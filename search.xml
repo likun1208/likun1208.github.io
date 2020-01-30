@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test password</title>
-    <url>/2020/01/30/test-password/</url>
-    <content><![CDATA[<a id="more"></a>
-
-<p>没有内容。</p>
-]]></content>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Let&#39;s Build A Simple Interpreter笔记[1]</title>
     <url>/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/</url>
     <content><![CDATA[<h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">原文</a></p>
