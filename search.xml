@@ -3,7 +3,9 @@
   <entry>
     <title>test password</title>
     <url>/2020/01/30/test-password/</url>
-    <content><![CDATA[<p>没有内容。</p>
+    <content><![CDATA[<a id="more"></a>
+
+<p>没有内容。</p>
 ]]></content>
       <tags>
         <tag>test</tag>
