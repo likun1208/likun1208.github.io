@@ -13,8 +13,8 @@
 <meta name="theme-color" content="#222">
 <script>
     (function () {
-        if ('') {
-            if (prompt('请输入文章密码') !== '') {
+        if ('xiaobin025') {
+            if (prompt('请输入文章密码') !== 'xiaobin025') {
                 alert('密码错误！');
                 if (history.length === 1) {
                     location.replace("https://kun-bin.github.io/");
@@ -81,7 +81,7 @@
 
 
 
-  <meta name="keywords" content="python,编译原理,学习笔记," />
+  <meta name="keywords" content="test," />
 
 
 
@@ -92,19 +92,17 @@
 
 
 
-<meta name="description" content="课程文档原文 翻译">
+<meta name="description" content="没有内容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Let&#39;s Build A Simple Interpreter笔记[1]">
-<meta property="og:url" content="http://yoursite.com/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:title" content="test password">
+<meta property="og:url" content="http://yoursite.com/2020/01/30/test-password/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="课程文档原文 翻译">
+<meta property="og:description" content="没有内容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-30T09:50:53.000Z">
-<meta property="article:modified_time" content="2020-01-30T12:14:38.289Z">
+<meta property="article:published_time" content="2020-01-30T12:14:58.000Z">
+<meta property="article:modified_time" content="2020-01-30T12:15:49.718Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="编译原理">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="test">
 <meta name="twitter:card" content="summary">
 
 
@@ -135,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/30/Let-s-Build-A-Simple-Interpreter笔记-1/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/01/30/test-password/"/>
 
 
 
 
 
-  <title>Let's Build A Simple Interpreter笔记[1] | Blog</title>
+  <title>test password | Blog</title>
   
 
 
@@ -302,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/test-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -319,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Let's Build A Simple Interpreter笔记[1]</h1>
+          <h1 class="post-title" itemprop="name headline">test password</h1>
         
 
         <div class="post-meta">
@@ -331,7 +329,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T17:50:53+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T20:14:58+08:00">
                 2020-01-30
               </time>
             
@@ -341,28 +339,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
-                    <span itemprop="name">Let's Build A Simple Interpreter</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -391,27 +367,8 @@
       
 
       
-        <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">原文</a></p>
-<p><a href="https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-01/" target="_blank" rel="noopener">翻译</a></p>
-<a id="more"></a>
+        <p>没有内容。</p>
 
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'EOF'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: INTEGER, PLUS, or EOF</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '+', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of the class instance.</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">        Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">        Token(PLUS, '+')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Token(&#123;type&#125;, &#123;value&#125;)'</span>.format(</span><br><span class="line">            type=self.type,</span><br><span class="line">            value=repr(self.value)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3+5"</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        <span class="comment"># current token instance</span></span><br><span class="line">        self.current_token = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Error parsing input'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens. One token at a time.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        text = self.text</span><br><span class="line"></span><br><span class="line">        <span class="comment"># is self.pos index past the end of the self.text ?</span></span><br><span class="line">        <span class="comment"># if so, then return EOF token because there no more</span></span><br><span class="line">        <span class="comment"># input left to convert into tokens</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt; len(text) - <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># get a character at the position self.pos and decide</span></span><br><span class="line">        <span class="comment"># what token to create based on the single character</span></span><br><span class="line">        current_char = text[self.pos]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># if the character is a digit then convert it to</span></span><br><span class="line">        <span class="comment"># integer, create an INTEGER token, increment self.pos</span></span><br><span class="line">        <span class="comment"># index to point to the next character after the digit,</span></span><br><span class="line">        <span class="comment"># and return the INTEGER token</span></span><br><span class="line">        <span class="keyword">if</span> current_char.isdigit():</span><br><span class="line">            token = Token(INTEGER, int(current_char))</span><br><span class="line">            self.pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current_char == <span class="string">'+'</span>:</span><br><span class="line">            token = Token(PLUS, current_char)</span><br><span class="line">            self.pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line">        self.error()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""expr -&gt; INTEGER PLUS INTEGER"""</span></span><br><span class="line">        <span class="comment"># set current token to the first token taken from the input</span></span><br><span class="line">        self.current_token = self.get_next_token()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a single-digit integer</span></span><br><span class="line">        left = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a '+' token</span></span><br><span class="line">        op = self.current_token</span><br><span class="line">        self.eat(PLUS)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a single-digit integer</span></span><br><span class="line">        right = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># after the above call the self.current_token is set to</span></span><br><span class="line">        <span class="comment"># EOF token</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># at this point INTEGER PLUS INTEGER sequence of tokens</span></span><br><span class="line">        <span class="comment"># has been successfully found and the method can just</span></span><br><span class="line">        <span class="comment"># return the result of adding two integers, thus</span></span><br><span class="line">        <span class="comment"># effectively interpreting client input</span></span><br><span class="line">        result = left.value + right.value</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># To run under Python3 replace 'raw_input' call with 'input'</span></span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        interpreter = Interpreter(text)</span><br><span class="line">        result = interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-
-<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><ol>
-<li>词法分析(lexical analysis)：把输入字符串拆分成 token 的过程。解释器中做这个工作的部 分被称为 <strong>词法分析器</strong>(lexical analyzer)，简称 <strong>lexer</strong> ，也被称作  <strong>scanner</strong> 或 <strong>tokenizer</strong> 。</li>
-<li>在完成词法分析后，解释器需要验证token序列是否符合期望的序列，如果符合，则进行一些运算，不符合则抛出异常。</li>
-</ol>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ol>
-<li><code>Token</code>类构造了一个结构为<code>(类型, 值)</code>的变量，当我们访问某个<code>Token</code>类型的变量<code>v</code>时，可以通过<code>v.type</code>来获取它的类型，通过<code>v.value</code>获取它的值。</li>
-<li></li>
-</ol>
-<h3 id="python相关"><a href="#python相关" class="headerlink" title="python相关"></a>python相关</h3><ol>
-<li><p>python命名规则：以下划线开头的标识符是有特殊意义的。以单下划线开头例如<code>_foo</code> 代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 <code>from xxx import</code> 而导入。</p>
-<p>以双下划线开头的 <code>__foo</code> 代表类的私有成员，以双下划线开头和结尾的 <code>__foo__</code> 代表 Python 里特殊方法专用的标识，如 <code>__init__()</code> 代表类的构造函数。</p>
-</li>
-<li></li>
-</ol>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2>
       
     </div>
     
@@ -438,11 +395,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-          
-            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 编译原理</a>
-          
-            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
+            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
           
         </div>
       
@@ -455,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/" rel="next" title="hexo + next + github配置blog">
-                <i class="fa fa-chevron-left"></i> hexo + next + github配置blog
+              <a href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" rel="next" title="Let's Build A Simple Interpreter笔记[1]">
+                <i class="fa fa-chevron-left"></i> Let's Build A Simple Interpreter笔记[1]
               </a>
             
           </div>
@@ -464,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/30/test-password/" rel="prev" title="test password">
-                test password <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,17 +468,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -609,22 +549,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">3.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">4.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python相关"><span class="nav-number">4.1.</span> <span class="nav-text">python相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
