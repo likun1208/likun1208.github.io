@@ -7,15 +7,127 @@
 <p><a href="https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-01/" target="_blank" rel="noopener">翻译</a></p>
 <a id="more"></a>
 
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'EOF'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: INTEGER, PLUS, or EOF</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '+', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of the class instance.</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">        Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">        Token(PLUS, '+')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Token(&#123;type&#125;, &#123;value&#125;)'</span>.format(</span><br><span class="line">            type=self.type,</span><br><span class="line">            value=repr(self.value)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3+5"</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        <span class="comment"># current token instance</span></span><br><span class="line">        self.current_token = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Error parsing input'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens. One token at a time.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        text = self.text</span><br><span class="line"></span><br><span class="line">        <span class="comment"># is self.pos index past the end of the self.text ?</span></span><br><span class="line">        <span class="comment"># if so, then return EOF token because there no more</span></span><br><span class="line">        <span class="comment"># input left to convert into tokens</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt; len(text) - <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># get a character at the position self.pos and decide</span></span><br><span class="line">        <span class="comment"># what token to create based on the single character</span></span><br><span class="line">        current_char = text[self.pos]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># if the character is a digit then convert it to</span></span><br><span class="line">        <span class="comment"># integer, create an INTEGER token, increment self.pos</span></span><br><span class="line">        <span class="comment"># index to point to the next character after the digit,</span></span><br><span class="line">        <span class="comment"># and return the INTEGER token</span></span><br><span class="line">        <span class="keyword">if</span> current_char.isdigit():</span><br><span class="line">            token = Token(INTEGER, int(current_char))</span><br><span class="line">            self.pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current_char == <span class="string">'+'</span>:</span><br><span class="line">            token = Token(PLUS, current_char)</span><br><span class="line">            self.pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line">        self.error()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""expr -&gt; INTEGER PLUS INTEGER"""</span></span><br><span class="line">        <span class="comment"># set current token to the first token taken from the input</span></span><br><span class="line">        self.current_token = self.get_next_token()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a single-digit integer</span></span><br><span class="line">        left = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a '+' token</span></span><br><span class="line">        op = self.current_token</span><br><span class="line">        self.eat(PLUS)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># we expect the current token to be a single-digit integer</span></span><br><span class="line">        right = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># after the above call the self.current_token is set to</span></span><br><span class="line">        <span class="comment"># EOF token</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># at this point INTEGER PLUS INTEGER sequence of tokens</span></span><br><span class="line">        <span class="comment"># has been successfully found and the method can just</span></span><br><span class="line">        <span class="comment"># return the result of adding two integers, thus</span></span><br><span class="line">        <span class="comment"># effectively interpreting client input</span></span><br><span class="line">        result = left.value + right.value</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># To run under Python3 replace 'raw_input' call with 'input'</span></span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        interpreter = Interpreter(text)</span><br><span class="line">        result = interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>   
+    <summary>折叠代码块竟然不能有空行而且似乎没有语法高亮</summary>   
+    <pre><code>       
+# Token types
+#
+# EOF (end-of-file) token is used to indicate that
+# there is no more input left for lexical analysis
+INTEGER, PLUS, EOF = 'INTEGER', 'PLUS', 'EOF'
+class Token(object):
+    def __init__(self, type, value):
+        # token type: INTEGER, PLUS, or EOF
+        self.type = type
+        # token value: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '+', or None
+        self.value = value
+    def __str__(self):
+        """String representation of the class instance.
+        Examples:
+        Token(INTEGER, 3)
+        Token(PLUS, '+')
+        """
+        return 'Token({type}, {value})'.format(
+            type=self.type,
+            value=repr(self.value)
+        )    
+    def __repr__(self):
+        return self.__str__()
+class Interpreter(object):
+    def __init__(self, text):
+        # client string input, e.g. "3+5"
+        self.text = text
+        # self.pos is an index into self.text
+        self.pos = 0
+        # current token instance
+        self.current_token = None
+    def error(self):
+        raise Exception('Error parsing input')    
+    def get_next_token(self):
+        """Lexical analyzer (also known as scanner or tokenizer)
+        This method is responsible for breaking a sentence
+        apart into tokens. One token at a time.
+        """
+        text = self.text    
+        # is self.pos index past the end of the self.text ?
+        # if so, then return EOF token because there no more
+        # input left to convert into tokens
+        if self.pos > len(text) - 1:
+            return Token(EOF, None)    
+        # get a character at the position self.pos and decide
+        # what token to create based on the single character
+        current_char = text[self.pos]    
+        # if the character is a digit then convert it to
+        # integer, create an INTEGER token, increment self.pos
+        # index to point to the next character after the digit,
+        # and return the INTEGER token
+        if current_char.isdigit():
+            token = Token(INTEGER, int(current_char))
+            self.pos += 1
+            return token    
+        if current_char == '+':
+            token = Token(PLUS, current_char)
+            self.pos += 1
+            return token    
+        self.error()    
+    def eat(self, token_type):
+        # compare the current token type with the passed token
+        # type and if they match then "eat" the current token
+        # and assign the next token to the self.current_token,
+        # otherwise raise an exception.
+        if self.current_token.type == token_type:
+            self.current_token = self.get_next_token()
+        else:
+            self.error()    
+    def expr(self):
+        """expr -> INTEGER PLUS INTEGER"""
+        # set current token to the first token taken from the input
+        self.current_token = self.get_next_token()    
+        # we expect the current token to be a single-digit integer
+        left = self.current_token
+        self.eat(INTEGER)    
+        # we expect the current token to be a '+' token
+        op = self.current_token
+        self.eat(PLUS)    
+        # we expect the current token to be a single-digit integer
+        right = self.current_token
+        self.eat(INTEGER)
+        # after the above call the self.current_token is set to
+        # EOF token    
+        # at this point INTEGER PLUS INTEGER sequence of tokens
+        # has been successfully found and the method can just
+        # return the result of adding two integers, thus
+        # effectively interpreting client input
+        result = left.value + right.value
+        return result
+def main():
+    while True:
+        try:
+            # To run under Python3 replace 'raw_input' call with 'input'
+            text = input('calc> ')
+        except EOFError:
+            break
+        if not text:
+            continue
+        interpreter = Interpreter(text)
+        result = interpreter.expr()
+        print(result)
+if __name__ == '__main__':
+    main()
+    </code></pre>
+</details>
 
 <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><ol>
-<li>词法分析(lexical analysis)：把输入字符串拆分成 token 的过程。解释器中做这个工作的部 分被称为 <strong>词法分析器</strong>(lexical analyzer)，简称 <strong>lexer</strong> ，也被称作  <strong>scanner</strong> 或 <strong>tokenizer</strong> 。</li>
+<li>词法分析(lexical analysis)：把输入字符串拆分成 token 的过程。解释器中做这个工作的部分被称为 <strong>词法分析器</strong>(lexical analyzer)，简称 <strong>lexer</strong> ，也被称作  <strong>scanner</strong> 或 <strong>tokenizer</strong> 。</li>
 <li>在完成词法分析后，解释器需要验证token序列是否符合期望的序列，如果符合，则进行一些运算，不符合则抛出异常。</li>
 </ol>
 <h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ol>
+<li>目的是执行一位数的加法运算，整体逻辑是，先取第一个字符，判断是否是数字，如果是，就把这个数字存在<code>left</code>中，然后取第二个字符，判读是否为加号，如果是，再继续取第三个字符，判断是否为数字并把数字存在<code>right</code>中，接下来就可以计算<code>left.value + right.value</code>了。整个过程中字符的移动依靠一个名为<code>pos</code>的变量，它作为索引，每当取完一个字符，<code>pos</code>的值就会<code>+1</code>，这样直到最后一个字符。</li>
 <li><code>Token</code>类构造了一个结构为<code>(类型, 值)</code>的变量，当我们访问某个<code>Token</code>类型的变量<code>v</code>时，可以通过<code>v.type</code>来获取它的类型，通过<code>v.value</code>获取它的值。</li>
-<li></li>
+<li><code>Interpreter</code>类是我们的解释器类型，其中<code>get_next_token()</code>函数可以从字符串中取一个字符，判断该字符类型是数字还是<code>+</code>，并返回正确的<code>Token</code>结构，比如是数字，就返回<code>Token(INTEGER, int(current_char))</code>，然后索引(<code>pos</code>)往后挪一位，如果既不是数字也不是加号，比如是空格，就会报错，如果已经到最后一位了，会返回<code>EOF</code>。</li>
+<li>接下来的<code>eat()</code>函数，参数是判断现在取出来的字符<code>type</code>是否符合设想的<code>type</code>，如果符合，就调用<code>get_next_token()</code>取下一个字符；反之，就输出错误信息。</li>
+<li>然后<code>expr()</code>函数用来按顺序从头到尾逐个读取字符，在<code>eat()</code>的帮助下判断整体结构是否符合词法要求（比如这里的要求是<code>INTEGER -&gt; + INTEGER</code>）并执行运算。</li>
+<li>最后的<code>main()</code>，将输入的字符串存到<code>text</code>中，并用<code>text</code>初始化类型为<code>Interpreter</code>的变量<code>interpreter</code>，接下来调用<code>interpreter.expr()</code>进行计算，结果存放到<code>result</code>中并输出。</li>
 </ol>
 <h3 id="python相关"><a href="#python相关" class="headerlink" title="python相关"></a>python相关</h3><ol>
 <li><p>python命名规则：以下划线开头的标识符是有特殊意义的。以单下划线开头例如<code>_foo</code> 代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 <code>from xxx import</code> 而导入。</p>
@@ -23,7 +135,29 @@
 </li>
 <li></li>
 </ol>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2>]]></content>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>修改代码使得允许输入多位整数，例如<code>12+3</code></p>
+<p>多位数不一定是几位数，也就是说我们在得到输入之前无法判断整个字符串第几位是什么类型，但是整体结构一定是<code>连在一起的数字 + 连在一起的数字</code>，因此考虑用<code>while</code>循环读取数字，在当前字符不是数字的情况下跳出循环去读取<code>+</code>，然后继续循环读数字，直到读取出<code>EOF</code>，字符串结束。具体来说是声明<code>left</code>和<code>right</code>两个数字并初始化为0，然后<code>left</code>存第一位数字，接下来乘10+第二位数字，再乘10+第三位数字，依次循环；<code>right</code>也是这样。具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line">left = right = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> self.current_token.type == <span class="string">'INTEGER'</span>:    </span><br><span class="line">	left = left * <span class="number">10</span> + self.current_token.value    </span><br><span class="line">	self.eat(INTEGER)</span><br><span class="line"><span class="comment"># 中间几行代码省略</span></span><br><span class="line"><span class="keyword">while</span> self.current_token.type != <span class="string">'EOF'</span>:</span><br><span class="line">	right = right * <span class="number">10</span> + self.current_token.value</span><br><span class="line">	self.eat(INTEGER)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加一个跳过空白符的方法，使你的计算器可以处理包含空白符的输入如<code>12 + 3</code></p>
+<p>我们要增加一个<code>Token</code>类型用来识别空格，然后在<code>expr()</code>中读取到空格时就调用<code>eat()</code>来跳过，我们假设空格不会出现在一个多位数的中间（比如<code>1 2 3</code>就会报错)。</p>
+<p>具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在代码开始的地方加</span></span><br><span class="line">SPACE = <span class="string">'SPACE'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在get_next_token()里加</span></span><br><span class="line"><span class="keyword">if</span> current_char == <span class="string">' '</span>:</span><br><span class="line">	token = Token(SPACE, current_char)</span><br><span class="line">	self.pos += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在expr()的数字和操作符的前后加</span></span><br><span class="line"><span class="keyword">while</span> self.current_token.value == <span class="string">' '</span>:</span><br><span class="line">	self.eat(SPACE)</span><br></pre></td></tr></table></figure>
+
+<p><strong>这里存在一些问题需要改进</strong>：</p>
+<ol>
+<li>应该可以想办法跳过多位数中间的空格，也就是直接忽略所有空格；</li>
+<li>个人认为不应该在<code>expr()</code>这个函数中出现对字符类型的判断，应该是在<code>expr()</code>中逐位后移，这个过程中调用其他函数来处理忽略空格等情况，也就是说上一个的<code>while</code>循环也不太合适，但是我暂时没想到怎么改，就先这样吧，反正功能上没问题。之后学到正则相关的地方可能会有新的思路。</li>
+</ol>
+</li>
+<li><p>修改代码使得它可以处理<code>-</code>而非<code>+</code>的情况</p>
+<p>这个类似于空格，也是要添加一下，我的做法是直接把<code>+</code>和<code>-</code>统一成类型为<code>OP</code>值为对应字符的<code>TOKEN</code>，然后在<code>expr()</code>中最后运算的时候，判断该变量的值是什么，再执行对应的运算。具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 文件开头的PLUS = 'PLUS'修改为</span></span><br><span class="line">OP = <span class="string">'OP'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改get_next_token()</span></span><br><span class="line"><span class="keyword">if</span> current_char == <span class="string">'+'</span> <span class="keyword">or</span> current_char == <span class="string">'-'</span>:</span><br><span class="line">	token = Token(OP, current_char)</span><br><span class="line">	self.pos += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'+'</span>:</span><br><span class="line">	result = left + right</span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'-'</span>:</span><br><span class="line">	result = left - right</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+]]></content>
       <categories>
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
