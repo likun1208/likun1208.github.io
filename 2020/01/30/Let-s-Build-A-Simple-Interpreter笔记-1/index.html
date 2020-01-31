@@ -100,7 +100,7 @@
 <meta property="og:description" content="课程文档原文 翻译">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-30T09:50:53.000Z">
-<meta property="article:modified_time" content="2020-01-31T02:33:48.167Z">
+<meta property="article:modified_time" content="2020-01-31T02:58:41.530Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="编译原理">
@@ -404,7 +404,7 @@
 <li>词法分析(lexical analysis)：把输入字符串拆分成 token 的过程。解释器中做这个工作的部分被称为 <strong>词法分析器</strong>(lexical analyzer)，简称 <strong>lexer</strong> ，也被称作  <strong>scanner</strong> 或 <strong>tokenizer</strong> 。</li>
 <li>在完成词法分析后，解释器需要验证token序列是否符合期望的序列，如果符合，则进行一些运算，不符合则抛出异常。</li>
 </ol>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ol>
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><ol>
 <li>目的是执行一位数的加法运算，整体逻辑是，先取第一个字符，判断是否是数字，如果是，就把这个数字存在<code>left</code>中，然后取第二个字符，判读是否为加号，如果是，再继续取第三个字符，判断是否为数字并把数字存在<code>right</code>中，接下来就可以计算<code>left.value + right.value</code>了。整个过程中字符的移动依靠一个名为<code>pos</code>的变量，它作为索引，每当取完一个字符，<code>pos</code>的值就会<code>+1</code>，这样直到最后一个字符。</li>
 <li><code>Token</code>类构造了一个结构为<code>(类型, 值)</code>的变量，当我们访问某个<code>Token</code>类型的变量<code>v</code>时，可以通过<code>v.type</code>来获取它的类型，通过<code>v.value</code>获取它的值。</li>
 <li><code>Interpreter</code>类是我们的解释器类型，其中<code>get_next_token()</code>函数可以从字符串中取一个字符，判断该字符类型是数字还是<code>+</code>，并返回正确的<code>Token</code>结构，比如是数字，就返回<code>Token(INTEGER, int(current_char))</code>，然后索引(<code>pos</code>)往后挪一位，如果既不是数字也不是加号，比如是空格，就会报错，如果已经到最后一位了，会返回<code>EOF</code>。</li>
@@ -412,7 +412,7 @@
 <li>然后<code>expr()</code>函数用来按顺序从头到尾逐个读取字符，在<code>eat()</code>的帮助下判断整体结构是否符合词法要求（比如这里的要求是<code>INTEGER -&gt; + INTEGER</code>）并执行运算。</li>
 <li>最后的<code>main()</code>，将输入的字符串存到<code>text</code>中，并用<code>text</code>初始化类型为<code>Interpreter</code>的变量<code>interpreter</code>，接下来调用<code>interpreter.expr()</code>进行计算，结果存放到<code>result</code>中并输出。</li>
 </ol>
-<h3 id="python相关"><a href="#python相关" class="headerlink" title="python相关"></a>python相关</h3><ol>
+<h4 id="python相关"><a href="#python相关" class="headerlink" title="python相关"></a>python相关</h4><ol>
 <li><p>python命名规则：以下划线开头的标识符是有特殊意义的。以单下划线开头例如<code>_foo</code> 代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 <code>from xxx import</code> 而导入。<br> 以双下划线开头的 <code>__foo</code> 代表类的私有成员，以双下划线开头和结尾的 <code>__foo__</code> 代表 Python 里特殊方法专用的标识，如 <code>__init__()</code> 代表类的构造函数。</p>
 </li>
 <li><p>python中的<code>main()</code>函数：python程序按顺序执行，而不是像之前学过的语言那样先找<code>main()</code>然后从<code>main()</code>开始，执行过程中遇到<code>def</code>代码块会先跳过，每个代码块需要保持相同的缩进。</p>
@@ -446,6 +446,29 @@
 <p>这个类似于空格，也是要添加一下，我的做法是直接把<code>+</code>和<code>-</code>统一成类型为<code>OP</code>值为对应字符的<code>TOKEN</code>，然后在<code>expr()</code>中最后运算的时候，判断该变量的值是什么，再执行对应的运算。具体代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件开头的PLUS = 'PLUS'修改为</span></span><br><span class="line">OP = <span class="string">'OP'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改get_next_token()</span></span><br><span class="line"><span class="keyword">if</span> current_char == <span class="string">'+'</span> <span class="keyword">or</span> current_char == <span class="string">'-'</span>:</span><br><span class="line">	token = Token(OP, current_char)</span><br><span class="line">	self.pos += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'+'</span>:</span><br><span class="line">	result = left + right</span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'-'</span>:</span><br><span class="line">	result = left - right</span><br></pre></td></tr></table></figure>
 
+<h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
+<li><p>什么是解释器？</p>
+<p>解释器把高级语言逐行转译执行。</p>
+</li>
+<li><p>什么是编译器？</p>
+<p>编译器把高级语言翻译成低级语言，再一起执行。</p>
+</li>
+<li><p>解释器和编译器的区别是什么？</p>
+<p>一个是一边翻译一边执行，一个是翻译完再执行。</p>
+</li>
+<li><p>什么是 token？</p>
+<p>有类型的值的对象</p>
+</li>
+<li><p>将输入拆分成 token 的过程叫什么？</p>
+<p>词法分析</p>
+</li>
+<li><p>解释器中做词法分析的部分叫什么？</p>
+<p>词法分析器(lexical analyzer)</p>
+</li>
+<li><p>解释器或编译器的这个部分还有什么其他常见的名字？</p>
+<p>scanner 或 tokenizer</p>
+</li>
+</ol>
 </li>
 </ol>
 
@@ -501,6 +524,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/" rel="prev" title="Let's Build A Simple Interpreter笔记[2]">
+                Let's Build A Simple Interpreter笔记[2] <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -581,7 +608,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -652,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">3.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">4.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python相关"><span class="nav-number">4.1.</span> <span class="nav-text">python相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">3.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码分析"><span class="nav-number">3.0.1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python相关"><span class="nav-number">3.0.2.</span> <span class="nav-text">python相关</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查理解"><span class="nav-number">5.</span> <span class="nav-text">检查理解</span></a></li></ol></div>
             
 
           </div>

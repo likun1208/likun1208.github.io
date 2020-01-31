@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://kun-bin.github.io/");
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,编译原理,学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="课程文档原文 翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Let&#39;s Build A Simple Interpreter笔记[2]">
+<meta property="og:url" content="http://yoursite.com/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="课程文档原文 翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-31T02:54:53.000Z">
+<meta property="article:modified_time" content="2020-01-31T07:59:02.103Z">
+<meta property="article:author" content="Kun Li">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="编译原理">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/31/Let-s-Build-A-Simple-Interpreter笔记-2/"/>
+
+
+
+
+
+  <title>Let's Build A Simple Interpreter笔记[2] | Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Let's Build A Simple Interpreter笔记[2]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T10:54:53+08:00">
+                2020-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
+                    <span itemprop="name">Let's Build A Simple Interpreter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part2/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-02/" target="_blank" rel="noopener">翻译</a></p>
+<a id="more"></a>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, MINUS, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'EOF'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: 'INTEGER', 'PLUS', 'MINUS', or 'EOF'</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: non-negative integer value, '+', '-', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of class instance</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">            Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">            Token(PLUS, '+')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f'Token(<span class="subst">&#123;self.type&#125;</span>, <span class="subst">&#123;self.value&#125;</span>)'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3 + 5", "12 - 5", etc</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        <span class="comment"># current token instance</span></span><br><span class="line">        self.current_token = <span class="literal">None</span></span><br><span class="line">        self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Error parsing input'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Advance the 'pos' pointer and set the 'current_char' variable."""</span></span><br><span class="line">        self.pos += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt;= len(self.text):</span><br><span class="line">            self.current_char = <span class="literal">None</span>  <span class="comment"># Indicates end of input</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return a (multidigit) integer consumed from the input."""</span></span><br><span class="line">        result = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isdigit():</span><br><span class="line">            result += self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        <span class="keyword">return</span> int(result)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> self.current_char.isdigit():</span><br><span class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'+'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'-'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MINUS, <span class="string">'-'</span>)</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Parser / Interpreter</span></span><br><span class="line"><span class="string">        expr -&gt; INTEGER PLUS INTEGER</span></span><br><span class="line"><span class="string">        expr -&gt; INTEGER MINUS INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># set current token to the first token from the input</span></span><br><span class="line">        self.current_token = self.get_next_token()</span><br><span class="line">        <span class="comment"># we expect the current token to be an integer</span></span><br><span class="line">        left = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># we expect the current token to be either a '+' or '-'</span></span><br><span class="line">        op = self.current_token</span><br><span class="line">        <span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">            self.eat(PLUS)</span><br><span class="line">        <span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">            self.eat(MINUS)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="comment"># we expect the current token to be an integer</span></span><br><span class="line">        right = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># after the above call the self.current_token is set to</span></span><br><span class="line">        <span class="comment"># EOF token</span></span><br><span class="line">        <span class="comment"># at this point either the INTEGER PLUS INTEGER or</span></span><br><span class="line">        <span class="comment"># the INTEGER MINUS INTEGER sequence of tokens</span></span><br><span class="line">        <span class="comment"># has been successfully found and the method can just</span></span><br><span class="line">        <span class="comment"># return the result of adding or subtracting two integers,</span></span><br><span class="line">        <span class="comment"># thus effectively interpreting client input</span></span><br><span class="line">        <span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">            result = left.value + right.value</span><br><span class="line">        <span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">            result = left.value - right.value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># To run under Python3 replace 'raw_input' call with 'input'</span></span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        interpreter = Interpreter(text)</span><br><span class="line">        result = interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这个处理方式和我想的不太一样…</p>
+<p>整体逻辑是：</p>
+<ol>
+<li><code>get_next_token</code>是词法分析器，输入一个字符串，逐一输出词法单元，比如输入<code>32 + 5</code>，输出的流应该是<code>Token(INTEGER, 32) -&gt; Token(PLUS, +) -&gt; Token(INTEGER, 5)</code>。<br>这个词法分析器用到的辅助函数为<code>advance()</code>，<code>skip_whitespace()</code>和<code>interger()</code>，其中<code>advance()</code>让索引后移一位，<code>skip_whitespace()</code>跳过空格，<code>interger()</code>把连续的数字变成一个完整的数字。注意这里如果是多位数中间有空格，多位数会被拆成两个数字，比如<code>32 3</code>会被判断为<code>32</code>和<code>3</code>，而不是<code>323</code>。<br>词法分析过程中会遇到以下几种情况：(1)空格，要跳过空格，循环继续运行，分析下一个字符；(2)结束符，直接返回<code>EOF</code>对应的<code>token</code>；(3)数字，循环终止，连后面的几位数字字符一起变成一个数字，返回对应的<code>token</code>；(4)是<code>+</code>或者<code>-</code>，索引移到下一位，循环终止，返回运算符对应的<code>token</code>。<br>分析几个辅助函数：<ol>
+<li><code>advance()</code>，索引<code>pos</code>后移一位，当前字符<code>current.char</code>的值变为新索引对应的字符。</li>
+</ol>
+</li>
+<li><code>skip_whitespace()</code>，循环调用<code>advance()</code>直到当前字符不是空格。<ol start="3">
+<li><code>integer()</code>，先声明一个初始为空字符串的<code>result</code>，然后循环把<code>current.char</code>加到<code>result</code>这个字符串里，接着<code>advance()</code>移动到下一位，直到当前字符不是数字。</li>
+</ol>
+</li>
+<li><code>expr()</code>是用来计算表达式的，判断词法分析后的词法单元是否符合规则，然后根据规则来计算结果。辅助函数为<code>eat()</code>，用来判断当前词法单元是否符合规则。</li>
+</ol>
+<p>以输入<code>32 + 5</code>为例分析整个流程：</p>
+<ol>
+<li><p>首先运行的是<code>main()</code>，获取输入字符串，存到<code>text</code>中（<code>line116</code>)，并用<code>text</code>初始化<code>interpreter</code>这个解释器类(<code>line121</code>)，此时，<code>interpreter.text</code>就是我们输入的字符串，<code>interpreter.pos</code>是初始值<code>0</code>，<code>self.current_token</code>是初始值<code>None</code>，<code>self.current_char</code>是<code>interpreter.text</code>这个字符串数组下标为<code>pos=0</code>对应的字符，也就是<code>3</code>。</p>
+</li>
+<li><p>接下来<code>line122</code>调用了表达式计算器<code>expr()</code>，而<code>expr()</code>的第一行调用了词法分析器<code>get_next_token()</code>，因为字符3是数字，所以要去调用<code>integer()</code>函数，并返回一个类型为<code>INTEGER</code>、值为函数结果的<code>TOKEN</code>。</p>
+<p>在执行完<code>integer()</code>并返回之前，<code>pos=0</code>，<code>current_token=None</code>，<code>current_char=3</code>。</p>
+</li>
+<li><p>进入<code>integer()</code>函数，最初<code>result</code>是空字符串，<code>current_char=3</code>符合循环条件，进入<code>while</code>循环，<code>result</code>变成<code>3</code>（是字符串格式）,调用<code>advance()</code>，接下来先让索引后移，即<code>pos=1</code>，此时还没移到最后一位，更新<code>current_char=text[pos]=text[1]=2</code>。此时还符合循环条件，<code>result</code>把新的<code>current_char</code>加上，变成<code>32</code>（字符串格式），再次<code>advance()</code>，调用完后，<code>pos=2</code>，依旧没移到最后一位，<code>current_char=text[2]=空格</code>。这时不满足循环条件了，循环结束，返回字符串<code>result</code>对应的数字也就是32。</p>
+</li>
+<li><p>然后回到<code>get_next_token()</code>，它已经有返回值了，返回给之前的<code>expr()</code>中的<code>self.current_token</code>，这是我们得到的第一个词法单元，是我们要计算的表达式的左值，将它存到<code>left</code>中，之后可以使用<code>left.value</code>来访问它的值，这之后就调用<code>eat()</code>看该值是不是一个<code>INTEGER</code>，如果是，就再次调用<code>get_next_token()</code>继续分析下一个单元，反之则报错。很显然此时<code>current_token</code>是<code>(INTEGER,32)</code>，符合要求，进入<code>get_next_token()</code>。</p>
+</li>
+<li><p><code>get_next_token()</code>判断此时<code>current_char</code>是空格，因此执行<code>skip_whitespace()</code>。</p>
+</li>
+<li><p>在<code>skip_whitespace()</code>中，<code>current_char</code>满足循环条件，进入循环体，调用<code>advance()</code>，<code>pos=3</code>，<code>current_char=text[3]=+</code>，循环结束，回到<code>get_next_token()</code>，执行<code>continue</code>，也就是继续进行词法判断。</p>
+</li>
+<li><p>由于<code>current_char</code>是<code>+</code>，在对应的<code>if</code>分支中，执行<code>advance()</code>，<code>pos=4</code>,<code>current_char=text[4]=空格</code>，然后把<code>+</code>对应的<code>token</code>返回到<code>expr()</code>中。</p>
+</li>
+<li><p><code>expr()</code>把新得到的<code>token</code>存入<code>op</code>，并通过<code>eat()</code>判断该<code>token</code>是否是一个加号或者减号。此时是加号，又开始了<code>get_next_token()</code>。</p>
+</li>
+<li><p>这次<code>get_next_token()</code>首先进入空格分支，跳过空格后，<code>pos=5</code>，<code>current_char=5</code>，进入数字分支，执行<code>integer()</code>。<code>integer()</code>中和第三步一样，最终返回数字5，再回到<code>get_next_token()</code>，返回5对应的<code>token</code>给<code>expr()</code>，存在<code>right</code>中。</p>
+</li>
+<li><p>此时，我们已经完成了词法分析，得到了<code>(INTEGER, 32) -&gt; (PLUS, &#39;+&#39;) -&gt; (INTEGER, 5)</code>的词法结构。由于<code>OP</code>对应的类型是<code>PLUS</code>，对<code>left.value</code>和<code>right.value</code>执行加法，存入<code>result</code>并返回。</p>
+</li>
+<li><p>再回到<code>line122</code>，<code>result</code>已经得到了结果，<code>line123</code>输出该结果，程序运行结束。</p>
+</li>
+</ol>
+<p>也就是说，在计算表达式结果的函数中调用词法分析器，判断词法分析的结果是否符合规则，如果符合规则，就按规则继续运行。在计算器函数中，只会出现<code>token</code>类型的变量，而词法分析函数会负责把词法单元打包成<code>token</code>交给计算器。</p>
+<blockquote>
+<p>在解释一个表达式之前，你需要知道它是哪种组合，比如相加或相减。这是 <code>expr</code> 方法本质上做的事： 它从 <code>get_next_token</code> 方法得到的 token 流中找到结构，然后解释它识别出的组合，产 生算术表达式的结果。<br>从 token 流中查找结构，或者说从 token 流中识别组合，的过程叫做 <strong>parsing</strong>. 解释器 或编译器中执行这部分任务的叫 <strong>parser</strong>.<br>现在你知道解释器的 <strong>parsing</strong> 和 <strong>解释</strong> 都在 <code>expr</code> 方法中了── <code>expr</code> 方法首先尝 试从 token 流中识别（即parse） INTEGER -&gt; PLUS -&gt; INTEGER 或 the INTEGER -&gt; MINUS -&gt; INTEGER 组合，在成功识别到（即parsed）其中一个组合时，该方法就解释执行 它并返回给调用者两个整数相加或相减的结果。</p>
+</blockquote>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>扩展计算器以处理两个整数相乘</p>
+</li>
+<li><p>扩展计算器以处理两个整数相除</p>
+<p>前两个都很简单，仿照加法减法的代码复制改写就行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符声明</span></span><br><span class="line">INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'MULTIPLY'</span>, <span class="string">'DIVIDE'</span>, <span class="string">'EOF'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get_next_token()</span></span><br><span class="line"><span class="keyword">if</span> self.current_char == <span class="string">'*'</span>:</span><br><span class="line">	self.advance()</span><br><span class="line">	<span class="keyword">return</span> Token(MULTIPLY, <span class="string">'*'</span>)</span><br><span class="line"><span class="keyword">if</span> self.current_char == <span class="string">'/'</span>:</span><br><span class="line">	self.advance()</span><br><span class="line">	<span class="keyword">return</span> Token(DIVIDE, <span class="string">'/'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># expr()</span></span><br><span class="line"><span class="comment"># 修改读取运算符</span></span><br><span class="line">op = self.current_token</span><br><span class="line"><span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">	self.eat(PLUS)</span><br><span class="line"><span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">	self.eat(MINUS)</span><br><span class="line"><span class="keyword">elif</span> op.type == MULTIPLY:</span><br><span class="line">	self.eat(MULTIPLY)</span><br><span class="line"><span class="keyword">elif</span> op.type == DIVIDE:</span><br><span class="line">	self.eat(DIVIDE)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	self.error()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改计算结果那里</span></span><br><span class="line"><span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">	result = left.value + right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">	result = left.value - right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == MULTIPLY:</span><br><span class="line">	result = left.value * right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == DIVIDE:</span><br><span class="line">	result = left.value / right.value</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	self.error()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改代码以使它可以解释包含任意个数字的加减操作，如“9 - 5 + 3 + 11”</p>
+<p>这个也不难。此时的词法结构是<code>INTEGER -&gt; 循环[OP -&gt;INTEGER]</code>，在<code>expr()</code>里首先读取并<code>eat()</code>第一个词法单元，<code>result</code>先等于这个单元的值，接下来用<code>while</code>进行两个词法单元为一组的循环，直到读取到<code>EOF</code>，每个循环里，<code>result</code>与新的<code>INTEGER</code>进行加减运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line">result = left.value</span><br><span class="line"><span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	op = self.current_token</span><br><span class="line">	<span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">		self.eat(PLUS)</span><br><span class="line">	<span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">		self.eat(MINUS)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		self.error()</span><br><span class="line">	right = self.current_token</span><br><span class="line">	self.eat(INTEGER)</span><br><span class="line">	<span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">		result += right.value</span><br><span class="line">	<span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">		result -= right.value</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		self.error()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
+<li><p>什么是 lexeme？</p>
+<p>lexeme 是组成 token 的一个字符序列。（这个词翻译过来是<strong>词位</strong>或<strong>词素</strong>）</p>
+<p><code>token</code>和<code>lexeme</code>的关系类似于类和实例（或者对象）之间的关系。举例来说，变量<code>a</code>和<code>b</code>，它们属于同一种<code>token</code>：<code>identifier</code>，而<code>a</code>的<code>lexeme</code>是<code>a</code>，<code>b</code>的<code>lexeme</code>是<code>b</code>。每个关键字是一种<code>token</code>。<code>token</code>可以附带一个值属性，例如变量<code>a</code>，调用<code>gettoken()</code>时，会返回一个<code>identifier</code>类型的<code>token</code>，其值属性是<code>a</code>。</p>
+</li>
+<li><p>在 token 流中找到结构的过程叫什么？或者这么问，在 token 流中识别出特定组合的过程叫什么？</p>
+<p>parsing（翻译是语法分析或句法分析）</p>
+</li>
+<li><p>解释器（编译器）做 parsing 工作的部分叫什么？</p>
+<p>parser（也就是语法分析器）</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 编译原理</a>
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" rel="next" title="Let's Build A Simple Interpreter笔记[1]">
+                <i class="fa fa-chevron-left"></i> Let's Build A Simple Interpreter笔记[1]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="Kun Li" />
+            
+              <p class="site-author-name" itemprop="name">Kun Li</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="likun@mail.bnu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">3.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查理解"><span class="nav-number">5.</span> <span class="nav-text">检查理解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kun Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
