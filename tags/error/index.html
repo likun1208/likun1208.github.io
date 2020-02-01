@@ -94,7 +94,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/error/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Kun Li">
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/error/"/>
 
 
 
 
 
-  <title>Blog</title>
+  <title>Tag: error | Blog</title>
   
 
 
@@ -153,8 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,629 +280,53 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block tag">
+
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>error<small>Tag</small>
+        </h1>
+      </div>
+
       
-
-  
-
-  
-  
-  
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kun Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" itemprop="url">各种平台遇到过的error处理方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" itemprop="url">
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span itemprop="name">各种平台遇到过的error处理方式</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T19:06:23+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A0%E5%88%86%E7%B1%BB%E9%A1%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">无分类项</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>平台：visiual studio<br>error LNK2026: 模块对于 SAFESEH 映像是不安全的<br>解决方法：属性 - &gt; 链接器 - &gt; 附加选项输入 /SAFESEH:NO - &gt; 应用</p>
-</li>
-<li><p>平台：visiual studio<br>error C4996: ‘fopen’: This function or variable may be unsafe. Consider using fopen_sinstead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help   for details.<br>1&gt;f:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : 参见“fopen”的声明<br>解决方法：预处理器加入_CRT_SECURE_NO_WARNINGS</p>
-</li>
-<li><p>平台：visiual studio<br>error C2664: “int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)”: 无法将参数 2 从“const char [17]”转换为“LPCWSTR”<br>解决方法：项目菜单-&gt;属性-&gt;配置属性-&gt;常规-&gt;项目默认值-&gt;字符集从unicode改为未设置</p>
-</li>
-<li><p>平台：visiual studio<br>error LNK2019: 无法解析的外部符号 _main，该符号在函数 ___tmainCRTStartup 中被引用<br>解决方法：右击项目，打开“属性”页，链接器-&gt;系统-&gt;子系统-&gt;/subsystem:windows。如果是刚开始默认的是/subsystem:windows则改为/subsytem:console</p>
-</li>
-<li><p>平台：visiual studio<br>error LNK2019: 无法解析的外部符号 <strong>imp</strong>timeGetTime@0，该符号在函数 “void __cdecl TimerInit(void)” (?TimerInit@@YAX<br>解决方法：将winmm.lib打入“附加依赖项”</p>
-</li>
-<li><p>平台：visiual studio<br>fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏<br>解决方法：右键-&gt;工程属性-&gt;配置属性-&gt; 清单工具-&gt;输入和输出-&gt;嵌入清单，选择[否]</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-		
-	</div>
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kun Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/" itemprop="url">Let's Build A Simple Interpreter笔记[2]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T10:54:53+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
-                    <span itemprop="name">Let's Build A Simple Interpreter</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part2/" target="_blank" rel="noopener">原文</a></p>
-<p><a href="https://feng-qi.github.io/2018/01/25/lets-build-a-simple-interpreter-part-02/" target="_blank" rel="noopener">翻译</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/#more" rel="contents">
-              Read more &raquo;
             </a>
-          </div>
-          <!--/noindex-->
         
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-01-31T19:06:23+08:00"
+              content="2020-01-31" >
+          01-31
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
 
-    
-
-    
-
-    
-	
-	<div>
-		
-	</div>
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kun Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" itemprop="url">Let's Build A Simple Interpreter笔记[1]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T17:50:53+08:00">
-                2020-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
-                    <span itemprop="name">Let's Build A Simple Interpreter</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">原文</a></p>
-<p><a href="https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-01/" target="_blank" rel="noopener">翻译</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-		
-	</div>
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kun Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/" itemprop="url">hexo + next + github配置blog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T09:20:38+08:00">
-                2020-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">博客配置</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="安装各种东西"><a href="#安装各种东西" class="headerlink" title="安装各种东西"></a>安装各种东西</h2><ol>
-<li>node.js：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js官网链接</a> 点击下载安装即可。</li>
-<li>Git： <a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git官网链接</a> 点击下载安装即可。</li>
-<li>deployer-git： 命令行里输入<code>npm install hexo-deployer-git --save</code>。</li>
-<li>Hexo：<ol>
-<li>准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；</li>
-<li>输入命令<code>npm install -g hexo-cli</code></li>
-</ol>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-		
-	</div>
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
 
   
 

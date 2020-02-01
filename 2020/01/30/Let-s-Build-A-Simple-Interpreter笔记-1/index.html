@@ -100,7 +100,7 @@
 <meta property="og:description" content="课程文档原文 翻译">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-30T09:50:53.000Z">
-<meta property="article:modified_time" content="2020-01-31T02:58:41.530Z">
+<meta property="article:modified_time" content="2020-01-31T11:02:41.725Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="编译原理">
@@ -446,6 +446,11 @@
 <p>这个类似于空格，也是要添加一下，我的做法是直接把<code>+</code>和<code>-</code>统一成类型为<code>OP</code>值为对应字符的<code>TOKEN</code>，然后在<code>expr()</code>中最后运算的时候，判断该变量的值是什么，再执行对应的运算。具体代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件开头的PLUS = 'PLUS'修改为</span></span><br><span class="line">OP = <span class="string">'OP'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改get_next_token()</span></span><br><span class="line"><span class="keyword">if</span> current_char == <span class="string">'+'</span> <span class="keyword">or</span> current_char == <span class="string">'-'</span>:</span><br><span class="line">	token = Token(OP, current_char)</span><br><span class="line">	self.pos += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'+'</span>:</span><br><span class="line">	result = left + right</span><br><span class="line"><span class="keyword">if</span> op.value == <span class="string">'-'</span>:</span><br><span class="line">	result = left - right</span><br></pre></td></tr></table></figure>
 
+
+
+</li>
+</ol>
+<p>   <strong>下一课的内容说明了我的想法全是错的…暴风哭泣</strong></p>
 <h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
 <li><p>什么是解释器？</p>
 <p>解释器把高级语言逐行转译执行。</p>
@@ -467,8 +472,6 @@
 </li>
 <li><p>解释器或编译器的这个部分还有什么其他常见的名字？</p>
 <p>scanner 或 tokenizer</p>
-</li>
-</ol>
 </li>
 </ol>
 
@@ -608,7 +611,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -619,7 +622,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -630,7 +633,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
