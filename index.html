@@ -388,8 +388,7 @@
 
       
         
-          
-            <ol>
+          <ol>
 <li><p>为了给变量x, y, z 赋初值5，下面正确的赋值语句是（）<br>A. xyz=5                    B. x=5 y=5 z=5<br>C. x=5, y=5, z=5        D. x=5;y=5;z=5<br>E. x=y=z=5                 F. x,y,z=5<br>G. x,y,z=5,5,5</p>
 <p> [DEG]<br> 没什么说的，运行一下就知道哪个对哪个错了。</p>
 </li>
@@ -397,33 +396,13 @@
 <p> [D]<br> 这里要区分“/”和“//”，前者是不取整数的除法，后者是取整，例如7/3=2.333，而7//3=2。</p>
 </li>
 </ol>
-<p>课后练习：</p>
-<ol>
-<li>编写程序1：提示输入姓名和出生年份，输出姓名和年龄。运行 结果如：<br>​        请输入你的姓名：<strong><em>张三</em></strong><br>​        你好，张三<br>​        请输入你的出生年份：<strong><em>1999</em></strong><br>​        你好，张三，你今年19岁了。</li>
-</ol>
-<p>这个很简单了，就是普通的输入输出。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = input(<span class="string">"请输入你的姓名："</span>)</span><br><span class="line">print(<span class="string">"你好，"</span>, name)</span><br><span class="line">age = input(<span class="string">"请输入你的出生年份："</span>)</span><br><span class="line">print(<span class="string">"你好，"</span>, name, <span class="string">"你今年"</span>, <span class="number">2020</span>-int(age), <span class="string">"岁了"</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>编写程序2： 三角形的三条边长为3、7、9，计算三角形的三个角（提示：余弦定理）</li>
-</ol>
-<p>这个也还是很简单，虽然我忘了三角形的边角关系公式，不过没关系，百度有。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">a = <span class="number">3</span></span><br><span class="line">b = <span class="number">7</span></span><br><span class="line">c = <span class="number">9</span></span><br><span class="line">A = math.acos((math.pow(c, <span class="number">2</span>) + math.pow(b, <span class="number">2</span>) - math.pow(a, <span class="number">2</span>)) / (<span class="number">2</span> * b * c))</span><br><span class="line">B = math.acos((math.pow(c, <span class="number">2</span>) + math.pow(a, <span class="number">2</span>) - math.pow(b, <span class="number">2</span>)) / (<span class="number">2</span> * a * c))</span><br><span class="line">C = math.acos((math.pow(a, <span class="number">2</span>) + math.pow(b, <span class="number">2</span>) - math.pow(c, <span class="number">2</span>)) / (<span class="number">2</span> * b * a))</span><br><span class="line">print(<span class="string">"弧度值："</span>, A, B, C)</span><br><span class="line">print(<span class="string">"角度值："</span>, math.degrees(A), math.degrees(B), math.degrees(C))</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><p>编写程序3：对猜数字游戏的程序进行如下修改：</p>
-<ol>
-<li>由用户键盘输入秘密数的上限和下限。</li>
-<li>现有的程序每次只能玩一局，对此进行修改，玩完一局后自动进入下一局。</li>
-<li>退出游戏时打印用户总共玩的局数（没玩完的局不算），如果局数不为0，则还需打印每一局的猜测次数。</li>
-</ol>
-</li>
-</ol>
-<p>这个看起来复杂，但就是条件说的不清楚而已，总的来说要求是用户输入数字的时候玩猜数字，反之结束游戏，然后输出一下统计结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">count &#x3D; 0</span><br><span class="line">number &#x3D; []</span><br><span class="line">a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">while a.isdigit():</span><br><span class="line">    b &#x3D; input(&quot;请输入一个整数上限：&quot;)</span><br><span class="line">    secret &#x3D; random.randint(int(a), int(b))</span><br><span class="line">    print(&quot;我有一个&quot;, a, &quot;-&quot;, b, &quot;的秘密数，想要猜出它？请按数字键并回车；如果不想猜了，可按非数字键并回车或直接回车。&quot;)</span><br><span class="line">    inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    number.append(0)</span><br><span class="line">    while inputStr.isdigit():</span><br><span class="line">        guess &#x3D; int(inputStr)</span><br><span class="line">        number[count] +&#x3D; 1</span><br><span class="line">        if guess &lt; secret:</span><br><span class="line">            print(&quot;小了&quot;)</span><br><span class="line">        elif guess &gt; secret:</span><br><span class="line">            print(&quot;大了&quot;)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;Bingo! 你猜对啦！这个数就是&quot;, secret)</span><br><span class="line">            print(&quot;继续玩下一局！&quot;)</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">            break</span><br><span class="line">        inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">print(&quot;再见，下次玩！&quot;)</span><br><span class="line">print(&quot;你一共玩了&quot;, count, &quot;局&quot;)</span><br><span class="line">for i in range(0, count):</span><br><span class="line">    print(&quot;第&quot;, i + 1, &quot;局猜测次数为&quot;, number[i])</span><br></pre></td></tr></table></figure>
-
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/26/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
