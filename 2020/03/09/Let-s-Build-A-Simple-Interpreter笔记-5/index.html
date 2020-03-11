@@ -81,7 +81,7 @@
 
 
 
-  <meta name="keywords" content="教程," />
+  <meta name="keywords" content="python,编译原理,学习笔记," />
 
 
 
@@ -92,17 +92,19 @@
 
 
 
-<meta name="description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
+<meta name="description" content="课程文档原文 翻译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo + next + github配置blog">
-<meta property="og:url" content="http://yoursite.com/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/index.html">
+<meta property="og:title" content="Let-s-Build-A-Simple-Interpreter笔记-5">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/index.html">
 <meta property="og:site_name" content="白银乡20-16">
-<meta property="og:description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
+<meta property="og:description" content="课程文档原文 翻译">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-30T01:20:38.000Z">
-<meta property="article:modified_time" content="2020-01-31T10:52:46.449Z">
+<meta property="article:published_time" content="2020-03-09T00:59:02.000Z">
+<meta property="article:modified_time" content="2020-03-09T10:56:46.859Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="教程">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="编译原理">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
 
 
@@ -133,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/30/hexo-next-github配置blog/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/09/Let-s-Build-A-Simple-Interpreter笔记-5/"/>
 
 
 
 
 
-  <title>hexo + next + github配置blog | 白银乡20-16</title>
+  <title>Let-s-Build-A-Simple-Interpreter笔记-5 | 白银乡20-16</title>
   
 
 
@@ -300,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -317,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo + next + github配置blog</h1>
+          <h1 class="post-title" itemprop="name headline">Let-s-Build-A-Simple-Interpreter笔记-5</h1>
         
 
         <div class="post-meta">
@@ -329,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T09:20:38+08:00">
-                2020-01-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-09T08:59:02+08:00">
+                2020-03-09
               </time>
             
 
@@ -352,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">博客配置</span>
+                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
+                    <span itemprop="name">Let's Build A Simple Interpreter</span>
                   </a>
                 </span>
 
@@ -389,98 +391,56 @@
       
 
       
-        <h2 id="安装各种东西"><a href="#安装各种东西" class="headerlink" title="安装各种东西"></a>安装各种东西</h2><ol>
-<li>node.js：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js官网链接</a> 点击下载安装即可。</li>
-<li>Git： <a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git官网链接</a> 点击下载安装即可。</li>
-<li>deployer-git： 命令行里输入<code>npm install hexo-deployer-git --save</code>。</li>
-<li>Hexo：<ol>
-<li>准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；</li>
-<li>输入命令<code>npm install -g hexo-cli</code></li>
-</ol>
-</li>
-</ol>
+        <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part5/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/01/30/lets-build-a-simple-interpreter-part-05/" target="_blank" rel="noopener">翻译</a></p>
 <a id="more"></a>
 
-<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><ol>
-<li>创建Hexo工程：接着刚才那个命令输入<code>hexo init blog</code>，这里会在这个文件夹下新建一个blog文件夹，如果把blog换成其他名字也是可以的。</li>
-<li>新建Post：命令行里进入blog文件夹（<code>cd blog</code>），输入<code>hexo new “HelloWorld”</code>，这里会在 <strong>/blog/sources/_post/</strong> 目录下生成 <strong>HelloWorld.md</strong> 文件，可以进去打开编辑内容，在之后想写新博客也是通过这个命令生成文件，或者直接把写好的博客文件放到该目录下。</li>
-<li>生成静态文件：命令行里输入<code>hexo generate</code>，也可以简单地写成<code>hexo g</code>。这样就使用 <strong>Hexo</strong> 引擎将 <strong>Markdown</strong> 格式的文件解析成可以使用浏览器查看的 <strong>HTML</strong> 文件，<strong>HTML</strong> 文件存储在 <strong>blog/public</strong> 目录下。</li>
-<li>运行Hexo服务器：命令行里输入<code>hexo server</code>，也可以简写成<code>hexo s</code>。这时命令行会有一些提示，其中有个地址，一般是<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，在浏览器里打开这个地址，就能看到博客网站是什么样的了。不过这个时候还只是一个本地博客。</li>
-</ol>
-<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p><strong>Hexo</strong> 提供了默认主题 <strong>landscape</strong>，主题的位置在 <strong>blog -&gt;themes</strong> 文件夹下。主题根据自己喜好可以在网上找到，通过 <strong>Git</strong> 进行相应的下载。接下来以Next主题为例。</p>
-<ol>
-<li>还是在blog文件夹下，命令行里输入<code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code>，这里是用<code>git clone</code>把<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">next主题</a>下载并存放到themes -&gt; next 文件夹里。需要注意的是，<code>git clone</code>这个命令下载起来特别慢，但浏览器直接去github下载的话速度还行，所以也可以直接下载解压改文件夹的名字并放到对应的地方。</li>
-<li>修改 <strong>/blog/config.yml</strong> 文件，将其中的 <strong>theme</strong> 改成 <strong>next</strong>。如果文件夹的名字不是next，或者用了其他主题等，这里的theme改成对应的文件夹名字就行。</li>
-<li>接下来可以输入<code>hexo g</code> 和<code>hexo s</code>来查看新的本地博客。</li>
-</ol>
-<h2 id="建立Github博客"><a href="#建立Github博客" class="headerlink" title="建立Github博客"></a>建立Github博客</h2><ol>
-<li><p>在<a href="https://github.com/" target="_blank" rel="noopener">Github官网</a>注册账号并登陆，点首页右上角的加号新建一个仓库(Repository)，仓库的名字为用户名.github.io（比如我的是kun-bin.github.io），这里一定要是这个格式，不然之后没法直接访问博客网站。然后其他的都是默认内容，点create repository就可以了。如果仓库名字输入错了，之后可以在github上这个仓库页面的setting选项中修改。</p>
-</li>
-<li><p>打开 <strong>/blog/config.yml</strong>文件修改deploy 属性(注意“：”之后有空格 ) 否则配置失败。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:&#x2F;&#x2F;github.com&#x2F;kun-bin&#x2F;kun-bin.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, MINUS, MUL, DIV, EOF = (</span><br><span class="line">    <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'MUL'</span>, <span class="string">'DIV'</span>, <span class="string">'EOF'</span></span><br><span class="line">)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: INTEGER, PLUS, MINUS, MUL, DIV, or EOF</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: non-negative integer value, '+', '-', '*', '/', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of the class instance.</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">            Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">            Token(PLUS, '+')</span></span><br><span class="line"><span class="string">            Token(MUL, '*')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f'Token(<span class="subst">&#123;self.type&#125;</span>, <span class="subst">&#123;repr(self.value)&#125;</span>)'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3 * 5", "12 / 3 * 4", etc</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Lexer error'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Advance the `pos` pointer and set the `current_char` variable."""</span></span><br><span class="line">        self.pos += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt;= len(self.text):</span><br><span class="line">            self.current_char = <span class="literal">None</span>  <span class="comment"># Indicates end of input</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return a (multidigit) integer consumed from the input."""</span></span><br><span class="line">        value = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isdigit():</span><br><span class="line">            value += self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        <span class="keyword">return</span> int(value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens. One token at a time.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">elif</span> self.current_char.isdigit():</span><br><span class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'*'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MUL, <span class="string">'*'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'/'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(DIV, <span class="string">'/'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'+'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'-'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MINUS, <span class="string">'-'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.error()</span><br><span class="line">        <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></span><br><span class="line">        self.lexer = lexer</span><br><span class="line">        <span class="comment"># set current token to the first token taken from the input</span></span><br><span class="line">        self.current_token = self.lexer.get_next_token()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Interpreter error'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.lexer.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""factor : INTEGER"""</span></span><br><span class="line">        value = self.current_token.value</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""term : factor ((MUL | DIV) factor)*"""</span></span><br><span class="line">        value = self.factor()</span><br><span class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</span><br><span class="line">            <span class="keyword">if</span> self.current_token.type == MUL:</span><br><span class="line">                self.eat(MUL)</span><br><span class="line">                value *= self.factor()</span><br><span class="line">            <span class="keyword">elif</span> self.current_token.type == DIV:</span><br><span class="line">                self.eat(DIV)</span><br><span class="line">                value /= self.factor()</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Arithmetic expression parser / interpreter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        calc&gt;  14 + 2 * 3 - 6 / 2</span></span><br><span class="line"><span class="string">        17</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        expr   : term ((PLUS | MINUS) term)*</span></span><br><span class="line"><span class="string">        term   : factor ((MUL | DIV) factor)*</span></span><br><span class="line"><span class="string">        factor : INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        value = self.term()</span><br><span class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</span><br><span class="line">            <span class="keyword">if</span> self.current_token.type == PLUS:</span><br><span class="line">                self.eat(PLUS)</span><br><span class="line">                value += self.term()</span><br><span class="line">            <span class="keyword">elif</span> self.current_token.type == MINUS:</span><br><span class="line">                self.eat(MINUS)</span><br><span class="line">                value -= self.term()</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.expr()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            print()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> len(text.strip()):</span><br><span class="line">            interpreter = Interpreter(Lexer(text))</span><br><span class="line">            result = interpreter.parse()</span><br><span class="line">            print(result)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 
-<p>注意这里repository要替换成自己的仓库地址。</p>
-</li>
-<li><p>初始化本地仓库：在blog文件夹下的命令行输入<code>git init</code></p>
-</li>
-<li><p>连接远程仓库：命令行接着输入<code>git remote add origin https://github.com/kun-bin/kun-bin.github.io.git</code>，这里记得把地址改成自己的仓库地址，第一次的时候会要求输入github的账号密码。</p>
-</li>
-<li><p>发布博客页面：命令行里输入<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>，这等于一次性执行了清空、刷新、部署三个命令，此时在浏览器里已经可以通过<code>用户名.github.io</code>访问博客了，在github的这个仓库里也能看到<strong>/blog/public</strong>文件夹里的内容。</p>
-</li>
-<li><p>可选：<code>hexo d</code>只是把public文件夹中的内容（也就是静态网页）传到了github的仓库里，应该还可以建立分支把博客配置文件整个传到github上，不过我没做这一步。</p>
-</li>
-</ol>
-<h2 id="关于next主题的配置"><a href="#关于next主题的配置" class="headerlink" title="关于next主题的配置"></a>关于next主题的配置</h2><p>目前在blog文件夹里有一个config.yml文件，我们称之为站点配置文件；而在themes/next文件夹里也有一个config.yml文件，称之为主题配置文件。</p>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这一课讲的是运算结合性和优先级的处理。</p>
+<h4 id="什么是结合性"><a href="#什么是结合性" class="headerlink" title="什么是结合性"></a>什么是结合性</h4><p>当一个操作数（比如 7+3+1 中的 3）两边都有加号时，我们需要一个规则来决定哪个运算符作用于 3，根据经验，是左边的加号起作用（也就是先计算7+3），因此我们把加号看做是左结合的。类似地，减、乘、除也都是左结合的。</p>
+<h4 id="什么是优先级"><a href="#什么是优先级" class="headerlink" title="什么是优先级"></a>什么是优先级</h4><p>当一个操作数（比如 7 + 5 * 2 中的5）两边有不同的运算符时，先进行运算的那个运算符优先级较高，比如我们说运算符*比+先取运算符，*就有较高的优先级。</p>
+<p>在一个表达式中有相同优先级的运算符出现时，我们就使用结合性惯例从左到右执行。</p>
+<h4 id="构建语法和写解释器"><a href="#构建语法和写解释器" class="headerlink" title="构建语法和写解释器"></a>构建语法和写解释器</h4><p>以算术表达式为例，优先级列表如下：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>结合性</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>左结合</td>
+<td>+, -</td>
+</tr>
+<tr>
+<td>1</td>
+<td>左结合</td>
+<td>*, /</td>
+</tr>
+</tbody></table>
+<p>从优先级表构建语法：</p>
 <ol>
-<li><p>基本信息：打开站点配置文件，找到site模块，可以修改博客标题、作者、描述、语言等等信息，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 标题</span><br><span class="line">subtitle: 副标题</span><br><span class="line">description: 描述</span><br><span class="line">author: 作者</span><br><span class="line">language: 语言（简体中文是zh-Hans）</span><br><span class="line">timezone: 网站时区（Hexo 默认使用您电脑的时区，不用写）</span><br></pre></td></tr></table></figure>
+<li>对于每一个优先级定义一个非终结符。这个非终结符的生成式的 body 应该由本优先级的算术运算符和更高优先级的非终结符组成。</li>
+<li>对表达式的基本单元(在我们的例子中是 INTEGER)新建一个额外的非终结符 <code>factor</code>. 一般原则就是如果你有 N 级优先级，你一共会需要 N+1 非终结符：每个优先级一个再 加上基本单元的一个。</li>
+</ol>
+<p>具体来说我们现在有2个优先级，因此会有3个非终结符，优先级为2的对应<code>expr</code>，优先级为1的对应<code>term</code>，最后是<code>factor</code>。</p>
+<p><code>expr</code>要表达包含<code>term</code>的加减运算，即：<code>expr: term((PLUS|MINUS)term)*</code></p>
+<p><code>term</code>则是包含<code>factor</code>的乘除运算，即：<code>term； factor((MUL|DIV)factor)*</code></p>
+<p>最后<code>factor</code>是基本单元，即：<code>factor: INTEGER</code></p>
+<p>然后就是和上一课一样的步骤写代码了。</p>
+<p>（总的来说这一课没有什么新知识，但是我还是不能不看教程自己写…）</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>根据本文的描述凭记忆写出一个解释器，不要参考文中的代码。为你的解释器写一些测试，确保它们可以通过。</p>
 </li>
-<li><p>菜单配置：初始网页只有两个菜单：home和archive，可以打开主题配置文件，找到menu模块，把需要的菜单前面的#删了，并注意把||<strong>前面</strong>的空格删了，不然可能会点了菜单以后报错（类似Cannot GET /tags/%20/这样的错）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /|| home                          <span class="comment">//首页</span></span><br><span class="line">  archives: /archives/|| archive          <span class="comment">//归档</span></span><br><span class="line">  categories: /categories/|| th           <span class="comment">//分类</span></span><br><span class="line">  tags: /tags/|| tags                     <span class="comment">//标签</span></span><br><span class="line">  about: /about/|| user                   <span class="comment">//关于</span></span><br><span class="line">  <span class="meta">#schedule: /schedule/|| calendar        <span class="comment">//日程表</span></span></span><br><span class="line">  <span class="meta">#sitemap: /sitemap.xml|| sitemap        <span class="comment">//站点地图</span></span></span><br><span class="line">  <span class="meta">#commonweal: /404/|| heartbeat          <span class="comment">//公益404</span></span></span><br></pre></td></tr></table></figure>
-<p>这里||后面的单词是指菜单对应的图标，可以自己修改。此外，日程表那个模块，因为实际上调用的是谷歌日历，国内显然没法用，所以不建议使用。</p>
-</li>
-<li><p>建立菜单对应的页面：还是在blog文件夹下打开命令行，输入<code>hexo new page &quot;categories&quot;</code>，然后在~/blog/source 文件夹中即可看到categories文件夹，打开里面的index.md文件，设置如下（注意：后面要加空格）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
-
-<p>tags页面也是一样的方式来建立。</p>
-</li>
-<li><p>主题风格：一共有四个风格可以选择，打开主题配置文件 找到<code>Scheme Settings</code>，把想用的风格前面的#去掉，比如我这里用了Mist。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line">scheme: Mist</span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="comment"># scheme: Gemini</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>侧栏设置：侧栏设置包括：侧栏位置、侧栏显示与否、文章间距、返回顶部按钮等等，打开主题配置文件 找到<code>sidebar</code>，按自己的喜好选择，把想要的那一项的#去掉或者false改成true即可。</p>
-</li>
-<li><p>头像设置：主题配置文件找到<code>avatar</code>，修改avatar后面的路径为自己头像的路径，头像文件要放到<code>themes/next/source/images</code>中，比如头像文件名为<code>header.jpg</code>，就把那一行写成<code>avatar: /images/header.jpg</code>。如果前面有#就去掉#。</p>
-</li>
-<li><p>添加搜索：</p>
-<ol>
-<li><p>还是blog文件夹的命令行里，输入<code>npm install hexo-generator-searchdb --save</code>。</p>
-</li>
-<li><p>打开站点配置文件找到<code>Extensions</code>在下面添加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>打开主题配置文件找到<code>Local search</code>，将<code>enable</code>设置为<code>true</code>。</p>
+<li><p>扩展这个解释器来处理包含括号的算术表达式，使得你的解释器可以对嵌套很深很深的算 术表达式进行求值如：7 + 3 * (10 / (12 / (3 + 1) - 1))</p>
 </li>
 </ol>
-</li>
-<li><p>还有很多能配置的，比如侧边栏头像下面有github链接，点击页面出现爱心符号，博客背景动态变化等，可自行搜索。</p>
-</li>
+<h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
+<li></li>
 </ol>
-<h2 id="如何发布新的博客"><a href="#如何发布新的博客" class="headerlink" title="如何发布新的博客"></a>如何发布新的博客</h2><ol>
-<li><p>在blog文件夹的命令行里输入<code>hexo new &quot;标题&quot;</code>，然后进入<strong>/blog/sources/_post/</strong>找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。</p>
-<p>文件头信息如下编写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写好以后保存，然后还是blog文件夹的命令行，输入<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>，就发布成功了。</p>
-</li>
-<li><p>如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tags；</span><br><span class="line">	- tag1</span><br><span class="line">	- tag2</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
-
-<p>这里<code>tags:</code> 后面一定要换行，下面的<code>-</code>后面注意有空格。</p>
-</li>
-</ol>
-<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
-<p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
-<p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
 
       
     </div>
@@ -508,7 +468,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 教程</a>
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 编译原理</a>
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
           
         </div>
       
@@ -521,14 +485,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/03/04/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-2/" rel="next" title="python课程记录-2">
+                <i class="fa fa-chevron-left"></i> python课程记录-2
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" rel="prev" title="Let's Build A Simple Interpreter笔记[1]">
-                Let's Build A Simple Interpreter笔记[1] <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/11/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-3/" rel="prev" title="python课程记录-3">
+                python课程记录-3 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -681,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装各种东西"><span class="nav-number">1.</span> <span class="nav-text">安装各种东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装主题"><span class="nav-number">3.</span> <span class="nav-text">安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立Github博客"><span class="nav-number">4.</span> <span class="nav-text">建立Github博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于next主题的配置"><span class="nav-number">5.</span> <span class="nav-text">关于next主题的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发布新的博客"><span class="nav-number">6.</span> <span class="nav-text">如何发布新的博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接："><span class="nav-number">7.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">3.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是结合性"><span class="nav-number">3.0.1.</span> <span class="nav-text">什么是结合性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是优先级"><span class="nav-number">3.0.2.</span> <span class="nav-text">什么是优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建语法和写解释器"><span class="nav-number">3.0.3.</span> <span class="nav-text">构建语法和写解释器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查理解"><span class="nav-number">5.</span> <span class="nav-text">检查理解</span></a></li></ol></div>
             
 
           </div>

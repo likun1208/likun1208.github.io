@@ -1,6 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>python课程记录-3</title>
+    <url>/2020/03/11/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-3/</url>
+    <content><![CDATA[<h3 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h3><p>这次上课有一些是以前不太了解的知识点。</p>
+<h5 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h5><p>包括字符串、列表、元组、字节序列。</p>
+<ol>
+<li><p>索引访问：</p>
+<p>有<code>n</code>个元素的数组，索引范围是<code>[0, n-1]</code>或<code>[-n, -1]</code>，也就是说，除了常规的类似其他语言中数组的下标索引方式，我们还可以通过<code>-1</code>来逆序访问。这在某些时候是很方便的一个操作，比如判断回文字符串。</p>
+</li>
+<li><p>遍历访问：</p>
+<p>遍历也是用<code>for</code>循环，不过和其他语言不同的是，这里<code>for</code>循环中的<code>i</code>类型很随意，可以是<code>1, 2, 3, ...</code>也可以是元组、字符等，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">'hello'</span>:</span><br><span class="line">	print(c)</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>c</code>是字符，最终会把<code>h</code>, <code>e</code>, <code>l</code>, <code>l</code>, <code>o</code> 逐行输出。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> [(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">5</span>,<span class="number">6</span>)]</span><br><span class="line">	print(t,t[<span class="number">0</span>],t[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>t</code>是元组，最终输出是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="number">1</span>,<span class="number">2</span>) <span class="number">1</span> <span class="number">2</span></span><br><span class="line">(<span class="number">3</span>,<span class="number">4</span>) <span class="number">3</span> <span class="number">4</span></span><br><span class="line">(<span class="number">5</span>,<span class="number">6</span>) <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切片</p>
+<p>序列<code>s</code>可以通过<code>s[i:j:k]</code>来截取其中的一部分，<code>i</code>是起点，<code>j</code>是终点，<code>k</code>是步长，注意这里的起点终点都可以是负数，结合上文可知，<code>s[::-1]</code>实际上就是序列的逆序。注意这个切片并不会改变序列<code>s</code>。想要将切片的下标信息保存下来，我们可以使用<code>slice(i:j:k)</code>函数。这里如果越界了也不会报错。</p>
+</li>
+<li><p>连接和重复</p>
+<p>连接<code>+</code>：<code>s1+s2</code></p>
+<p>重复<code>*</code>：<code>s*n</code> 或者 <code>n*s</code></p>
+<p>增量赋值：<code>+=</code>和<code>*=</code></p>
+<p>元组不可以<code>+=</code>序列，但是反过来序列<code>+=</code>元组是没问题的。</p>
+</li>
+<li><p>成员关系操作</p>
+<p><code>in</code>和<code>not in</code>可以判断一个元素是否在序列中。</p>
+<p><code>s.count(value)</code>可以统计<code>value</code>在序列<code>s</code>中出现的次数。</p>
+<p><code>s.index(value, [start, [stop]])</code>查找value在序列指定范围 <code>[start,stop)</code>中第一次出现的下标。</p>
+</li>
+<li><p>序列内置函数</p>
+<p><code>len</code> 单纯求序列长度</p>
+<p><code>sorted</code>对序列排序并返回排序后的列表，不改变原始序列</p>
+<p><code>reversed</code>逆序，不改动原序列，返回反向迭代器</p>
+<p><code>max</code>和<code>min</code>求最大值和最小值，要求元素类型都一样</p>
+<p><code>sum</code>序列求和，要求不能有非数字</p>
+<p><code>enumerate</code>返回元素为<code>元组(计数，元素)</code> 的迭代器</p>
+<p><code>zip</code>拼接多个对象<code>iter1、iter2…</code>的元素， 返回一个迭代器，其元素为各对象元素组成的元组。</p>
+<p><code>all</code>和<code>any</code>判断序列的元素是否全部和部分为True</p>
+</li>
+<li><p>序列类型转换</p>
+<p><code>str</code> <code>list</code> <code>tuple</code> <code>bytes</code> <code>bytearray</code>可以从字面意义看出是转成什么类型。</p>
+</li>
+<li><p>的</p>
+</li>
+<li><p>序列拆分</p>
+<p><code>变量1,变量2,…,变量n = 序列</code>这样的赋值语句，可以把序列中的元素拆开赋值给前面的变量，不过类型要统一，比如序列中有元组，那前面对应位置的变量也要写成元组的形式。</p>
+<p><code>*变量</code>的形式，可以把多个元素打包赋值给一个变量，但是只能出现一次。</p>
+<p>可以用临时变量<code>_</code>来占位从而将指定位置的元素赋值给某个变量，例如<code>_, b, _ = (1, 2, 3)</code>就是把<code>2</code>赋值给<code>b</code>。</p>
+</li>
+</ol>
+<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><ol>
+<li><p><code>del</code>删除元素，赋值修改元素</p>
+</li>
+<li><p><code>s.append(x)</code> 把<code>x</code>追加到<code>s</code>末尾</p>
+</li>
+<li><p><code>s.clear()</code> 删除所有元素</p>
+</li>
+<li><p><code>s.copy()</code> 复制</p>
+</li>
+<li><p><code>s.extend(t)</code> 和上面的<code>s.append(x)</code>是一样的，区别在于，<code>append</code>把<code>x</code>作为一个整体加到末尾，而<code>extend</code>把<code>x</code>作为一个新的列表合并到<code>s</code>的末尾。</p>
+</li>
+<li><p><code>s.insert(i,x)</code>插入</p>
+</li>
+<li><p><code>s.pop([i])</code>返回并移除下标为<code>i</code>的元素，<code>i</code>省略时默认为最后一个元素</p>
+</li>
+<li><p><code>s.remove(x)</code>移除列表中第一次出现的<code>x</code></p>
+</li>
+<li><p><code>s.reverse()</code>列表反转</p>
+</li>
+<li><p><code>s.sort()</code>列表排序</p>
+</li>
+<li><p>列表解析表达式：处理可迭代对象并生成结果列表，具体格式为<code>[express for i_1 in 可迭代对象1…for i_N in 可迭代对象N [if condition] ]</code></p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">[i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>]</span><br><span class="line">[(x+y,x*y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">2</span>) <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">4</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表解析生成字典和集合</span></span><br><span class="line">a = [(<span class="string">'小黑'</span>,<span class="string">'领导'</span>,<span class="number">30000</span>),(<span class="string">'小白'</span>,<span class="string">'职员'</span>,<span class="number">10000</span>),(<span class="string">'小蓝'</span>,<span class="string">'职员'</span>,<span class="number">5000</span>)]</span><br><span class="line">&#123;i[<span class="number">0</span>]:i[<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小黑': 30000, '小白': 10000, '小蓝': 5000&#125;</span></span><br><span class="line">&#123;i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i[<span class="number">2</span>]&gt;=<span class="number">10000</span>&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小白', '小黑'&#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
+<li><p>已知一选手的各评委得分<code>score = [95, 85, 89, 88, 86, 95, 89, 98, 85, 75, 80]</code>，运用序列的各项操作求该选手的得分，计算规则：去掉一个最高分和一个最低分，剩下的分数计算平均分。</p>
+<p>最直接的思路就是整体求和然后减去最大的和最小的再算平均值，也就是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">score = [<span class="number">95</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">88</span>, <span class="number">86</span>, <span class="number">95</span>, <span class="number">89</span>, <span class="number">98</span>, <span class="number">85</span>, <span class="number">75</span>, <span class="number">80</span>]</span><br><span class="line">s = (sum(score) - max(score) - min(score)) / (len(score) - <span class="number">2</span>)</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断一个字符串是否是回文串：<code>a = &#39;abcdcba&#39;  b = &#39;abcdefg&#39;</code></p>
+<p>这个题有很多思路，最快的办法就是用前面提到的<code>s[::-1]</code>来实现逆序，即：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_palindromic4</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num == num[::<span class="number">-1</span>]</span><br><span class="line">a = <span class="string">'abcdcba'</span></span><br><span class="line">b = <span class="string">'abcdefg'</span></span><br><span class="line">print(is_palindromic4(b))</span><br></pre></td></tr></table></figure>
+
+<p>也可以选择把字符串转成<code>list</code>或者<code>tuple</code>然后使用<code>reverse</code>函数来实现逆序。即：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list(a)==list(reverse(a))</span><br><span class="line">tuple(a)==tuple(reverse(a))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面代码执行后的<code>s</code>是（）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = [<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line">s.append([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">s.extend(<span class="string">'34'</span>)</span><br><span class="line">s.extend([<span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">s.insert(<span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">s.insert(<span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line">s.pop(<span class="number">2</span>)</span><br><span class="line">s.remove(<span class="string">'a'</span>)</span><br><span class="line">s[<span class="number">4</span>:] = []</span><br><span class="line">s.reverse()</span><br></pre></td></tr></table></figure>
+
+<p>对照每个函数的作用可以很容易判断出最后的结果是<code>[&#39;4&#39;,&#39;3&#39;,[1,2],7]</code></p>
+</li>
+</ol>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><ol>
+<li><p>使用<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>**</code>运算符和数字<code>2</code>,<code>3</code>,<code>4</code>,<code>5</code>，构造一个表达式，该表达式中上述4个数字和3种不同运算符各用一次，使得表达式的结果为24，打印出满足条件的表达式。</p>
+<p>提示：</p>
+<p>(1)构建表达式字符串，然后用内置函数<code>eval</code>计算该字符串 ，例如<code>eval(&#39;3*4/2+5&#39;)</code>返回<code>11.0</code>； </p>
+<p>(2)两字符串可通过”+”连接成一个字符串，如<code>’he’+’llo’</code>会 得到<code>’hello’</code>； </p>
+<p>(3)本题关键在于求排列，排列有多种实现方式，例如循环。</p>
+<p>根据提示很容易想到一个思路：把数字的全排列和运算符的取3个排列分别列出来，然后逐一组合成字符串，使用<code>eval</code>计算结果，如果是24，就输出。查找资料后发现<code>python</code>有一个算排列的库函数<code>itertools.permutations(s, n)</code>，该函数返回列表<code>s</code>中取<code>n</code>个元素的排列结果，该结果也是一个列表，也就是说我们可以通过该函数得到数字和运算符的排列结果，并<code>for</code>循环遍历，将它们组成计算表达式并求结果，然后输出。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">op = [<span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'**'</span>]</span><br><span class="line">num = [<span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(num, <span class="number">4</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> itertools.permutations(op, <span class="number">3</span>):</span><br><span class="line">        s = i[<span class="number">0</span>] + j[<span class="number">0</span>] + i[<span class="number">1</span>] + j[<span class="number">1</span>] + i[<span class="number">2</span>] + j[<span class="number">2</span>] + i[<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> float(eval(s)) == <span class="number">24.0</span>:</span><br><span class="line">            print(s)</span><br></pre></td></tr></table></figure>
+
+<p>此外，<code>python</code>中完成24点游戏的思路还有很多很多，复杂一些的办法可以是构造二叉树，然后遍历节点。</p>
+</li>
+<li><p>输入一个列表，然后删除该列表中的重复的元素，要求删除重复元素后还保持原排序，最后输出结果。例如，输入列表 <code>[0, 1, 1, 1, 3, 0, 3, 2]</code>，输出 <code>[0, 1, 3, 2]</code>。</p>
+<p>这个题也有很多思路，比如逐个比较等。有一种很便捷的方法是，对输入列表生成字典，这样就按顺序去掉了重复元素，再将字典的<code>key</code>转成列表即可，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list1 = eval(input(<span class="string">'请输入一个列表：'</span>))</span><br><span class="line">list2 = dict.fromkeys(list1)</span><br><span class="line">list3 = list(list2.keys())</span><br><span class="line">print(list3)</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Let-s-Build-A-Simple-Interpreter笔记-5</title>
+    <url>/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/</url>
+    <content><![CDATA[<h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part5/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/01/30/lets-build-a-simple-interpreter-part-05/" target="_blank" rel="noopener">翻译</a></p>
+<a id="more"></a>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, MINUS, MUL, DIV, EOF = (</span><br><span class="line">    <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'MUL'</span>, <span class="string">'DIV'</span>, <span class="string">'EOF'</span></span><br><span class="line">)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: INTEGER, PLUS, MINUS, MUL, DIV, or EOF</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: non-negative integer value, '+', '-', '*', '/', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of the class instance.</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">            Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">            Token(PLUS, '+')</span></span><br><span class="line"><span class="string">            Token(MUL, '*')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f'Token(<span class="subst">&#123;self.type&#125;</span>, <span class="subst">&#123;repr(self.value)&#125;</span>)'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3 * 5", "12 / 3 * 4", etc</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Lexer error'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Advance the `pos` pointer and set the `current_char` variable."""</span></span><br><span class="line">        self.pos += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt;= len(self.text):</span><br><span class="line">            self.current_char = <span class="literal">None</span>  <span class="comment"># Indicates end of input</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return a (multidigit) integer consumed from the input."""</span></span><br><span class="line">        value = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isdigit():</span><br><span class="line">            value += self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        <span class="keyword">return</span> int(value)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens. One token at a time.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">elif</span> self.current_char.isdigit():</span><br><span class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'*'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MUL, <span class="string">'*'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'/'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(DIV, <span class="string">'/'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'+'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line">            <span class="keyword">elif</span> self.current_char == <span class="string">'-'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MINUS, <span class="string">'-'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.error()</span><br><span class="line">        <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></span><br><span class="line">        self.lexer = lexer</span><br><span class="line">        <span class="comment"># set current token to the first token taken from the input</span></span><br><span class="line">        self.current_token = self.lexer.get_next_token()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Interpreter error'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.lexer.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""factor : INTEGER"""</span></span><br><span class="line">        value = self.current_token.value</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""term : factor ((MUL | DIV) factor)*"""</span></span><br><span class="line">        value = self.factor()</span><br><span class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</span><br><span class="line">            <span class="keyword">if</span> self.current_token.type == MUL:</span><br><span class="line">                self.eat(MUL)</span><br><span class="line">                value *= self.factor()</span><br><span class="line">            <span class="keyword">elif</span> self.current_token.type == DIV:</span><br><span class="line">                self.eat(DIV)</span><br><span class="line">                value /= self.factor()</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Arithmetic expression parser / interpreter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        calc&gt;  14 + 2 * 3 - 6 / 2</span></span><br><span class="line"><span class="string">        17</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        expr   : term ((PLUS | MINUS) term)*</span></span><br><span class="line"><span class="string">        term   : factor ((MUL | DIV) factor)*</span></span><br><span class="line"><span class="string">        factor : INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        value = self.term()</span><br><span class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</span><br><span class="line">            <span class="keyword">if</span> self.current_token.type == PLUS:</span><br><span class="line">                self.eat(PLUS)</span><br><span class="line">                value += self.term()</span><br><span class="line">            <span class="keyword">elif</span> self.current_token.type == MINUS:</span><br><span class="line">                self.eat(MINUS)</span><br><span class="line">                value -= self.term()</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.expr()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            print()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> len(text.strip()):</span><br><span class="line">            interpreter = Interpreter(Lexer(text))</span><br><span class="line">            result = interpreter.parse()</span><br><span class="line">            print(result)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这一课讲的是运算结合性和优先级的处理。</p>
+<h4 id="什么是结合性"><a href="#什么是结合性" class="headerlink" title="什么是结合性"></a>什么是结合性</h4><p>当一个操作数（比如 7+3+1 中的 3）两边都有加号时，我们需要一个规则来决定哪个运算符作用于 3，根据经验，是左边的加号起作用（也就是先计算7+3），因此我们把加号看做是左结合的。类似地，减、乘、除也都是左结合的。</p>
+<h4 id="什么是优先级"><a href="#什么是优先级" class="headerlink" title="什么是优先级"></a>什么是优先级</h4><p>当一个操作数（比如 7 + 5 * 2 中的5）两边有不同的运算符时，先进行运算的那个运算符优先级较高，比如我们说运算符*比+先取运算符，*就有较高的优先级。</p>
+<p>在一个表达式中有相同优先级的运算符出现时，我们就使用结合性惯例从左到右执行。</p>
+<h4 id="构建语法和写解释器"><a href="#构建语法和写解释器" class="headerlink" title="构建语法和写解释器"></a>构建语法和写解释器</h4><p>以算术表达式为例，优先级列表如下：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>结合性</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>左结合</td>
+<td>+, -</td>
+</tr>
+<tr>
+<td>1</td>
+<td>左结合</td>
+<td>*, /</td>
+</tr>
+</tbody></table>
+<p>从优先级表构建语法：</p>
+<ol>
+<li>对于每一个优先级定义一个非终结符。这个非终结符的生成式的 body 应该由本优先级的算术运算符和更高优先级的非终结符组成。</li>
+<li>对表达式的基本单元(在我们的例子中是 INTEGER)新建一个额外的非终结符 <code>factor</code>. 一般原则就是如果你有 N 级优先级，你一共会需要 N+1 非终结符：每个优先级一个再 加上基本单元的一个。</li>
+</ol>
+<p>具体来说我们现在有2个优先级，因此会有3个非终结符，优先级为2的对应<code>expr</code>，优先级为1的对应<code>term</code>，最后是<code>factor</code>。</p>
+<p><code>expr</code>要表达包含<code>term</code>的加减运算，即：<code>expr: term((PLUS|MINUS)term)*</code></p>
+<p><code>term</code>则是包含<code>factor</code>的乘除运算，即：<code>term； factor((MUL|DIV)factor)*</code></p>
+<p>最后<code>factor</code>是基本单元，即：<code>factor: INTEGER</code></p>
+<p>然后就是和上一课一样的步骤写代码了。</p>
+<p>（总的来说这一课没有什么新知识，但是我还是不能不看教程自己写…）</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>根据本文的描述凭记忆写出一个解释器，不要参考文中的代码。为你的解释器写一些测试，确保它们可以通过。</p>
+</li>
+<li><p>扩展这个解释器来处理包含括号的算术表达式，使得你的解释器可以对嵌套很深很深的算 术表达式进行求值如：7 + 3 * (10 / (12 / (3 + 1) - 1))</p>
+</li>
+</ol>
+<h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
+<li></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Let&#39;s Build A Simple Interpreter</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>编译原理</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python课程记录-2</title>
     <url>/2020/03/04/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-2/</url>
     <content><![CDATA[<ol>
@@ -36,12 +221,118 @@
 <p>最后就是格式化输出，然后就结束了，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">100</span>):</span><br><span class="line">    bool = random.randint(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> bool == <span class="number">0</span>:</span><br><span class="line">        a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        <span class="keyword">while</span> a != <span class="number">90</span> <span class="keyword">and</span> a % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        <span class="keyword">while</span> ((a % <span class="number">10</span> + b % <span class="number">10</span>) &lt; <span class="number">10</span>) <span class="keyword">and</span> ((a // <span class="number">10</span> + b // <span class="number">10</span>) &lt; <span class="number">10</span>):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; + &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="keyword">while</span> a % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">            a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        <span class="keyword">while</span> ((b % <span class="number">10</span>) &lt;= (a % <span class="number">10</span>)) <span class="keyword">and</span> ((b % <span class="number">100</span>) &lt;= (a % <span class="number">100</span>)):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; - &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">        print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
+<p>补充一下关于<code>print</code>格式化输出的内容：</p>
+<p><code>python</code>中的<code>print</code>函数有一个<code>end</code>参数，当直接<code>print</code>而没有<code>end</code>时，默认换行；当<code>end=&quot;&quot;</code>时，就不自动换行了；当<code>end=XXX</code>时，在<code>print</code>后，会接着有<code>XXX</code>，比如上面代码的<code>\t\t</code>，也不自动换行。</p>
+<p>在<code>C</code>语言中，可以通过<code>prints(&quot;%d, %d&quot;, a, b)</code>来实现输出<code>a, b</code>，并通过<code>%x.yd</code>（比如<code>%5.3d</code>)来控制输出长度和精度，而<code>python</code>中有类似的用法，即<code>str.format()</code>，其基本语法是通过<code>{}</code>和<code>:</code>来代替<code>%</code>。<code>&#39;{:&lt;2} - {:&lt;2}=&#39;.format(a, b)</code>这样的语句含义是：把<code>a</code>和<code>b</code>按默认顺序填入前面的花括号，并把长度控制为2个字符且左对齐。</p>
+<p><code>format()</code>的用法很多。</p>
+<p>可以接受不限个数和顺序的参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">"&#123;&#125; &#123;&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)    <span class="comment"># 不设置指定位置，按默认顺序</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;1&#125; &#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'world hello world'</span></span><br></pre></td></tr></table></figure>
+
+<p>可以指明参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(name=<span class="string">"菜鸟教程"</span>, url=<span class="string">"www.runoob.com"</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过字典设置参数</span></span><br><span class="line">site = &#123;<span class="string">"name"</span>: <span class="string">"菜鸟教程"</span>, <span class="string">"url"</span>: <span class="string">"www.runoob.com"</span>&#125;</span><br><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(**site))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过列表索引设置参数</span></span><br><span class="line">my_list = [<span class="string">'菜鸟教程'</span>, <span class="string">'www.runoob.com'</span>]</span><br><span class="line">print(<span class="string">"网站名：&#123;0[0]&#125;, 地址 &#123;0[1]&#125;"</span>.format(my_list))  <span class="comment"># "0" 是必须的</span></span><br></pre></td></tr></table></figure>
+
+<p>可以向<code>format</code>传入对象：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssignValue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">my_value = AssignValue(<span class="number">6</span>)</span><br><span class="line">print(<span class="string">'value 为: &#123;0.value&#125;'</span>.format(my_value))  <span class="comment"># "0" 是可选的</span></span><br></pre></td></tr></table></figure>
+
+<p>数字格式化输出的完整形式如下：</p>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>格式</th>
+<th>输出</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3.1415926</td>
+<td>{:.2f}</td>
+<td>3.14</td>
+<td>保留小数点后两位</td>
+</tr>
+<tr>
+<td>3.1415926</td>
+<td>{:+.2f}</td>
+<td>+3.14</td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>{:+.2f}</td>
+<td>-1.00</td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td>2.71828</td>
+<td>{:.0f}</td>
+<td>3</td>
+<td>不带小数</td>
+</tr>
+<tr>
+<td>5</td>
+<td>{:0&gt;2d}</td>
+<td>05</td>
+<td>数字补零 (填充左边, 宽度为2)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>{:x&lt;4d}</td>
+<td>5xxx</td>
+<td>数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>{:x&lt;4d}</td>
+<td>10xx</td>
+<td>数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td>1000000</td>
+<td>{:,}</td>
+<td>1,000,000</td>
+<td>以逗号分隔的数字格式</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>{:.2%}</td>
+<td>25.00%</td>
+<td>百分比格式</td>
+</tr>
+<tr>
+<td>1000000000</td>
+<td>{:.2e}</td>
+<td>1.00e+09</td>
+<td>指数记法</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:&gt;10d}</td>
+<td>13</td>
+<td>右对齐 (默认, 宽度为10)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:&lt;10d}</td>
+<td>13</td>
+<td>左对齐 (宽度为10)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:^10d}</td>
+<td>13</td>
+<td>中间对齐 (宽度为10)</td>
+</tr>
+</tbody></table>
+<p><code>^</code>,<code>&lt;</code>, <code>&gt;</code> 分别是居中、左对齐、右对齐，后面带宽度， <code>:</code> 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。<code>+</code> 表示在正数前显示 <code>+</code>，负数前显示 <code>-</code>； （空格）表示在正数前加空格。</p>
+<p>此外，还可以转进制输出，<code>b</code>、<code>d</code>、<code>o</code>、<code>x</code> 分别是二进制、十进制、八进制、十六进制。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">'&#123;:b&#125;'.format(11) --&gt; 1011</span><br><span class="line">'&#123;:d&#125;'.format(11) --&gt; 11</span><br><span class="line">'&#123;:o&#125;'.format(11) --&gt; 13</span><br><span class="line">'&#123;:x&#125;'.format(11) --&gt; b</span><br><span class="line">'&#123;:#x&#125;'.format(11) --&gt; 0xb</span><br><span class="line">'&#123;:#X&#125;'.format(11) --&gt; 0XB</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>编写程序，求解所有由两个四位数组成的亲和数。（如果两个正整数a和b满足：a的所有真因数（除本身以外的因数）之和等于b，同时b的所有真因数之和等于a，则称a，b是一对亲和数 。）</li>
 </ol>
 <p>思路是先写一个算真因数之和的函数，接着写两层循环，第一层<code>a</code>是1000到9999，第二层<code>b</code>是1000到<code>a</code>，然后调用函数判断<code>a</code>和<code>b</code>的真因数之和是否符合条件。一个整数<code>n</code>的真因数之和是很好计算的，只需要遍历1到<code>n//2+1</code>看是否整除<code>n</code>，然后把整除的累加一下，就可以了。</p>
 <p>但是实际运行的时候，发现这样搞真的很慢，要等好久才会出结果，这是因为两层<code>for</code>循环，每次都要算两个真因数的和，而这也是一层循环，再加上<code>python</code>本身就效率很低，速度就格外慢了，因此最好的办法是能去掉一层循环，或者有什么库可以飞快地计算真因数之和。</p>
-<p>然后再查资料的过程中，看到了另一种亲和数的定义：先求出数字<code>n</code>所有真因数之和<code>a</code>，然后再求出数字<code>a</code>所有真因数之和<code>b</code>。如果<code>a!= b</code> 且<code>n==b</code>，则<code>a</code>、<code>b</code>、<code>n</code>都是亲和数。</p>
+<p>然后在查资料的过程中，看到了另一种亲和数的定义：先求出数字<code>n</code>所有真因数之和<code>a</code>，然后再求出数字<code>a</code>所有真因数之和<code>b</code>。如果<code>a!= b</code> 且<code>n==b</code>，则<code>a</code>、<code>b</code>、<code>n</code>都是亲和数。</p>
 <p>也就是说，可以只写一层循环<code>a</code>，计算<code>a</code>的真因数之和<code>b</code>，再计算<code>b</code>的真因数之和<code>sum_b</code>，如果<code>a=sum_b</code>，则符合条件输出一下，反之就直接继续下一次循环，算真因数之和的部分没有变化。这样循环少了一层，运算速度快了好多。</p>
 <p>此外，看到一个不是用取余，而是用除法和整除结果来判断是否是因数的代码：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">d</span><span class="params">(n)</span>:</span>  <span class="comment">#计算数字n所有真因数之和</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> n/i == float(n//i):</span><br><span class="line">            res += i</span><br><span class="line">    <span class="keyword">return</span>(res)</span><br></pre></td></tr></table></figure>
@@ -64,7 +355,7 @@
 <p>(这个翻译里有个别地方翻译错了……)</p>
 <a id="more"></a>
 
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Token types</span><br><span class="line">#</span><br><span class="line"># EOF (end-of-file) token is used to indicate that</span><br><span class="line"># there is no more input left for lexical analysis</span><br><span class="line">INTEGER, MUL, DIV, EOF &#x3D; &#39;INTEGER&#39;, &#39;MUL&#39;, &#39;DIV&#39;, &#39;EOF&#39;</span><br><span class="line">class Token(object):</span><br><span class="line">    def __init__(self, type, value):</span><br><span class="line">        # token type: INTEGER, MUL, DIV, or EOF</span><br><span class="line">        self.type &#x3D; type</span><br><span class="line">        # token value: non-negative integer value, &#39;*&#39;, &#39;&#x2F;&#39;, or None</span><br><span class="line">        self.value &#x3D; value</span><br><span class="line">    def __str__(self):</span><br><span class="line">        &quot;&quot;&quot;String representation of the class instance.</span><br><span class="line">        Examples:</span><br><span class="line">            Token(INTEGER, 3)</span><br><span class="line">            Token(MUL, &#39;*&#39;)</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        return &#39;Token(&#123;type&#125;, &#123;value&#125;)&#39;.format(</span><br><span class="line">            type&#x3D;self.type,</span><br><span class="line">            value&#x3D;repr(self.value)</span><br><span class="line">        )</span><br><span class="line">    def __repr__(self):</span><br><span class="line">        return self.__str__()</span><br><span class="line">class Lexer(object):</span><br><span class="line">    def __init__(self, text):</span><br><span class="line">        # client string input, e.g. &quot;3 * 5&quot;, &quot;12 &#x2F; 3 * 4&quot;, etc</span><br><span class="line">        self.text &#x3D; text</span><br><span class="line">        # self.pos is an index into self.text</span><br><span class="line">        self.pos &#x3D; 0</span><br><span class="line">        self.current_char &#x3D; self.text[self.pos]</span><br><span class="line">    def error(self):</span><br><span class="line">        raise Exception(&#39;Invalid character&#39;)</span><br><span class="line">    def advance(self):</span><br><span class="line">        &quot;&quot;&quot;Advance the &#96;pos&#96; pointer and set the &#96;current_char&#96; variable.&quot;&quot;&quot;</span><br><span class="line">        self.pos +&#x3D; 1</span><br><span class="line">        if self.pos &gt; len(self.text) - 1:</span><br><span class="line">            self.current_char &#x3D; None  # Indicates end of input</span><br><span class="line">        else:</span><br><span class="line">            self.current_char &#x3D; self.text[self.pos]</span><br><span class="line">    def skip_whitespace(self):</span><br><span class="line">        while self.current_char is not None and self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    def integer(self):</span><br><span class="line">        &quot;&quot;&quot;Return a (multidigit) integer consumed from the input.&quot;&quot;&quot;</span><br><span class="line">        result &#x3D; &#39;&#39;</span><br><span class="line">        while self.current_char is not None and self.current_char.isdigit():</span><br><span class="line">            result +&#x3D; self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        return int(result)</span><br><span class="line">    def get_next_token(self):</span><br><span class="line">        &quot;&quot;&quot;Lexical analyzer (also known as scanner or tokenizer)</span><br><span class="line">        This method is responsible for breaking a sentence</span><br><span class="line">        apart into tokens. One token at a time.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        while self.current_char is not None:</span><br><span class="line">            if self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                continue</span><br><span class="line">            if self.current_char.isdigit():</span><br><span class="line">                return Token(INTEGER, self.integer())</span><br><span class="line">            if self.current_char &#x3D;&#x3D; &#39;*&#39;:</span><br><span class="line">                self.advance()</span><br><span class="line">                return Token(MUL, &#39;*&#39;)</span><br><span class="line">            if self.current_char &#x3D;&#x3D; &#39;&#x2F;&#39;:</span><br><span class="line">                self.advance()</span><br><span class="line">                return Token(DIV, &#39;&#x2F;&#39;)</span><br><span class="line">            self.error()</span><br><span class="line">        return Token(EOF, None)</span><br><span class="line">class Interpreter(object):</span><br><span class="line">    def __init__(self, lexer):</span><br><span class="line">        self.lexer &#x3D; lexer</span><br><span class="line">        # set current token to the first token taken from the input</span><br><span class="line">        self.current_token &#x3D; self.lexer.get_next_token()</span><br><span class="line">    def error(self):</span><br><span class="line">        raise Exception(&#39;Invalid syntax&#39;)</span><br><span class="line">    def eat(self, token_type):</span><br><span class="line">        # compare the current token type with the passed token</span><br><span class="line">        # type and if they match then &quot;eat&quot; the current token</span><br><span class="line">        # and assign the next token to the self.current_token,</span><br><span class="line">        # otherwise raise an exception.</span><br><span class="line">        if self.current_token.type &#x3D;&#x3D; token_type:</span><br><span class="line">            self.current_token &#x3D; self.lexer.get_next_token()</span><br><span class="line">        else:</span><br><span class="line">            self.error()</span><br><span class="line">    def factor(self):</span><br><span class="line">        &quot;&quot;&quot;Return an INTEGER token value.</span><br><span class="line">        factor : INTEGER</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        token &#x3D; self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        return token.value</span><br><span class="line">    def expr(self):</span><br><span class="line">        &quot;&quot;&quot;Arithmetic expression parser &#x2F; interpreter.</span><br><span class="line">        expr   : factor ((MUL | DIV) factor)*</span><br><span class="line">        factor : INTEGER</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        result &#x3D; self.factor()</span><br><span class="line">        while self.current_token.type in (MUL, DIV):</span><br><span class="line">            token &#x3D; self.current_token</span><br><span class="line">            if token.type &#x3D;&#x3D; MUL:</span><br><span class="line">                self.eat(MUL)</span><br><span class="line">                result &#x3D; result * self.factor()</span><br><span class="line">            elif token.type &#x3D;&#x3D; DIV:</span><br><span class="line">                self.eat(DIV)</span><br><span class="line">                result &#x3D; result &#x2F;&#x2F; self.factor()</span><br><span class="line">        return result</span><br><span class="line">def main():</span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            text &#x3D; input(&#39;calc&gt; &#39;)</span><br><span class="line">        except EOFError:</span><br><span class="line">            break</span><br><span class="line">        if not text:</span><br><span class="line">            continue</span><br><span class="line">        lexer &#x3D; Lexer(text)</span><br><span class="line">        interpreter &#x3D; Interpreter(lexer)</span><br><span class="line">        result &#x3D; interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, MUL, DIV, EOF = <span class="string">'INTEGER'</span>, <span class="string">'MUL'</span>, <span class="string">'DIV'</span>, <span class="string">'EOF'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: INTEGER, MUL, DIV, or EOF</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: non-negative integer value, '*', '/', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of the class instance.</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">            Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">            Token(MUL, '*')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Token(&#123;type&#125;, &#123;value&#125;)'</span>.format(</span><br><span class="line">            type=self.type,</span><br><span class="line">            value=repr(self.value)</span><br><span class="line">        )</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3 * 5", "12 / 3 * 4", etc</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Invalid character'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Advance the `pos` pointer and set the `current_char` variable."""</span></span><br><span class="line">        self.pos += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt; len(self.text) - <span class="number">1</span>:</span><br><span class="line">            self.current_char = <span class="literal">None</span>  <span class="comment"># Indicates end of input</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return a (multidigit) integer consumed from the input."""</span></span><br><span class="line">        result = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isdigit():</span><br><span class="line">            result += self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        <span class="keyword">return</span> int(result)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens. One token at a time.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> self.current_char.isdigit():</span><br><span class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'*'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MUL, <span class="string">'*'</span>)</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'/'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(DIV, <span class="string">'/'</span>)</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></span><br><span class="line">        self.lexer = lexer</span><br><span class="line">        <span class="comment"># set current token to the first token taken from the input</span></span><br><span class="line">        self.current_token = self.lexer.get_next_token()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Invalid syntax'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.lexer.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return an INTEGER token value.</span></span><br><span class="line"><span class="string">        factor : INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        token = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="keyword">return</span> token.value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Arithmetic expression parser / interpreter.</span></span><br><span class="line"><span class="string">        expr   : factor ((MUL | DIV) factor)*</span></span><br><span class="line"><span class="string">        factor : INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        result = self.factor()</span><br><span class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</span><br><span class="line">            token = self.current_token</span><br><span class="line">            <span class="keyword">if</span> token.type == MUL:</span><br><span class="line">                self.eat(MUL)</span><br><span class="line">                result = result * self.factor()</span><br><span class="line">            <span class="keyword">elif</span> token.type == DIV:</span><br><span class="line">                self.eat(DIV)</span><br><span class="line">                result = result // self.factor()</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        lexer = Lexer(text)</span><br><span class="line">        interpreter = Interpreter(lexer)</span><br><span class="line">        result = interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 
 <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h4 id="正则表达"><a href="#正则表达" class="headerlink" title="正则表达"></a>正则表达</h4><p>虽然课程内容里没有过多涉及这部分，但还是复习一下。从<a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">这里</a>复制的</p>
 <h5 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h5><p>指不会显示在文本中的字符，主要用于控制文本显示格式，例如换行、分页等。</p>

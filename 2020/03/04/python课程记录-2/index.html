@@ -100,7 +100,7 @@
 <meta property="og:description" content="下面程序的运行结果是（    ） 123456for i in range(3):	for j in range(3):		if i &#x3D;&#x3D; j &#x3D;&#x3D; 1；			break		else:			print(i, &#39;----&#39;, j)  A.    0 —- 0                B.    0 —- 0​        0 —- 1                       0 —-">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-04T03:12:25.000Z">
-<meta property="article:modified_time" content="2020-03-04T08:30:25.755Z">
+<meta property="article:modified_time" content="2020-03-11T11:03:51.077Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -422,12 +422,118 @@
 <p>最后就是格式化输出，然后就结束了，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">100</span>):</span><br><span class="line">    bool = random.randint(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> bool == <span class="number">0</span>:</span><br><span class="line">        a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        <span class="keyword">while</span> a != <span class="number">90</span> <span class="keyword">and</span> a % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        <span class="keyword">while</span> ((a % <span class="number">10</span> + b % <span class="number">10</span>) &lt; <span class="number">10</span>) <span class="keyword">and</span> ((a // <span class="number">10</span> + b // <span class="number">10</span>) &lt; <span class="number">10</span>):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; + &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="keyword">while</span> a % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">            a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        <span class="keyword">while</span> ((b % <span class="number">10</span>) &lt;= (a % <span class="number">10</span>)) <span class="keyword">and</span> ((b % <span class="number">100</span>) &lt;= (a % <span class="number">100</span>)):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; - &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">        print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
+<p>补充一下关于<code>print</code>格式化输出的内容：</p>
+<p><code>python</code>中的<code>print</code>函数有一个<code>end</code>参数，当直接<code>print</code>而没有<code>end</code>时，默认换行；当<code>end=&quot;&quot;</code>时，就不自动换行了；当<code>end=XXX</code>时，在<code>print</code>后，会接着有<code>XXX</code>，比如上面代码的<code>\t\t</code>，也不自动换行。</p>
+<p>在<code>C</code>语言中，可以通过<code>prints(&quot;%d, %d&quot;, a, b)</code>来实现输出<code>a, b</code>，并通过<code>%x.yd</code>（比如<code>%5.3d</code>)来控制输出长度和精度，而<code>python</code>中有类似的用法，即<code>str.format()</code>，其基本语法是通过<code>{}</code>和<code>:</code>来代替<code>%</code>。<code>&#39;{:&lt;2} - {:&lt;2}=&#39;.format(a, b)</code>这样的语句含义是：把<code>a</code>和<code>b</code>按默认顺序填入前面的花括号，并把长度控制为2个字符且左对齐。</p>
+<p><code>format()</code>的用法很多。</p>
+<p>可以接受不限个数和顺序的参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">"&#123;&#125; &#123;&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)    <span class="comment"># 不设置指定位置，按默认顺序</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;1&#125; &#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'world hello world'</span></span><br></pre></td></tr></table></figure>
+
+<p>可以指明参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(name=<span class="string">"菜鸟教程"</span>, url=<span class="string">"www.runoob.com"</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过字典设置参数</span></span><br><span class="line">site = &#123;<span class="string">"name"</span>: <span class="string">"菜鸟教程"</span>, <span class="string">"url"</span>: <span class="string">"www.runoob.com"</span>&#125;</span><br><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(**site))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过列表索引设置参数</span></span><br><span class="line">my_list = [<span class="string">'菜鸟教程'</span>, <span class="string">'www.runoob.com'</span>]</span><br><span class="line">print(<span class="string">"网站名：&#123;0[0]&#125;, 地址 &#123;0[1]&#125;"</span>.format(my_list))  <span class="comment"># "0" 是必须的</span></span><br></pre></td></tr></table></figure>
+
+<p>可以向<code>format</code>传入对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssignValue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">my_value = AssignValue(<span class="number">6</span>)</span><br><span class="line">print(<span class="string">'value 为: &#123;0.value&#125;'</span>.format(my_value))  <span class="comment"># "0" 是可选的</span></span><br></pre></td></tr></table></figure>
+
+<p>数字格式化输出的完整形式如下：</p>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>格式</th>
+<th>输出</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3.1415926</td>
+<td>{:.2f}</td>
+<td>3.14</td>
+<td>保留小数点后两位</td>
+</tr>
+<tr>
+<td>3.1415926</td>
+<td>{:+.2f}</td>
+<td>+3.14</td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>{:+.2f}</td>
+<td>-1.00</td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td>2.71828</td>
+<td>{:.0f}</td>
+<td>3</td>
+<td>不带小数</td>
+</tr>
+<tr>
+<td>5</td>
+<td>{:0&gt;2d}</td>
+<td>05</td>
+<td>数字补零 (填充左边, 宽度为2)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>{:x&lt;4d}</td>
+<td>5xxx</td>
+<td>数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>{:x&lt;4d}</td>
+<td>10xx</td>
+<td>数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td>1000000</td>
+<td>{:,}</td>
+<td>1,000,000</td>
+<td>以逗号分隔的数字格式</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>{:.2%}</td>
+<td>25.00%</td>
+<td>百分比格式</td>
+</tr>
+<tr>
+<td>1000000000</td>
+<td>{:.2e}</td>
+<td>1.00e+09</td>
+<td>指数记法</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:&gt;10d}</td>
+<td>13</td>
+<td>右对齐 (默认, 宽度为10)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:&lt;10d}</td>
+<td>13</td>
+<td>左对齐 (宽度为10)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>{:^10d}</td>
+<td>13</td>
+<td>中间对齐 (宽度为10)</td>
+</tr>
+</tbody></table>
+<p><code>^</code>,<code>&lt;</code>, <code>&gt;</code> 分别是居中、左对齐、右对齐，后面带宽度， <code>:</code> 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。<code>+</code> 表示在正数前显示 <code>+</code>，负数前显示 <code>-</code>； （空格）表示在正数前加空格。</p>
+<p>此外，还可以转进制输出，<code>b</code>、<code>d</code>、<code>o</code>、<code>x</code> 分别是二进制、十进制、八进制、十六进制。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">'&#123;:b&#125;'.format(11) --&gt; 1011</span><br><span class="line">'&#123;:d&#125;'.format(11) --&gt; 11</span><br><span class="line">'&#123;:o&#125;'.format(11) --&gt; 13</span><br><span class="line">'&#123;:x&#125;'.format(11) --&gt; b</span><br><span class="line">'&#123;:#x&#125;'.format(11) --&gt; 0xb</span><br><span class="line">'&#123;:#X&#125;'.format(11) --&gt; 0XB</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>编写程序，求解所有由两个四位数组成的亲和数。（如果两个正整数a和b满足：a的所有真因数（除本身以外的因数）之和等于b，同时b的所有真因数之和等于a，则称a，b是一对亲和数 。）</li>
 </ol>
 <p>思路是先写一个算真因数之和的函数，接着写两层循环，第一层<code>a</code>是1000到9999，第二层<code>b</code>是1000到<code>a</code>，然后调用函数判断<code>a</code>和<code>b</code>的真因数之和是否符合条件。一个整数<code>n</code>的真因数之和是很好计算的，只需要遍历1到<code>n//2+1</code>看是否整除<code>n</code>，然后把整除的累加一下，就可以了。</p>
 <p>但是实际运行的时候，发现这样搞真的很慢，要等好久才会出结果，这是因为两层<code>for</code>循环，每次都要算两个真因数的和，而这也是一层循环，再加上<code>python</code>本身就效率很低，速度就格外慢了，因此最好的办法是能去掉一层循环，或者有什么库可以飞快地计算真因数之和。</p>
-<p>然后再查资料的过程中，看到了另一种亲和数的定义：先求出数字<code>n</code>所有真因数之和<code>a</code>，然后再求出数字<code>a</code>所有真因数之和<code>b</code>。如果<code>a!= b</code> 且<code>n==b</code>，则<code>a</code>、<code>b</code>、<code>n</code>都是亲和数。</p>
+<p>然后在查资料的过程中，看到了另一种亲和数的定义：先求出数字<code>n</code>所有真因数之和<code>a</code>，然后再求出数字<code>a</code>所有真因数之和<code>b</code>。如果<code>a!= b</code> 且<code>n==b</code>，则<code>a</code>、<code>b</code>、<code>n</code>都是亲和数。</p>
 <p>也就是说，可以只写一层循环<code>a</code>，计算<code>a</code>的真因数之和<code>b</code>，再计算<code>b</code>的真因数之和<code>sum_b</code>，如果<code>a=sum_b</code>，则符合条件输出一下，反之就直接继续下一次循环，算真因数之和的部分没有变化。这样循环少了一层，运算速度快了好多。</p>
 <p>此外，看到一个不是用取余，而是用除法和整除结果来判断是否是因数的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">d</span><span class="params">(n)</span>:</span>  <span class="comment">#计算数字n所有真因数之和</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> n/i == float(n//i):</span><br><span class="line">            res += i</span><br><span class="line">    <span class="keyword">return</span>(res)</span><br></pre></td></tr></table></figure>
@@ -483,6 +589,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/" rel="prev" title="Let-s-Build-A-Simple-Interpreter笔记-5">
+                Let-s-Build-A-Simple-Interpreter笔记-5 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -554,7 +664,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

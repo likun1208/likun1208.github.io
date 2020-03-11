@@ -81,7 +81,7 @@
 
 
 
-  <meta name="keywords" content="教程," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
+<meta name="description" content="知识点记录这次上课有一些是以前不太了解的知识点。 序列包括字符串、列表、元组、字节序列。  索引访问： 有n个元素的数组，索引范围是[0, n-1]或[-n, -1]，也就是说，除了常规的类似其他语言中数组的下标索引方式，我们还可以通过-1来逆序访问。这在某些时候是很方便的一个操作，比如判断回文字符串。  遍历访问： 遍历也是用for循环，不过和其他语言不同的是，这里for循环中的i类型很随意，可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo + next + github配置blog">
-<meta property="og:url" content="http://yoursite.com/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/index.html">
+<meta property="og:title" content="python课程记录-3">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-3/index.html">
 <meta property="og:site_name" content="白银乡20-16">
-<meta property="og:description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
+<meta property="og:description" content="知识点记录这次上课有一些是以前不太了解的知识点。 序列包括字符串、列表、元组、字节序列。  索引访问： 有n个元素的数组，索引范围是[0, n-1]或[-n, -1]，也就是说，除了常规的类似其他语言中数组的下标索引方式，我们还可以通过-1来逆序访问。这在某些时候是很方便的一个操作，比如判断回文字符串。  遍历访问： 遍历也是用for循环，不过和其他语言不同的是，这里for循环中的i类型很随意，可">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-30T01:20:38.000Z">
-<meta property="article:modified_time" content="2020-01-31T10:52:46.449Z">
+<meta property="article:published_time" content="2020-03-11T01:38:20.000Z">
+<meta property="article:modified_time" content="2020-03-11T11:03:32.150Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="教程">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/30/hexo-next-github配置blog/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/11/python课程记录-3/"/>
 
 
 
 
 
-  <title>hexo + next + github配置blog | 白银乡20-16</title>
+  <title>python课程记录-3 | 白银乡20-16</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo + next + github配置blog</h1>
+          <h1 class="post-title" itemprop="name headline">python课程记录-3</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T09:20:38+08:00">
-                2020-01-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-11T09:38:20+08:00">
+                2020-03-11
               </time>
             
 
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">博客配置</span>
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
                   </a>
                 </span>
 
@@ -389,98 +389,117 @@
       
 
       
-        <h2 id="安装各种东西"><a href="#安装各种东西" class="headerlink" title="安装各种东西"></a>安装各种东西</h2><ol>
-<li>node.js：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js官网链接</a> 点击下载安装即可。</li>
-<li>Git： <a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git官网链接</a> 点击下载安装即可。</li>
-<li>deployer-git： 命令行里输入<code>npm install hexo-deployer-git --save</code>。</li>
-<li>Hexo：<ol>
-<li>准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；</li>
-<li>输入命令<code>npm install -g hexo-cli</code></li>
-</ol>
-</li>
-</ol>
-<a id="more"></a>
-
-<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><ol>
-<li>创建Hexo工程：接着刚才那个命令输入<code>hexo init blog</code>，这里会在这个文件夹下新建一个blog文件夹，如果把blog换成其他名字也是可以的。</li>
-<li>新建Post：命令行里进入blog文件夹（<code>cd blog</code>），输入<code>hexo new “HelloWorld”</code>，这里会在 <strong>/blog/sources/_post/</strong> 目录下生成 <strong>HelloWorld.md</strong> 文件，可以进去打开编辑内容，在之后想写新博客也是通过这个命令生成文件，或者直接把写好的博客文件放到该目录下。</li>
-<li>生成静态文件：命令行里输入<code>hexo generate</code>，也可以简单地写成<code>hexo g</code>。这样就使用 <strong>Hexo</strong> 引擎将 <strong>Markdown</strong> 格式的文件解析成可以使用浏览器查看的 <strong>HTML</strong> 文件，<strong>HTML</strong> 文件存储在 <strong>blog/public</strong> 目录下。</li>
-<li>运行Hexo服务器：命令行里输入<code>hexo server</code>，也可以简写成<code>hexo s</code>。这时命令行会有一些提示，其中有个地址，一般是<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，在浏览器里打开这个地址，就能看到博客网站是什么样的了。不过这个时候还只是一个本地博客。</li>
-</ol>
-<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p><strong>Hexo</strong> 提供了默认主题 <strong>landscape</strong>，主题的位置在 <strong>blog -&gt;themes</strong> 文件夹下。主题根据自己喜好可以在网上找到，通过 <strong>Git</strong> 进行相应的下载。接下来以Next主题为例。</p>
+        <h3 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h3><p>这次上课有一些是以前不太了解的知识点。</p>
+<h5 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h5><p>包括字符串、列表、元组、字节序列。</p>
 <ol>
-<li>还是在blog文件夹下，命令行里输入<code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code>，这里是用<code>git clone</code>把<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">next主题</a>下载并存放到themes -&gt; next 文件夹里。需要注意的是，<code>git clone</code>这个命令下载起来特别慢，但浏览器直接去github下载的话速度还行，所以也可以直接下载解压改文件夹的名字并放到对应的地方。</li>
-<li>修改 <strong>/blog/config.yml</strong> 文件，将其中的 <strong>theme</strong> 改成 <strong>next</strong>。如果文件夹的名字不是next，或者用了其他主题等，这里的theme改成对应的文件夹名字就行。</li>
-<li>接下来可以输入<code>hexo g</code> 和<code>hexo s</code>来查看新的本地博客。</li>
-</ol>
-<h2 id="建立Github博客"><a href="#建立Github博客" class="headerlink" title="建立Github博客"></a>建立Github博客</h2><ol>
-<li><p>在<a href="https://github.com/" target="_blank" rel="noopener">Github官网</a>注册账号并登陆，点首页右上角的加号新建一个仓库(Repository)，仓库的名字为用户名.github.io（比如我的是kun-bin.github.io），这里一定要是这个格式，不然之后没法直接访问博客网站。然后其他的都是默认内容，点create repository就可以了。如果仓库名字输入错了，之后可以在github上这个仓库页面的setting选项中修改。</p>
+<li><p>索引访问：</p>
+<p>有<code>n</code>个元素的数组，索引范围是<code>[0, n-1]</code>或<code>[-n, -1]</code>，也就是说，除了常规的类似其他语言中数组的下标索引方式，我们还可以通过<code>-1</code>来逆序访问。这在某些时候是很方便的一个操作，比如判断回文字符串。</p>
 </li>
-<li><p>打开 <strong>/blog/config.yml</strong>文件修改deploy 属性(注意“：”之后有空格 ) 否则配置失败。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:&#x2F;&#x2F;github.com&#x2F;kun-bin&#x2F;kun-bin.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<li><p>遍历访问：</p>
+<p>遍历也是用<code>for</code>循环，不过和其他语言不同的是，这里<code>for</code>循环中的<code>i</code>类型很随意，可以是<code>1, 2, 3, ...</code>也可以是元组、字符等，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">'hello'</span>:</span><br><span class="line">	print(c)</span><br></pre></td></tr></table></figure>
 
-<p>注意这里repository要替换成自己的仓库地址。</p>
-</li>
-<li><p>初始化本地仓库：在blog文件夹下的命令行输入<code>git init</code></p>
-</li>
-<li><p>连接远程仓库：命令行接着输入<code>git remote add origin https://github.com/kun-bin/kun-bin.github.io.git</code>，这里记得把地址改成自己的仓库地址，第一次的时候会要求输入github的账号密码。</p>
-</li>
-<li><p>发布博客页面：命令行里输入<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>，这等于一次性执行了清空、刷新、部署三个命令，此时在浏览器里已经可以通过<code>用户名.github.io</code>访问博客了，在github的这个仓库里也能看到<strong>/blog/public</strong>文件夹里的内容。</p>
-</li>
-<li><p>可选：<code>hexo d</code>只是把public文件夹中的内容（也就是静态网页）传到了github的仓库里，应该还可以建立分支把博客配置文件整个传到github上，不过我没做这一步。</p>
-</li>
-</ol>
-<h2 id="关于next主题的配置"><a href="#关于next主题的配置" class="headerlink" title="关于next主题的配置"></a>关于next主题的配置</h2><p>目前在blog文件夹里有一个config.yml文件，我们称之为站点配置文件；而在themes/next文件夹里也有一个config.yml文件，称之为主题配置文件。</p>
-<ol>
-<li><p>基本信息：打开站点配置文件，找到site模块，可以修改博客标题、作者、描述、语言等等信息，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 标题</span><br><span class="line">subtitle: 副标题</span><br><span class="line">description: 描述</span><br><span class="line">author: 作者</span><br><span class="line">language: 语言（简体中文是zh-Hans）</span><br><span class="line">timezone: 网站时区（Hexo 默认使用您电脑的时区，不用写）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>菜单配置：初始网页只有两个菜单：home和archive，可以打开主题配置文件，找到menu模块，把需要的菜单前面的#删了，并注意把||<strong>前面</strong>的空格删了，不然可能会点了菜单以后报错（类似Cannot GET /tags/%20/这样的错）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /|| home                          <span class="comment">//首页</span></span><br><span class="line">  archives: /archives/|| archive          <span class="comment">//归档</span></span><br><span class="line">  categories: /categories/|| th           <span class="comment">//分类</span></span><br><span class="line">  tags: /tags/|| tags                     <span class="comment">//标签</span></span><br><span class="line">  about: /about/|| user                   <span class="comment">//关于</span></span><br><span class="line">  <span class="meta">#schedule: /schedule/|| calendar        <span class="comment">//日程表</span></span></span><br><span class="line">  <span class="meta">#sitemap: /sitemap.xml|| sitemap        <span class="comment">//站点地图</span></span></span><br><span class="line">  <span class="meta">#commonweal: /404/|| heartbeat          <span class="comment">//公益404</span></span></span><br></pre></td></tr></table></figure>
-<p>这里||后面的单词是指菜单对应的图标，可以自己修改。此外，日程表那个模块，因为实际上调用的是谷歌日历，国内显然没法用，所以不建议使用。</p>
-</li>
-<li><p>建立菜单对应的页面：还是在blog文件夹下打开命令行，输入<code>hexo new page &quot;categories&quot;</code>，然后在~/blog/source 文件夹中即可看到categories文件夹，打开里面的index.md文件，设置如下（注意：后面要加空格）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>c</code>是字符，最终会把<code>h</code>, <code>e</code>, <code>l</code>, <code>l</code>, <code>o</code> 逐行输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> [(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">5</span>,<span class="number">6</span>)]</span><br><span class="line">	print(t,t[<span class="number">0</span>],t[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 
-<p>tags页面也是一样的方式来建立。</p>
+<p>这里的<code>t</code>是元组，最终输出是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>,<span class="number">2</span>) <span class="number">1</span> <span class="number">2</span></span><br><span class="line">(<span class="number">3</span>,<span class="number">4</span>) <span class="number">3</span> <span class="number">4</span></span><br><span class="line">(<span class="number">5</span>,<span class="number">6</span>) <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>主题风格：一共有四个风格可以选择，打开主题配置文件 找到<code>Scheme Settings</code>，把想用的风格前面的#去掉，比如我这里用了Mist。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line">scheme: Mist</span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="comment"># scheme: Gemini</span></span><br></pre></td></tr></table></figure>
+<li><p>切片</p>
+<p>序列<code>s</code>可以通过<code>s[i:j:k]</code>来截取其中的一部分，<code>i</code>是起点，<code>j</code>是终点，<code>k</code>是步长，注意这里的起点终点都可以是负数，结合上文可知，<code>s[::-1]</code>实际上就是序列的逆序。注意这个切片并不会改变序列<code>s</code>。想要将切片的下标信息保存下来，我们可以使用<code>slice(i:j:k)</code>函数。这里如果越界了也不会报错。</p>
 </li>
-<li><p>侧栏设置：侧栏设置包括：侧栏位置、侧栏显示与否、文章间距、返回顶部按钮等等，打开主题配置文件 找到<code>sidebar</code>，按自己的喜好选择，把想要的那一项的#去掉或者false改成true即可。</p>
+<li><p>连接和重复</p>
+<p>连接<code>+</code>：<code>s1+s2</code></p>
+<p>重复<code>*</code>：<code>s*n</code> 或者 <code>n*s</code></p>
+<p>增量赋值：<code>+=</code>和<code>*=</code></p>
+<p>元组不可以<code>+=</code>序列，但是反过来序列<code>+=</code>元组是没问题的。</p>
 </li>
-<li><p>头像设置：主题配置文件找到<code>avatar</code>，修改avatar后面的路径为自己头像的路径，头像文件要放到<code>themes/next/source/images</code>中，比如头像文件名为<code>header.jpg</code>，就把那一行写成<code>avatar: /images/header.jpg</code>。如果前面有#就去掉#。</p>
+<li><p>成员关系操作</p>
+<p><code>in</code>和<code>not in</code>可以判断一个元素是否在序列中。</p>
+<p><code>s.count(value)</code>可以统计<code>value</code>在序列<code>s</code>中出现的次数。</p>
+<p><code>s.index(value, [start, [stop]])</code>查找value在序列指定范围 <code>[start,stop)</code>中第一次出现的下标。</p>
 </li>
-<li><p>添加搜索：</p>
-<ol>
-<li><p>还是blog文件夹的命令行里，输入<code>npm install hexo-generator-searchdb --save</code>。</p>
+<li><p>序列内置函数</p>
+<p><code>len</code> 单纯求序列长度</p>
+<p><code>sorted</code>对序列排序并返回排序后的列表，不改变原始序列</p>
+<p><code>reversed</code>逆序，不改动原序列，返回反向迭代器</p>
+<p><code>max</code>和<code>min</code>求最大值和最小值，要求元素类型都一样</p>
+<p><code>sum</code>序列求和，要求不能有非数字</p>
+<p><code>enumerate</code>返回元素为<code>元组(计数，元素)</code> 的迭代器</p>
+<p><code>zip</code>拼接多个对象<code>iter1、iter2…</code>的元素， 返回一个迭代器，其元素为各对象元素组成的元组。</p>
+<p><code>all</code>和<code>any</code>判断序列的元素是否全部和部分为True</p>
 </li>
-<li><p>打开站点配置文件找到<code>Extensions</code>在下面添加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br></pre></td></tr></table></figure>
+<li><p>序列类型转换</p>
+<p><code>str</code> <code>list</code> <code>tuple</code> <code>bytes</code> <code>bytearray</code>可以从字面意义看出是转成什么类型。</p>
 </li>
-<li><p>打开主题配置文件找到<code>Local search</code>，将<code>enable</code>设置为<code>true</code>。</p>
+<li><p>的</p>
+</li>
+<li><p>序列拆分</p>
+<p><code>变量1,变量2,…,变量n = 序列</code>这样的赋值语句，可以把序列中的元素拆开赋值给前面的变量，不过类型要统一，比如序列中有元组，那前面对应位置的变量也要写成元组的形式。</p>
+<p><code>*变量</code>的形式，可以把多个元素打包赋值给一个变量，但是只能出现一次。</p>
+<p>可以用临时变量<code>_</code>来占位从而将指定位置的元素赋值给某个变量，例如<code>_, b, _ = (1, 2, 3)</code>就是把<code>2</code>赋值给<code>b</code>。</p>
 </li>
 </ol>
+<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><ol>
+<li><p><code>del</code>删除元素，赋值修改元素</p>
 </li>
-<li><p>还有很多能配置的，比如侧边栏头像下面有github链接，点击页面出现爱心符号，博客背景动态变化等，可自行搜索。</p>
+<li><p><code>s.append(x)</code> 把<code>x</code>追加到<code>s</code>末尾</p>
 </li>
-</ol>
-<h2 id="如何发布新的博客"><a href="#如何发布新的博客" class="headerlink" title="如何发布新的博客"></a>如何发布新的博客</h2><ol>
-<li><p>在blog文件夹的命令行里输入<code>hexo new &quot;标题&quot;</code>，然后进入<strong>/blog/sources/_post/</strong>找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。</p>
-<p>文件头信息如下编写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<li><p><code>s.clear()</code> 删除所有元素</p>
 </li>
-<li><p>写好以后保存，然后还是blog文件夹的命令行，输入<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>，就发布成功了。</p>
+<li><p><code>s.copy()</code> 复制</p>
 </li>
-<li><p>如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tags；</span><br><span class="line">	- tag1</span><br><span class="line">	- tag2</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<li><p><code>s.extend(t)</code> 和上面的<code>s.append(x)</code>是一样的，区别在于，<code>append</code>把<code>x</code>作为一个整体加到末尾，而<code>extend</code>把<code>x</code>作为一个新的列表合并到<code>s</code>的末尾。</p>
+</li>
+<li><p><code>s.insert(i,x)</code>插入</p>
+</li>
+<li><p><code>s.pop([i])</code>返回并移除下标为<code>i</code>的元素，<code>i</code>省略时默认为最后一个元素</p>
+</li>
+<li><p><code>s.remove(x)</code>移除列表中第一次出现的<code>x</code></p>
+</li>
+<li><p><code>s.reverse()</code>列表反转</p>
+</li>
+<li><p><code>s.sort()</code>列表排序</p>
+</li>
+<li><p>列表解析表达式：处理可迭代对象并生成结果列表，具体格式为<code>[express for i_1 in 可迭代对象1…for i_N in 可迭代对象N [if condition] ]</code></p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">[i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>]</span><br><span class="line">[(x+y,x*y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">2</span>) <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">4</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表解析生成字典和集合</span></span><br><span class="line">a = [(<span class="string">'小黑'</span>,<span class="string">'领导'</span>,<span class="number">30000</span>),(<span class="string">'小白'</span>,<span class="string">'职员'</span>,<span class="number">10000</span>),(<span class="string">'小蓝'</span>,<span class="string">'职员'</span>,<span class="number">5000</span>)]</span><br><span class="line">&#123;i[<span class="number">0</span>]:i[<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小黑': 30000, '小白': 10000, '小蓝': 5000&#125;</span></span><br><span class="line">&#123;i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i[<span class="number">2</span>]&gt;=<span class="number">10000</span>&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小白', '小黑'&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>这里<code>tags:</code> 后面一定要换行，下面的<code>-</code>后面注意有空格。</p>
 </li>
 </ol>
-<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
-<p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
-<p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
+<h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
+<li><p>已知一选手的各评委得分<code>score = [95, 85, 89, 88, 86, 95, 89, 98, 85, 75, 80]</code>，运用序列的各项操作求该选手的得分，计算规则：去掉一个最高分和一个最低分，剩下的分数计算平均分。</p>
+<p>最直接的思路就是整体求和然后减去最大的和最小的再算平均值，也就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">score = [<span class="number">95</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">88</span>, <span class="number">86</span>, <span class="number">95</span>, <span class="number">89</span>, <span class="number">98</span>, <span class="number">85</span>, <span class="number">75</span>, <span class="number">80</span>]</span><br><span class="line">s = (sum(score) - max(score) - min(score)) / (len(score) - <span class="number">2</span>)</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断一个字符串是否是回文串：<code>a = &#39;abcdcba&#39;  b = &#39;abcdefg&#39;</code></p>
+<p>这个题有很多思路，最快的办法就是用前面提到的<code>s[::-1]</code>来实现逆序，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_palindromic4</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num == num[::<span class="number">-1</span>]</span><br><span class="line">a = <span class="string">'abcdcba'</span></span><br><span class="line">b = <span class="string">'abcdefg'</span></span><br><span class="line">print(is_palindromic4(b))</span><br></pre></td></tr></table></figure>
+
+<p>也可以选择把字符串转成<code>list</code>或者<code>tuple</code>然后使用<code>reverse</code>函数来实现逆序。即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(a)==list(reverse(a))</span><br><span class="line">tuple(a)==tuple(reverse(a))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面代码执行后的<code>s</code>是（）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line">s.append([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">s.extend(<span class="string">'34'</span>)</span><br><span class="line">s.extend([<span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">s.insert(<span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">s.insert(<span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line">s.pop(<span class="number">2</span>)</span><br><span class="line">s.remove(<span class="string">'a'</span>)</span><br><span class="line">s[<span class="number">4</span>:] = []</span><br><span class="line">s.reverse()</span><br></pre></td></tr></table></figure>
+
+<p>对照每个函数的作用可以很容易判断出最后的结果是<code>[&#39;4&#39;,&#39;3&#39;,[1,2],7]</code></p>
+</li>
+</ol>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><ol>
+<li><p>使用<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>**</code>运算符和数字<code>2</code>,<code>3</code>,<code>4</code>,<code>5</code>，构造一个表达式，该表达式中上述4个数字和3种不同运算符各用一次，使得表达式的结果为24，打印出满足条件的表达式。</p>
+<p>提示：</p>
+<p>(1)构建表达式字符串，然后用内置函数<code>eval</code>计算该字符串 ，例如<code>eval(&#39;3*4/2+5&#39;)</code>返回<code>11.0</code>； </p>
+<p>(2)两字符串可通过”+”连接成一个字符串，如<code>’he’+’llo’</code>会 得到<code>’hello’</code>； </p>
+<p>(3)本题关键在于求排列，排列有多种实现方式，例如循环。</p>
+<p>根据提示很容易想到一个思路：把数字的全排列和运算符的取3个排列分别列出来，然后逐一组合成字符串，使用<code>eval</code>计算结果，如果是24，就输出。查找资料后发现<code>python</code>有一个算排列的库函数<code>itertools.permutations(s, n)</code>，该函数返回列表<code>s</code>中取<code>n</code>个元素的排列结果，该结果也是一个列表，也就是说我们可以通过该函数得到数字和运算符的排列结果，并<code>for</code>循环遍历，将它们组成计算表达式并求结果，然后输出。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">op = [<span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'**'</span>]</span><br><span class="line">num = [<span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(num, <span class="number">4</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> itertools.permutations(op, <span class="number">3</span>):</span><br><span class="line">        s = i[<span class="number">0</span>] + j[<span class="number">0</span>] + i[<span class="number">1</span>] + j[<span class="number">1</span>] + i[<span class="number">2</span>] + j[<span class="number">2</span>] + i[<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> float(eval(s)) == <span class="number">24.0</span>:</span><br><span class="line">            print(s)</span><br></pre></td></tr></table></figure>
+
+<p>此外，<code>python</code>中完成24点游戏的思路还有很多很多，复杂一些的办法可以是构造二叉树，然后遍历节点。</p>
+</li>
+<li><p>输入一个列表，然后删除该列表中的重复的元素，要求删除重复元素后还保持原排序，最后输出结果。例如，输入列表 <code>[0, 1, 1, 1, 3, 0, 3, 2]</code>，输出 <code>[0, 1, 3, 2]</code>。</p>
+<p>这个题也有很多思路，比如逐个比较等。有一种很便捷的方法是，对输入列表生成字典，这样就按顺序去掉了重复元素，再将字典的<code>key</code>转成列表即可，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = eval(input(<span class="string">'请输入一个列表：'</span>))</span><br><span class="line">list2 = dict.fromkeys(list1)</span><br><span class="line">list3 = list(list2.keys())</span><br><span class="line">print(list3)</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -508,7 +527,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 教程</a>
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -521,15 +540,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/" rel="next" title="Let-s-Build-A-Simple-Interpreter笔记-5">
+                <i class="fa fa-chevron-left"></i> Let-s-Build-A-Simple-Interpreter笔记-5
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" rel="prev" title="Let's Build A Simple Interpreter笔记[1]">
-                Let's Build A Simple Interpreter笔记[1] <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -681,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装各种东西"><span class="nav-number">1.</span> <span class="nav-text">安装各种东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装主题"><span class="nav-number">3.</span> <span class="nav-text">安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立Github博客"><span class="nav-number">4.</span> <span class="nav-text">建立Github博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于next主题的配置"><span class="nav-number">5.</span> <span class="nav-text">关于next主题的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发布新的博客"><span class="nav-number">6.</span> <span class="nav-text">如何发布新的博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接："><span class="nav-number">7.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点记录"><span class="nav-number">1.</span> <span class="nav-text">知识点记录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#序列"><span class="nav-number">1.0.1.</span> <span class="nav-text">序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列表"><span class="nav-number">1.0.2.</span> <span class="nav-text">列表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课堂练习"><span class="nav-number">2.</span> <span class="nav-text">课堂练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作业"><span class="nav-number">3.</span> <span class="nav-text">作业</span></a></li></ol></div>
             
 
           </div>
