@@ -49,6 +49,8 @@
     <title>python课程记录-3</title>
     <url>/2020/03/11/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-3/</url>
     <content><![CDATA[<h3 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h3><p>这次上课有一些是以前不太了解的知识点。</p>
+<a id="more"></a>
+
 <h5 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h5><p>包括字符串、列表、元组、字节序列。</p>
 <ol>
 <li><p>索引访问：</p>
