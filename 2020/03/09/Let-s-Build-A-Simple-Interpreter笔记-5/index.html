@@ -100,7 +100,7 @@
 <meta property="og:description" content="课程文档原文 翻译">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-09T00:59:02.000Z">
-<meta property="article:modified_time" content="2020-03-09T10:56:46.859Z">
+<meta property="article:modified_time" content="2020-03-12T07:29:46.018Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="编译原理">
@@ -434,12 +434,30 @@
 <p>（总的来说这一课没有什么新知识，但是我还是不能不看教程自己写…）</p>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
 <li><p>根据本文的描述凭记忆写出一个解释器，不要参考文中的代码。为你的解释器写一些测试，确保它们可以通过。</p>
+<p>我太菜了所以并没法凭记忆写一个解释器，于是我开始照着代码抄一下，并很快发现就算是照抄我也会出错…</p>
+<p>主要错误如下：</p>
+<ol>
+<li><code>else</code>后面忘了加<code>:</code>；</li>
+<li>某个地方的赋值(<code>=</code>)一个不注意就写成了相等(<code>==</code>)；</li>
+<li><code>while self.current_char is not None and self.current_char.isdigit():</code>以及前面判断空格的那个类似的语句，<code>is not None</code>一定要放前面，如果反过来，在当前字符是空的时候，执行<code>isdigit()</code>和<code>isspace()</code>就会报错了，所以要先判定不为空。</li>
+</ol>
+<p>我好菜啊.jpg</p>
 </li>
-<li><p>扩展这个解释器来处理包含括号的算术表达式，使得你的解释器可以对嵌套很深很深的算 术表达式进行求值如：7 + 3 * (10 / (12 / (3 + 1) - 1))</p>
+<li><p>扩展这个解释器来处理包含括号的算术表达式，使得你的解释器可以对嵌套很深很深的算术表达式进行求值如：7 + 3 * (10 / (12 / (3 + 1) - 1))</p>
+<p>这个我的想法是要设定一下括号的结合性，左括号是右结合而右括号是左结合，但是不会写。</p>
+<p>看了下一课发现是要写递归语法分析，所以放下一课来写吧。</p>
 </li>
 </ol>
 <h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
-<li></li>
+<li><p>一个操作符是左结合的是什么意思？</p>
+<p>是指当数字左右两边都有该运算符时，数字取左边的运算符。</p>
+</li>
+<li><p>操作符加减是左结合的还是右结合的？乘除呢？</p>
+<p>都是左结合。</p>
+</li>
+<li><p>操作符加是否比操作符乘有更高的优先级？</p>
+<p>否，乘的优先级更高。</p>
+</li>
 </ol>
 
       
@@ -578,7 +596,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
