@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://kun-bin.github.io/");
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,编译原理,学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="课程文档原文 翻译 （这次翻译又出现了一些不影响理解的小问题。课程代码越来越长，我决定改一下文档结构，不在一开始放整块代码了。）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Let-s-Build-A-Simple-Interpreter笔记-7">
+<meta property="og:url" content="http://yoursite.com/2020/03/15/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-7/index.html">
+<meta property="og:site_name" content="白银乡20-16">
+<meta property="og:description" content="课程文档原文 翻译 （这次翻译又出现了一些不影响理解的小问题。课程代码越来越长，我决定改一下文档结构，不在一开始放整块代码了。）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png">
+<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/visit.png">
+<meta property="article:published_time" content="2020-03-15T00:38:20.000Z">
+<meta property="article:modified_time" content="2020-03-15T08:03:11.347Z">
+<meta property="article:author" content="Kun Li">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="编译原理">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/15/Let-s-Build-A-Simple-Interpreter笔记-7/"/>
+
+
+
+
+
+  <title>Let-s-Build-A-Simple-Interpreter笔记-7 | 白银乡20-16</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">白银乡20-16</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白银乡20-16">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Let-s-Build-A-Simple-Interpreter笔记-7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-15T08:38:20+08:00">
+                2020-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Let-s-Build-A-Simple-Interpreter/" itemprop="url" rel="index">
+                    <span itemprop="name">Let's Build A Simple Interpreter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part7/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/02/02/lets-build-a-simple-interpreter-part-07/" target="_blank" rel="noopener">翻译</a></p>
+<p>（这次翻译又出现了一些不影响理解的小问题。课程代码越来越长，我决定改一下文档结构，不在一开始放整块代码了。）</p>
+<a id="more"></a>
+
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这一课的知识点格外多。</p>
+<h4 id="抽象语法树和解析树"><a href="#抽象语法树和解析树" class="headerlink" title="抽象语法树和解析树"></a>抽象语法树和解析树</h4><ol>
+<li><p>在之前的代码中，词法分析结束后进行语法分析的同时就完成了运算，这种 interpreter 被称为语法导向解释器 (syntax-directed interpreter)，对于更复杂的语法结构，我们需要建立一个中间表示（intermediate representation, IR），我们的 parser 会 负责构建 IR 而 interpreter 会用来解释由 IR 所代表的输入。一般来说会用树来构建IR。</p>
+</li>
+<li><p>解析树（有时叫做具体语法树）是一个根据我们的语法定义来表示一门语言的句法结构的树形结构。它基本上展示了你的 <code>parser</code> 如何识别语言结构或者， 换句话说，它展示了你语法的开始符号怎么派生出该编程语言中一个特定的字符串的。</p>
+</li>
+<li><p>抽象语法树（AST）是我们的解释器和未来编译器项目的中心数据结构。</p>
+</li>
+<li><p>如下图，分别是的AST和解析树。</p>
+<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png" alt="AST和解析树对比"></p>
+</li>
+<li><p>简单来说，AST就是把操作数放到叶节点，操作符放到中间节点和根节点，操作符节点在树中的高度可以体现运算优先级，括号改变优先级也是通过改变操作符的高度。</p>
+</li>
+<li><p>具体到代码，首先要构建一个AST类，目前这个类里什么也没有，就只是用来让别的类继承。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AST</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来要定义这个树的节点类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二元操作符类，继承AST</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinOp</span><span class="params">(AST)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, left, op, right)</span>:</span></span><br><span class="line">		self.left = left</span><br><span class="line">		self.token = self.op = op</span><br><span class="line">		self.right = right</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 整数类，继承AST</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Num</span><span class="params">(AST)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, token)</span>:</span></span><br><span class="line">		self.token = token</span><br><span class="line">		self.value = token.value</span><br></pre></td></tr></table></figure>
+
+<p><code>Token</code>这个类和前几课里的完全一致。</p>
+<p>到此为止，我们就创建好AST的基本结构了，接下来可以通过赋值的方式一点点创建一个解析式的AST，例如<code>2*7+3</code>的AST：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立加号和乘号的Token</span></span><br><span class="line">mul_token = Token(MUL, <span class="string">'*'</span>)</span><br><span class="line">plus_token = Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line"><span class="comment"># 先建立乘法操作符的节点</span></span><br><span class="line">mul_node = BinOp(</span><br><span class="line">    <span class="comment"># 左边是第一个乘数</span></span><br><span class="line">    left=Num(Token(INTEGER, <span class="number">2</span>)),</span><br><span class="line">    <span class="comment"># 是乘法</span></span><br><span class="line">    op=mul_token,</span><br><span class="line">    <span class="comment"># 右边是第二个乘数</span></span><br><span class="line">    right=Num(Token(INTEGER, <span class="number">7</span>))</span><br><span class="line">)</span><br><span class="line"><span class="comment">#建立加法操作符的节点</span></span><br><span class="line">add_node = BinOp(</span><br><span class="line">    <span class="comment"># 左边是刚才进行的乘法节点</span></span><br><span class="line">    left=mul_node,</span><br><span class="line">    <span class="comment"># 中间是加号</span></span><br><span class="line">    op=plus_token,</span><br><span class="line">    <span class="comment"># 右边是加数</span></span><br><span class="line">    right=Num(Token(INTEGER, <span class="number">3</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把上述内容合并到之前的代码中，在<code>Lexer</code>得到词法单元后，不是直接进行运算，而是建立AST，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parse</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></span><br><span class="line">        token = self.current_token</span><br><span class="line">		<span class="keyword">if</span> token.type == INTEGER:</span><br><span class="line">            self.eat(INTEGER)</span><br><span class="line">            <span class="comment"># 之前是return token.value</span></span><br><span class="line">	    	<span class="keyword">return</span> Num(token)</span><br><span class="line">		<span class="keyword">elif</span> token.type == LPAREN:</span><br><span class="line">            self.eat(LPAREN)</span><br><span class="line">            <span class="comment"># 之前是value = self.expr()</span></span><br><span class="line">            node = self.expr()</span><br><span class="line">            self.eat(RPAREN)</span><br><span class="line">            <span class="comment"># 之前是return value</span></span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 之前是value = self.factor()</span></span><br><span class="line">		node = self.factor()</span><br><span class="line">		<span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</span><br><span class="line">            token = self.current_token</span><br><span class="line">            <span class="keyword">if</span> token.type == MUL:</span><br><span class="line">            	self.eat(MUL)</span><br><span class="line">                <span class="comment"># 之前有value *= self.factor()求值</span></span><br><span class="line">            <span class="keyword">elif</span> token.type == DIV:</span><br><span class="line">            	self.eat(DIV)</span><br><span class="line">                <span class="comment"># 之前有value /= self.factor()求值</span></span><br><span class="line">	    	node = BinOp(left=node, op=token, right=self.factor())</span><br><span class="line">        <span class="comment"># 之前是return value</span></span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 之前是value = self.term()</span></span><br><span class="line">        node = self.term()</span><br><span class="line">		<span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</span><br><span class="line">		    token = self.current_token</span><br><span class="line">	    	<span class="keyword">if</span> token.type == PLUS:</span><br><span class="line">				self.eat(PLUS)</span><br><span class="line">                <span class="comment"># 之前有value += self.factor()求值</span></span><br><span class="line">	    	<span class="keyword">elif</span> token.type == MINUS:</span><br><span class="line">				self.eat(MINUS)</span><br><span class="line">                <span class="comment"># 之前有value -= self.factor()求值</span></span><br><span class="line">	    	node = BinOp(left=node, op=token, right=self.term())</span><br><span class="line">        <span class="comment"># 之前是return value</span></span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self.expr()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结一下就是，原本求值的地方，现在改为不断给<code>node</code>赋值，而<code>node</code>则层层嵌套，最终可以表达出AST。</p>
+</li>
+<li><p>以<code>7 + 3 * (10 - 1)</code>为例，看这份代码：</p>
+<ol>
+<li><code>parse</code>调用<code>expr()</code>，进入<code>expr</code>；</li>
+<li><code>expr</code>调用<code>term</code>，<code>term</code>调用<code>factor</code>，发现是<code>INTEGER</code>，于是返回<code>Num(token(INTEGER,7))</code>作为<code>node</code>，<code>term</code>发现接下来不是乘除法，于是直接返回<code>node</code>，回到<code>expr</code>，该节点类型以下简写为<code>Num(7)</code>；</li>
+<li><code>expr</code>发现接下来是加法，于是<code>node</code>变为<code>BinOp(left=Num(7), op=Token(PLUS, &#39;+&#39;), right=self.term())</code>，再次调用<code>term</code>；</li>
+<li><code>term</code>调用<code>factor</code>得到<code>Num(3)</code>，接下来是乘法，于是这里要返回给第三步中<code>expr</code>的<code>right</code>的东西变成了<code>BinOp(left=Num(3), op=Token(MUL, &#39;*&#39;), right=self.factor())</code>，显然又要调用<code>factor</code>；</li>
+<li><code>factor</code>判断接下来的左括号，于是调用<code>expr</code>处理，内容和上面的类似，会返回<code>BinOp(left=Num(10), op=Token(MINUS, &#39;-&#39;), right=Num(1))</code>给第四步的<code>right</code>；</li>
+<li>以此类推，最终<code>parse</code>中得到的是<code>node=BinOp(left=Num(7), op=Token(PLUS, &#39;+&#39;), right=BinOp(left=Num(3), op=Token(MUL, &#39;*&#39;), BinOp(left=Num(10), op=Token(MINUS, &#39;-&#39;), right=Num(1))))</code>。</li>
+</ol>
+</li>
+</ol>
+<h4 id="遍历树求值"><a href="#遍历树求值" class="headerlink" title="遍历树求值"></a>遍历树求值</h4><ol>
+<li><p>在得到AST之后，就要开始求值了，我们采用后序遍历的方法来遍历AST进行运算。</p>
+<ol>
+<li><p>前序遍历：<strong>根</strong>左右</p>
+</li>
+<li><p>中序遍历：左<strong>根</strong>右</p>
+</li>
+<li><p>后序遍历：左右<strong>根</strong></p>
+</li>
+<li><p>显然前中后是指根节点的遍历输出顺序，如下图的树，前序遍历的输出结果是：1-&gt;2-&gt;4-&gt;6-&gt;7-&gt;3-&gt;5，中序遍历是4-&gt;6-&gt;7-&gt;2-&gt;1-&gt;5-&gt;3，后序遍历是7-&gt;6-&gt;4-&gt;2-&gt;5-&gt;3-&gt;1</p>
+<p><img src="https://github.com/kun-bin/image/blob/master/visit.png" alt="一棵树"></p>
+</li>
+<li><p>对应到AST中，就是先访问<code>node</code>的<code>left</code>，得到一个结果，再访问<code>right</code>，得到另一个结果，最后访问中间的<code>op</code>，进行运算，伪代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    <span class="comment"># for every child node from left to right</span></span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children:</span><br><span class="line">		visit(child)</span><br><span class="line">    <span class="comment"># 指加减乘除等运算操作</span></span><br><span class="line">    &lt;&lt;postorder actions&gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>有时可能三种遍历都需要进行一些操作，因此伪代码改为：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    &lt;&lt; preorder actions &gt;&gt;</span><br><span class="line">    left_val = visit(node.left)</span><br><span class="line">    &lt;&lt; inorder actions &gt;&gt;</span><br><span class="line">    right_action = visit(node.right)</span><br><span class="line">    &lt;&lt; postorder actions &gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>具体来实现的时候首先要有<code>NodeVisitor</code>类：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NodeVisitor</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        method_name = <span class="string">'visit_'</span> + type(node).__name__</span><br><span class="line">        visitor = getattr(self, method_name, self.generic_visit)</span><br><span class="line">        <span class="keyword">return</span> visitor(node)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generic_visit</span><span class="params">(self, node)</span>:</span></span><br><span class="line">		<span class="keyword">raise</span> Exception(<span class="string">'No visit_&#123;&#125; method'</span>.format(type(node).__name__))</span><br></pre></td></tr></table></figure>
+
+<p>   <code>getattr(object, name, default)</code>函数的作用是，返回<code>object</code>这个变量的<code>name</code>属性，如果没有<code>name</code>则返回<code>default</code>，如果用这个函数的时候没有指明<code>default</code>，那么当<code>name</code>属性不存在时会报错。</p>
+<p>   <code>f.__name__</code>的作用是返回<code>f</code>的函数名。</p>
+<p>   在这段代码中，首先<code>method_name</code>是当前节点<code>node</code>对应<code>Token</code>的<code>type</code>，接下来返回该<code>NodeVisitor</code>对象的<code>method_name</code>属性，如果不存在则报错。具体来说，当<code>node</code>类型是<code>BinOp</code>时，会返回<code>visit_BinOp(node)</code>，而<code>node</code>类型是<code>Num</code>时，则返回<code>visit_Num(node)</code>。</p>
+</li>
+<li><p>接下来看我们的解释器<code>Interpreter</code>类，它继承了<code>NodeVisitor</code>：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(NodeVisitor)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parser)</span>:</span></span><br><span class="line">		self.parser = parser</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit_BinOp</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> node.op.type == PLUS:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) + self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == MINUS:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) - self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == MUL:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) * self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == DIV:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) / self.visit(node.right)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit_Num</span><span class="params">(self, node)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> node.value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">interpret</span><span class="params">(self)</span>:</span></span><br><span class="line">        tree = self.parser.parse()</span><br><span class="line">        <span class="keyword">return</span> self.visit(tree)</span><br></pre></td></tr></table></figure>
+
+<p>   首先是解释器的初始化，我们将<code>parser</code>得到的AST传入<code>Interpreter</code>。</p>
+<p>   接下来访问二元运算符节点的函数，该函数逻辑很简单，就是判定传入的<code>node</code>对应的<code>op</code>类型是什么，然后访问其左右节点，最后进行运算。</p>
+<p>   最后是访问整数节点的函数，该函数负责将节点的<code>value</code>返回。</p>
+<p>   这里要总结一下<code>node</code>这个变量，因为<code>python</code>里不需要指定变量类型，会动态决定，实际上这里的<code>node</code>有两个可能，当它是叶节点的时候，它是整数，也就是<code>Num(Token)</code>类型，在<code>visit</code>函数后会返回并执行<code>visit_Num</code>函数；而当它是中间节点和根节点时，就变成操作符，也就是<code>BinOp(left, op, right)</code>类型，在<code>visit</code>函数后会返回并执行<code>visit_BinOp</code>函数。</p>
+</li>
+<li><p>当调用解释器的<code>interpret</code>函数时，首先进入<code>visit</code>函数，判定是操作符，转入<code>visit_BinOp</code>函数，再判断运算类型，并访问左右节点直到得到一个返回值，最后进行运算得到结果。</p>
+</li>
+<li><p>总结一下，整个流程是：parser 从 lexer 中 得到 token 然后返回生成的 AST 给 interpreter 进行遍历并解释执行所给输入。</p>
+</li>
+</ol>
+<h4 id="递归下降"><a href="#递归下降" class="headerlink" title="递归下降"></a>递归下降</h4><p>一个 <strong>递归下降parser</strong> 就 是一个自顶向下的 parser，它使用一组递归过程来处理输入。自顶向下反映了 parser 从 构建解析树的顶部结点开始逐渐构建更低的结点这一事实。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>写一个翻译器（提示：node visitor），它接收一个算术表达式作为输入并打印出它的后缀形式，即逆波兰式(Reverse Polish Notation, RPN)。例如，如果翻译器接收的输入是 表达式 <code>(5 + 3) * 12 / 3</code> 则输入应该是 <code>5 3 + 12 * 3 /</code> 。答案在<a href="https://github.com/rspivak/lsbasi/blob/master/part7/python/ex1.py" target="_blank" rel="noopener">这儿</a>，不过要先自己解决再看啊。</p>
+<p>我的想法是：逆波兰式输出顺序实际上就是这一课遍历的顺序，因此只需要在现有的<code>visit_BinOp</code>和<code>visit_Num</code>加上<code>print</code>就行，注意这里因为是后序输出，<code>BinOP</code>需要先<code>visit(left)</code>和<code>visit(right)</code>，再<code>print(op.value)</code>，代码修改如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit_BinOp</span><span class="params">(self, node)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> node.op.type == PLUS:</span><br><span class="line">        tmp = self.visit(node.left) + self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == MINUS:</span><br><span class="line">        tmp = self.visit(node.left) - self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == MUL:</span><br><span class="line">        tmp = self.visit(node.left) * self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == DIV:</span><br><span class="line">        tmp = self.visit(node.left) // self.visit(node.right)</span><br><span class="line">    print(node.op.value, end=<span class="string">' '</span>)</span><br><span class="line">    <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit_Num</span><span class="params">(self, node)</span>:</span></span><br><span class="line">    print(node.value, end=<span class="string">' '</span>)</span><br><span class="line">    <span class="keyword">return</span> node.value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个翻译器（node visitor），它接收一个算术表达式作为输入并将它打印为 LISP 风 格的记法，即 <code>2 + 3</code> 变成 <code>(+ 2 3)</code> 及 <code>(2 + 3 * 5)</code> 变成 <code>(+ 2 (* 3 5))</code> 。你 可以在<a href="https://github.com/rspivak/lsbasi/blob/master/part7/python/ex2.py" target="_blank" rel="noopener">这儿</a>打到答案，但在查看之前还是要先尝试自己解决。</p>
+<p>这是要前序遍历输出，也就是先输出<code>op.value</code>，再进行<code>visit(left)</code>和<code>visit(right)</code>，和练习1相比，就是把<code>visit_BinOp</code>中的<code>print(node.op.value, end=&#39; &#39;)</code>放到最前面。</p>
+</li>
+</ol>
+<p>（这俩练习的答案和我想的还有点不太一样……不过问题不大……）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 编译原理</a>
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/12/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-6/" rel="next" title="Let-s-Build-A-Simple-Interpreter笔记-6">
+                <i class="fa fa-chevron-left"></i> Let-s-Build-A-Simple-Interpreter笔记-6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="Kun Li" />
+            
+              <p class="site-author-name" itemprop="name">Kun Li</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="likun@mail.bnu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程文档"><span class="nav-number">1.</span> <span class="nav-text">课程文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象语法树和解析树"><span class="nav-number">2.0.1.</span> <span class="nav-text">抽象语法树和解析树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历树求值"><span class="nav-number">2.0.2.</span> <span class="nav-text">遍历树求值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归下降"><span class="nav-number">2.0.3.</span> <span class="nav-text">递归下降</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">3.</span> <span class="nav-text">练习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kun Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
