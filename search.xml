@@ -1130,9 +1130,13 @@
 <p>这里<code>tags:</code> 后面一定要换行，下面的<code>-</code>后面注意有空格。</p>
 </li>
 </ol>
+<h2 id="一些后续问题"><a href="#一些后续问题" class="headerlink" title="一些后续问题"></a>一些后续问题</h2><p>今天（2020.03.16）突然发现当博客内容多起来以后，首页会有翻页，而翻页图标显示是乱的，查了一下发现要改<code>/Blog/themes/next/layout/_partials/pagination.swig</code>这个文件，内容整体替换成下面的：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;%- if page.prev or page.next %&#125;</span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"pagination"</span>&gt;</span></span><br><span class="line">   &#123;&#123;</span><br><span class="line">     paginator(&#123;</span><br><span class="line">       prev_text: '<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-angle-left"</span> <span class="attr">aria-label</span>=<span class="string">"'+__('accessibility.prev_page')+'"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>',</span><br><span class="line">       next_text: '<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-angle-right"</span> <span class="attr">aria-label</span>=<span class="string">"'+__('accessibility.next_page')+'"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>',</span><br><span class="line">       mid_size: 1,</span><br><span class="line">       escape: false</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;&#125;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
 <p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
 <p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
+<p><a href="https://blog.csdn.net/lihangll/article/details/103335246" target="_blank" rel="noopener">https://blog.csdn.net/lihangll/article/details/103335246</a></p>
 ]]></content>
       <categories>
         <category>博客配置</category>
