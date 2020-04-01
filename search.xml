@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>python课程记录-6</title>
+    <url>/2020/04/01/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-6/</url>
+    <content><![CDATA[<p>这一课讲第三方库的安装和使用，然后用<code>wordcloud</code>和<code>jieba</code>生成词云图和中文分词。没有课堂练习，只有一个在上次作业基础上的作业。</p>
+<p>我是直接<code>pip</code>安装的，在安装<code>wordcloud</code>时，<code>pip install wordcloud</code>很快就装好了，但是<code>jieba</code>反复出错，最后指定清华镜像，<code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jieba</code>，这样就飞快地安装好了。</p>
+<a id="more"></a>
+
+<h3 id="课后作业"><a href="#课后作业" class="headerlink" title="课后作业"></a>课后作业</h3><p>(4) 利用<code>wordcloud</code>结合<code>jieba</code>分别对李白（杜甫）诗歌内容中的字和词语进行可视化。</p>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>上节课的作业完成后已经得到了处理好的诗歌字符串和字频统计<code>Counter</code>，那么接下来就可以用这两个变量来得到对应的词云图。</p>
+<p>用<code>fit_words()</code>函数根据已经得到的计数器<code>poems_counter</code>生成的字典来制作字频的词云图片，用<code>generate()</code>函数对用<code>jieba</code>进行分词之后的<code>poems_text</code>生成词频的词云图片。在保存图片后可以用<code>PIL</code>中的<code>Image.open()</code>和<code>show()</code>来显示图片。对应的函数代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入库</span></span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> wordcloud</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cloud_character</span><span class="params">(poems_counter, name)</span>:</span></span><br><span class="line">    dict_character = dict(poems_counter)</span><br><span class="line">    <span class="comment"># 生成图像对应的遮罩，这样词云图就是按图像里非白色区域来填充的</span></span><br><span class="line">    mask = np.array(Image.open(name + <span class="string">'.jpg'</span>))</span><br><span class="line">    <span class="comment"># 根据图像生成颜色表，这样词云图的颜色就和图像一致了</span></span><br><span class="line">    color = wordcloud.ImageColorGenerator(mask)</span><br><span class="line">    <span class="comment"># 生成词云图变量，背景白色，random_state的值影响字在图中的分布，color_func设定词云颜色，mask设定图像遮罩，font_path指定字体，不指定的话中文没法显示</span></span><br><span class="line">    wc = wordcloud.WordCloud(background_color=<span class="string">"white"</span>, random_state=<span class="number">42</span>, color_func=color, mask=mask, font_path=<span class="string">'C:\Windows\Fonts\simsun.ttc'</span>)</span><br><span class="line">    <span class="comment"># 根据字典生成词云图的内容</span></span><br><span class="line">    wc.fit_words(dict_character)</span><br><span class="line">    <span class="comment"># 保存词云图</span></span><br><span class="line">    wc.to_file(name + <span class="string">"cloud_character.png"</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cloud_word</span><span class="params">(poems_text, name)</span>:</span></span><br><span class="line">    text = <span class="string">' '</span>.join(jieba.cut(poems_text))</span><br><span class="line">    mask = np.array(Image.open(name + <span class="string">'.jpg'</span>))</span><br><span class="line">    color = wordcloud.ImageColorGenerator(mask)</span><br><span class="line">    wc = wordcloud.WordCloud(background_color=<span class="string">"white"</span>, random_state=<span class="number">42</span>, color_func=color, mask=mask, font_path=<span class="string">'C:\Windows\Fonts\simsun.ttc'</span>)</span><br><span class="line">    <span class="comment"># 根据文本字符串生成词云图的内容</span></span><br><span class="line">    wc.generate(text)</span><br><span class="line">    wc.to_file(name + <span class="string">"cloud_word.png"</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_pic</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="comment"># 打开图像</span></span><br><span class="line">    img1 = Image.open(name + <span class="string">"cloud_character.png"</span>)</span><br><span class="line">    img2 = Image.open(name + <span class="string">"cloud_word.png"</span>)</span><br><span class="line">    <span class="comment"># 显示图像</span></span><br><span class="line">    img1.show()</span><br><span class="line">    img2.show()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序部分</span></span><br><span class="line">cloud_character(counter_libai, <span class="string">'libai'</span>)</span><br><span class="line">cloud_character(counter_dufu, <span class="string">'dufu'</span>)</span><br><span class="line">cloud_word(text_libai, <span class="string">'libai'</span>)</span><br><span class="line">cloud_word(text_dufu, <span class="string">'dufu'</span>)</span><br><span class="line">show_pic(<span class="string">"libai"</span>)</span><br><span class="line">show_pic(<span class="string">"dufu"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>（最后生成的词云图是真的怪怪的……）</p>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python课程记录-5</title>
+    <url>/2020/03/31/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-5/</url>
+    <content><![CDATA[<p>这一课讲的是字典和集合。</p>
+<a id="more"></a>
+
+<h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
+<li><p>对于下列财经数据<code>lst</code>，如何构造公司代码和股票价格的字典<code>d</code>？</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">lst=[(<span class="string">'AXP'</span>,<span class="string">'American Epress Company'</span>,<span class="string">'86.40'</span>),</span><br><span class="line">	(<span class="string">'BA'</span>,<span class="string">'The Boeing Company'</span>,<span class="string">'22.64'</span>),</span><br><span class="line">	(<span class="string">'CAT'</span>,<span class="string">'Caterpillar Inc.'</span>,<span class="string">'99.44'</span>),</span><br><span class="line">	(<span class="string">'CSCO'</span>,<span class="string">'Cisco System Inc.'</span>,<span class="string">'23.78'</span>),</span><br><span class="line">	(<span class="string">'CVX'</span>,<span class="string">'Chevron Corporation'</span>,<span class="string">'115.91'</span>)]</span><br><span class="line">d=&#123;<span class="string">'AXP'</span>:<span class="string">'86.40'</span>,<span class="string">'BA'</span>:<span class="string">'122.64'</span>,<span class="string">'CAT'</span>:<span class="string">'99.44'</span>,<span class="string">'CSCO'</span>:<span class="string">'23.78'</span>,<span class="string">'CVX'</span>:<span class="string">'115.91'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>答案：从列表构造字典，根据定义可以直接使用<code>d={a:c for a,b,c in lst}</code></p>
+</li>
+<li><p>如何把一个字典中的<code>key</code>和<code>value</code>互换？</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d=&#123;<span class="string">'blue'</span>:<span class="number">500</span>, <span class="string">'green'</span>:<span class="number">300</span>, <span class="string">'red'</span>:<span class="number">100</span>&#125;</span><br><span class="line">&#123;<span class="number">100</span>:<span class="string">'red'</span>, <span class="number">300</span>:<span class="string">'green'</span>, <span class="number">500</span>:<span class="string">'blue'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>答案：使用<code>items</code>属性即可，<code>new_d={value:key for key, value in d.items()}</code></p>
+</li>
+</ol>
+<h3 id="课后作业"><a href="#课后作业" class="headerlink" title="课后作业"></a>课后作业</h3><ol>
+<li>利用内置数据类型对李白和杜甫的诗歌进行分析，包括：</li>
+</ol>
+<p>(1)读入李白.txt，得到李白诗歌内容中的所有的汉字，并进一步得到其中的不重复汉字，最后打印所有汉字的个数、不重复汉字的个数、以及不重复汉字，打印汉字时要求每行10个汉字，汉字之间以2个空格分开。</p>
+<p>(2)进一步利用字典进行李白诗歌的字频统计，即统计每个字出现的次数，并对字频进行归一化处理（即除以诗歌篇数），然后输出显示字频统计结果，输出显示时根据字频降序排列，只打印频率大于等于0.1的结果，并注意对齐。</p>
+<p>(3)采用同上述相同的方法，得到杜甫诗歌的字频统计结果。在此基础上获得李白和杜甫的高频词集合（即频率大于等于0.1的汉字集合），利用集合操作进一步获得两位诗人都爱用的字、李白爱用但杜甫不爱用的字以及杜甫爱用而李白不爱用的字，并输出上述结果，输出时每行10个单词，汉字之间以2个空格分开。</p>
+<p>说明：统计时不考虑题目、朝代、作者，只考虑诗歌内容。</p>
+<p>作业思路：</p>
+<p>首先是要读取txt文件，这里作业提示说用下述代码来读取文件：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'李白.txt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    poems_text = f.read()</span><br></pre></td></tr></table></figure>
+
+<p>此时整个文件的内容作为字符串存在<code>poems_text</code>中，并且每首诗之间有换行符，因此使用<code>poems_list = poems_text.splitlines()</code>将每首诗作为列表<code>poems_list</code>中的元素（字符串）存储。</p>
+<p>接下来遍历列表元素，因为每首诗格式都是“标题 朝代 作者 诗歌内容”这样，所以对每个字符串查找作者名字，并只留存作者名字之后的字符串内容，就可以得到我们需要统计的诗歌内容，再去掉中文标点、英文标点和空格，就得到了一个处理好的诗歌内容列表，这部分代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(poems_list)):</span><br><span class="line">    index = poems_list[i].find(name)</span><br><span class="line">    poems_list[i] = poems_list[i][index + <span class="number">3</span>:]</span><br><span class="line">    poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, zhon.hanzi.punctuation))</span><br><span class="line">    poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, string.punctuation))</span><br><span class="line">    poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, <span class="string">' '</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这时<code>poems_num = len(poems_list)</code>即可得到诗歌总数，<code>poems_text = &#39;&#39;.join(poems_list)</code>即可得到处理好之后的字符串。然后进行统计。</p>
+<p>我们使用<code>poems_counter = collections.Counter(poems_text)</code>可以得到一个<code>Counter</code>计数器，该计数器是一个字典，<code>key</code> 是字，<code>val</code>是该字出现的次数，按出现次数遍历这个计数器，并把<code>key</code>加入到集合<code>poems_set</code>中，当字频（<code>val/poems_num</code>）低于0.1时，break结束遍历，这样就得到了高频字的集合，这部分代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> key, val <span class="keyword">in</span> poems_counter.most_common():</span><br><span class="line">    <span class="keyword">if</span> val / poems_num &lt; <span class="number">0.1</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    poems_set.add(key)</span><br></pre></td></tr></table></figure>
+
+<p>接下来通过集合运算就可以得到李白和杜甫的交集和差集了。</p>
+<p>关于格式化输出，首先是输出诗歌本身的字数、不重复字数和不重复字，每10个换行，字中间是两个空格，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(name + <span class="string">'诗词中总共有'</span> + str(len(poems_text)) + <span class="string">'个汉字，其中不重复的汉字有'</span> + str(len(poems_counter)) + <span class="string">'个，具体如下：'</span>)</span><br><span class="line">print_num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> poems_counter:</span><br><span class="line">    print(key, end=<span class="string">'  '</span>)</span><br><span class="line">    print_num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> print_num % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        print()</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
+
+<p>接下来是字频统计的输出，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">'字频统计信息如下：\n汉字---频率'</span>)</span><br><span class="line"><span class="keyword">for</span> key, val <span class="keyword">in</span> poems_counter.most_common():</span><br><span class="line">    <span class="keyword">if</span> val / poems_num &lt; <span class="number">0.1</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(<span class="string">'&#123;&#125;\t &#123;&#125;'</span>.format(key, val / poems_num))</span><br></pre></td></tr></table></figure>
+
+<p>最后是字频集合的输出，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print_num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> set:</span><br><span class="line">    print(i, end=<span class="string">'  '</span>)</span><br><span class="line">    print_num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> print_num % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        print()</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>整体代码我把诗歌的预处理部分作为一个函数、诗歌输出作为一个函数、集合输出作为一个函数，最后主函数调用它们。如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> zhon.hanzi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">poems</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(name + <span class="string">'.txt'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        poems_text = f.read()</span><br><span class="line">    poems_list = poems_text.splitlines()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(poems_list)):</span><br><span class="line">        index = poems_list[i].find(name)</span><br><span class="line">        poems_list[i] = poems_list[i][index + <span class="number">3</span>:]</span><br><span class="line">        poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, zhon.hanzi.punctuation))</span><br><span class="line">        poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, string.punctuation))</span><br><span class="line">        poems_list[i] = poems_list[i].translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, <span class="string">' '</span>))</span><br><span class="line">    poems_num = len(poems_list)</span><br><span class="line">    poems_text = <span class="string">''</span>.join(poems_list)</span><br><span class="line">    poems_counter = collections.Counter(poems_text)</span><br><span class="line">    poems_set = set()</span><br><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> poems_counter.most_common():</span><br><span class="line">        <span class="keyword">if</span> val / poems_num &lt; <span class="number">0.1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        poems_set.add(key)</span><br><span class="line">    <span class="keyword">return</span> poems_num, poems_text, poems_counter, poems_set</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_poem</span><span class="params">(name, poems_num, poems_text, poems_counter)</span>:</span></span><br><span class="line">    print(name + <span class="string">'诗词中总共有'</span> + str(len(poems_text)) + <span class="string">'个汉字，其中不重复的汉字有'</span> + str(len(poems_counter)) + <span class="string">'个，具体如下：'</span>)</span><br><span class="line">    print_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> poems_counter:</span><br><span class="line">        print(key, end=<span class="string">'  '</span>)</span><br><span class="line">        print_num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> print_num % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            print()</span><br><span class="line">    print()</span><br><span class="line">    print(<span class="string">'字频统计信息如下：\n汉字---频率'</span>)</span><br><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> poems_counter.most_common():</span><br><span class="line">        <span class="keyword">if</span> val / poems_num &lt; <span class="number">0.1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">'&#123;&#125;\t &#123;&#125;'</span>.format(key, val / poems_num))</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_set</span><span class="params">(set)</span>:</span></span><br><span class="line">    print_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> set:</span><br><span class="line">        print(i, end=<span class="string">'  '</span>)</span><br><span class="line">        print_num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> print_num % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            print()</span><br><span class="line">    print()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num_libai, text_libai, counter_libai, set_libai = poems(<span class="string">'李白'</span>)</span><br><span class="line">num_dufu, text_dufu, counter_dufu, set_dufu = poems(<span class="string">'杜甫'</span>)</span><br><span class="line">print_poem(<span class="string">'李白'</span>, num_libai, text_libai, counter_libai)</span><br><span class="line">print_poem(<span class="string">'杜甫'</span>, num_dufu, text_dufu, counter_dufu)</span><br><span class="line">s_both_love = set_libai &amp; set_dufu</span><br><span class="line">s_only_libai = set_libai - set_dufu</span><br><span class="line">s_only_dufu = set_dufu - set_libai</span><br><span class="line">print(<span class="string">'两位诗人都爱用的字有'</span> + str(len(s_both_love)) + <span class="string">'个，这些字为：'</span>)</span><br><span class="line">print_set(s_both_love)</span><br><span class="line">print(<span class="string">'李白爱用但杜甫不爱用的字有'</span>+str(len(s_only_libai))+<span class="string">'个，这些字为：'</span>)</span><br><span class="line">print_set(s_only_libai)</span><br><span class="line">print(<span class="string">'杜甫爱用但李白不爱用的字有'</span>+str(len(s_only_libai))+<span class="string">'个，这些字为：'</span>)</span><br><span class="line">print_set(s_only_dufu)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python课程记录-4</title>
+    <url>/2020/03/23/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-4/</url>
+    <content><![CDATA[<p>这一课是讲字符串的，主要是几种字符串函数。</p>
+<a id="more"></a>
+
+<h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
+<li><p>下面代码的运行结果是（）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">	print(i)</span><br><span class="line">	s.remove(i)</span><br></pre></td></tr></table></figure>
+
+<p>A. 1 2 3 4 5（一个数字一行）</p>
+<p>B. 1 3 5（一个数字一行）</p>
+<p>答案：显然这里<code>s</code>是个列表，列表的<code>remove()</code>函数的作用是移除指定元素，只移除匹配到的第一个。按顺序看，最初列表是<code>s=[1,2,3,4,5]</code>，<code>for</code>循环访问列表的第一个元素，并输出<code>1</code>，接着移除<code>1</code>，这之后列表<code>s</code>的元素会整体往前挪一位，变成<code>s=[2,3,4,5]</code>，此时第一个元素变成<code>2</code>，第二个元素变成<code>3</code>，而<code>for</code>循环会去找列表的第二个元素，也就是跳过<code>2</code>访问<code>3</code>，输出并移除，变成<code>s=[2,4,5]</code>，然后输出并移除第三个元素<code>5</code>。</p>
+<p>所以最后输出的是<code>1 3 5</code>，选B。</p>
+</li>
+<li><p>下列操作的结果是（）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s=<span class="string">'!..Hi!!!.'</span></span><br><span class="line">s.strip(<span class="string">'!.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>A. ‘.Hi!!!’        B. ‘.Hi!!!.’        C. ‘!..Hi!!’        D. ‘Hi’</p>
+<p>答案：字符串的<code>strip</code>函数是移除字符串左右两边的指定字符元素，如果没指定就移除空格，然后遇到第一个不是指定元素的时候就停止移除操作，并且指定元素不会连起来看，也就是这里的<code>!</code>和<code>.</code>是会被看做两个元素，而不是一个完整的字符串，因此移除的时候并不是找连续的<code>!.</code>，而是移除左右两边所有<code>!</code>和<code>.</code>，也就是选D。</p>
+</li>
+<li><p>用一行代码把字符串<code>s=&#39;  abcdbacbaab&#39;</code>中的<code>b</code>去掉。</p>
+<p>答案：首先可以用字符串中的翻译函数，将所有<code>b</code>翻译成空字符，也就是<code>s.translate(str.maketrans(&#39;&#39;, &#39;&#39;,&#39;b&#39;))</code>。最直接的方法是用字符串的<code>replace</code>函数，将<code>b</code>替换成空字符，即<code>s=s.replace(&#39;b&#39;,&#39;&#39;)</code>。</p>
+</li>
+<li><p>判断两个单词s1和s2是否构成字谜：即s1和s2的字母和个数相同，只是顺序不同，如cinema何iceman，要求只用一行代码。</p>
+<p>答案：如果不要求只用一行代码，那办法有很多了，现在要求只用一行代码，因此只能采用字符串的<code>sorted()</code>函数，该函数会返回一个排好序的字符串，因此可以通过<code>sorted(s1)==sorted(s2)</code>来判断两个字符串是否构成字谜。</p>
+</li>
+<li><p>如何将<code>s=&#39;d,f,a,c,b,d,g,e,a,f&#39;</code>中的字母进行排序，得到新的字符串<code>s=&#39;a,a,b,c,d,d,e,f,f,g&#39;</code>？</p>
+<p>答案：直接来说就是要把原字符串中的<code>,</code>去掉，剩下的字符串按字母顺序排序，然后再把<code>,</code>加回来。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s=<span class="string">'d,f,a,c,b,d,g,e,a,f'</span> </span><br><span class="line">s1=s.replace(<span class="string">','</span>,<span class="string">''</span>) </span><br><span class="line">s2=sorted(s1) </span><br><span class="line"><span class="string">','</span>.join(s2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h3><ol>
+<li><p>在第一课练习的基础上，判断一个字符串是否是回文串（规则更宽松）：</p>
+<p>例如：Madam, I’m Adam                 True</p>
+<p>A man, a plan, a canal, Panama!                True</p>
+<p>客上天然居，居然天上客.                True</p>
+<p>答案：我的思路是把字符串里所有的标点和空格去掉，然后把所有字母都转成小写字母，最后用之前写好的函数来判断字符串是否是回文串。 <code>string.punctuation</code>中存有所有标点符号，因此可以将字符串中所有的<code>string.punctuation</code>替换成空字符，从而去掉标点；空格同理；<code>casefold()</code>函数可以使字符串中所有的字符都变成小写。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_palindromic4</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num == num[::<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">del_space_punc</span><span class="params">(s)</span>:</span></span><br><span class="line">    s_1=s.translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, string.punctuation))</span><br><span class="line">    s_2=s_1.translate(str.maketrans(<span class="string">''</span>, <span class="string">''</span>, <span class="string">' '</span>))</span><br><span class="line">    s_3=s_2.casefold()</span><br><span class="line">    <span class="keyword">return</span> s_3</span><br><span class="line">    </span><br><span class="line">s1 = <span class="string">"Madam, I'm Adam"</span></span><br><span class="line">s2 = <span class="string">"A man, a plan, a canal, Panama!"</span></span><br><span class="line">s3 = <span class="string">"客上天然居，居然天上客."</span></span><br><span class="line"></span><br><span class="line">print(is_palindromic4(del_space_punc(s1)))</span><br><span class="line">print(is_palindromic4(del_space_punc(s2)))</span><br><span class="line">print(is_palindromic4(del_space_punc(s3)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入一个字符串a和字符串b，查找b在a中的所有位置并输出显示。</p>
+<p>例如：请输入一个字符串：abcdeabcdeab</p>
+<p>请输入另一个字符串：ab</p>
+<p>输出0 5 10</p>
+<p>答案：直接一些的想法是遍历字符串检索<code>a</code>，然后看下一个字符是否是<code>b</code>，不过百度之后发现可以直接用正则匹配，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">a = input(<span class="string">'请输入一个字符串：'</span>)</span><br><span class="line">b = input(<span class="string">'请输入另一个字符串：'</span>)</span><br><span class="line">print([i.start() <span class="keyword">for</span> i <span class="keyword">in</span> re.finditer(b,a)])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计一篇文章（看成一个长字符串）中单词的个数，以及文章中不同单词的个数及列表，最后输出显示。（备注：单词的不同时态 以及单复数都看成是不同的单词）。字符串为变量speech，<code>speech=&#39;&#39;&#39;  Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth.&#39;&#39;&#39;</code></p>
+<p>答案：受上一题的影响，这里也考虑用正则匹配来判断有多少个单词，并把单词放到一个列表中，再根据列表建立字典从而输出词频。统计词频可以用<code>collections.Counter</code>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">speech=<span class="string">'''  Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth.'''</span></span><br><span class="line">words=re.findall(<span class="string">r'[a-zA-Z]+'</span>,speech)</span><br><span class="line">count=len(words)</span><br><span class="line">print(<span class="string">'单词出现次数：'</span>,count)</span><br><span class="line">list2 = collections.Counter(words)</span><br><span class="line">print(dict(list2))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Let-s-Build-A-Simple-Interpreter笔记-8</title>
+    <url>/2020/03/23/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-8/</url>
+    <content><![CDATA[<p>还没开始看，看完再写。</p>
+]]></content>
+      <categories>
+        <category>Let&#39;s Build A Simple Interpreter</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>编译原理</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Let-s-Build-A-Simple-Interpreter笔记-7</title>
     <url>/2020/03/15/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-7/</url>
     <content><![CDATA[<h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part7/" target="_blank" rel="noopener">原文</a></p>
@@ -374,7 +533,7 @@
 <p><code>break</code>的中断只会断一层，也就是说这个代码在<code>i=j=1</code>的时候，属于<code>j</code>的循环会中断，<code>j=2</code>和<code>j=3</code>将跳过，直接开始<code>i=2, j=0</code>然后继续循环，也就是A选项。</p>
 <ol start="2">
 <li><p>下面程序的运行结果是（    ）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">if</span> i == j == <span class="number">1</span>；</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(i, <span class="string">'----'</span>, j)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">if</span> i == j == <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(i, <span class="string">'----'</span>, j)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
 <p>A.    0 —- 0                B.    0 —- 0<br>​        0 —- 1                       0 —- 1<br>​        0 —- 2                       0 —- 2<br>​        1 —- 0                       1 —- 0<br>​        2 —- 0<br>​        2 —- 1<br>​        2 —- 2</p>
 </li>
