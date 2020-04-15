@@ -81,7 +81,7 @@
 
 
 
-  <meta name="keywords" content="error," />
+  <meta name="keywords" content="blockchain," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="记录一下之前的一些问题。">
+<meta name="description" content="突破区块链不可能三角异步共识组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="各种平台遇到过的error处理方式">
-<meta property="og:url" content="http://yoursite.com/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="论文记录-Monoxide: Scale Out Blockchain with Asynchronous Consensus Zones">
+<meta property="og:url" content="http://yoursite.com/2020/04/07/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Monoxide%20Scale%20Out%20Blockchain%20with%20Asynchronous%20Consensus%20Zones/index.html">
 <meta property="og:site_name" content="白银乡20-16">
-<meta property="og:description" content="记录一下之前的一些问题。">
+<meta property="og:description" content="突破区块链不可能三角异步共识组">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-31T11:06:23.000Z">
-<meta property="article:modified_time" content="2020-02-12T06:32:16.926Z">
+<meta property="article:published_time" content="2020-04-07T10:38:45.000Z">
+<meta property="article:modified_time" content="2020-04-08T10:25:13.841Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="error">
+<meta property="article:tag" content="blockchain">
 <meta name="twitter:card" content="summary">
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/31/各种平台遇到过的error处理方式/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/07/论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones/"/>
 
 
 
 
 
-  <title>各种平台遇到过的error处理方式 | 白银乡20-16</title>
+  <title>论文记录-Monoxide: Scale Out Blockchain with Asynchronous Consensus Zones | 白银乡20-16</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Monoxide%20Scale%20Out%20Blockchain%20with%20Asynchronous%20Consensus%20Zones/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">各种平台遇到过的error处理方式</h1>
+          <h1 class="post-title" itemprop="name headline">论文记录-Monoxide: Scale Out Blockchain with Asynchronous Consensus Zones</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T19:06:23+08:00">
-                2020-01-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T18:38:45+08:00">
+                2020-04-07
               </time>
             
 
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A0%E5%88%86%E7%B1%BB%E9%A1%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">无分类项</span>
+                  <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index">
+                    <span itemprop="name">论文</span>
                   </a>
                 </span>
 
@@ -389,16 +389,99 @@
       
 
       
-        <p>记录一下之前的一些问题。</p>
-<a id="more"></a>
+        <h2 id="突破区块链不可能三角异步共识组"><a href="#突破区块链不可能三角异步共识组" class="headerlink" title="突破区块链不可能三角异步共识组"></a>突破区块链不可能三角异步共识组</h2><a id="more"></a>
 
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><ol>
+<li>背景：加密货币在匿名在线支付方面很重要</li>
+<li>问题：<ol>
+<li>随用户和交易的增长，低吞吐量阻碍加密货币系统的扩展</li>
+<li>每个节点复制整个网络的通信、存储和状态表示也阻碍了系统的扩展</li>
+</ol>
+</li>
+<li>本文：<ol>
+<li>Asynchronous Consensus Zones（异步一致网络）：分区域，不影响去中心化和安全性，每个区域独立并行，块内共识；</li>
+<li>诸葛连弩系统：使得攻击单独的一个块的难度和攻击整个区块的难度一样大</li>
+</ol>
+</li>
+</ol>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
+<li>TPS（每秒交易数）很低的原因在于区块按顺序建立，而网络延迟导致广播时间不能过短</li>
+<li>每一个完整的节点都需要复制整个网络的通信、存储和状态表示，系统受限于硬件设备而无法扩展</li>
+<li>综上可扩展的区块链要考虑：<ol>
+<li>共识协议的可扩展性</li>
+<li>通信、存储、计算和内存的资源使用</li>
+<li>去中心化和安全性</li>
+</ol>
+</li>
+<li>以太坊已提出分片的设计</li>
+<li>本文异步一致网络：<ol>
+<li>分区域，通过在多个独立和并行实例(或一致区域)中划分和处理工作负载来扩展区块链系统</li>
+<li>整个网络划分为区域，每个区域负责自己那部分，只在区域内复制，挖矿竞争和交易确认等在区块间异步进行</li>
+<li>挑战在于：<ol>
+<li>跨区域事务的吞吐量</li>
+<li>诚实矿工稀释带来的安全性问题</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>本文最终原子确认：跨区域事务由原子性分解为多个事务，每个事务涉及单独一个区域</li>
+<li>本文诸葛连弩：矿工挖矿成功时可以在不同的区域里创建多个区块，其算力平均分配到各个区域，而攻击者的攻击算力同样也被分到了不同区域，因此攻击单独一个区域和攻击整个系统难度一样</li>
+</ol>
+<h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p>对比PoS和PoW，UTXO和账户余额</p>
 <ol>
-<li>平台：visiual studio<br>error LNK2026: 模块对于 SAFESEH 映像是不安全的<br>解决方法：属性 - &gt; 链接器 - &gt; 附加选项输入 /SAFESEH:NO - &gt; 应用</li>
-<li>平台：visiual studio<br>error C4996: ‘fopen’: This function or variable may be unsafe. Consider using fopen_sinstead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help   for details.<br>1&gt;f:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : 参见“fopen”的声明<br>解决方法：预处理器加入_CRT_SECURE_NO_WARNINGS</li>
-<li>平台：visiual studio<br>error C2664: “int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)”: 无法将参数 2 从“const char [17]”转换为“LPCWSTR”<br>解决方法：项目菜单-&gt;属性-&gt;配置属性-&gt;常规-&gt;项目默认值-&gt;字符集从unicode改为未设置</li>
-<li>平台：visiual studio<br>error LNK2019: 无法解析的外部符号 _main，该符号在函数 ___tmainCRTStartup 中被引用<br>解决方法：右击项目，打开“属性”页，链接器-&gt;系统-&gt;子系统-&gt;/subsystem:windows。如果是刚开始默认的是/subsystem:windows则改为/subsytem:console</li>
-<li>平台：visiual studio<br>error LNK2019: 无法解析的外部符号 <strong>imp</strong>timeGetTime@0，该符号在函数 “void __cdecl TimerInit(void)” (?TimerInit@@YAX<br>解决方法：将winmm.lib打入“附加依赖项”</li>
-<li>平台：visiual studio<br>fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏<br>解决方法：右键-&gt;工程属性-&gt;配置属性-&gt; 清单工具-&gt;输入和输出-&gt;嵌入清单，选择[否]</li>
+<li>影响区块链系统和共识协议性能的因素：一致性（共识）、通信、存储、表示</li>
+<li>PoW耗费算力来竞争记账权，但是加密货币一定程度上有对应现实世界的价值；PoS由节点的股权（财富）来决定区块的产生；本文用PoW，但改PoS也行</li>
+<li>加密货币有两种交易模型，UTXO和账户余额，以太坊用了后者（更支持智能合约），本文也用了后者，总之账户余额模型有很多优点</li>
+</ol>
+<h3 id="System-Design"><a href="#System-Design" class="headerlink" title="System Design"></a>System Design</h3><ol>
+<li><p>跨区域事务的执行：</p>
+<ol>
+<li>区域A执行检查余额然后取钱（ withdraw operation），下一个该区域的区块就会更新余额状态等</li>
+<li>区域A把存钱（ deposit operation ）打包成一个中继操作（ relay transaction ）发给区域B</li>
+<li>区域B执行存钱操作，不需要检查余额</li>
+<li>取钱只涉及区域A，存钱只涉及区域B，因此不需要进行区域间的确认等</li>
+</ol>
+</li>
+<li><p>划分和命名（Partitioning and Naming）：</p>
+<ol>
+<li>用户地址被均匀划分为$2^k$个区域，一个区域由它的分片尺度k和区域索引s来识别</li>
+<li>群swarm：参与相同数据集的复制的一组节点。全节点加入群从而广播信息和接收其他全节点的信息。比特币和以太坊系统只有一个群，大家都保存同样的信息。</li>
+<li>本文有多个出于不同目的建立的群，采用分布式哈希表(DHT)进行群寻址和对等发现。</li>
+<li>系统中有一个包含所有全节点的全局群，用于复制所有区域的最小公共信息。</li>
+<li>在每个群内，全节点稀疏分布，使用gossip protocol广播信息</li>
+<li>区域特定的群也用分片尺度k和区域索引s来识别</li>
+</ol>
+</li>
+<li><p>单独一个区域：区域间计算和事务相互隔离、独立并行，随网络增长会创建新区域</p>
+<ol>
+<li>全节点或矿工有特定标识符来决定在哪个区域内工作</li>
+<li>每个区域有自己的区块链</li>
+<li>矿工只与同区域的PoW竞争记账权</li>
+<li>全节点会忽略其他区域的事务消息</li>
+</ol>
+</li>
+<li><p>最小化跨区域开销：</p>
+<ol>
+<li>系统在每个节点上维护一个分布式哈希表(DHT)</li>
+<li>大多数通信用于复制未经确认的事务，并广播带有已确认事务的新块</li>
+<li>获取未确认事务或新块对应的区域索引s后，系统在DHT中选择索引相同的节点，通过gossip protocol把事务和区块发给它们。</li>
+<li>只把中继事务发给对应区域，而不是全网广播</li>
+<li>用于形成链的最小化数据会被复制到所有区域（下一部分讨论）</li>
+</ol>
+<h3 id="Efﬁcient-Cross-Zone-Atomicity"><a href="#Efﬁcient-Cross-Zone-Atomicity" class="headerlink" title="Efﬁcient Cross-Zone Atomicity"></a>Efﬁcient Cross-Zone Atomicity</h3><ol>
+<li>事务分为取钱（relay）和存钱（deposit）操作，分别在对应的区域进行验证</li>
+<li>为避免分叉出现的问题：<ol>
+<li>取钱验证一次</li>
+<li>存钱验证一次</li>
+<li>中继操作隔一定数量的区块后才被打包</li>
+</ol>
+</li>
+</ol>
+<h3 id="Defense-Per-Zone-Security"><a href="#Defense-Per-Zone-Security" class="headerlink" title="Defense Per-Zone Security"></a>Defense Per-Zone Security</h3><ol>
+<li>允许矿工完成一次PoW在多个区域建立多个区块（区块网？），每个区域只能建立一个</li>
+<li>参与诸葛连弩的矿工的算力没被稀释，这样攻击单独一个区域所需的算力仍然是50%</li>
+</ol>
+</li>
 </ol>
 
       
@@ -427,7 +510,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/error/" rel="tag"><i class="fa fa-tag"></i> error</a>
+            <a href="/tags/blockchain/" rel="tag"><i class="fa fa-tag"></i> blockchain</a>
           
         </div>
       
@@ -440,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/" rel="next" title="Let's Build A Simple Interpreter笔记[2]">
-                <i class="fa fa-chevron-left"></i> Let's Build A Simple Interpreter笔记[2]
+              <a href="/2020/04/01/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-6/" rel="next" title="python课程记录-6">
+                <i class="fa fa-chevron-left"></i> python课程记录-6
               </a>
             
           </div>
@@ -450,8 +533,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/01/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-3/" rel="prev" title="Let's Build A Simple Interpreter笔记[3]">
-                Let's Build A Simple Interpreter笔记[3] <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E5%88%86%E7%89%87%E7%9B%B8%E5%85%B3/" rel="prev" title="论文记录-分片相关">
+                论文记录-分片相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,8 +587,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -585,6 +677,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#突破区块链不可能三角异步共识组"><span class="nav-number">1.</span> <span class="nav-text">突破区块链不可能三角异步共识组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Background"><span class="nav-number">1.3.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Design"><span class="nav-number">1.4.</span> <span class="nav-text">System Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Efﬁcient-Cross-Zone-Atomicity"><span class="nav-number">1.5.</span> <span class="nav-text">Efﬁcient Cross-Zone Atomicity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Defense-Per-Zone-Security"><span class="nav-number">1.6.</span> <span class="nav-text">Defense Per-Zone Security</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
