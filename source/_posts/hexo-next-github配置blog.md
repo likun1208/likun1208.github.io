@@ -154,6 +154,25 @@ categories:
 
    这里`tags:` 后面一定要换行，下面的`-`后面注意有空格。
 
+## 一些后续问题
+
+今天（2020.03.16）突然发现当博客内容多起来以后，首页会有翻页，而翻页图标显示是乱的，查了一下发现要改`/Blog/themes/next/layout/_partials/pagination.swig`这个文件，内容整体替换成下面的：
+
+```html
+{%- if page.prev or page.next %}
+ <nav class="pagination">
+   {{
+     paginator({
+       prev_text: '<i class="fa fa-angle-left" aria-label="'+__('accessibility.prev_page')+'"></i>',
+       next_text: '<i class="fa fa-angle-right" aria-label="'+__('accessibility.next_page')+'"></i>',
+       mid_size: 1,
+       escape: false
+     })
+   }}
+ </nav>
+{%- endif %}
+```
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324
@@ -161,3 +180,5 @@ https://segmentfault.com/a/1190000018761324
 https://www.jianshu.com/p/3a05351a37dc
 
 https://blog.csdn.net/nightmare_dimple/article/details/86661502
+
+https://blog.csdn.net/lihangll/article/details/103335246

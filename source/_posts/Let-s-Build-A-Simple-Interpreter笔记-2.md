@@ -12,7 +12,7 @@ categories: Let's Build A Simple Interpreter
 
 [原文](https://ruslanspivak.com/lsbasi-part2/)
 
-[翻译](https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-02/)
+[翻译](https://feng-qi.github.io/2018/01/25/lets-build-a-simple-interpreter-part-02/)
 
 <!--more-->
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
    词法分析过程中会遇到以下几种情况：(1)空格，要跳过空格，循环继续运行，分析下一个字符；(2)结束符，直接返回`EOF`对应的`token`；(3)数字，循环终止，连后面的几位数字字符一起变成一个数字，返回对应的`token`；(4)是`+`或者`-`，索引移到下一位，循环终止，返回运算符对应的`token`。
    分析几个辅助函数：
    1. `advance()`，索引`pos`后移一位，当前字符`current.char`的值变为新索引对应的字符。
-2. `skip_whitespace()`，循环调用`advance()`直到当前字符不是空格。
+   2. `skip_whitespace()`，循环调用`advance()`直到当前字符不是空格。
    3. `integer()`，先声明一个初始为空字符串的`result`，然后循环把`current.char`加到`result`这个字符串里，接着`advance()`移动到下一位，直到当前字符不是数字。
 2. `expr()`是用来计算表达式的，判断词法分析后的词法单元是否符合规则，然后根据规则来计算结果。辅助函数为`eat()`，用来判断当前词法单元是否符合规则。
 
@@ -166,7 +166,6 @@ if __name__ == '__main__':
 1. 首先运行的是`main()`，获取输入字符串，存到`text`中（`line116`)，并用`text`初始化`interpreter`这个解释器类(`line121`)，此时，`interpreter.text`就是我们输入的字符串，`interpreter.pos`是初始值`0`，`self.current_token`是初始值`None`，`self.current_char`是`interpreter.text`这个字符串数组下标为`pos=0`对应的字符，也就是`3`。
 
 2. 接下来`line122`调用了表达式计算器`expr()`，而`expr()`的第一行调用了词法分析器`get_next_token()`，因为字符3是数字，所以要去调用`integer()`函数，并返回一个类型为`INTEGER`、值为函数结果的`TOKEN`。
-
    在执行完`integer()`并返回之前，`pos=0`，`current_token=None`，`current_char=3`。
 
 3. 进入`integer()`函数，最初`result`是空字符串，`current_char=3`符合循环条件，进入`while`循环，`result`变成`3`（是字符串格式）,调用`advance()`，接下来先让索引后移，即`pos=1`，此时还没移到最后一位，更新`current_char=text[pos]=text[1]=2`。此时还符合循环条件，`result`把新的`current_char`加上，变成`32`（字符串格式），再次`advance()`，调用完后，`pos=2`，依旧没移到最后一位，`current_char=text[2]=空格`。这时不满足循环条件了，循环结束，返回字符串`result`对应的数字也就是32。
@@ -268,15 +267,11 @@ if __name__ == '__main__':
 ## 检查理解
 
 1. 什么是 lexeme？
-
    lexeme 是组成 token 的一个字符序列。（这个词翻译过来是**词位**或**词素**）
-
    `token`和`lexeme`的关系类似于类和实例（或者对象）之间的关系。举例来说，变量`a`和`b`，它们属于同一种`token`：`identifier`，而`a`的`lexeme`是`a`，`b`的`lexeme`是`b`。每个关键字是一种`token`。`token`可以附带一个值属性，例如变量`a`，调用`gettoken()`时，会返回一个`identifier`类型的`token`，其值属性是`a`。
 
 2. 在 token 流中找到结构的过程叫什么？或者这么问，在 token 流中识别出特定组合的过程叫什么？
-
    parsing（翻译是语法分析或句法分析）
 
 3. 解释器（编译器）做 parsing 工作的部分叫什么？
-
    parser（也就是语法分析器）
