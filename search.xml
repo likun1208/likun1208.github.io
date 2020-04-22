@@ -1,9 +1,430 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>python课程记录-9</title>
+    <url>/2020/04/22/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-9/</url>
+    <content><![CDATA[<p>这一课是爬虫。</p>
+<a id="more"></a>
+
+<ol>
+<li>使用两个库：<ol>
+<li>Requests：获取网络数据</li>
+<li>BeautifulSoup：分析网络数据</li>
+</ol>
+</li>
+</ol>
+<h3 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h3><ol>
+<li><p>获取某网址信息：<code>requests.get(url, params=None, **kwargs)</code></p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">html= requests.get(<span class="string">"html://www.bnu.edu.cn"</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'bnu.html'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(html.content)		<span class="comment"># 保存html的内容</span></span><br><span class="line">type(html)		<span class="comment"># requests.models.Response</span></span><br><span class="line">html.url		<span class="comment"># 'https://www.bnu.edu.cn/'</span></span><br><span class="line">html.content	<span class="comment"># 二进制内容</span></span><br><span class="line">html.text		<span class="comment"># 字符串（可能乱码）</span></span><br><span class="line">html.encoding	<span class="comment"># 'ISO-8859-1'</span></span><br><span class="line">html.encoding=<span class="string">'utf-8'</span>  <span class="comment">#修改编码</span></span><br><span class="line">html.request.headers	<span class="comment"># 访问方式： &#123;'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把访问方式伪装成正常浏览器：</p>
+<ol>
+<li><p>获取浏览器的访问方式：</p>
+<ol>
+<li><p>在浏览器中打开链接；</p>
+</li>
+<li><p>按F12，找到Network；</p>
+</li>
+<li><p>随便选一个资源点一下（如果一个都没有，就刷新一下网页）；</p>
+</li>
+<li><p>在Request Headers里找到User-Agent并把整个内容复制出来。</p>
+<p><img src="https://github.com/kun-bin/image/blob/master/0422.png" alt="示意图"></p>
+</li>
+</ol>
+</li>
+<li><p>在代码中做伪装：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">head = &#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'</span>&#125;</span><br><span class="line">html = requests.get(<span class="string">"http://www.bnu.edu.cn"</span>, headers=head)</span><br><span class="line">html.request.headers	<span class="comment"># 访问方式变成User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="BeautifulSoup"><a href="#BeautifulSoup" class="headerlink" title="BeautifulSoup"></a>BeautifulSoup</h3><ol>
+<li><p>分析页面信息：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">bsObj = BeautifulSoup(html.content, <span class="string">'lxml'</span>)  <span class="comment">#lxml HTML 解析器：速度快，文档容错能力强</span></span><br><span class="line">type(bsObj)		<span class="comment"># bs4.BeautifulSoup</span></span><br><span class="line">bsObj.title     <span class="comment">#获得html中的title标签: &lt;title&gt;北京师范大学&lt;/title&gt;</span></span><br><span class="line">type(bsObj.title )	<span class="comment"># bs4.element.Tag</span></span><br><span class="line">bsObj.img   <span class="comment">#获得html中的第一个img标签: &lt;img alt="" src="images/logo1.png"/&gt;</span></span><br><span class="line">bsObj.a    <span class="comment">#获得html中的第一个a标签: &lt;a href="https://one.bnu.edu.cn" target="_blank"&gt;信息门户&lt;/a&gt;</span></span><br><span class="line">print(type(bsObj.img), type(bsObj.a ))	<span class="comment"># &lt;class 'bs4.element.Tag'&gt; &lt;class 'bs4.element.Tag'&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取标签信息：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">bsObj.a.get_text()	<span class="comment"># '信息门户'</span></span><br><span class="line">bsObj.a.text		<span class="comment"># '信息门户'</span></span><br><span class="line">bsObj.a.attrs		<span class="comment"># &#123;'href': 'https://one.bnu.edu.cn', 'target': '_blank'&#125;</span></span><br><span class="line">bsObj.a[<span class="string">'href'</span>]		<span class="comment"># 获取a标签的href属性值：'https://one.bnu.edu.cn'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到特定标签：<code>find( name , attrs , recursive , text , **kwargs )</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">alink=bsObj.find(<span class="string">'a'</span>)   <span class="comment"># 没有属性限定，找到第一个a标签</span></span><br><span class="line">print(alink)			<span class="comment"># &lt;a href="https://one.bnu.edu.cn" target="_blank"&gt;信息门户&lt;/a&gt;</span></span><br><span class="line">blink=bsObj.find(<span class="string">'a'</span>,text=<span class="string">'学部院系'</span>)	<span class="comment"># 限定了属性 text的值</span></span><br><span class="line">print(blink)			<span class="comment"># &lt;a href="xbyx/index.htm"&gt;学部院系&lt;/a&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>找到所有指定标签：<code>find_all( name , attrs , recursive , text , limit, **kwargs )</code>返回列表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">alink=bsObj.find_all(<span class="string">'a'</span>)</span><br><span class="line">print(alink)	<span class="comment"># 所有a标签的列表</span></span><br><span class="line">blink=bsObj.find_all(<span class="string">"a"</span>, limit=<span class="number">2</span>)	<span class="comment"># 只找前两个a标签</span></span><br><span class="line">print(blink)				<span class="comment"># [&lt;a href="https://one.bnu.edu.cn" target="_blank"&gt;信息门户&lt;/a&gt;, &lt;a href="http://xxgk.bnu.edu.cn/" target="_blank"&gt;信息公开&lt;/a&gt;]</span></span><br><span class="line">clink=bsObj.find_all(<span class="string">'span'</span>, class_=<span class="string">"more01"</span>)	<span class="comment"># class值符合要求的span标签</span></span><br><span class="line">print(clink)		<span class="comment"># [&lt;span class="more01"&gt;&lt;img alt="" src="images/more3.png"/&gt;&lt;/span&gt;, &lt;span class="more01"&gt;&lt;img alt="" src="images/more3.png"/&gt;&lt;/span&gt;, &lt;span class="more01"&gt;&lt;img alt="" src="images/more3.png"/&gt;&lt;/span&gt;, &lt;span class="more01"&gt;&lt;img alt="" src="images/more3.png"/&gt;&lt;/span&gt;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">imglist = bsObj.find_all(<span class="string">'img'</span>, &#123;<span class="string">"src"</span>:re.compile(<span class="string">".+\.jpg"</span>)&#125;)	<span class="comment"># 符合正则表达的标签</span></span><br><span class="line">print(imglist)</span><br><span class="line"></span><br><span class="line">dlink=bsObj.find(<span class="string">'div'</span>, class_=<span class="string">"nav"</span>).find_all(<span class="string">'a'</span>)	<span class="comment"># find和findall结合使用</span></span><br><span class="line">print(dlink)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>相对url转绝对url：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> requests.compat <span class="keyword">import</span> urljoin</span><br><span class="line"></span><br><span class="line">url=<span class="string">'https://www.bnu.edu.cn/'</span></span><br><span class="line">blink = urljoin(url, blink[<span class="string">'href'</span>])</span><br><span class="line">print(blink)	<span class="comment"># https://www.bnu.edu.cn/xbyx/index.htm</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图像相关（img标签）：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">clink=bsObj.find(<span class="string">'img'</span>)</span><br><span class="line">print(clink)			<span class="comment"># &lt;img alt="" src="images/logo1.png"/&gt;</span></span><br><span class="line">print(clink[<span class="string">'src'</span>])		<span class="comment"># images/logo1.png</span></span><br><span class="line">logo= requests.get(urljoin(url, clink[<span class="string">'src'</span>]), headers=head) <span class="comment">#获得图像</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图像</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line">im=Image.open(BytesIO(logo.content))</span><br><span class="line">im.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图像</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">r'D:\2020Python\Ch8\BNU-logo.png'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f: </span><br><span class="line">    f.write(logo.content)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">r'D:\2020Python\Ch8\BNU-logo.'</span>+clink[<span class="string">'src'</span>][<span class="number">-3</span>:], <span class="string">'wb'</span>) <span class="keyword">as</span> f: </span><br><span class="line">    f.write(logo.content)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>class</code>标签的访问：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dlink=bsObj.find('span', class="col-md-10")  #class 是关键词，不能这样使用</span><br><span class="line"><span class="comment"># 解决方案1</span></span><br><span class="line">dlink=bsObj.find(<span class="string">'div'</span>, class_=<span class="string">"item-txt01"</span>)</span><br><span class="line">print(dlink)</span><br><span class="line"><span class="comment"># 解决方案2</span></span><br><span class="line">dlink=bsObj.find(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>:<span class="string">'item-txt01'</span>&#125;)</span><br><span class="line">print(dlink.text)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网页源码树状结构：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">clink=bsObj.find(<span class="string">'li'</span>)</span><br><span class="line">clink.parent  <span class="comment">#父节点</span></span><br><span class="line">clink.children  <span class="comment">#孩子节点</span></span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> clink.children:</span><br><span class="line">    print(child)	<span class="comment"># 输出子节点</span></span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> clink.descendants:    <span class="comment">#子孙节点，后代节点</span></span><br><span class="line">    print(child)</span><br><span class="line"><span class="keyword">for</span> sibling <span class="keyword">in</span> clink.next_siblings:  <span class="comment">#兄弟节点</span></span><br><span class="line">    print(sibling)</span><br><span class="line">clink.find_parent(<span class="string">'div'</span>, class_=<span class="string">'nav'</span>)  <span class="comment">#满足class为‘nav’的父节点</span></span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> clink.findChildren(<span class="string">'a'</span>):  <span class="comment">#找到 a标签 孩子</span></span><br><span class="line">    print(child)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="爬取网页所有图片的示例"><a href="#爬取网页所有图片的示例" class="headerlink" title="爬取网页所有图片的示例"></a>爬取网页所有图片的示例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#只爬取url网页上的图片，不爬next网页上的图片</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> requests.compat <span class="keyword">import</span> urljoin</span><br><span class="line">url = <span class="string">'http://news.bnu.edu.cn/sj/gysd/index.htm'</span></span><br><span class="line">head = &#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'</span>&#125;</span><br><span class="line">html = requests.get(url, headers = head)</span><br><span class="line">bsObj= BeautifulSoup(html.content, <span class="string">'lxml'</span>)</span><br><span class="line">allLinks = bsObj.find_all(<span class="string">'div'</span>, class_=<span class="string">"grid"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> allLinks:</span><br><span class="line">    imglink = i.find(<span class="string">'img'</span>)[<span class="string">'src'</span>]	</span><br><span class="line">    imglink = urljoin(url, imglink)	<span class="comment"># 图片链接</span></span><br><span class="line">    name = i.find(<span class="string">'h3'</span>).text		<span class="comment"># 图片标题</span></span><br><span class="line">    print(imglink, name)</span><br><span class="line">    img  = requests.get(imglink, headers = head)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">r'D:\2020Python\Ch8\图片/'</span>+name+imglink[<span class="number">-4</span>:], <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(img.content)		<span class="comment"># 保存图片</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#爬取本网页以及下一页的图片</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.compat <span class="keyword">import</span> urljoin</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">url=<span class="string">'http://news.bnu.edu.cn/sj/gysd/index.htm'</span></span><br><span class="line">head = &#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'</span>&#125;</span><br><span class="line">path=<span class="string">'D:/2020Python/Ch8/光影师大/'</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(path):</span><br><span class="line">    os.mkdir(path)</span><br><span class="line">nexturl=url</span><br><span class="line"><span class="keyword">while</span> nexturl:</span><br><span class="line">    html = requests.get(nexturl, headers=head)</span><br><span class="line">    bsObj=BeautifulSoup(html.content, <span class="string">'lxml'</span>)</span><br><span class="line">    imgslink=bsObj.find_all(<span class="string">'div'</span>, class_=<span class="string">"grid"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> imgslink:</span><br><span class="line">        imglink=i.find(<span class="string">'img'</span>)[<span class="string">'src'</span>]</span><br><span class="line">        imglink=urljoin(nexturl,imglink)</span><br><span class="line">        name=i.find(<span class="string">'h3'</span>).text</span><br><span class="line">        name=<span class="string">''</span>.join([i <span class="keyword">for</span> i <span class="keyword">in</span> name <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">'\\'</span>,<span class="string">'/'</span>,<span class="string">':'</span>,<span class="string">'*'</span>,<span class="string">'?'</span>,<span class="string">'"'</span>,<span class="string">'&lt;'</span>,<span class="string">'&gt;'</span>,<span class="string">'|'</span>]])</span><br><span class="line">        print(imglink, name)        </span><br><span class="line">        img=requests.get(urljoin(nexturl,imglink), headers=head)</span><br><span class="line">        <span class="keyword">with</span> open(path+name+imglink[<span class="number">-4</span>:], <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(img.content)        </span><br><span class="line">    temp=bsObj.find(<span class="string">'a'</span>,class_=<span class="string">"next"</span>)	<span class="comment"># 获取next标签（下一页）</span></span><br><span class="line">    <span class="keyword">if</span> temp:</span><br><span class="line">        nexturl=urljoin(nexturl,temp[<span class="string">'href'</span>])	<span class="comment"># 获取下一页的url</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        nexturl=<span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="课后作业"><a href="#课后作业" class="headerlink" title="课后作业"></a>课后作业</h3><p>抓取北京师范大学中头条关注网站： <a href="http://news.bnu.edu.cn/zx/ttgz/index.htm" target="_blank" rel="noopener">http://news.bnu.edu.cn/zx/ttgz/index.htm</a> 上迄今为止所 有头条关注报道的发表日期、标题、链接以及浏览次数，保存为 一个csv文件，要求使用函数封装。</p>
+<p>思路：</p>
+<ol>
+<li><p>导入所需库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> requests.compat <span class="keyword">import</span> urljoin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分析这个网站，发现了很神奇的一点，该网站一共68页，应该只有第68页没有<code>next</code>标签，但实际上它第67页就没了。如果用保存图像那个例子里的方式访问，则无法访问到第68页，所以考虑写个函数来获取网站一共多少页，然后<code>for</code>循环读网页内容。</p>
+<p>经过仔细观察，可以发现网页下面有一个元素用来显示“现在是第几页/总共多少页”，源代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pages "</span>&gt;</span></span><br><span class="line">		   			            页数：<span class="tag">&lt;<span class="name">span</span>&gt;</span>1/68<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          总数：<span class="tag">&lt;<span class="name">span</span>&gt;</span>680<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">						</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index.htm"</span> <span class="attr">class</span>=<span class="string">"on_pages"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index1.htm"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index2.htm"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index3.htm"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index4.htm"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index5.htm"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index6.htm"</span>&gt;</span>7<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index7.htm"</span>&gt;</span>8<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index8.htm"</span>&gt;</span>9<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index9.htm"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index1.htm"</span> <span class="attr">class</span>=<span class="string">"next"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../../images/pages04.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index10.htm"</span> <span class="attr">class</span>=<span class="string">"end"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../../images/pages05.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因此可以找到<code>class = pages</code> 的<code>div</code>标签，然后获取其中<code>span</code>标签的内容，并截取<code>/</code>符号后面的内容转为数字，即可得到网站页数，写成函数的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page</span><span class="params">(url, head)</span>:</span></span><br><span class="line">    html = requests.get(url, headers=head)</span><br><span class="line">    bsObj = BeautifulSoup(html.content, <span class="string">'lxml'</span>)</span><br><span class="line">    <span class="keyword">return</span> int(bsObj.find(class_=<span class="string">"pages"</span>).find(<span class="string">'span'</span>).text.split(<span class="string">'/'</span>)[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来可以通过<code>for</code>循环访问每一页，第一页是<code>index.htm</code>，接下来是<code>index1.htm</code>等等，直到最后是<code>index67.htm</code>。</p>
+<ol>
+<li><p>分析网页源码可知，在每一页中，我们需要提取的内容一定在<code>class = item-info01</code>的标签中，因此使用<code>findall</code>然后遍历得到的标签列表。</p>
+</li>
+<li><p>分析每个标签源码可知，文章标题出现在<code>h3</code>中，即<code>title = i.find(&#39;h3&#39;).text</code>。</p>
+</li>
+<li><p>文章链接是<code>a</code>标签的<code>href</code>属性，是相对链接，要转换为绝对链接，不过这里需要注意，有一些文章用了微信链接等站外网页作为内容，因此这些链接是绝对链接，不需要转换。所以要判断一下首字母是否为<code>h</code>。此外，在我们保存的时候，链接后面要加浏览次数，直接用逗号分隔会导致打开csv时链接和浏览次数连在一起，所以链接本身保存时在末尾加个空格。</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">link = i.find(<span class="string">'a'</span>)[<span class="string">'href'</span>]</span><br><span class="line"><span class="keyword">if</span> link[<span class="number">0</span>] != <span class="string">'h'</span>:</span><br><span class="line">	link = urljoin(url, link)</span><br><span class="line">link += <span class="string">' '</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>文章时间是<code>class = time</code>的<code>span</code>标签对应的内容，即<code>time = i.find(&#39;span&#39;, class_=&quot;time&quot;).text</code>。</p>
+</li>
+<li><p>最后是文章浏览次数，这个网站浏览次数是用script做的，所以要跳转到对应链接，然后从新网页里获取浏览次数。对应的相对链接是<code>script</code>标签中的<code>src</code>属性，因此要跳转的新网页是<code>urljoin(url, i.find(&#39;script&#39;)[&#39;src&#39;])</code>，这个网页的内容只有<code>document.write(&#39;31&#39;)</code>这样的字符，所以获取网页内容后提取它17位开始、倒数第3位结束的内容即可得到浏览次数（类型为字符串）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">viewlink = urljoin(url, i.find(<span class="string">'script'</span>)[<span class="string">'src'</span>])</span><br><span class="line">view = BeautifulSoup(requests.get(viewlink).text, <span class="string">'lxml'</span>).text[<span class="number">16</span>:<span class="number">-3</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后把上述内容按顺序加到列表中，然后在整个循环结束后返回列表即可。完整代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analy</span><span class="params">(page, url, head)</span>:</span></span><br><span class="line">    lists = []</span><br><span class="line">    nexturl = url</span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> range(page):</span><br><span class="line">        html = requests.get(nexturl, headers=head)</span><br><span class="line">        bsObj = BeautifulSoup(html.content, <span class="string">'lxml'</span>)</span><br><span class="line">        allLink = bsObj.find_all(class_=<span class="string">"item-info01"</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> allLink:</span><br><span class="line">            title = i.find(<span class="string">'h3'</span>).text</span><br><span class="line">            link = i.find(<span class="string">'a'</span>)[<span class="string">'href'</span>]</span><br><span class="line">            <span class="keyword">if</span> link[<span class="number">0</span>] != <span class="string">'h'</span>:</span><br><span class="line">                link = urljoin(url, link)</span><br><span class="line">            link += <span class="string">' '</span></span><br><span class="line">            time = i.find(<span class="string">'span'</span>, class_=<span class="string">"time"</span>).text</span><br><span class="line">            viewlink = urljoin(url, i.find(<span class="string">'script'</span>)[<span class="string">'src'</span>])</span><br><span class="line">            view = BeautifulSoup(requests.get(viewlink).text, <span class="string">'lxml'</span>).text[<span class="number">16</span>:<span class="number">-3</span>]</span><br><span class="line">            lists.append([time, title, link, view])</span><br><span class="line">        nexturl = urljoin(nexturl, <span class="string">'index'</span> + str(index + <span class="number">1</span>) + <span class="string">'.htm'</span>)</span><br><span class="line">    <span class="keyword">return</span> lists</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>在得到列表后，根据要求输出csv文件，这部分内容是上一课讲过的，基本没有变化，注意编码要用<code>utf-8-sig</code>，如果用其他编码，保存的中文会乱码；如果只是<code>utf-8</code>没<code>sig</code>，则excel打开时中文会乱码。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writecsv</span><span class="params">(lists)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"reportsInfo.csv"</span>, <span class="string">'w'</span>, newline=<span class="string">''</span>, encoding=<span class="string">'utf-8-sig'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f_csv = csv.writer(f)</span><br><span class="line">        headers = [<span class="string">'日期'</span>, <span class="string">'标题'</span>, <span class="string">'链接'</span>, <span class="string">'浏览次数'</span>]</span><br><span class="line">        f_csv.writerow(headers)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> lists:</span><br><span class="line">            f_csv.writerow(row)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后是主函数部分，如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">head = &#123;</span><br><span class="line">    <span class="string">'user-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'</span>&#125;</span><br><span class="line">url = <span class="string">'http://news.bnu.edu.cn/zx/ttgz/index.htm'</span></span><br><span class="line">page = page(url, head)</span><br><span class="line">lists = analy(page, url, head)</span><br><span class="line">writecsv(lists)</span><br><span class="line">print(<span class="string">"FIN"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python课程记录-8</title>
+    <url>/2020/04/17/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-8/</url>
+    <content><![CDATA[<p>这一课讲文件读写。</p>
+<a id="more"></a>
+
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ol>
+<li><p>文件类型：文本文件（纯文本、源代码、网页）、二进制文件（图片、word、excel、ppt）</p>
+</li>
+<li><p>读文本文件：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">r'/path/to/file'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>这样用<code>with open as</code>可以不用写<code>close</code></p>
+</li>
+<li><p>open函数：<code>open(file, mode=&#39;r&#39;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</code> 返回一个文件对象，是可迭代对象</p>
+</li>
+<li><p>tell函数：<code>f.tell()</code>返回文件指针当前在的位置</p>
+</li>
+<li><p>文本文件操作：</p>
+<p>以下都是写在<code>with open</code>的代码块里面</p>
+<ol>
+<li>读文本文件：<ol>
+<li><code>f.readline()</code>：读一行，到换行符结束，返回字符串</li>
+<li><code>f.read(2)</code>：接着读2个字符，返回字符串</li>
+<li><code>f.readlines()</code>：把剩下的都读完，返回列表，每一行作为列表中的一个元素</li>
+</ol>
+</li>
+<li>写文本文件：<ol>
+<li><code>f.write</code>：写入字符串，不换行，可以在字符串末尾加<code>\n</code>来实现换行</li>
+<li><code>f.writelines</code>：写入列表元素，不换行，可以在要换行的元素末尾加<code>\n</code></li>
+</ol>
+</li>
+<li>文件模式相关：<ol>
+<li>用新建文件的模式（<code>x</code>）来open文件，如果存在同名文件，则会报错</li>
+<li>用<code>w</code>方式写文件，如果存在同名文件，会清空原有内容再写入</li>
+<li>用<code>a</code>方式写文件，存在同名文件的时候，不会清空内容，而是在文件末尾写入新内容</li>
+<li>用<code>r+</code>的方式读写文件，默认位置为文件开头，读完以后移到结尾</li>
+<li>用<code>w+</code>的方式读写文件，清空文件内容以后读写</li>
+<li>用<code>a+</code>的方式读写文件，默认位置是文件末尾</li>
+<li>带+的都是可读可写，不带+的则只有读或者写</li>
+</ol>
+</li>
+<li>改变文件读写位置：<code>seek(offset, whence=0)</code>，从whence(0起始，1当前，2末尾)偏移offset个字节。例如<code>f.seek(0)</code>可以把文件指针放到最开始的地方。</li>
+<li>字符字节说明：utf-8编码中文3字节英文1字节；gbk编码中文2字节英文1字节</li>
+</ol>
+</li>
+<li><p>二进制文件操作：</p>
+<ol>
+<li>open函数的打开模式为<code>b</code></li>
+</ol>
+</li>
+<li><p>CSV文件：文本文件</p>
+<ol>
+<li>由若干条记录组成，每条记录由字段组成，字段间由分 隔符分开，最常见的分隔符是逗号，也可以是制表符、分号等</li>
+<li>列表读写：<code>csv.reader</code>和<code>csv.writer</code></li>
+<li>字典读写：<code>csv.DictReader</code>和<code>csv.DictWriter</code></li>
+<li><code>csv.reader(csvfile, dialect=‘excel’, **fmtparams)</code>：以字符串列表的形式读入文件内容，一行是一个列表<ol>
+<li>是可迭代对象，可以通过<code>next</code>访问，比如读完文件先用next把第一行存在标题变量里，再遍历剩下的内容</li>
+</ol>
+</li>
+<li><code>csv.writer(csvfile, dialect=‘excel’, **fmtparams)</code>：把字符串列表写入csv文件，注意先写入标题行，再写入剩下内容</li>
+<li><code>csv.DictReader(csvfile, fieldnames=None, restkey=None, restval=None, dialect=‘excel’, *args, **kwds)</code>字典方式读入，标题是key，内容是value<ol>
+<li>csv文件没有标题行时，可以设定列表指定标题行，然后<code>csv.DictReader(f,headers)</code>来建立内容和标题一一对应的字典</li>
+</ol>
+</li>
+<li><code>csv.DictWriter(csvfile, fieldnames, restval=‘’, extrsaction=‘raise’, dialect=‘excel’, *args, **kwds)</code> 要指定标题行和内容，在创建csv对象时就指定标题，接下来写入标题，最后写入内容</li>
+</ol>
+</li>
+</ol>
+<h3 id="随堂练习"><a href="#随堂练习" class="headerlink" title="随堂练习"></a>随堂练习</h3><ol>
+<li><p>读入《Declaration.txt》文件，该文件里存的是一篇英文文章 ，要求把这篇文章中的不重复单词（单词的不同时态以及单复数都 看成是不同的单词）进行排序后写入一个新的txt文件，并要求每行 5个单词，同时注意对齐。</p>
+<p>思路：</p>
+<ol>
+<li><p>使用<code>with open</code>方式读入文件并把其中的单词存入列表；</p>
+</li>
+<li><p>借助<code>Counter</code>统计词频和排序</p>
+</li>
+<li><p>把排序之后的列表写入新文件</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 读入文件内容，把单词存入列表并返回</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strtolist</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open (name,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        s = f.read()</span><br><span class="line">    words = re.findall(<span class="string">r'[a-zA-Z]+'</span>,s)</span><br><span class="line">    <span class="keyword">return</span> words</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对列表中的单词按字母顺序排序并返回</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortword</span><span class="params">(words)</span>:</span></span><br><span class="line">    list1 = collections.Counter(words)</span><br><span class="line">    list2 = sorted(list1.items())</span><br><span class="line">    list3 = []</span><br><span class="line">    <span class="keyword">for</span> key, value <span class="keyword">in</span> list2:</span><br><span class="line">        list3.append(key)</span><br><span class="line">    <span class="keyword">return</span> list3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把列表中的元素按要求写入文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writefile</span><span class="params">(lists)</span>:</span></span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'wordlist.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> lists:</span><br><span class="line">            f.write(<span class="string">'&#123;:&lt;16&#125;'</span>.format(i))</span><br><span class="line">            f.write(<span class="string">'\t'</span>)</span><br><span class="line">            count+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> count % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">                f.write(<span class="string">'\n'</span>)</span><br><span class="line">                </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    words = strtolist(<span class="string">'Declaration.txt'</span>)</span><br><span class="line">    lists = sortword(words)</span><br><span class="line">    writefile(lists)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>读入存有姓名和成绩的 成绩单.csv 文件，计算最终加权成绩（ 小数点后保留两位，三个成绩的权重分别为0.22,0.18,0.6），并 把该成绩追到到原有信息中，保存为一个新的csv文件。</p>
+<p>思路：</p>
+<ol>
+<li><p>读入csv文件，并为标题行添加“最终成绩”</p>
+</li>
+<li><p>计算平均分并添加到这一行的末尾，保留2位小数</p>
+</li>
+<li><p>把这一行的数据存到列表中</p>
+</li>
+<li><p>把刚才的内容逐行写入新的csv文件，注意这里要在之前那个文件关闭之前完成</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line"><span class="keyword">with</span> open (<span class="string">'成绩单.csv'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv=csv.reader(f)</span><br><span class="line">    headers = next(f_csv)</span><br><span class="line">    headers.append(<span class="string">'最终成绩'</span>)</span><br><span class="line">    lists = []</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        avg = <span class="number">0.22</span>*int(row[<span class="number">1</span>])+<span class="number">0.18</span>*int(row[<span class="number">2</span>])+<span class="number">0.6</span>*int(row[<span class="number">3</span>])</span><br><span class="line">        row.append(avg)</span><br><span class="line">        row[<span class="number">4</span>]=str(<span class="string">'&#123;:.2f&#125;'</span>.format(row[<span class="number">4</span>]))</span><br><span class="line">        lists.append(row)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'新成绩单.csv'</span>,<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> s:</span><br><span class="line">        s_csv=csv.writer(s)</span><br><span class="line">        s_csv.writerow(headers)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> lists:</span><br><span class="line">            s_csv.writerow(row)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python课程记录-7</title>
+    <url>/2020/04/16/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-7/</url>
+    <content><![CDATA[<p>这一课讲python中函数和模块的使用。</p>
+<a id="more"></a>
+
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><ol>
+<li><p>函数定义时可以为参数指定默认值，这样没传参的时候就会用默认值，要先声明没默认值的参数，再声明有默认值的。</p>
+</li>
+<li><p>调用函数时可以直接指明参数值（<code>mysum1(score1 = 88, score2 = 79)</code>)，不指明的参数写前面，指明的放后面。</p>
+</li>
+<li><p>指针（*）形式传递可变参数，以元组形式打包多出来的参数，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_sum2</span><span class="params">(a,b,*c)</span>:</span></span><br><span class="line">	total=a+b</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> c:</span><br><span class="line">        total=total+n</span><br><span class="line">    <span class="keyword">return</span> total</span><br><span class="line"></span><br><span class="line">print(my_sum2(<span class="number">1</span>,<span class="number">2</span>))				<span class="comment">#c=()	输出3</span></span><br><span class="line">print(my_sum2(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))		<span class="comment">#c=(3,4,5)	输出15</span></span><br><span class="line">print(my_sum2(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">20</span>))	<span class="comment">#c=(3,4,5,10,20)	输出45</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双指针（**）形式传递可变参数，以字典形式打包多出来的参数，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_sum3</span><span class="params">(a,b,*c,**d)</span>:</span></span><br><span class="line">	total=a+b</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> c:</span><br><span class="line">        total=total+n</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">        total=total+d[key]</span><br><span class="line">    <span class="keyword">return</span> total</span><br><span class="line"></span><br><span class="line">print(my_sum3(<span class="number">1</span>,<span class="number">2</span>))							<span class="comment">#c=() d=&#123;&#125; 输出3</span></span><br><span class="line">print(my_sum3(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))					<span class="comment">#c=(3,4,5) d=&#123;&#125; 输出15</span></span><br><span class="line">print(my_sum3(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,male=<span class="number">6</span>,female=<span class="number">7</span>))	<span class="comment">#c=(3,4,5) d=&#123;'male':6,'female':7&#125; 输出28</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>或*</em>的参数如果不位于形参列表的最后位置，则会使其后面声 明的参数为强制命名参数；使用一个星号而不带参数，也可导致强制命名参数。</p>
+</li>
+<li><p>列表、元组、字典可通过<em>和*</em>作为参数传递给函数。</p>
+</li>
+<li><p>形参复制了实参所指对象的引用</p>
+</li>
+</ol>
+<h2 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h2><ol>
+<li>返回多个值时，是元组形式。</li>
+</ol>
+<h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><ol>
+<li><p>局部变量全局变量和其他语言基本一致</p>
+</li>
+<li><p>只要在函数体内有赋值语句，不管在哪一行，这个变量就是局部变量，函数体内也只会用这个局部变量，而不是同名全局变量，例如下述代码会直接报错</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">var=<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">()</span>:</span></span><br><span class="line">    print(var)</span><br><span class="line">    var=<span class="number">200</span></span><br><span class="line">fun()</span><br><span class="line"></span><br><span class="line">var=<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">()</span>:</span></span><br><span class="line">    var+=<span class="number">1</span></span><br><span class="line">    print(var)</span><br><span class="line">fun()</span><br><span class="line"></span><br><span class="line">报错信息：local variable <span class="string">'var'</span> referenced before assignment</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数体内用全局变量，要声明<code>global</code></p>
+</li>
+<li><p>函数嵌套函数时，内层函数变量作用域只在内层，不影响外层，如果要内层用外层的，要声明<code>nonlocal</code></p>
+</li>
+</ol>
+<h2 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h2><ol>
+<li><p>递归</p>
+</li>
+<li><p>函数可以作为其他函数的参数</p>
+</li>
+<li><p>lambda匿名函数：实现行内函数 <code>lambda 形参列表:返回的结果</code></p>
+<p>例如：<code>f=lambda x,y: x+y</code>，<code>f(12,34)=46</code></p>
+</li>
+<li><p>map函数：以把一个函数作用到可迭代对象（如列表）的每一个 元素。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">-2</span>,<span class="number">1</span>,<span class="number">3</span>]</span><br><span class="line">b=map(<span class="keyword">lambda</span> x: x+<span class="number">2</span>, a)</span><br><span class="line">print(b)	<span class="comment">#b是一个可迭代对象，print得到它的地址，for循环输出可知b=0,3,5</span></span><br><span class="line">c=map(abs, a)</span><br><span class="line">c=list(c)</span><br><span class="line">print(c)	<span class="comment">#c=[2,1,3]</span></span><br><span class="line">d=map(<span class="keyword">lambda</span> x,y: x+y, a,c)</span><br><span class="line">print(list(d))	<span class="comment">#输出[0,2,6]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filter函数：筛选出可迭代对象中满足条件的元素，<code>filter( 返回bool类型的函数, 可迭代对象)</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=filter(<span class="keyword">lambda</span> x: x&gt;<span class="number">0</span>, (<span class="number">-1</span>,<span class="number">2</span>,<span class="number">-3</span>,<span class="number">0</span>,<span class="number">5</span>))</span><br><span class="line">print(list(a))		<span class="comment"># [2,5]</span></span><br><span class="line">b=filter(str.isalpha, (<span class="string">'word'</span>,<span class="string">','</span>,<span class="string">'\n'</span>,<span class="string">'$'</span>,<span class="string">'1'</span>))</span><br><span class="line">print(list(b))		<span class="comment"># ['word']</span></span><br><span class="line">c=filter(<span class="literal">None</span>,(<span class="number">-1</span>,<span class="number">2</span>,<span class="number">-3</span>,<span class="number">0</span>,<span class="number">5</span>))</span><br><span class="line">print(list(b))		<span class="comment"># [-1,2,-3,5] 传入None时会把序列中的false值比如0、空值等都去掉</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>reduce函数：对可迭代对象的元素进行递归计算，<code>reduce( 带两个参数的函数, 可迭代对象)</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=functools.reduce(operator.add,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line">print(a)	<span class="comment">#25</span></span><br><span class="line">b=functools.reduce(<span class="keyword">lambda</span> x,y:x+y,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line">print(b)	<span class="comment">#25</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h3><ol>
+<li><p>对第二次作业进行函数封装，按功能封装成几个函数。</p>
+<p>这个没啥说的，本来就是用函数写的。</p>
+</li>
+<li><p>利用map、filter、reduce、lambda函数，对一个元素为数字 字符串的列表，分别求出其中包含的所有奇数的乘积以及所有 偶数的乘积。</p>
+<p>思路：首先要把列表<code>l</code>的元素从字符串转成整数，从而才能进行奇偶性判断和乘法运算，这里用<code>map</code>函数来完成；接下来用<code>filter</code>函数就可以把奇数和偶数分别放到两个列表中，最后用<code>reduce</code>函数即可进行乘法运算，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line">l=[<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'14'</span>,<span class="string">'20'</span>,<span class="string">'5'</span>,<span class="string">'7'</span>,<span class="string">'39'</span>,<span class="string">'150'</span>,<span class="string">'6'</span>]</span><br><span class="line">m=list(map(<span class="keyword">lambda</span> x: int(x), l))</span><br><span class="line">a=filter(<span class="keyword">lambda</span> x: x%<span class="number">2</span>==<span class="number">0</span>, m)</span><br><span class="line">b=functools.reduce(<span class="keyword">lambda</span> x,y:x*y,list(a))</span><br><span class="line">c=filter(<span class="keyword">lambda</span> x: x%<span class="number">2</span>==<span class="number">1</span>, m)</span><br><span class="line">d=functools.reduce(<span class="keyword">lambda</span> x,y:x*y,list(c))</span><br><span class="line">print(<span class="string">'偶数乘积是'</span>,b)</span><br><span class="line">print(<span class="string">'奇数乘积是'</span>,d)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第一次作业第三题打印结果为24的表达式，我们通过嵌套循环 得到列表的全排列，试试采用递归函数求全排列。</p>
+<p>思路：</p>
+<ol>
+<li><p>列表只有1个元素时，全排列就是列表本身；</p>
+</li>
+<li><p>列表有2个元素时，全排列是[a,b]和[b,a]；</p>
+</li>
+<li><p>列表有n个元素时，将第一个元素固定，对剩下n - 1个元素进行全排列。再将第一个元素依此与其他元素交换，对每次交换后剩下的n-1个元素进行全排列。对n-1个元素的全排列就是一个递归过程。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">permutations</span><span class="params">(l, start, end)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> start==end:</span><br><span class="line">        print(l)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        i = start</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(start, end): </span><br><span class="line">            l[j], l[i] = l[i], l[j]</span><br><span class="line">            permutations(l, start + <span class="number">1</span>, end)</span><br><span class="line">            l[i], l[j] = l[j], l[i]            </span><br><span class="line">num=[<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>]</span><br><span class="line">permutations(num, <span class="number">0</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Privacy Policy in Online Social Network with Targeted Advertising Business</title>
+    <url>/2020/04/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business/</url>
+    <content><![CDATA[<h2 id="在线社交网络隐私政策与定向广告业务"><a href="#在线社交网络隐私政策与定向广告业务" class="headerlink" title="在线社交网络隐私政策与定向广告业务"></a>在线社交网络隐私政策与定向广告业务</h2><a id="more"></a>
+
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+<li>社交网络提供商SNP利用用户信息实现定向投放广告，广告商付费</li>
+<li>隐私政策：SNP应该利用的用户信息比例</li>
+<li>用户、广告商、SNP——&gt;三阶段stackelberg博弈</li>
+<li>更高的信息利用将阻碍用户展示信息，降低被利用信息的总量，并损害广告收入，基于用户信息等级与隐私策略之间的关联，进一步刻画出最优隐私策略。</li>
+</ol>
+<h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><ol>
+<li>广告商决定支付的广告费（更多数据意味着更精准投放——&gt;更高的广告费）：广告商如何在用户信息利用所限制的投放精准度的基础上进行广告投放，以实现预期收益的最大化?</li>
+<li>用户决定在社交平台的活跃度（更好的隐私保护——&gt;更活跃）：在隐私受到侵犯的情况下，用户在社交活动中暴露自己的程度如何?</li>
+<li>SNP决定隐私政策（广告费和用户活跃度的权衡）：SNP如何采取适当的隐私政策来最大化他的效用，包括社会网络效益和目标广告收入?</li>
+</ol>
+<h4 id="System-Model"><a href="#System-Model" class="headerlink" title="System Model"></a>System Model</h4><ol>
+<li>用户，决定活跃度（在社交平台上发布的信息等级），收益三部分相加组成：<ol>
+<li>网络收益：用户在社交平台上进行社交互动所得到的的收益，由用户自己的隐私等级和其他用户的隐私等级共同决定，这部分是一个对数函数（根据梅特卡夫定律决定函数形式）</li>
+<li>隐私损失：由【用户提供信息的程度和SNP的隐私等级】对应的函数共同决定（相乘），是一个增函数</li>
+<li>补贴：SNP鼓励用户在社交平台积极活跃，会提供固定的补贴，用户有一定概率拿到，拿到的概率由【用户提供信息的程度和SNP的隐私等级】对应的函数共同决定（相乘）</li>
+</ol>
+</li>
+<li>广告商，决定广告费，收益两部分相乘组成：<ol>
+<li>一个用户买该产品的净收益（考虑核算收入和生产成本）</li>
+<li>目标用户看了广告以后买产品的概率，两部分相加组成：<ol>
+<li>由【用户提供信息的程度和SNP的隐私等级】对应的概率</li>
+<li>投放不精准的情况下（不能依靠SNP时）的先验概率（就是广告给不感兴趣的人放了之后这个人来买的概率）</li>
+</ol>
+</li>
+<li>上述两部分相乘是一个用户带来的收益，广告商总收益是把所有目标用户的加起来，再减去支付给SNP的广告费</li>
+</ol>
+</li>
+<li>SNP，决定隐私政策和目标广告费，收益三部分相加（减）组成：<ol>
+<li>社交网络价值：用户活跃带来的收益，要去掉对用户活跃度的补贴</li>
+<li>目标广告收益：单个用户的广告费*目标用户</li>
+<li>隐私问题：出现隐私问题时所面临的金钱、名誉损失，有概率，泄露越多损失越大</li>
+</ol>
+</li>
+<li>stackelberg博弈：<ol>
+<li>第一阶段SNP考虑用户和广告商的决策来决定隐私等级和广告费</li>
+<li>第二阶段用户根据隐私政策决定活跃度</li>
+<li>第三阶段广告商根据用户信息和广告费决定是否投放广告</li>
+</ol>
+</li>
+</ol>
+<h4 id="Advertiser’s-Decision"><a href="#Advertiser’s-Decision" class="headerlink" title="Advertiser’s Decision"></a>Advertiser’s Decision</h4><ol>
+<li>简单的让收益大于广告费，然后显然隐私政策越大（SNP泄露用户信息越多或用户自己暴露越多），广告商越容易挣钱</li>
+</ol>
+<h4 id="Users’-Behavior"><a href="#Users’-Behavior" class="headerlink" title="Users’ Behavior"></a>Users’ Behavior</h4><ol>
+<li>多个用户之间的交互——&gt;多用户信息展示博弈——&gt;纳什均衡：所有用户都收益最大化</li>
+<li>信息展示博弈具有超模性：博弈方行为是紧集，收益函数是连续函数且二阶导大于0——&gt;当其他玩家选择更高决策时，该玩家选择更高决策的效用增加得更多——&gt;一个玩家的最佳反应是其他玩家决策的一个非递减函数</li>
+<li>所有用户活跃度从0开始，逐个根据其他用户的活跃度调整自己的来最大化收益，直到收敛——&gt;最小纳什均衡</li>
+<li>均衡属性分析：<ol>
+<li>假设用户效用总的来说是一个凸函数（活跃度越高，活跃度的提高所带来的收益越小，和超模性不冲突）</li>
+<li>隐私损失函数是凹函数：越活跃，隐私损失越多</li>
+<li>补贴函数是凸函数：越活跃，补贴增长越少</li>
+<li>补贴要能弥补隐私损失函数和补贴函数的冲突比例，避免出现大家都是0的场面（从而都是0的场面不是纳什均衡）</li>
+<li>处于NE时，隐私政策越高，用户收益越低，存在一个隐私政策阈值，小于这个值（只用很少一部分隐私），用户会选择完全暴露信息（活跃度=1），大于该值，活跃度&lt;1</li>
+<li>当隐私政策小于阈值时，【用户提供信息的程度和SNP的隐私等级相乘】随隐私政策增加而增加；大于阈值时，【】随…增加而减小；直接来说就是，用户愿意完全暴露信息时，提取更多信息能更好地服务用户（或者说补贴等等综合下来最好），反之，则隐私提取越少越好了</li>
+<li>如果两个用户对社交网络价值的判断相等，那么他们均衡解对应的活跃度也相等；如果不相等，价值判断高的，均衡解时的活跃度也更高；直接说就是，更看重社交价值的会更倾向于高活跃度</li>
+</ol>
+</li>
+</ol>
+<h4 id="SNP’s-Decision"><a href="#SNP’s-Decision" class="headerlink" title="SNP’s Decision"></a>SNP’s Decision</h4><ol>
+<li>均衡解没有具体形式——&gt;用户均衡解和隐私政策之间的关系来说明SNP效用函数的单调性</li>
+<li>广告商收入中的用户数量是离散的，且取决于隐私政策和广告费</li>
+<li>将SNP效用函数拆开：<ol>
+<li>广告费收益：单个用户广告费*用户个数（由用户活跃度均衡解、隐私政策和单用户广告费共同决定），通过对广告商效用函数的分析，找到固定隐私政策时最优的单用户广告费</li>
+<li>社交网络收益—隐私问题：最优广告费作为隐私政策的函数代入，得到最优隐私政策</li>
+</ol>
+</li>
+<li>最优广告费定价问题：<ol>
+<li>把用户个数问题转化成了概率问题：广告商有多大概率向某用户投放广告</li>
+<li>社交参数简化为两个值：一高一低</li>
+</ol>
+</li>
+<li>隐私问题：<ol>
+<li>社交参数依旧只有两个值，对应的均衡解的隐私政策阈值也是两个值</li>
+<li>可以推导出效用函数的单调性</li>
+<li>假设隐私问题函数是凹函数，广告商效用函数是凸函数，也就是隐私问题越严重，损失增长得会越多，广告商从中得到的收益增长越少——&gt;求导分析找最优隐私政策的特点</li>
+</ol>
+</li>
+</ol>
+<h4 id="Numerical-Result"><a href="#Numerical-Result" class="headerlink" title="Numerical Result"></a>Numerical Result</h4><ol>
+<li>这部分很少，没说数值实验具体是怎么做的</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+        <tag>stackelberg博弈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-分片相关</title>
     <url>/2020/04/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E5%88%86%E7%89%87%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="RapidChain-Scaling-Blockchain-via-Full-Sharding"><a href="#RapidChain-Scaling-Blockchain-via-Full-Sharding" class="headerlink" title="RapidChain: Scaling Blockchain via Full Sharding"></a>RapidChain: Scaling Blockchain via Full Sharding</h2><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+    <content><![CDATA[<p>关于区块链分片的几篇论文。</p>
+<a id="more"></a>
+
+<h2 id="1-RapidChain-Scaling-Blockchain-via-Full-Sharding"><a href="#1-RapidChain-Scaling-Blockchain-via-Full-Sharding" class="headerlink" title="1. RapidChain: Scaling Blockchain via Full Sharding"></a>1. RapidChain: Scaling Blockchain via Full Sharding</h2><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
 <li>分片目的：解除区块链性能和扩展性的限制</li>
 <li>分片定义：将处理事务的开销分配给多个更小的节点组，这些组并行工作以最大限度地提高性能，同时显著地减少每个节点的通信、计算和存储，从而允许系统扩展到大型网络。</li>
 <li>现有分片协议的问题：扩展性受限制、安全性</li>
@@ -47,7 +468,7 @@
 <li><p>这篇的related work部分之后可以参考</p>
 </li>
 </ol>
-<h2 id="A-Secure-Sharding-Protocol-For-Open-Blockchains"><a href="#A-Secure-Sharding-Protocol-For-Open-Blockchains" class="headerlink" title="A Secure Sharding Protocol For Open Blockchains"></a>A Secure Sharding Protocol For Open Blockchains</h2><h4 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+<h2 id="2-A-Secure-Sharding-Protocol-For-Open-Blockchains"><a href="#2-A-Secure-Sharding-Protocol-For-Open-Blockchains" class="headerlink" title="2. A Secure Sharding Protocol For Open Blockchains"></a>2. A Secure Sharding Protocol For Open Blockchains</h2><h4 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
 <li>区块链有安全性，但规模很小，每秒处理3-7笔交易</li>
 <li>ELASTICO：1/4拜占庭攻击，分为多个committees，每个处理自己的事务集合（称作分片）</li>
 </ol>
@@ -62,7 +483,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><a href="#A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains" class="headerlink" title="A Proof of Stake Sharding Protocol for  Scalable Blockchains"></a>A Proof of Stake Sharding Protocol for  Scalable Blockchains</h2><ol>
+<h2 id="3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><a href="#3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains" class="headerlink" title="3. A Proof of Stake Sharding Protocol for  Scalable Blockchains"></a>3. A Proof of Stake Sharding Protocol for  Scalable Blockchains</h2><ol>
 <li><code>c</code>组，每组<code>n</code>个，一共<code>nc</code>个节点</li>
 <li>普通节点组产生中间区块，发送给最终验证节点组</li>
 <li>最终验证节点组产生最终区块，全网广播</li>
@@ -74,7 +495,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="Ostraka-SecureBlockchainScalingbyNodeSharding"><a href="#Ostraka-SecureBlockchainScalingbyNodeSharding" class="headerlink" title="Ostraka:SecureBlockchainScalingbyNodeSharding"></a>Ostraka:SecureBlockchainScalingbyNodeSharding</h2><ol>
+<h2 id="4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding"><a href="#4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding" class="headerlink" title="4. Ostraka: Secure Blockchain Scaling by Node Sharding"></a>4. Ostraka: Secure Blockchain Scaling by Node Sharding</h2><ol>
 <li>采用UTXO、PoS</li>
 <li>矿池、UTXO、区块链存储在被称为分片（shard）的几个机器上，机器可以扩展，每个分片的节点数量不一定一样</li>
 <li>有一个机器称为 coordinator跟踪区块链并协调节点间的通信，可以要求某分片回滚到某区块链状态或开始新的链</li>
@@ -83,7 +504,7 @@
 <li>事务切分存储在对应分片上</li>
 <li>总的来说就是有个类似路由器一样的机器来协调处理跨片事务，这篇基本上没看懂，以后有需要再看看</li>
 </ol>
-<h2 id="OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><a href="#OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding" class="headerlink" title="OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding"></a>OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</h2><ol>
+<h2 id="5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><a href="#5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding" class="headerlink" title="5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding"></a>5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</h2><ol>
 <li>新分片方式，最小化跨分片事务，动态事务分配，把相关和即将相关的事务分组到同一分片</li>
 <li>对事务分片的依据：<ol>
 <li>这样分是否减少了跨片事务</li>
@@ -105,7 +526,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><a href="#Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management" class="headerlink" title="Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management"></a>Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</h2><ol>
+<h2 id="6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><a href="#6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management" class="headerlink" title="6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management"></a>6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</h2><ol>
 <li>每个epoch会重新分片并选择每个分片的block producers</li>
 <li>在上一个epoch中，users用自己的信息和一部分资产注册成为validator（验证器），这个epoch开始以后，validator和事务被分成k个分片，分片规则为：<ol>
 <li>验证器的地址和上一个区块的哈希值一起哈希然后对分片个数取余，即可得到验证器的分片</li>
@@ -120,7 +541,84 @@
 </ol>
 </li>
 </ol>
-]]></content>
+<h2 id="7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><a href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead" class="headerlink" title="7. SSChain: A full sharding protocol for public blockchain  without data migration overhead"></a>7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</h2><ol>
+<li><p>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</p>
+</li>
+<li><p>节点可以自由加入分片而无需刷新，为避免随之而来的51%攻击问题，本文提出了一个双层结构：</p>
+<ol>
+<li>根链验证分片的区块，避免恶意节点攻击，激励机制保证矿工愿意加入</li>
+<li>分片维护不相交的分类帐并独立处理不相交的交易子集。</li>
+<li>SSChain背后的关键思想是根链维护系统的安全性，而切分提高了吞吐量并减少了存储需求。</li>
+</ol>
+</li>
+<li><p>同一分片内的交易有更低的确认延迟和更少的交易费用，进而鼓励用户片内交易</p>
+</li>
+<li><p>解耦事务验证和状态更新，拆分跨分片事务</p>
+</li>
+<li><p>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</p>
+</li>
+<li><p>跨分片事务：切分成分片内事务，或者由根链处理</p>
+</li>
+<li><p>根链：PoW，分类帐修剪机制</p>
+</li>
+<li><p>事务分片：</p>
+<ol>
+<li>事务地址包含比特币地址和分片ID</li>
+<li>交易分类：<ol>
+<li>inputs和outputs在一个分片内</li>
+<li>inputs在一个分片内，outputs在不同分片</li>
+<li>都在不同分片</li>
+</ol>
+</li>
+<li>跨分片事务：<ol>
+<li>交给根链——&gt;随分片增长会很难处理</li>
+<li>鼓励用户在同一分片内创建新地址——&gt;跨分片变成同一分片</li>
+<li>A+B——&gt;C的事务拆分成A——&gt;C和B——&gt;C（个人感觉这没用啊）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</p>
+</li>
+<li><p>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：</p>
+<ol>
+<li>为了维护系统安全，根链占用了整个网络的很大一部分算力。由于切分块是由根链网络验证的，恶意对手至少需要根链哈希能力的一半才能进行双倍开销攻击。</li>
+<li>算力被鼓励平均分配到碎片中，这样每个碎片都可以正常工作。</li>
+</ol>
+</li>
+</ol>
+<h2 id="8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks"><a href="#8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks" class="headerlink" title="8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks"></a>8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks</h2><ol>
+<li>TBSD：把恶意节点放到不同的分片，使用信任管理系统和遗传算法</li>
+<li>定量衡量节点的信任度，对恶意节点进行信用惩罚</li>
+<li>遗传算法找到最优分片方法，使得每个分片的信用度都差不多</li>
+<li>总的来说信用系统分为5步：<ol>
+<li>每一轮开始时，PoS选一个leader出块</li>
+<li>全网广播验证区块，少数服从多数</li>
+<li>SCO：节点信用表，由验证节点产生，上一步的验证结果作为信用评分的依据</li>
+<li>LCR：根据SCO计算得到的相对信用分布矩阵</li>
+<li>最终信用评估</li>
+</ol>
+</li>
+<li>攻击模型：<ol>
+<li>恶意节点成为leader</li>
+<li>节点共谋</li>
+<li>恶意节点行为不一致，一会儿诚实一会儿恶意</li>
+</ol>
+</li>
+<li>分片过程：用GA</li>
+</ol>
+<h2 id="9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme"><a href="#9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme" class="headerlink" title="9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme"></a>9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme</h2><ol>
+<li>分片后，进行议价博弈，事务总的来说平分给每个分片处理</li>
+<li>有一个adjust shard负责确认，其他分片进行普通的挖矿</li>
+<li>随机数分片，分片内共识：标准拜占庭一致协议，看起来是对节点分片</li>
+<li>节点验证事务和参与共识的过程可看做两阶段博弈：<ol>
+<li>事务分配问题</li>
+<li>基于分片的共识机制</li>
+</ol>
+</li>
+<li>讨价还价博弈这里没完全看懂，感觉就是分片和节点根据奖励和支出决定是否处理事务，上面的4.1里博弈方是分片，4.2的博弈方是区块链节点</li>
+</ol>
+<h2 id="A-Node-Rating-Based-Sharding-Scheme-for-Blockchain"><a href="#A-Node-Rating-Based-Sharding-Scheme-for-Blockchain" class="headerlink" title="A Node Rating Based Sharding Scheme for Blockchain"></a>A Node Rating Based Sharding Scheme for Blockchain</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>

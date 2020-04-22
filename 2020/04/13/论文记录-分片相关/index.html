@@ -92,15 +92,15 @@
 
 
 
-<meta name="description" content="RapidChain: Scaling Blockchain via Full ShardingAbstract 分片目的：解除区块链性能和扩展性的限制 分片定义：将处理事务的开销分配给多个更小的节点组，这些组并行工作以最大限度地提高性能，同时显著地减少每个节点的通信、计算和存储，从而允许系统扩展到大型网络。 现有分片协议的问题：扩展性受限制、安全性 本文RapidChain：公链分片  Meth">
+<meta name="description" content="关于区块链分片的几篇论文。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文记录-分片相关">
 <meta property="og:url" content="http://yoursite.com/2020/04/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E5%88%86%E7%89%87%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="白银乡20-16">
-<meta property="og:description" content="RapidChain: Scaling Blockchain via Full ShardingAbstract 分片目的：解除区块链性能和扩展性的限制 分片定义：将处理事务的开销分配给多个更小的节点组，这些组并行工作以最大限度地提高性能，同时显著地减少每个节点的通信、计算和存储，从而允许系统扩展到大型网络。 现有分片协议的问题：扩展性受限制、安全性 本文RapidChain：公链分片  Meth">
+<meta property="og:description" content="关于区块链分片的几篇论文。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-13T01:01:06.000Z">
-<meta property="article:modified_time" content="2020-04-15T09:10:31.656Z">
+<meta property="article:modified_time" content="2020-04-20T04:26:25.093Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="blockchain">
 <meta name="twitter:card" content="summary">
@@ -389,7 +389,10 @@
       
 
       
-        <h2 id="RapidChain-Scaling-Blockchain-via-Full-Sharding"><a href="#RapidChain-Scaling-Blockchain-via-Full-Sharding" class="headerlink" title="RapidChain: Scaling Blockchain via Full Sharding"></a>RapidChain: Scaling Blockchain via Full Sharding</h2><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+        <p>关于区块链分片的几篇论文。</p>
+<a id="more"></a>
+
+<h2 id="1-RapidChain-Scaling-Blockchain-via-Full-Sharding"><a href="#1-RapidChain-Scaling-Blockchain-via-Full-Sharding" class="headerlink" title="1. RapidChain: Scaling Blockchain via Full Sharding"></a>1. RapidChain: Scaling Blockchain via Full Sharding</h2><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
 <li>分片目的：解除区块链性能和扩展性的限制</li>
 <li>分片定义：将处理事务的开销分配给多个更小的节点组，这些组并行工作以最大限度地提高性能，同时显著地减少每个节点的通信、计算和存储，从而允许系统扩展到大型网络。</li>
 <li>现有分片协议的问题：扩展性受限制、安全性</li>
@@ -433,7 +436,7 @@
 <li><p>这篇的related work部分之后可以参考</p>
 </li>
 </ol>
-<h2 id="A-Secure-Sharding-Protocol-For-Open-Blockchains"><a href="#A-Secure-Sharding-Protocol-For-Open-Blockchains" class="headerlink" title="A Secure Sharding Protocol For Open Blockchains"></a>A Secure Sharding Protocol For Open Blockchains</h2><h4 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+<h2 id="2-A-Secure-Sharding-Protocol-For-Open-Blockchains"><a href="#2-A-Secure-Sharding-Protocol-For-Open-Blockchains" class="headerlink" title="2. A Secure Sharding Protocol For Open Blockchains"></a>2. A Secure Sharding Protocol For Open Blockchains</h2><h4 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
 <li>区块链有安全性，但规模很小，每秒处理3-7笔交易</li>
 <li>ELASTICO：1/4拜占庭攻击，分为多个committees，每个处理自己的事务集合（称作分片）</li>
 </ol>
@@ -448,7 +451,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><a href="#A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains" class="headerlink" title="A Proof of Stake Sharding Protocol for  Scalable Blockchains"></a>A Proof of Stake Sharding Protocol for  Scalable Blockchains</h2><ol>
+<h2 id="3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><a href="#3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains" class="headerlink" title="3. A Proof of Stake Sharding Protocol for  Scalable Blockchains"></a>3. A Proof of Stake Sharding Protocol for  Scalable Blockchains</h2><ol>
 <li><code>c</code>组，每组<code>n</code>个，一共<code>nc</code>个节点</li>
 <li>普通节点组产生中间区块，发送给最终验证节点组</li>
 <li>最终验证节点组产生最终区块，全网广播</li>
@@ -460,7 +463,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="Ostraka-SecureBlockchainScalingbyNodeSharding"><a href="#Ostraka-SecureBlockchainScalingbyNodeSharding" class="headerlink" title="Ostraka:SecureBlockchainScalingbyNodeSharding"></a>Ostraka:SecureBlockchainScalingbyNodeSharding</h2><ol>
+<h2 id="4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding"><a href="#4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding" class="headerlink" title="4. Ostraka: Secure Blockchain Scaling by Node Sharding"></a>4. Ostraka: Secure Blockchain Scaling by Node Sharding</h2><ol>
 <li>采用UTXO、PoS</li>
 <li>矿池、UTXO、区块链存储在被称为分片（shard）的几个机器上，机器可以扩展，每个分片的节点数量不一定一样</li>
 <li>有一个机器称为 coordinator跟踪区块链并协调节点间的通信，可以要求某分片回滚到某区块链状态或开始新的链</li>
@@ -469,7 +472,7 @@
 <li>事务切分存储在对应分片上</li>
 <li>总的来说就是有个类似路由器一样的机器来协调处理跨片事务，这篇基本上没看懂，以后有需要再看看</li>
 </ol>
-<h2 id="OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><a href="#OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding" class="headerlink" title="OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding"></a>OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</h2><ol>
+<h2 id="5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><a href="#5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding" class="headerlink" title="5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding"></a>5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</h2><ol>
 <li>新分片方式，最小化跨分片事务，动态事务分配，把相关和即将相关的事务分组到同一分片</li>
 <li>对事务分片的依据：<ol>
 <li>这样分是否减少了跨片事务</li>
@@ -491,7 +494,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><a href="#Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management" class="headerlink" title="Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management"></a>Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</h2><ol>
+<h2 id="6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><a href="#6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management" class="headerlink" title="6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management"></a>6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</h2><ol>
 <li>每个epoch会重新分片并选择每个分片的block producers</li>
 <li>在上一个epoch中，users用自己的信息和一部分资产注册成为validator（验证器），这个epoch开始以后，validator和事务被分成k个分片，分片规则为：<ol>
 <li>验证器的地址和上一个区块的哈希值一起哈希然后对分片个数取余，即可得到验证器的分片</li>
@@ -506,7 +509,84 @@
 </ol>
 </li>
 </ol>
-
+<h2 id="7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><a href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead" class="headerlink" title="7. SSChain: A full sharding protocol for public blockchain  without data migration overhead"></a>7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</h2><ol>
+<li><p>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</p>
+</li>
+<li><p>节点可以自由加入分片而无需刷新，为避免随之而来的51%攻击问题，本文提出了一个双层结构：</p>
+<ol>
+<li>根链验证分片的区块，避免恶意节点攻击，激励机制保证矿工愿意加入</li>
+<li>分片维护不相交的分类帐并独立处理不相交的交易子集。</li>
+<li>SSChain背后的关键思想是根链维护系统的安全性，而切分提高了吞吐量并减少了存储需求。</li>
+</ol>
+</li>
+<li><p>同一分片内的交易有更低的确认延迟和更少的交易费用，进而鼓励用户片内交易</p>
+</li>
+<li><p>解耦事务验证和状态更新，拆分跨分片事务</p>
+</li>
+<li><p>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</p>
+</li>
+<li><p>跨分片事务：切分成分片内事务，或者由根链处理</p>
+</li>
+<li><p>根链：PoW，分类帐修剪机制</p>
+</li>
+<li><p>事务分片：</p>
+<ol>
+<li>事务地址包含比特币地址和分片ID</li>
+<li>交易分类：<ol>
+<li>inputs和outputs在一个分片内</li>
+<li>inputs在一个分片内，outputs在不同分片</li>
+<li>都在不同分片</li>
+</ol>
+</li>
+<li>跨分片事务：<ol>
+<li>交给根链——&gt;随分片增长会很难处理</li>
+<li>鼓励用户在同一分片内创建新地址——&gt;跨分片变成同一分片</li>
+<li>A+B——&gt;C的事务拆分成A——&gt;C和B——&gt;C（个人感觉这没用啊）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</p>
+</li>
+<li><p>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：</p>
+<ol>
+<li>为了维护系统安全，根链占用了整个网络的很大一部分算力。由于切分块是由根链网络验证的，恶意对手至少需要根链哈希能力的一半才能进行双倍开销攻击。</li>
+<li>算力被鼓励平均分配到碎片中，这样每个碎片都可以正常工作。</li>
+</ol>
+</li>
+</ol>
+<h2 id="8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks"><a href="#8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks" class="headerlink" title="8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks"></a>8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks</h2><ol>
+<li>TBSD：把恶意节点放到不同的分片，使用信任管理系统和遗传算法</li>
+<li>定量衡量节点的信任度，对恶意节点进行信用惩罚</li>
+<li>遗传算法找到最优分片方法，使得每个分片的信用度都差不多</li>
+<li>总的来说信用系统分为5步：<ol>
+<li>每一轮开始时，PoS选一个leader出块</li>
+<li>全网广播验证区块，少数服从多数</li>
+<li>SCO：节点信用表，由验证节点产生，上一步的验证结果作为信用评分的依据</li>
+<li>LCR：根据SCO计算得到的相对信用分布矩阵</li>
+<li>最终信用评估</li>
+</ol>
+</li>
+<li>攻击模型：<ol>
+<li>恶意节点成为leader</li>
+<li>节点共谋</li>
+<li>恶意节点行为不一致，一会儿诚实一会儿恶意</li>
+</ol>
+</li>
+<li>分片过程：用GA</li>
+</ol>
+<h2 id="9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme"><a href="#9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme" class="headerlink" title="9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme"></a>9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme</h2><ol>
+<li>分片后，进行议价博弈，事务总的来说平分给每个分片处理</li>
+<li>有一个adjust shard负责确认，其他分片进行普通的挖矿</li>
+<li>随机数分片，分片内共识：标准拜占庭一致协议，看起来是对节点分片</li>
+<li>节点验证事务和参与共识的过程可看做两阶段博弈：<ol>
+<li>事务分配问题</li>
+<li>基于分片的共识机制</li>
+</ol>
+</li>
+<li>讨价还价博弈这里没完全看懂，感觉就是分片和节点根据奖励和支出决定是否处理事务，上面的4.1里博弈方是分片，4.2的博弈方是区块链节点</li>
+</ol>
+<h2 id="A-Node-Rating-Based-Sharding-Scheme-for-Blockchain"><a href="#A-Node-Rating-Based-Sharding-Scheme-for-Blockchain" class="headerlink" title="A Node Rating Based Sharding Scheme for Blockchain"></a>A Node Rating Based Sharding Scheme for Blockchain</h2>
       
     </div>
     
@@ -555,6 +635,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business/" rel="prev" title="论文记录-Privacy Policy in Online Social Network with Targeted Advertising Business">
+                论文记录-Privacy Policy in Online Social Network with Targeted Advertising Business <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -635,7 +719,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -657,7 +741,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -706,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RapidChain-Scaling-Blockchain-via-Full-Sharding"><span class="nav-number">1.</span> <span class="nav-text">RapidChain: Scaling Blockchain via Full Sharding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Abstract"><span class="nav-number">1.0.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Method"><span class="nav-number">1.0.2.</span> <span class="nav-text">Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Secure-Sharding-Protocol-For-Open-Blockchains"><span class="nav-number">2.</span> <span class="nav-text">A Secure Sharding Protocol For Open Blockchains</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Abstract-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mehtod"><span class="nav-number">2.0.2.</span> <span class="nav-text">Mehtod</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><span class="nav-number">3.</span> <span class="nav-text">A Proof of Stake Sharding Protocol for  Scalable Blockchains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ostraka-SecureBlockchainScalingbyNodeSharding"><span class="nav-number">4.</span> <span class="nav-text">Ostraka:SecureBlockchainScalingbyNodeSharding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><span class="nav-number">5.</span> <span class="nav-text">OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><span class="nav-number">6.</span> <span class="nav-text">Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-RapidChain-Scaling-Blockchain-via-Full-Sharding"><span class="nav-number">1.</span> <span class="nav-text">1. RapidChain: Scaling Blockchain via Full Sharding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Abstract"><span class="nav-number">1.0.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Method"><span class="nav-number">1.0.2.</span> <span class="nav-text">Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-A-Secure-Sharding-Protocol-For-Open-Blockchains"><span class="nav-number">2.</span> <span class="nav-text">2. A Secure Sharding Protocol For Open Blockchains</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Abstract-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mehtod"><span class="nav-number">2.0.2.</span> <span class="nav-text">Mehtod</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><span class="nav-number">3.</span> <span class="nav-text">3. A Proof of Stake Sharding Protocol for  Scalable Blockchains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding"><span class="nav-number">4.</span> <span class="nav-text">4. Ostraka: Secure Blockchain Scaling by Node Sharding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><span class="nav-number">5.</span> <span class="nav-text">5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><span class="nav-number">6.</span> <span class="nav-text">6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><span class="nav-number">7.</span> <span class="nav-text">7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks"><span class="nav-number">8.</span> <span class="nav-text">8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme"><span class="nav-number">9.</span> <span class="nav-text">9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Node-Rating-Based-Sharding-Scheme-for-Blockchain"><span class="nav-number">10.</span> <span class="nav-text">A Node Rating Based Sharding Scheme for Blockchain</span></a></li></ol></div>
             
 
           </div>
