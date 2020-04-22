@@ -99,16 +99,16 @@
 <meta property="og:site_name" content="白银乡20-16">
 <meta property="og:description" content="课程文档原文 翻译 （这次翻译又出现了一些不影响理解的小问题。课程代码越来越长，我决定改一下文档结构，不在一开始放整块代码了。）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png">
-<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/visit.png">
+<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true">
+<meta property="og:image" content="https://github.com/kun-bin/image/blob/master/visit.png?raw=true">
 <meta property="article:published_time" content="2020-03-15T00:38:20.000Z">
-<meta property="article:modified_time" content="2020-03-15T08:03:11.347Z">
+<meta property="article:modified_time" content="2020-04-22T03:53:23.561Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="编译原理">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png">
+<meta name="twitter:image" content="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true">
 
 
 
@@ -408,7 +408,7 @@
 <li><p>抽象语法树（AST）是我们的解释器和未来编译器项目的中心数据结构。</p>
 </li>
 <li><p>如下图，分别是的AST和解析树。</p>
-<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png" alt="AST和解析树对比"></p>
+<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true" alt="AST和解析树对比"></p>
 </li>
 <li><p>简单来说，AST就是把操作数放到叶节点，操作符放到中间节点和根节点，操作符节点在树中的高度可以体现运算优先级，括号改变优先级也是通过改变操作符的高度。</p>
 </li>
@@ -448,7 +448,7 @@
 <li><p>后序遍历：左右<strong>根</strong></p>
 </li>
 <li><p>显然前中后是指根节点的遍历输出顺序，如下图的树，前序遍历的输出结果是：1-&gt;2-&gt;4-&gt;6-&gt;7-&gt;3-&gt;5，中序遍历是4-&gt;6-&gt;7-&gt;2-&gt;1-&gt;5-&gt;3，后序遍历是7-&gt;6-&gt;4-&gt;2-&gt;5-&gt;3-&gt;1</p>
-<p><img src="https://github.com/kun-bin/image/blob/master/visit.png" alt="一棵树"></p>
+<p><img src="https://github.com/kun-bin/image/blob/master/visit.png?raw=true" alt="一棵树"></p>
 </li>
 <li><p>对应到AST中，就是先访问<code>node</code>的<code>left</code>，得到一个结果，再访问<code>right</code>，得到另一个结果，最后访问中间的<code>op</code>，进行运算，伪代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    <span class="comment"># for every child node from left to right</span></span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children:</span><br><span class="line">		visit(child)</span><br><span class="line">    <span class="comment"># 指加减乘除等运算操作</span></span><br><span class="line">    &lt;&lt;postorder actions&gt;&gt;</span><br></pre></td></tr></table></figure>

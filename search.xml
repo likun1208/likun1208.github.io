@@ -29,7 +29,7 @@
 <li><p>随便选一个资源点一下（如果一个都没有，就刷新一下网页）；</p>
 </li>
 <li><p>在Request Headers里找到User-Agent并把整个内容复制出来。</p>
-<p><img src="https://github.com/kun-bin/image/blob/master/0422.png" alt="示意图"></p>
+<p><img src="https://github.com/kun-bin/image/blob/master/0422.png?raw=true" alt="示意图"></p>
 </li>
 </ol>
 </li>
@@ -907,7 +907,7 @@
 <li><p>抽象语法树（AST）是我们的解释器和未来编译器项目的中心数据结构。</p>
 </li>
 <li><p>如下图，分别是的AST和解析树。</p>
-<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png" alt="AST和解析树对比"></p>
+<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true" alt="AST和解析树对比"></p>
 </li>
 <li><p>简单来说，AST就是把操作数放到叶节点，操作符放到中间节点和根节点，操作符节点在树中的高度可以体现运算优先级，括号改变优先级也是通过改变操作符的高度。</p>
 </li>
@@ -947,7 +947,7 @@
 <li><p>后序遍历：左右<strong>根</strong></p>
 </li>
 <li><p>显然前中后是指根节点的遍历输出顺序，如下图的树，前序遍历的输出结果是：1-&gt;2-&gt;4-&gt;6-&gt;7-&gt;3-&gt;5，中序遍历是4-&gt;6-&gt;7-&gt;2-&gt;1-&gt;5-&gt;3，后序遍历是7-&gt;6-&gt;4-&gt;2-&gt;5-&gt;3-&gt;1</p>
-<p><img src="https://github.com/kun-bin/image/blob/master/visit.png" alt="一棵树"></p>
+<p><img src="https://github.com/kun-bin/image/blob/master/visit.png?raw=true" alt="一棵树"></p>
 </li>
 <li><p>对应到AST中，就是先访问<code>node</code>的<code>left</code>，得到一个结果，再访问<code>right</code>，得到另一个结果，最后访问中间的<code>op</code>，进行运算，伪代码如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    <span class="comment"># for every child node from left to right</span></span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children:</span><br><span class="line">		visit(child)</span><br><span class="line">    <span class="comment"># 指加减乘除等运算操作</span></span><br><span class="line">    &lt;&lt;postorder actions&gt;&gt;</span><br></pre></td></tr></table></figure>
