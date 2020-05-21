@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://kun-bin.github.io/");
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这一课讲Pandas库。 import pandas as pd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python课程记录-12">
+<meta property="og:url" content="http://yoursite.com/2020/05/19/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-12/index.html">
+<meta property="og:site_name" content="白银乡20-16">
+<meta property="og:description" content="这一课讲Pandas库。 import pandas as pd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-19T06:25:07.000Z">
+<meta property="article:modified_time" content="2020-05-21T08:54:42.665Z">
+<meta property="article:author" content="Kun Li">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/19/python课程记录-12/"/>
+
+
+
+
+
+  <title>python课程记录-12 | 白银乡20-16</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">白银乡20-16</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/19/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白银乡20-16">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python课程记录-12</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-19T14:25:07+08:00">
+                2020-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一课讲Pandas库。</p>
+<p><code>import pandas as pd</code></p>
+<a id="more"></a>
+
+<h2 id="Pandas初探"><a href="#Pandas初探" class="headerlink" title="Pandas初探"></a>Pandas初探</h2><ol>
+<li>读取文件：<code>data = pd.read_excel(filename, index_col=0)</code></li>
+<li>取出数据中的一列或一行：<code>data[&#39;学号&#39;], data.loc[1]</code></li>
+</ol>
+<h2 id="Pandas数据类型"><a href="#Pandas数据类型" class="headerlink" title="Pandas数据类型"></a>Pandas数据类型</h2><h3 id="Series-一维序列"><a href="#Series-一维序列" class="headerlink" title="Series(一维序列)"></a>Series(一维序列)</h3><ol>
+<li><p>由index+value组成</p>
+</li>
+<li><p>通过列表创建Series：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series([<span class="string">'apple'</span>,<span class="string">'peach'</span>])</span><br><span class="line"><span class="comment"># 0	apple</span></span><br><span class="line"><span class="comment"># 1	peach</span></span><br><span class="line">a.index</span><br><span class="line"><span class="comment"># RangeIndex(start=0,stop=2,step=1)</span></span><br><span class="line">a.values</span><br><span class="line"><span class="comment"># array(['apple','peach'],dtype=object)</span></span><br><span class="line">a[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 'peach'</span></span><br><span class="line">a[<span class="number">1</span>]=<span class="number">100</span></span><br><span class="line"><span class="comment"># 原来是peach的地方改成了100</span></span><br><span class="line">a[<span class="number">0</span>:]</span><br><span class="line"><span class="comment"># 整个输出</span></span><br><span class="line">a[[<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="comment"># 输出0和1</span></span><br><span class="line">a = pd.Series([<span class="string">'apple'</span>,<span class="string">'peach'</span>],index=[<span class="string">'a'</span>,<span class="string">'p'</span>])</span><br><span class="line"><span class="comment"># a    apple</span></span><br><span class="line"><span class="comment"># p    peach</span></span><br><span class="line">a[<span class="string">'a'</span>]</span><br><span class="line"><span class="comment"># 输出索引a对应的value</span></span><br><span class="line">a[<span class="string">'a'</span>]=<span class="string">'lemon'</span></span><br><span class="line"><span class="comment"># 原来的apple改成lemon</span></span><br><span class="line">a[<span class="string">'a'</span>:]</span><br><span class="line"><span class="comment"># 整个输出</span></span><br><span class="line">a[[<span class="string">'a'</span>,<span class="string">'p'</span>]]</span><br><span class="line"><span class="comment"># 输出a和p对应的value</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过字典创建Series：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'Japan'</span>:<span class="string">'Tokyo'</span>,<span class="string">'S.Korea'</span>:<span class="string">'Seoul'</span>,<span class="string">'China'</span>:<span class="string">'Beijing'</span>&#125;</span><br><span class="line">a = pd.Series(d)</span><br><span class="line"><span class="comment"># Japan        Tokyo</span></span><br><span class="line"><span class="comment"># S.Korea      Seoul</span></span><br><span class="line"><span class="comment"># China      Beijing</span></span><br><span class="line"></span><br><span class="line">indexL=[<span class="string">'China'</span>,<span class="string">'Japan'</span>,<span class="string">'ingapore'</span>,<span class="string">'S.Korea'</span>]</span><br><span class="line">a = pd.Series(d, index=indexL)</span><br><span class="line"><span class="comment"># China       Beijing</span></span><br><span class="line"><span class="comment"># Japan         Tokyo</span></span><br><span class="line"><span class="comment"># ingapore        NaN</span></span><br><span class="line"><span class="comment"># S.Korea       Seoul</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过标量创建Series：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series(<span class="string">'无'</span>)</span><br><span class="line"><span class="comment"># 0    无</span></span><br><span class="line">a = pd.Series(<span class="string">'无'</span>,index=np.arange(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"><span class="comment"># 1    无</span></span><br><span class="line"><span class="comment"># 2    无</span></span><br><span class="line"><span class="comment"># 3    无</span></span><br><span class="line"><span class="comment"># 4    无</span></span><br><span class="line"><span class="comment"># 5    无</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Series的基本运算：</p>
+<ol>
+<li>和numpy一样，过滤、广播、ufunc等</li>
+<li>对齐：对应索引进行运算</li>
+<li>频数统计：value_counts()</li>
+</ol>
+</li>
+</ol>
+<h3 id="DataFrame-二维表"><a href="#DataFrame-二维表" class="headerlink" title="DataFrame(二维表)"></a>DataFrame(二维表)</h3><ol>
+<li><p>共用index的Series的有序集合</p>
+</li>
+<li><p>从二维数组创建：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = np.array([(<span class="string">'Japan'</span>,<span class="string">'Tokyo'</span>,<span class="number">4000</span>),(<span class="string">'S.Korea'</span>,<span class="string">'Seoul'</span>,<span class="number">1300</span>),(<span class="string">'China'</span>,<span class="string">'Beijing'</span>,<span class="number">9100</span>)])</span><br><span class="line">DF1 = pd.DataFrame(data, columns=[<span class="string">'nation'</span>,<span class="string">'capital'</span>,<span class="string">'GDP'</span>],index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看索引和数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DF1.index</span><br><span class="line">DF1.columns</span><br><span class="line">DF1.values</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从字典创建：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">'nation'</span>:[<span class="string">'Japan'</span>,<span class="string">'S.Korea'</span>,<span class="string">'Japan'</span>],<span class="string">'capital'</span>:pd.Series([<span class="string">'Tokyo'</span>,<span class="string">'Seoul'</span>,<span class="string">'Beijing'</span>],index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]),<span class="string">'GDP'</span>:np.array([<span class="number">4900.1300</span><span class="number">.9100</span>],dtype=int)&#125;</span><br><span class="line">DF2=pd.DataFrame(dct)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把某列数据作为index：<code>DF2.set_index(&#39;nation&#39;)</code></p>
+</li>
+<li><p>修改index/columns：<code>DF2.reindex(index=[&#39;c&#39;,&#39;a&#39;,&#39;b&#39;,&#39;d&#39;])</code></p>
+</li>
+<li><p>数据选择：</p>
+<ol>
+<li>取头尾若干行：<code>df.head(行数), df.tail(行数)</code></li>
+<li>选择一列：<code>DF2.nation, DF2[&#39;GDP&#39;]</code></li>
+<li>选择一行或多行：<code>DF2[0:2], DF2[&#39;a&#39;:&#39;c&#39;]</code>    序号只能是切片，不能是下标</li>
+<li><code>loc[index, columns]</code>根据索引对多个轴进行选取</li>
+<li>取单个数据：<code>DF2.loc[&#39;c&#39;,&#39;GDP&#39;]</code>或<code>DF2.at[&#39;c&#39;,&#39;GDP&#39;]</code></li>
+<li>布尔索引：<ol>
+<li>用某列的值来选取数据：<code>DF2[DF2.GDP&gt;3000]</code></li>
+<li><code>isin()</code>方法过滤数据：<code>DF2[DF2.nation.isin([&#39;China&#39;,&#39;S.Korea&#39;])]</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>增加一列：<code>DF2[&#39;population&#39;]=[130,55,1600]</code></p>
+</li>
+<li><p>增加行：<code>append(要添加的行)</code>，序号是添加行的name，如果加入参数ignore_index=True，则序号就是数字</p>
+</li>
+<li><p>删除行列：<code>drop(序号)</code>，根据索引删除行列，默认删行，axis=1是删列</p>
+</li>
+<li><p>多个DataFrame对象数据拼接：</p>
+<ol>
+<li><code>pd.concat([p1,p2])</code>，序号是p1和p2各自的序号直接拼起来，是前几行p1，后几行p2；增加参数ignore_index=True，则序号是0、1、2、3这样；增加参数axis=1，则是前几列p1，后几列p2。</li>
+<li><code>pd.merge(p1,p3,on=&#39;name&#39;)</code>，把p1和p3中name列相同的部分融合起来，如果是要把所有name都留下，但是只要一列name，则增加参数<code>how=&#39;outer&#39;</code></li>
+</ol>
+</li>
+<li><p>缺失值处理：</p>
+<ol>
+<li><code>isnull()</code>和<code>notnull()</code>：是否缺失</li>
+<li><code>fillna()</code>：补充缺失值</li>
+<li><code>dropna()</code>：删除包含缺失值的行或列</li>
+</ol>
+</li>
+<li><p>基本运算：<code>sub,add,mul,div,sum,min,max,mean,std,describe</code>，默认是竖着运算，加axis=1变成横着运算</p>
+</li>
+<li><p>分组：<code>groupby()</code>、<code>get_group(列名)</code>，也可以进行上一条的基本运算</p>
+</li>
+<li><p>排序：<code>sort_value(by=&#39;&#39;, ascending=False)</code> 根据by的取值排序，可以是一个字符串<code>by=&#39;成绩&#39;</code>，也可以是多个字符串的列表，<code>by=[&#39;成绩&#39;,&#39;年级&#39;]</code></p>
+</li>
+</ol>
+<h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><h3 id="csv"><a href="#csv" class="headerlink" title="csv"></a>csv</h3><ol>
+<li><code>read_csv()/to_csv()</code>读写csv和txt</li>
+<li>加入参数index_col=0可以没有序号</li>
+</ol>
+<h3 id="excel"><a href="#excel" class="headerlink" title="excel"></a>excel</h3><ol>
+<li><p><code>read_excel()/to_excel()</code>读写excel</p>
+</li>
+<li><p>把几个dataframe写到一个excel文件里的不同sheet中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">writer=pd.ExcelWriter(<span class="string">'atest.xlsx'</span>)</span><br><span class="line">a.to_excel(writer, sheet_name=<span class="string">'Sheet1'</span>)</span><br><span class="line">b.to_excel(writer, sheet_name=<span class="string">'Sheet2'</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">'atest.xlsx'</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    a.to_excel(writer, sheet_name=<span class="string">'Sheet1'</span>)</span><br><span class="line">	b.to_excel(writer, sheet_name=<span class="string">'Sheet2'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取一个exce里的多个sheet</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reader = pd.ExcelWriter(<span class="string">'atest.xlsx'</span>)</span><br><span class="line">df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">'atest.xlsx'</span>) <span class="keyword">as</span> reader:</span><br><span class="line">    df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">	df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><ol>
+<li>matplotlib中的pyplot模块：<code>b.plot()</code>，表格中的一列代表一条线的数据，行名是横坐标，表格内容值是纵坐标，默认是折线图</li>
+<li>柱状图：<code>b.plot(kind=&#39;bar&#39;)      b.plot.bar()</code></li>
+</ol>
+<h2 id="随堂练习"><a href="#随堂练习" class="headerlink" title="随堂练习"></a>随堂练习</h2><p> 读入第三次作业第一部分爬虫得到的 csv文件，之后：</p>
+<ol>
+<li>绘制浏览次数曲线图；</li>
+<li>根据浏览次数进行降序排序，并打印前10篇报道的日期、标题； </li>
+<li>求浏览次数为1的报道的链接并打印结果；</li>
+<li>统计每一年的报道数量，以及每一年的总的浏览次数，并分别以 柱状图的形式绘制出来；</li>
+<li>统计2019年每个月的报道数量并以饼图的形式绘制出来。</li>
+</ol>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>首先加载库文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来读取csv文件，考虑到后面的几项要求，把日期作为DatetimeIndex的索引比较好：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reports = pd.read_csv(<span class="string">'reportsInfo.csv'</span>, header=<span class="number">0</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第一个要求是绘制浏览次数的折线图，因为原本的csv文件时间是先2020年再2019年然后2018年这样倒着来的，所以先重新排序，再取浏览次数那一列的数值来画图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reports.sort_index()[<span class="string">'浏览次数'</span>].plot(linestyle=<span class="string">'-'</span>, linewidth=<span class="number">2</span>, color=<span class="string">'steelblue'</span>)</span><br><span class="line">plt.title(<span class="string">'浏览次数折线图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'日期'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'浏览次数'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">'reports_linechart'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据浏览次数降序排序的操作和上一步索引排序差不多，然后切片取前10，用loc定位到标题那一列，输出即可：</p>
+<p><code>print(reports.sort_values(by=&#39;浏览次数&#39;, ascending=False)[0:10].loc[:, [&#39;标题&#39;]])</code></p>
+</li>
+<li><p>筛选浏览次数为1的链接，用下标的方式找即可：</p>
+<p><code>print(reports[reports.浏览次数 == 1].链接)</code></p>
+</li>
+<li><p>统计每年的报道数量，需要先按年来分组，然后得到分组的size，对size画图即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reports_group = reports.groupby(reports.index.year)</span><br><span class="line">reports_group.size().plot.bar()</span><br><span class="line">plt.title(<span class="string">'年报道数量柱状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'年份'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'报道数量'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.xticks(rotation=<span class="number">0</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_bar_1'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计每年的总浏览次数，在上一条分组的基础上对浏览次数那一列求和，然后画图即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">reports_group[<span class="string">'浏览次数'</span>].sum().plot.bar()</span><br><span class="line">plt.title(<span class="string">'年浏览次数柱状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'年份'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'浏览次数'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.xticks(rotation=<span class="number">0</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_bar_2'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计2019年每月的报道数量，在之前的分组中可以得到2019的分组，然后对2019部分再按月来分组，得到size，对size画图即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reports_2019 = reports_group.get_group(<span class="number">2019</span>)</span><br><span class="line">reports_2019_month = reports_2019.groupby(reports_2019.index.month).size()</span><br><span class="line">reports_2019_month.name = <span class="string">''</span></span><br><span class="line">reports_2019_month.plot.pie(startangle=<span class="number">90</span>)</span><br><span class="line">plt.title(<span class="string">'2019年每月报道数量饼状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_pie'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/14/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium/" rel="next" title="论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing with Markov Correlated Equilibrium">
+                <i class="fa fa-chevron-left"></i> 论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing with Markov Correlated Equilibrium
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="Kun Li" />
+            
+              <p class="site-author-name" itemprop="name">Kun Li</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="likun@mail.bnu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas初探"><span class="nav-number">1.</span> <span class="nav-text">Pandas初探</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas数据类型"><span class="nav-number">2.</span> <span class="nav-text">Pandas数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Series-一维序列"><span class="nav-number">2.1.</span> <span class="nav-text">Series(一维序列)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame-二维表"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame(二维表)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">3.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#csv"><span class="nav-number">3.1.</span> <span class="nav-text">csv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#excel"><span class="nav-number">3.2.</span> <span class="nav-text">excel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">4.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随堂练习"><span class="nav-number">5.</span> <span class="nav-text">随堂练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kun Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
