@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://kun-bin.github.io/");
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这一课讲scipy库。 from scipy import some_module from scipy.some_module import some_function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python课程记录-13">
+<meta property="og:url" content="http://yoursite.com/2020/05/26/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-13/index.html">
+<meta property="og:site_name" content="白银乡20-16">
+<meta property="og:description" content="这一课讲scipy库。 from scipy import some_module from scipy.some_module import some_function">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-26T07:43:07.000Z">
+<meta property="article:modified_time" content="2020-05-26T13:00:27.933Z">
+<meta property="article:author" content="Kun Li">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/26/python课程记录-13/"/>
+
+
+
+
+
+  <title>python课程记录-13 | 白银乡20-16</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">白银乡20-16</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白银乡20-16">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python课程记录-13</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-26T15:43:07+08:00">
+                2020-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一课讲scipy库。</p>
+<p><code>from scipy import some_module</code></p>
+<p><code>from scipy.some_module import some_function</code></p>
+<a id="more"></a>
+
+<h2 id="linalg模块的使用"><a href="#linalg模块的使用" class="headerlink" title="linalg模块的使用"></a>linalg模块的使用</h2><ol>
+<li><p>基本线性代数操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line">arr = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="comment"># 计算矩阵的行列式</span></span><br><span class="line">linalg.det(arr)				</span><br><span class="line"><span class="comment"># output: -2.0</span></span><br><span class="line"><span class="comment"># 计算特征值和特征向量</span></span><br><span class="line">linalg.eig(arr)</span><br><span class="line"><span class="comment"># output: (array([-0.37228132+0.j,  5.37228132+0.j]), array([[-0.82456484, -0.41597356], [ 0.56576746, -0.90937671]]))</span></span><br><span class="line"><span class="comment"># 矩阵求逆</span></span><br><span class="line">linalg.inv(arr)</span><br><span class="line"><span class="comment"># output: array([[-2. ,  1. ], [ 1.5, -0.5]])</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解线性方程组：$Ax=b$，其中A是方阵：<code>solve(A, b)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line">m = <span class="number">500</span></span><br><span class="line">A=np.random.rand(m,m)</span><br><span class="line">b=np.random.rand(m)</span><br><span class="line">x1=linalg.solve(A,b)</span><br><span class="line">x2=np.dot(linalg.inv(A),b)</span><br><span class="line">print(np.allclose(x1,x2))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更一般的线性方程组：$Ax=b$，其中A不是方阵：<code>lstsq(A,q)</code>找最小二乘解</p>
+<p>例如：给定四个点<code>(1,6) (2,5) (3,7) (4,10)</code>，找拟合直线<code>y=ax+b</code> 这样的问题可以转化为：矩阵<code>A=[[1,2],[2,1],[3,1],[4,1]]</code> ，<code>b=[6, 5, 7, 10]^T</code>，<code>x=[a,b]^T</code>，求解<code>Ax=b</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line">A = np.array([[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">2</span>,<span class="number">1</span>],[<span class="number">3</span>,<span class="number">1</span>],[<span class="number">4</span>,<span class="number">1</span>]])</span><br><span class="line">y = np.array([<span class="number">6</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">10</span>])</span><br><span class="line">c,resid,rank,sigma=linalg.lstsq(A,y)</span><br><span class="line">print(c, resid, rank, sigma)</span><br><span class="line"><span class="comment"># [1.4 3.5] 4.200000000000003 2 [5.77937881 0.77380911]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他功能：</p>
+<ol>
+<li>范数求解: <code>linalg.norm</code></li>
+<li>广义逆求解: <code>linalg.pinv, linalg.pinv2</code></li>
+<li>矩阵分解：<code>linalg.sva, linalg.lu, linalg.qr</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="optimize模块的使用"><a href="#optimize模块的使用" class="headerlink" title="optimize模块的使用"></a>optimize模块的使用</h2><ol>
+<li><p>求解带约束条件的函数最小值：<code>minimize(fun, x0[,args, method, jac, hess, bounds, constrains])</code></p>
+<ol>
+<li><p>fun是目标函数 </p>
+</li>
+<li><p>x0是初始解 </p>
+</li>
+<li><p>args：需要传递给fun, jac, hess函数的额外的参数 </p>
+</li>
+<li><p>method是所选方法：Newton-CG、CG、SLSQP、Nelder-Mead…… </p>
+</li>
+<li><p>jac: Jacobian矩阵，有些方法需要给出 </p>
+</li>
+<li><p>hess: Hessian矩阵，有些方法需要给出 </p>
+</li>
+<li><p>bounds是解的约束范围， L-BFGS-B,TNC,SLSQP,trust-constr支持 </p>
+</li>
+<li><p>constrains是约束条件，COBYLA, SLSQP, trust-constr支持</p>
+<p>例如：$min x1+x2+x3$</p>
+<p>$s.t. x_1x_2x_3&gt;25$</p>
+<p>​      $x_1^2+x_2^2+x_3^2=40$</p>
+<p>​     $1&lt;=x_1, x_2&lt;=5$     $x_3&gt;=4$</p>
+<p>$x_0=(3,3,4)$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">objective</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.sum(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">constr1</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">1</span>]*x[<span class="number">2</span>]<span class="number">-25</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">constr2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.sum(x**<span class="number">2</span>)<span class="number">-40</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jac</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.array([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">bnds=((<span class="number">1</span>,<span class="number">5</span>),(<span class="number">1</span>,<span class="number">5</span>),(<span class="number">4</span>,<span class="literal">None</span>))</span><br><span class="line">cons1=&#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:constr1&#125;</span><br><span class="line">cons2=&#123;<span class="string">'type'</span>:<span class="string">'eq'</span>,<span class="string">'fun'</span>:constr2&#125;</span><br><span class="line">cons=[cons1, cons2]</span><br><span class="line">result=minimize(objective,[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>],method=<span class="string">'SLSQP'</span>,jac=jac,bounds=bnds,constraints=cons)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#     fun: 9.807034491627501</span></span><br><span class="line"><span class="comment">#     jac: array([1., 1., 1.])</span></span><br><span class="line"><span class="comment"># message: 'Optimization terminated successfully.'</span></span><br><span class="line"><span class="comment">#    nfev: 7</span></span><br><span class="line"><span class="comment">#     nit: 7</span></span><br><span class="line"><span class="comment">#    njev: 7</span></span><br><span class="line"><span class="comment">#  status: 0</span></span><br><span class="line"><span class="comment"># success: True</span></span><br><span class="line"><span class="comment">#       x: array([2.11859914, 2.11859914, 5.5698362 ])</span></span><br><span class="line"><span class="comment"># result.fun可输出最小值，result.x可输出对应的x解</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>minimize是局部最优，basinhopping、shgo等可以求解全局最优</p>
+</li>
+<li><p>求解非线性方程：<code>root(fun, x0[, args, method, jac])</code></p>
+<ol>
+<li><p>fun是要求根的方程（组） </p>
+</li>
+<li><p>x0是初始猜测解 </p>
+</li>
+<li><p>args是fun以及jac中额外的参数 </p>
+</li>
+<li><p>method是所选方法： hybr, lm, broyden1/2, anderson, linearmixing, krylov, df-sane 等 </p>
+</li>
+<li><p>jac: Jacobian矩阵</p>
+<p>例如：求解 $f(x)=2x^2+3x-10$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*x**<span class="number">2</span>+<span class="number">3</span>*x<span class="number">-10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jac</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>*x+<span class="number">3</span></span><br><span class="line"></span><br><span class="line">x=np.linspace(<span class="number">-5</span>,<span class="number">3</span>)</span><br><span class="line">plt.plot(x,func(x))</span><br><span class="line">plt.plot(x,np.zeros(len(x)))</span><br><span class="line"></span><br><span class="line">result1=root(func,<span class="number">-3</span>,method=<span class="string">'hybr'</span>,jac=jac)</span><br><span class="line">result2=root(func,<span class="number">1</span>,method=<span class="string">'lm'</span>,jac=jac)</span><br><span class="line"></span><br><span class="line">print(result1.fun,result2.fun)</span><br><span class="line">print(result1.x, result2.x)</span><br><span class="line"><span class="comment"># [-1.77635684e-15] [0.]</span></span><br><span class="line"><span class="comment"># [-3.10849528] [1.60849528]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>求解非线性方程组：和前面一样，把给定的目标函数和雅可比矩阵写成函数然后运算。</p>
+</li>
+</ol>
+<h2 id="integrate模块的使用"><a href="#integrate模块的使用" class="headerlink" title="integrate模块的使用"></a>integrate模块的使用</h2><ol>
+<li><p>根据函数求解积分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> integrate</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">half_circle</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span>-x**<span class="number">2</span>)**<span class="number">0.5</span></span><br><span class="line">result = integrate.quad(half_circle, <span class="number">-1</span>, <span class="number">1</span>)	<span class="comment">#积分函数和积分上下限</span></span><br><span class="line">print(result)</span><br><span class="line"><span class="comment"># quad是一重积分，dblquad()和tplquad()分别是二重和三重积分</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据样本求解积分：分布均匀用<code>romb</code>，不均匀用<code>trapz(order 1), simple(order 2)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> simps</span><br><span class="line">x=np.array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">y=np.array([<span class="number">1</span>,<span class="number">9</span>,<span class="number">16</span>])</span><br><span class="line">result=simps(y1,x)</span><br><span class="line">print(result)	<span class="comment"># 21.0</span></span><br><span class="line"><span class="comment"># 相当于计算x的2次方在1到4的定积分</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>求解常微分方程：<code>odeint(func, y0, t, args=())</code></p>
+<ol>
+<li><p>func: 计算微分方程组中每个未知函数的一阶导数值</p>
+</li>
+<li><p>y0：微分方程组中每个未知函数的初始值</p>
+</li>
+<li><p>t：需要进行数值求解的时间点 （数值解）</p>
+</li>
+<li><p>args：计算导数时的其他参数</p>
+<p>求解方程以后还可以画好看的函数图像。</p>
+<p>这个涉及的数学知识略多，暂时也不用，就先不看例子了</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="interpolate模块的使用"><a href="#interpolate模块的使用" class="headerlink" title="interpolate模块的使用"></a>interpolate模块的使用</h2><ol>
+<li><p>插值：</p>
+<ol>
+<li>一/二维插值：interp1d/interp2d </li>
+<li>多维插值：griddata </li>
+<li>其他常用插值：Spline样条插值(spl（曲线）, bispl（曲面）等)、Rbf插值</li>
+</ol>
+</li>
+<li><p><code>interp1d(x, y, kind=&#39;linear‘,……)</code></p>
+<ol>
+<li>x,y：要插值的数据点，注意x是一个递增序列 </li>
+<li>kind：插值的方法：‘linear’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’,  ‘next’等</li>
+<li>返回值：一个用于插值的函数，调用这个函数时以新的x为参数 ，会得到对应的y值。</li>
+</ol>
+</li>
+<li><p>一维B样条插值：</p>
+<ol>
+<li>splrep(x,y,k=3,s,……)：获得一维曲线的B样条表示 </li>
+<li>splev(x, tck, der=0,……)：根据B样条表示得到对应数值 </li>
+</ol>
+<p>呜呜呜我不想看B样条了就这样把</p>
+</li>
+</ol>
+<h2 id="拟合"><a href="#拟合" class="headerlink" title="拟合"></a>拟合</h2><ol>
+<li><p>最小二乘拟合： least_squares(fun, x0, bounds=(-inf, inf), method=‘trf’, args,……) </p>
+<ol>
+<li><p>fun：计算残差向量(residuals)的函数 </p>
+</li>
+<li><p>x0：猜测的参数值𝑝0 </p>
+</li>
+<li><p>bounds：参数𝑝的约束范围，2-tuple：((𝑝i的下限),(𝑝i的上限)) </p>
+</li>
+<li><p>method： ‘trf’, ‘dogbox’, ‘lm’，其中‘lm’不支持bounds </p>
+</li>
+<li><p>args：计算fun需要的其他参数，例如样本数据x，y</p>
+<p>返回值： </p>
+</li>
+<li><p>x：求解出来使得S最小的参数𝑝 </p>
+</li>
+<li><p>fun：对应的残差向量</p>
+</li>
+</ol>
+<p>一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x,p)</span>:</span></span><br><span class="line">    A,k,theta = p</span><br><span class="line">    <span class="keyword">return</span> A*np.sin(<span class="number">2</span>*np.pi*k*x+theta)</span><br><span class="line">x=np.linspace(<span class="number">0</span>,<span class="number">2</span>*np.pi,<span class="number">100</span>)</span><br><span class="line">A,k,theta=<span class="number">10</span>,<span class="number">0.34</span>,np.pi/<span class="number">6</span>	<span class="comment"># 真实数据的函数参数</span></span><br><span class="line">y0=func(x,[A,k,theta])		<span class="comment"># 真实数据</span></span><br><span class="line">np.random.seed(<span class="number">0</span>)			<span class="comment"># 噪声种子</span></span><br><span class="line">y=y0+<span class="number">2</span>*np.random.randn(len(x))	<span class="comment"># 添加噪声后的数据</span></span><br><span class="line"></span><br><span class="line">plt.plot(x,y,<span class="string">"o"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">residuals</span><span class="params">(p,y,x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> y-func(x,p)</span><br><span class="line">p0=[<span class="number">7</span>,<span class="number">0.4</span>,<span class="number">0</span>]</span><br><span class="line">plsq=optimize.least_squares(residuals,p0,args=(y,x))</span><br><span class="line">print(<span class="string">"真实参数："</span>,[A,k,theta])</span><br><span class="line">print(<span class="string">"拟合参数："</span>,plsq.x)</span><br><span class="line">plt.plot(x,func(x,plsq.x))</span><br><span class="line"><span class="comment"># 真实参数： [10, 0.34, 0.5235987755982988]</span></span><br><span class="line"><span class="comment"># 拟合参数： [10.25218748  0.3423992   0.50817423]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scipy.optimize.curve_fit</code>：实质和最小二乘一样</p>
+<p>用法上和least_squares稍有点不同：不用定义误差函数，直接 使用目标函数，且目标函数的各个待优化参数𝑝直接作为函数的参 数传入。</p>
+</li>
+<li><p>多项式拟合polyfit：</p>
+<ol>
+<li><p>numpy/scipy.polyfit(x, y, deg,……)： </p>
+<ol>
+<li>x,y：待拟合的数据 </li>
+<li>deg：多项式的次数<br>返回值：<br>p：拟合后的多项式的系数，从<strong>高</strong>位到<strong>低</strong>位</li>
+</ol>
+</li>
+<li><p>numpy/scipy.polyval(p, x)：计算多项式p在x处的值</p>
+</li>
+</ol>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = np.polyfit(x,y,<span class="number">10</span>)</span><br><span class="line">plt.plot(x,np.polyval(p,x),<span class="string">'k-'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>polynomial模块：</p>
+<ol>
+<li>拟合：和上面的区别在于，返回的多项式系数是从<strong>低</strong>到<strong>高</strong>的</li>
+</ol>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy.polynomial <span class="keyword">import</span> polymial <span class="keyword">as</span> P</span><br><span class="line">p2=P.polyfit(x,y,<span class="number">10</span>)</span><br><span class="line">plt.plot(x,P.polyfit(x,p2),<span class="string">'m-'</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>四则运算：<code>P.polyadd(), P.polysub(), P.polymul(), P.polydiv()</code></p>
+</li>
+<li><p>微分：<code>P.polyder()</code>用来求微分以后的多项式参数，默认是一阶导，加参数就是参数对应的导数</p>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)	<span class="comment"># 1+2x+3x**2+4x**3</span></span><br><span class="line">P.polyder(a)	<span class="comment"># (d/dx)(c)=2+6x+12x**2	</span></span><br><span class="line"><span class="comment"># array([ 2., 6., 12.])</span></span><br><span class="line">P.polyder(a,<span class="number">3</span>)	<span class="comment"># (d**3/dx**3)(c)=24</span></span><br><span class="line"><span class="comment"># array([ 24.])</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>积分：<code>P.polyint(c)</code>  和微分类似的用法</p>
+</li>
+<li><p>求根：<code>P.polyroots(a)</code> 和微分类似，对多项式求根，返回运算之后的参数</p>
+</li>
+</ol>
+<h2 id="随堂练习"><a href="#随堂练习" class="headerlink" title="随堂练习"></a>随堂练习</h2><p>IBM.csv中保存了2014年以来的IBM股票信息，请读入IBM的收盘价，然后选取其中2019年的数据，之后： （1）假设每天的收盘价可以用之前5天的收盘价的线性组合表示出来，由此建立一个线性模型进行收盘价的预测，求解最佳的线性组合系数，并绘制收盘价以及预测的收盘价的曲线图。 </p>
+<p>（2）采用多项式对收盘价进行拟合，尝试不同的多项式次数， 选取其中较优的结果，打印该多项式的各项系数，并绘制多项式曲线以及收盘价散点图。进一步，求解该多项式的转折点， 即一阶导数为0的点（只要实数解），并在多项式曲线上以上三角的标记绘制出来。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>首先是读取csv文件并提取2019年收盘价：</li>
+<li>接下来，第一问可以看作是求解线性方程组的系数，<code>y=a*x1+b*x2+c*x3+d*x4+e*x5+f</code>，其中<code>abcdef</code>是待求解参数，<code>x1,x2,x3,x4,x5</code>分别是连续5天的收盘价，而<code>y</code>是第六天收盘价。<ol>
+<li>建立存放<code>x</code>的列表；</li>
+<li>遍历收盘价列表，把每一组收盘价（连续5个）作为一个列表加到x中，注意这里遍历的终点是倒数第5个，因为再往后就无法凑成连续5个了；</li>
+<li>每一行<code>x</code>对应的<code>y</code>都是连续5个收盘价的下一个，也就是第6个收盘价开始，即<code>ibm_2019[5:]</code></li>
+<li><code>x</code>和<code>y</code>都要转为<code>np.array</code>，然后用<code>lstsq</code>求解系数并绘制图像即可；</li>
+</ol>
+</li>
+<li>第二问则是多项式拟合，这里我把自变量<code>x</code>设置为<code>1,2,3,...</code>，因变量<code>y</code>就是所有收盘价，然后使用<code>polyfit</code>求解并输出和绘图即可。经过尝试和比较，选择了<code>deg=17</code>。</li>
+<li>求解一阶导数为0的点，也就是先对之前的多项式求导得到新多项式，再求解新多项式的根，最后在图像中标注即可。</li>
+</ol>
+<p>整体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line"><span class="keyword">from</span> numpy.polynomial <span class="keyword">import</span> polynomial <span class="keyword">as</span> P</span><br><span class="line">ibm = pd.read_csv(<span class="string">'IBM.csv'</span>, header=<span class="number">0</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br><span class="line">ibm_group = ibm.groupby(ibm.index.year)</span><br><span class="line">ibm_2019 = ibm_group.get_group(<span class="number">2019</span>)[<span class="string">'Close'</span>]</span><br><span class="line">x = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(ibm_2019)<span class="number">-5</span>):</span><br><span class="line">    tmp=[ibm_2019[i],ibm_2019[i+<span class="number">1</span>],ibm_2019[i+<span class="number">2</span>],ibm_2019[i+<span class="number">3</span>],ibm_2019[i+<span class="number">4</span>],<span class="number">1</span>]</span><br><span class="line">    x.append(tmp)</span><br><span class="line">x = np.array(x)</span><br><span class="line">y = np.array(ibm_2019[<span class="number">5</span>:])</span><br><span class="line">c,resid,rank,sigma=linalg.lstsq(x,y)</span><br><span class="line">x_1=np.linspace(<span class="number">1</span>,y.size,y.size)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(x_1,y,<span class="string">'x'</span>, x_1,x.dot(c))</span><br><span class="line">x_2=np.linspace(<span class="number">1</span>,len(ibm_2019),len(ibm_2019))</span><br><span class="line">p=P.polyfit(x_2,ibm_2019,<span class="number">17</span>)</span><br><span class="line">print(<span class="string">"多项式系数为："</span>,p)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(x_2,ibm_2019,<span class="string">'x'</span>,x_2,P.polyval(x_2,p),<span class="string">'k-'</span>)</span><br><span class="line">p2=P.polyder(p)</span><br><span class="line">root=P.polyroots(p2)</span><br><span class="line">plt.plot(root, P.polyval(root,p),<span class="string">'r^'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-BEYOND%20FINITE%20LAYER%20NEURAL%20NETWORKS%20BRIDGING%20DEEP%20ARCHITECTURES%20AND%20NUMERICAL%20DIFFERENTIAL%20EQUATIONS/" rel="next" title="论文记录-FractalNet的ODE建模">
+                <i class="fa fa-chevron-left"></i> 论文记录-FractalNet的ODE建模
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/06/vscode%E5%92%8Cc%E4%B8%8Ec-%E7%9A%84%E9%85%8D%E7%BD%AE/" rel="prev" title="vscode的一系列配置">
+                vscode的一系列配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="Kun Li" />
+            
+              <p class="site-author-name" itemprop="name">Kun Li</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="likun@mail.bnu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linalg模块的使用"><span class="nav-number">1.</span> <span class="nav-text">linalg模块的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimize模块的使用"><span class="nav-number">2.</span> <span class="nav-text">optimize模块的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#integrate模块的使用"><span class="nav-number">3.</span> <span class="nav-text">integrate模块的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#interpolate模块的使用"><span class="nav-number">4.</span> <span class="nav-text">interpolate模块的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟合"><span class="nav-number">5.</span> <span class="nav-text">拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随堂练习"><span class="nav-number">6.</span> <span class="nav-text">随堂练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">6.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kun Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
