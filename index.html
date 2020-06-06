@@ -388,205 +388,14 @@
 
       
         
-          
-            <p>前段时间忽然开始用vscode，今天配置好了C和C++，现在决定整理一下配置过程。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-		
-	</div>
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/06/vscode%E5%92%8Cc%E4%B8%8Ec-%E7%9A%84%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kun Li">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="白银乡20-16">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/06/vscode%E5%92%8Cc%E4%B8%8Ec-%E7%9A%84%E9%85%8D%E7%BD%AE/" itemprop="url">vscode的一系列配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-06T09:51:33+08:00">
-                2020-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">编辑器配置</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前段时间忽然开始用vscode，今天配置好了C和C++，现在决定整理一下配置过程。</p>
-<h2 id="安装和外观"><a href="#安装和外观" class="headerlink" title="安装和外观"></a>安装和外观</h2><ol>
-<li><p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode官网</a>下载和安装，这部分应该不会有问题，注意最后添加到path的选项要勾选，不然就要自己去配置环境变量；</p>
-</li>
-<li><p>中文设置：打开扩展（左边那一列按钮最下面的，默认快捷键是<code>ctrl+shift+x</code>，找一个叫Chinese (Simplified) Language Pack for Visual Studio Code的扩展，安装完成以后重启vscode，界面就变成中文了。如果没变，就按<code>ctrl+shift+p</code>，在出现的框里输入configure display language，然后下拉菜单里选zh-cn就可以了。</p>
-</li>
-<li><p>主题和图标：在扩展里找喜欢的就可以，据推荐vscode-icons比较好看，我也没研究其他图标。</p>
-</li>
-<li><p>背景：扩展里找background这个插件（名字就是这个单词），安装以后需要设置一下</p>
-<ol>
-<li><p><code>文件—&gt;首选项—&gt;设置—&gt;扩展—&gt;Plugin background config.background插件配置</code></p>
-</li>
-<li><p>打开这个界面以后，有一行字<code>在settings.json中编辑</code>，点一下可以打开settings.json（实际上在其他扩展里也能找到这行字，总之打开settings.json就行）</p>
-</li>
-<li><p>如果之前什么扩展也没装，也没搞别的配置，那这个文件打开以后应该是只有两行花括号(<code>{}</code>)的，如果之前装了别的，那花括号中间可能会有几行内容，接下来在花括号里面输入以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;background.enabled&quot;: true,</span><br><span class="line">   &quot;background.useDefault&quot;: false,</span><br><span class="line">   &quot;background.customImages&quot;:[&quot;file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;LiKun&#x2F;Pictures&#x2F;background.png&quot;],</span><br><span class="line">   &quot;background.style&quot;:&#123;</span><br><span class="line">       &quot;content&quot;:&quot;&#39;&#39;&quot;,</span><br><span class="line">       &quot;pointer-events&quot;:&quot;none&quot;,</span><br><span class="line">       &quot;position&quot;:&quot;absolute&quot;,&#x2F;&#x2F;图片位置</span><br><span class="line">       &quot;width&quot;:&quot;99%&quot;,</span><br><span class="line">       &quot;height&quot;:&quot;99%&quot;,</span><br><span class="line">       &quot;z-index&quot;:&quot;99999&quot;,</span><br><span class="line">       &quot;background.repeat&quot;:&quot;no-repeat&quot;,</span><br><span class="line">       &quot;background-size&quot;:&quot;25%,25%&quot;,&#x2F;&#x2F;图片大小</span><br><span class="line">       &quot;opacity&quot;:0.3 &#x2F;&#x2F;透明度</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-
-<p>注意：每一行最后的逗号不要忘了，背景图的路径改成自己的图，我这个设置是背景图出现在右下角的位置，如果有其他需求自己改就行。</p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="latex"><a href="#latex" class="headerlink" title="latex"></a>latex</h2><ol>
-<li><p>安装texlive，因为我之前安装过texstudio所以就没再装了，这里要记得环境变量的问题，正常来说安装的时候会自动添加，如果没勾选那就要自己配置；</p>
-</li>
-<li><p>vscode的扩展里找latex workshop安装，据说安装好就能编译tex文件并生成pdf，不过我还搞了乱七八糟的设置才可以；</p>
-</li>
-<li><p>设置过程还是打开setting.json，直接输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&quot;latex-workshop.latex.recipes&quot;: [</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;xelatex -&gt; bibtex -&gt; xelatex*2&quot;,</span><br><span class="line">       &quot;tools&quot;: [</span><br><span class="line">         &quot;xelatex&quot;,</span><br><span class="line">         &quot;bibtex&quot;,</span><br><span class="line">         &quot;xelatex&quot;,</span><br><span class="line">         &quot;xelatex&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;</span><br><span class="line">   ],</span><br><span class="line">   &quot;latex-workshop.latex.tools&quot;: [</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;xelatex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;xelatex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;latexmk&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;latexmk&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;pdflatex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;pdflatex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;bibtex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;bibtex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;%DOCFILE%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;</span><br><span class="line">   ],</span><br><span class="line">   &quot;latex-workshop.view.pdf.viewer&quot;: &quot;tab&quot;,</span><br><span class="line">   &quot;editor.wordWrap&quot;: &quot;on&quot;,</span><br><span class="line">   &quot;latex-workshop.synctex.afterBuild.enabled&quot;: true,</span><br><span class="line">   &quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;: &quot;double-click&quot;,</span><br><span class="line">   &quot;[latex]&quot;: &#123;</span><br><span class="line">     &quot;editor.defaultFormatter&quot;: &quot;nickfode.latex-formatter&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &quot;latex-workshop.latex.autoClean.run&quot;: &quot;onBuilt&quot;,</span><br></pre></td></tr></table></figure>
-
-<p>注意：这个文件最外层就一组花括号，不管有多少要设置的东西都在里面加；latex的内容里有一些是在那个设置里可以直接选的，而不是通过这种让人看不懂的代码来设置，例如<code>&quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;: &quot;double-click&quot;</code>这一句的作用是在pdf里双击可以跳转到latex源文件对应的位置，本来默认的是ctrl点击，但是我习惯双击，可以在设置里搜synctex:keybinding然后修改，改了会自动在settings.json 里出现那句话；<code>&quot;editor.wordWrap&quot;: &quot;on&quot;</code>是和latex本身无关的设置，是让编辑器可以自动换行；其他各种设置可以自行百度。</p>
-</li>
-</ol>
-<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><ol>
-<li>扩展里搜python，安装跳出来的第一个就行；</li>
-<li>可能和我之前已经安装过python、pycharm等等东西有关，安装插件之后就能编译运行python了。</li>
-</ol>
-<h2 id="C和C"><a href="#C和C" class="headerlink" title="C和C++"></a>C和C++</h2><ol>
-<li>安装mingw，如果之前装过就不必重装了，这里要自己添加环境变量，然后检查有没有装好；</li>
-<li>vscode里安装C/C++扩展，可能装好要重启；</li>
-<li>打开要写代码的那个文件夹，比如C++文件夹，里面新建一个cpp文件随便写几行；</li>
-<li><code>Ctrl+Shift+P</code>输入C/C++，选择“Edit Configurations(UI)”进入配置，这里要选编译器：<code>C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe</code>，路径改成自己的，还要选IntelliSense 模式，要用gcc-x64；</li>
-<li>上一步做好以后，可以看到C++文件夹里多出一个.vscode文件夹，里面有c_cpp_properties.json文件，文件内容是写好的，可以看看，不过不需要修改；</li>
-<li>再按<code>Ctrl+Shift+P</code>输入tasks，选择“Tasks:Configure Default Build Task”，再选择“C/C++: g++.exe build active file”，然后.vscode文件夹里就会出现tasks.json，也是写好的，不需要改；</li>
-<li>接下来点运行—&gt;启动调试，或者直接按F5，选择C++(GDB/LLDB)，会出现一个launch.json，或者左边那列扩展按钮上面的那个按钮里有个创建launch.json也可以；</li>
-<li>上一步的launch.json里可以自己根据需求添加一些配置，或者去网上复制别人的配置，总之我这里是什么也没改就能直接运行；</li>
-<li>然后再按F5，就可以运行文件了；</li>
-<li>在第4步之后，就可以在vscode里找到终端然后gcc编译运行文件；</li>
-<li>默认运行输出信息是在下面的终端，在launch.json里找到”externalConsole”然后把它的false改成true,就可以出现独立的命令行界面来显示信息了。</li>
-</ol>
-
-          
+          <p>前段时间忽然开始用vscode，今天配置好了C和C++，现在决定整理一下配置过程。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/06/vscode%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%85%8D%E7%BD%AE/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1830,6 +1639,156 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白银乡20-16">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/16/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-7/" itemprop="url">python课程记录-7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-16T21:56:12+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这一课讲python中函数和模块的使用。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/16/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-7/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1882,7 +1841,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
