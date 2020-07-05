@@ -100,7 +100,7 @@
 <meta property="og:description" content="前段时间忽然开始用vscode，今天配置好了C和C++，现在决定整理一下配置过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-06T01:51:33.000Z">
-<meta property="article:modified_time" content="2020-06-06T02:39:52.441Z">
+<meta property="article:modified_time" content="2020-06-29T04:08:54.011Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
@@ -441,6 +441,28 @@
 <li>在第4步之后，就可以在vscode里找到终端然后gcc编译运行文件；</li>
 <li>默认运行输出信息是在下面的终端，在launch.json里找到”externalConsole”然后把它的false改成true,就可以出现独立的命令行界面来显示信息了。</li>
 </ol>
+<h2 id="KanBan"><a href="#KanBan" class="headerlink" title="KanBan"></a>KanBan</h2><ol>
+<li><p>是最近发现的很好用的一个项目管理方式；</p>
+</li>
+<li><p>在扩展里搜KanBan，出来的第一个就是它，然后安装；</p>
+</li>
+<li><p>在扩展说明那里能看到很多可以配置的，我的配置如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">"kanban": </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">&lt;!--配置四个列的名称，因为原本的名称不符合我的需求，所以这么改了--&gt;</span></span><br><span class="line">        "columns": &#123;</span><br><span class="line">          "done": "Others",</span><br><span class="line">          "inProgress": "In Progress",</span><br><span class="line">          "testing": "Done",</span><br><span class="line">          "todo": "TODOs"</span><br><span class="line">        &#125;,</span><br><span class="line">        "openOnStartup": true,   <span class="comment">&lt;!--每次打开vscode的时候，自动打开KanBan标签页--&gt;</span></span><br><span class="line">        "trackTime": true    <span class="comment">&lt;!--打开计时功能，如果在干活前后各点一下，就会记录干了多久--&gt;</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在搞好以后发现，KanBan文件是存放在项目文件夹的<code>.vscode</code>中，名称是<code>vscode-kanban.json</code>，打开可以看到具体内容。打开不同文件夹时，KanBan文件都是新的，如果想保持同步，就得把最新的文件复制到其他文件夹里，这有点麻烦，所以对着说明文档分析了一下，猜测可以改扩展的源代码里的文件。</p>
+</li>
+<li><p>具体来说，是找到用户目录里的vscode文件夹中的KanBan文件夹，文件夹名字可能和版本号等有关，比如我的是<code>C:\Users\LiKun\.vscode\extensions\mkloubert.vscode-kanban-1.28.0\</code>，里面有一个<code>out</code>文件夹，打开会发现一些<code>js</code>文件，这些文件都可以按需求改，我需要改的是<code>workspace.js</code>。</p>
+</li>
+<li><p>打开<code>workspace.js</code>，在一开始定义常量的地方有一个<code>const BOARD_FILENAME</code>，把它的值改成我打算固定存KanBan的绝对路径，例如：<code>const BOARD_FILENAME = &#39;C:/code/.vscode/vscode-kanban.json&#39;;</code></p>
+</li>
+<li><p>改了之后如果直接保存并在vscode里运行，会提示路径不对，看报错信息是因为程序把上面那个路径和项目文件夹的路径直接拼起来了，显然有问题。回到<code>workspace.js</code>，往下没几行就能看到一个<code>get boardFile()</code>函数，函数内容就是把路径拼起来并作为新路径返回，那么在这里，把拼路径的去掉，直接返回<code>BOARD_FILENAME</code>就可以了，修改之后这个函数如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get</span> boardFile() &#123;</span><br><span class="line">        <span class="keyword">return</span> vscode.Uri.file(Path.resolve(BOARD_FILENAME));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个文件夹里其他东西不能乱改。</p>
+</li>
+<li><p>到此为止就可以实现所有项目文件共享同一个KanBan了。</p>
+</li>
+</ol>
 
       
     </div>
@@ -490,6 +512,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/13/python%E8%AF%BE%E7%A8%8B%E6%9C%9F%E6%9C%AB%E4%BD%9C%E4%B8%9A/" rel="prev" title="python课程期末作业">
+                python课程期末作业 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,7 +596,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -592,7 +618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -641,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和外观"><span class="nav-number">1.</span> <span class="nav-text">安装和外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#latex"><span class="nav-number">2.</span> <span class="nav-text">latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">3.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C和C"><span class="nav-number">4.</span> <span class="nav-text">C和C++</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和外观"><span class="nav-number">1.</span> <span class="nav-text">安装和外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#latex"><span class="nav-number">2.</span> <span class="nav-text">latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">3.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C和C"><span class="nav-number">4.</span> <span class="nav-text">C和C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KanBan"><span class="nav-number">5.</span> <span class="nav-text">KanBan</span></a></li></ol></div>
             
 
           </div>
