@@ -100,7 +100,7 @@
 <meta property="og:description" content="今天的我真的超级难过了。但是再难过也没用，看看论文好了，希望等月底能好点。 啊月底还是他生日，没能坚持到月底真是太难过了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-05T06:31:25.000Z">
-<meta property="article:modified_time" content="2020-07-05T10:21:25.930Z">
+<meta property="article:modified_time" content="2020-07-13T07:32:29.314Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="论文">
 <meta name="twitter:card" content="summary">
@@ -388,7 +388,166 @@
 </ol>
 <h2 id="Combinatorial-Multi-Armed-Bandit"><a href="#Combinatorial-Multi-Armed-Bandit" class="headerlink" title="Combinatorial Multi Armed Bandit"></a>Combinatorial Multi Armed Bandit</h2><ol>
 <li>实质是未知概率情况下的选择问题，比如赌博</li>
-<li>剩下的改天再继续</li>
+<li>具体来说，重复一个选择过程，每次有k个选项或动作可供选择，每次选择一个动作后会获得相应的奖励。目标是为了最大化k次后的奖励。选项对应的收益服从某种未知概率分布，对于实验者本人而言是黑箱，因此需要采取各种可能的方式来最大化收益。</li>
+<li>基础思路：每一轮根据之前的结果更新对收益的期望，期望计算方法为[之前采取该选项所得到的所有收益]/[之前采取过该选项的次数]，也就是平均每次得到的收益；只要时间够长，这个算出来的期望就会接近真实收益。</li>
+</ol>
+<h2 id="System-model-and-problem"><a href="#System-model-and-problem" class="headerlink" title="System model and problem"></a>System model and problem</h2><ol>
+<li><p>字母符号表示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">t</td>
+<td align="center">当前轮数，第t轮</td>
+</tr>
+<tr>
+<td align="center">N</td>
+<td align="center">N个workers的集合，第i个worker</td>
+</tr>
+<tr>
+<td align="center">M</td>
+<td align="center">M个任务的集合，第j个任务</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">预算</td>
+</tr>
+<tr>
+<td align="center">$w_j$</td>
+<td align="center">第j个任务的权重，所有权重加起来的和是1</td>
+</tr>
+<tr>
+<td align="center">L</td>
+<td align="center">每个worker会向平台提交L个任务候选</td>
+</tr>
+<tr>
+<td align="center">$p_i^l=&lt;M_i^l,c_i^l&gt;$</td>
+<td align="center">第i个worker提交的第l个选项，其中$M_i^l$表示该worker的任务候选集合，$c_i^l$表示收费</td>
+</tr>
+<tr>
+<td align="center">$c_i^l=\varepsilon_i f(</td>
+<td align="center">M_i^l</td>
+</tr>
+<tr>
+<td align="center">$P_i={p_i^l</td>
+<td align="center">1&lt;=l&lt;=L}$</td>
+</tr>
+<tr>
+<td align="center">$P=U_{i\in N}P_i $</td>
+<td align="center">所有选项集合</td>
+</tr>
+<tr>
+<td align="center">$q_{i,j}^t</td>
+<td align="center">j\in M_i^l$</td>
+</tr>
+<tr>
+<td align="center">$P^t\subset P$</td>
+<td align="center">第t轮中平台对所有workers所选的选项集合</td>
+</tr>
+<tr>
+<td align="center">$p_i^l\in P^t$</td>
+<td align="center">第t轮平台对第i个worker选了其第l个选项</td>
+</tr>
+<tr>
+<td align="center">$u^j(P^t)$</td>
+<td align="center">第t轮采用方案$P^t$时的第j个任务的最终质量（所有完成任务结果中最好的那个）</td>
+</tr>
+<tr>
+<td align="center">$u(P^t)$</td>
+<td align="center">第t轮采用方案$P^t$时所有任务的最终质量和，也就是上一个符号乘权重再加起来</td>
+</tr>
+<tr>
+<td align="center">$n_i^l(t)$</td>
+<td align="center">第i个worker的第l个选项被选的次数</td>
+</tr>
+<tr>
+<td align="center">$n_i(t)$</td>
+<td align="center">第i个worker被学习过的次数</td>
+</tr>
+<tr>
+<td align="center">$\overline{q}_i(t)$</td>
+<td align="center">截至到第t轮学习到的第i个worker的质量</td>
+</tr>
+</tbody></table>
+<p>需要注意：虽然worker可以提交L个任务候选，但是每一轮只能最终完成一个选项，这里假设$c_i^1$到$c_i^L$是从小到大排的，也就是说最后一个的收费最高，且实际中，c的取值一般和M的长度（就是任务数量）正相关。</p>
+<ul>
+<li>这里有个奇怪的问题，我以为每个选项就是单独一个任务，然后c是对应的收费，但是看起来每个选项是任务集合，然后c是收费，也就是说比如有5个任务用abcde表示，某个worker的选项就会是{a,b,收费3}{b,c,d,收费5}{a,c,d,e,收费10}，这样看起来好奇怪。希望后面有解释。</li>
+<li>虽然这样的设定有点别扭，不过解释是说：每一轮每个worker完成$|M_i^l|$个任务，也就会学习到到$|M_i^l|$个任务质量，就是说任务质量会被学习$|M_i^l|$次，这和传统CMAB不一样。</li>
+<li>每轮每个worker最多定一个选项（也可以不选）</li>
+</ul>
+</li>
+<li><p>要研究的问题：给定预算，每轮招募K个workers，使得所有轮中完成的所有任务的权重加起来最大。</p>
+</li>
+<li><p>数学模型：</p>
+<p>目标函数最大化：$E[\sum_{t\geq1}u(P^t) ]$    所有轮下来总期望收益最大</p>
+<p>约束：$\sum_{t\geq1}\sum_{p_i^l\in P^t}c_i^l\leq B$    花费不超过预算</p>
+<p>​            $|P^t|=K \  for\ \forall t&gt;1$    每一轮都招K个workers，不多不少</p>
+<p>​            $\sum_{l=1}^LI{p_i^l\in P^t}\leq 1$    每个worker的选项最多一个</p>
+</li>
+</ol>
+<h2 id="Algorithm-Design"><a href="#Algorithm-Design" class="headerlink" title="Algorithm Design"></a>Algorithm Design</h2><ol>
+<li><p>本文模型：K臂的组合多臂赌博机</p>
+</li>
+<li><p>本文方法：</p>
+<ol>
+<li>扩展的上置信界算法（UCB）学习任务质量</li>
+<li>增加了对最大化权重的考虑</li>
+<li>每轮用贪心算法招K个workers：最大化任务质量和招募费用的比（单位费用的任务质量最大化）</li>
+</ol>
+<h3 id="原本的UCB算法"><a href="#原本的UCB算法" class="headerlink" title="原本的UCB算法"></a>原本的UCB算法</h3><ol>
+<li>总的来说就是估计置信区间</li>
+<li>我们认为真实的那个未知概率或者说收益是p，而根据尝试和计算推断出的概率是$\widetilde{p}$，这两个概率之间存在差值，即：$\widetilde{p}-\Delta \leq p \leq \widetilde{p}+\Delta$，这个范围就是置信区间，算法的目的就是通过一次次尝试缩小置信区间</li>
+<li>该算法的流程是在所有臂里找$\widetilde{p}+\Delta$最大的那个，根据一系列完全没看的数学定理，$\Delta=\sqrt{2\ln T /n}$，T是目前进行过的轮数，n是这个臂已经被选过的次数，每一轮执行完会更新数据。具体来说，$\widetilde{p}$最大，选这个选项的收益就越大，而$\Delta$越大，这个选项之前被选中的次数就越小。</li>
+<li>总结一下就是会考虑每个臂已经估计过的历史记录，尽可能去探索次数较少和收益较高的臂，兼顾收益和探索。</li>
+</ol>
+<h3 id="本文的算法"><a href="#本文的算法" class="headerlink" title="本文的算法"></a>本文的算法</h3><ol>
+<li>在第t轮中，若第i个worker的第l个选项被选中，则$n_i^l(t)=n_i^l(t-1)+1$（就是比上一轮的多1），反之则保持上一轮的值不变</li>
+<li>$n_i(t)$的值是第t轮时的第i个worker每个选项的$n_i^l(t)$和该选项任务数（也就是$|M_i^l|$）相乘，然后所有的加起来，表示第i个worker的质量被学习过的次数</li>
+<li>用普通的总值/总次数更新worker的质量（$\overline {q}_i(t)$），用不太一样的UCB平衡探索和收益（$\widehat{q}_i (t)$）</li>
+<li>每一轮都是最大化权重*$\widehat{q}_i (t)$，也就是根据之前结果的信息推断出的最大收益</li>
+</ol>
+<h3 id="本文的流程"><a href="#本文的流程" class="headerlink" title="本文的流程"></a>本文的流程</h3><ol>
+<li>最一开始，对于每个worker平台都让他去完成候选列表中的第一个任务（就是最便宜的那个）,由此初始化$n_i^l(t)$、$n_i(t)$、$\overline{q}_i(t)$。</li>
+<li>接下来的每一轮中，都以最大化单位费用的收益增长为目的来选择K个worker和它们的任务，也就是说([选择这个任务选项的收益]-[选之前的收益])/[选这个任务的开销]，要找使得这个式子最大的那个任务选项。要注意这一步中，当某个worker已经被选了任务，那他的其他选项都不会再被考虑</li>
+<li>第t轮的K个worker选好以后，开始各自完成任务，做完以后平台计算任务质量，由此更新$n_i^l(t)$、$n_i(t)$、$\overline{q}_i(t)$、$\widehat{q}_i (t)$。同时，目前为止的所有轮获得的收益也更新了，平台根据预算还剩多少决定是否进行下一轮。</li>
+</ol>
+<h3 id="算法性能分析"><a href="#算法性能分析" class="headerlink" title="算法性能分析"></a>算法性能分析</h3><ol>
+<li>实质是01背包问题</li>
+<li>经过一系列我还没看的计算，该算法复杂度是$O(NLK^3\ln \tau(B))$</li>
+</ol>
+</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
+<li><p>扩展问题场景：所有worker的质量和收费都未知，收费未知是指$c_i^l=\varepsilon_i f(|M_i^l|)$这个公式里的参数$\varepsilon_i$未知，公式里的函数$f()$是公开的。具体来说，在第t轮，worker的任务已经选定后，worker根据当前电量、环境、网络等估计一个第t轮的收费参数$\varepsilon_i^t$，该值在0和1之间，且有下限$\varepsilon_{min}$，所有轮的$\varepsilon_i^t$独立同分布，分布未知，期望是$\varepsilon_i$。</p>
+</li>
+<li><p>每一轮开始时，首先是平台选worker和任务，然后是worker报价，接着平台算一下预算够不够，不够的话就结束，反之就进入做任务的环节，之后的流程和上一部分一样。</p>
+</li>
+<li><p>问题在于：$\varepsilon_i$也需要学习，而且每一轮会被学习一次，这和之前的任务质量不太一样。</p>
+<h3 id="本文方法"><a href="#本文方法" class="headerlink" title="本文方法"></a>本文方法</h3><ol>
+<li>新增一个符号表示：$m_i(t)=\sum_{l=1}^Ln_i^l(t)$，表示$\varepsilon_i$目前被学习过的次数（第i个worker的所有选项目前被选过的次数）</li>
+<li>新增另一个符号表示：$\overline \varepsilon_i (t) $，计算方法和前面p那个类似，也是[在此之前的值*在此之前的次数+这次的值]/[在此之前的次数+1]</li>
+<li>同样也新增了$\widehat  \varepsilon_i (t)$，和前面的一样</li>
+<li>把之前那个目标函数里的费用部分用这里新的符号改写然后化简，但是这里化简以后的没看懂（问了一下作者，是从regret部分分析出来的，然后又看了看之前没看的证明，发现是证明部分分析的）</li>
+<li>于是整个流程就和之前的一模一样，只是目标函数换了</li>
+<li>算法性能分析和前面一样，还没看，感觉不重要</li>
+</ol>
+</li>
+</ol>
+<h2 id="Performance-Evaluation"><a href="#Performance-Evaluation" class="headerlink" title="Performance Evaluation"></a>Performance Evaluation</h2><ol>
+<li>实验部分对平台的介绍格外简单，用的公开数据集，这部分没什么能说的</li>
+<li>实验主要关注：期望质量和期望费用（就是前面计算的俩参数）</li>
+<li>实验内容是和另一种常用的CMAB的算法做对比</li>
+<li>针对第一个算法：分析了预算的影响（500-1000），招募工人数K的变化（得出K小一些更好，但是意味着要来更多轮），用均匀分布作为例子对比了准确率</li>
+<li>针对第二个算法：估计了质量和预算的关系，改变工人数之后的性能（和上一个不太一样了）</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
+<li>没啥总结的，这个论文就这样了</li>
+<li>之后有时间就看看性能证明那里，不过个人觉得十有八九是已有证明改编的</li>
+<li>看了一点证明，还没完全看懂，大致了解思路了，不过不打算继续看了……</li>
 </ol>
 
       
@@ -439,6 +598,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/06/blender%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" rel="prev" title="blender学习记录-1">
+                blender学习记录-1 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +682,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -541,7 +704,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -590,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Combinatorial-Multi-Armed-Bandit"><span class="nav-number">2.</span> <span class="nav-text">Combinatorial Multi Armed Bandit</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Combinatorial-Multi-Armed-Bandit"><span class="nav-number">2.</span> <span class="nav-text">Combinatorial Multi Armed Bandit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-model-and-problem"><span class="nav-number">3.</span> <span class="nav-text">System model and problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-Design"><span class="nav-number">4.</span> <span class="nav-text">Algorithm Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原本的UCB算法"><span class="nav-number">4.1.</span> <span class="nav-text">原本的UCB算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本文的算法"><span class="nav-number">4.2.</span> <span class="nav-text">本文的算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本文的流程"><span class="nav-number">4.3.</span> <span class="nav-text">本文的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法性能分析"><span class="nav-number">4.4.</span> <span class="nav-text">算法性能分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文方法"><span class="nav-number">5.1.</span> <span class="nav-text">本文方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-Evaluation"><span class="nav-number">6.</span> <span class="nav-text">Performance Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>
