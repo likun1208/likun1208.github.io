@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 白银乡20-16
+title: 无题
 subtitle: ''
 description: ''
 keywords:
@@ -122,5 +122,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/kun-bin/kun-bin.github.io.git
+  repository: https://github.com/likun1208/likun1208.github.io.git
   branch: master

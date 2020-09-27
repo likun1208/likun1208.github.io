@@ -14,6 +14,8 @@ categories: Let's Build A Simple Interpreter
 
 [翻译](https://feng-qi.github.io/2018/01/23/lets-build-a-simple-interpreter-part-01/)
 
+上一个翻译页面凉了，找了一个[新的翻译](https://www.oschina.net/translate/build-a-simple-interpreter-part-1)
+
 <!--more-->
 
 ## 代码

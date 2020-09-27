@@ -16,6 +16,8 @@ categories: Let's Build A Simple Interpreter
 
 (这个翻译里有个别地方翻译错了......)
 
+[新的翻译](https://www.oschina.net/translate/lsbasi-part4)
+
 <!--more-->
 
 ## 代码

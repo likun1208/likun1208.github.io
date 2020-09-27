@@ -14,6 +14,8 @@ categories: Let's Build A Simple Interpreter
 
 [翻译](https://feng-qi.github.io/2018/01/30/lets-build-a-simple-interpreter-part-05/)
 
+[新的翻译](https://www.oschina.net/translate/lsbasi-part5)
+
 <!--more-->
 
 ## 代码

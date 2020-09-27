@@ -45,7 +45,7 @@ category: 课程笔记
 
       4. 在Request Headers里找到User-Agent并把整个内容复制出来。
 
-         ![示意图](https://github.com/kun-bin/image/blob/master/0422.png)
+         ![示意图](https://github.com/kun-bin/image/blob/master/0422.png?raw=true)
 
    2. 在代码中做伪装：
 

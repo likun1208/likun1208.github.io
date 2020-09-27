@@ -32,7 +32,7 @@ categories: Let's Build A Simple Interpreter
 
 4. 如下图，分别是的AST和解析树。
 
-   ![AST和解析树对比](https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png)
+   ![AST和解析树对比](https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true)
 
 5. 简单来说，AST就是把操作数放到叶节点，操作符放到中间节点和根节点，操作符节点在树中的高度可以体现运算优先级，括号改变优先级也是通过改变操作符的高度。
 
@@ -166,7 +166,7 @@ categories: Let's Build A Simple Interpreter
 
    4. 显然前中后是指根节点的遍历输出顺序，如下图的树，前序遍历的输出结果是：1->2->4->6->7->3->5，中序遍历是4->6->7->2->1->5->3，后序遍历是7->6->4->2->5->3->1
 
-      ![一棵树](https://github.com/kun-bin/image/blob/master/visit.png)
+      ![一棵树](https://github.com/kun-bin/image/blob/master/visit.png?raw=true)
 
    5. 对应到AST中，就是先访问`node`的`left`，得到一个结果，再访问`right`，得到另一个结果，最后访问中间的`op`，进行运算，伪代码如下：
 
