@@ -533,139 +533,14 @@
 
       
         
-          
-            <h1 id="新建Mod"><a href="#新建Mod" class="headerlink" title="新建Mod"></a>新建Mod</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
-<li>启动器里找到mod新建会自动生成相关文件；</li>
-<li>也可以文档里找到<code>...\Paradox Interactive\Crusader Kings III\mod</code>文件夹（如果没有就新建），新建<code>test.mod</code>文件，用随便什么编辑器打开，输入一系列内容并保存。</li>
-</ol>
-<h2 id="test-mod文件"><a href="#test-mod文件" class="headerlink" title="test.mod文件"></a><code>test.mod</code>文件</h2><ol>
-<li><p>启动器生成的该文件基础内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">version&#x3D;&quot;0.0&quot;</span><br><span class="line">tags&#x3D;&#123;</span><br><span class="line">	&quot;Historical&quot;</span><br><span class="line">&#125;</span><br><span class="line">name&#x3D;&quot;test&quot;</span><br><span class="line">supported_version&#x3D;&quot;1.0.3&quot;</span><br><span class="line">path&#x3D;&quot;C:&#x2F;Users&#x2F;LiKun&#x2F;Documents&#x2F;Paradox Interactive&#x2F;Crusader Kings III&#x2F;mod&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
-
-<p><code>version</code>和<code>supported_version</code>自己可以看着改。</p>
-</li>
-<li><p>可以附加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">picture &#x3D; 图像文件名</span><br></pre></td></tr></table></figure>
-
-<p>指定mod开场图片。</p>
-</li>
-<li><p>ck2可以设定<code>replace_path</code>，覆盖文件夹中的所有内容，ck3是否可以还没试过，之后看看。</p>
-</li>
-</ol>
-<h2 id="common文件夹"><a href="#common文件夹" class="headerlink" title="common文件夹"></a><code>common</code>文件夹</h2><ol>
-<li><p>正常来说ck3游戏本体内容不在上面那个文档里，而在其他安装路径，比如<code>C:\Program 1\Steam\steamapps\common\Crusader Kings III</code>，在这个文件夹中的<code>...\game\common</code>文件夹中存放着很多游戏相关文件，接下来试图逐一分析。</p>
-</li>
-<li><p>文件夹里有很多文件夹和一个<code>achievement_groups.txt</code>，这个txt文件内容看上去是对成就进行分组，分为<code>very_easy_achievements</code>, <code>easy_achievements</code>, <code>medium_achievements</code>, <code>hard_achievements</code>, <code>very_hard_achievements</code>，文件夹中的第一个是<code>achievements</code>，包括<code>standard_achievements.txt</code>和<code>msgrdk_achievements.json</code>。</p>
-<ol>
-<li><p><code>standard_achievements.txt</code>中的内容格式是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">成就名 &#x3D; &#123;</span><br><span class="line">	possible &#x3D; &#123;</span><br><span class="line">		# 这里应该是写成就达成所需要的条件，是很多逻辑语句组成的内容</span><br><span class="line">	&#125;</span><br><span class="line">	happened &#x3D; &#123;</span><br><span class="line">		custom_description &#x3D; &#123;</span><br><span class="line">			# 这里应该是写直接触发成就达成的行为</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-</li>
-</ol>
-<ol start="2">
-<li><p><code>msgrdk_achievements.json</code>看起来是给每个成就映射了一个数字编号，总共55个。</p>
-</li>
-<li><p>目前对成就这部分很不熟悉，可能有理解错的内容。</p>
-</li>
-</ol>
-<ol start="3">
-<li><p><code>activities</code>文件夹，这里看上去是五个主要活动的说明，这五个都是决议里的，但应该不是决议。</p>
-<ol>
-<li><p><code>_activities.info</code> 说明了具体格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">name_of_activity &#x3D; &#123;</span><br><span class="line">	expiration_days &#x3D; X 			# default number of days after an activity is started to it&#39;s expiration</span><br><span class="line">	days_until_auto_start &#x3D; X 		# number of days from an activity is spawned until it&#39;s started (regardless of if participants have arrived or not)</span><br><span class="line">	valid &#x3D; trigger					# checked daily on the activity scope</span><br><span class="line">	on_spawn &#x3D; effect 				# executed on the activity when spawned</span><br><span class="line">	on_activate &#x3D; effect			# executed on the activity when started (all invitations replied to or auto started)</span><br><span class="line">	on_complete &#x3D; effect			# executed on the activity when completed through complete_activity &#x3D; yes (ignored if complete_activity &#x3D; no)</span><br><span class="line">	on_expire &#x3D; effect				# executed on the activity when expiring from timeout</span><br><span class="line">	on_participant_death			# executed on the dying character during death, activity set as scope:activity</span><br><span class="line">	on_invalidated &#x3D; effect			# executed on the activity when failing the valid trigger	</span><br><span class="line">	solo &#x3D; yes						# marks the activity as a solo activity (no guests)</span><br><span class="line">	has_activity_window &#x3D; yes		# determines if a certain activity should show a window or not</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来结合其他几个具体文件来理解。</p>
-</li>
-<li><p><code>00_activity_feast.txt</code> 宴会：</p>
-<ol>
-<li><p><code>expiration_days = 300</code> 持续300天</p>
-</li>
-<li><p><code>has_activity_window = yes</code> 有事件窗口</p>
-</li>
-<li><p><code>days_until_auto_start = 20</code> 默认20天后开始</p>
-</li>
-<li><p><code>frame = 2</code></p>
-</li>
-<li><p><code>color = { 0.853906 0.867188 0.105469 1 }</code></p>
-</li>
-<li><pre><code>valid = {
-        activity_owner = {
-            is_alive = yes
-            is_imprisoned = no
-        }
-    }</code></pre><p>宴会期间每天检查召开宴会的人活着且没被关起来。</p>
-</li>
-<li><p><code>on_spawn</code>这段很长，大致是宴会事件生成时同时执行的内容，主要是设置潜在宾客列表<code>potential_guests</code>。这段有个<code>if</code>语句，提到条件和配偶有关，没配偶似乎是会随机初始化一个配偶，没太看懂这个设计。</p>
-</li>
-<li><p><code>on_activate</code> 也很长，大致是宴会事件开始时触发的，如果没人来，就结束这个事件，<code>feast.2003</code>可能就是结束宴会的意思；如果有人来，给召开宴会的人选关键事件，再从宾客里选人参与到这个事件中，这里提到<code>reveler（狂欢者？）</code>会得到两点不知道是生活方式还是生活经验的奖励。而作为客人，<code>reveler（狂欢者？）</code>会得到一点，此外针对所有客人，会移除宴会邀请的拦截器（？这里还得之后再看）。</p>
-</li>
-<li><p><code>on_complete</code> 宴会结束时，主人和封臣似乎会有什么互动，每个参与者的目标体重（？）会改变。</p>
-</li>
-<li><p><code>on_expire</code> 宴会到期以后会触发<code>feast.2002</code>。注释说这个不应出现，只是作为异常记录。</p>
-</li>
-<li><p><code>on_participant_death</code>是空的。</p>
-</li>
-<li><p><code>on_invalidated</code> 失效的情况？</p>
-</li>
-</ol>
-</li>
-<li><p><code>00_activity_hunt.txt</code> 打猎：</p>
-<ol>
-<li>和刚才的宴会不同，这里有<code>solo = yes</code>，说明可以一个人打猎。</li>
-<li><code>frame</code>和<code>color</code>暂时还是不太理解。</li>
-<li>这里的很多限制都要求是健康成年人。</li>
-</ol>
-</li>
-<li><p><code>00_activity_meditation.txt</code> 冥想：</p>
-<ol>
-<li>同样可以一个人进行。</li>
-</ol>
-</li>
-<li><p>看上去冥想是宗教决议中的一个：<code>religious_decision.0211</code></p>
-</li>
-<li><p><code>00_activity_pilgrimage.txt</code> 朝圣：因为没看懂就没什么能说的。</p>
-</li>
-<li><p><code>00_activity_witch_ritual.txt</code> 巫术仪式：</p>
-<ol>
-<li>其实也没看懂，看起来是可以搞巫术仪式的，但是限制有点多。</li>
-<li>似乎是有个宴会，参加宴会的可以为所欲为，还会有不一样的音乐（？<code>play_music_cue = &quot;mx_cue_sacredrite&quot;</code>）。</li>
-<li>这里提到的事件有<code>witch.3003</code> <code>witch.3010</code> <code>witch.3098</code>。</li>
-</ol>
-</li>
-<li><p>补充一下：从<code>event</code>文件夹的内容来看，官方没搞冥想和巫术仪式，以后可能会有吧。</p>
-</li>
-</ol>
-</li>
-<li><p><code>ai_goaltypes</code>文件夹和<code>ai_war_stances</code>，这俩看名字是和AI设定有关的。</p>
-<ol>
-<li><code>ai_goaltypes</code>文件夹里只有<code>00_testgoals.txt</code>，内容相当于是空的，可能是留着做mod用。</li>
-<li><code>ai_war_stances</code>文件夹里有<code>_ai_war_stances.info</code>和<code>00_ai_war_stances.txt</code>：<ol>
-<li><code>_ai_war_stances.info</code>说明了战争立场格式，注释说无法添加新的或者删除现有的，但是都能改。</li>
-<li>这里设定的是AI战争时的目标优先级，优先级范围是1-1000，有一个战争目标列表。</li>
-<li>有一个变量<code>enemy_unit_priority</code>，这个值目前设置为100，是指对于战力不到该AI一半的敌军单位，战争优先级数字会增加100，该值的影响似乎会随着敌军单位战力的增长而降低，当敌军战力和该AI战力一样的时候这个值就被看作0。</li>
-<li><code>00_ai_war_stances.txt</code>是具体的优先级设定，分为进攻方和防御方：<ol>
-<li>作为进攻方的AI，在进攻时作战优先级由高到低：目标省（<code>wargoal_province</code> 500）、敌军所在地（<code>enemy_unit_province</code> 300 这个翻译我猜的，可能不对）、敌军首都（<code>enemy_capital_province</code> 150）、敌军省（<code>enemy_province</code> 100）、敌军盟友省（<code>enemy_ally_province</code> 75）、首都（<code>capital_province</code> 50）、普通省（<code>province</code> 25）、保卫战争目标省（<code>defend_wargoal_province</code> 5）。</li>
-<li>作为进攻方的AI，在防御时会优先找敌军所在地（<code>enemy_unit_province</code> 500），其次才是战争目标省（<code>wargoal_province</code> 300），其他和刚才一样。</li>
-<li>作为防御方，也有和上面一样的两部分。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p><code>bookmark_portraits</code>文件夹看上去是存了游戏命令行里生成的外貌数据。</p>
-</li>
-<li><p><code>bookmark</code>文件夹中有<code>00_bookmarks.txt</code>，这里存了游戏开局可以选的剧本数据，一共6个时代（3个867和3个1066），设定了起止时间和可选的几个角色以及角色们的相关数据。</p>
-</li>
-<li><p>后面还有好多好多文件夹，等以后用到了再看吧……</p>
-</li>
-</ol>
-
-          
+          <p>首先新建一个mod文件。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/03/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

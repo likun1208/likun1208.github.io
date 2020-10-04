@@ -16,7 +16,10 @@
   <entry>
     <title>ck3mod制作笔记-1</title>
     <url>/2020/10/03/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-1/</url>
-    <content><![CDATA[<h1 id="新建Mod"><a href="#新建Mod" class="headerlink" title="新建Mod"></a>新建Mod</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
+    <content><![CDATA[<p>首先新建一个mod文件。</p>
+<a id="more"></a>
+
+<h1 id="新建Mod"><a href="#新建Mod" class="headerlink" title="新建Mod"></a>新建Mod</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
 <li>启动器里找到mod新建会自动生成相关文件；</li>
 <li>也可以文档里找到<code>...\Paradox Interactive\Crusader Kings III\mod</code>文件夹（如果没有就新建），新建<code>test.mod</code>文件，用随便什么编辑器打开，输入一系列内容并保存。</li>
 </ol>
