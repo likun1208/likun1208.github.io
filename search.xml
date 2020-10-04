@@ -3795,20 +3795,22 @@
 </li>
 <li><p>输入<code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code>，这里注意把自己的邮箱替换进去，看到提示<code>Enter file in which to save the key (/c/Users/you/.ssh/id_rsa):</code>时，直接按回车；</p>
 </li>
-<li><p>然后会要求输入密码，这个密码要记住，在第一次使用该ssh密钥时系统会要求输入它，也就是说后面会用；</p>
+<li><p>然后会要求输入密码，这个密码要记住，在第一次使用该ssh密钥时系统会要求输入它，也就是说后面会用，<strong>不过这里有个坑</strong>；</p>
 </li>
 <li><p>输入<code>clip &lt; ~/.ssh/id_rsa.pub</code>，即可把密钥内容复制到剪贴板，或者自己进<code>.ssh</code>找到密钥文件复制也行；</p>
 </li>
 <li><p>浏览器打开Github页面，右上角头像那里的下拉菜单有个Settings，点开以后左边找到<code>SSH and GPG keys</code>，点开以后右边的界面会列出目前所有的密钥，如果之前没做过那这里是空的；</p>
 </li>
-<li><p>SSH Keys那里点<code>New SSH Key</code>，名字随便设置，密钥部分粘贴刚才复制的那个，然后保存；</p>
+<li><p>SSH Keys那里点<code>New SSH Key</code>，名字随便设置，密钥部分粘贴第五步复制的那个，然后保存；</p>
 </li>
 <li><p>接下来回博客目录，找到<code>_config.yml</code>，也就是站点配置文件，把最下面<code>deploy</code>属性中的<code>repository:</code>内容修改成<code>git@github.com:你的name/你的username.github.io.git</code>的样子，比如：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:likun1208/likun1208.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
 <p>这里有的地方也把<code>repository:</code>写成<code>repo:</code>，应该都行。</p>
 </li>
-<li><p>然后命令行里<code>hexo d</code>，第一次会要求输入之前第四步里的那个密码，之后就可以不用再登录了。</p>
+<li><p>然后命令行里<code>hexo d</code>，会要求输入之前第四步里的那个密码；</p>
+</li>
+<li><p>我本来以为，第四步那个密码是输入一次之后就不用再输入的，然而尝试几次以后发现是每次都要输入，查了很多网页，有说配置ssh的config文件，有说修改host，总之都不太对，最终才发现，这一切都是因为第四步设置了密码，如果第四步不设置密码，一路按回车，就没有任何问题了！ssh似乎没提供修改密码的方式，所以就需要重新输入<code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code>，生成新的密钥文件并复制，然后去github的settings那里删旧密钥加新密钥，其他配置不用改动。</p>
 </li>
 </ol>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
@@ -3817,6 +3819,7 @@
 <p><a href="https://blog.csdn.net/lihangll/article/details/103335246" target="_blank" rel="noopener">https://blog.csdn.net/lihangll/article/details/103335246</a></p>
 <p><a href="https://www.cnblogs.com/xinxiandong/p/3867505.html" target="_blank" rel="noopener">https://www.cnblogs.com/xinxiandong/p/3867505.html</a></p>
 <p><a href="https://blog.csdn.net/hhgggggg/article/details/77853665" target="_blank" rel="noopener">https://blog.csdn.net/hhgggggg/article/details/77853665</a></p>
+<p><a href="https://blog.csdn.net/xiaomengzi_16/article/details/98847298" target="_blank" rel="noopener">https://blog.csdn.net/xiaomengzi_16/article/details/98847298</a></p>
 ]]></content>
       <categories>
         <category>博客配置</category>
