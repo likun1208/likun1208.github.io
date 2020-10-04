@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://kun-bin.github.io/");
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="游戏相关,ck3,mod," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="新建Mod方法 启动器里找到mod新建会自动生成相关文件； 也可以文档里找到...\Paradox Interactive\Crusader Kings III\mod文件夹（如果没有就新建），新建test.mod文件，用随便什么编辑器打开，输入一系列内容并保存。  test.mod文件 启动器生成的该文件基础内容： 1234567version&#x3D;&quot;0.0&quot;tags&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ck3mod制作笔记-1">
+<meta property="og:url" content="http://yoursite.com/2020/10/03/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:site_name" content="无题">
+<meta property="og:description" content="新建Mod方法 启动器里找到mod新建会自动生成相关文件； 也可以文档里找到...\Paradox Interactive\Crusader Kings III\mod文件夹（如果没有就新建），新建test.mod文件，用随便什么编辑器打开，输入一系列内容并保存。  test.mod文件 启动器生成的该文件基础内容： 1234567version&#x3D;&quot;0.0&quot;tags&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-03T02:34:06.000Z">
+<meta property="article:modified_time" content="2020-10-03T12:03:53.485Z">
+<meta property="article:author" content="Kun Li">
+<meta property="article:tag" content="游戏相关">
+<meta property="article:tag" content="ck3">
+<meta property="article:tag" content="mod">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/10/03/ck3mod制作笔记-1/"/>
+
+
+
+
+
+  <title>ck3mod制作笔记-1 | 无题</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无题</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/03/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kun Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无题">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ck3mod制作笔记-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-03T10:34:06+08:00">
+                2020-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CK3/" itemprop="url" rel="index">
+                    <span itemprop="name">CK3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="新建Mod"><a href="#新建Mod" class="headerlink" title="新建Mod"></a>新建Mod</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
+<li>启动器里找到mod新建会自动生成相关文件；</li>
+<li>也可以文档里找到<code>...\Paradox Interactive\Crusader Kings III\mod</code>文件夹（如果没有就新建），新建<code>test.mod</code>文件，用随便什么编辑器打开，输入一系列内容并保存。</li>
+</ol>
+<h2 id="test-mod文件"><a href="#test-mod文件" class="headerlink" title="test.mod文件"></a><code>test.mod</code>文件</h2><ol>
+<li><p>启动器生成的该文件基础内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">version&#x3D;&quot;0.0&quot;</span><br><span class="line">tags&#x3D;&#123;</span><br><span class="line">	&quot;Historical&quot;</span><br><span class="line">&#125;</span><br><span class="line">name&#x3D;&quot;test&quot;</span><br><span class="line">supported_version&#x3D;&quot;1.0.3&quot;</span><br><span class="line">path&#x3D;&quot;C:&#x2F;Users&#x2F;LiKun&#x2F;Documents&#x2F;Paradox Interactive&#x2F;Crusader Kings III&#x2F;mod&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>version</code>和<code>supported_version</code>自己可以看着改。</p>
+</li>
+<li><p>可以附加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">picture &#x3D; 图像文件名</span><br></pre></td></tr></table></figure>
+
+<p>指定mod开场图片。</p>
+</li>
+<li><p>ck2可以设定<code>replace_path</code>，覆盖文件夹中的所有内容，ck3是否可以还没试过，之后看看。</p>
+</li>
+</ol>
+<h2 id="common文件夹"><a href="#common文件夹" class="headerlink" title="common文件夹"></a><code>common</code>文件夹</h2><ol>
+<li><p>正常来说ck3游戏本体内容不在上面那个文档里，而在其他安装路径，比如<code>C:\Program 1\Steam\steamapps\common\Crusader Kings III</code>，在这个文件夹中的<code>...\game\common</code>文件夹中存放着很多游戏相关文件，接下来试图逐一分析。</p>
+</li>
+<li><p>文件夹里有很多文件夹和一个<code>achievement_groups.txt</code>，这个txt文件内容看上去是对成就进行分组，分为<code>very_easy_achievements</code>, <code>easy_achievements</code>, <code>medium_achievements</code>, <code>hard_achievements</code>, <code>very_hard_achievements</code>，文件夹中的第一个是<code>achievements</code>，包括<code>standard_achievements.txt</code>和<code>msgrdk_achievements.json</code>。</p>
+<ol>
+<li><p><code>standard_achievements.txt</code>中的内容格式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">成就名 &#x3D; &#123;</span><br><span class="line">	possible &#x3D; &#123;</span><br><span class="line">		# 这里应该是写成就达成所需要的条件，是很多逻辑语句组成的内容</span><br><span class="line">	&#125;</span><br><span class="line">	happened &#x3D; &#123;</span><br><span class="line">		custom_description &#x3D; &#123;</span><br><span class="line">			# 这里应该是写直接触发成就达成的行为</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li><p><code>msgrdk_achievements.json</code>看起来是给每个成就映射了一个数字编号，总共55个。</p>
+</li>
+<li><p>目前对成就这部分很不熟悉，可能有理解错的内容。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p><code>activities</code>文件夹，这里看上去是五个主要活动的说明，这五个都是决议里的，但应该不是决议。</p>
+<ol>
+<li><p><code>_activities.info</code> 说明了具体格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">name_of_activity &#x3D; &#123;</span><br><span class="line">	expiration_days &#x3D; X 			# default number of days after an activity is started to it&#39;s expiration</span><br><span class="line">	days_until_auto_start &#x3D; X 		# number of days from an activity is spawned until it&#39;s started (regardless of if participants have arrived or not)</span><br><span class="line">	valid &#x3D; trigger					# checked daily on the activity scope</span><br><span class="line">	on_spawn &#x3D; effect 				# executed on the activity when spawned</span><br><span class="line">	on_activate &#x3D; effect			# executed on the activity when started (all invitations replied to or auto started)</span><br><span class="line">	on_complete &#x3D; effect			# executed on the activity when completed through complete_activity &#x3D; yes (ignored if complete_activity &#x3D; no)</span><br><span class="line">	on_expire &#x3D; effect				# executed on the activity when expiring from timeout</span><br><span class="line">	on_participant_death			# executed on the dying character during death, activity set as scope:activity</span><br><span class="line">	on_invalidated &#x3D; effect			# executed on the activity when failing the valid trigger	</span><br><span class="line">	solo &#x3D; yes						# marks the activity as a solo activity (no guests)</span><br><span class="line">	has_activity_window &#x3D; yes		# determines if a certain activity should show a window or not</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来结合其他几个具体文件来理解。</p>
+</li>
+<li><p><code>00_activity_feast.txt</code> 宴会：</p>
+<ol>
+<li><p><code>expiration_days = 300</code> 持续300天</p>
+</li>
+<li><p><code>has_activity_window = yes</code> 有事件窗口</p>
+</li>
+<li><p><code>days_until_auto_start = 20</code> 默认20天后开始</p>
+</li>
+<li><p><code>frame = 2</code></p>
+</li>
+<li><p><code>color = { 0.853906 0.867188 0.105469 1 }</code></p>
+</li>
+<li><pre><code>valid = {
+        activity_owner = {
+            is_alive = yes
+            is_imprisoned = no
+        }
+    }</code></pre><p>宴会期间每天检查召开宴会的人活着且没被关起来。</p>
+</li>
+<li><p><code>on_spawn</code>这段很长，大致是宴会事件生成时同时执行的内容，主要是设置潜在宾客列表<code>potential_guests</code>。这段有个<code>if</code>语句，提到条件和配偶有关，没配偶似乎是会随机初始化一个配偶，没太看懂这个设计。</p>
+</li>
+<li><p><code>on_activate</code> 也很长，大致是宴会事件开始时触发的，如果没人来，就结束这个事件，<code>feast.2003</code>可能就是结束宴会的意思；如果有人来，给召开宴会的人选关键事件，再从宾客里选人参与到这个事件中，这里提到<code>reveler（狂欢者？）</code>会得到两点不知道是生活方式还是生活经验的奖励。而作为客人，<code>reveler（狂欢者？）</code>会得到一点，此外针对所有客人，会移除宴会邀请的拦截器（？这里还得之后再看）。</p>
+</li>
+<li><p><code>on_complete</code> 宴会结束时，主人和封臣似乎会有什么互动，每个参与者的目标体重（？）会改变。</p>
+</li>
+<li><p><code>on_expire</code> 宴会到期以后会触发<code>feast.2002</code>。注释说这个不应出现，只是作为异常记录。</p>
+</li>
+<li><p><code>on_participant_death</code>是空的。</p>
+</li>
+<li><p><code>on_invalidated</code> 失效的情况？</p>
+</li>
+</ol>
+</li>
+<li><p><code>00_activity_hunt.txt</code> 打猎：</p>
+<ol>
+<li>和刚才的宴会不同，这里有<code>solo = yes</code>，说明可以一个人打猎。</li>
+<li><code>frame</code>和<code>color</code>暂时还是不太理解。</li>
+<li>这里的很多限制都要求是健康成年人。</li>
+</ol>
+</li>
+<li><p><code>00_activity_meditation.txt</code> 冥想：</p>
+<ol>
+<li>同样可以一个人进行。</li>
+</ol>
+</li>
+<li><p>看上去冥想是宗教决议中的一个：<code>religious_decision.0211</code></p>
+</li>
+<li><p><code>00_activity_pilgrimage.txt</code> 朝圣：因为没看懂就没什么能说的。</p>
+</li>
+<li><p><code>00_activity_witch_ritual.txt</code> 巫术仪式：</p>
+<ol>
+<li>其实也没看懂，看起来是可以搞巫术仪式的，但是限制有点多。</li>
+<li>似乎是有个宴会，参加宴会的可以为所欲为，还会有不一样的音乐（？<code>play_music_cue = &quot;mx_cue_sacredrite&quot;</code>）。</li>
+<li>这里提到的事件有<code>witch.3003</code> <code>witch.3010</code> <code>witch.3098</code>。</li>
+</ol>
+</li>
+<li><p>补充一下：从<code>event</code>文件夹的内容来看，官方没搞冥想和巫术仪式，以后可能会有吧。</p>
+</li>
+</ol>
+</li>
+<li><p><code>ai_goaltypes</code>文件夹和<code>ai_war_stances</code>，这俩看名字是和AI设定有关的。</p>
+<ol>
+<li><code>ai_goaltypes</code>文件夹里只有<code>00_testgoals.txt</code>，内容相当于是空的，可能是留着做mod用。</li>
+<li><code>ai_war_stances</code>文件夹里有<code>_ai_war_stances.info</code>和<code>00_ai_war_stances.txt</code>：<ol>
+<li><code>_ai_war_stances.info</code>说明了战争立场格式，注释说无法添加新的或者删除现有的，但是都能改。</li>
+<li>这里设定的是AI战争时的目标优先级，优先级范围是1-1000，有一个战争目标列表。</li>
+<li>有一个变量<code>enemy_unit_priority</code>，这个值目前设置为100，是指对于战力不到该AI一半的敌军单位，战争优先级数字会增加100，该值的影响似乎会随着敌军单位战力的增长而降低，当敌军战力和该AI战力一样的时候这个值就被看作0。</li>
+<li><code>00_ai_war_stances.txt</code>是具体的优先级设定，分为进攻方和防御方：<ol>
+<li>作为进攻方的AI，在进攻时作战优先级由高到低：目标省（<code>wargoal_province</code> 500）、敌军所在地（<code>enemy_unit_province</code> 300 这个翻译我猜的，可能不对）、敌军首都（<code>enemy_capital_province</code> 150）、敌军省（<code>enemy_province</code> 100）、敌军盟友省（<code>enemy_ally_province</code> 75）、首都（<code>capital_province</code> 50）、普通省（<code>province</code> 25）、保卫战争目标省（<code>defend_wargoal_province</code> 5）。</li>
+<li>作为进攻方的AI，在防御时会优先找敌军所在地（<code>enemy_unit_province</code> 500），其次才是战争目标省（<code>wargoal_province</code> 300），其他和刚才一样。</li>
+<li>作为防御方，也有和上面一样的两部分。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><code>bookmark_portraits</code>文件夹看上去是存了游戏命令行里生成的外貌数据。</p>
+</li>
+<li><p><code>bookmark</code>文件夹中有<code>00_bookmarks.txt</code>，这里存了游戏开局可以选的剧本数据，一共6个时代（3个867和3个1066），设定了起止时间和可选的几个角色以及角色们的相关数据。</p>
+</li>
+<li><p>后面还有好多好多文件夹，等以后用到了再看吧……</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		
+	</div>
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B8%B8%E6%88%8F%E7%9B%B8%E5%85%B3/" rel="tag"><i class="fa fa-tag"></i> 游戏相关</a>
+          
+            <a href="/tags/ck3/" rel="tag"><i class="fa fa-tag"></i> ck3</a>
+          
+            <a href="/tags/mod/" rel="tag"><i class="fa fa-tag"></i> mod</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/28/%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98-1/" rel="next" title="使用算法和数据结构解决问题-1">
+                <i class="fa fa-chevron-left"></i> 使用算法和数据结构解决问题-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/04/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-2/" rel="prev" title="ck3mod制作笔记-2">
+                ck3mod制作笔记-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="Kun Li" />
+            
+              <p class="site-author-name" itemprop="name">Kun Li</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="likun@mail.bnu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新建Mod"><span class="nav-number">1.</span> <span class="nav-text">新建Mod</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-mod文件"><span class="nav-number">1.2.</span> <span class="nav-text">test.mod文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#common文件夹"><span class="nav-number">1.3.</span> <span class="nav-text">common文件夹</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kun Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
