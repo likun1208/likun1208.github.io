@@ -1,9 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ck3mod制作笔记-3</title>
+    <url>/2020/10/05/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-3/</url>
+    <content><![CDATA[<p>接下来是事件和决议的简单写法。</p>
+<a id="more"></a>
+
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="一些文件说明"><a href="#一些文件说明" class="headerlink" title="一些文件说明"></a>一些文件说明</h2><ol>
+<li><p>首先在<code>...\Crusader Kings III\game\common\event_themes</code>文件夹中，可以看到<code>00_event_themes.txt</code>文件，里面记录了游戏中的事件主题，不同的主题会有不同的图标、音乐和背景。</p>
+</li>
+<li><p>其次在<code>...\Crusader Kings III\game\common\event_backgrounds</code>文件夹中，可以看到<code>01_event_backgrounds.txt</code>文件，里面记录了上一条提到的背景对应的信息，包括图片、环境和氛围，例如对于<code>event_background = study</code>的事件主题而言，它的背景信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">study &#x3D; &#123;</span><br><span class="line">	background &#x3D; &#123;</span><br><span class="line">		reference &#x3D; &quot;gfx&#x2F;interface&#x2F;illustrations&#x2F;event_scenes&#x2F;study.dds&quot;</span><br><span class="line">		environment &#x3D; &quot;environment_event_study&quot;</span><br><span class="line">		ambience &#x3D; &quot;event:&#x2F;SFX&#x2F;Events&#x2F;Backgrounds&#x2F;office_workplace&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来在<code>...\Crusader Kings III\game\events</code>文件夹中，可以看到大量事件的具体说明，其中的<code>_events.info</code>文件介绍了事件格式。</p>
+</li>
+</ol>
+<h2 id="事件格式"><a href="#事件格式" class="headerlink" title="事件格式"></a>事件格式</h2><ol>
+<li><p>以勒索事件为例来分析事件格式，勒索事件一共有3种：勒索被拒绝、勒索某人造成恐惧、被勒索带来压力。</p>
+<p>这里分析第一种：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">blackmail.0001 &#x3D; &#123;</span><br><span class="line">	title &#x3D; blackmail.0001.t</span><br><span class="line">	desc &#x3D; blackmail.0001.desc</span><br><span class="line">	theme &#x3D; intrigue</span><br><span class="line">	left_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; scope:recipient</span><br><span class="line">		animation &#x3D; dismissal</span><br><span class="line">	&#125;</span><br><span class="line">	# TODO_CD: Add a check that the secret has not yet been exposed</span><br><span class="line">	immediate &#x3D; &#123;</span><br><span class="line">		play_music_cue &#x3D; mx_cue_murder</span><br><span class="line">	&#125;</span><br><span class="line">	after &#x3D; &#123; remove_variable &#x3D; currently_blackmailing &#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; blackmail.0001.a</span><br><span class="line">		scope:target &#x3D; &#123;</span><br><span class="line">			expose_secret &#x3D; root</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; blackmail.0001.b</span><br><span class="line">		scope:target &#x3D; &#123;</span><br><span class="line">			disable_exposure_by &#x3D; root</span><br><span class="line">		&#125;</span><br><span class="line">		ai_chance &#x3D; &#123;</span><br><span class="line">			factor &#x3D; 0</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>title</code>和<code>desc</code>两个字段对应的内容可以在文本文件（<code>...\Crusader Kings III\game\localization\simp_chinese\event_localization\blackmail_events_l_simp_chinese.yml</code>）中看到；</p>
+<p><code>theme</code>是<code>intrigue</code>，在之前的事件主题中可以找到：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">intrigue &#x3D; &#123;</span><br><span class="line">	icon &#x3D; &#123;</span><br><span class="line">		reference &#x3D; &quot;gfx&#x2F;interface&#x2F;icons&#x2F;event_types&#x2F;type_intrigue.dds&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	sound &#x3D; &#123;</span><br><span class="line">		reference &#x3D; &quot;event:&#x2F;SFX&#x2F;Events&#x2F;Themes&#x2F;sfx_event_theme_type_intrigue&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	background &#x3D; &#123;</span><br><span class="line">		event_background &#x3D; corridor_night</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说该事件出现时会有如上图标音乐和背景。</p>
+<p>接下来<code>left_portrait</code>是说事件发生时左边的人物形象，这里还可以根据需要设置<code>right_portrait, lower_left_portrait, lower_center_portrait, lower_right_portrait</code>。</p>
+<p><code>immediate</code>和<code>after</code>根据字面意思来理解应该是指事件发生时和发生后所触发的效果。</p>
+<p>接下来两个<code>option</code>表示这个事件有两个选项，分别对应的文字是<code>blackmail.0001.a</code>和<code>blackmail.0001.b</code>，对应的结果是暴露用来勒索的秘密和放弃勒索。</p>
+</li>
+<li><p>事件的写法还涉及很多东西，之后再继续看，然后先看看决议。</p>
+</li>
+</ol>
+<h1 id="决议"><a href="#决议" class="headerlink" title="决议"></a>决议</h1><ol>
+<li>决议文件存放在<code>...\Crusader Kings III\game\common\decisions</code>中，同样有一个<code>_decisions.info</code>来说明决议的大致格式。</li>
+<li>决议的格式和事件其实大同小异，就不记录了。</li>
+</ol>
+<h1 id="一个基础尝试"><a href="#一个基础尝试" class="headerlink" title="一个基础尝试"></a>一个基础尝试</h1><p>我希望做一个决议，通过决议触发一个事件，而该事件有3个选项，分别是</p>
+<ol>
+<li>消耗500威望给我1000金钱；</li>
+<li>无事发生；</li>
+<li>消耗1000金钱给我500威望。</li>
+</ol>
+<p>那么首先新建一个mod文件夹，它的路径是<code>C:\Users\LiKun\Documents\Paradox Interactive\Crusader Kings III\mod\test</code>，需要注意的是，在<code>C:\Users\LiKun\Documents\Paradox Interactive\Crusader Kings III\mod</code>文件夹里同时会出现一个<code>test.mod</code>，它指向我们mod的路径，内容是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">version&#x3D;&quot;0.0&quot;</span><br><span class="line">tags&#x3D;&#123;</span><br><span class="line">	&quot;Historical&quot;</span><br><span class="line">&#125;</span><br><span class="line">name&#x3D;&quot;test&quot;</span><br><span class="line">supported_version&#x3D;&quot;1.1.*&quot;</span><br><span class="line">path&#x3D;&quot;C:&#x2F;Users&#x2F;LiKun&#x2F;Documents&#x2F;Paradox Interactive&#x2F;Crusader Kings III&#x2F;mod&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们在mod文件夹中按照游戏本体那样逐层建立所需要的文件夹，这里一定要严格弄清楚所有路径。建立好的文件夹和文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- test</span><br><span class="line">	- common</span><br><span class="line">		- decisions</span><br><span class="line">			give_money_decision.txt</span><br><span class="line">	- events</span><br><span class="line">		- give_money_events</span><br><span class="line">			give_money_events.txt</span><br><span class="line">	- localization</span><br><span class="line">		- simp_chinese</span><br><span class="line">			- event_localization</span><br><span class="line">				give_money_l_simp_chinese.yml</span><br><span class="line">			decisions_test_l_simp_chinese.yml</span><br><span class="line">	descriptor.mod</span><br></pre></td></tr></table></figure>
+
+<p>我首先写的是事件，也就是<code>give_money_events.txt</code>，该文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#x3D; give_money</span><br><span class="line"></span><br><span class="line">give_money.1 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; immortality_set_age.1.t</span><br><span class="line">	desc &#x3D; give_money.1.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.a</span><br><span class="line">		add_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; -500</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.b</span><br><span class="line">		gold &#x3D; -1000</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.c</span><br><span class="line">		remove_short_term_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; 500</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>是非常简单的格式，一共3个选项，没有任何触发限制。其中<code>title, desc, name</code>等需要替换成文字的地方，之后在文本文件会增加内容。</p>
+<p>需要注意的是，这里用<code>add_gold</code>增加金钱，用<code>remove_short_term_gold</code>减少金钱，是因为我发现<code>add_gold = -1000</code>根本不会生效，查了一下现成的和金钱有关的事件文档，发现用的是<code>remove_short_term_gold</code>，但这个句式到底是什么意思目前也不是很确定。</p>
+<p>接下来写决议文件<code>give_money_decision.txt</code>，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">give_money_decision &#x3D; &#123;</span><br><span class="line">	picture &#x3D; &quot;gfx&#x2F;interface&#x2F;illustrations&#x2F;decisions&#x2F;decision_personal_religious.dds&quot;</span><br><span class="line">	desc &#x3D; give_money_decision_desc</span><br><span class="line">	is_valid_showing_failures_only &#x3D; &#123;</span><br><span class="line">		is_available_adult &#x3D; yes</span><br><span class="line">	&#125;</span><br><span class="line">	effect &#x3D; &#123;</span><br><span class="line">		custom_tooltip &#x3D; give_money_decision_effect_tooltip</span><br><span class="line">		trigger_event &#x3D; give_money.1</span><br><span class="line">	&#125;</span><br><span class="line">	ai_check_interval &#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里增加了需要成年人的限制，<code>custom_tooltip = give_money_decision_effect_tooltip</code>是指效果区域会显示<code>give_money_decision_effect_tooltip</code>所对应的文字，而<code>trigger_event = give_money.1</code>表示确认该决议后，会触发事件<code>give_money.1</code>。</p>
+<p>事件和决议都写好以后，就开始完成文本内容，首先是决议文本<code>decisions_test_l_simp_chinese.yml</code>，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> give_money_decision:0 &quot;我好穷啊&quot;</span><br><span class="line"> give_money_decision_tooltip:0 &quot;收点钱。&quot;</span><br><span class="line"> give_money_decision_desc:0 &quot;想要钱吗？&quot;</span><br><span class="line"> give_money_decision_effect_tooltip:0 &quot;点击按钮一键收钱。&quot;</span><br><span class="line"> give_money_decision_confirm:0 &quot;当然&quot;</span><br></pre></td></tr></table></figure>
+
+<p>完成这部分内容后，该决议在游戏中的效果就是</p>
+<p><img src="https://i.loli.net/2020/10/06/HQoYAK7JVivqI62.png" alt="image-20201006221530141"></p>
+<p>相应的，事件文本也是一样的格式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> give_money.1.t:0 &quot;给我打钱！&quot;</span><br><span class="line"> give_money.1.desc:0 &quot;神说要有钱。&quot;</span><br><span class="line"> give_money.1.option.a:0 &quot;好，我喜欢！&quot;</span><br><span class="line"> give_money.1.option.b:0 &quot;不了不了。&quot;</span><br><span class="line"> give_money.1.option.c:0 &quot;你这是看不起我！&quot;</span><br></pre></td></tr></table></figure>
+
+<p>游戏中的效果是</p>
+<p><img src="https://i.loli.net/2020/10/06/MWy7KlRpa1wA4kN.png" alt="image-20201006221637015"></p>
+<p>把文件们都保存好，就完成了第一个基础mod了。</p>
+]]></content>
+      <categories>
+        <category>CK3</category>
+      </categories>
+      <tags>
+        <tag>游戏相关</tag>
+        <tag>ck3</tag>
+        <tag>mod</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ck3mod制作笔记-2</title>
     <url>/2020/10/04/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-2/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>这次了解一下决议和事件的图标相关的事情。</p>
+<a id="more"></a>
+
+<h1 id="关于图片"><a href="#关于图片" class="headerlink" title="关于图片"></a>关于图片</h1><ol>
+<li>游戏中出现的过场图、背景图、事件图标等等基本存放在<code>...\Crusader Kings III\game\gfx\interface</code>文件夹中，比如<code>...\interface\bookmarks</code>里存着开场选人物时的界面贴图，而<code>...\interface\illustrations</code>文件夹里则存着很多尺寸大一些的图（例如过场图、决议说明界面的图等等）；</li>
+<li>这些贴图都是dds格式，不同使用场景的贴图有不同尺寸，可以给PS装dds插件然后打开查看；</li>
+<li>以决议为例，代码段落中会有<code>picture</code>这个选项，例如<code>create_cadet_branch_decision</code>中的是<code>picture = &quot;gfx/interface/illustrations/decisions/decision_dynasty_house.dds&quot;</code>，如果要自己写决议，或者想把某个决议的图像修改成其他样式，就在这里进行替换，注意dds文件的尺寸等；</li>
+<li>开场<code>bookmarks</code>的贴图和上面的不太一样，经过反复分析我发现，在bookmarks文件（<code>...\Crusader Kings III\game\common\bookmarks\00_bookmarks.txt</code>）中，预设的六个是<code>bm_867_northmen</code>、<code>bm_867_adventurers</code>等等，而在<code>...\Crusader Kings III\game\gfx\interface\bookmarks</code>中存在和这些名字相同的六个dds文件，每个可选的人物也类似，总之是dds文件的名字要和bookmarks文件里设定的选项保持一致，这样游戏里会自动对应起来。</li>
+<li>图片暂时就先看到这里。</li>
+</ol>
+<h1 id="关于文本"><a href="#关于文本" class="headerlink" title="关于文本"></a>关于文本</h1><ol>
+<li><p>游戏中出现的文本存放在<code>...\Crusader Kings III\game\localization</code>文件夹中，每个语言有一个文件夹；</p>
+</li>
+<li><p>每个文本文件是<code>.yml</code>格式的，可以用记事本的编辑器打开修改；</p>
+</li>
+<li><p>文本内容格式是：<code>文本名称:0 &quot;text&quot;</code>，这其中的0也见过写成1的，目前不知道是什么区别，也许和路径有关吧。文本名称的命名有固定格式，比如bookms的命名方式是<code>bm_year_bookmarkname</code>，而对应的描述则是<code>bm_year_bookmarkname_desc</code>，如下是一个例子；</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bm_1066_conqueror:0 &quot;Norman England&quot;</span><br><span class="line">bm_1066_conqueror_desc:0 &quot;William has defeated the Anglo-Saxon king Harold at the Battle of Hastings and is crowned king of England, starting an age of Norman rule over the kingdom.&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在使用的时候，注意名称的统一即可，例如：</p>
+<p>在common文件夹的决议文件中，成立葡萄牙的决议如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">form_portugal_decision &#x3D; &#123;</span><br><span class="line">	picture &#x3D; &quot;gfx&#x2F;interface&#x2F;illustrations&#x2F;decisions&#x2F;decision_dynasty_house.dds&quot;</span><br><span class="line">	major &#x3D; yes</span><br><span class="line">	ai_check_interval &#x3D; 60</span><br><span class="line">	desc &#x3D; form_portugal_decision_desc</span><br><span class="line">......</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>那么对应的文本内容则是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">form_portugal_decision:0 &quot;成立葡萄牙&quot;</span><br><span class="line">form_portugal_decision_desc:0 &quot;一旦我控制了伊比利亚半岛的西海岸，我就能成立葡萄牙王国，并且建立自己独特的文化。&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目前先看到这里，还有很多问题之后再说。</p>
+</li>
+</ol>
+]]></content>
       <categories>
         <category>CK3</category>
       </categories>
