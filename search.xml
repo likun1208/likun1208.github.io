@@ -68,6 +68,7 @@
 <p>游戏中的效果是</p>
 <p><img src="https://i.loli.net/2020/10/06/MWy7KlRpa1wA4kN.png" alt="image-20201006221637015"></p>
 <p>把文件们都保存好，就完成了第一个基础mod了。</p>
+<p>补充一个重要说明，文件的编码格式非常重要，统一采用UTF-8-BOM编码，不然会出问题。</p>
 ]]></content>
       <categories>
         <category>CK3</category>
@@ -3885,7 +3886,7 @@
 <li><p>写好以后保存，然后还是blog文件夹的命令行，输入<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>，就发布成功了。</p>
 </li>
 <li><p>如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tags；</span><br><span class="line">	- tag1</span><br><span class="line">	- tag2</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tags:</span><br><span class="line">	- tag1</span><br><span class="line">	- tag2</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
 
 <p>这里<code>tags:</code> 后面一定要换行，下面的<code>-</code>后面注意有空格。</p>
 </li>
