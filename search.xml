@@ -6,10 +6,10 @@
     <content><![CDATA[<p>试一下Echarts看能不能用。</p>
 <a id="more"></a>
 
-<div id="echarts7287" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9269" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7287'));
+        var myChart = echarts.init(document.getElementById('echarts9269'));
 
         // 指定图表的配置项和数据
         var option = {

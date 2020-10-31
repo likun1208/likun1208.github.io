@@ -94,10 +94,12 @@
 
 
 
+<meta name="description" content="三月樱，六月雪，也望尘莫及">
 <meta property="og:type" content="website">
-<meta property="og:title" content="无题">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
-<meta property="og:site_name" content="无题">
+<meta property="og:title" content="左边">
+<meta property="og:url" content="https://likun1208.github.io/archives/2020/04/index.html">
+<meta property="og:site_name" content="左边">
+<meta property="og:description" content="三月樱，六月雪，也望尘莫及">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Kun Li">
 <meta name="twitter:card" content="summary">
@@ -130,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2020/04/"/>
+  <link rel="canonical" href="https://likun1208.github.io/archives/2020/04/"/>
 
 
 
 
 
-  <title>Archive | 无题</title>
+  <title>Archive | 左边</title>
   
 
 
@@ -166,7 +168,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">无题</span>
+        <span class="site-title">左边</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -603,117 +605,6 @@
 	  
     </div>
   </div>
-  <div class="container archive-calendar">
-    <div class="card">
-        <div id="post-calendar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/js/echarts.min.js"></script>
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('post-calendar'));
-
-    <%
-    var nameMap = (config.language && config.language.indexOf('zh') >= 0) ? 'cn' : 'en';
-    var titleText = (config.language && config.language.indexOf('zh') >= 0) ? '文章日历' : 'Post Calendar';
-
-    // calculate range.
-    var startDate = moment().subtract(1, 'years');
-    var endDate = moment();
-    var rangeArr = '["' + startDate.format('YYYY-MM-DD') + '", "' + endDate.format('YYYY-MM-DD') + '"]';
-
-    // post and count map.
-    var dateMap = new Map();
-    site.posts.forEach(function (post) {
-        var date = post.date.format('YYYY-MM-DD');
-        var count = dateMap.get(date);
-        dateMap.set(date, count == null || count == undefined ? 1 : count + 1);
-    });
-
-    // loop the data for the current year, generating the number of post per day
-    var i = 0;
-    var datePosts = '[';
-    var dayTime = 3600 * 24 * 1000;
-    for (var time = startDate; time <= endDate; time += dayTime) {
-        var date = moment(time).format('YYYY-MM-DD');
-        datePosts = (i === 0 ? datePosts + '["' : datePosts + ', ["') + date + '", '
-                + (dateMap.has(date) ? dateMap.get(date) : 0) + ']';
-        i++;
-    }
-    datePosts += ']';
-    %>
-
-    let option = {
-        title: {
-            top: 0,
-            text: '<%- titleText %>',
-            left: 'center',
-            textStyle: {
-                color: '#3C4858'
-            }
-        },
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#555',
-            borderColor: '#777',
-            borderWidth: 1,
-            formatter: function (obj) {
-                var value = obj.value;
-                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
-            }
-        },
-        visualMap: {
-            show: true,
-            showLabel: true,
-            categories: [0, 1, 2, 3, 4],
-            calculable: true,
-            inRange: {
-                symbol: 'rect',
-                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
-            },
-            itemWidth: 12,
-            itemHeight: 12,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: 0
-        },
-        calendar: [{
-            left: 'center',
-            range: <%- rangeArr %>,
-            cellSize: [13, 13],
-            splitLine: {
-                show: false
-            },
-            itemStyle: {
-                color: '#196127',
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            yearLabel: {
-                show: false
-            },
-            monthLabel: {
-                nameMap: '<%- nameMap %>',
-                fontSize: 11
-            },
-            dayLabel: {
-                formatter: '{start}  1st',
-                nameMap: '<%- nameMap %>',
-                fontSize: 11
-            }
-        }],
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            calendarIndex: 0,
-            data: <%- datePosts %>
-        }]
-
-    };
-
-    myChart.setOption(option);
-</script>
- 
   
   
   
@@ -756,7 +647,7 @@
                 alt="Kun Li" />
             
               <p class="site-author-name" itemprop="name">Kun Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">三月樱，六月雪，也望尘莫及</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -802,7 +693,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://github.com/kun-bin" target="_blank" title="GitHub">
+                    <a href="https://github.com/likun1208" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
