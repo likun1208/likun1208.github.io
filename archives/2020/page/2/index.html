@@ -66,7 +66,7 @@
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
@@ -276,7 +276,7 @@
 
  </div>
     </header>
-
+	<script type="text/javascript" src="/js/echarts.min.js"></script>
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
@@ -295,7 +295,7 @@
         
          
         
-        OK! 43 posts in total. Keep on posting.
+        OK! 44 posts in total. Keep on posting.
       </span>
 
       
@@ -309,6 +309,43 @@
           <div class="collection-title">
             <h1 class="archive-year" id="archive-year-2020">2020</h1>
           </div>
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/07/07/typora%E5%9B%BE%E5%BA%8A%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE/" itemprop="url">
+              
+                <span itemprop="name">typora图床功能设置</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-07-07T08:33:38+08:00"
+              content="2020-07-07" >
+          07-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
         
         
 
@@ -637,46 +674,120 @@
 
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/05/12/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-11/" itemprop="url">
-              
-                <span itemprop="name">python课程记录-11</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-05-12T15:03:39+08:00"
-              content="2020-05-12" >
-          05-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
+	  
     </div>
   </div>
+  <div class="container archive-calendar">
+    <div class="card">
+        <div id="post-calendar" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/echarts.min.js"></script>
+<script type="text/javascript">
+    let myChart = echarts.init(document.getElementById('post-calendar'));
+
+    <%
+    var nameMap = (config.language && config.language.indexOf('zh') >= 0) ? 'cn' : 'en';
+    var titleText = (config.language && config.language.indexOf('zh') >= 0) ? '文章日历' : 'Post Calendar';
+
+    // calculate range.
+    var startDate = moment().subtract(1, 'years');
+    var endDate = moment();
+    var rangeArr = '["' + startDate.format('YYYY-MM-DD') + '", "' + endDate.format('YYYY-MM-DD') + '"]';
+
+    // post and count map.
+    var dateMap = new Map();
+    site.posts.forEach(function (post) {
+        var date = post.date.format('YYYY-MM-DD');
+        var count = dateMap.get(date);
+        dateMap.set(date, count == null || count == undefined ? 1 : count + 1);
+    });
+
+    // loop the data for the current year, generating the number of post per day
+    var i = 0;
+    var datePosts = '[';
+    var dayTime = 3600 * 24 * 1000;
+    for (var time = startDate; time <= endDate; time += dayTime) {
+        var date = moment(time).format('YYYY-MM-DD');
+        datePosts = (i === 0 ? datePosts + '["' : datePosts + ', ["') + date + '", '
+                + (dateMap.has(date) ? dateMap.get(date) : 0) + ']';
+        i++;
+    }
+    datePosts += ']';
+    %>
+
+    let option = {
+        title: {
+            top: 0,
+            text: '<%- titleText %>',
+            left: 'center',
+            textStyle: {
+                color: '#3C4858'
+            }
+        },
+        tooltip: {
+            padding: 10,
+            backgroundColor: '#555',
+            borderColor: '#777',
+            borderWidth: 1,
+            formatter: function (obj) {
+                var value = obj.value;
+                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
+            }
+        },
+        visualMap: {
+            show: true,
+            showLabel: true,
+            categories: [0, 1, 2, 3, 4],
+            calculable: true,
+            inRange: {
+                symbol: 'rect',
+                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+            },
+            itemWidth: 12,
+            itemHeight: 12,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 0
+        },
+        calendar: [{
+            left: 'center',
+            range: <%- rangeArr %>,
+            cellSize: [13, 13],
+            splitLine: {
+                show: false
+            },
+            itemStyle: {
+                color: '#196127',
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            yearLabel: {
+                show: false
+            },
+            monthLabel: {
+                nameMap: '<%- nameMap %>',
+                fontSize: 11
+            },
+            dayLabel: {
+                formatter: '{start}  1st',
+                nameMap: '<%- nameMap %>',
+                fontSize: 11
+            }
+        }],
+        series: [{
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            calendarIndex: 0,
+            data: <%- datePosts %>
+        }]
+
+    };
+
+    myChart.setOption(option);
+</script>
+ 
   
   
   
@@ -732,7 +843,7 @@
               
 				<a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
