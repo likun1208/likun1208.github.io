@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="游戏相关,ck3,mod," />
 
 
 
@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="下面程序的运行结果是（    ） 123456for i in range(3):	for j in range(3):		if i &#x3D;&#x3D; j &#x3D;&#x3D; 1；			break		else:			print(i, &#39;----&#39;, j)  A.    0 —- 0                B.    0 —- 0​        0 —- 1                       0 —-">
+<meta name="description" content="这是对CK3的wiki中的事件模组的简要翻译。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python课程记录-2">
-<meta property="og:url" content="https://likun1208.github.io/2020/03/04/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-2/index.html">
+<meta property="og:title" content="ck3mod制作笔记-4">
+<meta property="og:url" content="https://likun1208.github.io/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-4/index.html">
 <meta property="og:site_name" content="左边">
-<meta property="og:description" content="下面程序的运行结果是（    ） 123456for i in range(3):	for j in range(3):		if i &#x3D;&#x3D; j &#x3D;&#x3D; 1；			break		else:			print(i, &#39;----&#39;, j)  A.    0 —- 0                B.    0 —- 0​        0 —- 1                       0 —-">
+<meta property="og:description" content="这是对CK3的wiki中的事件模组的简要翻译。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-04T03:12:25.000Z">
-<meta property="article:modified_time" content="2020-03-16T13:40:46.197Z">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/GlaYmiW15KjkUzF.png">
+<meta property="article:published_time" content="2020-11-08T03:48:18.000Z">
+<meta property="article:modified_time" content="2020-11-08T04:30:28.274Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="游戏相关">
+<meta property="article:tag" content="ck3">
+<meta property="article:tag" content="mod">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/08/GlaYmiW15KjkUzF.png">
 
 
 
@@ -135,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://likun1208.github.io/2020/03/04/python课程记录-2/"/>
+  <link rel="canonical" href="https://likun1208.github.io/2020/11/08/ck3mod制作笔记-4/"/>
 
 
 
 
 
-  <title>python课程记录-2 | 左边</title>
+  <title>ck3mod制作笔记-4 | 左边</title>
   
 
 
@@ -302,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://likun1208.github.io/2020/03/04/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-2/">
+    <link itemprop="mainEntityOfPage" href="https://likun1208.github.io/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -319,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python课程记录-2</h1>
+          <h1 class="post-title" itemprop="name headline">ck3mod制作笔记-4</h1>
         
 
         <div class="post-meta">
@@ -331,8 +335,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-04T11:12:25+08:00">
-                2020-03-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-08T11:48:18+08:00">
+                2020-11-08
               </time>
             
 
@@ -354,8 +358,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
+                  <a href="/categories/CK3/" itemprop="url" rel="index">
+                    <span itemprop="name">CK3</span>
                   </a>
                 </span>
 
@@ -377,6 +381,10 @@
           
 
           
+              <div class="post-description">
+                  这是对CK3的wiki中的事件模组的简要翻译。
+              </div>
+          
 
         </div>
       </header>
@@ -391,158 +399,537 @@
       
 
       
-        <ol>
-<li><p>下面程序的运行结果是（    ）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">if</span> i == j == <span class="number">1</span>；</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(i, <span class="string">'----'</span>, j)</span><br></pre></td></tr></table></figure>
+        <h1 id="事件模组"><a href="#事件模组" class="headerlink" title="事件模组"></a>事件模组</h1><p><a href="https://ck3.paradoxwikis.com/Event_modding" target="_blank" rel="noopener">链接</a></p>
+<h2 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h2><p>事件在<code>ecents</code>文件夹下的<code>.txt</code>文件中。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>整体结构与<a href="https://ck2.paradoxwikis.com/Event_modding" target="_blank" rel="noopener">CK2</a>的事件很相似，但是对语法进行了一些调整，并增加了大量额外的功能，其中许多功能是可选的。此处将介绍每个事件所必须的部分，并在稍后部分中单独介绍其他内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">example.1 &#x3D; &#123;</span><br><span class="line">	desc &#x3D; example.1.desc</span><br><span class="line">	</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; example.1.a</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>A.    0 —- 0                B.    0 —- 0<br>​        0 —- 1                       0 —- 1<br>​        0 —- 2                       0 —- 2<br>​        1 —- 0                       1 —- 0<br>​        2 —- 0<br>​        2 —- 1<br>​        2 —- 2</p>
-</li>
-</ol>
-<a id="more"></a>
-
-<p>答案：A（我怀疑这题的选项对齐在网页上显示会出问题，不过懒得改了）</p>
-<p><code>break</code>的中断只会断一层，也就是说这个代码在<code>i=j=1</code>的时候，属于<code>j</code>的循环会中断，<code>j=2</code>和<code>j=3</code>将跳过，直接开始<code>i=2, j=0</code>然后继续循环，也就是A选项。</p>
-<ol start="2">
-<li><p>下面程序的运行结果是（    ）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">if</span> i == j == <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(i, <span class="string">'----'</span>, j)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p>A.    0 —- 0                B.    0 —- 0<br>​        0 —- 1                       0 —- 1<br>​        0 —- 2                       0 —- 2<br>​        1 —- 0                       1 —- 0<br>​        2 —- 0<br>​        2 —- 1<br>​        2 —- 2</p>
-</li>
-</ol>
-<p>答案：B</p>
-<p>这里首先要学习的是<code>python</code>与其他语言中不太一样的<code>else</code>用法，在其他语言中，<code>else</code>只搭配<code>if</code>来做条件判断，而<code>python</code>中有<code>for... else...</code>、<code>while...else...</code>和<code>try...else...</code>的用法，具体来说，在<code>for</code>循环中如果有并触发了<code>break</code>，则<code>for</code>循环后的<code>else</code>语句不会被执行，如果没触发或者没有，则会执行<code>else</code>分支的语句；在<code>while</code>循环中，也是如此，<code>break</code>不执行或不存在的时候，就会执行<code>else</code>语句，而如果执行了<code>break</code>就不会执行<code>else</code>；<code>try</code>中的用法则是当<code>try</code>块中的语句正常执行完毕就会执行<code>else</code>分支。</p>
-<p>其次，<code>continue</code>在循环中是用来跳过这次循环并开始下一次循环，比如在<code>j=1</code>的时候<code>continue</code>，则<code>j=1</code>中剩下的语句不执行，但是会开始执行<code>j=2</code>，而不是像<code>break</code>那样跳出<code>j</code>的循环去执行<code>i</code>的循环。</p>
-<p>分析这个代码，这个<code>else</code>分支是<code>j</code>的循环对应的，也就是说<code>i=0,j=x</code>时，没触发<code>break</code>，每次都会执行<code>else</code>中的<code>continue</code>，也就是说此时最后一行的打断<code>i</code>的循环的<code>break</code>不会执行；在<code>i=j=1</code>的时候<code>j</code>的循环<code>break</code>了，那么<code>else</code>分支不会执行，就会执行到最后一行的<code>break</code>，从而打断<code>i</code>的循环，程序直接结束，也就是B选项。</p>
-<p>课后作业：</p>
-<ol>
-<li>利用random库，随机出100道两个数的加、减口算题。要求 ： (1)a+b或者a-b，a、b和得数范围均为[0,100]；(2)如果是加法运算，要求有进位；如果是减法运算，要求有退位；(3)在屏幕上打印出结果，每一行显示4道题，注意对齐。示例如下。（示例就不放了总之就是100个加减法运算题，加法有进位减法有借位，输出是格式化的）</li>
-</ol>
-<p>这个本来是不难的，随机生成两个100以内的数字然后随机决定加减法就行，但是还必须有进位和退位。</p>
-<p>一开始的思路是，先随机生成第一个数字<code>a</code>，然后再随机生成<code>0</code>和<code>1</code>来决定加减法，接下来如果是加法，就生成一个在<code>a</code>到<code>100-a</code>之间的数字<code>b</code>，如果是减法，就生成一个在<code>1</code>到<code>a</code>之间的数字<code>b</code>，这两个分支中，如果<code>b</code>不符合进位或者退位，就重新生成，也就是一个<code>while</code>循环。</p>
-<p>按这个思路写好运行以后就发现了问题，那个<code>while</code>循环有时候会一直循环下去就是找不到符合进位或退位的数字<code>b</code>，这是因为一开始的数字<code>a</code>如果不合适，那什么数字也没法实现进位或者退位，比如加法中，个位数如果是<code>0</code>，这个数字还不是<code>90</code>，则无论如何也不会遇到进位；而减法中，这个数字如果个位是<code>9</code>，题目又要求不会出现负数的减法，那无论如何都不可能有借位运算。也就是说，先决定加减法，再生成一个恰当的数字<code>a</code>，它要符合一些条件，接着生成一个恰当的数字<code>b</code>，也要符合一些条件。</p>
-<p>具体来说，数字<code>a</code>要符合：<br>        1. 如果是加法，则个位数不是0，或这个数不是90，且范围在1到90之间；<br>         2. 如果是减法，则个位数不是9，且范围在10到100之间。<br>数字<code>b</code>要符合：<br>        1. 如果是加法，则小于<code>100-a</code>，且个位数之和大于10，或十位数之和大于10；<br>        2. 如果是减法，则小于<code>a</code>，且个位数比<code>a</code>的个位数大，或十位数比<code>a</code>的十位数大。</p>
-<p>最后就是格式化输出，然后就结束了，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">100</span>):</span><br><span class="line">    bool = random.randint(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> bool == <span class="number">0</span>:</span><br><span class="line">        a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        <span class="keyword">while</span> a != <span class="number">90</span> <span class="keyword">and</span> a % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            a = random.randint(<span class="number">1</span>, <span class="number">90</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        <span class="keyword">while</span> ((a % <span class="number">10</span> + b % <span class="number">10</span>) &lt; <span class="number">10</span>) <span class="keyword">and</span> ((a // <span class="number">10</span> + b // <span class="number">10</span>) &lt; <span class="number">10</span>):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, <span class="number">100</span> - a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; + &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="keyword">while</span> a % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">            a = random.randint(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        <span class="keyword">while</span> ((b % <span class="number">10</span>) &lt;= (a % <span class="number">10</span>)) <span class="keyword">and</span> ((b % <span class="number">100</span>) &lt;= (a % <span class="number">100</span>)):</span><br><span class="line">            b = random.randint(<span class="number">1</span>, a)</span><br><span class="line">        print(<span class="string">'&#123;:&lt;2&#125; - &#123;:&lt;2&#125;='</span>.format(a, b), end=<span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">        print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>补充一下关于<code>print</code>格式化输出的内容：</p>
-<p><code>python</code>中的<code>print</code>函数有一个<code>end</code>参数，当直接<code>print</code>而没有<code>end</code>时，默认换行；当<code>end=&quot;&quot;</code>时，就不自动换行了；当<code>end=XXX</code>时，在<code>print</code>后，会接着有<code>XXX</code>，比如上面代码的<code>\t\t</code>，也不自动换行。</p>
-<p>在<code>C</code>语言中，可以通过<code>prints(&quot;%d, %d&quot;, a, b)</code>来实现输出<code>a, b</code>，并通过<code>%x.yd</code>（比如<code>%5.3d</code>)来控制输出长度和精度，而<code>python</code>中有类似的用法，即<code>str.format()</code>，其基本语法是通过<code>{}</code>和<code>:</code>来代替<code>%</code>。<code>&#39;{:&lt;2} - {:&lt;2}=&#39;.format(a, b)</code>这样的语句含义是：把<code>a</code>和<code>b</code>按默认顺序填入前面的花括号，并把长度控制为2个字符且左对齐。</p>
-<p><code>format()</code>的用法很多。</p>
-<p>可以接受不限个数和顺序的参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">"&#123;&#125; &#123;&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)    <span class="comment"># 不设置指定位置，按默认顺序</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'hello world'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"&#123;1&#125; &#123;0&#125; &#123;1&#125;"</span>.format(<span class="string">"hello"</span>, <span class="string">"world"</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">'world hello world'</span></span><br></pre></td></tr></table></figure>
-
-<p>可以指明参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(name=<span class="string">"菜鸟教程"</span>, url=<span class="string">"www.runoob.com"</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过字典设置参数</span></span><br><span class="line">site = &#123;<span class="string">"name"</span>: <span class="string">"菜鸟教程"</span>, <span class="string">"url"</span>: <span class="string">"www.runoob.com"</span>&#125;</span><br><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(**site))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过列表索引设置参数</span></span><br><span class="line">my_list = [<span class="string">'菜鸟教程'</span>, <span class="string">'www.runoob.com'</span>]</span><br><span class="line">print(<span class="string">"网站名：&#123;0[0]&#125;, 地址 &#123;0[1]&#125;"</span>.format(my_list))  <span class="comment"># "0" 是必须的</span></span><br></pre></td></tr></table></figure>
-
-<p>可以向<code>format</code>传入对象：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssignValue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">my_value = AssignValue(<span class="number">6</span>)</span><br><span class="line">print(<span class="string">'value 为: &#123;0.value&#125;'</span>.format(my_value))  <span class="comment"># "0" 是可选的</span></span><br></pre></td></tr></table></figure>
-
-<p>数字格式化输出的完整形式如下：</p>
+<p>写好该mod并加载，即可在游戏中的控制台输入<code>event triggers [example.1]</code>来触发该事件。</p>
+<h3 id="ID和命名空间"><a href="#ID和命名空间" class="headerlink" title="ID和命名空间"></a>ID和命名空间</h3><p>ID是事件独一无二的标志。</p>
+<h3 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h3><p>这些是确定事件种类和外观的顶级变量。它们具有有限的值集。</p>
 <table>
 <thead>
 <tr>
-<th>数字</th>
-<th>格式</th>
-<th>输出</th>
-<th>解释</th>
+<th>Flag</th>
+<th>Meaning</th>
+<th>Possible values</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>3.1415926</td>
-<td>{:.2f}</td>
-<td>3.14</td>
-<td>保留小数点后两位</td>
+<td>type</td>
+<td>事件类型，决定root的范围。</td>
+<td>* character_event none (when an event doesn’t use the root scope at all)</td>
 </tr>
 <tr>
-<td>3.1415926</td>
-<td>{:+.2f}</td>
-<td>+3.14</td>
-<td>带符号保留小数点后两位</td>
-</tr>
-<tr>
-<td>-1</td>
-<td>{:+.2f}</td>
-<td>-1.00</td>
-<td>带符号保留小数点后两位</td>
-</tr>
-<tr>
-<td>2.71828</td>
-<td>{:.0f}</td>
-<td>3</td>
-<td>不带小数</td>
-</tr>
-<tr>
-<td>5</td>
-<td>{:0&gt;2d}</td>
-<td>05</td>
-<td>数字补零 (填充左边, 宽度为2)</td>
-</tr>
-<tr>
-<td>5</td>
-<td>{:x&lt;4d}</td>
-<td>5xxx</td>
-<td>数字补x (填充右边, 宽度为4)</td>
-</tr>
-<tr>
-<td>10</td>
-<td>{:x&lt;4d}</td>
-<td>10xx</td>
-<td>数字补x (填充右边, 宽度为4)</td>
-</tr>
-<tr>
-<td>1000000</td>
-<td>{:,}</td>
-<td>1,000,000</td>
-<td>以逗号分隔的数字格式</td>
-</tr>
-<tr>
-<td>0.25</td>
-<td>{:.2%}</td>
-<td>25.00%</td>
-<td>百分比格式</td>
-</tr>
-<tr>
-<td>1000000000</td>
-<td>{:.2e}</td>
-<td>1.00e+09</td>
-<td>指数记法</td>
-</tr>
-<tr>
-<td>13</td>
-<td>{:&gt;10d}</td>
-<td>13</td>
-<td>右对齐 (默认, 宽度为10)</td>
-</tr>
-<tr>
-<td>13</td>
-<td>{:&lt;10d}</td>
-<td>13</td>
-<td>左对齐 (宽度为10)</td>
-</tr>
-<tr>
-<td>13</td>
-<td>{:^10d}</td>
-<td>13</td>
-<td>中间对齐 (宽度为10)</td>
+<td>hidden</td>
+<td>如果设置为true，则该事件不会显示出来，只会在后台触发。可用于执行与玩家不立即相关的维护事件。</td>
+<td>true, false</td>
 </tr>
 </tbody></table>
-<p><code>^</code>,<code>&lt;</code>, <code>&gt;</code> 分别是居中、左对齐、右对齐，后面带宽度， <code>:</code> 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。<code>+</code> 表示在正数前显示 <code>+</code>，负数前显示 <code>-</code>； （空格）表示在正数前加空格。</p>
-<p>此外，还可以转进制输出，<code>b</code>、<code>d</code>、<code>o</code>、<code>x</code> 分别是二进制、十进制、八进制、十六进制。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">'&#123;:b&#125;'.format(11) --&gt; 1011</span><br><span class="line">'&#123;:d&#125;'.format(11) --&gt; 11</span><br><span class="line">'&#123;:o&#125;'.format(11) --&gt; 13</span><br><span class="line">'&#123;:x&#125;'.format(11) --&gt; b</span><br><span class="line">'&#123;:#x&#125;'.format(11) --&gt; 0xb</span><br><span class="line">'&#123;:#X&#125;'.format(11) --&gt; 0XB</span><br></pre></td></tr></table></figure>
+<h2 id="画像"><a href="#画像" class="headerlink" title="画像"></a>画像</h2><h3 id="画像位置"><a href="#画像位置" class="headerlink" title="画像位置"></a>画像位置</h3><table>
+<thead>
+<tr>
+<th>Portrait Position</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>left_portrait</td>
+<td>出现在事件场景的左边。</td>
+</tr>
+<tr>
+<td>right_portrait</td>
+<td>出现在事件场景的右边。</td>
+</tr>
+<tr>
+<td>lower_left_portrait</td>
+<td>出现在事件场景的左下方。</td>
+</tr>
+<tr>
+<td>lower_center_portrait</td>
+<td>出现在事件场景的中下方。</td>
+</tr>
+<tr>
+<td>lower_right_portrait</td>
+<td>出现在事件场景的右下方。</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">example_event.1001 &#x3D; &#123;</span><br><span class="line">	left_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT # 无论是什么角色，都显示在此事件窗口位置，显示所选的动画。</span><br><span class="line">		animation &#x3D; fear # 请注意，具有某些遗传特征（例如，巨人主义、侏儒主义）的角色更改其角色模型具有不同的动画，如果将其中一个动画分配给没有该模型的角色，则可能会发生崩溃。</span><br><span class="line">	&#125;</span><br><span class="line">	right_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">		animation &#x3D; scheme</span><br><span class="line">	&#125;</span><br><span class="line">	lower_left_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">	lower_center_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">	lower_right_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>编写程序，求解所有由两个四位数组成的亲和数。（如果两个正整数a和b满足：a的所有真因数（除本身以外的因数）之和等于b，同时b的所有真因数之和等于a，则称a，b是一对亲和数 。）</li>
-</ol>
-<p>思路是先写一个算真因数之和的函数，接着写两层循环，第一层<code>a</code>是1000到9999，第二层<code>b</code>是1000到<code>a</code>，然后调用函数判断<code>a</code>和<code>b</code>的真因数之和是否符合条件。一个整数<code>n</code>的真因数之和是很好计算的，只需要遍历1到<code>n//2+1</code>看是否整除<code>n</code>，然后把整除的累加一下，就可以了。</p>
-<p>但是实际运行的时候，发现这样搞真的很慢，要等好久才会出结果，这是因为两层<code>for</code>循环，每次都要算两个真因数的和，而这也是一层循环，再加上<code>python</code>本身就效率很低，速度就格外慢了，因此最好的办法是能去掉一层循环，或者有什么库可以飞快地计算真因数之和。</p>
-<p>然后在查资料的过程中，看到了另一种亲和数的定义：先求出数字<code>n</code>所有真因数之和<code>a</code>，然后再求出数字<code>a</code>所有真因数之和<code>b</code>。如果<code>a!= b</code> 且<code>n==b</code>，则<code>a</code>、<code>b</code>、<code>n</code>都是亲和数。</p>
-<p>也就是说，可以只写一层循环<code>a</code>，计算<code>a</code>的真因数之和<code>b</code>，再计算<code>b</code>的真因数之和<code>sum_b</code>，如果<code>a=sum_b</code>，则符合条件输出一下，反之就直接继续下一次循环，算真因数之和的部分没有变化。这样循环少了一层，运算速度快了好多。</p>
-<p>此外，看到一个不是用取余，而是用除法和整除结果来判断是否是因数的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">d</span><span class="params">(n)</span>:</span>  <span class="comment">#计算数字n所有真因数之和</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> n/i == float(n//i):</span><br><span class="line">            res += i</span><br><span class="line">    <span class="keyword">return</span>(res)</span><br></pre></td></tr></table></figure>
+<p>这段mod所对应的事件如下图所示。</p>
+<p><img src="https://i.loli.net/2020/11/08/GlaYmiW15KjkUzF.png" alt="img"></p>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><table>
+<thead>
+<tr>
+<th>Animation</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>happiness</td>
+<td>dismissal</td>
+<td>prison_dungeon</td>
+<td>admiration</td>
+</tr>
+<tr>
+<td>disgust</td>
+<td>schadenfreude</td>
+<td>stress</td>
+<td>personality_compassionate</td>
+</tr>
+<tr>
+<td>pain</td>
+<td>ecstasy</td>
+<td>fear</td>
+<td>rage</td>
+</tr>
+<tr>
+<td>anger</td>
+<td>flirtation_left</td>
+<td>shame</td>
+<td>boredom</td>
+</tr>
+<tr>
+<td>shock</td>
+<td>worry</td>
+<td>scheme</td>
+<td>personality_bold</td>
+</tr>
+<tr>
+<td>personality_callous</td>
+<td>personality_irrational</td>
+<td>personality_content</td>
+<td>flirtation</td>
+</tr>
+<tr>
+<td>disbelief</td>
+<td>personality_cynical</td>
+<td>personality_rational</td>
+<td>personality_dishonorable</td>
+</tr>
+<tr>
+<td>idle</td>
+<td>paranoia</td>
+<td>personality_vengeful</td>
+<td>disapproval</td>
+</tr>
+<tr>
+<td>sick</td>
+<td>beg</td>
+<td>personality_zealous</td>
+<td>newborn</td>
+</tr>
+<tr>
+<td>love</td>
+<td>sadness</td>
+<td>personality_honorable</td>
+<td>personality_forgiving</td>
+</tr>
+<tr>
+<td>personality_greedy</td>
+<td>personality_coward</td>
+<td>severelyinjured</td>
+<td>severelywounded</td>
+</tr>
+<tr>
+<td>war_attacker</td>
+<td>war_defender</td>
+<td>war_over_win</td>
+<td>grief</td>
+</tr>
+</tbody></table>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><table>
+<thead>
+<tr>
+<th>Theme</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abduct_scheme</td>
+<td>alliance</td>
+<td>bastardy</td>
+<td>battle</td>
+</tr>
+<tr>
+<td>befriend_scheme</td>
+<td>claim_throne_scheme</td>
+<td>corruption</td>
+<td>crown</td>
+</tr>
+<tr>
+<td>culture_change</td>
+<td>death</td>
+<td>default</td>
+<td>diplomacy</td>
+</tr>
+<tr>
+<td>diplomacy_family_focus</td>
+<td>diplomacy_foreign_affairs_focus</td>
+<td>diplomacy_majesty_focus</td>
+<td>dread</td>
+</tr>
+<tr>
+<td>dungeon</td>
+<td>dynasty</td>
+<td>education</td>
+<td>fabricate_hook_scheme</td>
+</tr>
+<tr>
+<td>faith</td>
+<td>family</td>
+<td>feast_activity</td>
+<td>friend_relation</td>
+</tr>
+<tr>
+<td>friendly</td>
+<td>generic_intrigue_scheme</td>
+<td>healthcare</td>
+<td>hunt_activity</td>
+</tr>
+<tr>
+<td>hunting</td>
+<td>intrigue</td>
+<td>intrigue_intimidation_focus</td>
+<td>intrigue_skulduggery_focus</td>
+</tr>
+<tr>
+<td>intrigue_temptation_focus</td>
+<td>learning</td>
+<td>learning_medicine_focus</td>
+<td>learning_scholarship_focus</td>
+</tr>
+<tr>
+<td>learning_theology_focus</td>
+<td>love</td>
+<td>lover_relation</td>
+<td>marriage</td>
+</tr>
+<tr>
+<td>martial</td>
+<td>martial_authority_focus</td>
+<td>martial_chivalry_focus</td>
+<td>martial_strategy_focus</td>
+</tr>
+<tr>
+<td>medicine</td>
+<td>mental_break</td>
+<td>mental_health</td>
+<td>murder_scheme</td>
+</tr>
+<tr>
+<td>party</td>
+<td>pet</td>
+<td>physical_health</td>
+<td>pilgrimage_activity</td>
+</tr>
+<tr>
+<td>pregnancy</td>
+<td>prison</td>
+<td>realm</td>
+<td>recovery</td>
+</tr>
+<tr>
+<td>rival_relation</td>
+<td>romance_scheme</td>
+<td>secret</td>
+<td>seduce_scheme</td>
+</tr>
+<tr>
+<td>seduction</td>
+<td>skull</td>
+<td>stewardship</td>
+<td>stewardship_domain_focus</td>
+</tr>
+<tr>
+<td>stewardship_duty_focus</td>
+<td>stewardship_wealth_focus</td>
+<td>sway_scheme</td>
+<td>unfriendly</td>
+</tr>
+<tr>
+<td>vassal</td>
+<td>war</td>
+<td>witchcraft</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><table>
+<thead>
+<tr>
+<th>Background</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alley_day</td>
+<td>alley_night</td>
+<td>armory</td>
+<td>army_camp</td>
+</tr>
+<tr>
+<td>battlefield</td>
+<td>bedchamber</td>
+<td>burning_building</td>
+<td>corridor_day</td>
+</tr>
+<tr>
+<td>corridor_night</td>
+<td>council_chamber</td>
+<td>courtyard</td>
+<td>docks</td>
+</tr>
+<tr>
+<td>dungeon</td>
+<td>farmland</td>
+<td>feast</td>
+<td>gallows</td>
+</tr>
+<tr>
+<td>garden</td>
+<td>market</td>
+<td>market_east</td>
+<td>market_india</td>
+</tr>
+<tr>
+<td>market_tribal</td>
+<td>market_west</td>
+<td>physicians_study</td>
+<td>sitting_room</td>
+</tr>
+<tr>
+<td>study</td>
+<td>tavern</td>
+<td>temple</td>
+<td>temple_church</td>
+</tr>
+<tr>
+<td>temple_generic</td>
+<td>temple_mosque</td>
+<td>temple_scope</td>
+<td>terrain</td>
+</tr>
+<tr>
+<td>terrain_activity</td>
+<td>terrain_scope</td>
+<td>throne_room</td>
+<td>throne_room_east</td>
+</tr>
+<tr>
+<td>throne_room_india</td>
+<td>throne_room_mediterranean</td>
+<td>throne_room_scope</td>
+<td>throne_room_tribal</td>
+</tr>
+<tr>
+<td>throne_room_west</td>
+<td>wilderness</td>
+<td>wilderness_desert</td>
+<td>wilderness_forest</td>
+</tr>
+<tr>
+<td>wilderness_forest_pine</td>
+<td>wilderness_mountains</td>
+<td>wilderness_scope</td>
+<td>wilderness_steppe</td>
+</tr>
+</tbody></table>
+<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>当选择好背景后，对应的环境也会被自动选择，但如果有必要可以自行指定覆盖。</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>environment_body</td>
+<td>environment_council</td>
+<td>environment_cw_east_main</td>
+</tr>
+<tr>
+<td>environment_cw_east_spouse</td>
+<td>environment_cw_east_throneroom_main</td>
+<td>environment_cw_east_throneroom_spouse</td>
+</tr>
+<tr>
+<td>environment_cw_india_main</td>
+<td>environment_cw_india_spouse</td>
+<td>environment_cw_india_throneroom_main</td>
+</tr>
+<tr>
+<td>environment_cw_india_throneroom_spouse</td>
+<td>environment_cw_mediterranean_main</td>
+<td>environment_cw_mediterranean_spouse</td>
+</tr>
+<tr>
+<td>environment_cw_mediterranean_throneroom_main</td>
+<td>environment_cw_mediterranean_throneroom_spouse</td>
+<td>environment_cw_tavern</td>
+</tr>
+<tr>
+<td>environment_cw_tavern_spouse</td>
+<td>environment_cw_tribal_main</td>
+<td>environment_cw_tribal_spouse</td>
+</tr>
+<tr>
+<td>environment_cw_west</td>
+<td>environment_cw_west_spouse</td>
+<td>environment_event_alley</td>
+</tr>
+<tr>
+<td>environment_event_alley_day</td>
+<td>environment_event_armory</td>
+<td>environment_event_battlefield</td>
+</tr>
+<tr>
+<td>environment_event_bedchamber</td>
+<td>environment_event_church</td>
+<td>environment_event_corridor_day</td>
+</tr>
+<tr>
+<td>environment_event_courtyard</td>
+<td>environment_event_desert</td>
+<td>environment_event_docks</td>
+</tr>
+<tr>
+<td>environment_event_dungeon</td>
+<td>environment_event_farms</td>
+<td>environment_event_feast</td>
+</tr>
+<tr>
+<td>environment_event_forest</td>
+<td>environment_event_forest_pine</td>
+<td>environment_event_gallows</td>
+</tr>
+<tr>
+<td>environment_event_garden</td>
+<td>environment_event_genericcamp</td>
+<td>environment_event_market_east</td>
+</tr>
+<tr>
+<td>environment_event_market_tribal</td>
+<td>environment_event_market_west</td>
+<td>environment_event_mosque</td>
+</tr>
+<tr>
+<td>environment_event_mountains</td>
+<td>environment_event_sittingroom</td>
+<td>environment_event_standard</td>
+</tr>
+<tr>
+<td>environment_event_steppe</td>
+<td>environment_event_study</td>
+<td>environment_event_study_physician</td>
+</tr>
+<tr>
+<td>environment_event_tavern</td>
+<td>environment_event_temple</td>
+<td>environment_event_throne_room_west</td>
+</tr>
+<tr>
+<td>environment_frontend_east_heir</td>
+<td>environment_frontend_east_main</td>
+<td>environment_frontend_east_secondary</td>
+</tr>
+<tr>
+<td>environment_frontend_india_heir</td>
+<td>environment_frontend_india_main</td>
+<td>environment_frontend_india_secondary</td>
+</tr>
+<tr>
+<td>environment_frontend_mediterranean_heir</td>
+<td>environment_frontend_mediterranean_main</td>
+<td>environment_frontend_mediterranean_secondary</td>
+</tr>
+<tr>
+<td>environment_frontend_tribal_heir</td>
+<td>environment_frontend_tribal_main</td>
+<td>environment_frontend_tribal_secondary</td>
+</tr>
+<tr>
+<td>environment_frontend_west_heir</td>
+<td>environment_frontend_west_main</td>
+<td>environment_frontend_west_secondary</td>
+</tr>
+<tr>
+<td>environment_head</td>
+<td>environment_hud</td>
+<td>environment_portrait_editor</td>
+</tr>
+<tr>
+<td>environment_shoulders</td>
+<td>environment_standard</td>
+<td>environment_torso</td>
+</tr>
+<tr>
+<td>environment_war_overview</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><p>是使事件工作的附加内容。</p>
+<h3 id="on-trigger-fail"><a href="#on-trigger-fail" class="headerlink" title="on_trigger_fail"></a>on_trigger_fail</h3><p>当触发器失败时运行该项。</p>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>解释一个描述如何由多个字符串组成，例如<code>first_valid</code>和所有其他选项。</p>
+<h3 id="立即"><a href="#立即" class="headerlink" title="立即"></a>立即</h3><p>该代码块中的内容会在事件触发时立即执行，甚至早于标题、描述和画像的渲染等等。一般用于设置变量和保存范围，或想要实现无玩家控制的功能影响。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>事件中的选项可以由用户选择。每个事件可以有任意数量的选项，包括无选项（一个典型的例子就是隐藏事件）。每个选项在主事件中如下定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">example.1 &#x3D; &#123;</span><br><span class="line">	[...]</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		# option info</span><br><span class="line">	&#125;</span><br><span class="line">	[...]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>猜测<code>python</code>中的除法、整除、取余可能有运算时间的差别，不过应该不大。</p>
-<p>最后代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算一个数的真因数和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_factor</span><span class="params">(n)</span>:</span></span><br><span class="line">    sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n // <span class="number">2</span> + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            sum += i</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">1000</span>, <span class="number">9999</span>):</span><br><span class="line">    b = sum_of_factor(a)</span><br><span class="line">    <span class="keyword">if</span> b &lt;= a:</span><br><span class="line">        sum_b = sum_of_factor(b)</span><br><span class="line">        <span class="keyword">if</span> sum_b == a:</span><br><span class="line">            print(a, b)</span><br></pre></td></tr></table></figure>
+<p>下列表格介绍了<code>option</code>块中的可选关键字：</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Required</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>Yes</td>
+<td>Points to a localization key for the event option button text.</td>
+<td>name=example.1.a</td>
+</tr>
+<tr>
+<td>(effects)</td>
+<td>No</td>
+<td>Any <a href="https://ck3.paradoxwikis.com/Effect" target="_blank" rel="noopener">effects</a> that the option may have can be written directly in the <code>option</code> block.</td>
+<td>play_music_cue = mx_cue_banquet</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>No</td>
+<td>Defines a <a href="https://ck3.paradoxwikis.com/Trigger" target="_blank" rel="noopener">trigger</a> that has to be fulfilled for the option to be valid and thus available to the user. Not to be confused with the <a href="https://ck3.paradoxwikis.com/Event_modding#Trigger" target="_blank" rel="noopener">main event trigger</a>.</td>
+<td><code>trigger = { has_trait = shy }</code></td>
+</tr>
+<tr>
+<td>show_as_unavailable</td>
+<td>No</td>
+<td>If the option is invalid, but this trigger is, the option will be  shown, but disabled. This behavior is also influenced by the  EVENT_OPTIONS_SHOWN_HIDE_UNAVAILABLE define.</td>
+<td><code>show_as_unavailable = { short_term_gold &lt; medium_gold_value }</code></td>
+</tr>
+<tr>
+<td>highlight_portrait</td>
+<td>No</td>
+<td>Highlights the event portrait of this character while this option is hovered. This is in addition to the automatic highlighting when  hovering an event option that has an effect that affects portrait  characters.</td>
+<td>highlight_portrait = scope:custom</td>
+</tr>
+</tbody></table>
+<h3 id="结束后"><a href="#结束后" class="headerlink" title="结束后"></a>结束后</h3><p>该代码块描述了事件发生后运行的内容。</p>
+<h3 id="部件"><a href="#部件" class="headerlink" title="部件"></a>部件</h3><p>有什么类型的小部件。</p>
+<h2 id="On-actions"><a href="#On-actions" class="headerlink" title="On_actions"></a>On_actions</h2><p>这部分wiki上是不完整的，先不详细写了。</p>
+<p>该部分分为两类：On_actions from Code和On_actions Not from Code（即from script）</p>
+<h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><p>这部分wiki也不完整，以后有了在写。</p>
+<p>分为两部分：触发事件 和 技术与设计模式。</p>
+
       
     </div>
     
@@ -569,7 +956,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="/tags/%E6%B8%B8%E6%88%8F%E7%9B%B8%E5%85%B3/" rel="tag"><i class="fa fa-tag"></i> 游戏相关</a>
+          
+            <a href="/tags/ck3/" rel="tag"><i class="fa fa-tag"></i> ck3</a>
+          
+            <a href="/tags/mod/" rel="tag"><i class="fa fa-tag"></i> mod</a>
           
         </div>
       
@@ -582,8 +973,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/28/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-4/" rel="next" title="Let's Build A Simple Interpreter笔记[4]">
-                <i class="fa fa-chevron-left"></i> Let's Build A Simple Interpreter笔记[4]
+              <a href="/2020/10/31/Echarts%E7%9A%84%E9%85%8D%E7%BD%AE/" rel="next" title="Echarts的配置">
+                <i class="fa fa-chevron-left"></i> Echarts的配置
               </a>
             
           </div>
@@ -592,8 +983,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/09/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-5/" rel="prev" title="Let-s-Build-A-Simple-Interpreter笔记-5">
-                Let-s-Build-A-Simple-Interpreter笔记-5 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-5/" rel="prev" title="ck3mod制作笔记-5">
+                ck3mod制作笔记-5 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -646,8 +1037,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -727,6 +1127,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件模组"><span class="nav-number">1.</span> <span class="nav-text">事件模组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位置"><span class="nav-number">1.1.</span> <span class="nav-text">位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构"><span class="nav-number">1.2.</span> <span class="nav-text">结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ID和命名空间"><span class="nav-number">1.2.1.</span> <span class="nav-text">ID和命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识"><span class="nav-number">1.2.2.</span> <span class="nav-text">标识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#画像"><span class="nav-number">1.3.</span> <span class="nav-text">画像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#画像位置"><span class="nav-number">1.3.1.</span> <span class="nav-text">画像位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画"><span class="nav-number">1.3.2.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题"><span class="nav-number">1.3.3.</span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器"><span class="nav-number">1.3.4.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#on-trigger-fail"><span class="nav-number">1.3.5.</span> <span class="nav-text">on_trigger_fail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述"><span class="nav-number">1.3.6.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即"><span class="nav-number">1.3.7.</span> <span class="nav-text">立即</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">1.3.8.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束后"><span class="nav-number">1.3.9.</span> <span class="nav-text">结束后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部件"><span class="nav-number">1.3.10.</span> <span class="nav-text">部件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-actions"><span class="nav-number">1.4.</span> <span class="nav-text">On_actions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略"><span class="nav-number">1.5.</span> <span class="nav-text">策略</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
