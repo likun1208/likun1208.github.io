@@ -1,10 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ck3mod制作笔记-6</title>
+    <url>/2020/12/16/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-6/</url>
+    <content><![CDATA[<h1 id="特质"><a href="#特质" class="headerlink" title="特质"></a>特质</h1><h2 id="基础格式"><a href="#基础格式" class="headerlink" title="基础格式"></a>基础格式</h2><ol>
+<li><p>特质相关的文件有两个，第一个是对特质的说明，存放在文件夹<code>Crusader Kings III\game\common\traits</code>中，文件名为<code>00_traits.txt</code>，同目录下有一个<code>_traits.info</code>是说明怎么写特质；第二个是本地化文本文件，<code>Crusader Kings III\game\localization\simp_chinese\traits_l_simp_chinese.yml</code>，其他语言的也是类似路径。</p>
+</li>
+<li><p>目前游戏里有277个特质，在<a href="https://ck3.parawikis.com/wiki/%E7%89%B9%E8%B4%A8" target="_blank" rel="noopener">wiki</a>中已经有人整理过特质的分类和效果等信息。</p>
+</li>
+<li><p>从<code>_traits.info</code>中我们可以看到，一个特质<code>trait_&lt;key&gt;</code>对应的描述在本地化文本中应该是<code>trait_&lt;key&gt;_desc</code>，而默认图标是<code>gfx/interface/icons/traits/&lt;trait&gt;.dds</code>文件。</p>
+</li>
+<li><p>特质默认加给玩家角色，也就是<code>root</code>。</p>
+</li>
+<li><p>显然，一个最基础的特质<code>test_trait</code>由3部分组成：</p>
+<ol>
+<li><p>特质图标：<code>gfx/interface/icons/traits/test_trait.dds</code></p>
+</li>
+<li><p>特质内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">test_trait &#x3D; &#123;</span><br><span class="line">	index &#x3D; 278</span><br><span class="line">	desc &#x3D; &#123;</span><br><span class="line">		first_valid &#x3D; &#123;</span><br><span class="line">			triggered_desc &#x3D; &#123;</span><br><span class="line">				trigger &#x3D; &#123;</span><br><span class="line">					NOT &#x3D; &#123; exists &#x3D; this &#125;</span><br><span class="line">				&#125;</span><br><span class="line">				desc &#x3D; trait_test_trait_desc</span><br><span class="line">			&#125;</span><br><span class="line">			desc &#x3D; trait_test_trait_character_desc</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特质文本描述：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> # test traits</span><br><span class="line"> trait_test_trait:0 &quot;XXX&quot;</span><br><span class="line"> trait_test_trait_desc:0 &quot;XXX&quot;</span><br><span class="line"> trait_test_trait_character_desc:0 &quot;XXX&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要注意的是，在特质内容中，为了保证触发特效时该角色是存在的，我们需要进行<code>first_valid</code>来验证<code>Root</code>存在。</p>
+</li>
+<li><p>文本描述中，如果需要出现角色的名字，可以通过<code>[ROOT.GetCharacter.GetFirstNameNoTooltip]</code>来获取角色名。</p>
+</li>
+</ol>
+</li>
+<li><p>当我们按照上一条中，准备好对应的图标，并在mod文件夹中建立了<code>traits</code>文件夹和相应的特质文件，以及本地化内容也新建了文件，就会得到如下文件结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- test</span><br><span class="line">	- common</span><br><span class="line">		- traits</span><br><span class="line">			01_traits.txt</span><br><span class="line">	- gfx</span><br><span class="line">		- interface</span><br><span class="line">			- icons</span><br><span class="line">				- traits</span><br><span class="line">					test_trait.dds</span><br><span class="line">	- localization</span><br><span class="line">		- simp_chinese</span><br><span class="line">			- traits_test_l_simp_chinese.yml</span><br><span class="line">	descriptor.mod</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，特质文件和本地化文件的文件名本身并不是很重要，但是如果和CK3官方的那俩文件重名，则需要把那两个文件中的内容也原封不动复制过来，否则本身自带的特质就会都没法用。</p>
+</li>
+<li><p>准备好一系列文件以后，打开游戏通过<code>add_traits</code>指令增加特质，就可以看到对应的特质了。</p>
+</li>
+</ol>
+<h2 id="一些具体设置"><a href="#一些具体设置" class="headerlink" title="一些具体设置"></a>一些具体设置</h2><ol>
+<li>除了上述的文本描述以外，特质还可以增加很多具体设置，例如对角色的影响、获取的触发条件等等。</li>
+<li></li>
+</ol>
+]]></content>
+      <categories>
+        <category>CK3</category>
+      </categories>
+      <tags>
+        <tag>游戏相关</tag>
+        <tag>ck3</tag>
+        <tag>mod</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ck3mod制作笔记-5</title>
     <url>/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-5/</url>
-    <content><![CDATA[<h1 id="条件式"><a href="#条件式" class="headerlink" title="条件式"></a>条件式</h1><h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="条件式"><a href="#条件式" class="headerlink" title="条件式"></a>条件式</h1><h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>条件式的基本结构和CK2里一样，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if &#x3D; &#123;</span><br><span class="line">	limit &#x3D; &#123;</span><br><span class="line">		# 条件</span><br><span class="line">	&#125;</span><br><span class="line">	# 符合条件时执行的指令</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>其实条件式不仅限于if语句，在其他地方也会出现这样<code>limit = ...</code>的句式，用来表示执行指令的条件。</p>
+<p>接下来沿用之前的例子，将送钱的事件写一个条件式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#x3D; give_money</span><br><span class="line">give_money.1 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; give_money.1.t</span><br><span class="line">	desc &#x3D; give_money.1.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.a</span><br><span class="line">		add_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; -500</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.b</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.c</span><br><span class="line">		if &#x3D; &#123;</span><br><span class="line">			limit &#x3D; &#123;</span><br><span class="line">				gold &gt;1000</span><br><span class="line">			&#125;</span><br><span class="line">			remove_short_term_gold &#x3D; 1000</span><br><span class="line">			add_prestige &#x3D; 500</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，现在第三个选项是有条件执行的，当金币大于1000时，会执行减少金钱增加虔诚的指令，而金币不足则不会执行。具体到游戏中，界面如下图，当右上角金币只有26的时候，第三个选项是没有直接影响；而金币超过1000时，则第三个选项变成了扣钱换虔诚。</p>
+<p><img src="https://i.loli.net/2020/12/05/nUe1ExpMmFwiJgr.png" alt="image-20201205211819919"></p>
+<p><img src="https://i.loli.net/2020/12/05/EMmug4AC7KRUFrS.png" alt="image-20201205212017719"></p>
+<h2 id="增加分支"><a href="#增加分支" class="headerlink" title="增加分支"></a>增加分支</h2><p>在一些情况下，我们需要表达“如果满足条件，则执行A指令；反之，则执行B指令”，这种情况就不能简单地用上面的结构来实现，而是使用else语句，具体结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if &#x3D; &#123;</span><br><span class="line">	limit &#x3D; &#123;</span><br><span class="line">		# 条件</span><br><span class="line">	&#125;</span><br><span class="line">	# 符合条件时执行的指令</span><br><span class="line">&#125;</span><br><span class="line">else &#x3D; &#123;</span><br><span class="line">	# 不符合条件时执行的指令</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如我们希望，当金钱不够1000时加200虔诚，不扣钱，那就如下改写：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">option &#x3D; &#123;</span><br><span class="line">	name &#x3D; give_money.1.option.c</span><br><span class="line">	if &#x3D; &#123;</span><br><span class="line">		limit &#x3D; &#123;</span><br><span class="line">			gold &gt;1000</span><br><span class="line">		&#125;</span><br><span class="line">		remove_short_term_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; 500</span><br><span class="line">	&#125;</span><br><span class="line">	else &#x3D; &#123;</span><br><span class="line">		add_prestige &#x3D; 200</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体效果如下图，当金币够1000时，和前面一样；而金币不够1000时，则只有加200虔诚。</p>
+<p><img src="https://i.loli.net/2020/12/05/42FCzK9NsnlEhZ5.png" alt="image-20201205213507855"></p>
+<p><img src="https://i.loli.net/2020/12/05/VbFYSnlX19IqHAp.png" alt="image-20201205213724688"></p>
+<ul>
+<li>需要补充说明的是，CK2中没有else语句，而是通过增加break来实现分支的；相反，CK3中无法通过break来实现分支。</li>
+</ul>
+<h1 id="随机性结果"><a href="#随机性结果" class="headerlink" title="随机性结果"></a>随机性结果</h1><p>当我们希望某个选项的结果随机出现的时候，就需要用到<code>Random</code>，它有以下两种用法：</p>
+<ol>
+<li><p>该选项有一定概率得到某种结果，或者无事发生：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">random &#x3D; &#123;</span><br><span class="line">	chance &#x3D; 概率值</span><br><span class="line">	选项结果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，我们将之前的事件中的第二个选项修改成如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">option &#x3D; &#123;</span><br><span class="line">	name &#x3D; give_money.1.option.b</span><br><span class="line">	random &#x3D; &#123;</span><br><span class="line">		chance &#x3D; 50</span><br><span class="line">		add_gold &#x3D; 1000</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个选项很容易理解，有50%的概率得到1000金币，游戏中的截图如下：</p>
+<p><img src="https://i.loli.net/2020/12/10/GLtuAOkoBDZ4S8h.png" alt="image-20201210193754167"></p>
+<p>顺带一提，明明是50%的概率，我却直到第5次才获得1000……</p>
+</li>
+<li><p>更多情况我们会希望得到多个随机结果，这时就要用<code>Random_list</code>，结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">random_list &#x3D; &#123;</span><br><span class="line">	概率1 &#x3D; &#123;</span><br><span class="line">		第一个结果</span><br><span class="line">	&#125;</span><br><span class="line">	概率2 &#x3D; &#123;</span><br><span class="line">		第二个结果</span><br><span class="line">	&#125;</span><br><span class="line">	概率3 &#x3D; &#123;</span><br><span class="line">		第三个结果</span><br><span class="line">	&#125;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种结构下，每个情况的触发概率并不是直接的百分比，而是该选项值占所有概率总和的百分比，具体来说，比如（30，30，15）这样的组合中，第一个选项的概率并不是30%，而是30/75，也就是40%。</p>
+<p>我们再将刚才的事件进行如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">option &#x3D; &#123;</span><br><span class="line">	name &#x3D; give_money.1.option.b</span><br><span class="line">	random_list &#x3D; &#123;</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			add_gold &#x3D; 1000</span><br><span class="line">		&#125;</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			add_gold &#x3D; 100</span><br><span class="line">		&#125;</span><br><span class="line">		15 &#x3D; &#123;</span><br><span class="line">			remove_short_term_gold &#x3D; 200</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样修改后，游戏中的截图如下：</p>
+<p><img src="https://i.loli.net/2020/12/10/T1wtGmAWIkvqrCo.png" alt="image-20201210194729366"></p>
+</li>
+</ol>
+<h2 id="有触发的随机性条件"><a href="#有触发的随机性条件" class="headerlink" title="有触发的随机性条件"></a>有触发的随机性条件</h2><p>虽然到目前为止还没学触发（Trigger），但大致意思应该能看懂，和前面if语句中的limit有点像。</p>
+<p>如果某个随机选项有触发条件，那么当满足条件时，该选项的概率值才会参与计算，例如下面这个事件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">option &#x3D; &#123;</span><br><span class="line">	name &#x3D; give_money.1.option.b</span><br><span class="line">	random_list &#x3D; &#123;</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			trigger &#x3D; &#123;</span><br><span class="line">				gold &gt; 1000</span><br><span class="line">			&#125;</span><br><span class="line">			add_gold &#x3D; 1000</span><br><span class="line">		&#125;</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			add_gold &#x3D; 100</span><br><span class="line">		&#125;</span><br><span class="line">		15 &#x3D; &#123;</span><br><span class="line">			remove_short_term_gold &#x3D; 200</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当金币不足1000时，可以看到游戏中截图如下：</p>
+<p><img src="https://i.loli.net/2020/12/10/EkoGJDMLstROlY5.png" alt="image-20201210195304419"></p>
+<p>而当金币够1000时，事件就变成了：</p>
+<p><img src="https://i.loli.net/2020/12/10/mp8YdqW7IS1R2vZ.png" alt="image-20201210195404539"></p>
+<h2 id="修改随机权重"><a href="#修改随机权重" class="headerlink" title="修改随机权重"></a>修改随机权重</h2><p>有时候我们希望某个随机结果的权重根据不同的条件而发生改变，例如前面的事件中，同样是得到1000金币，我们希望根据不同的管理值会有不同的概率。这样的效果我们可以使用<code>modifier</code>来实现，具体事件代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">option &#x3D; &#123;</span><br><span class="line">	name &#x3D; give_money.1.option.b</span><br><span class="line">	random_list &#x3D; &#123;</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			trigger &#x3D; &#123;</span><br><span class="line">				gold &gt; 1000</span><br><span class="line">			&#125;</span><br><span class="line">			modifier &#x3D; &#123;</span><br><span class="line">				add &#x3D; stewardship</span><br><span class="line">			&#125;</span><br><span class="line">			add_gold &#x3D; 1000</span><br><span class="line">		&#125;			</span><br><span class="line">		30 &#x3D; &#123;</span><br><span class="line">			add_gold &#x3D; 100</span><br><span class="line">		&#125;</span><br><span class="line">		15 &#x3D; &#123;</span><br><span class="line">			remove_short_term_gold &#x3D; 200</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的含义就是，该选项有3个随机结果，分别是金币+1000，金币+100，金币-200，其概率组合是（30+管理值，30，15）。</p>
+<p>那么在游戏中我们可以看到，该角色管理值是8，对应的事件如下：</p>
+<p><img src="https://i.loli.net/2020/12/10/htkEOdT9qS3xBQY.png" alt="image-20201210203011631"></p>
+<p>需要注意的是，不能直接把类似stewardship这样的词放到概率值那里，如果我们希望直接用stewardship当概率，则应该按下面的形式来写：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">random_list &#x3D; &#123;</span><br><span class="line">	0 &#x3D; &#123;</span><br><span class="line">		modifier &#x3D; &#123;</span><br><span class="line">			add &#x3D; stewardship</span><br><span class="line">		&#125;</span><br><span class="line">		......</span><br><span class="line">	&#125;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，我尝试给modifier加trigger或者if语句，都失败了，可能它只能单独出现吧。</p>
 ]]></content>
       <categories>
         <category>CK3</category>
@@ -497,7 +608,7 @@
 <h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><p>是使事件工作的附加内容。</p>
 <h3 id="on-trigger-fail"><a href="#on-trigger-fail" class="headerlink" title="on_trigger_fail"></a>on_trigger_fail</h3><p>当触发器失败时运行该项。</p>
 <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>解释一个描述如何由多个字符串组成，例如<code>first_valid</code>和所有其他选项。</p>
-<h3 id="立即"><a href="#立即" class="headerlink" title="立即"></a>立即</h3><p>该代码块中的内容会在事件触发时立即执行，甚至早于标题、描述和画像的渲染等等。一般用于设置变量和保存范围，或想要实现无玩家控制的功能影响。</p>
+<h3 id="即时模块"><a href="#即时模块" class="headerlink" title="即时模块"></a>即时模块</h3><p>该代码块中的内容会在事件触发时立即执行，甚至早于标题、描述和画像的渲染等等。一般用于设置变量和保存范围，或想要实现无玩家控制的功能影响。</p>
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>事件中的选项可以由用户选择。每个事件可以有任意数量的选项，包括无选项（一个典型的例子就是隐藏事件）。每个选项在主事件中如下定义：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">example.1 &#x3D; &#123;</span><br><span class="line">	[...]</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		# option info</span><br><span class="line">	&#125;</span><br><span class="line">	[...]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -589,10 +700,10 @@
 
 
 
-<div id="echarts4345" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8706" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4345'));
+        var myChart = echarts.init(document.getElementById('echarts8706'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -720,7 +831,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- test</span><br><span class="line">	- common</span><br><span class="line">		- decisions</span><br><span class="line">			give_money_decision.txt</span><br><span class="line">	- events</span><br><span class="line">		- give_money_events</span><br><span class="line">			give_money_events.txt</span><br><span class="line">	- localization</span><br><span class="line">		- simp_chinese</span><br><span class="line">			- event_localization</span><br><span class="line">				give_money_l_simp_chinese.yml</span><br><span class="line">			decisions_test_l_simp_chinese.yml</span><br><span class="line">	descriptor.mod</span><br></pre></td></tr></table></figure>
 
 <p>我首先写的是事件，也就是<code>give_money_events.txt</code>，该文件如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#x3D; give_money</span><br><span class="line"></span><br><span class="line">give_money.1 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; immortality_set_age.1.t</span><br><span class="line">	desc &#x3D; give_money.1.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.a</span><br><span class="line">		add_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; -500</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.b</span><br><span class="line">		gold &#x3D; -1000</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.c</span><br><span class="line">		remove_short_term_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; 500</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#x3D; give_money</span><br><span class="line"></span><br><span class="line">give_money.1 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; give_money.1.t</span><br><span class="line">	desc &#x3D; give_money.1.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.a</span><br><span class="line">		add_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; -500</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.b</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; give_money.1.option.c</span><br><span class="line">		remove_short_term_gold &#x3D; 1000</span><br><span class="line">		add_prestige &#x3D; 500</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>是非常简单的格式，一共3个选项，没有任何触发限制。其中<code>title, desc, name</code>等需要替换成文字的地方，之后在文本文件会增加内容。</p>
 <p>需要注意的是，这里用<code>add_gold</code>增加金钱，用<code>remove_short_term_gold</code>减少金钱，是因为我发现<code>add_gold = -1000</code>根本不会生效，查了一下现成的和金钱有关的事件文档，发现用的是<code>remove_short_term_gold</code>，但这个句式到底是什么意思目前也不是很确定。</p>
@@ -965,11 +1076,30 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.sqrt(<span class="number">16</span>)</span><br><span class="line"><span class="number">4.0</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 
 <p>这是<strong>过程抽象(procedural abstraction)</strong>的示例。我们不一定知道平方根是如何计算的，但我们知道函数的调用以及如何使用它。如果我们正确执行导入，我们可以假定函数将为我们提供正确的结果。我们知道有人实现了平方根问题的解决方案，但我们并不关心是如何实现的，只需要知道如何使用它。这有时称为进程的”黑盒”视图。我们简单地将接口描述为：函数的名称、需要什么（参数）以及将返回什么，而具体内容则隐藏在接口中，如图1.1。</p>
-<p><img src="https://i.loli.net/2020/11/06/UwFpIlg9mroSa8i.jpg" alt="过程抽象"></p>
+<center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://i.loli.net/2020/11/06/UwFpIlg9mroSa8i.jpg">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图1.1 过程抽象</div> </center>
+
 <h3 id="1-3-1-什么是编程"><a href="#1-3-1-什么是编程" class="headerlink" title="1.3.1 什么是编程"></a>1.3.1 什么是编程</h3><p><strong>编程</strong>是将算法编码为符号（编程语言）从而使其可以在计算机上执行的过程。尽管存在许多编程语言和许多不同类型的计算机，但重要的第一步是提出解决方案，没有算法就没有程序。</p>
 <p>计算机科学不是编程的研究，然而编程是计算机科学家工作的一个重要部分。编程通常是我们为解决方案创建的表示。因此，这种语言表示和创建过程成为学科的基本部分。</p>
 <p>算法根据表示问题实例所需的数据和产生预期结果所需的步骤集来描述问题的解决方案。编程语言必须提供一种符号方式来表示进程和数据。为此，语言提供了控件构造和数据类型。</p>
-]]></content>
+<p>控件构造允许以方便而明确的方式表示算法步骤。算法至少需要执行顺序处理、决策选择和重复控制迭代的构造（注：简单来说就是顺序、选择、循环）。只要编程语言提供这些基本语句，它就可以用于算法表示。</p>
+<p>计算机中的所有数据项都表示为二进制数字字符串。为了给这些字符串赋予意义，我们需要有<strong>数据类型</strong>。数据类型为此二进制数据提供解释，以便我们可以从与所解决的问题有意义的术语中分析数据。这些低级的内置数据类型（有时称为基元数据类型）为算法开发提供了构建基块。</p>
+<p>例如，大多数编程语言为整数提供了数据类型，计算机内存中的二进制数字字符串可以解释为整数，并给出我们通常与整数关联的典型含义（例如 23、654 和 -19）。此外，数据类型还提供数据项可以参与的操作的说明，对于整数，加法、减法和乘法等操作是通用的。我们期望该数字类型的数据可以参与这些算术运算。</p>
+<p>我们经常遇到的困难是，问题及其解决方法非常复杂。这些简单的语言所提供的构造和数据类型虽然肯定足以表示复杂的解决方案，但往往会使我们再处理问题的过程中处于不利地位。我们需要控制这种复杂性和协助创建解决方案的方法。</p>
+<h3 id="1-3-2-为什么要学习数据结构和抽象数据类型"><a href="#1-3-2-为什么要学习数据结构和抽象数据类型" class="headerlink" title="1.3.2 为什么要学习数据结构和抽象数据类型"></a>1.3.2 为什么要学习数据结构和抽象数据类型</h3><p>为了管理问题的复杂性和解决问题的过程，计算机科学家们使用抽象，使他们能够专注于”大局”，而不会迷失在细节中。通过创建问题域的模型，我们能够利用更好、更高效的问题求解过程。这些模型允许我们以与问题本身更加一致的方式来描述我们的算法将处理的数据。</p>
+<p>在前文中，我们提到过程抽象是一个隐藏特定函数的详细信息的过程，以允许用户或客户端在非常高的级别上查看它。现在，我们把注意力转向一个类似的想法，即<strong>数据抽象</strong>。<strong>抽象数据类型</strong>（有时称为<strong>ADT</strong>）是对我们如何查看数据及其允许操作的逻辑描述，我们并不关心如何实现该数据类型。这意味着我们只关心数据所代表的是什么，而不关心数据是如何构造的。通过提供这种抽象级别，我们围绕数据创建封装，其理念是，在用户视图中，通过封装将实现过程的详细信息隐藏起来，这被称为信息隐藏。</p>
+<p>图 1.2 显示了抽象数据类型及其操作方式的图片。用户使用抽象数据类型指定的操作与接互。抽象数据类型是用户与之交互的 shell。实现过程被隐藏在更深的一层，而用户并不关心实现过程的详细信息。</p>
+<center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://i.loli.net/2020/11/12/iqCUNtAdfyQEM16.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图1.2 抽象数据类型</div> </center>
+
+<p>抽象数据类型的实现（通常称为数据结构）要求我们使用一些编程构造和基元数据类型的集合提供数据的物理视图。正如我们前面所讨论的，这两个视图的分离将使我们能够在无需说明模型实际构建的细节的情况下，定义我们问题的复杂数据模型，它提供了<strong>实现独立性</strong>的数据视图。由于实现抽象数据类型通常有很多不同的方法，因此这种实现独立性允许程序员切换实现过程的详细信息，而无需更改数据用户与其交互的方式，用户可以继续专注于解决问题的过程。</p>
+<h3 id="1-3-3-为什么要学习算法"><a href="#1-3-3-为什么要学习算法" class="headerlink" title="1.3.3 为什么要学习算法"></a>1.3.3 为什么要学习算法</h3><p>计算机科学家通过经验学习，通过看到别人解决问题和自己解决问题来学习。接触不同的问题解决技术，并了解不同的算法是如何设计的，这有助于我们面对下一个具有挑战性的问题。通过思考许多不同的算法，我们可以开始开发模式识别，以便下次出现类似的问题时，可以更好地解决它。</p>
+<p>算法通常彼此大不相同，例如前文中的<code>sqrt</code>示例，完全有可能有许多不同的方法来具体实现计算平方根的函数。某种算法使用的资源可能比另一种算法少很多，而某种算法可能需要10倍的时间才能返回结果。我们希望有一些办法来比较这两种解决方案，即使它们都是有效方案，一种也许会比另一种更好。我们可能会认为一种方法更高效，或者运行得更快或使用更少的内存。当我们研究算法时，我们可以学习分析技术，这些分析技术使我们能够仅根据解决方案自身的特点进行比较和对比，而不是基于用于实现它们的程序或计算机的特性。</p>
+<p>在最坏的情况下，我们可能有一个难以解决的棘手问题，这意味着没有算法可以在实际的时间内解决问题。能够区分那些有解决办法的问题、没有解决办法的问题和存在解决方案但需要太多时间或其他资源才能合理工作的问题是很重要的。</p>
+<p>我们往往需要确定和决定解决方案之间的权衡，作为计算机科学家，除了解决问题的能力外，我们还需要了解和理解解决方案的评估技术。最后，往往有很多方法可以解决问题。找到一个解决方案，然后决定它是否是好的，是我们将不断重复完成的任务。</p>
+<h2 id="1-4-基础Python复习"><a href="#1-4-基础Python复习" class="headerlink" title="1.4 基础Python复习"></a>1.4 基础Python复习</h2><p>在本节中，我们将回顾编程语言 Python，并提供上一节中想法的一些更详细的示例。如果你是 Python 的初学者，或者发现需要有关任何内容的更多信息，我们建议你参考诸如<code>Python Language Reference</code>或<code>Python Tutorial</code>这样的资源。在这里我们的目标是重新认识Python语言，并加强一些后几章中的核心概念。</p>
+<p>Python 是一种现代、易于学习、面向对象的编程语言。它有一组强大的内置数据类型和易于使用的控件构造。由于 Python 是一种解释性语言，因此只需查看和描述交互式会话，就可以了解它。你应该记得，解释器在提示<code>&gt;&gt;&gt;</code>时显示操作，然后评估您提供的 Python 构造。例如下面这段代码展示了提示、打印功能、结果和下一个提示。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">"Algorithms and Data Structures"</span>)</span><br><span class="line">Algorithms <span class="keyword">and</span> Data Structures</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-1-从数据开始"><a href="#1-4-1-从数据开始" class="headerlink" title="1.4.1 从数据开始"></a>1.4.1 从数据开始</h3>]]></content>
       <categories>
         <category>Problem Solving with Algorithms and Data Structures</category>
       </categories>

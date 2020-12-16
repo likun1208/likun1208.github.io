@@ -94,16 +94,17 @@
 
 
 
-<meta name="description" content="第一章 前言1.1 目标 回顾计算机科学、编程和解决问题的想法。  理解“抽象”及其在解决问题的过程中发挥的作用。  理解和实现抽象数据类型的概念。  复习 Python 编程语言。   1.2 开始自从第一台通过贴片电缆和开关来传达人与机器之间指令的电子计算机问世以来，我们对编程的思考方式已经发生了许多变化。与社会的许多方面一样，计算机技术的变化为计算机科学家提供了越来越多的工具和平台来练习他们">
+<meta name="description" content="第一章">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用算法和数据结构解决问题-1">
 <meta property="og:url" content="https://likun1208.github.io/2020/09/28/%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98-1/index.html">
 <meta property="og:site_name" content="左边">
-<meta property="og:description" content="第一章 前言1.1 目标 回顾计算机科学、编程和解决问题的想法。  理解“抽象”及其在解决问题的过程中发挥的作用。  理解和实现抽象数据类型的概念。  复习 Python 编程语言。   1.2 开始自从第一台通过贴片电缆和开关来传达人与机器之间指令的电子计算机问世以来，我们对编程的思考方式已经发生了许多变化。与社会的许多方面一样，计算机技术的变化为计算机科学家提供了越来越多的工具和平台来练习他们">
+<meta property="og:description" content="第一章">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/11/06/UwFpIlg9mroSa8i.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/11/12/iqCUNtAdfyQEM16.png">
 <meta property="article:published_time" content="2020-09-28T07:10:15.000Z">
-<meta property="article:modified_time" content="2020-11-06T08:49:31.728Z">
+<meta property="article:modified_time" content="2020-11-12T06:57:41.129Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="翻译">
@@ -380,6 +381,10 @@
           
 
           
+              <div class="post-description">
+                  第一章
+              </div>
+          
 
         </div>
       </header>
@@ -419,11 +424,30 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.sqrt(<span class="number">16</span>)</span><br><span class="line"><span class="number">4.0</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 
 <p>这是<strong>过程抽象(procedural abstraction)</strong>的示例。我们不一定知道平方根是如何计算的，但我们知道函数的调用以及如何使用它。如果我们正确执行导入，我们可以假定函数将为我们提供正确的结果。我们知道有人实现了平方根问题的解决方案，但我们并不关心是如何实现的，只需要知道如何使用它。这有时称为进程的”黑盒”视图。我们简单地将接口描述为：函数的名称、需要什么（参数）以及将返回什么，而具体内容则隐藏在接口中，如图1.1。</p>
-<p><img src="https://i.loli.net/2020/11/06/UwFpIlg9mroSa8i.jpg" alt="过程抽象"></p>
+<center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://i.loli.net/2020/11/06/UwFpIlg9mroSa8i.jpg">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图1.1 过程抽象</div> </center>
+
 <h3 id="1-3-1-什么是编程"><a href="#1-3-1-什么是编程" class="headerlink" title="1.3.1 什么是编程"></a>1.3.1 什么是编程</h3><p><strong>编程</strong>是将算法编码为符号（编程语言）从而使其可以在计算机上执行的过程。尽管存在许多编程语言和许多不同类型的计算机，但重要的第一步是提出解决方案，没有算法就没有程序。</p>
 <p>计算机科学不是编程的研究，然而编程是计算机科学家工作的一个重要部分。编程通常是我们为解决方案创建的表示。因此，这种语言表示和创建过程成为学科的基本部分。</p>
 <p>算法根据表示问题实例所需的数据和产生预期结果所需的步骤集来描述问题的解决方案。编程语言必须提供一种符号方式来表示进程和数据。为此，语言提供了控件构造和数据类型。</p>
+<p>控件构造允许以方便而明确的方式表示算法步骤。算法至少需要执行顺序处理、决策选择和重复控制迭代的构造（注：简单来说就是顺序、选择、循环）。只要编程语言提供这些基本语句，它就可以用于算法表示。</p>
+<p>计算机中的所有数据项都表示为二进制数字字符串。为了给这些字符串赋予意义，我们需要有<strong>数据类型</strong>。数据类型为此二进制数据提供解释，以便我们可以从与所解决的问题有意义的术语中分析数据。这些低级的内置数据类型（有时称为基元数据类型）为算法开发提供了构建基块。</p>
+<p>例如，大多数编程语言为整数提供了数据类型，计算机内存中的二进制数字字符串可以解释为整数，并给出我们通常与整数关联的典型含义（例如 23、654 和 -19）。此外，数据类型还提供数据项可以参与的操作的说明，对于整数，加法、减法和乘法等操作是通用的。我们期望该数字类型的数据可以参与这些算术运算。</p>
+<p>我们经常遇到的困难是，问题及其解决方法非常复杂。这些简单的语言所提供的构造和数据类型虽然肯定足以表示复杂的解决方案，但往往会使我们再处理问题的过程中处于不利地位。我们需要控制这种复杂性和协助创建解决方案的方法。</p>
+<h3 id="1-3-2-为什么要学习数据结构和抽象数据类型"><a href="#1-3-2-为什么要学习数据结构和抽象数据类型" class="headerlink" title="1.3.2 为什么要学习数据结构和抽象数据类型"></a>1.3.2 为什么要学习数据结构和抽象数据类型</h3><p>为了管理问题的复杂性和解决问题的过程，计算机科学家们使用抽象，使他们能够专注于”大局”，而不会迷失在细节中。通过创建问题域的模型，我们能够利用更好、更高效的问题求解过程。这些模型允许我们以与问题本身更加一致的方式来描述我们的算法将处理的数据。</p>
+<p>在前文中，我们提到过程抽象是一个隐藏特定函数的详细信息的过程，以允许用户或客户端在非常高的级别上查看它。现在，我们把注意力转向一个类似的想法，即<strong>数据抽象</strong>。<strong>抽象数据类型</strong>（有时称为<strong>ADT</strong>）是对我们如何查看数据及其允许操作的逻辑描述，我们并不关心如何实现该数据类型。这意味着我们只关心数据所代表的是什么，而不关心数据是如何构造的。通过提供这种抽象级别，我们围绕数据创建封装，其理念是，在用户视图中，通过封装将实现过程的详细信息隐藏起来，这被称为信息隐藏。</p>
+<p>图 1.2 显示了抽象数据类型及其操作方式的图片。用户使用抽象数据类型指定的操作与接互。抽象数据类型是用户与之交互的 shell。实现过程被隐藏在更深的一层，而用户并不关心实现过程的详细信息。</p>
+<center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="https://i.loli.net/2020/11/12/iqCUNtAdfyQEM16.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">图1.2 抽象数据类型</div> </center>
 
+<p>抽象数据类型的实现（通常称为数据结构）要求我们使用一些编程构造和基元数据类型的集合提供数据的物理视图。正如我们前面所讨论的，这两个视图的分离将使我们能够在无需说明模型实际构建的细节的情况下，定义我们问题的复杂数据模型，它提供了<strong>实现独立性</strong>的数据视图。由于实现抽象数据类型通常有很多不同的方法，因此这种实现独立性允许程序员切换实现过程的详细信息，而无需更改数据用户与其交互的方式，用户可以继续专注于解决问题的过程。</p>
+<h3 id="1-3-3-为什么要学习算法"><a href="#1-3-3-为什么要学习算法" class="headerlink" title="1.3.3 为什么要学习算法"></a>1.3.3 为什么要学习算法</h3><p>计算机科学家通过经验学习，通过看到别人解决问题和自己解决问题来学习。接触不同的问题解决技术，并了解不同的算法是如何设计的，这有助于我们面对下一个具有挑战性的问题。通过思考许多不同的算法，我们可以开始开发模式识别，以便下次出现类似的问题时，可以更好地解决它。</p>
+<p>算法通常彼此大不相同，例如前文中的<code>sqrt</code>示例，完全有可能有许多不同的方法来具体实现计算平方根的函数。某种算法使用的资源可能比另一种算法少很多，而某种算法可能需要10倍的时间才能返回结果。我们希望有一些办法来比较这两种解决方案，即使它们都是有效方案，一种也许会比另一种更好。我们可能会认为一种方法更高效，或者运行得更快或使用更少的内存。当我们研究算法时，我们可以学习分析技术，这些分析技术使我们能够仅根据解决方案自身的特点进行比较和对比，而不是基于用于实现它们的程序或计算机的特性。</p>
+<p>在最坏的情况下，我们可能有一个难以解决的棘手问题，这意味着没有算法可以在实际的时间内解决问题。能够区分那些有解决办法的问题、没有解决办法的问题和存在解决方案但需要太多时间或其他资源才能合理工作的问题是很重要的。</p>
+<p>我们往往需要确定和决定解决方案之间的权衡，作为计算机科学家，除了解决问题的能力外，我们还需要了解和理解解决方案的评估技术。最后，往往有很多方法可以解决问题。找到一个解决方案，然后决定它是否是好的，是我们将不断重复完成的任务。</p>
+<h2 id="1-4-基础Python复习"><a href="#1-4-基础Python复习" class="headerlink" title="1.4 基础Python复习"></a>1.4 基础Python复习</h2><p>在本节中，我们将回顾编程语言 Python，并提供上一节中想法的一些更详细的示例。如果你是 Python 的初学者，或者发现需要有关任何内容的更多信息，我们建议你参考诸如<code>Python Language Reference</code>或<code>Python Tutorial</code>这样的资源。在这里我们的目标是重新认识Python语言，并加强一些后几章中的核心概念。</p>
+<p>Python 是一种现代、易于学习、面向对象的编程语言。它有一组强大的内置数据类型和易于使用的控件构造。由于 Python 是一种解释性语言，因此只需查看和描述交互式会话，就可以了解它。你应该记得，解释器在提示<code>&gt;&gt;&gt;</code>时显示操作，然后评估您提供的 Python 构造。例如下面这段代码展示了提示、打印功能、结果和下一个提示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">"Algorithms and Data Structures"</span>)</span><br><span class="line">Algorithms <span class="keyword">and</span> Data Structures</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-1-从数据开始"><a href="#1-4-1-从数据开始" class="headerlink" title="1.4.1 从数据开始"></a>1.4.1 从数据开始</h3>
       
     </div>
     
@@ -558,7 +582,7 @@
               
 				<a href="/archives/">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -629,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-前言"><span class="nav-number">1.</span> <span class="nav-text">第一章 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-目标"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-开始"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-什么是计算科学"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 什么是计算科学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-什么是编程"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 什么是编程</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-前言"><span class="nav-number">1.</span> <span class="nav-text">第一章 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-目标"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-开始"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-什么是计算科学"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 什么是计算科学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-什么是编程"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 什么是编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-为什么要学习数据结构和抽象数据类型"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 为什么要学习数据结构和抽象数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-为什么要学习算法"><span class="nav-number">1.3.3.</span> <span class="nav-text">1.3.3 为什么要学习算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-基础Python复习"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 基础Python复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-从数据开始"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 从数据开始</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
