@@ -102,7 +102,7 @@
 <meta property="og:description" content="这部分学习特质相关的内容。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-16T06:35:13.000Z">
-<meta property="article:modified_time" content="2020-12-16T07:03:30.149Z">
+<meta property="article:modified_time" content="2020-12-20T12:25:04.214Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="游戏相关">
 <meta property="article:tag" content="ck3">
@@ -431,9 +431,43 @@
 </li>
 </ol>
 <h2 id="一些具体设置"><a href="#一些具体设置" class="headerlink" title="一些具体设置"></a>一些具体设置</h2><ol>
-<li>除了上述的文本描述以外，特质还可以增加很多具体设置，例如对角色的影响、获取的触发条件等等。</li>
-<li></li>
+<li>除了上述的文本描述以外，特质还可以增加很多具体设置，例如对角色的影响、获取的触发条件等等。以下内容是对<code>_traits.info</code>文件的翻译。</li>
+<li><code>health</code>：表示该特质对健康的修正，例如在特质身心俱悉（<code>whole_of_body</code>）中，有一条<code>health = 0.5</code>，表示有该特质的角色健康+0.5。</li>
+<li><code>fertility</code>：表示该特质对生育力的修正百分比，例如还是身心俱悉中，有一条<code>fertility = 0.2</code>表示该角色的生育力+25%。</li>
+<li><code>inherit_chance</code>：表示该特质遗传给孩子的概率，例如特质梅毒<code>great_pox</code>中有一条<code>inherit_chance = 10</code>，表示遗传概率是10%。</li>
+<li><code>birth</code>：表示有百分之多少的人会带着这个特质出生。</li>
+<li><code>random_creation</code>：表示有百分之多少的人会带着这个特质被创造出来。和出生不一样的是，创造是指通过命令行生成和修改人物。不过根据检索，<code>00_traits</code>文件里的<code>birth</code>和<code>random_creation</code>都是一起出现的，且值相等。</li>
+<li><code>triggered_opinion</code>：这一条应该是针对角色好感度修正特质的触发器，它包括以下内容：<ol>
+<li><code>opinion_modifier</code>：修正的好感度类型</li>
+<li><code>parameter</code>：要检查的布尔值参数</li>
+<li><code>check_missing</code>：检查参数是否没设置（或设置为 false），而不是设置为 true</li>
+<li><code>same_faith</code>：相同信仰</li>
+<li><code>same_dynasty</code>：相同王朝</li>
+<li><code>ignore_opinion_value_if_same_trait</code>：设置为<code>yes</code>的时候，会对有相同特质的角色不进行好感度修正，但是惩罚理由还在</li>
+<li><code>male_only</code>和<code>female_only</code>很显然分别是仅限男性和仅限女性</li>
 </ol>
+</li>
+<li><code>compatibility</code>：这是用于<code>compatibility_modifier</code>和<code>trait_compatibility</code>这两个触发器的，是检查特质持有者与列出的特质的兼容性。感觉是指获取某一特质后，再获取其他特质的概率会受这个列表值的修正。具体怎么用还不太明白，之后补充。</li>
+<li><code>parent_inheritance_sex</code>：可以是<code>male/female/all</code>，表示该特质可以从父亲/母亲/双亲继承。</li>
+<li><code>child_inheritance_sex</code>：值同上，表示该特质可以遗传给男孩/女孩/所有孩子。</li>
+<li><code>genetic</code>：默认是<code>no</code>，如果被设置为<code>yes</code>，则表示特征可以是非活动状态。子级可以从活动和非活动父特征中继承该特征。活动特征继承为 100% 的机会，非活动特征为 50% 的机会。如果从父母两个成功继承该特征，则该特征将变为活动状态。如果仅从一个父级继承，则它是非活动状态。（可以理解成生物学基因的隐性显性）。</li>
+<li><code>inherit_from_real_father</code>：是否可以从亲生父亲那里继承，其实不太懂这个和前面<code>parent_inheritance_sex</code>有什么不一样的。</li>
+<li><code>enables_inbred</code>：概括来说这个标志为<code>yes</code>时意味着这个特质是近亲繁殖的。</li>
+<li><code>good</code>：特质标识为好的（默认值是<code>no</code>，表示坏的）。</li>
+<li><code>genetic_constraint_all</code>：这种遗传约束将在获得特征时应用。</li>
+<li><code>forced_portrait_age_index</code>：年龄索引，可以设置多个，但是我还不知道年龄索引是什么东西，以后补充。</li>
+<li><code>portrait_extremity_shift</code>：这个值是一个表示百分比的小数，角色获得对应特质时，每个变形基因都会按这个百分比向 0 或 1 移动，具体是0还是1看基因本身接近哪个，比如该值为0.25， 基因值为0.4，则0.4将向0偏移0.25，从而变成0.3。</li>
+<li><code>ugliness_portrait_extremity_shift</code>：和上一条一样，但是获得此特质时，与角色最极端的单一特征（在公共/基因中定义）相关的每个变形基因都会按此百分比向 0 或 1 移动。关于这里的特征、基因等词还不太了解，以后再补充。</li>
+<li><code>immortal</code>：设置为<code>yes</code>后，获得该特质的角色会停止视觉老化，使角色对自然死亡免疫。仍然可以被脚本杀死。生育能力将匹配视觉年龄。可以使用<code>set_immortal_age</code>更改视觉年龄。</li>
+<li><code>physical, health_trait, fame</code>：这三个设置为<code>yes</code>则分别表示该特质是和物理、健康、名誉相关。</li>
+<li><code>trait_exclusive_if_realm_contains</code>：这个值是<code>{}</code>，大括号里可以填东西，表示随机分配给指挥官时考虑的地形类型列表。只有当指挥官的文化包含具有列表中指定的地形类型之一的省时，才分配/考虑这些特征。</li>
+<li><code>blocks_from_claim_inheritance</code>：设置为<code>yes</code>时，有该特质的角色无法继承头衔宣称。</li>
+<li><code>blocks_from_claim_inheritance_from_dynasty</code>：同上，设置为<code>yes</code>时，有该特质的角色无法从王朝成员那里继承头衔宣称。</li>
+<li><code>shown_in_ruler_designer</code>：默认是<code>yes</code>，设置为<code>yes</code>时，可以在自定义角色的那个地方的特质列表中看到该特质。</li>
+<li><code>ruler_designer_cost</code>：默认是0，同上，是指自定义角色时该特质消耗的点数。</li>
+<li><code>valid_sex</code>：可以是<code>all/male/female</code>，默认是<code>all</code>，表示该特质可以由什么性别的角色获得。</li>
+</ol>
+<h2 id="如何使角色得到特质"><a href="#如何使角色得到特质" class="headerlink" title="如何使角色得到特质"></a>如何使角色得到特质</h2><p>和命令行一样，在<code>mod</code>里需要角色获取特质的时候，<code>add_trait = trait_ID</code>即可。</p>
 
       
     </div>
@@ -638,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特质"><span class="nav-number">1.</span> <span class="nav-text">特质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础格式"><span class="nav-number">1.1.</span> <span class="nav-text">基础格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些具体设置"><span class="nav-number">1.2.</span> <span class="nav-text">一些具体设置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特质"><span class="nav-number">1.</span> <span class="nav-text">特质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础格式"><span class="nav-number">1.1.</span> <span class="nav-text">基础格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些具体设置"><span class="nav-number">1.2.</span> <span class="nav-text">一些具体设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使角色得到特质"><span class="nav-number">1.3.</span> <span class="nav-text">如何使角色得到特质</span></a></li></ol></li></ol></div>
             
 
           </div>
