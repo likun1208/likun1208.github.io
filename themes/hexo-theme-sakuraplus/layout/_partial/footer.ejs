@@ -1,0 +1,159 @@
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info">
+        <div class="footertext">
+          <div class="img-preload">
+              <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+              <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+          </div>
+        </div>
+        <!-- 网站数据统计 -->
+        <div class="footer-device">
+          <p style="font-family: 'Ubuntu', sans-serif;">
+            <span style="color: #ff9999;padding-left: 20px;">
+                <!-- 网站运行时间统计 -->
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                <span id="time" align="center">载入时间中...</span>
+                <script>
+                var now = new Date(); 
+                function createtime() { 
+                      var grt= new Date("<%- theme.siteBuildingTime %>");//在此处修改你的建站时间
+                      now.setTime(now.getTime()+250); 
+                      days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                      if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                      mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                      snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                      document.getElementById("time").innerHTML = "小破站在各种灾难中苟活了 "+ dnum +" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";      
+                  } 
+                  setInterval("createtime()",250);
+                </script>
+            </span> 
+          </p>
+        </div>
+        <div class="footer-device">
+          <p style="font-family: 'Ubuntu', sans-serif;">
+            <span style="color: #b9b9b9;padding-left: 20px;">
+              <!-- 全网站字数统计wordcount -->
+              <i class="fa fa-line-chart"  aria-hidden="true" style="color: #ff9999;display:inline-block"></i> 博客全站共: <span class="post-count" style="color:#ff9999;"><%= totalcount(site) %></span>字</span>
+              <!-- 不蒜子网页计数器 -->
+              <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalTraffic) { %>
+              <span style="padding-left: 20px;"><i class="fa fa-fire" aria-hidden="true" style="color: #ff9999;display:inline-block"></i><span id="busuanzi_container_site_pv">总访问量： <span id="busuanzi_value_site_pv" style="color:#ff9999;"></span>次</span>
+              </span>
+              <% } %>
+              <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalNumberOfvisitors) { %>
+              <span style="padding-left: 20px;"><i class="fa fa-user" aria-hidden="true" style="color: #ff9999;display:inline-block"></i><span id="busuanzi_container_site_uv">总访问人数： <span id="busuanzi_value_site_uv" style="color:#ff9999;"></span>人</span>
+              </span>
+              <% } %>
+            </span>
+          </p>
+        </div>
+        <!-- 作者注明 -->
+        <div class="footer-device">
+          <p style="font-family: 'Ubuntu', sans-serif;">
+              <span style="color: #b9b9b9;">
+                Copyright &copy; <%= date(new Date(), 'YYYY') %>
+                &nbsp;<a style="color: #ff9999;display:inline-block"> <%= config.author || config.title %> </a>
+                &nbsp;<i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> 
+                &nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" style="color: #ff9999;display:inline-block">Hexo</a>
+                |&nbsp;Theme&nbsp;<a href="https://gitee.com/cungudafa/hexo-theme-sakuraplus" target="_blank" style="color: #ff9999;display:inline-block">SakuraPlus</a>
+              </span>
+          </p>
+        </div>
+         <!-- 网站作者版权注明 -->
+         <% if (theme.icp.enable) { %>
+          <div id="footer-info" class="inner">
+            <p style="font-family: 'Ubuntu', sans-serif;">
+              <span style="color: #ff9999;">
+                <%= theme.icp.text %>
+              </span>
+            </p>
+          </div>
+        <% } %>
+    </div><!-- .site-info -->
+</footer>
+
+<% if (theme.linkcard.enable ){ %>
+<script type="text/javascript" src="<%- theme.libs.js.linkcard %>"></script>
+<% } %>
+<script type="text/javascript" src="<%- theme.libs.js.lib %>"></script>
+<script src="<%- theme.libs.js.clipboard %>"></script>
+<script type="text/javascript" src="<%- theme.libs.js.InsightSearch %>"></script>
+<script type="text/javascript" src="<%- theme.libs.js.sakura_app %>"></script>
+
+<% if (theme.busuanziStatistics.enable){ %>
+<script async src="<%- theme.libs.js.busuanzi %>"></script>
+<% } %>
+<!-- fancybox大图查看 需jq -->
+<% if (theme.fancybox.enable){ %>
+  <script type="text/javascript" src="<%- theme.libs.js.fancybox %>"></script>
+  <script>
+    $('[data-fancybox="images"]').fancybox({
+      thumbs : {
+        autoStart : true //缩略图
+      }
+    });
+    $('[data-fancybox]').fancybox({
+      protect: true,//图片右键不能下载
+      youtube : {
+          controls : 0,
+          showinfo : 0
+      },
+      vimeo : {
+          color : 'f00'
+      }
+    });
+  </script>
+<% } %>
+
+<!-- 自适应浏览器 -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = {"pjax":"<%- theme.pjax %>","movies":{"url": "<%- theme.movies.url %>","name":"<%- theme.movies.name%>","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+  } else {
+    var Poi = {"pjax":"<%- theme.pjax %>","movies":{"url": "<%- theme.movies.url %>","name":"<%- theme.movies.name%>","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+  }
+  /* ]]> */
+  
+  </script>
+  <script>
+  $(document).ready(function() {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '.toc', // 放置目录的容器
+            // Where to grab the headings to build the table of contents.
+            contentSelector: '.entry-content', // 正文内容所在
+            // Which headings to grab inside of the contentSelector element.
+            scrollSmooth: true,
+            headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+            headingsOffset: -400,
+            scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '.toc', // 放置目录的容器
+            // Where to grab the headings to build the table of contents.
+            contentSelector: '.entry-content', // 正文内容所在
+            // Which headings to grab inside of the contentSelector element.
+            scrollSmooth: true,
+            headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+            headingsOffset: -85,
+            scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+  </script>

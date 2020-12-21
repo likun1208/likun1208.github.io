@@ -1,0 +1,30 @@
+<div class="pattern-center-blank">
+</div>
+<div class="pattern-center ">
+    <div class="pattern-attachment-img">
+        <img src="https://cdn.jsdelivr.net/gh/drew233/cdn/20200303155335.webp" data-src="<%= page.photos %>"
+            class="lazyload" onerror="imgError(this,3)"
+            style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    </div>
+    <style type="text/css">
+        #contentss {
+            position: relative;
+            width: 800px;
+            height: 900px;
+            max-height: 1200px;
+            text-align: center;
+            border: 0;
+            color: rgba(0, 0, 0, .87);
+            background: rgba(255, 255, 255, .8);
+            background-size: cover;
+            margin: 0 auto;
+        }
+    </style>
+    <header class="pattern-header ">
+        <h1 class="entry-title">
+            文章数据统计</h1>
+    </header>
+</div>
+<div id="contentss">
+    <%- partial('_widget/post-charts') %>
+</div>

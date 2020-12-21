@@ -1,0 +1,20 @@
+<% if (pagination >= 2){ %>
+    <!-- 置顶文章 -->
+    <% page.posts.each(function(post, index){ %>
+      <% if (post.top){ %>
+        <%- partial('_widget/category-items', {index: index, post: post}) %>
+      <% } %>
+    <% }) %>
+    <!-- 首页默认取最最新文章集 -->
+    <% page.posts.sort('date', theme.homePageSortType).limit(theme.homeArticleShown).each(function(post, index){ %>
+      <!-- 其余文章 -->
+      <% if (!post.top){ %>
+        <%- partial('_widget/category-items', {index: index, post: post}) %>
+      <% } %> 
+    <% }) %>
+<% } else { %>
+  <% page.posts.each(function(post, index){ %>
+    <%- partial('_widget/category-items', {index: index, post: post}) %>
+  <% }) %>
+<% } %>
+

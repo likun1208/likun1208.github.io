@@ -1,0 +1,28 @@
+{
+  "name": "hexo-theme-sakuraplus",
+  "version": "0.0.2",
+  "description": "Hexo sakura theme personal beautification custom made by cungudafa",
+  "license": "MIT",
+  "dependencies": {
+    "hexo-renderer-ejs": "^0.2.0",
+    "hexo-renderer-marked": "^0.2.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitee.com/cungudafa/hexo-theme-sakuraplus.git"
+  },
+  "keywords": [
+    "Simple",
+    "sakura",
+    "cungudafa",
+    "Hexo"
+  ],
+  "bugs": {
+    "url": "https://gitee.com/cungudafa/hexo-theme-sakuraplus/issues"
+  },
+  "author": {
+    "name": "cungudafa",
+    "url": "https://www.cungudafa.top",
+    "email": "cungudafa@163.com"
+  }
+}

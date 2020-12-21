@@ -25,6 +25,7 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
+    "hexo-tag-echarts": "^1.0.0",
     "live2d-widget-model-shizuku": "^1.0.5",
     "live2d-widget-model-wanko": "^1.0.5",
     "live2d-widget-model-z16": "^1.0.5"

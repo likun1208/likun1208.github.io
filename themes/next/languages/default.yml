@@ -35,6 +35,9 @@ post:
   wordcount: Words count in article
   min2read: Reading time
   totalcount: Site words total count
+  copy_button: Copy
+  copy_success: Success
+  copy_failure: Fail
   copyright:
     author: Post author
     link: Post link

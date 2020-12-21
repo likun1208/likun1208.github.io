@@ -2,6 +2,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="{{ theme.android_chrome_color }}">
+<meta name="baidu-site-verification" content="code-Vc9hmj7JE9" />
+<meta name="google-site-verification" content="tMVEtTlHbEdIEga44DZi47Yu8Pl2shFKVZcqz6rfSW0" />
 <script>
     (function () {
         if ('{{ page.password }}') {
@@ -85,7 +87,7 @@
 <link href="{{ font_awesome_uri }}" rel="stylesheet" type="text/css" />
 
 <link href="{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
 {% if theme.favicon.apple_touch_icon %}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for(theme.favicon.apple_touch_icon) }}?v={{ theme.version }}">
 {% endif %}

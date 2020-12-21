@@ -2,7 +2,7 @@
 title: blender学习记录-4
 date: 2020-08-13 12:01:04
 tags: 随便学学
-cagegories: blender
+categories: blender
 ---
 
 在这里记录一些学到的技巧。

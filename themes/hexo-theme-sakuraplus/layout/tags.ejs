@@ -1,0 +1,86 @@
+<div class="blank" style="padding-top: 75px;">
+</div>
+<div class="pattern-center ">
+  <div class="pattern-attachment-img">
+    <% if (page.photos) { %>
+    <img src="<%= page.photos %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    <% } else { %>
+      <img src="<%= theme.bg[Math.floor(Math.random() * theme.bg.length + 1)-1] %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    <% } %>
+    <header class="pattern-header ">
+      <h1 class="entry-title">
+        标签云</h1>
+        <span class="post-meta-item-icon">
+          <i class="iconfont icon-attention"></i>
+        </span>
+        <span class="post-meta-item-text">本页共<span id="busuanzi_value_page_pv"> </span>次阅读
+        </span>
+    </header>
+  </div>
+</div>
+<div id="content" class="site-content">
+  <div id="main">
+    <header class="page-header">
+      <h1 class="cat-title">
+      标签云</h1>
+      <span class="cat-des">
+        <p>
+          <%- "Tags " + site.tags.length %></p>
+      </span>
+    </header>
+    <div id="main-part">
+   
+        <div class="tag-cloud">
+          <div class="tag-cloud-title">
+          </div>
+          <div class="tag-cloud-tags">
+          <%- tagcloud({
+            min_font: 15,
+            max_font: 30,
+            amount: 200,
+            color: true,
+            start_color: '#ff6666',
+            end_color: '#0099cc'
+            }) %>
+          </div>
+        </div>
+
+        <%- partial('_widget/tag-cloud') %>
+
+        <% if (site.tags && site.tags.length > 0) { %>
+        <%- partial('_widget/tag-wordcloud') %>
+        <% } %>
+
+      
+        <section class="author-profile">
+          <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <a href="/about/" class="profile gravatar"><img src="<%- (theme.cdn || '') + theme.avatar%>" itemprop="image" alt="hojun" height="70" width="70"></a>
+            <div class="meta">
+              <span class="title">Author</span>
+              <h3 itemprop="name">
+              <a href="<%- theme.url%>" itemprop="url" rel="author"><%- config.author %></a>
+              </h3>
+            </div>
+          </div>
+          <hr>
+          <p id="showStr"></p>
+        </section>
+        <!-- 一言 -->
+        <script type="text/javascript" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=&encode=js&fun=sync&source="></script>
+        <div style="display:none" id="hitokoto"><script>hitokoto()</script>
+        </div>
+        <script>
+            var index = 0;
+            var str = document.getElementById("hitokoto").innerText;
+            str = str.substring(10, str.length)//裁剪hitokoto()字样
+            function type() {
+              if(index == str.length) {
+                  index = 0;
+                }
+                document.getElementById("showStr").innerText = str.substring(0, index++);
+            }
+            setInterval(type, 200); //通过定时器来让文字逐步显示
+        </script>
+      </div>   
+  </div>
+</div>

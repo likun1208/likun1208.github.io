@@ -13,7 +13,7 @@
 # Set to true, if you want to fully override the default configuration.
 # Useful if you don't want to inherit the theme _config.yml configurations.
 override: false
-
+postCalendar: true
 # ---------------------------------------------------------------
 # Site Information Settings
 # ---------------------------------------------------------------
@@ -127,7 +127,7 @@ scheme: Mist
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/kun-bin || github
+  GitHub: https://github.com/likun1208 || github
   E-Mail: likun@mail.bnu.edu.cn || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -406,7 +406,7 @@ gitment:
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
-  language: # Force language, or auto switch by theme
+  language: zh-Hans # Force language, or auto switch by theme
   github_user: # MUST HAVE, Your Github ID
   github_repo: # MUST HAVE, The repo you use to store Gitment comments
   client_id: # MUST HAVE, Github client id for the Gitment
@@ -673,6 +673,14 @@ motion:
 
 # Fancybox
 fancybox: true
+
+# Reading progress bar
+reading_progress:
+  enable: true
+  # Available values: top | bottom
+  position: top
+  color: "#37c6c0"
+  height: 2px
 
 # Progress bar in the top during page loading.
 pace: false

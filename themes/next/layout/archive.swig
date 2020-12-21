@@ -1,4 +1,5 @@
 {% extends '_layout.swig' %}
+
 {% import '_macro/post-collapse.swig' as post_template %}
 {% import '_macro/sidebar.swig' as sidebar_template %}
 
@@ -46,13 +47,13 @@
         {{ post_template.render(post) }}
 
       {% endfor %}
-
+	  
     </div>
   </div>
   {#########################}
   {### END ARCHIVE BLOCK ###}
   {#########################}
-
+  {#% include '_widget/post-calendar.swig' % #}
   {% include '_partials/pagination.swig' %}
 
 {% endblock %}

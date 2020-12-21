@@ -1,0 +1,97 @@
+<div class="pattern-center-blank">
+</div>
+<div class="pattern-center ">
+  <div class="pattern-attachment-img">
+    <% if (page.photos) { %>
+    <img src="<%= page.photos %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    <% } else { %>
+      <img src="<%= theme.bg[Math.floor(Math.random() * theme.bg.length + 1)-1] %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    <% } %>
+    <header class="pattern-header ">
+      <h1 class="entry-title">
+      微语</h1>
+      <span class="post-meta-item-icon">
+      <i class="iconfont icon-attention"></i>
+      </span>
+      <span class="post-meta-item-text">本页共<span id="busuanzi_value_page_pv"> </span>次阅读
+      </span>
+    </header>
+    
+  </div>
+</div>
+<div id="content" class="site-content">
+  <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
+    <div >
+      <!-- artitalk more: https://artitalk.js.org/doc.html -->
+      <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
+      <div id="artitalk_main"></div>
+      <script>
+      new Artitalk({
+          appId: "<%- theme.artitalk.appID %>",
+          appKey: "<%- theme.artitalk.appKEY %>",
+          motion: "<%- theme.artitalk.motion %>",
+          bgImg: "<%- theme.artitalk.bgimg %>",
+          pageSize: "<%- theme.artitalk.pageSize %>"
+      })
+      </script>
+
+      <!-- artitalk.end -->
+      <!-- 自定义样式 -->
+      <% if (theme.artitalk.style.enable){ %>
+        <style>
+          .cbp_tmtimeline>li:nth-child(odd) .cbp_tmlabel {
+            background: linear-gradient(60deg,<%- theme.artitalk.style.linear_gradient %>) 0% 0% / cover, url("<%- theme.artitalk.style.wallpaper %>")<% if (theme.artitalk.style.animation!=true){ %> 0% 0% / cover <% } %>;
+            <% if (theme.artitalk.style.animation){ %>
+              animation: 15s ease 0s infinite normal none running gradientBG;
+            <% } %>
+            color: <%- theme.artitalk.style.color %>;
+          }
+          .cbp_tmtimeline>li .cbp_tmlabel {
+            background: linear-gradient(60deg,<%- theme.artitalk.style.linear_gradient %>) 0% 0% / cover, url("<%- theme.artitalk.style.wallpaper %>")<% if (theme.artitalk.style.animation!=true){ %> 0% 0% / cover<% } %>;
+            <% if (theme.artitalk.style.animation){ %>
+              animation: 15s ease 0s infinite normal none running gradientBG;
+            <% } %>
+            color: <%- theme.artitalk.style.color %>;
+          }
+          .cbp_tmtimeline>li:nth-child(odd) .cbp_tmlabel:after {
+            border-right-color: <%- theme.artitalk.style.border_right_color %>
+          }
+          .cbp_tmtimeline>li .cbp_tmlabel:after {
+            border-right-color: <%- theme.artitalk.style.border_right_color %>
+          }
+          .button {
+            background: linear-gradient(60deg,<%- theme.artitalk.style.linear_gradient %>) 0% 0% / cover, url("<%- theme.artitalk.style.wallpaper %>")<% if (theme.artitalk.style.animation!=true){ %> 0% 0% / cover<% } %>;  
+            <% if (theme.artitalk.style.animation){ %>
+              animation: 15s ease 0s infinite normal none running gradientBG;
+            <% } %>
+            color: <%- theme.artitalk.style.color %>;
+          }
+          @keyframes gradientBG {
+              0% {
+                  background-position: 0% 50%;
+              }
+              50% {
+                  background-position: 100% 50%;
+              }
+              100% {
+                  background-position: 0% 50%;
+              }
+          }
+
+          .balck_white01 {
+            background: #333030;
+            color: #e3dede
+          }
+          .url02{
+            background: url("https://gitee.com/cungudafa/source/raw/master/img/bg/hyo/hyo01.jpg") 0% 0% / cover;
+          }
+        </style>
+      <% } %>
+      <!-- 自定义样式.end -->
+      <script>
+        $('path').css('fill', '');
+      </script>
+         
+    </div>
+  </article>
+</div>

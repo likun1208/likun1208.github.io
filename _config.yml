@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 无题
+title: 左边
 subtitle: ''
-description: ''
+description: 三月樱，六月雪，也望尘莫及
 keywords:
 author: Kun Li
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://likun1208.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -122,5 +122,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/likun1208/likun1208.github.io.git
+  repository: git@github.com:likun1208/likun1208.github.io.git
   branch: master

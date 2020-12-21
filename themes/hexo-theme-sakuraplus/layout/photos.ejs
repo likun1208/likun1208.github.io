@@ -1,0 +1,194 @@
+<div class="pattern-center-blank">
+</div>
+<div class="pattern-center ">
+    <div class="pattern-attachment-img">
+        <% if (page.photos) { %>
+          <img src="<%= page.photos %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+          <% } else { %>
+            <img src="<%= theme.bg[Math.floor(Math.random() * theme.bg.length + 1)-1] %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+          <% } %>  
+    </div>
+    <header class="pattern-header ">
+        <h1 class="entry-title">
+        相册</h1>
+        <span class="post-meta-item-icon">
+            <i class="iconfont icon-attention"></i>
+          </span>
+          <span class="post-meta-item-text">本页共<span id="busuanzi_value_page_pv"> </span>次阅读
+          </span>
+    </header>
+</div>
+<div id="content" class="site-content">
+    <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
+        <!-- photos -->
+        <div class="gallery-group-main">
+            <figure class="gallery-group"> 
+                <img class="gallery-group-img medium-zoom-image" src="https://gitee.com/cungudafa/source/raw/master/img/bg/hyo/3.jpg" data-src="" data-loaded="true">
+                <figcaption>
+                    <div class="gallery-group-name">hyo</div>
+                    <p>背景壁纸</p>
+                    <a href="http://cungudafa.top/post/1cb6.html"></a>
+                </figcaption>
+            </figure>
+            <figure class="gallery-group"> 
+                <img class="gallery-group-img medium-zoom-image" src="https://gitee.com/cungudafa/source/raw/master/img/bg/hyo/3.jpg" data-src="" data-loaded="true">
+                <figcaption>
+                    <div class="gallery-group-name">史迪奇</div>
+                    <p>小动图</p>
+                    <a href="http://cungudafa.top/post/f4ae.html"></a>
+                </figcaption>
+            </figure>
+        </div>
+        <!-- style -->
+        <style>
+            .gallery-group-main {
+                overflow: auto;
+                padding: 0 0 .8rem;
+                color: #fff;
+            }
+            figure {
+                display: block;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 40px;
+                margin-inline-end: 40px;
+            }
+            figure.gallery-group {
+                position: relative;
+                float: left;
+                overflow: hidden;
+                margin: .3rem .2rem;
+                width: calc(50% - .4rem);
+                height: 250px;
+                border-radius: 8px;
+                background: #000;
+                transform: translate3d(0,0,0);
+            }
+            
+            figure.gallery-group img {
+                position: relative;
+                margin: 0!important;
+                max-width: none;
+                width: calc(100% + 20px);
+                height: 250px;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -ms-backface-visibility: hidden;
+                backface-visibility: hidden;
+                opacity: .8;
+                -webkit-transition: opacity .35s,-webkit-transform .35s;
+                -moz-transition: opacity .35s,-moz-transform .35s;
+                -o-transition: opacity .35s,-o-transform .35s;
+                -ms-transition: opacity .35s,-ms-transform .35s;
+                transition: opacity .35s,transform .35s;
+                -webkit-transform: translate3d(-10px,0,0);
+                -moz-transform: translate3d(-10px,0,0);
+                -o-transform: translate3d(-10px,0,0);
+                -ms-transform: translate3d(-10px,0,0);
+                transform: translate3d(-10px,0,0);
+                object-fit: cover;
+            }
+            figure.gallery-group .gallery-group-name {
+                position: relative;
+                display: -webkit-box;
+                overflow: hidden;
+                margin: 0;
+                padding: .4rem 0;
+                font-weight: 700;
+                font-size: 1.2rem;
+                line-height: 1.5;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            figure.gallery-group .gallery-group-name:after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #fff;
+                content: "";
+                -webkit-transition: -webkit-transform .35s;
+                -moz-transition: -moz-transform .35s;
+                -o-transition: -o-transform .35s;
+                -ms-transition: -ms-transform .35s;
+                transition: transform .35s;
+                -webkit-transform: translate3d(-100%,0,0);
+                -moz-transform: translate3d(-100%,0,0);
+                -o-transform: translate3d(-100%,0,0);
+                -ms-transform: translate3d(-100%,0,0);
+                transform: translate3d(-100%,0,0);
+            }
+            figure.gallery-group figcaption {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 1.5rem;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                text-transform: uppercase;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -ms-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+            .medium-zoom-image {
+                cursor: pointer;
+                cursor: zoom-in;
+                transition: transform .3s cubic-bezier(.2,0,.2,1)!important;
+            }
+            #article-container p {
+                margin: 0 0 .8rem;
+            }
+            figure.gallery-group p {
+                display: -webkit-box;
+                overflow: hidden;
+                margin: 0;
+                padding: .4rem 0 0;
+                letter-spacing: 1px;
+                font-size: .8rem;
+                line-height: 1.5;
+                opacity: 0;
+                -webkit-transition: opacity .35s,-webkit-transform .35s;
+                -moz-transition: opacity .35s,-moz-transform .35s;
+                -o-transition: opacity .35s,-o-transform .35s;
+                -ms-transition: opacity .35s,-ms-transform .35s;
+                transition: opacity .35s,transform .35s;
+                -webkit-transform: translate3d(100%,0,0);
+                -moz-transform: translate3d(100%,0,0);
+                -o-transform: translate3d(100%,0,0);
+                -ms-transform: translate3d(100%,0,0);
+                transform: translate3d(100%,0,0);
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+            p {
+                display: block;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+            }
+            figure.gallery-group figcaption>a {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1000;
+                opacity: 0;
+            }
+            a {
+                color: #99a9bf;
+                text-decoration: none;
+                word-wrap: break-word;
+                -webkit-transition: all .2s;
+                -moz-transition: all .2s;
+                -o-transition: all .2s;
+                -ms-transition: all .2s;
+                transition: all .2s;
+                overflow-wrap: break-word;
+            }
+        </style>
+    </article>

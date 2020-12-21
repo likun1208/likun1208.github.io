@@ -2,7 +2,7 @@
 title: blender学习记录-3
 date: 2020-08-11 17:33:04
 tags: 随便学学
-cagegories: blender
+categories: blender
 ---
 
 第二课是建模型相关操作

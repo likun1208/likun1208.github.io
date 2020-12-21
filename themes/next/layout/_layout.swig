@@ -25,7 +25,7 @@
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
-
+	<script type="text/javascript" src="/js/echarts.min.js"></script>
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
@@ -88,6 +88,7 @@
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/scroll-cookie.swig' %}
   {% include '_third-party/exturl.swig' %}
+  {% include '_third-party/copy-code.swig' %}
 </body>
 </html>
 <!-- 页面点击小红心 -->

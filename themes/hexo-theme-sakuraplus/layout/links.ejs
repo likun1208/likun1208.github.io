@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="<%- theme.libs.css.tocbot %>">
+<div class="pattern-center-blank">
+</div>
+<div class="pattern-center ">
+  <div class="pattern-attachment-img">
+    <% if (page.photos) { %>
+      <img src="<%= page.photos %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      <% } else { %>
+        <img src="<%= theme.bg[Math.floor(Math.random() * theme.bg.length + 1)-1] %>" src="<%- theme.lazyloadImg %>" data-src="<%= page.photos %>" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      <% } %>  
+  </div>
+  <header class="pattern-header ">
+    <h1 class="entry-title">
+    友人帐</h1>
+    <span class="post-meta-item-icon">
+      <i class="iconfont icon-attention"></i>
+    </span>
+    <span class="post-meta-item-text">本页共<span id="busuanzi_value_page_pv"> </span>次阅读
+    </span>
+  </header>
+</div>
+<div id="content" class="site-content">
+  <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
+    <% if (page.links) { %>
+      <div class="links">
+        <% (page.links||[]).forEach(function (group, index) { %>
+          <h3 class="link-title"><span class="fake-title"><%- index + 1 %>. <%- group.group %></span></h3>
+          <% if (group.desc) { %>
+            <div class="link-description"><%- group.desc %></div>
+          <% } %>
+          <ul class="link-items fontSmooth">
+            <% (group.items||[]).forEach(function (item) { %>
+              <li class="link-item">
+                <a class="link-item-inner effect-apollo" href="<%- item.url %>" title="<%- item.desc %>" target="_blank" rel="friend">
+                  <img class="lazyload" onerror="imgError(this,1)" src="<%- theme.lazyloadImg%>" data-src="<%- item.img %>" src="<%- item.img %>">
+                  <span class="sitename">
+                  <%- item.name %></span>
+                  <div class="linkdes">
+                  <%- item.desc %></div>
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        <% }) %>
+      </div>
+    <% } %>
+    <div class="links">
+      <% if (theme.mylinkinfo.enable){ %>
+      <h2>🌼欢迎交换友链</h2>
+        <h3>请留言告诉我你的:</h3>
+          <pre>
+            <code>
+name: 名称
+url: 地址
+img: 头像
+desc: 描述
+            </code>
+          </pre>
+        
+        <%- theme.mylinkinfo.tips %>
+        <h3>👀我的友链：</h3>
+        <pre>
+          <code>
+name: <%- theme.mylinkinfo.name %>
+desc: <%- theme.mylinkinfo.desc %>
+url: <%- theme.mylinkinfo.url %>
+img: <%- theme.mylinkinfo.img %>
+          </code>
+        </pre>
+    </div>
+    <% } %>
+    <%- partial('_partial/valine', {post: page})  %>
+    <%- partial('_partial/gitalk', {post: page})  %>
+    <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+    <footer class="post-footer">
+      <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+      <div class="post-tags">
+      </div>
+      <div class="post-share">
+        <div class="social-share sharehidden share-component"></div>
+        <i class="iconfont show-share icon-forward"></i>
+      </div>
+    </footer><!-- .entry-footer -->
+  </article>
+  <div class="have-toc">
+  </div>
+    <div class="toc-container" style="height: 4886.5px;">
+      <div class="toc">
+        <ol class="toc-list ">
+          <li class="toc-list-item">
+            <a href="#toc-head-1" class="toc-link node-name--H3  is-active-link">
+            1. 个人主页</a>
+          </li>
+          <li class="toc-list-item">
+            <a href="#toc-head-2" class="toc-link node-name--H3 ">
+            2. 个人项目</a>
+          </li>
+          <li class="toc-list-item">
+            <a href="#toc-head-3" class="toc-link node-name--H3 ">
+            3. 个人定制工具</a>
+          </li>
+          <li class="toc-list-item">
+            <a href="#toc-head-4" class="toc-link node-name--H3 ">
+            4. 主题相关</a>
+          </li>
+          <li class="toc-list-item">
+            <a href="#toc-head-5" class="toc-link node-name--H3 ">
+            5. 学习的好地方</a>
+          </li>
+          <li class="toc-list-item">
+            <a href="#toc-head-6" class="toc-link node-name--H3 ">
+            6. 小伙伴们</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  <% if (config.author && config.authorAbout){ %>
+    <section class="author-profile">
+      <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="/about/" class="profile gravatar"><img src="<%- (theme.cdn || '') + theme.avatar%>" itemprop="image" alt="hojun" height="70" width="70"></a>
+        <div class="meta">
+          <span class="title">Author</span>
+          <h3 itemprop="name">
+          <a href="<%- theme.url%>" itemprop="url" rel="author"><%- config.author %></a>
+          </h3>
+        </div>
+      </div>
+      <hr>
+      <p id="showStr"></p>
+    </section>
+    <!-- 一言 -->
+    <script type="text/javascript" src="https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=&encode=js&fun=sync&source="></script>
+    <div style="display:none" id="hitokoto"><script>hitokoto()</script>
+    </div>
+    <script>
+        var index = 0;
+        var str = document.getElementById("hitokoto").innerText;
+        str = str.substring(10, str.length)//裁剪hitokoto()字样
+        function type() {
+          if(index == str.length) {
+              index = 0;
+            }
+            document.getElementById("showStr").innerText = str.substring(0, index++);
+        }
+        setInterval(type, 200); //通过定时器来让文字逐步显示
+    </script>
+  <% } %>
+</div>

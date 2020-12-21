@@ -1,0 +1,16 @@
+<% if (pagination == 2){ %>
+  <% page.posts.each(function(post, index){ %>
+    <% if (post.top){ %>
+      <%- partial('_widget/index-items', {index: index, post: post}) %>
+    <% } %>
+  <% }) %>
+  <% page.posts.sort('date', theme.homePageSortType).limit(theme.homeArticleShown).each(function(post, index){ %>
+    <% if (!post.top){ %>
+      <%- partial('_widget/index-items', {index: index, post: post}) %>
+    <% } %> 
+  <% }) %>
+<% } else { %>
+  <% page.posts.each(function(post, index){ %>
+    <%- partial('_widget/index-items', {index: index, post: post}) %>
+  <% }) %>
+<% } %>

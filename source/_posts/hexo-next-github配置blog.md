@@ -146,7 +146,7 @@ categories:
 3. 如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：
 
    ```
-   tags；
+   tags:
    	- tag1
    	- tag2
    	...
@@ -173,6 +173,39 @@ categories:
 {%- endif %}
 ```
 
+## SSH登录配置
+
+每次`hexo d`的时候都要输入用户名和密码会很麻烦，所以今天做了一下这个。
+
+1. 首先进入博客目录比如`C:\Users\LiKun\Documents\GitHub\blog`，在这个目录下右键然后打开git bash，如果右键没这个选项那就去开始菜单之类的地方打开git bash然后一点点切目录；
+
+2. 输入`ls -al ~/.ssh`检查目前是否有已经生成过的密钥文件，这个命令会输出`.ssh`里的文件，如果其中有`id_rsa.pub`或者`id_dsa.pub`，那就直接看第五步，如果这俩都没有就继续第三步；
+
+3. 输入`ssh-keygen -t rsa -C "your_email@example.com"`，这里注意把自己的邮箱替换进去，看到提示`Enter file in which to save the key (/c/Users/you/.ssh/id_rsa):`时，直接按回车；
+
+4. 然后会要求输入密码，这个密码要记住，在第一次使用该ssh密钥时系统会要求输入它，也就是说后面会用，**不过这里有个坑**；
+
+5. 输入`clip < ~/.ssh/id_rsa.pub`，即可把密钥内容复制到剪贴板，或者自己进`.ssh`找到密钥文件复制也行；
+
+6. 浏览器打开Github页面，右上角头像那里的下拉菜单有个Settings，点开以后左边找到`SSH and GPG keys`，点开以后右边的界面会列出目前所有的密钥，如果之前没做过那这里是空的；
+
+7. SSH Keys那里点`New SSH Key`，名字随便设置，密钥部分粘贴第五步复制的那个，然后保存；
+
+8. 接下来回博客目录，找到`_config.yml`，也就是站点配置文件，把最下面`deploy`属性中的`repository: `内容修改成`git@github.com:你的name/你的username.github.io.git`的样子，比如：
+
+   ```html
+   deploy:
+     type: git
+     repository: git@github.com:likun1208/likun1208.github.io.git
+     branch: master
+   ```
+
+   这里有的地方也把`repository:`写成`repo:`，应该都行。
+
+9. 然后命令行里`hexo d`，会要求输入之前第四步里的那个密码；
+
+10. 我本来以为，第四步那个密码是输入一次之后就不用再输入的，然而尝试几次以后发现是每次都要输入，查了很多网页，有说配置ssh的config文件，有说修改host，总之都不太对，最终才发现，这一切都是因为第四步设置了密码，如果第四步不设置密码，一路按回车，就没有任何问题了！ssh似乎没提供修改密码的方式，所以就需要重新输入`ssh-keygen -t rsa -C "your_email@example.com"`，生成新的密钥文件并复制，然后去github的settings那里删旧密钥加新密钥，其他配置不用改动。
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324
@@ -182,3 +215,9 @@ https://www.jianshu.com/p/3a05351a37dc
 https://blog.csdn.net/nightmare_dimple/article/details/86661502
 
 https://blog.csdn.net/lihangll/article/details/103335246
+
+https://www.cnblogs.com/xinxiandong/p/3867505.html
+
+https://blog.csdn.net/hhgggggg/article/details/77853665
+
+https://blog.csdn.net/xiaomengzi_16/article/details/98847298

@@ -1,0 +1,62 @@
+<% var external_link = config.external_link ? '_blank' : '_self'; %>
+<article <% if (index%2 == 0){ %> class="post post-list-thumb post-list-thumb-left" <% } %> class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <div class="post-thumb">
+    <a href="<%- url_for(post.path) %>">
+      <% if(post.photos && post.photos.length){ %>
+        <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= post.photos[0] || 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png' %>">
+      <% }else{ %>
+        <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= theme.bg[Math.floor(Math.random() * theme.bg.length + 1)-1] || 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png' %>">
+      <% } %>
+      </a>
+  </div>
+  <div class="post-content-wrap">
+    <div class="post-content">
+      <div class="post-date">
+        <i class="iconfont icon-time">
+        </i><%= date(post.date, 'YYYY-M-D HH:MM') %>
+      </div>
+      <a href="<%- url_for(post.path) %>" class="post-title">
+        <h3><%= post.title %></h3>
+      </a>
+      <div class="post-meta">
+        <span>
+          <% if (post.top){ %>
+            <i class="fa fa-thumb-tack"></i>
+            <font color=ff9999>置顶</font>
+            <span class="post-meta-divider"> · </span>
+          <% } %>
+        </span>
+        <span><i class="fa fa-tags"></i>
+        <% post.tags.each((tag)=>{ %>
+            <a href="<%- url_for(tag.path) %>"><%= tag.name %><em>·</em></a>
+          <% }) %>
+        </span>
+        <span>
+          <i class="iconfont icon-file"></i>
+          <% post.categories.each((category)=>{ %>
+            <a href="<%- url_for(category.path) %>"><%= category.name %></a>
+          <% }) %>
+        </span>
+        <!-- <span><i class="iconfont icon-attention"></i>
+          本页共<span id="busuanzi_value_page_pv"> </span>次阅读
+        </span> -->
+      </div>
+      <div class="float-content">
+        <p style="color: #666;">
+        <% if (post.description && post.description.length > 0) { %>
+            <%- post.description %>
+        <% } else { %>
+          <% if (theme.post_description.enable) { %>
+            <%- strip_html(post.content).substring(0, 50) %>
+          <% } %>
+        <% } %>
+        </p>
+        <div class="post-bottom">
+          <a href="<%- url_for(post.path) %>" class="button-normal">
+            <i class="iconfont icon-caidan"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
