@@ -102,7 +102,7 @@
 <meta property="og:description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-30T01:20:38.000Z">
-<meta property="article:modified_time" content="2020-12-21T06:31:24.686Z">
+<meta property="article:modified_time" content="2020-12-21T13:21:45.544Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
@@ -509,6 +509,59 @@
 <li><p>我本来以为，第四步那个密码是输入一次之后就不用再输入的，然而尝试几次以后发现是每次都要输入，查了很多网页，有说配置ssh的config文件，有说修改host，总之都不太对，最终才发现，这一切都是因为第四步设置了密码，如果第四步不设置密码，一路按回车，就没有任何问题了！ssh似乎没提供修改密码的方式，所以就需要重新输入<code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code>，生成新的密钥文件并复制，然后去github的settings那里删旧密钥加新密钥，其他配置不用改动。</p>
 </li>
 </ol>
+<h2 id="分支同步"><a href="#分支同步" class="headerlink" title="分支同步"></a>分支同步</h2><p>今天研究了一下把博客所有文件上传到github仓库的一个分支，这样可以在多个电脑上同步写博客而不需要用U盘来回复制。首先，如果前面没有自己定义分支的名字，那么我们的网站内容是存放在<code>master</code>分支的，在这一步，我们会新建一个<code>hexo</code>分支，来存放博客文件（指主题文件和博客markdown文件等）。具体来说，当我们需要在多个电脑之间迁移博客时，会受影响的文件如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件（夹）</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">scaffolds/</td>
+<td align="center">博客文章的模版</td>
+</tr>
+<tr>
+<td align="center">source/</td>
+<td align="center">所有博客文章，以及about、tags、categories等page</td>
+</tr>
+<tr>
+<td align="center">themes/</td>
+<td align="center">网站的主题</td>
+</tr>
+<tr>
+<td align="center">.gitignore</td>
+<td align="center">在push时需要忽略的文件和文件夹</td>
+</tr>
+<tr>
+<td align="center">_config.yml</td>
+<td align="center">站点配置文件</td>
+</tr>
+<tr>
+<td align="center">package.json</td>
+<td align="center">依赖包的名称和版本号</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>在github网站上找到自己的博客项目，新建<code>hexo</code>分支，并设置为主分支；</p>
+</li>
+<li><p>在本地博客文件夹里打开git bash，输入<code>git clone git@github.com:用户名/用户名.github.io.git</code>，把<code>hexo</code>分支复制到本地，这里的用户名请自行替换；</p>
+</li>
+<li><p>在博客文件夹里找到<code>.gitignore</code>文件，如果没有这个文件就自己新建一下，注意这个文件开头就是<code>.</code>，整个名字就是<code>.gitignore</code>，然后打开它里面写入以下内容，表示同步的时候忽略这些文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules&#x2F;</span><br><span class="line">public&#x2F;</span><br><span class="line">.deploy*&#x2F;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了；</p>
+</li>
+<li><p>然后在git bash里输入以下命令，即可完成<code>hexo</code>分支的上传：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit –m &quot;add branch&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>这里的add branch可以改成其他内容，表示这次上传的说明注释；</p>
+</li>
+<li><p>到此就完成了上传，这样换电脑以后，按照前面的内容把git和hexo以及其他相关东西都安装配置好以后，通过git把这个项目文件下载到本地，就又可以编辑博客了；</p>
+</li>
+<li><p>以上操作也可以通过github的桌面版程序来完成，还挺方便。</p>
+</li>
+</ol>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
 <p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
 <p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
@@ -516,6 +569,8 @@
 <p><a href="https://www.cnblogs.com/xinxiandong/p/3867505.html" target="_blank" rel="noopener">https://www.cnblogs.com/xinxiandong/p/3867505.html</a></p>
 <p><a href="https://blog.csdn.net/hhgggggg/article/details/77853665" target="_blank" rel="noopener">https://blog.csdn.net/hhgggggg/article/details/77853665</a></p>
 <p><a href="https://blog.csdn.net/xiaomengzi_16/article/details/98847298" target="_blank" rel="noopener">https://blog.csdn.net/xiaomengzi_16/article/details/98847298</a></p>
+<p><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></p>
+<p><a href="https://blog.csdn.net/White_Idiot/article/details/80685990" target="_blank" rel="noopener">https://blog.csdn.net/White_Idiot/article/details/80685990</a></p>
 
       
     </div>
@@ -716,7 +771,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装各种东西"><span class="nav-number">1.</span> <span class="nav-text">安装各种东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装主题"><span class="nav-number">3.</span> <span class="nav-text">安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立Github博客"><span class="nav-number">4.</span> <span class="nav-text">建立Github博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于next主题的配置"><span class="nav-number">5.</span> <span class="nav-text">关于next主题的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发布新的博客"><span class="nav-number">6.</span> <span class="nav-text">如何发布新的博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些后续问题"><span class="nav-number">7.</span> <span class="nav-text">一些后续问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH登录配置"><span class="nav-number">8.</span> <span class="nav-text">SSH登录配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接："><span class="nav-number">9.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装各种东西"><span class="nav-number">1.</span> <span class="nav-text">安装各种东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装主题"><span class="nav-number">3.</span> <span class="nav-text">安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立Github博客"><span class="nav-number">4.</span> <span class="nav-text">建立Github博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于next主题的配置"><span class="nav-number">5.</span> <span class="nav-text">关于next主题的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发布新的博客"><span class="nav-number">6.</span> <span class="nav-text">如何发布新的博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些后续问题"><span class="nav-number">7.</span> <span class="nav-text">一些后续问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH登录配置"><span class="nav-number">8.</span> <span class="nav-text">SSH登录配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支同步"><span class="nav-number">9.</span> <span class="nav-text">分支同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接："><span class="nav-number">10.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
             
 
           </div>
