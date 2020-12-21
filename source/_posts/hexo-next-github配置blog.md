@@ -206,6 +206,51 @@ categories:
 
 10. 我本来以为，第四步那个密码是输入一次之后就不用再输入的，然而尝试几次以后发现是每次都要输入，查了很多网页，有说配置ssh的config文件，有说修改host，总之都不太对，最终才发现，这一切都是因为第四步设置了密码，如果第四步不设置密码，一路按回车，就没有任何问题了！ssh似乎没提供修改密码的方式，所以就需要重新输入`ssh-keygen -t rsa -C "your_email@example.com"`，生成新的密钥文件并复制，然后去github的settings那里删旧密钥加新密钥，其他配置不用改动。
 
+## 分支同步
+
+今天研究了一下把博客所有文件上传到github仓库的一个分支，这样可以在多个电脑上同步写博客而不需要用U盘来回复制。首先，如果前面没有自己定义分支的名字，那么我们的网站内容是存放在`master`分支的，在这一步，我们会新建一个`hexo`分支，来存放博客文件（指主题文件和博客markdown文件等）。具体来说，当我们需要在多个电脑之间迁移博客时，会受影响的文件如下：
+
+|  文件（夹）  |                      说明                       |
+| :----------: | :---------------------------------------------: |
+|  scaffolds/  |                 博客文章的模版                  |
+|   source/    | 所有博客文章，以及about、tags、categories等page |
+|   themes/    |                   网站的主题                    |
+|  .gitignore  |         在push时需要忽略的文件和文件夹          |
+| _config.yml  |                  站点配置文件                   |
+| package.json |              依赖包的名称和版本号               |
+
+1. 在github网站上找到自己的博客项目，新建`hexo`分支，并设置为主分支；
+
+2. 在本地博客文件夹里打开git bash，输入`git clone git@github.com:用户名/用户名.github.io.git`，把`hexo`分支复制到本地，这里的用户名请自行替换；
+
+3. 在博客文件夹里找到`.gitignore`文件，如果没有这个文件就自己新建一下，注意这个文件开头就是`.`，整个名字就是`.gitignore`，然后打开它里面写入以下内容，表示同步的时候忽略这些文件：
+
+   ```
+   .DS_Store
+   Thumbs.db
+   db.json
+   *.log
+   node_modules/
+   public/
+   .deploy*/
+   ```
+
+4. 注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的`.git`文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了；
+
+5. 然后在git bash里输入以下命令，即可完成`hexo`分支的上传：
+
+   ```
+   git add .
+   git commit –m "add branch"
+   git push
+   ```
+
+   这里的add branch可以改成其他内容，表示这次上传的说明注释；
+
+6. 到此就完成了上传，这样换电脑以后，按照前面的内容把git和hexo以及其他相关东西都安装配置好以后，通过git把这个项目文件下载到本地，就又可以编辑博客了；
+
+7. 以上操作也可以通过github的桌面版程序来完成，还挺方便。
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324
@@ -221,3 +266,7 @@ https://www.cnblogs.com/xinxiandong/p/3867505.html
 https://blog.csdn.net/hhgggggg/article/details/77853665
 
 https://blog.csdn.net/xiaomengzi_16/article/details/98847298
+
+https://www.zhihu.com/question/21193762
+
+https://blog.csdn.net/White_Idiot/article/details/80685990
