@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="学习笔记," />
 
 
 
@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="这一课讲Pandas库。 import pandas as pd">
+<meta name="description" content="Leetcode刷题记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python课程记录-12">
-<meta property="og:url" content="https://likun1208.github.io/2020/05/19/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-12/index.html">
+<meta property="og:title" content="Leetcode记录-1">
+<meta property="og:url" content="https://likun1208.github.io/2020/12/21/Leetcode%E8%AE%B0%E5%BD%95-1/index.html">
 <meta property="og:site_name" content="左边">
-<meta property="og:description" content="这一课讲Pandas库。 import pandas as pd">
+<meta property="og:description" content="Leetcode刷题记录">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-19T06:25:07.000Z">
-<meta property="article:modified_time" content="2020-12-21T06:31:24.691Z">
+<meta property="article:published_time" content="2020-12-21T06:38:58.000Z">
+<meta property="article:modified_time" content="2020-12-21T06:41:23.894Z">
 <meta property="article:author" content="Kun Li">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="https://likun1208.github.io/2020/05/19/python课程记录-12/"/>
+  <link rel="canonical" href="https://likun1208.github.io/2020/12/21/Leetcode记录-1/"/>
 
 
 
 
 
-  <title>python课程记录-12 | 左边</title>
+  <title>Leetcode记录-1 | 左边</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://likun1208.github.io/2020/05/19/python%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-12/">
+    <link itemprop="mainEntityOfPage" href="https://likun1208.github.io/2020/12/21/Leetcode%E8%AE%B0%E5%BD%95-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kun Li">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python课程记录-12</h1>
+          <h1 class="post-title" itemprop="name headline">Leetcode记录-1</h1>
         
 
         <div class="post-meta">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-19T14:25:07+08:00">
-                2020-05-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-21T14:38:58+08:00">
+                2020-12-21
               </time>
             
 
@@ -342,28 +342,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -376,6 +354,10 @@
 
           
 
+          
+              <div class="post-description">
+                  Leetcode刷题记录
+              </div>
           
 
         </div>
@@ -391,143 +373,7 @@
       
 
       
-        <p>这一课讲Pandas库。</p>
-<p><code>import pandas as pd</code></p>
-<a id="more"></a>
-
-<h2 id="Pandas初探"><a href="#Pandas初探" class="headerlink" title="Pandas初探"></a>Pandas初探</h2><ol>
-<li>读取文件：<code>data = pd.read_excel(filename, index_col=0)</code></li>
-<li>取出数据中的一列或一行：<code>data[&#39;学号&#39;], data.loc[1]</code></li>
-</ol>
-<h2 id="Pandas数据类型"><a href="#Pandas数据类型" class="headerlink" title="Pandas数据类型"></a>Pandas数据类型</h2><h3 id="Series-一维序列"><a href="#Series-一维序列" class="headerlink" title="Series(一维序列)"></a>Series(一维序列)</h3><ol>
-<li><p>由index+value组成</p>
-</li>
-<li><p>通过列表创建Series：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series([<span class="string">'apple'</span>,<span class="string">'peach'</span>])</span><br><span class="line"><span class="comment"># 0	apple</span></span><br><span class="line"><span class="comment"># 1	peach</span></span><br><span class="line">a.index</span><br><span class="line"><span class="comment"># RangeIndex(start=0,stop=2,step=1)</span></span><br><span class="line">a.values</span><br><span class="line"><span class="comment"># array(['apple','peach'],dtype=object)</span></span><br><span class="line">a[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 'peach'</span></span><br><span class="line">a[<span class="number">1</span>]=<span class="number">100</span></span><br><span class="line"><span class="comment"># 原来是peach的地方改成了100</span></span><br><span class="line">a[<span class="number">0</span>:]</span><br><span class="line"><span class="comment"># 整个输出</span></span><br><span class="line">a[[<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="comment"># 输出0和1</span></span><br><span class="line">a = pd.Series([<span class="string">'apple'</span>,<span class="string">'peach'</span>],index=[<span class="string">'a'</span>,<span class="string">'p'</span>])</span><br><span class="line"><span class="comment"># a    apple</span></span><br><span class="line"><span class="comment"># p    peach</span></span><br><span class="line">a[<span class="string">'a'</span>]</span><br><span class="line"><span class="comment"># 输出索引a对应的value</span></span><br><span class="line">a[<span class="string">'a'</span>]=<span class="string">'lemon'</span></span><br><span class="line"><span class="comment"># 原来的apple改成lemon</span></span><br><span class="line">a[<span class="string">'a'</span>:]</span><br><span class="line"><span class="comment"># 整个输出</span></span><br><span class="line">a[[<span class="string">'a'</span>,<span class="string">'p'</span>]]</span><br><span class="line"><span class="comment"># 输出a和p对应的value</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过字典创建Series：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'Japan'</span>:<span class="string">'Tokyo'</span>,<span class="string">'S.Korea'</span>:<span class="string">'Seoul'</span>,<span class="string">'China'</span>:<span class="string">'Beijing'</span>&#125;</span><br><span class="line">a = pd.Series(d)</span><br><span class="line"><span class="comment"># Japan        Tokyo</span></span><br><span class="line"><span class="comment"># S.Korea      Seoul</span></span><br><span class="line"><span class="comment"># China      Beijing</span></span><br><span class="line"></span><br><span class="line">indexL=[<span class="string">'China'</span>,<span class="string">'Japan'</span>,<span class="string">'ingapore'</span>,<span class="string">'S.Korea'</span>]</span><br><span class="line">a = pd.Series(d, index=indexL)</span><br><span class="line"><span class="comment"># China       Beijing</span></span><br><span class="line"><span class="comment"># Japan         Tokyo</span></span><br><span class="line"><span class="comment"># ingapore        NaN</span></span><br><span class="line"><span class="comment"># S.Korea       Seoul</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过标量创建Series：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series(<span class="string">'无'</span>)</span><br><span class="line"><span class="comment"># 0    无</span></span><br><span class="line">a = pd.Series(<span class="string">'无'</span>,index=np.arange(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"><span class="comment"># 1    无</span></span><br><span class="line"><span class="comment"># 2    无</span></span><br><span class="line"><span class="comment"># 3    无</span></span><br><span class="line"><span class="comment"># 4    无</span></span><br><span class="line"><span class="comment"># 5    无</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Series的基本运算：</p>
-<ol>
-<li>和numpy一样，过滤、广播、ufunc等</li>
-<li>对齐：对应索引进行运算</li>
-<li>频数统计：value_counts()</li>
-</ol>
-</li>
-</ol>
-<h3 id="DataFrame-二维表"><a href="#DataFrame-二维表" class="headerlink" title="DataFrame(二维表)"></a>DataFrame(二维表)</h3><ol>
-<li><p>共用index的Series的有序集合</p>
-</li>
-<li><p>从二维数组创建：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = np.array([(<span class="string">'Japan'</span>,<span class="string">'Tokyo'</span>,<span class="number">4000</span>),(<span class="string">'S.Korea'</span>,<span class="string">'Seoul'</span>,<span class="number">1300</span>),(<span class="string">'China'</span>,<span class="string">'Beijing'</span>,<span class="number">9100</span>)])</span><br><span class="line">DF1 = pd.DataFrame(data, columns=[<span class="string">'nation'</span>,<span class="string">'capital'</span>,<span class="string">'GDP'</span>],index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看索引和数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DF1.index</span><br><span class="line">DF1.columns</span><br><span class="line">DF1.values</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从字典创建：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">'nation'</span>:[<span class="string">'Japan'</span>,<span class="string">'S.Korea'</span>,<span class="string">'Japan'</span>],<span class="string">'capital'</span>:pd.Series([<span class="string">'Tokyo'</span>,<span class="string">'Seoul'</span>,<span class="string">'Beijing'</span>],index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]),<span class="string">'GDP'</span>:np.array([<span class="number">4900.1300</span><span class="number">.9100</span>],dtype=int)&#125;</span><br><span class="line">DF2=pd.DataFrame(dct)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把某列数据作为index：<code>DF2.set_index(&#39;nation&#39;)</code></p>
-</li>
-<li><p>修改index/columns：<code>DF2.reindex(index=[&#39;c&#39;,&#39;a&#39;,&#39;b&#39;,&#39;d&#39;])</code></p>
-</li>
-<li><p>数据选择：</p>
-<ol>
-<li>取头尾若干行：<code>df.head(行数), df.tail(行数)</code></li>
-<li>选择一列：<code>DF2.nation, DF2[&#39;GDP&#39;]</code></li>
-<li>选择一行或多行：<code>DF2[0:2], DF2[&#39;a&#39;:&#39;c&#39;]</code>    序号只能是切片，不能是下标</li>
-<li><code>loc[index, columns]</code>根据索引对多个轴进行选取</li>
-<li>取单个数据：<code>DF2.loc[&#39;c&#39;,&#39;GDP&#39;]</code>或<code>DF2.at[&#39;c&#39;,&#39;GDP&#39;]</code></li>
-<li>布尔索引：<ol>
-<li>用某列的值来选取数据：<code>DF2[DF2.GDP&gt;3000]</code></li>
-<li><code>isin()</code>方法过滤数据：<code>DF2[DF2.nation.isin([&#39;China&#39;,&#39;S.Korea&#39;])]</code></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>增加一列：<code>DF2[&#39;population&#39;]=[130,55,1600]</code></p>
-</li>
-<li><p>增加行：<code>append(要添加的行)</code>，序号是添加行的name，如果加入参数ignore_index=True，则序号就是数字</p>
-</li>
-<li><p>删除行列：<code>drop(序号)</code>，根据索引删除行列，默认删行，axis=1是删列</p>
-</li>
-<li><p>多个DataFrame对象数据拼接：</p>
-<ol>
-<li><code>pd.concat([p1,p2])</code>，序号是p1和p2各自的序号直接拼起来，是前几行p1，后几行p2；增加参数ignore_index=True，则序号是0、1、2、3这样；增加参数axis=1，则是前几列p1，后几列p2。</li>
-<li><code>pd.merge(p1,p3,on=&#39;name&#39;)</code>，把p1和p3中name列相同的部分融合起来，如果是要把所有name都留下，但是只要一列name，则增加参数<code>how=&#39;outer&#39;</code></li>
-</ol>
-</li>
-<li><p>缺失值处理：</p>
-<ol>
-<li><code>isnull()</code>和<code>notnull()</code>：是否缺失</li>
-<li><code>fillna()</code>：补充缺失值</li>
-<li><code>dropna()</code>：删除包含缺失值的行或列</li>
-</ol>
-</li>
-<li><p>基本运算：<code>sub,add,mul,div,sum,min,max,mean,std,describe</code>，默认是竖着运算，加axis=1变成横着运算</p>
-</li>
-<li><p>分组：<code>groupby()</code>、<code>get_group(列名)</code>，也可以进行上一条的基本运算</p>
-</li>
-<li><p>排序：<code>sort_value(by=&#39;&#39;, ascending=False)</code> 根据by的取值排序，可以是一个字符串<code>by=&#39;成绩&#39;</code>，也可以是多个字符串的列表，<code>by=[&#39;成绩&#39;,&#39;年级&#39;]</code></p>
-</li>
-</ol>
-<h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><h3 id="csv"><a href="#csv" class="headerlink" title="csv"></a>csv</h3><ol>
-<li><code>read_csv()/to_csv()</code>读写csv和txt</li>
-<li>加入参数index_col=0可以没有序号</li>
-</ol>
-<h3 id="excel"><a href="#excel" class="headerlink" title="excel"></a>excel</h3><ol>
-<li><p><code>read_excel()/to_excel()</code>读写excel</p>
-</li>
-<li><p>把几个dataframe写到一个excel文件里的不同sheet中：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">writer=pd.ExcelWriter(<span class="string">'atest.xlsx'</span>)</span><br><span class="line">a.to_excel(writer, sheet_name=<span class="string">'Sheet1'</span>)</span><br><span class="line">b.to_excel(writer, sheet_name=<span class="string">'Sheet2'</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">'atest.xlsx'</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    a.to_excel(writer, sheet_name=<span class="string">'Sheet1'</span>)</span><br><span class="line">	b.to_excel(writer, sheet_name=<span class="string">'Sheet2'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>读取一个exce里的多个sheet</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reader = pd.ExcelWriter(<span class="string">'atest.xlsx'</span>)</span><br><span class="line">df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">'atest.xlsx'</span>) <span class="keyword">as</span> reader:</span><br><span class="line">    df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">	df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><ol>
-<li>matplotlib中的pyplot模块：<code>b.plot()</code>，表格中的一列代表一条线的数据，行名是横坐标，表格内容值是纵坐标，默认是折线图</li>
-<li>柱状图：<code>b.plot(kind=&#39;bar&#39;)      b.plot.bar()</code></li>
-</ol>
-<h2 id="随堂练习"><a href="#随堂练习" class="headerlink" title="随堂练习"></a>随堂练习</h2><p> 读入第三次作业第一部分爬虫得到的 csv文件，之后：</p>
-<ol>
-<li>绘制浏览次数曲线图；</li>
-<li>根据浏览次数进行降序排序，并打印前10篇报道的日期、标题； </li>
-<li>求浏览次数为1的报道的链接并打印结果；</li>
-<li>统计每一年的报道数量，以及每一年的总的浏览次数，并分别以 柱状图的形式绘制出来；</li>
-<li>统计2019年每个月的报道数量并以饼图的形式绘制出来。</li>
-</ol>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li><p>首先加载库文件：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接下来读取csv文件，考虑到后面的几项要求，把日期作为DatetimeIndex的索引比较好：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reports = pd.read_csv(<span class="string">'reportsInfo.csv'</span>, header=<span class="number">0</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第一个要求是绘制浏览次数的折线图，因为原本的csv文件时间是先2020年再2019年然后2018年这样倒着来的，所以先重新排序，再取浏览次数那一列的数值来画图：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reports.sort_index()[<span class="string">'浏览次数'</span>].plot(linestyle=<span class="string">'-'</span>, linewidth=<span class="number">2</span>, color=<span class="string">'steelblue'</span>)</span><br><span class="line">plt.title(<span class="string">'浏览次数折线图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'日期'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'浏览次数'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">'reports_linechart'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>根据浏览次数降序排序的操作和上一步索引排序差不多，然后切片取前10，用loc定位到标题那一列，输出即可：</p>
-<p><code>print(reports.sort_values(by=&#39;浏览次数&#39;, ascending=False)[0:10].loc[:, [&#39;标题&#39;]])</code></p>
-</li>
-<li><p>筛选浏览次数为1的链接，用下标的方式找即可：</p>
-<p><code>print(reports[reports.浏览次数 == 1].链接)</code></p>
-</li>
-<li><p>统计每年的报道数量，需要先按年来分组，然后得到分组的size，对size画图即可：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reports_group = reports.groupby(reports.index.year)</span><br><span class="line">reports_group.size().plot.bar()</span><br><span class="line">plt.title(<span class="string">'年报道数量柱状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'年份'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'报道数量'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.xticks(rotation=<span class="number">0</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_bar_1'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>统计每年的总浏览次数，在上一条分组的基础上对浏览次数那一列求和，然后画图即可：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">reports_group[<span class="string">'浏览次数'</span>].sum().plot.bar()</span><br><span class="line">plt.title(<span class="string">'年浏览次数柱状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'年份'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'浏览次数'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.xticks(rotation=<span class="number">0</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_bar_2'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>统计2019年每月的报道数量，在之前的分组中可以得到2019的分组，然后对2019部分再按月来分组，得到size，对size画图即可：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reports_2019 = reports_group.get_group(<span class="number">2019</span>)</span><br><span class="line">reports_2019_month = reports_2019.groupby(reports_2019.index.month).size()</span><br><span class="line">reports_2019_month.name = <span class="string">''</span></span><br><span class="line">reports_2019_month.plot.pie(startangle=<span class="number">90</span>)</span><br><span class="line">plt.title(<span class="string">'2019年每月报道数量饼状图'</span>, fontproperties=<span class="string">'Kaiti'</span>)</span><br><span class="line">plt.savefig(<span class="string">'reports_pie'</span>, dpi=<span class="number">300</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
-</ol>
-
+        <h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h1>
       
     </div>
     
@@ -554,7 +400,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习笔记</a>
           
         </div>
       
@@ -567,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/14/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium/" rel="next" title="论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing with Markov Correlated Equilibrium">
-                <i class="fa fa-chevron-left"></i> 论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing with Markov Correlated Equilibrium
+              <a href="/2020/12/16/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-6/" rel="next" title="ck3mod制作笔记-6">
+                <i class="fa fa-chevron-left"></i> ck3mod制作笔记-6
               </a>
             
           </div>
@@ -576,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-BEYOND%20FINITE%20LAYER%20NEURAL%20NETWORKS%20BRIDGING%20DEEP%20ARCHITECTURES%20AND%20NUMERICAL%20DIFFERENTIAL%20EQUATIONS/" rel="prev" title="论文记录-FractalNet的ODE建模">
-                论文记录-FractalNet的ODE建模 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -731,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas初探"><span class="nav-number">1.</span> <span class="nav-text">Pandas初探</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas数据类型"><span class="nav-number">2.</span> <span class="nav-text">Pandas数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Series-一维序列"><span class="nav-number">2.1.</span> <span class="nav-text">Series(一维序列)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame-二维表"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame(二维表)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">3.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#csv"><span class="nav-number">3.1.</span> <span class="nav-text">csv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#excel"><span class="nav-number">3.2.</span> <span class="nav-text">excel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">4.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随堂练习"><span class="nav-number">5.</span> <span class="nav-text">随堂练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Leetcode"><span class="nav-number">1.</span> <span class="nav-text">Leetcode</span></a></li></ol></div>
             
 
           </div>
