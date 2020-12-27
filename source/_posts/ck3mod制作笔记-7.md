@@ -5,8 +5,8 @@ tags:
 	- 游戏相关
 	- ck3
 	- mod
-cagegories: CK3
-description: 这部分学习on_action的使用
+categories: CK3
+description: 这部分学习on_action的使用。
 ---
 
 # On_Action
