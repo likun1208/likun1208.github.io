@@ -102,7 +102,7 @@
 <meta property="og:description" content="安装各种东西 node.js：Node.js官网链接 点击下载安装即可。 Git： Git官网链接 点击下载安装即可。 deployer-git： 命令行里输入npm install hexo-deployer-git --save。 Hexo： 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-30T01:20:38.000Z">
-<meta property="article:modified_time" content="2020-12-21T13:21:45.544Z">
+<meta property="article:modified_time" content="2020-12-24T10:56:01.786Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
@@ -559,6 +559,10 @@
 </li>
 <li><p>到此就完成了上传，这样换电脑以后，按照前面的内容把git和hexo以及其他相关东西都安装配置好以后，通过git把这个项目文件下载到本地，就又可以编辑博客了；</p>
 </li>
+<li><p>如果多个电脑同时在写博客，时不时需要同步博客内容，就不需要<code>git clone</code>下载整个文件，只需要<code>git pull</code>把远程文件同步到本地即可；</p>
+</li>
+<li><p>总结一下就是，每次写博客之前，首先<code>git pull</code>把github上的博客内容下载到本地；写完新的内容，首先进行<code>hexo clean, hexo g, hexo d</code>把内容渲染成网页并发布，接着<code>git add ., git commit -m &quot;description&quot;, git push</code>把新增和修改的内容也上传到github，这样就可以实现白天在实验室写，晚上回宿舍写的操作了；</p>
+</li>
 <li><p>以上操作也可以通过github的桌面版程序来完成，还挺方便。</p>
 </li>
 </ol>
@@ -700,7 +704,7 @@
               
 				<a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -722,7 +726,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
