@@ -1993,6 +1993,9 @@
 </tr>
 </tbody></table>
 ]]></content>
+      <categories>
+        <category>CK3</category>
+      </categories>
       <tags>
         <tag>游戏相关</tag>
         <tag>ck3</tag>
@@ -2741,10 +2744,10 @@
 
 
 
-<div id="echarts9425" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6813" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9425'));
+        var myChart = echarts.init(document.getElementById('echarts6813'));
 
         // 指定图表的配置项和数据
         var option = {
