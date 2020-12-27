@@ -93,7 +93,7 @@ description: 这部分学习特质相关的内容。
    2. `parameter`：要检查的布尔值参数
    3. `check_missing`：检查参数是否没设置（或设置为 false），而不是设置为 true
    4. `same_faith`：相同信仰
-   5. `same_dynasty`：相同王朝
+   5. `same_dynasty`：相同宗族
    6. `ignore_opinion_value_if_same_trait`：设置为`yes`的时候，会对有相同特质的角色不进行好感度修正，但是惩罚理由还在
    7. `male_only`和`female_only`很显然分别是仅限男性和仅限女性
 8. `compatibility`：这是用于`compatibility_modifier`和`trait_compatibility`这两个触发器的，是检查特质持有者与列出的特质的兼容性。感觉是指获取某一特质后，再获取其他特质的概率会受这个列表值的修正。具体怎么用还不太明白，之后补充。
@@ -111,7 +111,7 @@ description: 这部分学习特质相关的内容。
 20. `physical, health_trait, fame`：这三个设置为`yes`则分别表示该特质是和物理、健康、名誉相关。
 21. `trait_exclusive_if_realm_contains`：这个值是`{}`，大括号里可以填东西，表示随机分配给指挥官时考虑的地形类型列表。只有当指挥官的文化包含具有列表中指定的地形类型之一的省时，才分配/考虑这些特征。
 22. `blocks_from_claim_inheritance`：设置为`yes`时，有该特质的角色无法继承头衔宣称。
-23. `blocks_from_claim_inheritance_from_dynasty`：同上，设置为`yes`时，有该特质的角色无法从王朝成员那里继承头衔宣称。
+23. `blocks_from_claim_inheritance_from_dynasty`：同上，设置为`yes`时，有该特质的角色无法从宗族成员那里继承头衔宣称。
 24. `shown_in_ruler_designer`：默认是`yes`，设置为`yes`时，可以在自定义角色的那个地方的特质列表中看到该特质。
 25. `ruler_designer_cost`：默认是0，同上，是指自定义角色时该特质消耗的点数。
 26. `valid_sex`：可以是`all/male/female`，默认是`all`，表示该特质可以由什么性别的角色获得。
