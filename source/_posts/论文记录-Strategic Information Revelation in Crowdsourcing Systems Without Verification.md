@@ -1,7 +1,9 @@
 ---
 title: 论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification
 date: 2020-12-25 09:38:43
-tags: 众包
+tags: 
+	- crowdsourcing
+	- game theory
 category: 论文
 description: 无验证的众包系统中的策略性信息披露
 ---
@@ -144,9 +146,7 @@ description: 无验证的众包系统中的策略性信息披露
 
 1. 前提：给定平台策略$\epsilon$和$R$，每个worker选择自己的努力程度和报告策略$s_i$来最大化自身收益
 
-2. worker的信念更新：
-
-   1. 平台公布$k_p^{anu}$之前，workers有对$k$的先验信念$\mu^{prior}$（是每人一个还是所有worker共用？）
+2. worker的信念更新：平台公布$k_p^{anu}$之前，workers有对$k$的先验信念$\mu^{prior}$（是每人一个还是所有worker共用？）
 
    2. 平台公布$k_p^{anu}$后，workers基于先验信念和平台公布值更新后验信念$\mu_w^{post,str}|k_p^{anu}$，其中$w\in \{high,low\}$。计算如下：
       $$
@@ -172,8 +172,27 @@ description: 无验证的众包系统中的策略性信息披露
 3. worker的均衡策略：worker根据后验信念做出是否努力以及是否如实汇报的决策，本文关注对称纳什均衡——相同类型（任务求解准确率）的worker会有相同的决策。
 
    1. 定义1：
+   
+      1. $n-SNE$：$(s_i^*=(0,rd), \forall i\in N)$，没有worker会努力和如实报告
+      2. $f-SNE$：$(s_i^*=(1,1), \forall i\in N)$， 所有worker都努力和如实报告
+      3. $p-SNE$：$(s_i^*=(1,1), \forall i\in N_h, s_j^*=(0,rd), \forall j\in N_l)$，高准确率的worker会努力和如实报告，低准确率的worker会不努力和随机报告
+   
    2. 定理1：
+   
+      1. 给定任意$\epsilon\in [0,1]^2$，$R\geq 0$时一定存在一个$n-SNE$.
+      2. 给定任意$\epsilon\in [0,1]^2$，始终存在阈值$R_f^{str}(\epsilon, k_p^{anu})> 0$，使得当且仅当$R>R_f^{str}(\epsilon,k_p^{anu})$时存在$f-SNE$.
+      3. 当$\epsilon\in \Phi=\{\epsilon\in [0,1]^2|condition (11) 成立\}$时，存在两个阈值$0<R_{pl}^{str}(\epsilon,k_p^{anu})\leq R_{ph}^{str}(\epsilon, k_p^{anu})$，使得当且仅当$R_{pl}^{str}(\epsilon,k_p^{anu})\leq R \leq R_{ph}^{str}(\epsilon, k_p^{anu})$时，存在$p-SNE$. $condition (11)$如下：
+   
+      $$
+      \frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}
+      $$
+   
+      ​		在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的那个高准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+   
+      
+   
    3. 推论1：
+   
    4. 定理2：
 
 ### Platform Reward Design in Stage II
