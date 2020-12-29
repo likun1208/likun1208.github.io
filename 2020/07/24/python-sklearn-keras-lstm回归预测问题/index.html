@@ -397,15 +397,12 @@
       
         <p>因为接到了股票价格预测的任务，所以开始研究怎么写代码。实际上代码是网上现成的，并不需要自己研究算法和网络结构，复制粘贴再重新组合一下就好，所以难度不大。之前做过sklearn的分类问题，现在做回归，思路是差不多的。</p>
 <a id="more"></a>
-
 <p>具体场景是：给定某时间段内的股票价格数据，预测接下来的走势；用同样的算法预测其他股票，看准确率是否有变化；老师的想法是对比国内外市场的差异，看是否在机器学习算法中也有体现。</p>
 <h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>这里先列一下所有导入的包，可能有一些实际没用上：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> style</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing, svm</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime <span class="keyword">as</span> date</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> ensemble</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> BaggingRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> ExtraTreeRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">import</span> quandl</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="comment">#from pandas_datareader import data</span></span><br><span class="line"><span class="keyword">import</span> yfinance <span class="keyword">as</span> yf</span><br><span class="line"><span class="comment"># 下面这几个是lstm用的</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dense, Dropout, LSTM</span><br></pre></td></tr></table></figure>
-
 <h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><ol>
 <li><p>使用quandl获取数据：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> quandl</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">start = date(<span class="number">2000</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">end = date.today()</span><br><span class="line">quandl.ApiConfig.api_key = <span class="string">"gEyzpvmpXReFE8Z8TEps"</span></span><br><span class="line">stock_df = pd.DataFrame(quandl.get(<span class="string">"WIKI/GOOGL"</span>, start_date=start, end_date=end))</span><br></pre></td></tr></table></figure>
-
 <p>第一行导入包；</p>
 <p>第二行第三行设置要获取的数据时间范围</p>
 <p>第四行设置api_key，这里是需要到quandl官网注册账户，注册好以后会得到这个key，可以用免费数据。注册的时候分为3步，填名字邮箱密码啥的，第三步的时候会需要点一个人机验证的东西才能注册成功，如果没出现人机验证且无法点注册的按钮，说明需要翻墙。</p>
@@ -415,7 +412,6 @@
 </li>
 <li><p>发现pandas_datareader实际上不太行，查了一下找到了新的数据，数据来源是雅虎财经：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yfinance <span class="keyword">as</span> yf</span><br><span class="line">start_date = <span class="string">"2000-01-01"</span></span><br><span class="line">end_date = <span class="string">"2018-12-01"</span></span><br><span class="line">stock_df = yf.download(tickers = <span class="string">"MCD"</span>, start = start_date, end = end_date)</span><br></pre></td></tr></table></figure>
-
 <p>这里<code>start_date</code>和<code>end_date</code>也可以写成前面<code>date(2000,1,1)</code>的样子，<code>tickers</code>的参数是可以百度到的股票代码，如果是上海的就是<code>600673.SS</code>这种代码后面加<code>.SS</code>，深圳是<code>.SZ</code>，香港是<code>.HK</code>，美国就是那串字母本身，此外，香港的代码查到的都是五位数，但是在这里要把最高位的0去掉，只用四位数。</p>
 <p><code>yf.download</code>会直接返回<code>pandas</code>的<code>dataframe</code>结构，方便后续处理。</p>
 <p>和前面那个<code>quandl</code>的比起来，简单了很多，但是有时候会运行很慢，等十几分钟也不出结果。</p>
@@ -456,7 +452,6 @@
 </li>
 <li><p>画图</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(stock_df[<span class="string">'Close'</span>], label=<span class="string">'Close'</span>, color=<span class="string">'deepskyblue'</span>)	<span class="comment">#实际值</span></span><br><span class="line">stock_df[<span class="string">'Predict'</span>].plot()										<span class="comment">#预测值</span></span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Date'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 </li>
@@ -464,7 +459,6 @@
 <h2 id="lstm"><a href="#lstm" class="headerlink" title="lstm"></a>lstm</h2><ol>
 <li><p>预处理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stock_df[<span class="string">'Date'</span>] = stock_df.index</span><br><span class="line">data = stock_df.sort_index(ascending=<span class="literal">True</span>, axis=<span class="number">0</span>)</span><br><span class="line">new_data = pd.DataFrame(index=range(<span class="number">0</span>, len(stock_df)), columns=[<span class="string">'Date'</span>, <span class="string">'Close'</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(data)):</span><br><span class="line">    new_data[<span class="string">'Date'</span>][i] = data[<span class="string">'Date'</span>][i]</span><br><span class="line">    new_data[<span class="string">'Close'</span>][i] = data[<span class="string">'Close'</span>][i]</span><br><span class="line"><span class="comment"># setting index</span></span><br><span class="line">new_data.index = new_data.Date</span><br><span class="line">new_data.drop(<span class="string">'Date'</span>, axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <p>这样的结果就是把日期和收盘价单独提出来了</p>
 </li>
 <li><p>划分训练集和测试集，是7:3划分</p>
@@ -475,7 +469,6 @@
 </li>
 <li><p>建立和训练lstm模型，这里训练50轮，实际上感觉100轮和50轮没什么差别；这里用了4层lstm，但实际上感觉一层就够了。在训练时用均方根误差作为指标。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create and fit the LSTM network</span></span><br><span class="line">model = Sequential()</span><br><span class="line">model.add(LSTM(units=<span class="number">50</span>, return_sequences=<span class="literal">True</span>, input_shape=(x_train.shape[<span class="number">1</span>], <span class="number">1</span>)))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="literal">True</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="literal">True</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units=<span class="number">50</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(Dense(<span class="number">1</span>))</span><br><span class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, optimizer=<span class="string">'adam'</span>)</span><br><span class="line">model.fit(x_train, y_train, epochs=<span class="number">50</span>, batch_size=<span class="number">32</span>, verbose=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
 <p>需要注意的是，这些lstm模型用的激活函数是默认的<code>tanh</code>，然后训练时会有错误信息，据一些人说是可以忽略的，参见<a href="https://github.com/tensorflow/tensorflow/issues/30263" target="_blank" rel="noopener">链接</a>。如果把激活函数改成<code>sigmoid</code>，就没报错了，但是发现训练结果格外不好，不清楚是我操作问题还是这个激活函数就不合适。总之暂且先用<code>tanh</code>。</p>
 </li>
 <li><p>准备测试集，这里和训练集一样，往前倒60个数据</p>
@@ -489,7 +482,6 @@
 </li>
 <li><p>和sklearn一样的画图</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">train = new_data[:t_len]</span><br><span class="line">valid = new_data[t_len:]</span><br><span class="line">valid[<span class="string">'Predictions'</span>] = closing_price</span><br><span class="line">plt.plot(train[<span class="string">'Adj. Close'</span>], color=<span class="string">'deepskyblue'</span>, label = <span class="string">'Adj. Close'</span>)</span><br><span class="line">plt.plot(valid[<span class="string">'Adj. Close'</span>], color=<span class="string">'deepskyblue'</span>)</span><br><span class="line">plt.plot(valid[<span class="string">'Predictions'</span>], label = <span class="string">'Predict'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Date'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h2 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h2><ol>
@@ -659,7 +651,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1227,6 +1219,8 @@
   
 
   
+  
+
 
   
 

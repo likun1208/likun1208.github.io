@@ -395,7 +395,6 @@
       
         <p>首先新建一个mod文件。</p>
 <a id="more"></a>
-
 <h1 id="新建Mod"><a href="#新建Mod" class="headerlink" title="新建Mod"></a>新建Mod</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
 <li>启动器里找到mod新建会自动生成相关文件；</li>
 <li>也可以文档里找到<code>...\Paradox Interactive\Crusader Kings III\mod</code>文件夹（如果没有就新建），新建<code>test.mod</code>文件，用随便什么编辑器打开，输入一系列内容并保存。</li>
@@ -403,12 +402,10 @@
 <h2 id="test-mod文件"><a href="#test-mod文件" class="headerlink" title="test.mod文件"></a><code>test.mod</code>文件</h2><ol>
 <li><p>启动器生成的该文件基础内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">version&#x3D;&quot;0.0&quot;</span><br><span class="line">tags&#x3D;&#123;</span><br><span class="line">	&quot;Historical&quot;</span><br><span class="line">&#125;</span><br><span class="line">name&#x3D;&quot;test&quot;</span><br><span class="line">supported_version&#x3D;&quot;1.0.3&quot;</span><br><span class="line">path&#x3D;&quot;C:&#x2F;Users&#x2F;LiKun&#x2F;Documents&#x2F;Paradox Interactive&#x2F;Crusader Kings III&#x2F;mod&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
-
 <p><code>version</code>和<code>supported_version</code>自己可以看着改。</p>
 </li>
 <li><p>可以附加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">picture &#x3D; 图像文件名</span><br></pre></td></tr></table></figure>
-
 <p>指定mod开场图片。</p>
 </li>
 <li><p>ck2可以设定<code>replace_path</code>，覆盖文件夹中的所有内容，ck3是否可以还没试过，之后看看。</p>
@@ -421,25 +418,21 @@
 <ol>
 <li><p><code>standard_achievements.txt</code>中的内容格式是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">成就名 &#x3D; &#123;</span><br><span class="line">	possible &#x3D; &#123;</span><br><span class="line">		# 这里应该是写成就达成所需要的条件，是很多逻辑语句组成的内容</span><br><span class="line">	&#125;</span><br><span class="line">	happened &#x3D; &#123;</span><br><span class="line">		custom_description &#x3D; &#123;</span><br><span class="line">			# 这里应该是写直接触发成就达成的行为</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 </li>
 </ol>
-<ol start="2">
+<ol>
 <li><p><code>msgrdk_achievements.json</code>看起来是给每个成就映射了一个数字编号，总共55个。</p>
 </li>
 <li><p>目前对成就这部分很不熟悉，可能有理解错的内容。</p>
 </li>
 </ol>
-<ol start="3">
+<ol>
 <li><p><code>activities</code>文件夹，这里看上去是五个主要活动的说明，这五个都是决议里的，但应该不是决议。</p>
 <ol>
 <li><p><code>_activities.info</code> 说明了具体格式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">name_of_activity &#x3D; &#123;</span><br><span class="line">	expiration_days &#x3D; X 			# default number of days after an activity is started to it&#39;s expiration</span><br><span class="line">	days_until_auto_start &#x3D; X 		# number of days from an activity is spawned until it&#39;s started (regardless of if participants have arrived or not)</span><br><span class="line">	valid &#x3D; trigger					# checked daily on the activity scope</span><br><span class="line">	on_spawn &#x3D; effect 				# executed on the activity when spawned</span><br><span class="line">	on_activate &#x3D; effect			# executed on the activity when started (all invitations replied to or auto started)</span><br><span class="line">	on_complete &#x3D; effect			# executed on the activity when completed through complete_activity &#x3D; yes (ignored if complete_activity &#x3D; no)</span><br><span class="line">	on_expire &#x3D; effect				# executed on the activity when expiring from timeout</span><br><span class="line">	on_participant_death			# executed on the dying character during death, activity set as scope:activity</span><br><span class="line">	on_invalidated &#x3D; effect			# executed on the activity when failing the valid trigger	</span><br><span class="line">	solo &#x3D; yes						# marks the activity as a solo activity (no guests)</span><br><span class="line">	has_activity_window &#x3D; yes		# determines if a certain activity should show a window or not</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>接下来结合其他几个具体文件来理解。</p>
 </li>
 <li><p><code>00_activity_feast.txt</code> 宴会：</p>
@@ -459,7 +452,8 @@
             is_alive = yes
             is_imprisoned = no
         }
-    }</code></pre><p>宴会期间每天检查召开宴会的人活着且没被关起来。</p>
+    }
+</code></pre><p>宴会期间每天检查召开宴会的人活着且没被关起来。</p>
 </li>
 <li><p><code>on_spawn</code>这段很长，大致是宴会事件生成时同时执行的内容，主要是设置潜在宾客列表<code>potential_guests</code>。这段有个<code>if</code>语句，提到条件和配偶有关，没配偶似乎是会随机初始化一个配偶，没太看懂这个设计。</p>
 </li>
@@ -685,7 +679,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1253,6 +1247,8 @@
   
 
   
+  
+
 
   
 

@@ -393,7 +393,6 @@
       
         <p>前段时间忽然开始用vscode，今天配置好了C和C++，现在决定整理一下配置过程。</p>
 <a id="more"></a>
-
 <h2 id="安装和外观"><a href="#安装和外观" class="headerlink" title="安装和外观"></a>安装和外观</h2><ol>
 <li><p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode官网</a>下载和安装，这部分应该不会有问题，注意最后添加到path的选项要勾选，不然就要自己去配置环境变量；</p>
 </li>
@@ -409,7 +408,6 @@
 </li>
 <li><p>如果之前什么扩展也没装，也没搞别的配置，那这个文件打开以后应该是只有两行花括号(<code>{}</code>)的，如果之前装了别的，那花括号中间可能会有几行内容，接下来在花括号里面输入以下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;background.enabled&quot;: true,</span><br><span class="line">   &quot;background.useDefault&quot;: false,</span><br><span class="line">   &quot;background.customImages&quot;:[&quot;file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;LiKun&#x2F;Pictures&#x2F;background.png&quot;],</span><br><span class="line">   &quot;background.style&quot;:&#123;</span><br><span class="line">       &quot;content&quot;:&quot;&#39;&#39;&quot;,</span><br><span class="line">       &quot;pointer-events&quot;:&quot;none&quot;,</span><br><span class="line">       &quot;position&quot;:&quot;absolute&quot;,&#x2F;&#x2F;图片位置</span><br><span class="line">       &quot;width&quot;:&quot;99%&quot;,</span><br><span class="line">       &quot;height&quot;:&quot;99%&quot;,</span><br><span class="line">       &quot;z-index&quot;:&quot;99999&quot;,</span><br><span class="line">       &quot;background.repeat&quot;:&quot;no-repeat&quot;,</span><br><span class="line">       &quot;background-size&quot;:&quot;25%,25%&quot;,&#x2F;&#x2F;图片大小</span><br><span class="line">       &quot;opacity&quot;:0.3 &#x2F;&#x2F;透明度</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-
 <p>注意：每一行最后的逗号不要忘了，背景图的路径改成自己的图，我这个设置是背景图出现在右下角的位置，如果有其他需求自己改就行。</p>
 </li>
 </ol>
@@ -422,7 +420,6 @@
 </li>
 <li><p>设置过程还是打开setting.json，直接输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&quot;latex-workshop.latex.recipes&quot;: [</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;xelatex -&gt; bibtex -&gt; xelatex*2&quot;,</span><br><span class="line">       &quot;tools&quot;: [</span><br><span class="line">         &quot;xelatex&quot;,</span><br><span class="line">         &quot;bibtex&quot;,</span><br><span class="line">         &quot;xelatex&quot;,</span><br><span class="line">         &quot;xelatex&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;</span><br><span class="line">   ],</span><br><span class="line">   &quot;latex-workshop.latex.tools&quot;: [</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;xelatex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;xelatex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;latexmk&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;latexmk&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;pdflatex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;pdflatex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;-synctex&#x3D;1&quot;,</span><br><span class="line">         &quot;-interaction&#x3D;nonstopmode&quot;,</span><br><span class="line">         &quot;-file-line-error&quot;,</span><br><span class="line">         &quot;%DOC%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;name&quot;: &quot;bibtex&quot;,</span><br><span class="line">       &quot;command&quot;: &quot;bibtex&quot;,</span><br><span class="line">       &quot;args&quot;: [</span><br><span class="line">         &quot;%DOCFILE%&quot;</span><br><span class="line">       ]</span><br><span class="line">     &#125;</span><br><span class="line">   ],</span><br><span class="line">   &quot;latex-workshop.view.pdf.viewer&quot;: &quot;tab&quot;,</span><br><span class="line">   &quot;editor.wordWrap&quot;: &quot;on&quot;,</span><br><span class="line">   &quot;latex-workshop.synctex.afterBuild.enabled&quot;: true,</span><br><span class="line">   &quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;: &quot;double-click&quot;,</span><br><span class="line">   &quot;[latex]&quot;: &#123;</span><br><span class="line">     &quot;editor.defaultFormatter&quot;: &quot;nickfode.latex-formatter&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &quot;latex-workshop.latex.autoClean.run&quot;: &quot;onBuilt&quot;,</span><br></pre></td></tr></table></figure>
-
 <p>注意：这个文件最外层就一组花括号，不管有多少要设置的东西都在里面加；latex的内容里有一些是在那个设置里可以直接选的，而不是通过这种让人看不懂的代码来设置，例如<code>&quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;: &quot;double-click&quot;</code>这一句的作用是在pdf里双击可以跳转到latex源文件对应的位置，本来默认的是ctrl点击，但是我习惯双击，可以在设置里搜synctex:keybinding然后修改，改了会自动在settings.json 里出现那句话；<code>&quot;editor.wordWrap&quot;: &quot;on&quot;</code>是和latex本身无关的设置，是让编辑器可以自动换行；其他各种设置可以自行百度。</p>
 </li>
 </ol>
@@ -459,7 +456,6 @@
 </li>
 <li><p>改了之后如果直接保存并在vscode里运行，会提示路径不对，看报错信息是因为程序把上面那个路径和项目文件夹的路径直接拼起来了，显然有问题。回到<code>workspace.js</code>，往下没几行就能看到一个<code>get boardFile()</code>函数，函数内容就是把路径拼起来并作为新路径返回，那么在这里，把拼路径的去掉，直接返回<code>BOARD_FILENAME</code>就可以了，修改之后这个函数如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get</span> boardFile() &#123;</span><br><span class="line">        <span class="keyword">return</span> vscode.Uri.file(Path.resolve(BOARD_FILENAME));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>注意这个文件夹里其他东西不能乱改。</p>
 </li>
 <li><p>到此为止就可以实现所有项目文件共享同一个KanBan了，不过每次更新了以后需要重新改js文件。</p>
@@ -622,7 +618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1190,6 +1186,8 @@
   
 
   
+  
+
 
   
 

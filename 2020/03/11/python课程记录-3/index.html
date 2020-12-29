@@ -393,7 +393,6 @@
       
         <h3 id="知识点记录"><a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h3><p>这次上课有一些是以前不太了解的知识点。</p>
 <a id="more"></a>
-
 <h5 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h5><p>包括字符串、列表、元组、字节序列。</p>
 <ol>
 <li><p>索引访问：</p>
@@ -402,10 +401,8 @@
 <li><p>遍历访问：</p>
 <p>遍历也是用<code>for</code>循环，不过和其他语言不同的是，这里<code>for</code>循环中的<code>i</code>类型很随意，可以是<code>1, 2, 3, ...</code>也可以是元组、字符等，例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">'hello'</span>:</span><br><span class="line">	print(c)</span><br></pre></td></tr></table></figure>
-
 <p>这里的<code>c</code>是字符，最终会把<code>h</code>, <code>e</code>, <code>l</code>, <code>l</code>, <code>o</code> 逐行输出。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> [(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">5</span>,<span class="number">6</span>)]</span><br><span class="line">	print(t,t[<span class="number">0</span>],t[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
 <p>这里的<code>t</code>是元组，最终输出是：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>,<span class="number">2</span>) <span class="number">1</span> <span class="number">2</span></span><br><span class="line">(<span class="number">3</span>,<span class="number">4</span>) <span class="number">3</span> <span class="number">4</span></span><br><span class="line">(<span class="number">5</span>,<span class="number">6</span>) <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -468,7 +465,6 @@
 <li><p>列表解析表达式：处理可迭代对象并生成结果列表，具体格式为<code>[express for i_1 in 可迭代对象1…for i_N in 可迭代对象N [if condition] ]</code></p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">[i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>]</span><br><span class="line">[(x+y,x*y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">2</span>) <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">4</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表解析生成字典和集合</span></span><br><span class="line">a = [(<span class="string">'小黑'</span>,<span class="string">'领导'</span>,<span class="number">30000</span>),(<span class="string">'小白'</span>,<span class="string">'职员'</span>,<span class="number">10000</span>),(<span class="string">'小蓝'</span>,<span class="string">'职员'</span>,<span class="number">5000</span>)]</span><br><span class="line">&#123;i[<span class="number">0</span>]:i[<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小黑': 30000, '小白': 10000, '小蓝': 5000&#125;</span></span><br><span class="line">&#123;i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i[<span class="number">2</span>]&gt;=<span class="number">10000</span>&#125;</span><br><span class="line"><span class="comment"># output: &#123;'小白', '小黑'&#125;</span></span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
@@ -479,13 +475,11 @@
 <li><p>判断一个字符串是否是回文串：<code>a = &#39;abcdcba&#39;  b = &#39;abcdefg&#39;</code></p>
 <p>这个题有很多思路，最快的办法就是用前面提到的<code>s[::-1]</code>来实现逆序，即：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_palindromic4</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num == num[::<span class="number">-1</span>]</span><br><span class="line">a = <span class="string">'abcdcba'</span></span><br><span class="line">b = <span class="string">'abcdefg'</span></span><br><span class="line">print(is_palindromic4(b))</span><br></pre></td></tr></table></figure>
-
 <p>也可以选择把字符串转成<code>list</code>或者<code>tuple</code>然后使用<code>reverse</code>函数来实现逆序。即：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(a)==list(reverse(a))</span><br><span class="line">tuple(a)==tuple(reverse(a))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>下面代码执行后的<code>s</code>是（）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line">s.append([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">s.extend(<span class="string">'34'</span>)</span><br><span class="line">s.extend([<span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">s.insert(<span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">s.insert(<span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line">s.pop(<span class="number">2</span>)</span><br><span class="line">s.remove(<span class="string">'a'</span>)</span><br><span class="line">s[<span class="number">4</span>:] = []</span><br><span class="line">s.reverse()</span><br></pre></td></tr></table></figure>
-
 <p>对照每个函数的作用可以很容易判断出最后的结果是<code>[&#39;4&#39;,&#39;3&#39;,[1,2],7]</code></p>
 </li>
 </ol>
@@ -497,7 +491,6 @@
 <p>(3)本题关键在于求排列，排列有多种实现方式，例如循环。</p>
 <p>根据提示很容易想到一个思路：把数字的全排列和运算符的取3个排列分别列出来，然后逐一组合成字符串，使用<code>eval</code>计算结果，如果是24，就输出。查找资料后发现<code>python</code>有一个算排列的库函数<code>itertools.permutations(s, n)</code>，该函数返回列表<code>s</code>中取<code>n</code>个元素的排列结果，该结果也是一个列表，也就是说我们可以通过该函数得到数字和运算符的排列结果，并<code>for</code>循环遍历，将它们组成计算表达式并求结果，然后输出。代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">op = [<span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'**'</span>]</span><br><span class="line">num = [<span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(num, <span class="number">4</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> itertools.permutations(op, <span class="number">3</span>):</span><br><span class="line">        s = i[<span class="number">0</span>] + j[<span class="number">0</span>] + i[<span class="number">1</span>] + j[<span class="number">1</span>] + i[<span class="number">2</span>] + j[<span class="number">2</span>] + i[<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> float(eval(s)) == <span class="number">24.0</span>:</span><br><span class="line">            print(s)</span><br></pre></td></tr></table></figure>
-
 <p>此外，<code>python</code>中完成24点游戏的思路还有很多很多，复杂一些的办法可以是构造二叉树，然后遍历节点。</p>
 </li>
 <li><p>输入一个列表，然后删除该列表中的重复的元素，要求删除重复元素后还保持原排序，最后输出结果。例如，输入列表 <code>[0, 1, 1, 1, 3, 0, 3, 2]</code>，输出 <code>[0, 1, 3, 2]</code>。</p>
@@ -659,7 +652,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1227,6 +1220,8 @@
   
 
   
+  
+
 
   
 

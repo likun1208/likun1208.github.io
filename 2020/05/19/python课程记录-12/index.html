@@ -394,7 +394,6 @@
         <p>这一课讲Pandas库。</p>
 <p><code>import pandas as pd</code></p>
 <a id="more"></a>
-
 <h2 id="Pandas初探"><a href="#Pandas初探" class="headerlink" title="Pandas初探"></a>Pandas初探</h2><ol>
 <li>读取文件：<code>data = pd.read_excel(filename, index_col=0)</code></li>
 <li>取出数据中的一列或一行：<code>data[&#39;学号&#39;], data.loc[1]</code></li>
@@ -487,7 +486,6 @@
 </li>
 <li><p>读取一个exce里的多个sheet</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reader = pd.ExcelWriter(<span class="string">'atest.xlsx'</span>)</span><br><span class="line">df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">'atest.xlsx'</span>) <span class="keyword">as</span> reader:</span><br><span class="line">    df1 = pd.read_excel(reader, <span class="string">'Sheet1'</span>)</span><br><span class="line">	df2 = pd.read_excel(reader, <span class="string">'Sheet2'</span>)</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><ol>
@@ -682,7 +680,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1250,6 +1248,8 @@
   
 
   
+  
+
 
   
 

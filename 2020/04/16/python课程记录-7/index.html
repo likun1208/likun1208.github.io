@@ -393,7 +393,6 @@
       
         <p>这一课讲python中函数和模块的使用。</p>
 <a id="more"></a>
-
 <h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><ol>
 <li><p>函数定义时可以为参数指定默认值，这样没传参的时候就会用默认值，要先声明没默认值的参数，再声明有默认值的。</p>
 </li>
@@ -443,9 +442,6 @@
 </li>
 <li><p>reduce函数：对可迭代对象的元素进行递归计算，<code>reduce( 带两个参数的函数, 可迭代对象)</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=functools.reduce(operator.add,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line">print(a)	<span class="comment">#25</span></span><br><span class="line">b=functools.reduce(<span class="keyword">lambda</span> x,y:x+y,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line">print(b)	<span class="comment">#25</span></span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 <h3 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h3><ol>
@@ -466,9 +462,6 @@
 <li><p>列表有n个元素时，将第一个元素固定，对剩下n - 1个元素进行全排列。再将第一个元素依此与其他元素交换，对每次交换后剩下的n-1个元素进行全排列。对n-1个元素的全排列就是一个递归过程。</p>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">permutations</span><span class="params">(l, start, end)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> start==end:</span><br><span class="line">        print(l)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        i = start</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(start, end): </span><br><span class="line">            l[j], l[i] = l[i], l[j]</span><br><span class="line">            permutations(l, start + <span class="number">1</span>, end)</span><br><span class="line">            l[i], l[j] = l[j], l[i]            </span><br><span class="line">num=[<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>]</span><br><span class="line">permutations(num, <span class="number">0</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 </li>
@@ -628,7 +621,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1196,6 +1189,8 @@
   
 
   
+  
+
 
   
 

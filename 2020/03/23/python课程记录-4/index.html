@@ -393,11 +393,9 @@
       
         <p>这一课是讲字符串的，主要是几种字符串函数。</p>
 <a id="more"></a>
-
 <h3 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h3><ol>
 <li><p>下面代码的运行结果是（）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">	print(i)</span><br><span class="line">	s.remove(i)</span><br></pre></td></tr></table></figure>
-
 <p>A. 1 2 3 4 5（一个数字一行）</p>
 <p>B. 1 3 5（一个数字一行）</p>
 <p>答案：显然这里<code>s</code>是个列表，列表的<code>remove()</code>函数的作用是移除指定元素，只移除匹配到的第一个。按顺序看，最初列表是<code>s=[1,2,3,4,5]</code>，<code>for</code>循环访问列表的第一个元素，并输出<code>1</code>，接着移除<code>1</code>，这之后列表<code>s</code>的元素会整体往前挪一位，变成<code>s=[2,3,4,5]</code>，此时第一个元素变成<code>2</code>，第二个元素变成<code>3</code>，而<code>for</code>循环会去找列表的第二个元素，也就是跳过<code>2</code>访问<code>3</code>，输出并移除，变成<code>s=[2,4,5]</code>，然后输出并移除第三个元素<code>5</code>。</p>
@@ -405,7 +403,6 @@
 </li>
 <li><p>下列操作的结果是（）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">'!..Hi!!!.'</span></span><br><span class="line">s.strip(<span class="string">'!.'</span>)</span><br></pre></td></tr></table></figure>
-
 <p>A. ‘.Hi!!!’        B. ‘.Hi!!!.’        C. ‘!..Hi!!’        D. ‘Hi’</p>
 <p>答案：字符串的<code>strip</code>函数是移除字符串左右两边的指定字符元素，如果没指定就移除空格，然后遇到第一个不是指定元素的时候就停止移除操作，并且指定元素不会连起来看，也就是这里的<code>!</code>和<code>.</code>是会被看做两个元素，而不是一个完整的字符串，因此移除的时候并不是找连续的<code>!.</code>，而是移除左右两边所有<code>!</code>和<code>.</code>，也就是选D。</p>
 </li>
@@ -418,7 +415,6 @@
 <li><p>如何将<code>s=&#39;d,f,a,c,b,d,g,e,a,f&#39;</code>中的字母进行排序，得到新的字符串<code>s=&#39;a,a,b,c,d,d,e,f,f,g&#39;</code>？</p>
 <p>答案：直接来说就是要把原字符串中的<code>,</code>去掉，剩下的字符串按字母顺序排序，然后再把<code>,</code>加回来。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">'d,f,a,c,b,d,g,e,a,f'</span> </span><br><span class="line">s1=s.replace(<span class="string">','</span>,<span class="string">''</span>) </span><br><span class="line">s2=sorted(s1) </span><br><span class="line"><span class="string">','</span>.join(s2)</span><br></pre></td></tr></table></figure>
-
 <h3 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h3><ol>
 <li><p>在第一课练习的基础上，判断一个字符串是否是回文串（规则更宽松）：</p>
 <p>例如：Madam, I’m Adam                 True</p>
@@ -437,9 +433,6 @@
 <li><p>统计一篇文章（看成一个长字符串）中单词的个数，以及文章中不同单词的个数及列表，最后输出显示。（备注：单词的不同时态 以及单复数都看成是不同的单词）。字符串为变量speech，<code>speech=&#39;&#39;&#39;  Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth.&#39;&#39;&#39;</code></p>
 <p>答案：受上一题的影响，这里也考虑用正则匹配来判断有多少个单词，并把单词放到一个列表中，再根据列表建立字典从而输出词频。统计词频可以用<code>collections.Counter</code>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">speech=<span class="string">'''  Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth.'''</span></span><br><span class="line">words=re.findall(<span class="string">r'[a-zA-Z]+'</span>,speech)</span><br><span class="line">count=len(words)</span><br><span class="line">print(<span class="string">'单词出现次数：'</span>,count)</span><br><span class="line">list2 = collections.Counter(words)</span><br><span class="line">print(dict(list2))</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 </li>
@@ -599,7 +592,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1167,6 +1160,8 @@
   
 
   
+  
+
 
   
 

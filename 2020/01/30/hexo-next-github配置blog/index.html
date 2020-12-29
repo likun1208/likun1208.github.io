@@ -402,7 +402,6 @@
 </li>
 </ol>
 <a id="more"></a>
-
 <h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><ol>
 <li>创建Hexo工程：接着刚才那个命令输入<code>hexo init blog</code>，这里会在这个文件夹下新建一个blog文件夹，如果把blog换成其他名字也是可以的。</li>
 <li>新建Post：命令行里进入blog文件夹（<code>cd blog</code>），输入<code>hexo new “HelloWorld”</code>，这里会在 <strong>/blog/sources/_post/</strong> 目录下生成 <strong>HelloWorld.md</strong> 文件，可以进去打开编辑内容，在之后想写新博客也是通过这个命令生成文件，或者直接把写好的博客文件放到该目录下。</li>
@@ -420,7 +419,6 @@
 </li>
 <li><p>打开 <strong>/blog/config.yml</strong>文件修改deploy 属性(注意“：”之后有空格 ) 否则配置失败。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:&#x2F;&#x2F;github.com&#x2F;kun-bin&#x2F;kun-bin.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
 <p>注意这里repository要替换成自己的仓库地址。</p>
 </li>
 <li><p>初始化本地仓库：在blog文件夹下的命令行输入<code>git init</code></p>
@@ -443,7 +441,6 @@
 </li>
 <li><p>建立菜单对应的页面：还是在blog文件夹下打开命令行，输入<code>hexo new page &quot;categories&quot;</code>，然后在~/blog/source 文件夹中即可看到categories文件夹，打开里面的index.md文件，设置如下（注意：后面要加空格）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
-
 <p>tags页面也是一样的方式来建立。</p>
 </li>
 <li><p>主题风格：一共有四个风格可以选择，打开主题配置文件 找到<code>Scheme Settings</code>，把想用的风格前面的#去掉，比如我这里用了Mist。</p>
@@ -476,13 +473,11 @@
 </li>
 <li><p>如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">	- tag1</span><br><span class="line">	- tag2</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
-
 <p>这里<code>tags:</code> 后面一定要换行，下面的<code>-</code>后面注意有空格。</p>
 </li>
 </ol>
 <h2 id="一些后续问题"><a href="#一些后续问题" class="headerlink" title="一些后续问题"></a>一些后续问题</h2><p>今天（2020.03.16）突然发现当博客内容多起来以后，首页会有翻页，而翻页图标显示是乱的，查了一下发现要改<code>/Blog/themes/next/layout/_partials/pagination.swig</code>这个文件，内容整体替换成下面的：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;%- if page.prev or page.next %&#125;</span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"pagination"</span>&gt;</span></span><br><span class="line">   &#123;&#123;</span><br><span class="line">     paginator(&#123;</span><br><span class="line">       prev_text: '<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-angle-left"</span> <span class="attr">aria-label</span>=<span class="string">"'+__('accessibility.prev_page')+'"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>',</span><br><span class="line">       next_text: '<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-angle-right"</span> <span class="attr">aria-label</span>=<span class="string">"'+__('accessibility.next_page')+'"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>',</span><br><span class="line">       mid_size: 1,</span><br><span class="line">       escape: false</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;&#125;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="SSH登录配置"><a href="#SSH登录配置" class="headerlink" title="SSH登录配置"></a>SSH登录配置</h2><p>每次<code>hexo d</code>的时候都要输入用户名和密码会很麻烦，所以今天做了一下这个。</p>
 <ol>
 <li><p>首先进入博客目录比如<code>C:\Users\LiKun\Documents\GitHub\blog</code>，在这个目录下右键然后打开git bash，如果右键没这个选项那就去开始菜单之类的地方打开git bash然后一点点切目录；</p>
@@ -501,7 +496,6 @@
 </li>
 <li><p>接下来回博客目录，找到<code>_config.yml</code>，也就是站点配置文件，把最下面<code>deploy</code>属性中的<code>repository:</code>内容修改成<code>git@github.com:你的name/你的username.github.io.git</code>的样子，比如：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:likun1208/likun1208.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
 <p>这里有的地方也把<code>repository:</code>写成<code>repo:</code>，应该都行。</p>
 </li>
 <li><p>然后命令行里<code>hexo d</code>，会要求输入之前第四步里的那个密码；</p>
@@ -510,38 +504,42 @@
 </li>
 </ol>
 <h2 id="分支同步"><a href="#分支同步" class="headerlink" title="分支同步"></a>分支同步</h2><p>今天研究了一下把博客所有文件上传到github仓库的一个分支，这样可以在多个电脑上同步写博客而不需要用U盘来回复制。首先，如果前面没有自己定义分支的名字，那么我们的网站内容是存放在<code>master</code>分支的，在这一步，我们会新建一个<code>hexo</code>分支，来存放博客文件（指主题文件和博客markdown文件等）。具体来说，当我们需要在多个电脑之间迁移博客时，会受影响的文件如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">文件（夹）</th>
-<th align="center">说明</th>
+<th style="text-align:center">文件（夹）</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">scaffolds/</td>
-<td align="center">博客文章的模版</td>
+<tbody>
+<tr>
+<td style="text-align:center">scaffolds/</td>
+<td style="text-align:center">博客文章的模版</td>
 </tr>
 <tr>
-<td align="center">source/</td>
-<td align="center">所有博客文章，以及about、tags、categories等page</td>
+<td style="text-align:center">source/</td>
+<td style="text-align:center">所有博客文章，以及about、tags、categories等page</td>
 </tr>
 <tr>
-<td align="center">themes/</td>
-<td align="center">网站的主题</td>
+<td style="text-align:center">themes/</td>
+<td style="text-align:center">网站的主题</td>
 </tr>
 <tr>
-<td align="center">.gitignore</td>
-<td align="center">在push时需要忽略的文件和文件夹</td>
+<td style="text-align:center">.gitignore</td>
+<td style="text-align:center">在push时需要忽略的文件和文件夹</td>
 </tr>
 <tr>
-<td align="center">_config.yml</td>
-<td align="center">站点配置文件</td>
+<td style="text-align:center">_config.yml</td>
+<td style="text-align:center">站点配置文件</td>
 </tr>
 <tr>
-<td align="center">package.json</td>
-<td align="center">依赖包的名称和版本号</td>
+<td style="text-align:center">package.json</td>
+<td style="text-align:center">依赖包的名称和版本号</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ol>
 <li><p>在github网站上找到自己的博客项目，新建<code>hexo</code>分支，并设置为主分支；</p>
 </li>
@@ -554,7 +552,6 @@
 </li>
 <li><p>然后在git bash里输入以下命令，即可完成<code>hexo</code>分支的上传：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit –m &quot;add branch&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
 <p>这里的add branch可以改成其他内容，表示这次上传的说明注释；</p>
 </li>
 <li><p>到此就完成了上传，这样换电脑以后，按照前面的内容把git和hexo以及其他相关东西都安装配置好以后，通过git把这个项目文件下载到本地，就又可以编辑博客了；</p>
@@ -726,7 +723,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1294,6 +1291,8 @@
   
 
   
+  
+
 
   
 

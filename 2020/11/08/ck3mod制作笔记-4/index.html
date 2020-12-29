@@ -403,10 +403,10 @@
 <h2 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h2><p>事件在<code>ecents</code>文件夹下的<code>.txt</code>文件中。</p>
 <h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>整体结构与<a href="https://ck2.paradoxwikis.com/Event_modding" target="_blank" rel="noopener">CK2</a>的事件很相似，但是对语法进行了一些调整，并增加了大量额外的功能，其中许多功能是可选的。此处将介绍每个事件所必须的部分，并在稍后部分中单独介绍其他内容。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">example.1 &#x3D; &#123;</span><br><span class="line">	desc &#x3D; example.1.desc</span><br><span class="line">	</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; example.1.a</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>写好该mod并加载，即可在游戏中的控制台输入<code>event triggers [example.1]</code>来触发该事件。</p>
 <h3 id="ID和命名空间"><a href="#ID和命名空间" class="headerlink" title="ID和命名空间"></a>ID和命名空间</h3><p>ID是事件独一无二的标志。</p>
 <h3 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h3><p>这些是确定事件种类和外观的顶级变量。它们具有有限的值集。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -415,7 +415,8 @@
 <th>Possible values</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>type</td>
 <td>事件类型，决定root的范围。</td>
 <td>* character_event none (when an event doesn’t use the root scope at all)</td>
@@ -425,15 +426,19 @@
 <td>如果设置为true，则该事件不会显示出来，只会在后台触发。可用于执行与玩家不立即相关的维护事件。</td>
 <td>true, false</td>
 </tr>
-</tbody></table>
-<h2 id="画像"><a href="#画像" class="headerlink" title="画像"></a>画像</h2><h3 id="画像位置"><a href="#画像位置" class="headerlink" title="画像位置"></a>画像位置</h3><table>
+</tbody>
+</table>
+</div>
+<h2 id="画像"><a href="#画像" class="headerlink" title="画像"></a>画像</h2><h3 id="画像位置"><a href="#画像位置" class="headerlink" title="画像位置"></a>画像位置</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Portrait Position</th>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>left_portrait</td>
 <td>出现在事件场景的左边。</td>
 </tr>
@@ -453,12 +458,14 @@
 <td>lower_right_portrait</td>
 <td>出现在事件场景的右下方。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">example_event.1001 &#x3D; &#123;</span><br><span class="line">	left_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT # 无论是什么角色，都显示在此事件窗口位置，显示所选的动画。</span><br><span class="line">		animation &#x3D; fear # 请注意，具有某些遗传特征（例如，巨人主义、侏儒主义）的角色更改其角色模型具有不同的动画，如果将其中一个动画分配给没有该模型的角色，则可能会发生崩溃。</span><br><span class="line">	&#125;</span><br><span class="line">	right_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">		animation &#x3D; scheme</span><br><span class="line">	&#125;</span><br><span class="line">	lower_left_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">	lower_center_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">	lower_right_portrait &#x3D; &#123;</span><br><span class="line">		character &#x3D; ROOT</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这段mod所对应的事件如下图所示。</p>
 <p><img src="https://i.loli.net/2020/11/08/GlaYmiW15KjkUzF.png" alt="img"></p>
-<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><table>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Animation</th>
@@ -467,7 +474,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>happiness</td>
 <td>dismissal</td>
 <td>prison_dungeon</td>
@@ -539,8 +547,11 @@
 <td>war_over_win</td>
 <td>grief</td>
 </tr>
-</tbody></table>
-<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><table>
+</tbody>
+</table>
+</div>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Theme</th>
@@ -549,7 +560,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>abduct_scheme</td>
 <td>alliance</td>
 <td>bastardy</td>
@@ -655,10 +667,12 @@
 <td>vassal</td>
 <td>war</td>
 <td>witchcraft</td>
-<td></td>
 </tr>
-</tbody></table>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><table>
+</tbody>
+</table>
+</div>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Background</th>
@@ -667,7 +681,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>alley_day</td>
 <td>alley_night</td>
 <td>armory</td>
@@ -739,8 +754,11 @@
 <td>wilderness_scope</td>
 <td>wilderness_steppe</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>当选择好背景后，对应的环境也会被自动选择，但如果有必要可以自行指定覆盖。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -749,7 +767,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>environment_body</td>
 <td>environment_council</td>
 <td>environment_cw_east_main</td>
@@ -872,17 +891,18 @@
 <tr>
 <td>environment_war_overview</td>
 <td></td>
-<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><p>是使事件工作的附加内容。</p>
 <h3 id="on-trigger-fail"><a href="#on-trigger-fail" class="headerlink" title="on_trigger_fail"></a>on_trigger_fail</h3><p>当触发器失败时运行该项。</p>
 <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>解释一个描述如何由多个字符串组成，例如<code>first_valid</code>和所有其他选项。</p>
 <h3 id="即时模块"><a href="#即时模块" class="headerlink" title="即时模块"></a>即时模块</h3><p>该代码块中的内容会在事件触发时立即执行，甚至早于标题、描述和画像的渲染等等。一般用于设置变量和保存范围，或想要实现无玩家控制的功能影响。</p>
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>事件中的选项可以由用户选择。每个事件可以有任意数量的选项，包括无选项（一个典型的例子就是隐藏事件）。每个选项在主事件中如下定义：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">example.1 &#x3D; &#123;</span><br><span class="line">	[...]</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		# option info</span><br><span class="line">	&#125;</span><br><span class="line">	[...]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>下列表格介绍了<code>option</code>块中的可选关键字：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -892,7 +912,8 @@
 <th>Example</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>name</td>
 <td>Yes</td>
 <td>Points to a localization key for the event option button text.</td>
@@ -922,7 +943,9 @@
 <td>Highlights the event portrait of this character while this option is hovered. This is in addition to the automatic highlighting when  hovering an event option that has an effect that affects portrait  characters.</td>
 <td>highlight_portrait = scope:custom</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="结束后"><a href="#结束后" class="headerlink" title="结束后"></a>结束后</h3><p>该代码块描述了事件发生后运行的内容。</p>
 <h3 id="部件"><a href="#部件" class="headerlink" title="部件"></a>部件</h3><p>有什么类型的小部件。</p>
 <h2 id="On-actions"><a href="#On-actions" class="headerlink" title="On_actions"></a>On_actions</h2><p>这部分wiki上是不完整的，先不详细写了。</p>
@@ -1088,7 +1111,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1656,6 +1679,8 @@
   
 
   
+  
+
 
   
 

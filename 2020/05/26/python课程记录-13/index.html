@@ -395,7 +395,6 @@
 <p><code>from scipy import some_module</code></p>
 <p><code>from scipy.some_module import some_function</code></p>
 <a id="more"></a>
-
 <h2 id="linalg模块的使用"><a href="#linalg模块的使用" class="headerlink" title="linalg模块的使用"></a>linalg模块的使用</h2><ol>
 <li><p>基本线性代数操作：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line">arr = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="comment"># 计算矩阵的行列式</span></span><br><span class="line">linalg.det(arr)				</span><br><span class="line"><span class="comment"># output: -2.0</span></span><br><span class="line"><span class="comment"># 计算特征值和特征向量</span></span><br><span class="line">linalg.eig(arr)</span><br><span class="line"><span class="comment"># output: (array([-0.37228132+0.j,  5.37228132+0.j]), array([[-0.82456484, -0.41597356], [ 0.56576746, -0.90937671]]))</span></span><br><span class="line"><span class="comment"># 矩阵求逆</span></span><br><span class="line">linalg.inv(arr)</span><br><span class="line"><span class="comment"># output: array([[-2. ,  1. ], [ 1.5, -0.5]])</span></span><br></pre></td></tr></table></figure>
@@ -541,8 +540,7 @@
 <li>deg：多项式的次数<br>返回值：<br>p：拟合后的多项式的系数，从<strong>高</strong>位到<strong>低</strong>位</li>
 </ol>
 </li>
-<li><p>numpy/scipy.polyval(p, x)：计算多项式p在x处的值</p>
-</li>
+<li>numpy/scipy.polyval(p, x)：计算多项式p在x处的值</li>
 </ol>
 <p>例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = np.polyfit(x,y,<span class="number">10</span>)</span><br><span class="line">plt.plot(x,np.polyval(p,x),<span class="string">'k-'</span>)</span><br></pre></td></tr></table></figure>
@@ -553,8 +551,7 @@
 </ol>
 <p>例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy.polynomial <span class="keyword">import</span> polymial <span class="keyword">as</span> P</span><br><span class="line">p2=P.polyfit(x,y,<span class="number">10</span>)</span><br><span class="line">plt.plot(x,P.polyfit(x,p2),<span class="string">'m-'</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><p>四则运算：<code>P.polyadd(), P.polysub(), P.polymul(), P.polydiv()</code></p>
 </li>
 <li><p>微分：<code>P.polyder()</code>用来求微分以后的多项式参数，默认是一阶导，加参数就是参数对应的导数</p>
@@ -582,9 +579,6 @@
 </ol>
 <p>整体代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</span><br><span class="line"><span class="keyword">from</span> numpy.polynomial <span class="keyword">import</span> polynomial <span class="keyword">as</span> P</span><br><span class="line">ibm = pd.read_csv(<span class="string">'IBM.csv'</span>, header=<span class="number">0</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br><span class="line">ibm_group = ibm.groupby(ibm.index.year)</span><br><span class="line">ibm_2019 = ibm_group.get_group(<span class="number">2019</span>)[<span class="string">'Close'</span>]</span><br><span class="line">x = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(ibm_2019)<span class="number">-5</span>):</span><br><span class="line">    tmp=[ibm_2019[i],ibm_2019[i+<span class="number">1</span>],ibm_2019[i+<span class="number">2</span>],ibm_2019[i+<span class="number">3</span>],ibm_2019[i+<span class="number">4</span>],<span class="number">1</span>]</span><br><span class="line">    x.append(tmp)</span><br><span class="line">x = np.array(x)</span><br><span class="line">y = np.array(ibm_2019[<span class="number">5</span>:])</span><br><span class="line">c,resid,rank,sigma=linalg.lstsq(x,y)</span><br><span class="line">x_1=np.linspace(<span class="number">1</span>,y.size,y.size)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(x_1,y,<span class="string">'x'</span>, x_1,x.dot(c))</span><br><span class="line">x_2=np.linspace(<span class="number">1</span>,len(ibm_2019),len(ibm_2019))</span><br><span class="line">p=P.polyfit(x_2,ibm_2019,<span class="number">17</span>)</span><br><span class="line">print(<span class="string">"多项式系数为："</span>,p)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(x_2,ibm_2019,<span class="string">'x'</span>,x_2,P.polyval(x_2,p),<span class="string">'k-'</span>)</span><br><span class="line">p2=P.polyder(p)</span><br><span class="line">root=P.polyroots(p2)</span><br><span class="line">plt.plot(root, P.polyval(root,p),<span class="string">'r^'</span>)</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 
@@ -742,7 +736,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1310,6 +1304,8 @@
   
 
   
+  
+
 
   
 

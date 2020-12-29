@@ -393,13 +393,11 @@
       
         <p>这一课讲文件读写。</p>
 <a id="more"></a>
-
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ol>
 <li><p>文件类型：文本文件（纯文本、源代码、网页）、二进制文件（图片、word、excel、ppt）</p>
 </li>
 <li><p>读文本文件：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">r'/path/to/file'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
-
 <p>这样用<code>with open as</code>可以不用写<code>close</code></p>
 </li>
 <li><p>open函数：<code>open(file, mode=&#39;r&#39;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</code> 返回一个文件对象，是可迭代对象</p>
@@ -483,7 +481,6 @@
 <li><p>把刚才的内容逐行写入新的csv文件，注意这里要在之前那个文件关闭之前完成</p>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line"><span class="keyword">with</span> open (<span class="string">'成绩单.csv'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv=csv.reader(f)</span><br><span class="line">    headers = next(f_csv)</span><br><span class="line">    headers.append(<span class="string">'最终成绩'</span>)</span><br><span class="line">    lists = []</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        avg = <span class="number">0.22</span>*int(row[<span class="number">1</span>])+<span class="number">0.18</span>*int(row[<span class="number">2</span>])+<span class="number">0.6</span>*int(row[<span class="number">3</span>])</span><br><span class="line">        row.append(avg)</span><br><span class="line">        row[<span class="number">4</span>]=str(<span class="string">'&#123;:.2f&#125;'</span>.format(row[<span class="number">4</span>]))</span><br><span class="line">        lists.append(row)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'新成绩单.csv'</span>,<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> s:</span><br><span class="line">        s_csv=csv.writer(s)</span><br><span class="line">        s_csv.writerow(headers)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> lists:</span><br><span class="line">            s_csv.writerow(row)</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 </li>
@@ -643,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1211,6 +1208,8 @@
   
 
   
+  
+
 
   
 
