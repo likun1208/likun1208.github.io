@@ -189,9 +189,18 @@ description: 无验证的众包系统中的策略性信息披露
    
       ​		在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的那个高准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
    
-      
+      ​		$P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个低准确率workers决定采取策略$(1,1)$且剩下的那个低准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+   
+      ​		$P_{k^{high}}^{majority}$是指：$k_{high}$个高准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+   
+      ​		$P_{k^{low}}^{majority}$是指：$k_{low}$个低准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+   
+      ​		这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。
    
    3. 推论1：
+   
+      1. 对于一个固定的$\epsilon^l$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^h$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^h$增加而减小。
+      2. 对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。
    
    4. 定理2：
 
