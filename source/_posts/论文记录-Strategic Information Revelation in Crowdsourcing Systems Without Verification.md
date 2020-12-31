@@ -172,36 +172,41 @@ description: 无验证的众包系统中的策略性信息披露
 3. worker的均衡策略：worker根据后验信念做出是否努力以及是否如实汇报的决策，本文关注对称纳什均衡——相同类型（任务求解准确率）的worker会有相同的决策。
 
    1. 定义1：
-   
+
       1. $n-SNE$：$(s_i^*=(0,rd), \forall i\in N)$，没有worker会努力和如实报告
       2. $f-SNE$：$(s_i^*=(1,1), \forall i\in N)$， 所有worker都努力和如实报告
       3. $p-SNE$：$(s_i^*=(1,1), \forall i\in N_h, s_j^*=(0,rd), \forall j\in N_l)$，高准确率的worker会努力和如实报告，低准确率的worker会不努力和随机报告
-   
+
    2. 定理1：
-   
+
       1. 给定任意$\epsilon\in [0,1]^2$，$R\geq 0$时一定存在一个$n-SNE$.
       2. 给定任意$\epsilon\in [0,1]^2$，始终存在阈值$R_f^{str}(\epsilon, k_p^{anu})> 0$，使得当且仅当$R>R_f^{str}(\epsilon,k_p^{anu})$时存在$f-SNE$.
       3. 当$\epsilon\in \Phi=\{\epsilon\in [0,1]^2|condition (11) 成立\}$时，存在两个阈值$0<R_{pl}^{str}(\epsilon,k_p^{anu})\leq R_{ph}^{str}(\epsilon, k_p^{anu})$，使得当且仅当$R_{pl}^{str}(\epsilon,k_p^{anu})\leq R \leq R_{ph}^{str}(\epsilon, k_p^{anu})$时，存在$p-SNE$. $condition (11)$如下：
-   
+
       $$
       \frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}
       $$
-   
+
       ​		在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的那个高准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-   
+
       ​		$P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个低准确率workers决定采取策略$(1,1)$且剩下的那个低准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-   
+
       ​		$P_{k^{high}}^{majority}$是指：$k_{high}$个高准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-   
+
       ​		$P_{k^{low}}^{majority}$是指：$k_{low}$个低准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-   
+
       ​		这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。
-   
+
    3. 推论1：
-   
+
       1. 对于一个固定的$\epsilon^l$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^h$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^h$增加而减小。
+
+         说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{high}$（也就是说在$k^{low}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台需要提供更高报酬（也就是更大的$R$）。分析原因：这种情况会让workers觉得实际的$k$并不是$k^{high}$而是$k^{low}$，也就是说$\mu_{high}^{post,str}|k^{high}(\epsilon)$会减小，因此通过多数一致获得的奖励会减少，而为了激励workers，平台就需要提高奖励，从而提高workers的期望收益。
+
       2. 对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。
-   
+
+         说明：
+
    4. 定理2：
 
 ### Platform Reward Design in Stage II
