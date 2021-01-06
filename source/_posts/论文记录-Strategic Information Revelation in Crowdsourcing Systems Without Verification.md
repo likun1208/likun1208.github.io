@@ -205,11 +205,33 @@ description: 无验证的众包系统中的策略性信息披露
 
       2. 对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。
 
-         说明：
+         说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{low}$（也就是说在$k^{high}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台也一样需要提高报酬来激励。这里的推导可以看前面workers更新后验信念那里的公式来理解。
+         
+      3. 对于适当的$\epsilon$和$R$，定理1中的几个不同的$SNE$可以共存。
 
-   4. 定理2：
+   4. 定理2：帕累托最优：对于任意给定$\epsilon$和$R$，workers之间存在一个帕累托最优均衡解。
+
+      本文假设当多个均衡解共存时，workers会选择帕累托最优。
 
 ### Platform Reward Design in Stage II
+
+这一部分分析对于给定的$\epsilon$，平台观察$k$并决定$R$，从而在第三阶段达到帕累托最优。
+
+1. 定义2：$z\in \{n,f,p\}$表示均衡解索引
+
+   1. $P_z(k)$：均衡$z-SNE$的任务聚合准确率
+
+   2. $E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}$：均衡$z-SNE$的总期望一致性奖励
+
+   3. $B_z(\epsilon,k,k_p^{anu})$：对于每单位$R$，均衡解从$n-SNE$提升到$z-SNE$所带来的平均准确率的提升，计算方式如下：
+      $$
+      B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}}
+      $$
+      
+
+2. 定理3：
+
+   1. 
 
 ### Platform Information Revelation in Stage I
 
