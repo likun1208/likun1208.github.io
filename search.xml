@@ -178,14 +178,24 @@
 </ol>
 <script type="math/tex; mode=display">
 \frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}</script><p>​        在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的那个高准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个低准确率workers决定采取策略$(1,1)$且剩下的那个低准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{high}}^{majority}$是指：$k_{high}$个高准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{low}}^{majority}$是指：$k_{low}$个低准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。</p>
 </li>
-</ol>
-</li>
-</ol>
-<ol>
 <li><p>推论1：</p>
+<ol>
+<li><p>对于一个固定的$\epsilon^l$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^h$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^h$增加而减小。</p>
+<p>说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{high}$（也就是说在$k^{low}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台需要提供更高报酬（也就是更大的$R$）。分析原因：这种情况会让workers觉得实际的$k$并不是$k^{high}$而是$k^{low}$，也就是说$\mu_{high}^{post,str}|k^{high}(\epsilon)$会减小，因此通过多数一致获得的奖励会减少，而为了激励workers，平台就需要提高奖励，从而提高workers的期望收益。</p>
+</li>
+<li><p>对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。</p>
+<p>说明：</p>
+</li>
+</ol>
 </li>
 <li><p>定理2：</p>
+</li>
+</ol>
 </li>
 </ol>
 <h3 id="Platform-Reward-Design-in-Stage-II"><a href="#Platform-Reward-Design-in-Stage-II" class="headerlink" title="Platform Reward Design in Stage II"></a>Platform Reward Design in Stage II</h3><h3 id="Platform-Information-Revelation-in-Stage-I"><a href="#Platform-Information-Revelation-in-Stage-I" class="headerlink" title="Platform Information Revelation in Stage I"></a>Platform Information Revelation in Stage I</h3><h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><h3 id="Impact-of-Worker-Characteristics"><a href="#Impact-of-Worker-Characteristics" class="headerlink" title="Impact of Worker Characteristics"></a>Impact of Worker Characteristics</h3><h3 id="Impact-of-Worker-Prior-Belief"><a href="#Impact-of-Worker-Prior-Belief" class="headerlink" title="Impact of Worker Prior Belief"></a>Impact of Worker Prior Belief</h3><h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><ol>
@@ -2874,10 +2884,10 @@
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4773" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4154" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4773'));
+        var myChart = echarts.init(document.getElementById('echarts4154'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -5529,9 +5539,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -5632,9 +5642,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -5675,9 +5685,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -5876,9 +5886,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -6268,9 +6278,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -6359,9 +6369,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -6475,9 +6485,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -6562,9 +6572,9 @@
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -6757,6 +6767,66 @@
       </categories>
       <tags>
         <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ck3mod制作笔记-8</title>
+    <url>/0202/12/24/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-8/</url>
+    <content><![CDATA[<h1 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h1><ol>
+<li><p><code>flag</code>的作用是对人物或者事件进行标记，可以用在<code>if</code>或<code>trigger</code>或其他类似的地方，而其中人物对应的<code>flag</code>就是<code>character_flag</code>。</p>
+</li>
+<li><p>我们使用<code>add_character_flag</code>来添加一个人物标记，用<code>remove_character_flag</code>移除一个人物标记。</p>
+</li>
+<li><p>接下来看一个例子：有两个事件，其中事件1001有2个选项，选项a和b分别会给人物添加两个不同的<code>flag</code>，2个选项都会触发事件1002；而事件1002则有1个选项，根据事件1中的两个<code>flag</code>，该选项会显示不同的内容。那么代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">namespace &#x3D; adventure</span><br><span class="line">adventure.1001 &#x3D; &#123;</span><br><span class="line">    type &#x3D; character_event</span><br><span class="line">	title &#x3D; adventure.1001.t1</span><br><span class="line">	desc &#x3D; adventure.1001.desc</span><br><span class="line">	theme &#x3D; adventure</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; adventure.1001.option.a</span><br><span class="line">		add_character_flag &#x3D; flag_adventure_random_1</span><br><span class="line">		trigger_event &#x3D; adventure.1002</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; adventure.1001.option.b</span><br><span class="line">		add_character_flag &#x3D; flag_adventure_random_2</span><br><span class="line">		trigger_event &#x3D; adventure.1002</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">adventure.1002 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; adventure.1002.t1</span><br><span class="line">	desc &#x3D; adventure.1002.desc1</span><br><span class="line">	theme &#x3D; adventure</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; &#123;</span><br><span class="line">			trigger &#x3D; &#123;has_character_flag &#x3D;flag_adventure_random_1&#125;</span><br><span class="line">			text &#x3D; adventure.1002.option.a</span><br><span class="line">		&#125;</span><br><span class="line">		name &#x3D; &#123;</span><br><span class="line">			trigger &#x3D; &#123;has_character_flag &#x3D; flag_adventure_random_2&#125;</span><br><span class="line">			text &#x3D; adventure.1002.option.b</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>flag</code>的基础用法大致就是这样，除了<code>character_flag</code>也还有其他类型的<code>flag</code>。</p>
+</li>
+</ol>
+<h1 id="customizable-localization"><a href="#customizable-localization" class="headerlink" title="customizable_localization"></a>customizable_localization</h1><ol>
+<li><p>起因是想了解如何随机显示出现的文字，例如某事件的标题随机显示。试图使用<code>random_list</code>等方式都没用，在论坛提问以后大佬告诉我可以用<code>customizable_localization</code>来实现。学习了一下大致写法如下。</p>
+</li>
+<li><p>首先，文件夹路径是<code>Crusader Kings III\game\common\customizable_localization</code>，该文件夹中有很多已经写好的文件。</p>
+</li>
+<li><p>其次，相关的本地化文件夹路径是<code>Crusader Kings III\game\localization\simp_chinese\custom_localization</code>。</p>
+</li>
+<li><p>一个普通的<code>customizable_localization</code>文件格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">YourCustomLoc &#x3D; &#123;</span><br><span class="line">    type &#x3D; character </span><br><span class="line">    random_valid &#x3D; yes</span><br><span class="line">    text &#x3D; &#123;</span><br><span class="line">        trigger &#x3D; &#123;  </span><br><span class="line">            your_triggers &#x3D; yes</span><br><span class="line">        &#125;</span><br><span class="line">        localization_key &#x3D; title_1</span><br><span class="line">    &#125;</span><br><span class="line">    text &#x3D; &#123;</span><br><span class="line">        trigger &#x3D; &#123;  </span><br><span class="line">            your_triggers &#x3D; no</span><br><span class="line">        &#125;</span><br><span class="line">        localization_key &#x3D; title_2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>type</code>可以有其他选项，具体选项在<code>CUSTOM_LOC_README.txt</code>文件中列出了。</p>
+<p><code>random_valid</code>表示随机选，如果去掉这行就不随机了，而是按顺序第一个满足条件的文本。</p>
+<p>接下来的<code>text</code>块就是待选的随机文本，其中<code>trigger</code>是该文本的触发条件，如果没有条件则可以不写<code>trigger</code>块。<code>localization_key</code>所对应的文字是在前面第3条提到的路径中。</p>
+</li>
+<li><p>在使用该随机文本的时候，例如我们要让某事件的标题随机出现，则把该标题所对应的本地化字符串写成<code>&quot;[ROOT.Char.Custom(&#39;YourCustomLoc&#39;)]&quot;</code></p>
+</li>
+<li><p>具体来看一个例子：</p>
+<ol>
+<li><p><code>common\customizable_localization\00_test_random_loc.txt</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">YourCustomLoc &#x3D; &#123;</span><br><span class="line">    type &#x3D; character</span><br><span class="line">    random_valid &#x3D; yes</span><br><span class="line">    text &#x3D; &#123;</span><br><span class="line">        localization_key &#x3D; title_1</span><br><span class="line">    &#125;</span><br><span class="line">    text &#x3D; &#123;</span><br><span class="line">        localization_key &#x3D; title_2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>localization\simp_chinese\custom_localization\test_random_loc_l_simp_chinese.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> title_1:0 &quot;大胆&quot;</span><br><span class="line"> title_2:0 &quot;善心&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>events\adventure_events\adventure_events.txt</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adventure.1001 &#x3D; &#123;</span><br><span class="line">    type &#x3D; character_event</span><br><span class="line">	title &#x3D; adventure.1001.t1</span><br><span class="line">	desc &#x3D; adventure.1001.desc</span><br><span class="line">	theme &#x3D; adventure</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; adventure.1001.option.a</span><br><span class="line">		add_character_flag &#x3D; flag_adventure_random_1</span><br><span class="line">		trigger_event &#x3D; adventure.1002</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; adventure.1001.option.b</span><br><span class="line">		add_character_flag &#x3D; flag_adventure_random_2</span><br><span class="line">		trigger_event &#x3D; adventure.1002</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; adventure.1001.option.c</span><br><span class="line">		trigger_event &#x3D; adventure.1003</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>localization\simp_chinese\event_localization\adventure\adventure_l_simp_chinese.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> adventure.1001.t1:0 &quot;[ROOT.Char.Custom(&#39;YourCustomLoc&#39;)]&quot;</span><br><span class="line"> adventure.1001.desc:0 &quot;氪金可以获得更好的体验&quot;</span><br><span class="line"> adventure.1001.option.a:0 &quot;我相信上天会为我选择最合适的道路！&quot;</span><br><span class="line"> adventure.1001.option.b:0 &quot;我相信我的能力，命运掌握在我自己手中！&quot;</span><br><span class="line"> adventure.1001.option.c:0 &quot;人的能力是有极限的，我要充钱变强！&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写好这些文件以后，游戏中通过<code>event adventure.1001</code>触发该事件，可以看到标题会随机显示为<code>大胆</code>或者<code>善心</code>。</p>
+</li>
+<li><p>类似地，<code>desc</code>部分也可以这样写。此外，除了<code>[ROOT.Char.Custom(&#39;YourCustomLoc&#39;)]</code>这样的写法，也还有其他类型的写法，具体可以参考游戏本体文件中的内容。</p>
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CK3</category>
+      </categories>
+      <tags>
+        <tag>游戏相关</tag>
+        <tag>ck3</tag>
+        <tag>mod</tag>
       </tags>
   </entry>
 </search>
