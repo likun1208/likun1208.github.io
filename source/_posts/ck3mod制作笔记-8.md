@@ -1,12 +1,12 @@
 ---
 title: ck3mod制作笔记-8
-date: 202-12-24 19:08:27
+date: 2021-01-06 19:08:27
 tags:	
 	- 游戏相关
 	- ck3
 	- mod
 categories: CK3
-description: 这部分学习flag和customizable_localization。
+description: 这部分学习flag、modifier、customizable_localization和message。
 ---
 
 # flag
@@ -56,6 +56,54 @@ description: 这部分学习flag和customizable_localization。
    ```
 
 4. `flag`的基础用法大致就是这样，除了`character_flag`也还有其他类型的`flag`。
+
+
+
+# modifier
+
+1. `modifier`可以理解为对数值的修正，和特质有点像，但结构和功能简单一些。
+
+2. `modifier`的基础结构如下：
+
+   ```
+   modifer_key = {
+   	icon = icon_name	
+   	# Effects, such as
+   	# tax_mult = 0.25
+   	# county_opinion_add = -30
+   }
+   ```
+
+   其中，`icon` 的文件名如果以`positive`或`negative`结尾，则该`modifier`的颜色会有相应的变化（指游戏里那行字的颜色），例如`diplomacy_positive`和`diplomacy_negative`。
+
+3. 在写好一个`modifier`之后，我们可以使用`add_character_modifier = XXX`来给角色添加`modifier`，使用`has_character_modifier = XXX`来判断角色是否有该`modifier`，使用`remove_character_character_modifier = XXX`来移除一个角色的某个`modifier`。在添加的时候，可以加时间字段来限制该`modifier`的持续时间，前面部分中的`flag`也是同样的用法。
+
+4. 一个例子：
+
+   ```
+   # modifier file
+   adventure_diplomacy_add_modifier = {
+   	icon = diplomacy_positive
+   	diplomacy = 2
+   }
+   
+   # event file
+   trigger = {
+   	has_character_flag = flag_adventure_diplomacy
+   	NOT = { has_character_modifier = adventure_diplomacy_add_modifier }
+   }
+   send_interface_message = {
+   	type = adventure_success_type
+   	add_character_modifier = {
+   		modifier = adventure_diplomacy_add_modifier
+   		years = 20
+   	}
+   }
+   ```
+
+   这里的`modifier`的作用是让角色外交+2，在事件中，判断该角色有相应的`flag`且没有该`modifier`时，就给角色增加该`modifier`，且持续20年。
+
+5. 需要注意的是，我们无法在mod中直接修改角色的健康，只能通过`trait`或者`modifier`这样的方式来修改；类似地，角色的五个属性值也不能直接通过`diplomacy = 1`或者`add_diplomacy = 1`这样的方式来改，而是要通过`trait`或`modifier`修正（实际上，一定要改角色的属性值时，可以使用`add_diplomacy_skill = 1`这样的代码，但是一般不建议这么做，因为这样改完全看不出来数值是因为什么事件发生了变化，也不利于后续取消这个改变）。
 
 # customizable_localization
 
@@ -159,3 +207,82 @@ description: 这部分学习flag和customizable_localization。
    5. 写好这些文件以后，游戏中通过`event adventure.1001`触发该事件，可以看到标题会随机显示为`大胆`或者`善心`。
 
    6. 类似地，`desc`部分也可以这样写。此外，除了`[ROOT.Char.Custom('YourCustomLoc')]`这样的写法，也还有其他类型的写法，具体可以参考游戏本体文件中的内容。
+
+# message
+
+1. `message`是指游戏右下角弹出的那个信息提示，或者屏幕上半部分的中间弹出的那个横幅。
+
+2. 代码基础结构如下：
+
+   ```
+   my_message = {
+   	display = (feed|toast)		# where to display the message; default: feed
+   	text = some_loc_key			# string to be used in the message; default: same as message key (e.g "my_message" in this example)
+   	desc = some_loc_key			# string that gives more info about what happened
+   	tooltip = some_loc_key		# string to be used for tooltip of type(optional); default: no tooltip
+   	soundeffect = sound_name	# sound effect played when showing the message (optional); default: no sound
+   	icon = "texture.dds"		# icon textures found in gfx\interface\message_icons
+   	style = good/bad/neutral	# neutral is default, affects the look of message items
+   }
+   ```
+
+   第一行的`display`如果是`feed`，则信息是右下角的形式；如果是`toast`，则信息是中间横幅的形式；默认值是`feed`；
+
+   第二行是该信息的标题文本，默认是信息本身的关键字段，例如这里的`my_message`；
+
+   第三行是改信息的描述文本；
+
+   接下来是该信息的工具栏提示文本；
+
+   最后三行分别是音效、图标和类型，图标的路径在`gfx\interface\message_icons`，类型的设置会影响信息框的颜色外观。
+
+3. 一个例子：
+
+   ```
+   my_message_type = {
+   	display = feed
+   	title = "My Title"
+   	desc = "My $EFFECT$"
+   	tooltip = "My Tooltip"
+   	soundeffect = "blah.audio"
+   	icon = "nice.dds"
+   	style = good
+   }
+   
+   send_interface_message = {
+   	type = my_message_type
+   	add_gold = 50
+   }
+   ```
+
+   这里`$EFFECT$`的写法表示该信息的文本描述是实际造成的效果，比如这里是钱增加50。这样写的一个好处就是，类似的事件可以共用同一个`message_type`，而不用针对每个事件都写一个新的。上述这个例子所弹出的信息提示如下：
+
+   	Title = My Title
+   	Description = My Add 50 Gold
+   	Tooltip = My Tooltip
+
+4. 第二个例子：
+
+   ```
+   send_interface_message = {
+   	type = my_message_type
+   	desc = {
+   		desc = "My Start Line"
+   		desc = linebreak
+   		desc = "My $EFFECT$"
+   	}
+   	title = "My Cooler Title"
+   	tooltip = "$DESCRIPTION$"
+   	add_gold = 50
+   }
+   ```
+
+   仍然使用刚才的`message_type`，但是在调用的时候指定了`desc`、`title`和`tooltip`这3个字段，则输出的信息中的3个字段会替换为指定的内容，如下：
+
+   ```
+   Title = My Cooler Title
+   Description = My Start Line \n My Add 50 Gold
+   Tooltip = My Start Line \n My Add 50 Gold
+   ```
+
+   
