@@ -102,7 +102,7 @@
 <meta property="og:description" content="无验证的众包系统中的策略性信息披露">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-25T01:38:43.000Z">
-<meta property="article:modified_time" content="2020-12-30T11:14:05.543Z">
+<meta property="article:modified_time" content="2021-01-06T13:52:41.080Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="crowdsourcing">
 <meta property="article:tag" content="game theory">
@@ -582,16 +582,40 @@
 <p>说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{high}$（也就是说在$k^{low}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台需要提供更高报酬（也就是更大的$R$）。分析原因：这种情况会让workers觉得实际的$k$并不是$k^{high}$而是$k^{low}$，也就是说$\mu_{high}^{post,str}|k^{high}(\epsilon)$会减小，因此通过多数一致获得的奖励会减少，而为了激励workers，平台就需要提高奖励，从而提高workers的期望收益。</p>
 </li>
 <li><p>对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。</p>
-<p>说明：</p>
+<p>说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{low}$（也就是说在$k^{high}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台也一样需要提高报酬来激励。这里的推导可以看前面workers更新后验信念那里的公式来理解。</p>
+</li>
+<li><p>对于适当的$\epsilon$和$R$，定理1中的几个不同的$SNE$可以共存。</p>
 </li>
 </ol>
 </li>
-<li><p>定理2：</p>
+<li><p>定理2：帕累托最优：对于任意给定$\epsilon$和$R$，workers之间存在一个帕累托最优均衡解。</p>
+<p>本文假设当多个均衡解共存时，workers会选择帕累托最优。</p>
 </li>
 </ol>
 </li>
 </ol>
-<h3 id="Platform-Reward-Design-in-Stage-II"><a href="#Platform-Reward-Design-in-Stage-II" class="headerlink" title="Platform Reward Design in Stage II"></a>Platform Reward Design in Stage II</h3><h3 id="Platform-Information-Revelation-in-Stage-I"><a href="#Platform-Information-Revelation-in-Stage-I" class="headerlink" title="Platform Information Revelation in Stage I"></a>Platform Information Revelation in Stage I</h3><h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><h3 id="Impact-of-Worker-Characteristics"><a href="#Impact-of-Worker-Characteristics" class="headerlink" title="Impact of Worker Characteristics"></a>Impact of Worker Characteristics</h3><h3 id="Impact-of-Worker-Prior-Belief"><a href="#Impact-of-Worker-Prior-Belief" class="headerlink" title="Impact of Worker Prior Belief"></a>Impact of Worker Prior Belief</h3><h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><ol>
+<h3 id="Platform-Reward-Design-in-Stage-II"><a href="#Platform-Reward-Design-in-Stage-II" class="headerlink" title="Platform Reward Design in Stage II"></a>Platform Reward Design in Stage II</h3><p>这一部分分析对于给定的$\epsilon$，平台观察$k$并决定$R$，从而在第三阶段达到帕累托最优。</p>
+<ol>
+<li><p>定义2：$z\in \{n,f,p\}$表示均衡解索引</p>
+<ol>
+<li><p>$P_z(k)$：均衡$z-SNE$的任务聚合准确率</p>
+</li>
+<li><p>$E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}$：均衡$z-SNE$的总期望一致性奖励</p>
+</li>
+<li><p>$B_z(\epsilon,k,k_p^{anu})$：对于每单位$R$，均衡解从$n-SNE$提升到$z-SNE$所带来的平均准确率的提升，计算方式如下：</p>
+<script type="math/tex; mode=display">
+B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}}</script></li>
+</ol>
+</li>
+</ol>
+<ol>
+<li><p>定理3：</p>
+<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h3 id="Platform-Information-Revelation-in-Stage-I"><a href="#Platform-Information-Revelation-in-Stage-I" class="headerlink" title="Platform Information Revelation in Stage I"></a>Platform Information Revelation in Stage I</h3><h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><h3 id="Impact-of-Worker-Characteristics"><a href="#Impact-of-Worker-Characteristics" class="headerlink" title="Impact of Worker Characteristics"></a>Impact of Worker Characteristics</h3><h3 id="Impact-of-Worker-Prior-Belief"><a href="#Impact-of-Worker-Prior-Belief" class="headerlink" title="Impact of Worker Prior Belief"></a>Impact of Worker Prior Belief</h3><h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><ol>
 <li>策略性信息披露问题——非凸规划</li>
 <li>naive workers：总是公开一个较高的平均准确率</li>
 <li>strategic workers：收益和平台信用的平衡，有动机宣布一个低于实际值的平均准确率</li>
@@ -656,6 +680,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/06/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-8/" rel="prev" title="ck3mod制作笔记-8">
+                ck3mod制作笔记-8 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -758,7 +786,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

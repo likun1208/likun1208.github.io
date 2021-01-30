@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="LBS," />
+  <meta name="keywords" content="LBS,POI," />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="新的LBS系统">
+<meta name="description" content="针对LBS中的POI问题的研究">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文记录-N-in-One: A Novel Location-Based-Service">
 <meta property="og:url" content="https://likun1208.github.io/2020/07/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-N-in-One-A-Novel-Location-Based-Service/index.html">
 <meta property="og:site_name" content="左边">
-<meta property="og:description" content="新的LBS系统">
+<meta property="og:description" content="针对LBS中的POI问题的研究">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-18T07:51:56.000Z">
-<meta property="article:modified_time" content="2020-12-21T06:31:24.706Z">
+<meta property="article:modified_time" content="2021-01-06T13:52:41.078Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="LBS">
+<meta property="article:tag" content="POI">
 <meta name="twitter:card" content="summary">
 
 
@@ -377,6 +378,10 @@
           
 
           
+              <div class="post-description">
+                  针对LBS中的POI问题的研究
+              </div>
+          
 
         </div>
       </header>
@@ -391,18 +396,20 @@
       
 
       
-        <h2 id="新的LBS系统"><a href="#新的LBS系统" class="headerlink" title="新的LBS系统"></a>新的LBS系统</h2><a id="more"></a>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
+        <h1 id="新的LBS系统"><a href="#新的LBS系统" class="headerlink" title="新的LBS系统"></a>新的LBS系统</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ol>
+<li>现有LBS基于单一POI，而现实里用户需要多POI的LBS</li>
+<li>本文将单一POI的LBS扩展为使用单个查询请求多个POI的LBS</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
 <li>场景：用户希望同时查询某地点附近的多个兴趣点（例如饭店和KTV都需要）</li>
 <li>和单兴趣点推荐的差别：要综合考虑多个兴趣点的评价和距离以及用户需求，例如吃完饭去KTV这种场景就需要推荐的饭店和KTV近一些</li>
 <li>本文实现的功能：<ol>
-<li>根据每个兴趣点的评价和兴趣点之间的距离，提供一个按评分排序的列表中的前K个兴趣点组合</li>
-<li>找出一个包含了最多兴趣点的矩形区域</li>
+<li>Ranking mode：根据每个兴趣点的评价和兴趣点之间的距离，提供一个按评分排序的列表中的前K个兴趣点组合</li>
+<li>Service area mode：找出一个包含了最多兴趣点的矩形区域</li>
 </ol>
 </li>
-<li></li>
 </ol>
-
+<h2 id="“N-IN-ONE”-LBS-IN-THE-RANKING-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-RANKING-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE RANKING MODE"></a>“N-IN-ONE” LBS IN THE RANKING MODE</h2><h3 id="Metric-to-Evaluate-a-POI-Cluster"><a href="#Metric-to-Evaluate-a-POI-Cluster" class="headerlink" title="Metric to Evaluate a POI Cluster"></a>Metric to Evaluate a POI Cluster</h3><h3 id="Overview-of-Our-Algorithm-for-the-Ranking-Mode"><a href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode" class="headerlink" title="Overview of Our Algorithm for the Ranking Mode"></a>Overview of Our Algorithm for the Ranking Mode</h3><h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><h3 id="Searching-the-Best-K-Results-in-the-Ranking-Mode"><a href="#Searching-the-Best-K-Results-in-the-Ranking-Mode" class="headerlink" title="Searching the Best K Results in the Ranking Mode"></a>Searching the Best K Results in the Ranking Mode</h3><h2 id="“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE SERVICE AREA MODE"></a>“N-IN-ONE” LBS IN THE SERVICE AREA MODE</h2><h2 id="PERFORMANCE-EVALUATION"><a href="#PERFORMANCE-EVALUATION" class="headerlink" title="PERFORMANCE EVALUATION"></a>PERFORMANCE EVALUATION</h2><h3 id="Performance-Evaluation-Based-on-Synthetic-Data"><a href="#Performance-Evaluation-Based-on-Synthetic-Data" class="headerlink" title="Performance Evaluation Based on Synthetic Data"></a>Performance Evaluation Based on Synthetic Data</h3><h3 id="Performance-Evaluation-Based-on-Real-World-Data"><a href="#Performance-Evaluation-Based-on-Real-World-Data" class="headerlink" title="Performance Evaluation Based on Real-World Data"></a>Performance Evaluation Based on Real-World Data</h3><h2 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h2><h2 id="CONCLUSION-AND-FUTURE-WORK"><a href="#CONCLUSION-AND-FUTURE-WORK" class="headerlink" title="CONCLUSION AND FUTURE WORK"></a>CONCLUSION AND FUTURE WORK</h2>
       
     </div>
     
@@ -430,6 +437,8 @@
         <div class="post-tags">
           
             <a href="/tags/LBS/" rel="tag"><i class="fa fa-tag"></i> LBS</a>
+          
+            <a href="/tags/POI/" rel="tag"><i class="fa fa-tag"></i> POI</a>
           
         </div>
       
@@ -557,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -606,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新的LBS系统"><span class="nav-number">1.</span> <span class="nav-text">新的LBS系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新的LBS系统"><span class="nav-number">1.</span> <span class="nav-text">新的LBS系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“N-IN-ONE”-LBS-IN-THE-RANKING-MODE"><span class="nav-number">1.3.</span> <span class="nav-text">“N-IN-ONE” LBS IN THE RANKING MODE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Metric-to-Evaluate-a-POI-Cluster"><span class="nav-number">1.3.1.</span> <span class="nav-text">Metric to Evaluate a POI Cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode"><span class="nav-number">1.3.2.</span> <span class="nav-text">Overview of Our Algorithm for the Ranking Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constructing-the-Viewable-Network"><span class="nav-number">1.3.3.</span> <span class="nav-text">Constructing the Viewable Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Searching-Heterogeneous-POIs"><span class="nav-number">1.3.4.</span> <span class="nav-text">Searching Heterogeneous POIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Searching-the-Best-K-Results-in-the-Ranking-Mode"><span class="nav-number">1.3.5.</span> <span class="nav-text">Searching the Best K Results in the Ranking Mode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE"><span class="nav-number">1.4.</span> <span class="nav-text">“N-IN-ONE” LBS IN THE SERVICE AREA MODE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PERFORMANCE-EVALUATION"><span class="nav-number">1.5.</span> <span class="nav-text">PERFORMANCE EVALUATION</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-Evaluation-Based-on-Synthetic-Data"><span class="nav-number">1.5.1.</span> <span class="nav-text">Performance Evaluation Based on Synthetic Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-Evaluation-Based-on-Real-World-Data"><span class="nav-number">1.5.2.</span> <span class="nav-text">Performance Evaluation Based on Real-World Data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RELATED-WORK"><span class="nav-number">1.6.</span> <span class="nav-text">RELATED WORK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONCLUSION-AND-FUTURE-WORK"><span class="nav-number">1.7.</span> <span class="nav-text">CONCLUSION AND FUTURE WORK</span></a></li></ol></li></ol></div>
             
 
           </div>
