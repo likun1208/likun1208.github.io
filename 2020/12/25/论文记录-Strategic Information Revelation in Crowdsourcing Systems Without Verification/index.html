@@ -102,7 +102,7 @@
 <meta property="og:description" content="无验证的众包系统中的策略性信息披露">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-25T01:38:43.000Z">
-<meta property="article:modified_time" content="2021-01-06T13:52:41.080Z">
+<meta property="article:modified_time" content="2021-02-17T08:34:36.877Z">
 <meta property="article:author" content="Kun Li">
 <meta property="article:tag" content="crowdsourcing">
 <meta property="article:tag" content="game theory">
@@ -478,7 +478,7 @@
 <li>对于不努力的worker：策略唯一，随机上报，用<code>rd</code>表示</li>
 <li>对于努力的worker：策略空间<code>{1,-1}</code>，分别表示如实报告和谎报</li>
 <li>workers可以共谋，大家都报告1或者-1，但对于在线众包系统，这样的共谋并不现实；平台检测到共谋则会删除该worker，因此认为workers的报告策略是独立的，且只有<code>{rd,1,-1}</code>这三个选项。</li>
-<li>$s_i=(e_i,r_i)$表示第$i$个worker的努力策略和报告策略，具体来说$s_i\in S_i={(0,rd),(1,1),(1,-1)}$</li>
+<li>$s_i=(e_i,r_i)$表示第$i$个worker的努力策略和报告策略，具体来说$s_i\in S_i=\{(0,rd),(1,1),(1,-1)\}$</li>
 </ol>
 </li>
 <li>一致性奖励：<ol>
@@ -499,9 +499,11 @@
 <ol>
 <li><p>平台虽然不知道$k$，但是知道$k$的分布，从而得到先验信念$\mu^{prior}=(\mu_{high}^{prior},\mu_{low}^{prior})$，其中$\mu_{high}^{prior}=Pr(k=k^{high})$，$\mu_{low}^{prior}=Pr(k=k^{low})$。$\mu_{high}^{prior}+\mu_{low}^{prior}=1$，且$k^{high}$和$k^{low}$是$k$的两个可能取值。</p>
 </li>
+<li><p>这个先验同时也是workers的，大家都一样。</p>
+</li>
 <li><p>注意，出于简化，上述公式中$k$的分布是两点分布，本方法同样适用于其他分布的情况。</p>
 </li>
-<li><p>在$k$被发现之前，平台会预定一个信息披露策略（？是否公开）。</p>
+<li><p>在$k$被发现之前，平台会预定一个信息披露策略（？是否公开——从后文看是公开的，或者说是workers能发现其规律）。</p>
 </li>
 <li><p>平台可以有多个任务，每个任务有各自对应的$k$，在workers到来之前（也即是在$k$被发现之前），平台会先决定信息披露策略，并承诺会按这个策略执行，从而建立良好信誉。</p>
 </li>
@@ -532,7 +534,7 @@
 <p>$U_p(\epsilon,R,k;s)=\beta P_a(\epsilon,R,k;s)-E\{R^{tot}(\epsilon,R,k;s)\}$</p>
 <ol>
 <li>$P_a(\epsilon,R,k;s)$表示workers的任务聚合准确率，使用少数服从多数的规则来计算该概率。</li>
-<li>$\beta$表示平台对聚合准确率的估值</li>
+<li>$\beta$表示平台对聚合准确率的估值（从公式上理解感觉更像是说当聚合结果是正确的时候所得到的收益）</li>
 <li>$E\{R^{tot}(\epsilon,R,k;s)\}$表示对总的一致性奖励的预期支出（这里的$R^{tot}$是指什么？）</li>
 </ol>
 </li>
@@ -549,6 +551,7 @@
 \mu_{low}^{post,str}|k^{high}(\epsilon)=\frac{\epsilon^h\mu_{low}^{prior}}{(1-\epsilon^l)\mu_{high}^{prior}+\epsilon^h\mu_{low}^{prior}}</script><script type="math/tex; mode=display">
 \mu_{high}^{post,str}|k^{low}(\epsilon)=\frac{\epsilon^l\mu_{low}^{prior}}{\epsilon^l\mu_{high}^{prior}+(1-\epsilon^h)\mu_{low}^{prior}}</script><script type="math/tex; mode=display">
 \mu_{low}^{post,str}|k^{low}(\epsilon)=\frac{(1-\epsilon^h)\mu_{low}^{prior}}{\epsilon^l\mu_{high}^{prior}+(1-\epsilon^h)\mu_{low}^{prior}}</script><p>推导过程用到了<a href="https://zhuanlan.zhihu.com/p/134036707" target="_blank" rel="noopener">贝叶斯公式</a>。</p>
+<p>前两行表示平台宣布$k=k^{high}$时，worker对$k$实际值的后验信念；后两行表示平台宣布$k=k^{low}$时，worker对$k$实际值的后验信念。</p>
 </li>
 <li><p>显然，第一个公式里，随着$\epsilon^h$的增加，workers对k为high的后验信念逐渐减小，也就是说，如果平台在k实际为low时说谎的概率增加，则workers在听到平台说k为high时，会怀疑平台说谎；类似地，在第四个公式中，随着$\epsilon^l$的增加，workers对k为low的后验信念逐渐减小，也就是说，如果平台在k实际为high时说谎的概率增加，则workers在听到平台说k为low时，会怀疑平台，进而减小后验信念。</p>
 </li>
@@ -567,14 +570,16 @@
 <ol>
 <li>给定任意$\epsilon\in [0,1]^2$，$R\geq 0$时一定存在一个$n-SNE$.</li>
 <li>给定任意$\epsilon\in [0,1]^2$，始终存在阈值$R_f^{str}(\epsilon, k_p^{anu})&gt; 0$，使得当且仅当$R&gt;R_f^{str}(\epsilon,k_p^{anu})$时存在$f-SNE$.</li>
-<li>当$\epsilon\in \Phi=\{\epsilon\in [0,1]^2|condition (11) 成立\}$时，存在两个阈值$0&lt;R_{pl}^{str}(\epsilon,k_p^{anu})\leq R_{ph}^{str}(\epsilon, k_p^{anu})$，使得当且仅当$R_{pl}^{str}(\epsilon,k_p^{anu})\leq R \leq R_{ph}^{str}(\epsilon, k_p^{anu})$时，存在$p-SNE$. $condition (11)$如下：</li>
+<li>当$\epsilon\in \Phi=\{\epsilon\in [0,1]^2|condition (11) \}$成立时，存在两个阈值$0&lt;R_{pl}^{str}(\epsilon,k_p^{anu})\leq R_{ph}^{str}(\epsilon, k_p^{anu})$，使得当且仅当$R_{pl}^{str}(\epsilon,k_p^{anu})\leq R \leq R_{ph}^{str}(\epsilon, k_p^{anu})$时，存在$p-SNE$. $condition (11)$如下：</li>
 </ol>
 <script type="math/tex; mode=display">
-\frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}</script><p>​        在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的那个高准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
-<p>​        $P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个低准确率workers决定采取策略$(1,1)$且剩下的那个低准确率workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
-<p>​        $P_{k^{high}}^{majority}$是指：$k_{high}$个高准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
-<p>​        $P_{k^{low}}^{majority}$是指：$k_{low}$个低准确率worker决定采取策略$(1,1)$，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+\frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority} \tag{11}</script><p>​        在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers都决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{high}}^{majority}$是指：$k^{high}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>​        $P_{k^{low}}^{majority}$是指：$k^{low}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
 <p>​        这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。</p>
+</li>
+</ol>
 </li>
 <li><p>推论1：</p>
 <ol>
@@ -590,8 +595,6 @@
 </li>
 <li><p>定理2：帕累托最优：对于任意给定$\epsilon$和$R$，workers之间存在一个帕累托最优均衡解。</p>
 <p>本文假设当多个均衡解共存时，workers会选择帕累托最优。</p>
-</li>
-</ol>
 </li>
 </ol>
 <h3 id="Platform-Reward-Design-in-Stage-II"><a href="#Platform-Reward-Design-in-Stage-II" class="headerlink" title="Platform Reward Design in Stage II"></a>Platform Reward Design in Stage II</h3><p>这一部分分析对于给定的$\epsilon$，平台观察$k$并决定$R$，从而在第三阶段达到帕累托最优。</p>
@@ -611,11 +614,97 @@ B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu}
 <ol>
 <li><p>定理3：</p>
 <ol>
-<li></li>
+<li><p>如果$(11)$成立且$B_p(\epsilon,k,k_p^{anu})&gt;B_f(\epsilon,k,k_p^{anu})$，则平台的最优奖励为：</p>
+<script type="math/tex; mode=display">
+R^*=\left\{
+\begin{aligned}
+&0, &if \ \ \beta<\frac{1}{B_p(\epsilon,k,k_p^{anu})}\\
+&R_{pl}^{str}(\epsilon,k_p^{anu}), &if\ \ \frac{1}{B_p(\epsilon,k,k_p^{anu})} \leq \beta<\widetilde\beta(\epsilon,k,k_p^{anu}) \\
+&R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \widetilde\beta(\epsilon,k,k_p^{anu})
+\end{aligned}
+\right.</script><p>其中，$\widetilde\beta(\epsilon,k,k_p^{anu})=\frac{E\{R_f^{tot}(\epsilon,k,k_p^{anu})-E\{R_p^{tot}(\epsilon,k,k_p^{anu})}{P_f(k)-P_p(k)}$</p>
+</li>
+<li><p>如果$(11)$不成立或者$B_p(\epsilon,k,k_p^{anu})&lt;B_f(\epsilon,k,k_p^{anu})$，则平台的最优奖励为：</p>
+<script type="math/tex; mode=display">
+R^*=\left\{
+\begin{aligned}
+&0, &if \ \ \beta<\frac{1}{B_f(\epsilon,k,k_p^{anu})}\\
+&R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \frac{1}{B_f(\epsilon,k,k_p^{anu})}
+\end{aligned}
+\right.</script><p>注意，$(11)$是达到$p-SNE$所必须的条件。</p>
+</li>
+</ol>
+</li>
+<li><p>定理3说明了：</p>
+<ol>
+<li>如果$p-SNE$存在，且它比$f-SNE$的单位收益准确率提升更高，且平台的估值$\beta$是温和的，平台会通过选择$R^*=R_{pl}^{str}(\epsilon,k_p^{anu})$引出$p-SNE$作为第三阶段的帕累托均衡来最大化自己的收益。</li>
+<li>如果$p-SNE$不存在，或者它比$f-SNE$的单位收益准确率提升低，那么$p-SNE$对平台而言就不是最好的均衡解。当$\beta$很大时，平台会通过选择$R^*=R_f^{str}(\epsilon,k_p^{anu})$引出$f-SNE$作为第三阶段的帕累托最优。</li>
 </ol>
 </li>
 </ol>
-<h3 id="Platform-Information-Revelation-in-Stage-I"><a href="#Platform-Information-Revelation-in-Stage-I" class="headerlink" title="Platform Information Revelation in Stage I"></a>Platform Information Revelation in Stage I</h3><h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><h3 id="Impact-of-Worker-Characteristics"><a href="#Impact-of-Worker-Characteristics" class="headerlink" title="Impact of Worker Characteristics"></a>Impact of Worker Characteristics</h3><h3 id="Impact-of-Worker-Prior-Belief"><a href="#Impact-of-Worker-Prior-Belief" class="headerlink" title="Impact of Worker Prior Belief"></a>Impact of Worker Prior Belief</h3><h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><ol>
+<h3 id="Platform-Information-Revelation-in-Stage-I"><a href="#Platform-Information-Revelation-in-Stage-I" class="headerlink" title="Platform Information Revelation in Stage I"></a>Platform Information Revelation in Stage I</h3><p>这一部分讨论平台的信息披露策略。在该阶段中，平台决定自己的信息披露策略$\epsilon = (\epsilon^h,\epsilon^l)\in[0,1]^2$，并预测自己在第二阶段中的$R$和workers在第三阶段中的帕累托均衡。</p>
+<p>重复一下前文的符号表示：</p>
+<blockquote>
+<p>$\epsilon = (\epsilon^h, \epsilon^l)\in [0,1]^2$：平台的信息披露策略。假设当$k=k^{low}$时，平台宣称$k_p^{anu}=k^{high}$的概率是$\epsilon^h$，而反之，当$k=k^{high}$时，平台宣称$k_p^{anu}=k^{low}$的概率是$\epsilon^l$。</p>
+<p>总结一下就是平台会按下列概率决策：</p>
+<p>$Pr(k_p^{anu}=k^{high}|k=k^{low})=\epsilon^h$</p>
+<p>$Pr(k_p^{anu}=k^{low}|k=k^{low})=1-\epsilon^h$</p>
+<p>$Pr(k_p^{anu}=k^{high}|k=k^{high})=1-\epsilon^l$</p>
+<p>$Pr(k_p^{anu}=k^{low}|k=k^{high})=\epsilon^l$</p>
+<p>即：k有两个取值，一个high，一个low，当真实的k是high时，平台说谎的概率是$\epsilon^l$；当真实的k是low时，平台说谎的概率是$\epsilon^h$。</p>
+</blockquote>
+<ol>
+<li><p>定理4：对平台而言，设置为$\epsilon^h=1,\epsilon^l=0$并不总是最优解。</p>
+<p>换言之，宣称$k_p^{anu}=k^{high}$并不总是最好的，具体分析如下：</p>
+<p>首先，复习内容：$k$的真实值影响第2阶段中的奖励设计，而平台对$k$的宣称值$k_p^{anu}$影响第3阶段中workers的行为。考虑一下4种情况：</p>
+<ol>
+<li>Case $(h,h)$: $k=k^{high}$ 且 $k_p^{anu}=k^{high}$，出现概率$Q_{h,h}(\epsilon)=\mu_{high}^{prior}(1-\epsilon^l)$</li>
+<li>Case $(h,l)$: $k=k^{high}$ 且 $k_p^{anu}=k^{low}$，出现概率$Q_{h,l}(\epsilon)=\mu_{high}^{prior}\epsilon^l$</li>
+<li>Case $(l,h)$: $k=k^{low}$ 且 $k_p^{anu}=k^{high}$，出现概率$Q_{l,h}(\epsilon)=\mu_{low}^{prior}\epsilon^h$</li>
+<li>Case $(l,l)$: $k=k^{low}$ 且 $k_p^{anu}=k^{low}$，出现概率$Q_{l,l}(\epsilon)=\mu_{low}^{prior}(1-\epsilon^h)$</li>
+</ol>
+<p>固定$\epsilon^l$，平台的期望收益为：</p>
+<script type="math/tex; mode=display">
+E\{U_p(\epsilon^h)\}=Q_{h,h}(\epsilon^h)U_{h,h}(\epsilon^h)+Q_{h,l}(\epsilon^h)U_{h,l}(\epsilon^h)+Q_{l,h}(\epsilon^h)U_{l,h}(\epsilon^h)+Q_{l,l}(\epsilon^h)U_{l,l}(\epsilon^h)</script><p>$U_{h,h}$表示在Case $(h,h)$的情况下，平台在第2阶段最优化奖励值后的最大收益。其他几个U也是类似的含义。</p>
+<p>接下来分析期望收益随披露策略的变化趋势。</p>
+</li>
+<li><p>引理1：</p>
+<ol>
+<li>$U_{h,h}(\epsilon^h),U_{l,h}(\epsilon^h),Q_{l,l}(\epsilon^h)$随$\epsilon^h$增加而减小。</li>
+<li>$U_{h,l}(\epsilon^h),U_{l,l}(\epsilon^h),Q_{l,h}(\epsilon^h)$随$\epsilon^h$增加而增加。</li>
+</ol>
+<p>分析：$Q_{l,l}(\epsilon^h)$和$Q_{l,h}(\epsilon^h)$随$\epsilon^h$的变化从定义即可看出。接下来用Case $(h,h)$ 中的 $U_{h,h}(\epsilon^h)$作为例子来分析。在推论1中可知，随$\epsilon^h$增加，平台需要支付更大的奖励$R$来激励workers，而这会减小平台的收益。其他几个U也是类似的分析思路。</p>
+<p>而由于$E\{U_p(\epsilon^h)\}$的几部分单调性不同，因此无法直接分析出平台收益随$\epsilon^h$的变化趋势。同样的，$E\{U_p(\epsilon^l)\}$也无法分析变化趋势。从而得出定理4的结论。</p>
+</li>
+</ol>
+<p>具体的平台披露策略因为太复杂了，所以没法分析，在实验部分进行了数值实验。</p>
+<h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><p>这一部分进行数值实验，研究两类workers：策略型和天真型，天真型的符号表达沿用前文中策略型的，只是把$str$改成了$nai$，具体如下：</p>
+<script type="math/tex; mode=display">
+\left\{
+\begin{aligned}
+\mu_{high}^{post,nai}|k^{high}=\mu_{low}^{post,nai}|k^{low}=1\\
+\mu_{high}^{post,nai}|k^{low}=\mu_{low}^{post,nai}|k^{high}=0\\
+\end{aligned}
+\right.</script><p>接下来的实验结果说明：平台始终向天真的工人宣布高平均工人准确率是最佳的（也就是$k=k^{high}$），但对策略型工人来说并非如此。我们还显示了一个反直觉的结果，表明平台的收益随高准确率workers的准确率提高而提高，随高准确率workers的数量提高而减小。</p>
+<h3 id="Impact-of-Worker-Characteristics"><a href="#Impact-of-Worker-Characteristics" class="headerlink" title="Impact of Worker Characteristics"></a>Impact of Worker Characteristics</h3><p>这一部分研究高准确率workers的准确率$p_h$对平台最优收益、workers总收益（所有workers的收益和）和社会福利（平台收益+workers收益）的影响。</p>
+<p>参数：workers数量$N=100$，高准确率workers的准确率$p_h\in(0.7,0.8),step=0.02$，低准确率workers的准确率$p_l=0.6$，对$k$的先验信念$\mu_{high}^{prior}=0.7,\mu_{low}^{prior}=0.3$，$k$的取值$k^{low}=20,k^{high}\in\{50,70\}$，workers努力的成本$c=1$，平台对聚合准确的估值$\beta=1000$。</p>
+<p>分析图像：</p>
+<ol>
+<li>平台收益随$p_h$增加而增加，对于某些$p_h$随$k^{high}$增加（指从50变成70）而减小。</li>
+<li>天真的workers给平台带来的收益更高。</li>
+<li>workers收益可能随$p_h$增加而减小。</li>
+<li>社会财富随$p_h$增加而增加。</li>
+</ol>
+<h3 id="Impact-of-Worker-Prior-Belief"><a href="#Impact-of-Worker-Prior-Belief" class="headerlink" title="Impact of Worker Prior Belief"></a>Impact of Worker Prior Belief</h3><p>这一部分研究先验信念对平台最优收益、workers总收益和平台披露策略的影响。</p>
+<p>参数：workers数量$N=100$，高准确率workers的准确率$p_h=0.75$，低准确率workers的准确率$p_l=0.6$，对$k$的先验信念$\mu_{high}^{prior}\in\{0.01,0.2,0.4,0.6,0.8,0.99\}$，$k$的取值$k^{low}=20,k^{high}\in\{50,70\}$，workers努力的成本$c=1$，平台对聚合准确的估值$\beta=1000$。</p>
+<p>分析图像：</p>
+<ol>
+<li>平台收益随先验$\mu_{high}^{prior}$增加而增加。</li>
+<li>策略型workers的聚合收益随先验$\mu_{high}^{prior}$增加而减小，天真型workers的聚合收益与先验$\mu_{high}^{prior}$无关。</li>
+<li>面对天真型workers，平台始终宣称$k=k^{high}$是最优的；面对策略型workers则不是这样。</li>
+<li>面对策略型workers时，平台的最优$\epsilon^{h}$随先验$\mu_{high}^{prior}$增加而减小，最优$\epsilon^{l}$随先验$\mu_{high}^{prior}$增加而增加。</li>
+</ol>
+<h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><ol>
 <li>策略性信息披露问题——非凸规划</li>
 <li>naive workers：总是公开一个较高的平均准确率</li>
 <li>strategic workers：收益和平台信用的平衡，有动机宣布一个低于实际值的平均准确率</li>
@@ -628,6 +717,83 @@ B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu}
 </ol>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/134036707" target="_blank" rel="noopener">贝叶斯公式</a></li>
+</ol>
+<h2 id="我的分析"><a href="#我的分析" class="headerlink" title="我的分析"></a>我的分析</h2><h3 id="第三阶段workers均衡解定理1"><a href="#第三阶段workers均衡解定理1" class="headerlink" title="第三阶段workers均衡解定理1"></a>第三阶段workers均衡解定理1</h3><p>要用到的字母表达：</p>
+<p>$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers都决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>$P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>$P_{k^{high}}^{majority}$是指：$k^{high}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>$P_{k^{low}}^{majority}$是指：$k^{low}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）</p>
+<p>$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)$和$\mu_{low}^{post,str}|k_p^{anu}(\epsilon)$是高质量workers的数量的后验概率</p>
+<p>我增加的字母表达：$P^{00}$表示高低质量都采取$(0,rd)$时多数一致方案是正确的概率，$P^{01}$表示高质量采取$(0,rd)$低质量采取$(1,-1)$…类似的，可以把workers策略组合的所有概率表达都写出来，上标左边的数字表示高质量workers的策略，右边的数字表示低质量workers的策略，数字012分别表示策略$(0,rd),(1,-1),(1,1)$。</p>
+<p>显然，$P^{00}=0.5$，$P^{20}=\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}$</p>
+<p>本文假设相同质量的workers会采取相同的策略，也就是说，高低质量的workers的策略组合一共有9种，我们列出收益矩阵：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>(0,rd)</th>
+<th>(1,-1)</th>
+<th>(1,1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0,rd)</td>
+<td>$(0.5R, 0.5R)$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>(1,-1)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>(1,1)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="低质量workers选-0-rd"><a href="#低质量workers选-0-rd" class="headerlink" title="低质量workers选$(0,rd)$"></a>低质量workers选$(0,rd)$</h4><ol>
+<li>高质量workers选$(0,rd)$，所有workers的答案是正确和错误的概率都是0.5，因此大家的收益都是$0.5R$，没有支出。</li>
+<li>高质量workers选$(1,1)$，高质量workers正确的概率是$p_h$，低质量workers正确的概率是0.5，多数一致方案正确的概率是$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}$，</li>
+<li>高质量workers选$(1,-1)$，高质量workers正确的概率是$1-p_h$，低质量workers正确的概率是0.5，多数一致方案正确的概率是$P^{10}$。</li>
+</ol>
+<h4 id="低质量workers选-1-1"><a href="#低质量workers选-1-1" class="headerlink" title="低质量workers选$(1,-1)$"></a>低质量workers选$(1,-1)$</h4><ol>
+<li>高质量workers选$(0,rd)$，高质量workers正确的概率是0.5，低质量workers正确的概率是$1-p_l$，多数一致方案正确的概率是$P^{01}$。</li>
+<li>高质量workers选$(1,1)$，高质量workers正确的概率是$p_h$，低质量workers正确的概率是$1-p_l$，多数一致方案正确的概率是$P^{21}$。</li>
+<li>高质量workers选$(1,-1)$，高质量workers正确的概率是$1-p_h$，低质量workers正确的概率是$1-p_l$，多数一致方案正确的概率是$P^{11}$。</li>
+</ol>
+<h4 id="低质量workders选-1-1"><a href="#低质量workders选-1-1" class="headerlink" title="低质量workders选$(1,1)$"></a>低质量workders选$(1,1)$</h4><ol>
+<li>高质量workers选$(0,rd)$，高质量workers正确的概率是0.5，低质量workers正确的概率是$p_l$，多数一致方案正确的概率是$P^{02}$。</li>
+<li>高质量workers选$(1,1)$，高质量workers正确的概率是$p_h$，低质量workers正确的概率是$p_l$，多数一致方案正确的概率是$P^{22}$。</li>
+<li>高质量workers选$(1,-1)$，高质量workers正确的概率是$1-p_h$，低质量workers正确的概率是$p_l$，多数一致方案正确的概率是$P^{12}$。</li>
+</ol>
+<p>这里看起来是把每一个都列出来，然后比较大小找均衡解。</p>
+<h4 id="Condition-11-的推导"><a href="#Condition-11-的推导" class="headerlink" title="$Condition(11)$的推导"></a>$Condition(11)$的推导</h4><p>在$p-SNE$的情况下，高准确率的worker采取策略$(1,1)$，低准确率的worker采取策略$(0,rd)$。</p>
+<p>对于一个高质量worker，该workers努力时得到正确答案概率：$p_h$，得到错误答案概率：$1-p_h$。</p>
+<p>其他workers中，高质量workers的数量$k$为$k^{high}-1$或者$k^{low}-1$，且对应的概率分别是两个后验概率$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)$和$\mu_{low}^{post,str}|k_p^{anu}(\epsilon)$，而这两种情况下其他workers的多数一致方案是正确和错误的概率分别是$P_{k^{high}-1}^{majority}$和$P_{k^{low}-1}^{majority}$，即可得：</p>
+<p>其他workers的多数一致方案是正确的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority}$，</p>
+<p>其他workers的多数一致方案是错误的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}-1}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}-1}^{majority})$</p>
+<p>一个努力且如实报告的高质量worker得到收益的概率为：</p>
+<script type="math/tex; mode=display">
+p_h(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})+(1-p_h)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}-1}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}-1}^{majority})) \tag{1}</script><p>对于一个低质量worker而言，该workers努力时得到正确答案概率：$p_l$，得到错误答案概率：$1-p_l$，其他workers中，高质量workers的数量$k$为$k^{high}$或者$k^{low}$，且对应的概率分别是两个后验概率$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)$和$\mu_{low}^{post,str}|k_p^{anu}(\epsilon)$，而这两种情况下其他workers的多数一致方案是正确和错误的概率分别是$P_{k^{high}}^{majority}$和$P_{k^{low}}^{majority}$，即可得：</p>
+<p>其他workers的多数一致方案是正确的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}$，</p>
+<p>其他workers的多数一致方案是错误的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}}^{majority})$</p>
+<p>一个努力且如实报告的低质量worker得到收益的概率为：</p>
+<script type="math/tex; mode=display">
+p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})+(1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}}^{majority})) \tag{2}</script><p>公式(1)大于公式(2)所推导出的公式和论文中的$condition(11)$不一样，暂时没想到其他的思路。</p>
+<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><ol>
+<li>均衡解和阈值是怎么算出来的完全不懂</li>
+<li>实验部分是怎么算最优平台披露策略$\epsilon^h,\epsilon^l$</li>
+<li>图2(b)中增加的那段没有解释</li>
+<li>$k^{high}=50$和$k^{high}=70$只有两个值是否能充分说明变化趋势（这个不重要）</li>
+<li>社会财富的增加是否与平台数值过大有关（这个也不重要）</li>
+<li>多数一致投票的时候，如果两边一样怎么处理（这个还不重要）</li>
 </ol>
 
       
@@ -764,7 +930,7 @@ B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu}
               
 				<a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -786,7 +952,7 @@ B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu}
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -835,7 +1001,7 @@ B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategic-Information-Revelation-in-Crowdsourcing-Systems-Without-Verification"><span class="nav-number">1.</span> <span class="nav-text">Strategic Information Revelation in Crowdsourcing Systems Without Verification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Contributions"><span class="nav-number">1.2.2.</span> <span class="nav-text">Key Contributions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">1.3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-Elicitation-Without-Verification-IEWV"><span class="nav-number">1.3.1.</span> <span class="nav-text">Information Elicitation Without Verification(IEWV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strategic-Information-Revelation"><span class="nav-number">1.3.2.</span> <span class="nav-text">Strategic Information Revelation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">1.4.</span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Workers’-Decisions-and-Payoffs"><span class="nav-number">1.4.1.</span> <span class="nav-text">Workers’ Decisions and Payoffs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform’s-Decisions-and-Payoff"><span class="nav-number">1.4.2.</span> <span class="nav-text">Platform’s Decisions and Payoff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOLVING-THREE-STAGE-MODEL"><span class="nav-number">1.5.</span> <span class="nav-text">SOLVING THREE-STAGE MODEL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker-Equilibrium-Behaviors-in-Stage-III"><span class="nav-number">1.5.1.</span> <span class="nav-text">Worker Equilibrium Behaviors in Stage III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform-Reward-Design-in-Stage-II"><span class="nav-number">1.5.2.</span> <span class="nav-text">Platform Reward Design in Stage II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform-Information-Revelation-in-Stage-I"><span class="nav-number">1.5.3.</span> <span class="nav-text">Platform Information Revelation in Stage I</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NUMERICAL-RESULTS"><span class="nav-number">1.6.</span> <span class="nav-text">NUMERICAL RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Impact-of-Worker-Characteristics"><span class="nav-number">1.6.1.</span> <span class="nav-text">Impact of Worker Characteristics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impact-of-Worker-Prior-Belief"><span class="nav-number">1.6.2.</span> <span class="nav-text">Impact of Worker Prior Belief</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONCLUSION"><span class="nav-number">1.7.</span> <span class="nav-text">CONCLUSION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.8.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategic-Information-Revelation-in-Crowdsourcing-Systems-Without-Verification"><span class="nav-number">1.</span> <span class="nav-text">Strategic Information Revelation in Crowdsourcing Systems Without Verification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Contributions"><span class="nav-number">1.2.2.</span> <span class="nav-text">Key Contributions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">1.3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-Elicitation-Without-Verification-IEWV"><span class="nav-number">1.3.1.</span> <span class="nav-text">Information Elicitation Without Verification(IEWV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strategic-Information-Revelation"><span class="nav-number">1.3.2.</span> <span class="nav-text">Strategic Information Revelation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">1.4.</span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Workers’-Decisions-and-Payoffs"><span class="nav-number">1.4.1.</span> <span class="nav-text">Workers’ Decisions and Payoffs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform’s-Decisions-and-Payoff"><span class="nav-number">1.4.2.</span> <span class="nav-text">Platform’s Decisions and Payoff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOLVING-THREE-STAGE-MODEL"><span class="nav-number">1.5.</span> <span class="nav-text">SOLVING THREE-STAGE MODEL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker-Equilibrium-Behaviors-in-Stage-III"><span class="nav-number">1.5.1.</span> <span class="nav-text">Worker Equilibrium Behaviors in Stage III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform-Reward-Design-in-Stage-II"><span class="nav-number">1.5.2.</span> <span class="nav-text">Platform Reward Design in Stage II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform-Information-Revelation-in-Stage-I"><span class="nav-number">1.5.3.</span> <span class="nav-text">Platform Information Revelation in Stage I</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NUMERICAL-RESULTS"><span class="nav-number">1.6.</span> <span class="nav-text">NUMERICAL RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Impact-of-Worker-Characteristics"><span class="nav-number">1.6.1.</span> <span class="nav-text">Impact of Worker Characteristics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impact-of-Worker-Prior-Belief"><span class="nav-number">1.6.2.</span> <span class="nav-text">Impact of Worker Prior Belief</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONCLUSION"><span class="nav-number">1.7.</span> <span class="nav-text">CONCLUSION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.8.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的分析"><span class="nav-number">1.9.</span> <span class="nav-text">我的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第三阶段workers均衡解定理1"><span class="nav-number">1.9.1.</span> <span class="nav-text">第三阶段workers均衡解定理1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#低质量workers选-0-rd"><span class="nav-number">1.9.1.1.</span> <span class="nav-text">低质量workers选$(0,rd)$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#低质量workers选-1-1"><span class="nav-number">1.9.1.2.</span> <span class="nav-text">低质量workers选$(1,-1)$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#低质量workders选-1-1"><span class="nav-number">1.9.1.3.</span> <span class="nav-text">低质量workders选$(1,1)$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Condition-11-的推导"><span class="nav-number">1.9.1.4.</span> <span class="nav-text">$Condition(11)$的推导</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些问题"><span class="nav-number">1.9.2.</span> <span class="nav-text">一些问题</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
