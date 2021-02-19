@@ -15,7 +15,7 @@ description: 这是对CK3的wiki中的事件模组的简要翻译。
 
 ## 位置
 
-事件在`ecents`文件夹下的`.txt`文件中。
+事件在`events`文件夹下的`.txt`文件中。
 
 ## 结构
 

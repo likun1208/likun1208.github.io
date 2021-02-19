@@ -56,11 +56,11 @@ categories: CK3
       ```
       成就名 = {
       	possible = {
-      		# 这里应该是写成就达成所需要的条件，是很多逻辑语句组成的内容
+      		# 成就起始条件
       	}
       	happened = {
       		custom_description = {
-      			# 这里应该是写直接触发成就达成的行为
+      			# 成就达成要求
       		}
       	}
       }
