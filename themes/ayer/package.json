@@ -1,0 +1,36 @@
+{
+  "name": "hexo-theme-ayer",
+  "version": "1.8.13",
+  "description": "a clean and elegant theme for hexo.",
+  "scripts": {
+    "dev": "parcel serve source-src/main.js -d source/dist",
+    "build": "rimraf source/dist && parcel build source-src/main.js -d source/dist --no-source-maps",
+    "postinstall": "node ./move_config.js"
+  },
+  "source": "source-src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shen-Yu/hexo-theme-ayer.git"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "blog",
+    "ayer"
+  ],
+  "author": "Shen-Yu <shenyu@hotmail.com>",
+  "license": "SATA",
+  "bugs": {
+    "url": "https://github.com/Shen-Yu/hexo-theme-ayer/issues",
+    "email": "shenyu@hotmail.com"
+  },
+  "homepage": "https://shen-yu.gitee.io/",
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "cssnano": "^4.1.10",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "postcss-modules": "^1.5.0"
+  },
+  "dependencies": {}
+}
