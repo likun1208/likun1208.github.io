@@ -931,7 +931,6 @@ s_k = -(1-p_k)/p_k \tag{3c}</script><p>上述过程用matlab可以写成：</p>
 </tbody>
 </table>
 </div>
-<p>talkaboutclubs == 1and kingconvinced == 0: kingconvinced == 1</p>
 <h3 id="第一天（战争）"><a href="#第一天（战争）" class="headerlink" title="第一天（战争）"></a>第一天（战争）</h3><div class="table-container">
 <table>
 <thead>
@@ -2380,7 +2379,12 @@ p_h(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}
 <p>一个努力且如实报告的低质量worker得到收益的概率为：</p>
 <script type="math/tex; mode=display">
 p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})+(1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}}^{majority})) \tag{2}</script><p>公式(1)大于公式(2)所推导出的公式和论文中的$condition(11)$不一样，暂时没想到其他的思路。</p>
-<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><ol>
+<p>这里推导出的是：</p>
+<script type="math/tex; mode=display">
+(1-p_h)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_h-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \\
+(1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_l-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})</script><p>论文里的11是：</p>
+<script type="math/tex; mode=display">
+\frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority} \tag{11}</script><h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><ol>
 <li>均衡解和阈值是怎么算出来的完全不懂</li>
 <li>实验部分是怎么算最优平台披露策略$\epsilon^h,\epsilon^l$</li>
 <li>图2(b)中增加的那段没有解释</li>
@@ -5093,10 +5097,10 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts9636" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2941" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9636'));
+        var myChart = echarts.init(document.getElementById('echarts2941'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -7751,9 +7755,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7854,9 +7858,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7897,9 +7901,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8098,9 +8102,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8490,9 +8494,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8581,9 +8585,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8697,9 +8701,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8784,9 +8788,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8863,6 +8867,23 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 </li>
 <li><p>还有很多能配置的，比如侧边栏头像下面有github链接，点击页面出现爱心符号，博客背景动态变化等，可自行搜索。</p>
+</li>
+</ol>
+<h2 id="关于ayer主题的配置"><a href="#关于ayer主题的配置" class="headerlink" title="关于ayer主题的配置"></a>关于ayer主题的配置</h2><p>今天（2021.02.26）为了让网页中的公式能稍微好一些，我换了一个新主题<a href="https://shen-yu.gitee.io/2019/ayer/" target="_blank" rel="noopener">ayer</a>。</p>
+<ol>
+<li><p>安装：在博客文件夹的目录下进命令行输入<code>git clone https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer</code>，如果因为网络原因等问题导致GitHub没法用，可以改用码云：<code>git clone https://gitee.com/mirrors/ayer.git themes/ayer</code>；</p>
+</li>
+<li><p>博客配置文件中的主题改成<code>ayer</code>；</p>
+</li>
+<li><p>进主题配置文件进行自己需要的修改，比如调整logo、友情链接、启用公式等等；</p>
+</li>
+<li><p>需要注意的是，这个主题的分类（categories）、标签（tags）等文件和next主题稍微不一样，需要改一下，以分类为例，进入<code>...\source\categories</code>文件夹，可以看到一个<code>index.md</code>文件，打开以后无论里面有什么内容，都彻底改成以下的：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: "categories"</span><br><span class="line">layout: "categories"</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>相应地，其他用到的文件夹里的<code>index.md</code>也这样改。</p>
+</li>
+<li><p>安装好以后进行<code>hexo clean</code>等等操作，就可以看到新主题的博客了，不过可能和我的屏幕尺寸有关，在文章页面中，固定的目录栏有些靠右，以至于目录显示不完整，而浮动的目录栏有些靠左了，会挡住正文，当目录很长时，文章几乎没法看了。这时需要打开主题中对目录栏的配置，<code>\themes\ayer\source-src\css\_partial</code>文件夹中的<code>tocbot.styl</code>文件，第一部分<code>.tocbot</code>的<code>right</code>属性从<code>-28rem</code>改成<code>-25rem</code>，这样固定目录栏就相对偏左一些，能显示完整了；第六部分<code>.is-position-fixed</code>的<code>right</code>属性从<code>6rem</code>改成<code>0</code>，这样浮动目录栏就会贴着右边，从而不挡左边了；</p>
+</li>
+<li><p>按上面这个操作改完以后发现网页的显示并没有变化，接着打开<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，然后直接搜索<code>-28rem</code>或者<code>tocbot</code>等关键词，找到以后把<code>-28</code>和<code>6</code>改成合适的数值（<code>-25</code>和<code>0</code>），重新部署网站就会发现目录栏变合适了。</p>
 </li>
 </ol>
 <h2 id="如何发布新的博客"><a href="#如何发布新的博客" class="headerlink" title="如何发布新的博客"></a>如何发布新的博客</h2><ol>
