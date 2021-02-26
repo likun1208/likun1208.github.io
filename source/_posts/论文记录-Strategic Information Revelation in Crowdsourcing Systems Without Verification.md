@@ -443,6 +443,17 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 $$
 公式(1)大于公式(2)所推导出的公式和论文中的$condition(11)$不一样，暂时没想到其他的思路。
 
+这里推导出的是：
+$$
+(1-p_h)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_h-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \\
+(1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_l-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})
+$$
+论文里的11是：
+$$
+\frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority} \tag{11}
+$$
+
+
 ### 一些问题
 
 1. 均衡解和阈值是怎么算出来的完全不懂

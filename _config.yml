@@ -109,14 +109,14 @@ live2d:
     # use: live2d-widget-model-wanko
     use: live2d-widget-model-z16
   display: #放置位置和大小
-    position: left
+    position: right
     width: 175
     height: 350
   mobile:
     show: false #是否在手机端显示
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: ayer
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

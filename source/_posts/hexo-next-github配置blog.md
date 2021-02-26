@@ -127,6 +127,33 @@ categories: 博客配置
 
 8. 还有很多能配置的，比如侧边栏头像下面有github链接，点击页面出现爱心符号，博客背景动态变化等，可自行搜索。
 
+## 关于ayer主题的配置
+
+今天（2021.02.26）为了让网页中的公式能稍微好一些，我换了一个新主题[ayer](https://shen-yu.gitee.io/2019/ayer/)。
+
+1. 安装：在博客文件夹的目录下进命令行输入`git clone https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer`，如果因为网络原因等问题导致GitHub没法用，可以改用码云：`git clone https://gitee.com/mirrors/ayer.git themes/ayer`；
+
+2. 博客配置文件中的主题改成`ayer`；
+
+3. 进主题配置文件进行自己需要的修改，比如调整logo、友情链接、启用公式等等；
+
+4. 需要注意的是，这个主题的分类（categories）、标签（tags）等文件和next主题稍微不一样，需要改一下，以分类为例，进入`...\source\categories`文件夹，可以看到一个`index.md`文件，打开以后无论里面有什么内容，都彻底改成以下的：
+
+   ```markdown
+   ---
+   title: categories
+   date: 2020-01-30 08:54:26
+   type: "categories"
+   layout: "categories"
+   ---
+   ```
+
+   相应地，其他用到的文件夹里的`index.md`也这样改。
+
+5. 安装好以后进行`hexo clean`等等操作，就可以看到新主题的博客了，不过可能和我的屏幕尺寸有关，在文章页面中，固定的目录栏有些靠右，以至于目录显示不完整，而浮动的目录栏有些靠左了，会挡住正文，当目录很长时，文章几乎没法看了。这时需要打开主题中对目录栏的配置，`\themes\ayer\source-src\css\_partial`文件夹中的`tocbot.styl`文件，第一部分`.tocbot`的`right`属性从`-28rem`改成`-25rem`，这样固定目录栏就相对偏左一些，能显示完整了；第六部分`.is-position-fixed`的`right`属性从`6rem`改成`0`，这样浮动目录栏就会贴着右边，从而不挡左边了；
+
+6. 按上面这个操作改完以后发现网页的显示并没有变化，接着打开`\themes\ayer\source\dist`文件夹中的`main.css`文件，然后直接搜索`-28rem`或者`tocbot`等关键词，找到以后把`-28`和`6`改成合适的数值（`-25`和`0`），重新部署网站就会发现目录栏变合适了。
+
 ## 如何发布新的博客
 
 1. 在blog文件夹的命令行里输入`hexo new "标题"`，然后进入**/blog/sources/_post/**找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。
