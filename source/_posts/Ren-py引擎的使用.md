@@ -4,7 +4,7 @@ date: 2021-02-11 17:12:12
 tags:
 	- 游戏相关
 	- Renpy
-cagegories: Renpy
+categories: Renpy
 description: 简单学习Renpy引擎的使用。
 ---
 

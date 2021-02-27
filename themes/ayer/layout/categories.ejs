@@ -1,3 +1,22 @@
+<style type="text/css">
+        #contentss {
+        position: relative;
+        width: 800px;
+        height: 1200px;
+        max-height: 1200px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        text-align: center;
+        border: 0;
+        border-radius: 10px;
+        color: rgba(0, 0, 0, .87);
+        background: #fff 50%;
+        background-size: cover;
+        box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+        margin:0 auto;
+        }
+</style>
+
 <section class="outer">
   <% if (site.categories.length){ %>
     <h1 class="page-type-title"><%= __('categories') %></h1>
@@ -5,4 +24,5 @@
       <%- list_categories() %>
     </div>
   <% } %>
+  <%- partial('_widget/category-radar') %>
 </section>

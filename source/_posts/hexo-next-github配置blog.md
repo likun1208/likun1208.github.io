@@ -154,6 +154,192 @@ categories: 博客配置
 
 6. 按上面这个操作改完以后发现网页的显示并没有变化，接着打开`\themes\ayer\source\dist`文件夹中的`main.css`文件，然后直接搜索`-28rem`或者`tocbot`等关键词，找到以后把`-28`和`6`改成合适的数值（`-25`和`0`），重新部署网站就会发现目录栏变合适了。
 
+## GitHub风格日历、标签云、分类雷达图的配置
+
+由于next主题的css文件是swig格式，而网上查到的GitHub日历等都是ejs格式的，因此在用next主题时没能成功配置好日历等；改用Ayer主题后，该主题就是ejs格式的，因此现在添加了日历等内容。这一部分所有涉及到的下载链接都是在别人网站里复制的，如果链接失效可以直接在网上搜文件名来下载，也可以在我的GitHub项目中的主题文件里找已经修改和配置好的相关内容。
+
+### 需要下载配置的文件
+
+1. 下载[echarts.min.js](https://pan.miaodrew.workers.dev/Drew/web/js/echarts.min.js?rootId=0AAjrE2SiYnTaUk9PVA)，放到主题文件夹中的`\source\js`文件夹中，
+
+2. 下载[matery.css](https://pan.miaodrew.workers.dev/Drew/web/css/matery.css?rootId=0AAjrE2SiYnTaUk9PVA)，放到主题文件夹中的`\source\css`文件夹中。
+
+3. 打开`\layout\_partial\head.ejs`文件，在`head`标记中添加一行：
+
+   `<link rel="stylesheet" type="text/css" href="/css/matery.css">`
+
+   这一行直接加到`<head>`的下一行就好，在我的文件里是加到了第10行，如下图：
+
+   ![image-20210227182758974](https://i.loli.net/2021/02/27/hAeoFcx8wIYlL2S.png)
+
+### GitHub风格日历
+
+1. 下载[post-calendar.ejs](https://pan.miaodrew.workers.dev/Drew/web/ejs-hexo/post-calendar.ejs?rootId=0AAjrE2SiYnTaUk9PVA)，放到`\layout\_widget`文件夹中，如果没有这个文件夹就自己新建一个。
+
+2. 打开`post-calendar.ejs`文件，看第7行的内容是否为`<script type="text/javascript" src="/js/echarts.min.js"></script>`，如果不是则改成这样。
+
+3. 在打算添加文章日历的地方，输入以下这行代码
+
+   `<%- partial('_widget/post-calendar') %>`
+
+   例如我要加到归档页面（`archive`），就打开`\layout\archive.ejs`文件，进行添加。不过Ayer主题的这个文件里就下面这行内容：
+
+   `<%- partial('_partial/archive', {pagination: config.archive, index: true}) %>`
+
+   如果直接在这一行前面或者后面添加日历代码，显示效果会不太好，而且会被左边的侧栏挡住，因此找到`\layout\_partial\archive.ejs`文件，在添加日历代码的时候可以多尝试几个位置，看哪个合适。我打算把日历放到“归档”这两个字的下面，文章列表的上面，于是整个文件的内容如下：
+
+   ```ejs
+   <section class="outer">
+     <% if (theme.ads && theme.ads.length != 0){ %>
+     <%- partial('ads') %>
+     <% } %>
+     <% if (theme.broadcast.enable && pagination == 2){ %>
+     <%- partial('_partial/broadcast') %>
+     <% } %>
+     <article class="articles">
+       <%
+       var title = '';
+       if (page.category) title = page.category;
+       if (page.tag) title = "#" + "&nbsp" + page.tag;
+       if (page.archive) {
+         if (page.year) title = page.year + (page.month ? '/' + page.month : '');
+         else title = __('archive_a');
+       }
+       %>
+       <% if (pagination !== 2){ %>
+       <h1 class="page-type-title"><%- title %></h1>
+       <% } %>
+       <% if (pagination == 2){ %>
+       <% page.posts.each(function(post){ %>
+       <%- partial('article', {post: post, index: true}) %>
+       <% }) %>
+     </article>
+     <% } else { %>
+     <% var last; %>
+     <% page.posts.each(function(post, i){ %>
+     <% var year = post.date.year(); %>
+     <% if (last != year){ %>
+     <% if (last != null){ %>
+     </div>
+     </div>
+     <% } %>
+     <% last = year; %>
+     <%- partial('_widget/post-calendar') %>
+     <div class="archives-wrap">
+       <div class="archive-year-wrap">
+         <a href="<%- url_for(config.archive_dir + '/' + year) %>" class="archive-year"><%= year %></a>
+       </div>
+       <div class="archives">
+         <% } %>
+         <%- partial('archive-post', {post: post, even: i % 2 == 0}) %>
+         <% }) %>
+         <% if (page.posts.length){ %>
+       </div>
+     </div>
+     <% } %>
+     <% } %>
+   
+     <% if (page.total > 1){ %>
+     <nav class="page-nav">
+       <%
+           var prev_text = theme.nav_text.page_prev;
+           var next_text = theme.nav_text.page_next
+         %>
+       <%- paginator({
+           prev_text: prev_text,
+           next_text: next_text
+         }) %>
+     </nav>
+     <% } %>
+   </section>
+   ```
+
+4. 最后呈现的效果如下：
+
+![image-20210227184135159](https://i.loli.net/2021/02/27/sXmQr18FJ6HtNko.png)
+
+### 标签云
+
+1. 下载[tag-cloud.ejs](https://cdn.jsdelivr.net/gh/InfiniteYinux/cloud@2.44/Hexo/themeConfig/tag-cloud.ejs)，放到`\layout\_widget`文件夹中，如果没有这个文件夹就自己新建一个。
+
+2. 打开`tag-cloud.ejs`，和前面那个日历一样，检查是否有`<script type="text/javascript" src="<%- theme.jsDelivr.url %><%- theme.libs.js.echarts %>"></script>`，如果有则替换为`<script type="text/javascript" src="/js/echarts.min.js"></script>`。如果没有就忽略。
+
+3. 在需要添加标签云的地方，输入代码：`<%- partial('_widget/tag-cloud') %>`
+
+4. 例如我要将这个添加到原本的标签页面，则找到`\layout\tags.ejs`文件，添加标签云代码。需要注意的是，Ayer主题本身会在这个页面自动生成标签，因此需要把`tags.ejs`文件中原本的标签内容那行去掉，整个文件改成了以下内容：
+
+   ```ejs
+   <section class="outer">
+     <% if (site.tags.length){ %>
+       <h1 class="page-type-title"><%= __('tags') %></h1>
+   	<%- partial('_widget/tag-cloud') %>
+     <% } %>
+   </section>
+   ```
+
+5. 此外，标签云本身的标题和Ayer主题中的标题会重复显示，而我更喜欢Ayer本身那个标题，所以编辑了`tag-cloud.ejs`文件，把第25行的`<i class="fas fa-tags"></i>&nbsp;&nbsp;<%= __('postTagTitle') %>`中的`postTagTitle`改成了空格，之所以没直接去掉这一行，是因为觉得空一行好看一些。
+
+6. 整体效果如图，和Ayer主题本身的标签相比，要好看一些。标签的颜色也可以在`tag-cloud.ejs`文件中自行修改。![image-20210227185130174](https://i.loli.net/2021/02/27/il6UtNjZsCkqozK.png)
+
+### 分类雷达图
+
+1. 下载[category-radar.ejs](https://pan.miaodrew.workers.dev/Drew/web/ejs-hexo/category-radar.ejs?rootId=0AAjrE2SiYnTaUk9PVA)，放到`\layout\_widget`文件夹中，如果没有这个文件夹就自己新建一个。
+
+2. 依旧是检查替换`<script type="text/javascript" src="/js/echarts.min.js"></script>`，如果没有就忽略。
+
+3. 在需要添加分类雷达图的地方，输入代码：`<%- partial('_widget/category-radar') %>`
+
+4. 例如我要添加到原本的分类（`category`）页面，就找到`\layout\categories.ejs`，这里我不打算去掉原本的分类内容，因此不删除原本的代码，直接添加雷达图代码，修改后的文件整体如下：
+
+   ```ejs
+   <section class="outer">
+     <% if (site.categories.length){ %>
+       <h1 class="page-type-title"><%= __('categories') %></h1>
+       <div class="categories-box">
+         <%- list_categories() %>
+       </div>
+     <% } %>
+     <%- partial('_widget/category-radar') %>
+   </section>
+   ```
+
+5. 如果觉得这个雷达图和主题格格不入，想给它加个边框，则可以在刚才的`categories.ejs`文件最开头的地方粘贴以下代码：
+
+   ```ejs
+   <style type="text/css">
+           #contentss {
+           position: relative;
+           width: 800px;
+           height: 1200px;
+           max-height: 1200px;
+           margin-bottom: 15px;
+           margin-top: 15px;
+           text-align: center;
+           border: 0;
+           border-radius: 10px;
+           color: rgba(0, 0, 0, .87);
+           background: #fff 50%;
+           background-size: cover;
+           box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+           margin:0 auto;
+           }
+   </style>
+   ```
+
+   然后下面的雷达图代码修改为：
+
+   ```ejs
+   <div id="contentss">
+   <%- partial('_widget/category-radar') %></div>`或者`<%- partial('_widget/post-calendar') %>
+   </div>
+   ```
+
+   边框的大小样式颜色等等可以自行修改。不过Ayer主题不加边框就挺合适了，因此我没加。
+
+6. 整体效果如下（这个截图是一开始没注意，把雷达图加到了标签页面，但是不影响雷达图的展示；此外，很显然分类名字过长就会显示不完整，这应该和雷达图的大小有关，懒得改了）：
+
+![image-20210227190056808](https://i.loli.net/2021/02/27/4TRVLa5sFIzktBX.png)
+
 ## 如何发布新的博客
 
 1. 在blog文件夹的命令行里输入`hexo new "标题"`，然后进入**/blog/sources/_post/**找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。

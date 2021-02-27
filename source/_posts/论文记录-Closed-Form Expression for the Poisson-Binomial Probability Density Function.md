@@ -2,7 +2,7 @@
 title: 论文记录-Closed-Form Expression for the Poisson-Binomial Probability Density Function
 date: 2021-02-12 17:43:55
 tags: 泊松分布
-cagegories: 论文
+categories: 论文
 description: 泊松-二项分布概率密度函数的近似表达
 ---
 
