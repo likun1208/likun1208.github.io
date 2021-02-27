@@ -5,6 +5,7 @@
 
 
 <head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
   <meta charset="utf-8" />
     
   <meta name="description" content="三月樱，六月雪，也望尘莫及" />
@@ -72,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.2k</span>
+            <span class="post-count">6.1k</span>
         </span>
     </span>
 
@@ -81,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16 分钟</span>
+            <span class="post-count">24 分钟</span>
         </span>
     </span>
 </div>
@@ -186,6 +187,69 @@
 <li><p>按上面这个操作改完以后发现网页的显示并没有变化，接着打开<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，然后直接搜索<code>-28rem</code>或者<code>tocbot</code>等关键词，找到以后把<code>-28</code>和<code>6</code>改成合适的数值（<code>-25</code>和<code>0</code>），重新部署网站就会发现目录栏变合适了。</p>
 </li>
 </ol>
+<h2 id="GitHub风格日历、标签云、分类雷达图的配置"><a href="#GitHub风格日历、标签云、分类雷达图的配置" class="headerlink" title="GitHub风格日历、标签云、分类雷达图的配置"></a>GitHub风格日历、标签云、分类雷达图的配置</h2><p>由于next主题的css文件是swig格式，而网上查到的GitHub日历等都是ejs格式的，因此在用next主题时没能成功配置好日历等；改用Ayer主题后，该主题就是ejs格式的，因此现在添加了日历等内容。这一部分所有涉及到的下载链接都是在别人网站里复制的，如果链接失效可以直接在网上搜文件名来下载，也可以在我的GitHub项目中的主题文件里找已经修改和配置好的相关内容。</p>
+<h3 id="需要下载配置的文件"><a href="#需要下载配置的文件" class="headerlink" title="需要下载配置的文件"></a>需要下载配置的文件</h3><ol>
+<li><p>下载<a href="https://pan.miaodrew.workers.dev/Drew/web/js/echarts.min.js?rootId=0AAjrE2SiYnTaUk9PVA" target="_blank" rel="noopener">echarts.min.js</a>，放到主题文件夹中的<code>\source\js</code>文件夹中，</p>
+</li>
+<li><p>下载<a href="https://pan.miaodrew.workers.dev/Drew/web/css/matery.css?rootId=0AAjrE2SiYnTaUk9PVA" target="_blank" rel="noopener">matery.css</a>，放到主题文件夹中的<code>\source\css</code>文件夹中。</p>
+</li>
+<li><p>打开<code>\layout\_partial\head.ejs</code>文件，在<code>head</code>标记中添加一行：</p>
+<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/css/matery.css&quot;&gt;</code></p>
+<p>这一行直接加到<code>&lt;head&gt;</code>的下一行就好，在我的文件里是加到了第10行，如下图：</p>
+<p><img src="https://i.loli.net/2021/02/27/hAeoFcx8wIYlL2S.png" alt="image-20210227182758974"></p>
+</li>
+</ol>
+<h3 id="GitHub风格日历"><a href="#GitHub风格日历" class="headerlink" title="GitHub风格日历"></a>GitHub风格日历</h3><ol>
+<li><p>下载<a href="https://pan.miaodrew.workers.dev/Drew/web/ejs-hexo/post-calendar.ejs?rootId=0AAjrE2SiYnTaUk9PVA" target="_blank" rel="noopener">post-calendar.ejs</a>，放到<code>\layout\_widget</code>文件夹中，如果没有这个文件夹就自己新建一个。</p>
+</li>
+<li><p>打开<code>post-calendar.ejs</code>文件，看第7行的内容是否为<code>&lt;script type=&quot;text/javascript&quot; src=&quot;/js/echarts.min.js&quot;&gt;&lt;/script&gt;</code>，如果不是则改成这样。</p>
+</li>
+<li><p>在打算添加文章日历的地方，输入以下这行代码</p>
+<p><code>&lt;%- partial(&#39;_widget/post-calendar&#39;) %&gt;</code></p>
+<p>例如我要加到归档页面（<code>archive</code>），就打开<code>\layout\archive.ejs</code>文件，进行添加。不过Ayer主题的这个文件里就下面这行内容：</p>
+<p><code>&lt;%- partial(&#39;_partial/archive&#39;, {pagination: config.archive, index: true}) %&gt;</code></p>
+<p>如果直接在这一行前面或者后面添加日历代码，显示效果会不太好，而且会被左边的侧栏挡住，因此找到<code>\layout\_partial\archive.ejs</code>文件，在添加日历代码的时候可以多尝试几个位置，看哪个合适。我打算把日历放到“归档”这两个字的下面，文章列表的上面，于是整个文件的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;outer&quot;&gt;</span><br><span class="line">  &lt;% if (theme.ads &amp;&amp; theme.ads.length !&#x3D; 0)&#123; %&gt;</span><br><span class="line">  &lt;%- partial(&#39;ads&#39;) %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  &lt;% if (theme.broadcast.enable &amp;&amp; pagination &#x3D;&#x3D; 2)&#123; %&gt;</span><br><span class="line">  &lt;%- partial(&#39;_partial&#x2F;broadcast&#39;) %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  &lt;article class&#x3D;&quot;articles&quot;&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    var title &#x3D; &#39;&#39;;</span><br><span class="line">    if (page.category) title &#x3D; page.category;</span><br><span class="line">    if (page.tag) title &#x3D; &quot;#&quot; + &quot;&amp;nbsp&quot; + page.tag;</span><br><span class="line">    if (page.archive) &#123;</span><br><span class="line">      if (page.year) title &#x3D; page.year + (page.month ? &#39;&#x2F;&#39; + page.month : &#39;&#39;);</span><br><span class="line">      else title &#x3D; __(&#39;archive_a&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;% if (pagination !&#x3D;&#x3D; 2)&#123; %&gt;</span><br><span class="line">    &lt;h1 class&#x3D;&quot;page-type-title&quot;&gt;&lt;%- title %&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">    &lt;% if (pagination &#x3D;&#x3D; 2)&#123; %&gt;</span><br><span class="line">    &lt;% page.posts.each(function(post)&#123; %&gt;</span><br><span class="line">    &lt;%- partial(&#39;article&#39;, &#123;post: post, index: true&#125;) %&gt;</span><br><span class="line">    &lt;% &#125;) %&gt;</span><br><span class="line">  &lt;&#x2F;article&gt;</span><br><span class="line">  &lt;% &#125; else &#123; %&gt;</span><br><span class="line">  &lt;% var last; %&gt;</span><br><span class="line">  &lt;% page.posts.each(function(post, i)&#123; %&gt;</span><br><span class="line">  &lt;% var year &#x3D; post.date.year(); %&gt;</span><br><span class="line">  &lt;% if (last !&#x3D; year)&#123; %&gt;</span><br><span class="line">  &lt;% if (last !&#x3D; null)&#123; %&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  &lt;% last &#x3D; year; %&gt;</span><br><span class="line">  &lt;%- partial(&#39;_widget&#x2F;post-calendar&#39;) %&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;archives-wrap&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;archive-year-wrap&quot;&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;&lt;%- url_for(config.archive_dir + &#39;&#x2F;&#39; + year) %&gt;&quot; class&#x3D;&quot;archive-year&quot;&gt;&lt;%&#x3D; year %&gt;&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;archives&quot;&gt;</span><br><span class="line">      &lt;% &#125; %&gt;</span><br><span class="line">      &lt;%- partial(&#39;archive-post&#39;, &#123;post: post, even: i % 2 &#x3D;&#x3D; 0&#125;) %&gt;</span><br><span class="line">      &lt;% &#125;) %&gt;</span><br><span class="line">      &lt;% if (page.posts.length)&#123; %&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line"></span><br><span class="line">  &lt;% if (page.total &gt; 1)&#123; %&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;page-nav&quot;&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        var prev_text &#x3D; theme.nav_text.page_prev;</span><br><span class="line">        var next_text &#x3D; theme.nav_text.page_next</span><br><span class="line">      %&gt;</span><br><span class="line">    &lt;%- paginator(&#123;</span><br><span class="line">        prev_text: prev_text,</span><br><span class="line">        next_text: next_text</span><br><span class="line">      &#125;) %&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;&#x2F;section&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后呈现的效果如下：</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2021/02/27/sXmQr18FJ6HtNko.png" alt="image-20210227184135159"></p>
+<h3 id="标签云"><a href="#标签云" class="headerlink" title="标签云"></a>标签云</h3><ol>
+<li><p>下载<a href="https://cdn.jsdelivr.net/gh/InfiniteYinux/cloud@2.44/Hexo/themeConfig/tag-cloud.ejs" target="_blank" rel="noopener">tag-cloud.ejs</a>，放到<code>\layout\_widget</code>文件夹中，如果没有这个文件夹就自己新建一个。</p>
+</li>
+<li><p>打开<code>tag-cloud.ejs</code>，和前面那个日历一样，检查是否有<code>&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;%- theme.jsDelivr.url %&gt;&lt;%- theme.libs.js.echarts %&gt;&quot;&gt;&lt;/script&gt;</code>，如果有则替换为<code>&lt;script type=&quot;text/javascript&quot; src=&quot;/js/echarts.min.js&quot;&gt;&lt;/script&gt;</code>。如果没有就忽略。</p>
+</li>
+<li><p>在需要添加标签云的地方，输入代码：<code>&lt;%- partial(&#39;_widget/tag-cloud&#39;) %&gt;</code></p>
+</li>
+<li><p>例如我要将这个添加到原本的标签页面，则找到<code>\layout\tags.ejs</code>文件，添加标签云代码。需要注意的是，Ayer主题本身会在这个页面自动生成标签，因此需要把<code>tags.ejs</code>文件中原本的标签内容那行去掉，整个文件改成了以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;outer&quot;&gt;</span><br><span class="line">  &lt;% if (site.tags.length)&#123; %&gt;</span><br><span class="line">    &lt;h1 class&#x3D;&quot;page-type-title&quot;&gt;&lt;%&#x3D; __(&#39;tags&#39;) %&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">	&lt;%- partial(&#39;_widget&#x2F;tag-cloud&#39;) %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;&#x2F;section&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此外，标签云本身的标题和Ayer主题中的标题会重复显示，而我更喜欢Ayer本身那个标题，所以编辑了<code>tag-cloud.ejs</code>文件，把第25行的<code>&lt;i class=&quot;fas fa-tags&quot;&gt;&lt;/i&gt;&amp;nbsp;&amp;nbsp;&lt;%= __(&#39;postTagTitle&#39;) %&gt;</code>中的<code>postTagTitle</code>改成了空格，之所以没直接去掉这一行，是因为觉得空一行好看一些。</p>
+</li>
+<li><p>整体效果如图，和Ayer主题本身的标签相比，要好看一些。标签的颜色也可以在<code>tag-cloud.ejs</code>文件中自行修改。<img src="https://i.loli.net/2021/02/27/il6UtNjZsCkqozK.png" alt="image-20210227185130174"></p>
+</li>
+</ol>
+<h3 id="分类雷达图"><a href="#分类雷达图" class="headerlink" title="分类雷达图"></a>分类雷达图</h3><ol>
+<li><p>下载<a href="https://pan.miaodrew.workers.dev/Drew/web/ejs-hexo/category-radar.ejs?rootId=0AAjrE2SiYnTaUk9PVA" target="_blank" rel="noopener">category-radar.ejs</a>，放到<code>\layout\_widget</code>文件夹中，如果没有这个文件夹就自己新建一个。</p>
+</li>
+<li><p>依旧是检查替换<code>&lt;script type=&quot;text/javascript&quot; src=&quot;/js/echarts.min.js&quot;&gt;&lt;/script&gt;</code>，如果没有就忽略。</p>
+</li>
+<li><p>在需要添加分类雷达图的地方，输入代码：<code>&lt;%- partial(&#39;_widget/category-radar&#39;) %&gt;</code></p>
+</li>
+<li><p>例如我要添加到原本的分类（<code>category</code>）页面，就找到<code>\layout\categories.ejs</code>，这里我不打算去掉原本的分类内容，因此不删除原本的代码，直接添加雷达图代码，修改后的文件整体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class&#x3D;&quot;outer&quot;&gt;</span><br><span class="line">  &lt;% if (site.categories.length)&#123; %&gt;</span><br><span class="line">    &lt;h1 class&#x3D;&quot;page-type-title&quot;&gt;&lt;%&#x3D; __(&#39;categories&#39;) %&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;categories-box&quot;&gt;</span><br><span class="line">      &lt;%- list_categories() %&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  &lt;%- partial(&#39;_widget&#x2F;category-radar&#39;) %&gt;</span><br><span class="line">&lt;&#x2F;section&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果觉得这个雷达图和主题格格不入，想给它加个边框，则可以在刚才的<code>categories.ejs</code>文件最开头的地方粘贴以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;</span><br><span class="line">        #contentss &#123;</span><br><span class="line">        position: relative;</span><br><span class="line">        width: 800px;</span><br><span class="line">        height: 1200px;</span><br><span class="line">        max-height: 1200px;</span><br><span class="line">        margin-bottom: 15px;</span><br><span class="line">        margin-top: 15px;</span><br><span class="line">        text-align: center;</span><br><span class="line">        border: 0;</span><br><span class="line">        border-radius: 10px;</span><br><span class="line">        color: rgba(0, 0, 0, .87);</span><br><span class="line">        background: #fff 50%;</span><br><span class="line">        background-size: cover;</span><br><span class="line">        box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);</span><br><span class="line">        margin:0 auto;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>然后下面的雷达图代码修改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;contentss&quot;&gt;</span><br><span class="line">&lt;%- partial(&#39;_widget&#x2F;category-radar&#39;) %&gt;&lt;&#x2F;div&gt;&#96;或者&#96;&lt;%- partial(&#39;_widget&#x2F;post-calendar&#39;) %&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>边框的大小样式颜色等等可以自行修改。不过Ayer主题不加边框就挺合适了，因此我没加。</p>
+</li>
+<li><p>整体效果如下（这个截图是一开始没注意，把雷达图加到了标签页面，但是不影响雷达图的展示；此外，很显然分类名字过长就会显示不完整，这应该和雷达图的大小有关，懒得改了）：</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2021/02/27/4TRVLa5sFIzktBX.png" alt="image-20210227190056808"></p>
 <h2 id="如何发布新的博客"><a href="#如何发布新的博客" class="headerlink" title="如何发布新的博客"></a>如何发布新的博客</h2><ol>
 <li><p>在blog文件夹的命令行里输入<code>hexo new &quot;标题&quot;</code>，然后进入<strong>/blog/sources/_post/</strong>找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。</p>
 <p>文件头信息如下编写：</p>
