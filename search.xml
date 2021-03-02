@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2021/03/02/nonTitleMerge/</url>
+    <content><![CDATA[<p>Here is post content.  </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"This is code test should with highlight."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>论文记录-Closed-Form Expression for the Poisson-Binomial Probability Density Function</title>
     <url>/2021/02/12/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Closed-Form%20Expression%20for%20the%20Poisson-Binomial%20Probability%20Density%20Function/</url>
     <content><![CDATA[<h1 id="Closed-Form-Expression-for-the-Poisson-Binomial-Probability-Density-Function"><a href="#Closed-Form-Expression-for-the-Poisson-Binomial-Probability-Density-Function" class="headerlink" title="Closed-Form Expression for the Poisson-Binomial Probability Density Function"></a>Closed-Form Expression for the Poisson-Binomial Probability Density Function</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>二项分布概率密度函数描述了当单个成功概率在试验中保持不变时 N 次独立试验中的成功数。而当这个成功概率会改变时，概率密度函数就转变为泊松-二项分布。</p>
@@ -5109,10 +5116,10 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3019" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5116" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3019'));
+        var myChart = echarts.init(document.getElementById('echarts5116'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -7766,9 +7773,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7869,9 +7876,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7912,9 +7919,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8113,9 +8120,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8505,9 +8512,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8596,9 +8603,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8712,9 +8719,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8799,9 +8806,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -9068,6 +9075,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 <p><a href="https://blog.csdn.net/xiaomengzi_16/article/details/98847298" target="_blank" rel="noopener">https://blog.csdn.net/xiaomengzi_16/article/details/98847298</a></p>
 <p><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></p>
 <p><a href="https://blog.csdn.net/White_Idiot/article/details/80685990" target="_blank" rel="noopener">https://blog.csdn.net/White_Idiot/article/details/80685990</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1597223" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1597223</a></p>
+<p><a href="https://cndrew.cn/2020/03/03/calender/" target="_blank" rel="noopener">https://cndrew.cn/2020/03/03/calender/</a></p>
 ]]></content>
       <categories>
         <category>博客配置</category>
