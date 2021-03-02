@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>Hello World</title>
+        <title>hexo+reveal实现slide</title>
 
         <link rel="stylesheet" href="https://cdn.bootcss.com/reveal.js/3.4.1/css/reveal.min.css">
         
@@ -64,62 +64,15 @@
                          data-separator="^\n---\n"
                          data-separator-vertical="^\n--\n"
                          data-separator-notes="^Note:">
-                    <script type="text/template">Hello World
+                    <script type="text/template">hexo+reveal实现slide
 
-  
+  `，整个文件内容会以此分为两部分，在这一行前面的，就会展示在博客内容中，而这一行后面的，则会出现在对应的slide中。例如本篇博客的内容就到此结束了，而如果在网址后面添加`slide.html`，则会看到我复制别人的slide内容。
 
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+## Reference
 
-This page should be slide first.  
+1. https://github.com/jackey8616/hexo-generator-slidehtml
+2. https://revealjs.com/math/
 
-`$$x+3=x_3$$`
-
-
-Not in post.  
-
----
-
-## Quick Start
-
---
-
-### Create a new post
-
-``` bash
-$ hexo new "My New Post"
-```
-
-More info: [Writing](https://hexo.io/docs/writing.html)
-
---
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
---
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
---
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
 </script>
                 </section>
             </div>

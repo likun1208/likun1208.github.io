@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/03/02/nonTitleMerge/</url>
-    <content><![CDATA[<p>Here is post content.  </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"This is code test should with highlight."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>hexo+reveal实现slide</title>
+    <url>/2021/03/02/hexo+reveal%E5%AE%9E%E7%8E%B0slide/</url>
+    <content><![CDATA[<p>今天终于搞成了用<code>reveal.js</code>在博客里显示ppt的效果。感谢做模块的大佬，以至于安装过程还挺简单的。步骤如下：</p>
+<ol>
+<li><p>安装：命令行进入博客目录，输入<code>npm i hexo-generator-slidehtml</code></p>
+</li>
+<li><p>安装好以后，一个按格式（格式见后文）写好的markdown文件就会被渲染成slide格式的html网页了，需要访问的时候，在博客的链接后面加<code>slide.html</code>即可，比如某个博客的链接是<code>http://www.clo5de.info/hexo-generator-slidehtml/2019/04/03/nonTitleMerge/</code>，那么它对应的slide链接就是<code>http://www.clo5de.info/hexo-generator-slidehtml/2019/04/03/nonTitleMerge/slide.html</code>。</p>
+</li>
+<li><p>但是这样安装好的没法渲染公式，因此要进入<code>\blog\node_modules\hexo-generator-slidehtml\layout</code>目录，打开<code>post-slide.ejs</code>文件，添加<code>&lt;script src=&quot;https://cdn.bootcss.com/reveal.js/3.4.1/plugin/math/math.js&quot;&gt;&lt;/script&gt;</code>（和其他script放一起就行），并在<code>Reveal.initialize</code> 代码块中添加一行<code>plugins: [ RevealMath ],</code>注意这一行最后有个逗号不要忘了。</p>
+</li>
+<li><p>关于math的设置也还有其他可选项，可以参考<a href="https://revealjs.com/math/" target="_blank" rel="noopener">官网</a></p>
+</li>
+<li><p>此外我在官网还下载了<code>reveal.js</code>的完整内容，并把其中的<code>plugin</code>文件夹整个复制到了<code>\blog\node_modules\hexo-generator-slidehtml\layout</code>目录下；而刚才那个<code>post-slide.ejs</code>的<code>Reveal.initialize</code> 代码块中的<code>dependencies</code>也增加了以下两行：</p>
+<p><code>{ src: &#39;https://cdn.bootcss.com/reveal.js/3.4.1/plugin/math/math.esm.js&#39; },</code></p>
+<p><code>{ src: &#39;https://cdn.bootcss.com/reveal.js/3.4.1/plugin/math/math.js&#39; },</code></p>
+<p>不过这一步的操作按理说是不需要的，只是我一开始怎么也没法刷新出公式，猜测可能和网页缓存等有关。</p>
+</li>
+<li><p>按官网的说法，如果要写markdown行内公式，就需要把内容放到如下代码所示的符号中间：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;$$公式内容$$&#96;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>If you want to include math inside of a presentation written in Markdown you need to wrap the formula in backticks. This prevents syntax conflicts between LaTeX and Markdown</p>
+</blockquote>
+</li>
+<li><p>如果写latex公式，就放到<code>&lt;section&gt;&lt;/section&gt;</code>中间，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;section&gt;</span><br><span class="line">  &lt;h2&gt;The Lorenz Equations&lt;&#x2F;h2&gt;</span><br><span class="line">  \[\begin&#123;aligned&#125;</span><br><span class="line">  \dot&#123;x&#125; &amp; &#x3D; \sigma(y-x) \\</span><br><span class="line">  \dot&#123;y&#125; &amp; &#x3D; \rho x - y - xz \\</span><br><span class="line">  \dot&#123;z&#125; &amp; &#x3D; -\beta z + xy</span><br><span class="line">  \end&#123;aligned&#125; \]</span><br><span class="line">&lt;&#x2F;section&gt;</span><br></pre></td></tr></table></figure>
+<p>这个公式的展示效果在官网上可以看到。</p>
+</li>
+<li><p>在搞了各种配置之后公式如果还没渲染，就等一等，可能和缓存有关。</p>
+</li>
+<li><p>对于需要制作成slide的markdown文件，只需要在原先写标题日期分类和tags等内容的那个地方增加一个字段：<code>slidehtml: true</code>，这个也可以写进<code>hexo new</code>的模板，这样方便一些。markdown文件中要有一行<code>&lt;!-- Slide Start --&gt;</code>，整个文件内容会以此分为两部分，在这一行前面的，就会展示在博客内容中，而这一行后面的，则会出现在对应的slide中。例如本篇博客的内容就到此结束了，而如果在网址后面添加<code>slide.html</code>，则会看到我复制别人的slide内容。</p>
+</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://github.com/jackey8616/hexo-generator-slidehtml" target="_blank" rel="noopener">https://github.com/jackey8616/hexo-generator-slidehtml</a></li>
+<li><a href="https://revealjs.com/math/" target="_blank" rel="noopener">https://revealjs.com/math/</a></li>
+</ol>
 ]]></content>
+      <categories>
+        <category>slides</category>
+      </categories>
+      <tags>
+        <tag>博客配置</tag>
+      </tags>
   </entry>
   <entry>
     <title>论文记录-Closed-Form Expression for the Poisson-Binomial Probability Density Function</title>
@@ -5116,10 +5154,10 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts5116" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2408" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5116'));
+        var myChart = echarts.init(document.getElementById('echarts2408'));
 
         // 指定图表的配置项和数据
         var option = {
