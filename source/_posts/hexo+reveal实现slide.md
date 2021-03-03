@@ -37,7 +37,9 @@ slidehtml: true
 
    > If you want to include math inside of a presentation written in Markdown you need to wrap the formula in backticks. This prevents syntax conflicts between LaTeX and Markdown
 
-7. 如果写latex公式，就放到`<section></section>`中间，例如：
+7. 不过根据我自己的使用，markdown语法的公式就可以正常显示了，不需要按上面的格式来写。
+
+8. 如果写latex公式，就放到`<section></section>`中间，例如：
 
    ```
    <section>
@@ -52,9 +54,9 @@ slidehtml: true
 
    这个公式的展示效果在官网上可以看到。
 
-8. 在搞了各种配置之后公式如果还没渲染，就等一等，可能和缓存有关。
+9. 在搞了各种配置之后公式如果还没渲染，就等一等，可能和缓存有关。
 
-9. 对于需要制作成slide的markdown文件，只需要在原先写标题日期分类和tags等内容的那个地方增加一个字段：`slidehtml: true`，这个也可以写进`hexo new`的模板，这样方便一些。markdown文件中要有一行`<!-- #Slide Start# -->  `（去掉#，这里加#是为了避免接下来直接渲染slide），整个文件内容会以此分为两部分，在这一行前面的，就会展示在博客内容中，而这一行后面的，则会出现在对应的slide中。例如本篇博客的内容就到此结束了，而如果在网址后面添加`slide.html`，则会看到我复制别人的slide内容。
+10. 对于需要制作成slide的markdown文件，只需要在原先写标题日期分类和tags等内容的那个地方增加一个字段：`slidehtml: true`，这个也可以写进`hexo new`的模板，这样方便一些。markdown文件中要有一行`<!-- #Slide Start# -->  `（去掉#，这里加#是为了避免接下来直接渲染slide），整个文件内容会以此分为两部分，在这一行前面的，就会展示在博客内容中，而这一行后面的，则会出现在对应的slide中。例如本篇博客的内容就到此结束了，而如果在网址后面添加`slide.html`，则会看到我复制别人的slide内容。
 
 ## Reference
 
@@ -280,6 +282,21 @@ slidehtml: true
 - 演讲提示模式 s
 - vi导航键: h, j, k, l
 - 帮助页面: ?
+
+---
+
+## 测试公式
+
+行内公式：$x+3=x_3$
+
+latex公式块，注意用于对齐的`&`符号要写成`&amp;`，用于换行的两个斜杠`\\`要写成三个斜杠`\\\`，总之是要转义。
+$$
+\begin{aligned}
+  \dot{x} &amp; = \sigma(y-x) \\\
+  \dot{y} &amp; = \rho x - y - xz \\\
+  \dot{z} &amp; = -\beta z + xy \\\
+\end{aligned}
+$$
 
 ---
 
