@@ -286,6 +286,21 @@
 
 ---
 
+## 测试公式
+
+行内公式：$x+3=x_3$
+
+latex公式块，注意用于对齐的`&`符号要写成`&amp;`，用于换行的两个斜杠`\\`要写成三个斜杠`\\\`，总之是要转义。
+$$
+\begin{aligned}
+  \dot{x} &amp; = \sigma(y-x) \\\
+  \dot{y} &amp; = \rho x - y - xz \\\
+  \dot{z} &amp; = -\beta z + xy \\\
+\end{aligned}
+$$
+
+---
+
 ## 主题说明
 
 进入`post-slide.ejs`可以修改主题，有如下几种主题：
