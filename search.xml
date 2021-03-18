@@ -1,6 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-A Novel Paradigm for Disaster-Response Networks: Framework, Strategy and Solution</title>
+    <url>/2021/03/06/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Novel%20Paradigm%20for%20Disaster-Response%20Networks%20Framework,%20Strategy%20and%20Solution/</url>
+    <content><![CDATA[<h1 id="灾害应对网络的新范式：框架、策略与解决方案"><a href="#灾害应对网络的新范式：框架、策略与解决方案" class="headerlink" title="灾害应对网络的新范式：框架、策略与解决方案"></a>灾害应对网络的新范式：框架、策略与解决方案</h1><p>这篇是投稿到IEEE Wireless Communications Magazine的论文，现在要写审稿意见。</p>
+<p>作者：</p>
+<p>中国电力科学研究院</p>
+<p>西安电子科技大学</p>
+<p>华中科技大学</p>
+<p>西北工业大学</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><ol>
+<li>起因：自然灾害频发、恐怖势力猖獗</li>
+<li>特性：DRN（disaster-response network灾害应对网络）更看重网络的灵活性和应急救援能力，对网络框架和资源配置策略提出了新的要求</li>
+<li>技术基础：卫星通信和无人机（UAV）动态中继</li>
+<li>本文：提出了DRN建设和资源配置的新范式，通过卫星和无人机构建动态可扩展的DRN；提出了新的网络资源配置视角；在DRN框架下设计了资源调度计划。</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="DRN的结构"><a href="#DRN的结构" class="headerlink" title="DRN的结构"></a>DRN的结构</h3><ol>
+<li>需求：快速恢复通信，为救灾提供前提，提高救援效率</li>
+<li>关键问题：个人安全</li>
+<li>传统DRN：在快速部署和网络灵活性方面不好</li>
+<li>新技术DRN：根据是否使用其他基础设施分为两类，基础设施包括可移动和可部署的ICT资源单元（MDRU）、卫星、无人机；总的来说使用其他基础设施的这一类更好</li>
+<li>大多数现有网络的问题：只重视容量或覆盖性能，忽视救灾需求，尤其是用户的人身安全</li>
+</ol>
+<h3 id="DRN中的资源分配"><a href="#DRN中的资源分配" class="headerlink" title="DRN中的资源分配"></a>DRN中的资源分配</h3><ol>
+<li>受灾用户的实时需求通常远远大于 DRN 的能力。因此，资源配置策略成为决定系统效率的关键因素。传统网络中的资源配置策略通常涉及容量、延迟或吞吐量，并相应地进行优化。</li>
+<li>救灾的特殊性，即及时性和任务导向性，加上DRN之间的建筑差异，使得现有的资源配置策略不适应。由于时间和任务导向，主要考虑如何提高受灾用户的救援能力。因此，DRN 中的资源分配策略需要更多地考虑应用层的要求，而不是物理层的性能。</li>
+</ol>
+<h3 id="本文"><a href="#本文" class="headerlink" title="本文"></a>本文</h3><ol>
+<li>针对时效性和任务导向，提出了一种新范式</li>
+<li>采用卫星、无人机</li>
+<li>快速部署、动态覆盖、灵活中继</li>
+<li>第二部分：DRN的框架；第三部分：跨层资源优化和资源分配方案的开发；第四部分：性能评估；第五部分：总结</li>
+</ol>
+<h2 id="Disaster-response-network"><a href="#Disaster-response-network" class="headerlink" title="Disaster response network"></a>Disaster response network</h2><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><ol>
+<li>由空间层、空气层和地面层组成：用户在地面层，需要发射信号；无人机在空气层收集信号传递给空间层的卫星；卫星和卫星基站通信。</li>
+<li>空间层：使用低轨道卫星、中心化网络控制器</li>
+<li>空气层：无人机作为中继来弥补卫星欠缺的灵活性等；假设无人机数量大于卫星容量，配备移动充电设施，可动态规划工作路径；简化卫星信道受大气变化的影响问题，重点关注资源分配策略</li>
+<li>地面层：遇险用户发射求救信号成功则被视为成功救援；用户分为三类：成功发出信号的被救援用户（R-user）、有足够电量试图发求救信号的活跃用户（A-user）、用完电池无能为力的沉默用户（S-user）</li>
+<li>本文框架中的A-user通过无人机中继器向卫星发信号，无人机分配完成后网络拓扑保持不变，每个用户只涉及一个无人机中继，使用译码转发和波束形成技术，用户与无人机中继之间的链路采用Nakagami衰落信道模型</li>
+</ol>
+<h3 id="资源分配策略"><a href="#资源分配策略" class="headerlink" title="资源分配策略"></a>资源分配策略</h3><ol>
+<li>控制层和数据层通过卫星上的中心化网络解耦</li>
+<li>控制层：网络控制器制定通信请求接收率（CRAR），接收用户、无人机报告的信道状态信息，收集用户设备的剩余工作时间</li>
+<li>资源分配问题：用户的剩余电量不同，卫星要在电量耗尽前接收用户的遇险通信请求；通信请求的数量可能超过网络容量，要综合考虑用户设备的剩余工作时间和卫星、无人机可以处理的通信请求。</li>
+</ol>
+<h2 id="Resource-allocation"><a href="#Resource-allocation" class="headerlink" title="Resource allocation"></a>Resource allocation</h2><ol>
+<li>用CRAR作为系统效率指标，即优化目标是提高CRAR</li>
+<li>t时刻的CRAR指当前CRAR和未来CRAR的总和<ol>
+<li>当前CRAR：s(t)</li>
+<li>未来CRAR：$\sum_{\tau=t+1}^{\infty}P_{\tau}(B, C_{v-u}, C_{u-s})$</li>
+<li>$B, C_{u-s},C_{v-u}$分别表示用户电量、空间层频道和空气层频道</li>
+<li>电量越多用户等待救援的时间越久</li>
+</ol>
+</li>
+<li>无人机算力有限，因此需要降低资源分配算法的复杂度——本文资源分配分为两阶段：空间层和空气层各一阶段</li>
+<li>第一阶段中，对于每个无人机中继，网络控制器都会收集 CSI（频道状态信息） 并保持空气层链路的信道增益，这是成功传输的最关键因素之一。卫星根据卫星接入能力以更大的信道增益访问无人机中继</li>
+<li>第二阶段中，t时刻的空气层链路资源分配方案：用矩阵表示卫星到无人机的分配方案、无人机到用户的分配方案和根据信道容错率判断的信道可用性（1或者0），用户电量不同会有不同的权重（低电量高延迟的优先级高），计算上述矩阵卷积相乘的F范数来作为目标函数</li>
+<li>优化算法：贪婪的迭代匹配过程</li>
+</ol>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ol>
+<li>仿真模拟实验：用户由泊松点过程建模，使用二进制相移键控发送信号，位错误概率阈值$\epsilon=10^3$，进行20轮实验</li>
+</ol>
+<h3 id="CRAR"><a href="#CRAR" class="headerlink" title="CRAR"></a>CRAR</h3><ol>
+<li>不同信噪比下，无人机数量和CRAR之间的关系</li>
+</ol>
+<h3 id="传输功率"><a href="#传输功率" class="headerlink" title="传输功率"></a>传输功率</h3><ol>
+<li>不同无人机数量下，CRAR和传输功率之间的关系</li>
+</ol>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><p>提出了灾害应对系统中的资源分配方案，可改善CRAR</p>
+<h2 id="审稿意见"><a href="#审稿意见" class="headerlink" title="审稿意见"></a>审稿意见</h2><h3 id="Strength"><a href="#Strength" class="headerlink" title="Strength"></a>Strength</h3><ul>
+<li></li>
+<li></li>
+</ul>
+<h3 id="Weakness"><a href="#Weakness" class="headerlink" title="Weakness"></a>Weakness</h3><ul>
+<li>创新性较差，实质就提出了一个基于电量和延迟的资源分配方案</li>
+<li>灾害应对系统的通信恢复过程除了考虑用户电量和延迟，也应当考虑用户本身的生命体征等；第一部分中提到的其他DRN存在的问题，本文中的DRN同样也有</li>
+<li>公式1中的P函数具体形式没有介绍，且后文中的资源分配方案是否能得到最优的R(t)也需要进行分析</li>
+<li>没有具体介绍空间层（卫星和无人机）的分配方案，“卫星以较大的信道增益访问无人机”是否会和卫星本身的容量和传输能力发生冲突，如果发生冲突（即资源不够分配）时，应当如何向不同的无人机分配资源？</li>
+<li><del>网络控制器是卫星和无人机上都有吗？是否可以把无人机的资源分配计算工作放到卫星上，无人机仅进行通信中继？</del></li>
+<li>在用户设备与无人机建立通信连接后，如果因为意外导致连接断开如何判断和处理？</li>
+<li>在灾害应对系统中，直接将信息发送成功视作救援成功合适吗？是否还需要考虑周期性确认用户状态等后续操作带来的能量消耗？</li>
+<li>实验中用作对比的传统方案具体是指哪种方案？</li>
+<li>实验是数值仿真还是小规模的无人机仿真？如果是前者，无人机和卫星在实际使用场景的差异很大，数值仿真无法有效说明方案的效率；如果进行了无人机实验，则型号等相关参数应该在实验部分进行说明。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>灾害应对网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>读书笔记-中世纪历史与文化</title>
+    <url>/2021/03/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E4%B8%AD%E4%B8%96%E7%BA%AA%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%96%87%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="中世纪历史与文化"><a href="#中世纪历史与文化" class="headerlink" title="中世纪历史与文化"></a>中世纪历史与文化</h1><h2 id="第一章-波埃修斯与欧洲的崛起"><a href="#第一章-波埃修斯与欧洲的崛起" class="headerlink" title="第一章 波埃修斯与欧洲的崛起"></a>第一章 波埃修斯与欧洲的崛起</h2><h3 id="波埃修斯：新柏拉图主义者"><a href="#波埃修斯：新柏拉图主义者" class="headerlink" title="波埃修斯：新柏拉图主义者"></a>波埃修斯：新柏拉图主义者</h3><ol>
+<li>波埃修斯的成就：<ol>
+<li>翻译《工具论》by亚里士多德的前三篇，介绍了一种思维方式；</li>
+<li>著作《分类之书》、论算术的论文、对音乐的说明、《哲学的慰藉》等；</li>
+<li>将“原理”“主体”“本质”等基础概念引入欧洲学术话语；</li>
+<li>“知识并不来自所认知的事物，而是进行思考与认识的主题的认知能力所固有的”；</li>
+<li>“四艺”的概念</li>
+</ol>
+</li>
+<li>对后世的影响：<ol>
+<li>《哲学的慰藉》：见证了古典文化在最终熄灭前发出最后的火光；</li>
+<li>但丁、豪斯费霍尔等作者深受影响；</li>
+<li>”哲学“与”命运“的讨论支撑着基督教，对自由意志的探讨意义深远；</li>
+<li>推进神学与哲学之辩——&gt;中世纪理性与信仰日趋严重分化与对立</li>
+</ol>
+</li>
+<li>在这之后：学术与知识逐渐随古代的结束而沉默，许多学派被取缔，艺术停滞在圣像的形式主义上，留下的只有基督教、教会和异端。中世纪的教育体系不再关注传统教育内容——科学研究与实验，而更多地体现为护教、阐释、劝勉、布道和虔敬。</li>
+</ol>
+<h3 id="传承到中世纪的知识"><a href="#传承到中世纪的知识" class="headerlink" title="传承到中世纪的知识"></a>传承到中世纪的知识</h3><ol>
+<li>《论基督教教义》by圣奥古斯丁：符号学——事物通过符号被认识</li>
+<li>《指南》by卡西奥多鲁斯：基督教的教育规划</li>
+<li>《语文学与墨丘利的婚约》by马蒂安努斯$\cdot$卡佩拉：寓言式的有关技艺的基础教程</li>
+</ol>
+<h3 id="罗马与外族的融合"><a href="#罗马与外族的融合" class="headerlink" title="罗马与外族的融合"></a>罗马与外族的融合</h3><ol>
+<li>来到罗马帝国的土地上的外族人一方面想要战胜先进文明，同时另一方面又效仿着先进文明，典型的例子：哥特人</li>
+</ol>
+<h4 id="哥特人"><a href="#哥特人" class="headerlink" title="哥特人"></a>哥特人</h4><ol>
+<li>”没有法律任何国家都不能长存“</li>
+<li>”复兴罗马“成为接下来数百年乃至整个中世纪的标语，在历史的不同阶段以不同面貌出现，也以不同方式被付诸实践</li>
+<li>最初（4世纪初以来）罗马人向哥特人派遣基督教传教士，而这也受到了异教徒的抵抗，由此发生了哥特人的罗马化。在这一阶段，乌尔菲拉主教将《圣经》翻译为哥特方言，尽管翻译存在很多问题，但这仍然推进了哥特人向地中海高等文化的转变。</li>
+<li>到5世纪左右，哥特人分为西哥特和东哥特两部分</li>
+<li>5世纪后期，西哥特国王们编撰了一系列法令集，这些成文法一直沿用至中世纪盛期，它们将”罗马人“从”哥特人“中分离出来，并形成”成文法区域“</li>
+<li>在与法兰克人打仗并战败后，哥特人被迫来到赛蒂马尼亚和西班牙，并建立新的哥特王国。在此之后原本信奉阿里乌教派的哥特人皈依了天主教，修订了教会法。</li>
+<li>尽管哥特人认可天主教会的合法性，但事实上哥特人与罗马教会、教宗之间并未建立法律上的联系，哥特-西班牙的天主教徒更多地保持了自身的独立性</li>
+<li>11世纪教会改革，西班牙被纳入罗马教宗的普世主教区（指世俗君主放弃神职叙任权）</li>
+</ol>
+<h4 id="法兰克人"><a href="#法兰克人" class="headerlink" title="法兰克人"></a>法兰克人</h4><ol>
+<li>在哥特人发展的同时，法兰克人也在发展；法兰克人的起源混沌不清，没有详细记载，更多的是各种神话</li>
+<li>法兰克的整个发展过程中都得到了罗马帝国的帮助，尤其是经济扶持；相应地，墨洛温王朝将罗马遗留的军事、民政管理系统作为自身的统治基础。</li>
+<li>古典文化在墨洛温王朝经历了转型、退化，并没有像在哥特王国那样突然消亡。</li>
+<li>法兰克王国的创立者克洛维死后，按其意愿，法兰克王国分给了他的四个儿子，这一分裂的继承法由此传承下去，直到9、10世纪随加洛林王朝的结束而结束。</li>
+<li>法兰克王国的由于分裂的继承法没能形成稳定的证券，但同时诞生了一系列下属王国</li>
+</ol>
+<h4 id="东罗马帝国（拜占庭）"><a href="#东罗马帝国（拜占庭）" class="headerlink" title="东罗马帝国（拜占庭）"></a>东罗马帝国（拜占庭）</h4><ol>
+<li>在波埃修斯的时代，东罗马统治者是查士丁尼大帝，他实行了一系列复兴政策：<ol>
+<li>收复落入蛮族统治的西部省份——战争同时带来巨大的负担，以君士坦丁堡为中心建立的政治经济集权体制绑架了被收复省份的发展机会，削弱了其生产和抵抗的力量，反而加快了罗马帝国的衰落</li>
+<li>编撰罗马法法典《民法大全》（又被称为《查士丁尼法典》）——11世纪末，引发了西方以大学为基础的学术勃兴</li>
+<li>关闭雅典学园——科学发展逐渐停滞，不再有根本上的创新</li>
+</ol>
+</li>
+<li>陆陆续续的外敌入侵：<ol>
+<li>来自中亚的匈人入侵</li>
+<li>南面皈依伊斯兰教的阿拉伯人</li>
+<li>各类蛮族：斯拉夫人、阿瓦尔人、佩切涅格人、保加利亚人</li>
+<li>伦巴第人入侵意大利</li>
+</ol>
+</li>
+<li>11世纪诺曼人的到来终结了拜占庭势力对伦巴第和意大利南部的影响</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>罗马象征着先进的物质、社会和文化发展水平，”朝向罗马“（Romorientierung）这一确凿的、潜意识上的进程从未消解。与之对应的，在罗马彼岸居住着古代意义上的”野蛮人“，他们相对于罗马而言处于低等文化，只拥有少数铁器；没有城市和铺设的道路；只有纯粹的口头文化而没有文字，很长一段时间内用凿刻的符文作为咒语或简单的名字；没有科学也没有持久的历史传统；宗教崇拜鲜为人知。</p>
+<p>西方世界的不同地域对接受和继承高等书写文化有着完全不同的启动环境，离地中海高等文明越远的地方，高等文明遭到的拒绝和限制就越明显，其童话效应也更为迟缓和微弱。</p>
+<p>不过爱尔兰与众不同，西方学术的复兴从那里受益，尽管波埃修斯的作品并未在爱尔兰产生任何影响。</p>
+<h2 id="第二章-大格里高利和法兰克人的新兴权力"><a href="#第二章-大格里高利和法兰克人的新兴权力" class="headerlink" title="第二章 大格里高利和法兰克人的新兴权力"></a>第二章 大格里高利和法兰克人的新兴权力</h2><h2 id="第三章-查理曼与第一次“罗马帝国的复兴”"><a href="#第三章-查理曼与第一次“罗马帝国的复兴”" class="headerlink" title="第三章 查理曼与第一次“罗马帝国的复兴”"></a>第三章 查理曼与第一次“罗马帝国的复兴”</h2><h2 id="第四章-王国的巩固与罗马帝国的第二次复兴"><a href="#第四章-王国的巩固与罗马帝国的第二次复兴" class="headerlink" title="第四章 王国的巩固与罗马帝国的第二次复兴"></a>第四章 王国的巩固与罗马帝国的第二次复兴</h2><h2 id="第五章-末世危险地临近了"><a href="#第五章-末世危险地临近了" class="headerlink" title="第五章 末世危险地临近了"></a>第五章 末世危险地临近了</h2><h2 id="第六章-“真正的皇帝是教宗”"><a href="#第六章-“真正的皇帝是教宗”" class="headerlink" title="第六章 “真正的皇帝是教宗”"></a>第六章 “真正的皇帝是教宗”</h2><h2 id="第七章-教宗分立的漫长世纪"><a href="#第七章-教宗分立的漫长世纪" class="headerlink" title="第七章 教宗分立的漫长世纪"></a>第七章 教宗分立的漫长世纪</h2><h2 id="第八章-天主的代理人"><a href="#第八章-天主的代理人" class="headerlink" title="第八章 天主的代理人"></a>第八章 天主的代理人</h2><h2 id="第九章-法理高奏凯歌"><a href="#第九章-法理高奏凯歌" class="headerlink" title="第九章 法理高奏凯歌"></a>第九章 法理高奏凯歌</h2><h2 id="第十章-理性之光"><a href="#第十章-理性之光" class="headerlink" title="第十章 理性之光"></a>第十章 理性之光</h2><h2 id="第十一章-君主制"><a href="#第十一章-君主制" class="headerlink" title="第十一章 君主制"></a>第十一章 君主制</h2><h2 id="第十二章-对最后的审判与重生的期待"><a href="#第十二章-对最后的审判与重生的期待" class="headerlink" title="第十二章 对最后的审判与重生的期待"></a>第十二章 对最后的审判与重生的期待</h2>]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+        <tag>中世纪历史与文化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo+reveal实现slide</title>
     <url>/2021/03/02/hexo+reveal%E5%AE%9E%E7%8E%B0slide/</url>
     <content><![CDATA[<h1 id="hexo-reveal"><a href="#hexo-reveal" class="headerlink" title="hexo+reveal"></a>hexo+reveal</h1><h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><p>今天终于搞成了用<code>reveal.js</code>在博客里显示ppt的效果。感谢做模块的大佬，以至于安装过程还挺简单的。步骤如下：</p>
@@ -5158,10 +5323,10 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3172" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1456" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3172'));
+        var myChart = echarts.init(document.getElementById('echarts1456'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -7815,9 +7980,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7918,9 +8083,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -7961,9 +8126,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8162,9 +8327,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8554,9 +8719,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8645,9 +8810,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8761,9 +8926,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8848,9 +9013,9 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>Let&#39;s Build A Simple Interpreter</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>python</tag>
         <tag>编译原理</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
