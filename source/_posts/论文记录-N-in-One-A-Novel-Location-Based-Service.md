@@ -38,7 +38,7 @@ description: 针对LBS中的POI问题的研究
 
 ### Metric to Evaluate a POI Cluster
 
-POI聚类$\Pi=<p_1,...,p_N>$，其中$p_j$是第$j$个兴趣点位置
+POI聚类$\Pi=\{p_1,...,p_N\}$，其中$p_j$是第$j$个兴趣点位置
 
 **定义1**  POI聚类的直径：覆盖该聚类所有兴趣点的最小圆直径
 
