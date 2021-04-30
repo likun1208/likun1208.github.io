@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="使用Github接口获取相关数据并进行分析统计" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Github项目数据统计 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Github项目数据统计"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Github项目数据统计
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/04/30/Github%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/" class="article-date">
+  <time datetime="2021-04-30T02:06:21.000Z" itemprop="datePublished">2021-04-30</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A0%E5%88%86%E7%B1%BB%E9%A1%B9/">无分类项</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">13 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Github项目数据统计"><a href="#Github项目数据统计" class="headerlink" title="Github项目数据统计"></a>Github项目数据统计</h1><p>​      由于需要统计Dapp项目的发展历程数据，在查资料时看到了<a href="https://zhuanlan.zhihu.com/p/32759663" target="_blank" rel="noopener">以太坊 Dapp 调研</a>，这份统计只包含了2017年12月20日及之前的数据，而现在已经是2021年了，因此我模仿这个进行了新的统计。</p>
+<a id="more"></a>
+<h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><p>经过一系列学习，我终于掌握了GitHub api的基础使用。简单来说，我们可以通过访问api接口进行查询并获取数据。通过关键字dapp进行查询的api是<code>https://api.github.com/search/repositories?q=dapp</code>，用浏览器直接打开这个链接可以看到如下图的内容：</p>
+<p><img src="https://i.loli.net/2021/04/30/nXQsavbDH98PJxc.png" alt="image-20210430103142883"></p>
+<p>第一行的<code>total_count</code>是所有结果的总数，接下来有30个<code>items</code>，每一个都是对应的项目，点开第一个可以看到其数据格式为：</p>
+<p><img src="https://i.loli.net/2021/04/30/qNL3xuYcrlByVbW.png" alt="image-20210430103308097"></p>
+<p>图中显示的内容并不完整，还有很多信息比如stars数量等都可以直接获取。</p>
+<p>但是总共有19930个项目，却只获取到30个，这显然是不够的，想获取更多项目就需要修改api的内容，改成<code>https://api.github.com/search/repositories?q=dapp&amp;page=1&amp;per_page=100</code>，修改后就可以获取到100条项目信息了，这是每页项目数的上限，将api中的<code>page=1</code>改成<code>page=2</code>即可得到新的100条信息，然而由于api限制，通过这样的方法最多可以获取1000条（即<code>page=10</code>），超过1000条后会有报错信息。为了能获取到更多项目，我们需要对访问查询作出限制，使得每次查询结果都不超过1000条，然后将多次查询结果合并起来得到完整结果，例如仅查找创建于2021年1月至2月的项目数，这样就可以得到1000条以内的结果，再逐页访问即可。限制时间的api为：<code>https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=1&amp;per_page=100</code>，这个api可以获取创建时间在2021年4月1日至5月1日的所有项目数据，如果要获取其他时间范围，对api中的时间进行修改即可，可以精确到秒；如果时间限制是早于或晚于某个时间点，则写成<code>created:&gt;=2021-04-01T00:00:00</code>，大于等于符号可以改成小于等于或者大于或者小于。如果想限制其他字段，比如更新时间，则把created修改为updated即可。</p>
+<p>具体到写python代码时，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> github3 <span class="keyword">import</span> login, GitHub</span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    result = requests.get(<span class="string">"https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=6&amp;per_page=100"</span>)</span><br><span class="line">    response_dict = result.json()</span><br><span class="line">    repo_dicts = response_dict[<span class="string">'items'</span>]</span><br><span class="line">    print(<span class="string">"Toal repositories:"</span>, response_dict[<span class="string">'total_count'</span>])</span><br><span class="line">    print(<span class="string">"Repositories returned:"</span>, len(repo_dicts))</span><br><span class="line">    keys = &#123;<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>&#125;</span><br><span class="line">    save_dicts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> repo_dicts:</span><br><span class="line">        j = &#123;key: value <span class="keyword">for</span> key, value <span class="keyword">in</span> i.items() <span class="keyword">if</span> key <span class="keyword">in</span> keys&#125;</span><br><span class="line">        save_dicts.append(j)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'test.csv'</span>, <span class="string">'a+'</span>, newline=<span class="string">''</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f: </span><br><span class="line">        fieldnames = [<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>]</span><br><span class="line">        writer = csv.DictWriter(f,fieldnames=fieldnames)</span><br><span class="line">        <span class="comment">#writer.writeheader()</span></span><br><span class="line">        writer.writerows(save_dicts)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<!--这段代码`import`的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。-->
+<p>代码第9行使用<code>requests.get()</code>获取api的数据，接着使用<code>.json()</code>将它转为字典。这个字典的<code>total_count</code>项就是前面图中显示的项目总数，这里我们没有用到；字典的<code>items</code>项则是我们需要的项目列表，将它单独存到<code>repo_dicts</code>，显然获取的项目列表数并不等于项目总数。</p>
+<p>接下来把这次数据处理所需要的字段写到<code>keys</code>中，从<code>repo_dicts</code>中提取这些列的内容存到新列表<code>save_dicts</code>中，再将这些数据保存到csv文件里。这个提取数据并保存的过程应该有更简练的代码写法，我懒得改了就这样吧。</p>
+<p>最终得到的csv文件如下图所示：</p>
+<p><img src="https://i.loli.net/2021/04/30/YIcsFzMrN1Cb93l.png" alt="image-20210430105338111"></p>
+<p>这个数据总量比api那里的总量要多一些，显然是有重复的，因此要进行去重，我们选择把相同id的条目删了，只保留一个。excel本身就有去重的功能，在python里用pandas也可以，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'test.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    data = frame.drop_duplicates(subset=[<span class="string">'id'</span>], keep=<span class="string">'first'</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">    data.to_csv(<span class="string">'newtest.csv'</span>, encoding=<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这样就得到了一份到目前为止所有和dapp相关的项目表。</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>接下来要对所有数据进行分析统计。我们要做的图表如下：</p>
+<ol>
+<li>每月新Dapp项目数量分布</li>
+<li>项目创建及更新时间分布</li>
+<li>项目语言分布</li>
+</ol>
+<p>第3个最简单，我们先看它。</p>
+<h3 id="项目语言分布"><a href="#项目语言分布" class="headerlink" title="项目语言分布"></a>项目语言分布</h3><p>从csv文件读入数据后，按<code>language</code>列进行数量统计即可，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import csv</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">pd.set_option(&#39;display.max_rows&#39;,None)</span><br><span class="line">pd.set_option(&#39;display.max_columns&#39;, None)</span><br><span class="line">pd.set_option(&#39;display.width&#39;, 1000)</span><br><span class="line">pd.set_option(&#39;display.max_colwidth&#39;, 1000)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    frame&#x3D;pd.read_csv(&#39;newtest.csv&#39;,engine&#x3D;&#39;python&#39;)</span><br><span class="line">    df1 &#x3D; frame.language.value_counts()</span><br><span class="line">    print(df1)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">JavaScript           <span class="number">10018</span></span><br><span class="line">C<span class="comment">#                    2087</span></span><br><span class="line">HTML                  <span class="number">1019</span></span><br><span class="line">TypeScript             <span class="number">806</span></span><br><span class="line">CSS                    <span class="number">376</span></span><br><span class="line">Solidity               <span class="number">336</span></span><br><span class="line">Vue                    <span class="number">335</span></span><br><span class="line">Java                   <span class="number">295</span></span><br><span class="line">Python                 <span class="number">256</span></span><br><span class="line">Shell                  <span class="number">139</span></span><br><span class="line">Go                     <span class="number">133</span></span><br><span class="line">C++                    <span class="number">120</span></span><br><span class="line">Dockerfile              <span class="number">72</span></span><br><span class="line">PHP                     <span class="number">65</span></span><br><span class="line">Kotlin                  <span class="number">54</span></span><br><span class="line">Ruby                    <span class="number">52</span></span><br><span class="line">Swift                   <span class="number">49</span></span><br><span class="line">Dart                    <span class="number">37</span></span><br><span class="line">Rust                    <span class="number">34</span></span><br><span class="line">Objective-C             <span class="number">30</span></span><br><span class="line">Jupyter Notebook        <span class="number">30</span></span><br><span class="line">C                       <span class="number">25</span></span><br><span class="line">Makefile                <span class="number">24</span></span><br><span class="line">WebAssembly             <span class="number">22</span></span><br><span class="line">TSQL                    <span class="number">19</span></span><br><span class="line">SCSS                    <span class="number">17</span></span><br><span class="line">PowerShell              <span class="number">10</span></span><br><span class="line">F<span class="comment">#                      10</span></span><br><span class="line">TeX                      <span class="number">9</span></span><br><span class="line">Perl                     <span class="number">8</span></span><br><span class="line">Clojure                  <span class="number">8</span></span><br><span class="line">Haskell                  <span class="number">7</span></span><br><span class="line">R                        <span class="number">7</span></span><br><span class="line">Svelte                   <span class="number">6</span></span><br><span class="line">CoffeeScript             <span class="number">6</span></span><br><span class="line">Scala                    <span class="number">6</span></span><br><span class="line">Nix                      <span class="number">5</span></span><br><span class="line">Visual Basic             <span class="number">5</span></span><br><span class="line">Visual Basic .NET        <span class="number">5</span></span><br><span class="line">D                        <span class="number">4</span></span><br><span class="line">Elm                      <span class="number">4</span></span><br><span class="line">Smarty                   <span class="number">3</span></span><br><span class="line">Elixir                   <span class="number">3</span></span><br><span class="line">GLSL                     <span class="number">3</span></span><br><span class="line">ASP                      <span class="number">3</span></span><br><span class="line">HCL                      <span class="number">3</span></span><br><span class="line">PLpgSQL                  <span class="number">2</span></span><br><span class="line">ShaderLab                <span class="number">2</span></span><br><span class="line">OCaml                    <span class="number">2</span></span><br><span class="line">Logos                    <span class="number">2</span></span><br><span class="line">Blade                    <span class="number">2</span></span><br><span class="line">Roff                     <span class="number">2</span></span><br><span class="line">LiveScript               <span class="number">2</span></span><br><span class="line">Hack                     <span class="number">2</span></span><br><span class="line">PLSQL                    <span class="number">2</span></span><br><span class="line">Sass                     <span class="number">1</span></span><br><span class="line">ECL                      <span class="number">1</span></span><br><span class="line">GDScript                 <span class="number">1</span></span><br><span class="line">NSIS                     <span class="number">1</span></span><br><span class="line">Stata                    <span class="number">1</span></span><br><span class="line">CMake                    <span class="number">1</span></span><br><span class="line">MATLAB                   <span class="number">1</span></span><br><span class="line">EJS                      <span class="number">1</span></span><br><span class="line">Twig                     <span class="number">1</span></span><br><span class="line">QML                      <span class="number">1</span></span><br><span class="line">XML                      <span class="number">1</span></span><br><span class="line">Batchfile                <span class="number">1</span></span><br><span class="line">Crystal                  <span class="number">1</span></span><br><span class="line">Apex                     <span class="number">1</span></span><br><span class="line">Emacs Lisp               <span class="number">1</span></span><br><span class="line">Lua                      <span class="number">1</span></span><br><span class="line">Racket                   <span class="number">1</span></span><br><span class="line">VimL                     <span class="number">1</span></span><br><span class="line">Handlebars               <span class="number">1</span></span><br><span class="line"><span class="number">4</span>D                       <span class="number">1</span></span><br><span class="line">PureScript               <span class="number">1</span></span><br><span class="line">Pascal                   <span class="number">1</span></span><br><span class="line">Io                       <span class="number">1</span></span><br><span class="line">Assembly                 <span class="number">1</span></span><br><span class="line">Name: language, dtype: int64</span><br></pre></td></tr></table></figure>
+<h3 id="每月新增Dapp项目数量分布"><a href="#每月新增Dapp项目数量分布" class="headerlink" title="每月新增Dapp项目数量分布"></a>每月新增Dapp项目数量分布</h3><p>从csv文件读入数据后，访问<code>created_at</code>这一列并截取其前7位，即可得到每个项目的创建年月，统计每个月创建的项目数量即可得到数据结果，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">'display.max_rows'</span>,<span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_columns'</span>, <span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.width'</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_colwidth'</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'newtest.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    frame[<span class="string">'created'</span>] = frame[<span class="string">'created_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    df1 = frame.created.value_counts()</span><br><span class="line">    print(df1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这份数据内容很多，因此就不列出了。</p>
+<h3 id="项目创建及更新时间分布"><a href="#项目创建及更新时间分布" class="headerlink" title="项目创建及更新时间分布"></a>项目创建及更新时间分布</h3><p>由于数据很多，因此这里并不逐月统计，对于创建时间，统计每半年的项目数；对于更新时间，统计每一年的项目数，例如创建于2009年10月至2010年4月且最后一次更新于2014年4月至2015年4月的项目有1个，则这一对时间所对应的值就是1。以此类推，可以得到一份完整表格。</p>
+<p>我们首先读入csv文件，截取创建和更新的年月数据，并依次分组并统计每组的项目数，这样就可以得到每组年月对所对应的项目数，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">'display.max_rows'</span>,<span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_columns'</span>, <span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.width'</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_colwidth'</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'newtest.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    frame[<span class="string">'created'</span>] = frame[<span class="string">'created_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    frame[<span class="string">'updated'</span>] = frame[<span class="string">'updated_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    group = frame.groupby([<span class="string">'created'</span>,<span class="string">'updated'</span>])</span><br><span class="line">    dict_tmp = dict(group.size())</span><br><span class="line">    print(dict_tmp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>得到的结果是<code>... (&#39;2021-03&#39;, &#39;2021-03&#39;): 473, (&#39;2021-03&#39;, &#39;2021-04&#39;): 151,...</code>这样的格式，将这些放到excel里并进行分列、去除无效数据等处理，最终可以得到如下图所示的表格：</p>
+<p><img src="https://i.loli.net/2021/04/30/tS9wECnmoiONprB.png" alt="image-20210430122233349"></p>
+<p>接下来筛选出created列中2014-11~2015-04之间的数据，将筛选后的updated和num这两列复制到新区域（比如sheet4），按升序排列，如下图，选中2015-04之前的数据，就可以在右下角看到这个时间段内的项目数总和。</p>
+<p><img src="https://i.loli.net/2021/04/30/Eq83h4BrRxLd5z6.png" alt="image-20210430122713555"></p>
+<p>用类似的方法进行多次筛选、排序、求和，最终可以得到如下数据表：</p>
+<p><img src="https://i.loli.net/2021/04/30/1Qok6Z9U2r5RtvO.png" alt="image-20210430124738534"></p>
+<p>行表示创建时间，列表示更新时间。</p>
+<h2 id="图像生成"><a href="#图像生成" class="headerlink" title="图像生成"></a>图像生成</h2><p>使用<code>Echarts</code>生成图表，因为没学过前端，所以就直接用了<a href="https://zhuanlan.zhihu.com/p/32759663" target="_blank" rel="noopener">以太坊 Dapp 调研</a>给出的js代码，链接为 <a href="https://github.com/heeeeeng/my_docs/tree/master/ethereum_dapp/data_viewer" target="_blank" rel="noopener">Github</a> 。</p>
+<p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
+<p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
+<p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
+<div id="echarts1983" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts1983'));
+        // 指定图表的配置项和数据
+        var option = {
+title: {
+            text: '每月新Dapp项目数量分布',
+            x:'center'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            name: "创建时间",
+            type: 'category',
+            boundaryGap: false,
+            data: ["2009-01","2009-02","2009-03","2009-04","2009-05","2009-06","2009-07","2009-08","2009-09","2009-10","2009-11","2009-12","2010-01","2010-02","2010-03","2010-04","2010-05","2010-06","2010-07","2010-08","2010-09","2010-10","2010-11","2010-12","2011-01","2011-02","2011-03","2011-04","2011-05","2011-06","2011-07","2011-08","2011-09","2011-10","2011-11","2011-12","2012-01","2012-02","2012-03","2012-04","2012-05","2012-06","2012-07","2012-08","2012-09","2012-10","2012-11","2012-12","2013-01","2013-02","2013-03","2013-04","2013-05","2013-06","2013-07","2013-08","2013-09","2013-10","2013-11","2013-12","2014-01","2014-02","2014-03","2014-04","2014-05","2014-06","2014-07","2014-08","2014-09","2014-10","2014-11","2014-12","2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07","2015-08","2015-09","2015-10","2015-11","2015-12","2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06","2017-07","2017-08","2017-09","2017-10","2017-11","2017-12","2018-01","2018-02","2018-03","2018-04","2018-05","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05","2020-06","2020-07","2020-08","2020-09","2020-10","2020-11","2020-12","2021-01","2021-02","2021-03","2021-04"]
+        },
+        yAxis: {
+            name: '新项目数量',
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name:'新项目数量',
+                type:'line',
+                data: [1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1,1,1,0,2,0,1,2,1,3,2,1,2,2,2,0,1,5,2,3,5,2,1,1,5,4,4,3,3,8,8,8,5,7,5,8,11,16,9,9,5,6,6,12,19,5,12,16,10,14,21,29,29,26,18,29,34,34,32,34,52,42,49,63,56,50,58,66,64,66,60,41,37,69,60,75,109,128,118,148,203,193,217,223,229,339,353,455,425,625,506,526,596,488,490,432,456,441,341,433,391,385,387,383,379,278,303,313,288,320,288,291,407,479,348,381,316,339,411,448,392,492,456,633,581],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<div id="echarts3591" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts3591'));
+        // 指定图表的配置项和数据
+        var option = {
+        title : {
+            text: '项目语言分布',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} <br/> 项目数量: {c} ({d}%) "
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['JavaScript','HTML', 'TypeScript', 'CSS', 'Others']
+        },
+        series : [
+            {
+                name: '项目语言分布',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:10018, name:'JavaScript'},
+                    {value:2087, name:'C#'},
+                    {value:1019,name:"HTML"},
+                    {value:806,name:"TypeScript"},
+                    {value:376,name:"CSS"},
+                    {value:336,name:"Solidity"},
+                    {value:335,name:"Vue"},
+                    {value:295,name:"Java"},
+                    {value:256,name:"Python"},
+                    {value:139,name:"Shell"},
+                    {value:133,name:"Go"},
+                    {value:120,name:"C++"},
+                    {value:687, name:'Others'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<div id="echarts2930" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts2930'));
+        // 指定图表的配置项和数据
+        var option = {
+        title : {
+            text: '剩余语言分布',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} <br/> 项目数量: {c} ({d}%) "
+        },
+        series : [
+            {
+                name: '编程语言数量分布',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[                    
+                    {value:72,name:"Dockerfile"},
+                    {value:65,name:"PHP"},
+                    {value:54,name:"Kotlin"},
+                    {value:52,name:"Ruby"},
+                    {value:49,name:"Swift"},
+                    {value:37,name:"Dart"},
+                    {value:34,name:"Rust"},
+                    {value:30,name:"Jupyter Notebook"},
+                    {value:30,name:"Objective-C"},
+                    {value:25,name:"C"},
+                    {value:24,name:"Makefile"},
+                    {value:22,name:"WebAssembly"},
+                    {value:19,name:"TSQL"},
+                    {value:17,name:"SCSS"},
+                    {value:10,name:"PowerShell"},
+                    {value:10,name:"F#"},
+                    {value:137,name:"Others"},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<p><img src="https://i.loli.net/2021/04/30/UC8DSlosXBIu5Mv.png" alt="fe0b04c74a9bae3058a8c53ba973f4e"></p>
+<p>热力图不知道为什么始终没法在这里显示，所以就放个截图了……</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2021/04/30/Github%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Echarts/" rel="tag">Echarts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag">统计</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/04/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Information%20from%20Heterogeneous%20Mobile%20Crowdsourced%20Workers%20Without%20Verification/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+
+</html>

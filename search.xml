@@ -1,6 +1,453 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Github项目数据统计</title>
+    <url>/2021/04/30/Github%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="Github项目数据统计"><a href="#Github项目数据统计" class="headerlink" title="Github项目数据统计"></a>Github项目数据统计</h1><p>​      由于需要统计Dapp项目的发展历程数据，在查资料时看到了<a href="https://zhuanlan.zhihu.com/p/32759663" target="_blank" rel="noopener">以太坊 Dapp 调研</a>，这份统计只包含了2017年12月20日及之前的数据，而现在已经是2021年了，因此我模仿这个进行了新的统计。</p>
+<a id="more"></a>
+<h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><p>经过一系列学习，我终于掌握了GitHub api的基础使用。简单来说，我们可以通过访问api接口进行查询并获取数据。通过关键字dapp进行查询的api是<code>https://api.github.com/search/repositories?q=dapp</code>，用浏览器直接打开这个链接可以看到如下图的内容：</p>
+<p><img src="https://i.loli.net/2021/04/30/nXQsavbDH98PJxc.png" alt="image-20210430103142883"></p>
+<p>第一行的<code>total_count</code>是所有结果的总数，接下来有30个<code>items</code>，每一个都是对应的项目，点开第一个可以看到其数据格式为：</p>
+<p><img src="https://i.loli.net/2021/04/30/qNL3xuYcrlByVbW.png" alt="image-20210430103308097"></p>
+<p>图中显示的内容并不完整，还有很多信息比如stars数量等都可以直接获取。</p>
+<p>但是总共有19930个项目，却只获取到30个，这显然是不够的，想获取更多项目就需要修改api的内容，改成<code>https://api.github.com/search/repositories?q=dapp&amp;page=1&amp;per_page=100</code>，修改后就可以获取到100条项目信息了，这是每页项目数的上限，将api中的<code>page=1</code>改成<code>page=2</code>即可得到新的100条信息，然而由于api限制，通过这样的方法最多可以获取1000条（即<code>page=10</code>），超过1000条后会有报错信息。为了能获取到更多项目，我们需要对访问查询作出限制，使得每次查询结果都不超过1000条，然后将多次查询结果合并起来得到完整结果，例如仅查找创建于2021年1月至2月的项目数，这样就可以得到1000条以内的结果，再逐页访问即可。限制时间的api为：<code>https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=1&amp;per_page=100</code>，这个api可以获取创建时间在2021年4月1日至5月1日的所有项目数据，如果要获取其他时间范围，对api中的时间进行修改即可，可以精确到秒；如果时间限制是早于或晚于某个时间点，则写成<code>created:&gt;=2021-04-01T00:00:00</code>，大于等于符号可以改成小于等于或者大于或者小于。如果想限制其他字段，比如更新时间，则把created修改为updated即可。</p>
+<p>具体到写python代码时，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> github3 <span class="keyword">import</span> login, GitHub</span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    result = requests.get(<span class="string">"https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=6&amp;per_page=100"</span>)</span><br><span class="line">    response_dict = result.json()</span><br><span class="line">    repo_dicts = response_dict[<span class="string">'items'</span>]</span><br><span class="line">    print(<span class="string">"Toal repositories:"</span>, response_dict[<span class="string">'total_count'</span>])</span><br><span class="line">    print(<span class="string">"Repositories returned:"</span>, len(repo_dicts))</span><br><span class="line">    keys = &#123;<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>&#125;</span><br><span class="line">    save_dicts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> repo_dicts:</span><br><span class="line">        j = &#123;key: value <span class="keyword">for</span> key, value <span class="keyword">in</span> i.items() <span class="keyword">if</span> key <span class="keyword">in</span> keys&#125;</span><br><span class="line">        save_dicts.append(j)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'test.csv'</span>, <span class="string">'a+'</span>, newline=<span class="string">''</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f: </span><br><span class="line">        fieldnames = [<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>]</span><br><span class="line">        writer = csv.DictWriter(f,fieldnames=fieldnames)</span><br><span class="line">        <span class="comment">#writer.writeheader()</span></span><br><span class="line">        writer.writerows(save_dicts)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<!--这段代码`import`的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。-->
+<p>代码第9行使用<code>requests.get()</code>获取api的数据，接着使用<code>.json()</code>将它转为字典。这个字典的<code>total_count</code>项就是前面图中显示的项目总数，这里我们没有用到；字典的<code>items</code>项则是我们需要的项目列表，将它单独存到<code>repo_dicts</code>，显然获取的项目列表数并不等于项目总数。</p>
+<p>接下来把这次数据处理所需要的字段写到<code>keys</code>中，从<code>repo_dicts</code>中提取这些列的内容存到新列表<code>save_dicts</code>中，再将这些数据保存到csv文件里。这个提取数据并保存的过程应该有更简练的代码写法，我懒得改了就这样吧。</p>
+<p>最终得到的csv文件如下图所示：</p>
+<p><img src="https://i.loli.net/2021/04/30/YIcsFzMrN1Cb93l.png" alt="image-20210430105338111"></p>
+<p>这个数据总量比api那里的总量要多一些，显然是有重复的，因此要进行去重，我们选择把相同id的条目删了，只保留一个。excel本身就有去重的功能，在python里用pandas也可以，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'test.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    data = frame.drop_duplicates(subset=[<span class="string">'id'</span>], keep=<span class="string">'first'</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">    data.to_csv(<span class="string">'newtest.csv'</span>, encoding=<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这样就得到了一份到目前为止所有和dapp相关的项目表。</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>接下来要对所有数据进行分析统计。我们要做的图表如下：</p>
+<ol>
+<li>每月新Dapp项目数量分布</li>
+<li>项目创建及更新时间分布</li>
+<li>项目语言分布</li>
+</ol>
+<p>第3个最简单，我们先看它。</p>
+<h3 id="项目语言分布"><a href="#项目语言分布" class="headerlink" title="项目语言分布"></a>项目语言分布</h3><p>从csv文件读入数据后，按<code>language</code>列进行数量统计即可，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import csv</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">pd.set_option(&#39;display.max_rows&#39;,None)</span><br><span class="line">pd.set_option(&#39;display.max_columns&#39;, None)</span><br><span class="line">pd.set_option(&#39;display.width&#39;, 1000)</span><br><span class="line">pd.set_option(&#39;display.max_colwidth&#39;, 1000)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    frame&#x3D;pd.read_csv(&#39;newtest.csv&#39;,engine&#x3D;&#39;python&#39;)</span><br><span class="line">    df1 &#x3D; frame.language.value_counts()</span><br><span class="line">    print(df1)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">JavaScript           <span class="number">10018</span></span><br><span class="line">C<span class="comment">#                    2087</span></span><br><span class="line">HTML                  <span class="number">1019</span></span><br><span class="line">TypeScript             <span class="number">806</span></span><br><span class="line">CSS                    <span class="number">376</span></span><br><span class="line">Solidity               <span class="number">336</span></span><br><span class="line">Vue                    <span class="number">335</span></span><br><span class="line">Java                   <span class="number">295</span></span><br><span class="line">Python                 <span class="number">256</span></span><br><span class="line">Shell                  <span class="number">139</span></span><br><span class="line">Go                     <span class="number">133</span></span><br><span class="line">C++                    <span class="number">120</span></span><br><span class="line">Dockerfile              <span class="number">72</span></span><br><span class="line">PHP                     <span class="number">65</span></span><br><span class="line">Kotlin                  <span class="number">54</span></span><br><span class="line">Ruby                    <span class="number">52</span></span><br><span class="line">Swift                   <span class="number">49</span></span><br><span class="line">Dart                    <span class="number">37</span></span><br><span class="line">Rust                    <span class="number">34</span></span><br><span class="line">Objective-C             <span class="number">30</span></span><br><span class="line">Jupyter Notebook        <span class="number">30</span></span><br><span class="line">C                       <span class="number">25</span></span><br><span class="line">Makefile                <span class="number">24</span></span><br><span class="line">WebAssembly             <span class="number">22</span></span><br><span class="line">TSQL                    <span class="number">19</span></span><br><span class="line">SCSS                    <span class="number">17</span></span><br><span class="line">PowerShell              <span class="number">10</span></span><br><span class="line">F<span class="comment">#                      10</span></span><br><span class="line">TeX                      <span class="number">9</span></span><br><span class="line">Perl                     <span class="number">8</span></span><br><span class="line">Clojure                  <span class="number">8</span></span><br><span class="line">Haskell                  <span class="number">7</span></span><br><span class="line">R                        <span class="number">7</span></span><br><span class="line">Svelte                   <span class="number">6</span></span><br><span class="line">CoffeeScript             <span class="number">6</span></span><br><span class="line">Scala                    <span class="number">6</span></span><br><span class="line">Nix                      <span class="number">5</span></span><br><span class="line">Visual Basic             <span class="number">5</span></span><br><span class="line">Visual Basic .NET        <span class="number">5</span></span><br><span class="line">D                        <span class="number">4</span></span><br><span class="line">Elm                      <span class="number">4</span></span><br><span class="line">Smarty                   <span class="number">3</span></span><br><span class="line">Elixir                   <span class="number">3</span></span><br><span class="line">GLSL                     <span class="number">3</span></span><br><span class="line">ASP                      <span class="number">3</span></span><br><span class="line">HCL                      <span class="number">3</span></span><br><span class="line">PLpgSQL                  <span class="number">2</span></span><br><span class="line">ShaderLab                <span class="number">2</span></span><br><span class="line">OCaml                    <span class="number">2</span></span><br><span class="line">Logos                    <span class="number">2</span></span><br><span class="line">Blade                    <span class="number">2</span></span><br><span class="line">Roff                     <span class="number">2</span></span><br><span class="line">LiveScript               <span class="number">2</span></span><br><span class="line">Hack                     <span class="number">2</span></span><br><span class="line">PLSQL                    <span class="number">2</span></span><br><span class="line">Sass                     <span class="number">1</span></span><br><span class="line">ECL                      <span class="number">1</span></span><br><span class="line">GDScript                 <span class="number">1</span></span><br><span class="line">NSIS                     <span class="number">1</span></span><br><span class="line">Stata                    <span class="number">1</span></span><br><span class="line">CMake                    <span class="number">1</span></span><br><span class="line">MATLAB                   <span class="number">1</span></span><br><span class="line">EJS                      <span class="number">1</span></span><br><span class="line">Twig                     <span class="number">1</span></span><br><span class="line">QML                      <span class="number">1</span></span><br><span class="line">XML                      <span class="number">1</span></span><br><span class="line">Batchfile                <span class="number">1</span></span><br><span class="line">Crystal                  <span class="number">1</span></span><br><span class="line">Apex                     <span class="number">1</span></span><br><span class="line">Emacs Lisp               <span class="number">1</span></span><br><span class="line">Lua                      <span class="number">1</span></span><br><span class="line">Racket                   <span class="number">1</span></span><br><span class="line">VimL                     <span class="number">1</span></span><br><span class="line">Handlebars               <span class="number">1</span></span><br><span class="line"><span class="number">4</span>D                       <span class="number">1</span></span><br><span class="line">PureScript               <span class="number">1</span></span><br><span class="line">Pascal                   <span class="number">1</span></span><br><span class="line">Io                       <span class="number">1</span></span><br><span class="line">Assembly                 <span class="number">1</span></span><br><span class="line">Name: language, dtype: int64</span><br></pre></td></tr></table></figure>
+<h3 id="每月新增Dapp项目数量分布"><a href="#每月新增Dapp项目数量分布" class="headerlink" title="每月新增Dapp项目数量分布"></a>每月新增Dapp项目数量分布</h3><p>从csv文件读入数据后，访问<code>created_at</code>这一列并截取其前7位，即可得到每个项目的创建年月，统计每个月创建的项目数量即可得到数据结果，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">'display.max_rows'</span>,<span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_columns'</span>, <span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.width'</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_colwidth'</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'newtest.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    frame[<span class="string">'created'</span>] = frame[<span class="string">'created_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    df1 = frame.created.value_counts()</span><br><span class="line">    print(df1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>这份数据内容很多，因此就不列出了。</p>
+<h3 id="项目创建及更新时间分布"><a href="#项目创建及更新时间分布" class="headerlink" title="项目创建及更新时间分布"></a>项目创建及更新时间分布</h3><p>由于数据很多，因此这里并不逐月统计，对于创建时间，统计每半年的项目数；对于更新时间，统计每一年的项目数，例如创建于2009年10月至2010年4月且最后一次更新于2014年4月至2015年4月的项目有1个，则这一对时间所对应的值就是1。以此类推，可以得到一份完整表格。</p>
+<p>我们首先读入csv文件，截取创建和更新的年月数据，并依次分组并统计每组的项目数，这样就可以得到每组年月对所对应的项目数，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">'display.max_rows'</span>,<span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_columns'</span>, <span class="literal">None</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.width'</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">'display.max_colwidth'</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    frame=pd.read_csv(<span class="string">'newtest.csv'</span>,engine=<span class="string">'python'</span>)</span><br><span class="line">    frame[<span class="string">'created'</span>] = frame[<span class="string">'created_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    frame[<span class="string">'updated'</span>] = frame[<span class="string">'updated_at'</span>].str[<span class="number">0</span>:<span class="number">7</span>]</span><br><span class="line">    group = frame.groupby([<span class="string">'created'</span>,<span class="string">'updated'</span>])</span><br><span class="line">    dict_tmp = dict(group.size())</span><br><span class="line">    print(dict_tmp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>得到的结果是<code>... (&#39;2021-03&#39;, &#39;2021-03&#39;): 473, (&#39;2021-03&#39;, &#39;2021-04&#39;): 151,...</code>这样的格式，将这些放到excel里并进行分列、去除无效数据等处理，最终可以得到如下图所示的表格：</p>
+<p><img src="https://i.loli.net/2021/04/30/tS9wECnmoiONprB.png" alt="image-20210430122233349"></p>
+<p>接下来筛选出created列中2014-11~2015-04之间的数据，将筛选后的updated和num这两列复制到新区域（比如sheet4），按升序排列，如下图，选中2015-04之前的数据，就可以在右下角看到这个时间段内的项目数总和。</p>
+<p><img src="https://i.loli.net/2021/04/30/Eq83h4BrRxLd5z6.png" alt="image-20210430122713555"></p>
+<p>用类似的方法进行多次筛选、排序、求和，最终可以得到如下数据表：</p>
+<p><img src="https://i.loli.net/2021/04/30/1Qok6Z9U2r5RtvO.png" alt="image-20210430124738534"></p>
+<p>行表示创建时间，列表示更新时间。</p>
+<h2 id="图像生成"><a href="#图像生成" class="headerlink" title="图像生成"></a>图像生成</h2><p>使用<code>Echarts</code>生成图表，因为没学过前端，所以就直接用了<a href="https://zhuanlan.zhihu.com/p/32759663" target="_blank" rel="noopener">以太坊 Dapp 调研</a>给出的js代码，链接为 <a href="https://github.com/heeeeeng/my_docs/tree/master/ethereum_dapp/data_viewer" target="_blank" rel="noopener">Github</a> 。</p>
+<p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
+<p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
+<p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
+<div id="echarts1983" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts1983'));
+        // 指定图表的配置项和数据
+        var option = {
+title: {
+            text: '每月新Dapp项目数量分布',
+            x:'center'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            name: "创建时间",
+            type: 'category',
+            boundaryGap: false,
+            data: ["2009-01","2009-02","2009-03","2009-04","2009-05","2009-06","2009-07","2009-08","2009-09","2009-10","2009-11","2009-12","2010-01","2010-02","2010-03","2010-04","2010-05","2010-06","2010-07","2010-08","2010-09","2010-10","2010-11","2010-12","2011-01","2011-02","2011-03","2011-04","2011-05","2011-06","2011-07","2011-08","2011-09","2011-10","2011-11","2011-12","2012-01","2012-02","2012-03","2012-04","2012-05","2012-06","2012-07","2012-08","2012-09","2012-10","2012-11","2012-12","2013-01","2013-02","2013-03","2013-04","2013-05","2013-06","2013-07","2013-08","2013-09","2013-10","2013-11","2013-12","2014-01","2014-02","2014-03","2014-04","2014-05","2014-06","2014-07","2014-08","2014-09","2014-10","2014-11","2014-12","2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07","2015-08","2015-09","2015-10","2015-11","2015-12","2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06","2017-07","2017-08","2017-09","2017-10","2017-11","2017-12","2018-01","2018-02","2018-03","2018-04","2018-05","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05","2020-06","2020-07","2020-08","2020-09","2020-10","2020-11","2020-12","2021-01","2021-02","2021-03","2021-04"]
+        },
+        yAxis: {
+            name: '新项目数量',
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name:'新项目数量',
+                type:'line',
+                data: [1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1,1,1,0,2,0,1,2,1,3,2,1,2,2,2,0,1,5,2,3,5,2,1,1,5,4,4,3,3,8,8,8,5,7,5,8,11,16,9,9,5,6,6,12,19,5,12,16,10,14,21,29,29,26,18,29,34,34,32,34,52,42,49,63,56,50,58,66,64,66,60,41,37,69,60,75,109,128,118,148,203,193,217,223,229,339,353,455,425,625,506,526,596,488,490,432,456,441,341,433,391,385,387,383,379,278,303,313,288,320,288,291,407,479,348,381,316,339,411,448,392,492,456,633,581],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<div id="echarts3591" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts3591'));
+        // 指定图表的配置项和数据
+        var option = {
+        title : {
+            text: '项目语言分布',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} <br/> 项目数量: {c} ({d}%) "
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['JavaScript','HTML', 'TypeScript', 'CSS', 'Others']
+        },
+        series : [
+            {
+                name: '项目语言分布',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:10018, name:'JavaScript'},
+                    {value:2087, name:'C#'},
+                    {value:1019,name:"HTML"},
+                    {value:806,name:"TypeScript"},
+                    {value:376,name:"CSS"},
+                    {value:336,name:"Solidity"},
+                    {value:335,name:"Vue"},
+                    {value:295,name:"Java"},
+                    {value:256,name:"Python"},
+                    {value:139,name:"Shell"},
+                    {value:133,name:"Go"},
+                    {value:120,name:"C++"},
+                    {value:687, name:'Others'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<div id="echarts2930" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts2930'));
+        // 指定图表的配置项和数据
+        var option = {
+        title : {
+            text: '剩余语言分布',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} <br/> 项目数量: {c} ({d}%) "
+        },
+        series : [
+            {
+                name: '编程语言数量分布',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[                    
+                    {value:72,name:"Dockerfile"},
+                    {value:65,name:"PHP"},
+                    {value:54,name:"Kotlin"},
+                    {value:52,name:"Ruby"},
+                    {value:49,name:"Swift"},
+                    {value:37,name:"Dart"},
+                    {value:34,name:"Rust"},
+                    {value:30,name:"Jupyter Notebook"},
+                    {value:30,name:"Objective-C"},
+                    {value:25,name:"C"},
+                    {value:24,name:"Makefile"},
+                    {value:22,name:"WebAssembly"},
+                    {value:19,name:"TSQL"},
+                    {value:17,name:"SCSS"},
+                    {value:10,name:"PowerShell"},
+                    {value:10,name:"F#"},
+                    {value:137,name:"Others"},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<p><img src="https://i.loli.net/2021/04/30/UC8DSlosXBIu5Mv.png" alt="fe0b04c74a9bae3058a8c53ba973f4e"></p>
+<p>热力图不知道为什么始终没法在这里显示，所以就放个截图了……</p>
+]]></content>
+      <categories>
+        <category>无分类项</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>python</tag>
+        <tag>Echarts</tag>
+        <tag>Github</tag>
+        <tag>统计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification</title>
+    <url>/2021/04/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Information%20from%20Heterogeneous%20Mobile%20Crowdsourced%20Workers%20Without%20Verification/</url>
+    <content><![CDATA[<h1 id="Eliciting-Information-from-Heterogeneous-Mobile-Crowdsourced-Workers-Without-Verification"><a href="#Eliciting-Information-from-Heterogeneous-Mobile-Crowdsourced-Workers-Without-Verification" class="headerlink" title="Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification"></a>Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification</h1><p>这篇和Strategic Information Revelation in Crowdsourcing Systems Without Verification是同一批作者的，针对的问题一样，内容方法看着也差不多，希望别一模一样……</p>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：无验证的信息提取（IEWV）</p>
+<p>思路：激励workers高质量和如实报告</p>
+<p>常规方法：多数投票——符合多数解决方案的workers获得报酬</p>
+<p>存在问题：未考虑workers的异构性</p>
+<p>本文方法：两阶段Stackelberg博弈</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文场景：</p>
+<ol>
+<li>workers求解准确率异构（即，不同workers以不同概率生成高质量数据）</li>
+<li>考虑数据质量与平台成本之间的平衡</li>
+</ol>
+<p>本文方法：多数投票机制</p>
+<p>需要解决的问题：</p>
+<ol>
+<li>给定奖励，多数投票机制下，异构workers会如何行动；</li>
+<li>workers的异构性如何影响平台的最优奖励设计和均衡；</li>
+<li>在提升平台均衡方面，知道workers异构方案准确性有什么价值。</li>
+</ol>
+<p>本文的两阶段博弈：</p>
+<ol>
+<li>平台决定多数投票机制的奖励等级，目标是最大化收益，该收益考虑了workers解决方案质量和平台总支出之间的均衡；</li>
+<li>每个worker选择自己的努力等级和报告策略，目标是最大化自己收益。</li>
+</ol>
+<p>本文考虑两种情况：</p>
+<ol>
+<li>不完全信息博弈（平台不知道workers的准确率）</li>
+<li>完全信息博弈（平台知道workers的准确率）</li>
+</ol>
+<h3 id="Key-Contributions"><a href="#Key-Contributions" class="headerlink" title="Key Contributions"></a>Key Contributions</h3><ol>
+<li>分析了IEWV问题中异构workers场景下的平台均衡</li>
+<li>分析了多均衡共存的场景</li>
+<li>刻画了workers的最优策略</li>
+<li>刻画了workers异构性对平台均衡的影响</li>
+<li>刻画了得知workers异构性的价值</li>
+</ol>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Information-Elicitation"><a href="#Information-Elicitation" class="headerlink" title="Information Elicitation"></a>Information Elicitation</h3><h3 id="Information-Aggregation"><a href="#Information-Aggregation" class="headerlink" title="Information Aggregation"></a>Information Aggregation</h3><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Workers’-Decision-Problem"><a href="#Workers’-Decision-Problem" class="headerlink" title="Workers’ Decision Problem"></a>Workers’ Decision Problem</h3><h4 id="Workers-and-Task"><a href="#Workers-and-Task" class="headerlink" title="Workers and Task"></a>Workers and Task</h4><p>集合：$N=\{1,2,…,N\}$表示到达平台的workers</p>
+<p>待求解问题的答案是二选一，记作$X=\{-1,1\}$</p>
+<p>$x\in X$表示该任务的正确答案</p>
+<p>$x_i^{estimate}\in X$表示第$i$个worker对任务答案的估计值</p>
+<p>$x_i^{estimate}\in X$表示第$i$个worker向平台上报的任务答案</p>
+<h4 id="Worker-Effort-Exertion-and-Reporting-Strategy"><a href="#Worker-Effort-Exertion-and-Reporting-Strategy" class="headerlink" title="Worker Effort Exertion and Reporting Strategy"></a>Worker Effort Exertion and Reporting Strategy</h4><p>workers的任务质量依赖于努力程度，记作$e_i\in \{0,1\}$</p>
+<p>workers可通过付出一定代价来努力从而提高任务质量（即准确率）</p>
+<p>第$i$个worker的求解方案准确率记作$p_i\in (0.5,1])$</p>
+<script type="math/tex; mode=display">
+P(x_i^{estimate}=x)=\left\{
+\begin{matrix}
+p_i,\ \ &if\ \ e_i=1\ \ with\ \ a\ \ cost\ \ c_i\geq 0, \\
+0.5,\ \ &if\ \ e_i=0.
+\end{matrix}
+\right.</script><p>workers异构性的体现：$N$个workers中有$k$个高质量的求解准确率为$p_h$，和$N-k$个低质量的求解准确率为$p_l$，$0.5&lt;p_l&lt;p_h\leq 1$</p>
+<p>workers的上报策略：$v_i=\{1,-1,rd\}$，其中，努力的workers可以选择$\{1,-1\}$分别表示如实报告和谎报；而不努力的workers可以选择$rd$表示以0.5的概率随机上报</p>
+<script type="math/tex; mode=display">
+x_i^{report}=
+\left\{
+\begin{matrix}
+x_i^{estimate},\ \ &if\ \  v_i=1\\
+-x_i^{estimate},\ \ &if\ \  v_i=-1\\
+1\ \  or\ \  -1\ \  with\ \  an\ \  equal\ \  probability,\ \ &if\ \  v_i=rd.
+\end{matrix}
+\right.</script><p>本文不考虑多个workers共谋等情况。</p>
+<p>workers的策略记作$s_i=(e_i,v_i)$，属于集合$S_i=\{(0,rd),(1,1),(1,-1)\}$</p>
+<h4 id="Internal-Reward-for-Truthful-Reports"><a href="#Internal-Reward-for-Truthful-Reports" class="headerlink" title="Internal Reward for Truthful Reports"></a>Internal Reward for Truthful Reports</h4><p>第$i$个worker如果努力且如实上报，则会得到内在奖励$l_i\geq 0$</p>
+<p>反之，谎报会得到内在惩罚$-l_i$</p>
+<p>不努力的worker会随机上报，他的内在奖励为0</p>
+<h4 id="Consistency-Reward-for-Output-Agreement"><a href="#Consistency-Reward-for-Output-Agreement" class="headerlink" title="Consistency Reward for Output Agreement"></a>Consistency Reward for Output Agreement</h4><p>一致性奖励记作$R\geq 0$</p>
+<p>除了第$i$个worker以外，其余workers的多数投票方案记作$x_{-i}^{majority}$</p>
+<p>从第$i$个worker的角度来看，多数投票方案是：</p>
+<script type="math/tex; mode=display">
+x_{-i}^{majority}=
+\left \{
+\begin{matrix}
+1,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}>0,\\
+-1,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}<0,\\
+tie,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}=0.
+\end{matrix}
+\right.</script><p>第$i$个worker的上报值与多数投票方案一致或者多数投票方案是tie的情况下，该worker会得到奖励；反之则不会。</p>
+<p>第$i$个worker得到奖励R的概率记作$P_i(R,p,s)$，$p=(p_j,\forall j\in N)$，$s=(e,v)$，$e=(e_j,\forall j \in N)$，$v=(v_j,\forall j \in N)$</p>
+<h4 id="Worker-Payoff-Maximization-Problem"><a href="#Worker-Payoff-Maximization-Problem" class="headerlink" title="Worker Payoff Maximization Problem"></a>Worker Payoff Maximization Problem</h4><p>worker的收益函数：$u_i(R,s)=R*P_i(R,p,s)+v_il_i-e_ic_i$</p>
+<p><strong>博弈1：</strong>$\Omega_1=(N,S,u)$，其中：</p>
+<ol>
+<li><p>$N$：N个workers的集合</p>
+</li>
+<li><p>$S$：第$i$个worker的策略空间为$s_i\in S_i=\{(0,rd),(1,1),(1,-1)\}$。所有workers的策略记作$s=(s_i,\forall i\in N)$，所有workers的可行策略集合记作$S=\prod_{i\in N}S_i$。</p>
+<!--这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。-->
+</li>
+<li><p>$u$：向量$u=(u_i,\forall i \in N)$包含了所有workers的收益</p>
+</li>
+</ol>
+<p>该博弈中，给定报酬$R$和其他workers的决策$s_{-i}=(e_{-i},v_{-i})=((e_j,v_j),\forall j \neq i)$，第$i$个worker需要求解下述优化问题。</p>
+<p><strong>问题1：</strong>第$i$个worker的收益最大化</p>
+<p>$max\ \ u_i(R,s,s_{-i})$</p>
+<p>$var.\ \ s_i\in\{(0,rd),(1,1),(1,-1)\}.$</p>
+<p><strong>定义1：</strong>纳什均衡：在给定$R$的情况下，如果对于所有$s_i’\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^<em>,s_{-i}^</em>)\geq u_i(R,s_i’,s_{-i}^<em>)$，则认为策略$s^</em>=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。</p>
+<p>注意：第$i$个worker的策略选择是前面<strong>问题1</strong>的优化解决方案，是与平台支付报酬$R$和其他worker策略$s_{-i}$相关的函数。</p>
+<h3 id="Platform’s-Reward-Design-Problem"><a href="#Platform’s-Reward-Design-Problem" class="headerlink" title="Platform’s Reward Design Problem"></a>Platform’s Reward Design Problem</h3><h4 id="Accuracy-of-Aggregated-Estimate"><a href="#Accuracy-of-Aggregated-Estimate" class="headerlink" title="Accuracy of Aggregated Estimate"></a>Accuracy of Aggregated Estimate</h4><p>平台根据所有workers的上报值进行多数投票猜测最终的值</p>
+<script type="math/tex; mode=display">
+x_p^{estimate}=
+\left \{
+\begin{matrix}
+1,\ &if\ \sum_{i=1}^Nx_i^{report}>0,\\
+-1,\ &if\ \sum_{i=1}^Nx_i^{report}<0,\\
+1\ or\ -1\ with\ an\ equal\ probability,\ &if\ \sum_{i=1}^Nx_i^{report}=0.
+\end{matrix}
+\right.</script><p>$P_a(R,p,N)$表示上述公式得到的聚合解决方案是正确的概率</p>
+<p>假设：N是基数且$N\geq 4$</p>
+<h4 id="Expected-Consistency-Rewards"><a href="#Expected-Consistency-Rewards" class="headerlink" title="Expected Consistency Rewards."></a>Expected Consistency Rewards.</h4><p>workers总一致性奖励期望记作$E[R^T]$</p>
+<h4 id="Platform’s-Payoff-Maximization-Problem"><a href="#Platform’s-Payoff-Maximization-Problem" class="headerlink" title="Platform’s Payoff Maximization Problem"></a>Platform’s Payoff Maximization Problem</h4><p>平台收益函数：</p>
+<script type="math/tex; mode=display">
+\prod(R)=\beta P_a(R,p,N)-E[R^T]</script><p>$\beta&gt;0$表示平台对准确率分配的权重</p>
+<p><strong>问题2：</strong>平台的收益最大化：</p>
+<p>$max \prod(R)$</p>
+<p>$var. R\geq0$</p>
+<h3 id="Two-Stage-Game"><a href="#Two-Stage-Game" class="headerlink" title="Two-Stage Game"></a>Two-Stage Game</h3><p>阶段1：平台决定R</p>
+<p>阶段2：workers选择努力和上报策略</p>
+<p>博弈求解方法：逆向归纳</p>
+<p>符号表达：</p>
+<p>$X$：任务类型空间</p>
+<p>$x$：任务真实类型</p>
+<p>$x_i^{estimate}$：第$i$个worker的估计值</p>
+<p>$x_i^{report}$：第$i$个worker的上报值</p>
+<p>$x_{-i}^{majority}$：除了第$i$个worker以外，剩下workers的多数投票方案</p>
+<p>$x_p^{estimate}$：平台的聚合估计值</p>
+<p>$s_i\triangleq(e_i,v_i)$：第$i$个worker的策略（努力策略和上报策略）</p>
+<p>$c_i$：第$i$个worker的努力成本</p>
+<p>$l_i$：第$i$个worker的内部奖励</p>
+<p>$p_i$：第$i$个worker努力时的准确率</p>
+<p>$R$：平台的一致性奖励</p>
+<p>$\beta$：平台对聚合准确率的权重</p>
+<p>$E[R^T]$：所有workers一致性奖励的期望</p>
+<h2 id="Incomplete-Information"><a href="#Incomplete-Information" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h2><p>每个worker的准确率只有自己知道，其他workers和平台都不知道。</p>
+<h3 id="Workers’-Decisions-at-Stage-II"><a href="#Workers’-Decisions-at-Stage-II" class="headerlink" title="Workers’ Decisions at Stage II"></a>Workers’ Decisions at Stage II</h3><h4 id="Workers’-Heterogeneity"><a href="#Workers’-Heterogeneity" class="headerlink" title="Workers’ Heterogeneity"></a>Workers’ Heterogeneity</h4><p>workers异构性的体现：</p>
+<ol>
+<li>准确率异构——&gt;$k$个高准确率$p_h$workers，用集合$N_h$表示，$N-k$个低准确率$p_l$，用集合$N_l$表示，$1\leq k\leq N-1,0.5&lt;p_l&lt;p_h\leq 1$，这些参数的数值是公开信息。</li>
+<li>努力时的成本和内在奖励/惩罚相同——&gt;$c_i=c,l_i=l,l&lt;c$</li>
+</ol>
+<h4 id="Workers’-Equilibrium-Behaviors"><a href="#Workers’-Equilibrium-Behaviors" class="headerlink" title="Workers’ Equilibrium Behaviors"></a>Workers’ Equilibrium Behaviors</h4><p>假设：同类型worker（准确率相同）会选择相同的策略</p>
+<p><strong>定义2：</strong>对称纳什均衡（SNE）</p>
+<ol>
+<li>n-SNE：所有workers都不努力和如实报告</li>
+<li>f-SNE：所有workers都努力和如实报告</li>
+<li>p-SNE：高质量workers努力和如实报告，低质量workers则相反</li>
+</ol>
+<p><strong>命题1：</strong>workers之间的SNE</p>
+<ol>
+<li>当$R\geq 0$时一定存在一个n-SNE</li>
+<li>存在一个阈值$R_f\geq 0$，当$R\geq R_f$时，一定存在一个f-SNE</li>
+<li>当$k\geq k_1$时，存在两个阈值$0&lt;R_p^l\leq R_p^h$，使得在$R_p^l\leq R \leq R_p^h$时，一定存在一个p-SNE</li>
+</ol>
+<p>阈值之间的关系取决于$k$的大小：当$k$较小时，$R_f\leq R_p^l$；当$k$较大时，$R_f&gt;R_p^l$。</p>
+<p>由命题1可得：</p>
+<ol>
+<li>对于任意非负一致性奖励$R$，一定存在一个n-SNE，所有workers都没有动机努力和如实报告；努力worker的收益是$\frac{R}{2}+l-c$，不努力worker的收益是$\frac{R}{2}$，由于$l&lt;c$，显然不努力更好。</li>
+<li>当一致性奖励足够大时，存在f-SNE，所有workers都会努力和如实报告。</li>
+<li>workers准确率的异构性允许我们通过机制来使不同准确率的workers采取不同策略，当一致性准确率在合适范围内时，存在p-SNE使得高准确率workers努力且如实报告，而低准确率workers不努力并随机报告。</li>
+</ol>
+<p>各均衡解存在性与参数的关系：</p>
+<ol>
+<li>$k&lt;k_1:$ 高准确率workers很少时，不存在p-SNE。</li>
+<li>$k_1\leq k\leq k_2:$ 高准确率workers人数适量时，存在p-SNE，但平台报酬$R$的下限很高（$R_p^l&gt;R_f$）。</li>
+<li>$k\geq k_2:$ 高准确率workers足够多时，存在p-SNE，且$R_p^l&lt;R_f$。当k很大时，高质量workers在p-SNE得到报酬的概率与在f-SNE得到报酬的概率相近，低质量workers也会被激励选择(1,1)策略。</li>
+</ol>
+<p>帕累托最优均衡解：</p>
+<p><strong>命题2：</strong>给定一致性奖励$R$，一定存在一个帕累托最优均衡解。</p>
+<p>这意味着可以通过调整一致性奖励来引导worker的努力策略和上报策略。</p>
+<p><strong>命题3：</strong>策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。</p>
+<p>这意味着不会出现低质量workers努力而高质量workers随机的场面。对于给定的R，高质量workers有更高的概率拿到奖励。在努力成本不变的前提下，高准确率workers更愿意选择(1,1)的策略。换言之，多数投票方案更能吸引高准确率workers。然而，在完全信息的场景下这一条并不成立。</p>
+<h3 id="Platform’s-Reward-Design-at-Stage-I"><a href="#Platform’s-Reward-Design-at-Stage-I" class="headerlink" title="Platform’s Reward Design at Stage I"></a>Platform’s Reward Design at Stage I</h3><p>$P_f,P_p,P_n:$ workers在三种均衡下的聚合准确率</p>
+<p>$E[R_f^T],E[R_p^T],E[R_n^T]:$ 三种均衡下的总期望一致性奖励</p>
+<p>$\eta_f,\eta_p,\eta_n:$ 三种均衡下的效率（是指一致性奖励的效率）</p>
+<p>效率计算方式：</p>
+<p>$\eta_f=\frac{P_f-P_n}{E[R_f^T]}$</p>
+<p>$\eta_p=\frac{P_p-P_n}{E[R_p^T]}$</p>
+<p>$\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$</p>
+<p>上面这个计算式反过来（也就是$\frac{1}{\eta_f}$）的含义是：对于单位准确率而言，从均衡n-SNE提高到f-SNE所需要支出的平均一致性奖励。$\eta_p$也是类似的含义。</p>
+<p>平台的最优决策R：</p>
+<p><strong>定理1：</strong>给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
+<ol>
+<li>如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：<script type="math/tex; mode=display">
+R^* = 
+\left\{
+\begin{matrix}
+0,\ &if\ \beta<\frac{1}{\eta_p}, \\
+R_p^l,\  &if\ \frac{1}{\eta_p}\leq\beta<\frac{E[R_f^T]-E[R_p^T]}{P_f-P_p}\\
+R_f,\  &if\ \beta \geq \frac{E[R_f^T]-E[R_p^T]}{P_f-P_p};\\
+\end{matrix}
+\right.</script></li>
+</ol>
+<ol>
+<li><p>其他情况下的平台最优一致性奖励为：</p>
+<script type="math/tex; mode=display">
+</script></li>
+</ol>
+<h2 id="Complete-Information-Weighted-Aggregation"><a href="#Complete-Information-Weighted-Aggregation" class="headerlink" title="Complete Information: Weighted Aggregation"></a>Complete Information: Weighted Aggregation</h2><h3 id="Workers’-Decisions"><a href="#Workers’-Decisions" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Reward-Design"><a href="#Platform’s-Reward-Design" class="headerlink" title="Platform’s Reward Design"></a>Platform’s Reward Design</h3><h2 id="Complete-Information-Discriminatory-Reward-Policy"><a href="#Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="Complete Information: Discriminatory Reward Policy"></a>Complete Information: Discriminatory Reward Policy</h2><h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Optimal-Reward-Design"><a href="#Platform’s-Optimal-Reward-Design" class="headerlink" title="Platform’s Optimal Reward Design"></a>Platform’s Optimal Reward Design</h3><h2 id="Numerical-Results"><a href="#Numerical-Results" class="headerlink" title="Numerical Results"></a>Numerical Results</h2><h3 id="Incomplete-Information-1"><a href="#Incomplete-Information-1" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h3><h3 id="Complete-Information"><a href="#Complete-Information" class="headerlink" title="Complete Information"></a>Complete Information</h3><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
+        <tag>Stackelberg game</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>区块链行业总结</title>
+    <url>/2021/04/10/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%A1%8C%E4%B8%9A%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="区块链行业总结"><a href="#区块链行业总结" class="headerlink" title="区块链行业总结"></a>区块链行业总结</h1>]]></content>
+      <categories>
+        <category>slides</category>
+      </categories>
+      <tags>
+        <tag>区块链</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-A Novel Paradigm for Disaster-Response Networks: Framework, Strategy and Solution</title>
     <url>/2021/03/06/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Novel%20Paradigm%20for%20Disaster-Response%20Networks%20Framework,%20Strategy%20and%20Solution/</url>
     <content><![CDATA[<h1 id="灾害应对网络的新范式：框架、策略与解决方案"><a href="#灾害应对网络的新范式：框架、策略与解决方案" class="headerlink" title="灾害应对网络的新范式：框架、策略与解决方案"></a>灾害应对网络的新范式：框架、策略与解决方案</h1><p>这篇是投稿到IEEE Wireless Communications Magazine的论文，现在要写审稿意见。</p>
@@ -5323,11 +5770,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1456" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4208" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1456'));
-
+        var myChart = echarts.init(document.getElementById('echarts4208'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -5394,7 +5841,6 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         }
     ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>]]></content>
@@ -5872,12 +6318,117 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 <li>场景：用户希望同时查询某地点附近的多个兴趣点（例如饭店和KTV都需要）</li>
 <li>和单兴趣点推荐的差别：要综合考虑多个兴趣点的评价和距离以及用户需求，例如吃完饭去KTV这种场景就需要推荐的饭店和KTV近一些</li>
 <li>本文实现的功能：<ol>
-<li>Ranking mode：根据每个兴趣点的评价和兴趣点之间的距离，提供一个按评分排序的列表中的前K个兴趣点组合</li>
-<li>Service area mode：找出一个包含了最多兴趣点的矩形区域</li>
+<li>Ranking mode（排序模式）：根据每个兴趣点的评价和兴趣点之间的距离，提供一个按评分排序的列表中的前K个兴趣点组合</li>
+<li>Service area mode（服务区模式）：找出一个包含了最多兴趣点的矩形区域</li>
+</ol>
+</li>
+<li>挑战性：<ol>
+<li>受限于兴趣点之间的距离，实现”N-in-One”与单纯找N个相互独立的兴趣点并不同；</li>
+<li>服务区模式可能会有木桶效应问题：返回的聚类结果可能因为有一个或多个热门兴趣点被排除。</li>
+</ol>
+</li>
+<li>本文提出：<ol>
+<li>排序模式：基于平面扫描算法，垂直线从右往左扫描兴趣点区域，遇到兴趣点时回溯和已经记录的兴趣点匹配，以查找最优K聚类；为实现回溯过程中的POI匹配，引入“可查看网络”；</li>
+<li>服务区模式：引入“瓶颈值”来描述 POI 的重复使用数，使用计算几何来识别给定大小的矩形，该矩形可以覆盖尽可能多的最佳Q群集，同时减少木桶效应。</li>
+</ol>
+</li>
+<li>本文组织结构：<ol>
+<li>第二部分、第三部分分别介绍排序模式和服务区模式</li>
+<li>第四部分仿真实验</li>
+<li>第五部分相关研究</li>
+<li>第六部分总结</li>
 </ol>
 </li>
 </ol>
-<h2 id="“N-IN-ONE”-LBS-IN-THE-RANKING-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-RANKING-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE RANKING MODE"></a>“N-IN-ONE” LBS IN THE RANKING MODE</h2><h3 id="Metric-to-Evaluate-a-POI-Cluster"><a href="#Metric-to-Evaluate-a-POI-Cluster" class="headerlink" title="Metric to Evaluate a POI Cluster"></a>Metric to Evaluate a POI Cluster</h3><h3 id="Overview-of-Our-Algorithm-for-the-Ranking-Mode"><a href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode" class="headerlink" title="Overview of Our Algorithm for the Ranking Mode"></a>Overview of Our Algorithm for the Ranking Mode</h3><h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><h3 id="Searching-the-Best-K-Results-in-the-Ranking-Mode"><a href="#Searching-the-Best-K-Results-in-the-Ranking-Mode" class="headerlink" title="Searching the Best K Results in the Ranking Mode"></a>Searching the Best K Results in the Ranking Mode</h3><h2 id="“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE SERVICE AREA MODE"></a>“N-IN-ONE” LBS IN THE SERVICE AREA MODE</h2><h2 id="PERFORMANCE-EVALUATION"><a href="#PERFORMANCE-EVALUATION" class="headerlink" title="PERFORMANCE EVALUATION"></a>PERFORMANCE EVALUATION</h2><h3 id="Performance-Evaluation-Based-on-Synthetic-Data"><a href="#Performance-Evaluation-Based-on-Synthetic-Data" class="headerlink" title="Performance Evaluation Based on Synthetic Data"></a>Performance Evaluation Based on Synthetic Data</h3><h3 id="Performance-Evaluation-Based-on-Real-World-Data"><a href="#Performance-Evaluation-Based-on-Real-World-Data" class="headerlink" title="Performance Evaluation Based on Real-World Data"></a>Performance Evaluation Based on Real-World Data</h3><h2 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h2><h2 id="CONCLUSION-AND-FUTURE-WORK"><a href="#CONCLUSION-AND-FUTURE-WORK" class="headerlink" title="CONCLUSION AND FUTURE WORK"></a>CONCLUSION AND FUTURE WORK</h2>]]></content>
+<h2 id="“N-IN-ONE”-LBS-IN-THE-RANKING-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-RANKING-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE RANKING MODE"></a>“N-IN-ONE” LBS IN THE RANKING MODE</h2><h3 id="Metric-to-Evaluate-a-POI-Cluster"><a href="#Metric-to-Evaluate-a-POI-Cluster" class="headerlink" title="Metric to Evaluate a POI Cluster"></a>Metric to Evaluate a POI Cluster</h3><p>POI聚类$\Pi=\{p_1,…,p_N\}$，其中$p_j$是第$j$个兴趣点位置</p>
+<p><strong>定义1</strong>  POI聚类的直径：覆盖该聚类所有兴趣点的最小圆直径</p>
+<p><strong>定义2</strong>  POI聚类的中心：覆盖该聚类所有兴趣点的最小圆圆心</p>
+<p>最小圆问题：直径取决于聚类中距离最远的两点之间的距离上限</p>
+<p><strong>评估函数：</strong></p>
+<script type="math/tex; mode=display">
+R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中，$e_j$是对该聚类内第$j$个兴趣点的评估值，$\alpha_j$是对应的权重；$D(\Pi)$是聚类的直径，体现了聚类的离散程度，$\beta$是对应的权重；$d(\Pi,c)$是当前位置$c$到聚类中心的距离，$\gamma$是对应权重。所有权重由用户自己决定。</p>
+<h3 id="Overview-of-Our-Algorithm-for-the-Ranking-Mode"><a href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode" class="headerlink" title="Overview of Our Algorithm for the Ranking Mode"></a>Overview of Our Algorithm for the Ranking Mode</h3><p>用户兴趣区域内有$n$个POI，集合表示为$\Omega$，$||\Omega||=n$</p>
+<p><strong>算法流程</strong>：</p>
+<ol>
+<li>所有POI根据x坐标升序排列（即标号大的POI出现在右边）</li>
+<li>垂直线从右向左扫描兴趣区域</li>
+<li>当垂直线扫到了某个POI，算法会检查之前找到的POI聚类，并将该POI加到之前的聚类中形成新聚类，聚类中所有元素的POI类型在任何时刻都不同</li>
+<li>基于新聚类，更新最优K结果</li>
+<li>当兴趣区域内的POI都被扫描过时，上述过程结束，最终的最优K结果被推送给用户</li>
+</ol>
+<p><strong>关键问题</strong>：扫描到一个POI时，如何从之前的POI集合中高效识别那些需要被回溯的</p>
+<p><strong>解决方法</strong>：引入可视网络的概念，$N=(\Omega,E)$，$\Omega$是兴趣点集合，E是可视线集合</p>
+<p>可视线：由扫描到的POI及其可视点之一决定。当扫描到某个POI $P_i$时，算法根据其可视线回溯L层邻近POI</p>
+<p>L层邻近POI：可视网络中，比$P_i$扫描得早、且从$P_i$出发可通过最多L个可视线到达的POI</p>
+<p>采用递归方法，整体分为两步：</p>
+<ol>
+<li>构建可视网络</li>
+<li>移动和回溯</li>
+</ol>
+<h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><p>构建可视网络的思路大致是：从右向左扫描点（也就是从最后一个点开始），每扫描到一个点就看它右边是否有没被挡住可以直接相连的点，如果有就连起来，这样一直扫到最左边的点（也就是第一个点），网络就构建好了。</p>
+<p>实际上这个网络扫描的方向并不一定要这样，也可以从左往右。</p>
+<p>时间复杂度的分析和证明省略。</p>
+<h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><ol>
+<li>总共有$n$个兴趣点</li>
+<li>兴趣点异构，总共有$j$个类型</li>
+<li>有$j$个异构兴趣点的聚类的集合记作$G_j$，而$G_1$是有$n$个聚类的集合，其中每个聚类都包含一个兴趣点</li>
+<li>垂直线从第$n-j+1$个点开始扫描，L层邻接POI集合最多有$j$个POI，这也是构建包含j-1个异构兴趣点的聚类的最小兴趣点编号</li>
+<li>整个算法递归地根据$G_{j-1}$计算$G_j$，具体过程如下：<ol>
+<li>每当扫描到一个兴趣点$P_i$时，遍历$G_{j-1}$中的聚类，如果某个聚类属于$P_i$的L层邻接POI集合，则把该聚类加到一个新集合$S_{i,j-1}$中</li>
+<li>第一步中的聚类遍历结束后，遍历得到的集合$S_{i,j-1}$中的聚类，如果$P_i$和这个聚类异构，则把$P_i$和这个聚类组成的集合加到集合$G_j$中</li>
+<li>继续用同样的思路扫描兴趣点$P_{i-1}$，这样循环直到$P_1$被扫描完</li>
+<li>最终得到$G_j$作为异构兴趣点聚类</li>
+</ol>
+</li>
+</ol>
+<p>复杂度分析省略。</p>
+<h3 id="Searching-the-Best-K-Results-in-the-Ranking-Mode"><a href="#Searching-the-Best-K-Results-in-the-Ranking-Mode" class="headerlink" title="Searching the Best K Results in the Ranking Mode"></a>Searching the Best K Results in the Ranking Mode</h3><p>算法1构建可视网络得到的可视线记作$E$；算法2寻找异构兴趣点聚类的集合记作$G_{N-1}$（它包括所有具有N-1个异构兴趣点的聚类）；兴趣点$P_i$的L层邻接兴趣点记作$L_i$。</p>
+<ol>
+<li>从第$i=n-N+1$个兴趣点开始，从右向左扫描所有兴趣点</li>
+<li>遍历$G_{N-1}$中的聚类，如果聚类属于$L_i$，则把聚类加到一个新集合$S_{i,N-1}$中</li>
+<li>遍历新集合$S_{i,N-1}$中的聚类，如果$P_i$和聚类异构，则把$P_i$和这个聚类组成的集合插入到列表B中，插入顺序按聚类的评价降序</li>
+<li>如果列表B中的元素个数大于K，则删去最后一个元素</li>
+<li>继续扫描第$i-1$个兴趣点，执行相同的操作，直到扫描到$P_1$</li>
+</ol>
+<p>复杂度分析省略。</p>
+<h2 id="“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE SERVICE AREA MODE"></a>“N-IN-ONE” LBS IN THE SERVICE AREA MODE</h2><p>服务区：给定长宽的矩形区域，该区域内的兴趣点密度最大，且所有兴趣点都属于最优Q聚类</p>
+<p>矩形区域的权重受三个因素影响：</p>
+<ol>
+<li>矩形覆盖的最优兴趣点聚类个数</li>
+<li>矩形内的兴趣点聚类评分</li>
+<li>兴趣点聚类的分布</li>
+</ol>
+<p><strong>定义3.1</strong>  如果一个兴趣点聚类$\Pi$的中心在某区域$\Gamma$内，则称该聚类在该区域内。</p>
+<p>就此将聚类视作其中心点，将该问题转变为<code>maximizing range sum</code>（最大子序列？）</p>
+<p>当一个兴趣点属于多个聚类时，我们称它被多个聚类复用了。这种情况如果该兴趣点不可用，则会导致区域内大量聚类都不可用，这不好。</p>
+<p><strong>定义3.2</strong>  一个矩形区域内聚类集合的瓶颈值$B$是指，该区域内被复用次数最多的兴趣点所对应的复用次数。</p>
+<p><strong>定义3.3</strong>  矩形的权重由该区域内聚类的评分和该区域的瓶颈值决定，计算公式如下：</p>
+<script type="math/tex; mode=display">
+W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$和$\eta$都是常数系数。</p>
+<p>找服务区的算法流程：</p>
+<p>复杂度分析省略。</p>
+<h2 id="PERFORMANCE-EVALUATION"><a href="#PERFORMANCE-EVALUATION" class="headerlink" title="PERFORMANCE EVALUATION"></a>PERFORMANCE EVALUATION</h2><h3 id="Performance-Evaluation-Based-on-Synthetic-Data"><a href="#Performance-Evaluation-Based-on-Synthetic-Data" class="headerlink" title="Performance Evaluation Based on Synthetic Data"></a>Performance Evaluation Based on Synthetic Data</h3><h3 id="Performance-Evaluation-Based-on-Real-World-Data"><a href="#Performance-Evaluation-Based-on-Real-World-Data" class="headerlink" title="Performance Evaluation Based on Real-World Data"></a>Performance Evaluation Based on Real-World Data</h3><p>实验部分不看了，省略。</p>
+<h2 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h2><p>当前LBS领域的热点研究：基于位置信息的推荐系统，尤其是兴趣点推荐</p>
+<ol>
+<li>潜在Dirichlet分配（LDA）</li>
+<li>朴素贝叶斯</li>
+<li>地理概率分析框架，策略性地考虑多个因素</li>
+<li>动态聚类算法识别运动轨迹</li>
+</ol>
+<p>路线推荐同样热门</p>
+<ol>
+<li>分析用户交通路线来得到两地之间最受欢迎的路线</li>
+<li>基于集体知识的路线推荐框架</li>
+<li>候选-生成-验证策略得到K近邻轨迹</li>
+<li>KNN+更多因素的分析</li>
+<li>LIT前缀挖掘算法</li>
+<li>网络优化问题</li>
+<li>轨迹大数据</li>
+</ol>
+<p>本文和上述内容的共同点：给用户返回多个POI</p>
+<p>不同点：本文侧重查询，是LBS的基础服务；上述侧重推荐，是LBS的衍生服务</p>
+<p>本文的创新性：现有LBS的基础服务不涉及多POI查询，本文针对基础服务进行了改进</p>
+<h2 id="CONCLUSION-AND-FUTURE-WORK"><a href="#CONCLUSION-AND-FUTURE-WORK" class="headerlink" title="CONCLUSION AND FUTURE WORK"></a>CONCLUSION AND FUTURE WORK</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
