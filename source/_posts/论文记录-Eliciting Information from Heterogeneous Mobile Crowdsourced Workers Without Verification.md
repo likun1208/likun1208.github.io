@@ -64,11 +64,11 @@ description: 众包中的多数投票--探索众包工人异构性对激励机�
 
 ### Information Elicitation
 
-
+略
 
 ### Information Aggregation
 
-
+略
 
 ## Model
 
@@ -157,7 +157,7 @@ worker的收益函数：$u_i(R,s)=R*P_i(R,p,s)+v_il_i-e_ic_i$
 
 2. $S$：第$i$个worker的策略空间为$s_i\in S_i=\{(0,rd),(1,1),(1,-1)\}$。所有workers的策略记作$s=(s_i,\forall i\in N)$，所有workers的可行策略集合记作$S=\prod_{i\in N}S_i$。
 
-   <!--这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。-->
+   *这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。*
 
 3. $u$：向量$u=(u_i,\forall i \in N)$包含了所有workers的收益
 
@@ -333,18 +333,66 @@ $\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$
    \right.
    $$
    
-
 2. 其他情况下的平台最优一致性奖励为：
    $$
-   
+   R^*=
+   \left \{
+   \begin{matrix}
+   0,&\ if\ \beta<1/\eta_f,\\
+   R_f,&\ if\ \beta\geq1/\eta_f.
+   \end{matrix}
+   \right.
    $$
-   
+
+![image-20210507094050695](https://i.loli.net/2021/05/07/E2af8LhbsgiKpUC.png)
+
+![image-20210507094124550](https://i.loli.net/2021/05/07/2PdRjKWyF7prVfT.png)
+
+分析**定理1**可得：
+
+1. 当p-SNE存在，且效率高于f-SNE，对应图4中的$k>k^{THR}$区域，平台会根据$\beta$来引导均衡从而最大化收益。当$\beta$较小时，由于较低的准确率评价，平台不会提供任何激励，R=0，从而n-SNE是帕累托最优，对应图3中$k>k^{THR}$区域中下面的白色部分。当$\beta$合适时，即图3中的蓝色区域，平台会选择$R=R_p^l$从而得到p-SNE。当$\beta$很大时，即图3中的灰色区域，平台会选择$R=R_f$，得到f-SNE，同时在一致性奖励方面支出很大。
+2. 当p-SNE不存在，或其效率低于f-SNE，对应图4中的$k<k^{THR}$区域，类似前面的分析，$\beta$较小时，是n-SNE；反之则是p-SNE。
 
 ## Complete Information: Weighted Aggregation
 
+每个worker的准确率$p_i$是公开信息
+
 ### Workers' Decisions
 
+这一步和前面的**博弈1**、**命题1**一样。
+
 ### Platform's Reward Design
+
+平台使用加权多数规则（weighted majority rule）来决定最终的聚合准确率：
+$$
+x_p^{estimate}=
+\left\{
+\begin{matrix}
+1,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}>0\\
+-1,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}<0\\
+1\ or\ -1\ with\ equal\ prob.,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}=0
+\end{matrix}
+\right.
+$$
+其中，
+$$
+w_i(p_i,s_i)=log\frac{\rho(p_i,s_i)}{1-\rho(p_i,s_i)}, \\
+\rho(p_i,s_i)=
+\left\{
+\begin{matrix}
+0.5,\ &if\ s_i=(0,rd), \\
+p_i,\ &if\ s_i=(1,1), \\
+1-p_i,\ &if\ s_i=(1,-1).
+\end{matrix}
+\right.
+$$
+
+权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。
+
+第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：
+
+1. 在f-SNE时（所有workers都选择`(1,1)`策略），高质量workers有更高权重，
+
 
 ## Complete Information: Discriminatory Reward Policy
 
