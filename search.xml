@@ -49,11 +49,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts1983" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1792" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1983'));
+        var myChart = echarts.init(document.getElementById('echarts1792'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -109,11 +109,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3591" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5350" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3591'));
+        var myChart = echarts.init(document.getElementById('echarts5350'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -163,11 +163,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2930" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts183" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2930'));
+        var myChart = echarts.init(document.getElementById('echarts183'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -269,7 +269,9 @@ title: {
 <li>刻画了workers异构性对平台均衡的影响</li>
 <li>刻画了得知workers异构性的价值</li>
 </ol>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Information-Elicitation"><a href="#Information-Elicitation" class="headerlink" title="Information Elicitation"></a>Information Elicitation</h3><h3 id="Information-Aggregation"><a href="#Information-Aggregation" class="headerlink" title="Information Aggregation"></a>Information Aggregation</h3><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Workers’-Decision-Problem"><a href="#Workers’-Decision-Problem" class="headerlink" title="Workers’ Decision Problem"></a>Workers’ Decision Problem</h3><h4 id="Workers-and-Task"><a href="#Workers-and-Task" class="headerlink" title="Workers and Task"></a>Workers and Task</h4><p>集合：$N=\{1,2,…,N\}$表示到达平台的workers</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Information-Elicitation"><a href="#Information-Elicitation" class="headerlink" title="Information Elicitation"></a>Information Elicitation</h3><p>略</p>
+<h3 id="Information-Aggregation"><a href="#Information-Aggregation" class="headerlink" title="Information Aggregation"></a>Information Aggregation</h3><p>略</p>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Workers’-Decision-Problem"><a href="#Workers’-Decision-Problem" class="headerlink" title="Workers’ Decision Problem"></a>Workers’ Decision Problem</h3><h4 id="Workers-and-Task"><a href="#Workers-and-Task" class="headerlink" title="Workers and Task"></a>Workers and Task</h4><p>集合：$N=\{1,2,…,N\}$表示到达平台的workers</p>
 <p>待求解问题的答案是二选一，记作$X=\{-1,1\}$</p>
 <p>$x\in X$表示该任务的正确答案</p>
 <p>$x_i^{estimate}\in X$表示第$i$个worker对任务答案的估计值</p>
@@ -317,7 +319,7 @@ tie,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}=0.
 <li><p>$N$：N个workers的集合</p>
 </li>
 <li><p>$S$：第$i$个worker的策略空间为$s_i\in S_i=\{(0,rd),(1,1),(1,-1)\}$。所有workers的策略记作$s=(s_i,\forall i\in N)$，所有workers的可行策略集合记作$S=\prod_{i\in N}S_i$。</p>
-<!--这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。-->
+<p><em>这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。</em></p>
 </li>
 <li><p>$u$：向量$u=(u_i,\forall i \in N)$包含了所有workers的收益</p>
 </li>
@@ -411,7 +413,8 @@ x_p^{estimate}=
 <p>平台的最优决策R：</p>
 <p><strong>定理1：</strong>给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
 <ol>
-<li>如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：<script type="math/tex; mode=display">
+<li><p>如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：</p>
+<script type="math/tex; mode=display">
 R^* = 
 \left\{
 \begin{matrix}
@@ -420,19 +423,56 @@ R_p^l,\  &if\ \frac{1}{\eta_p}\leq\beta<\frac{E[R_f^T]-E[R_p^T]}{P_f-P_p}\\
 R_f,\  &if\ \beta \geq \frac{E[R_f^T]-E[R_p^T]}{P_f-P_p};\\
 \end{matrix}
 \right.</script></li>
-</ol>
-<ol>
 <li><p>其他情况下的平台最优一致性奖励为：</p>
 <script type="math/tex; mode=display">
-</script></li>
+R^*=
+\left \{
+\begin{matrix}
+0,&\ if\ \beta<1/\eta_f,\\
+R_f,&\ if\ \beta\geq1/\eta_f.
+\end{matrix}
+\right.</script></li>
 </ol>
-<h2 id="Complete-Information-Weighted-Aggregation"><a href="#Complete-Information-Weighted-Aggregation" class="headerlink" title="Complete Information: Weighted Aggregation"></a>Complete Information: Weighted Aggregation</h2><h3 id="Workers’-Decisions"><a href="#Workers’-Decisions" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Reward-Design"><a href="#Platform’s-Reward-Design" class="headerlink" title="Platform’s Reward Design"></a>Platform’s Reward Design</h3><h2 id="Complete-Information-Discriminatory-Reward-Policy"><a href="#Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="Complete Information: Discriminatory Reward Policy"></a>Complete Information: Discriminatory Reward Policy</h2><h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Optimal-Reward-Design"><a href="#Platform’s-Optimal-Reward-Design" class="headerlink" title="Platform’s Optimal Reward Design"></a>Platform’s Optimal Reward Design</h3><h2 id="Numerical-Results"><a href="#Numerical-Results" class="headerlink" title="Numerical Results"></a>Numerical Results</h2><h3 id="Incomplete-Information-1"><a href="#Incomplete-Information-1" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h3><h3 id="Complete-Information"><a href="#Complete-Information" class="headerlink" title="Complete Information"></a>Complete Information</h3><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+<p><img src="https://i.loli.net/2021/05/07/E2af8LhbsgiKpUC.png" alt="image-20210507094050695"></p>
+<p><img src="https://i.loli.net/2021/05/07/2PdRjKWyF7prVfT.png" alt="image-20210507094124550"></p>
+<p>分析<strong>定理1</strong>可得：</p>
+<ol>
+<li>当p-SNE存在，且效率高于f-SNE，对应图4中的$k&gt;k^{THR}$区域，平台会根据$\beta$来引导均衡从而最大化收益。当$\beta$较小时，由于较低的准确率评价，平台不会提供任何激励，R=0，从而n-SNE是帕累托最优，对应图3中$k&gt;k^{THR}$区域中下面的白色部分。当$\beta$合适时，即图3中的蓝色区域，平台会选择$R=R_p^l$从而得到p-SNE。当$\beta$很大时，即图3中的灰色区域，平台会选择$R=R_f$，得到f-SNE，同时在一致性奖励方面支出很大。</li>
+<li>当p-SNE不存在，或其效率低于f-SNE，对应图4中的$k&lt;k^{THR}$区域，类似前面的分析，$\beta$较小时，是n-SNE；反之则是p-SNE。</li>
+</ol>
+<h2 id="Complete-Information-Weighted-Aggregation"><a href="#Complete-Information-Weighted-Aggregation" class="headerlink" title="Complete Information: Weighted Aggregation"></a>Complete Information: Weighted Aggregation</h2><p>每个worker的准确率$p_i$是公开信息</p>
+<h3 id="Workers’-Decisions"><a href="#Workers’-Decisions" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p>这一步和前面的<strong>博弈1</strong>、<strong>命题1</strong>一样。</p>
+<h3 id="Platform’s-Reward-Design"><a href="#Platform’s-Reward-Design" class="headerlink" title="Platform’s Reward Design"></a>Platform’s Reward Design</h3><p>平台使用加权多数规则（weighted majority rule）来决定最终的聚合准确率：</p>
+<script type="math/tex; mode=display">
+x_p^{estimate}=
+\left\{
+\begin{matrix}
+1,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}>0\\
+-1,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}<0\\
+1\ or\ -1\ with\ equal\ prob.,\ &if\ \sum_{i=1}^Nw_i(p_i,s_i)x_i^{report}=0
+\end{matrix}
+\right.</script><p>其中，</p>
+<script type="math/tex; mode=display">
+w_i(p_i,s_i)=log\frac{\rho(p_i,s_i)}{1-\rho(p_i,s_i)}, \\
+\rho(p_i,s_i)=
+\left\{
+\begin{matrix}
+0.5,\ &if\ s_i=(0,rd), \\
+p_i,\ &if\ s_i=(1,1), \\
+1-p_i,\ &if\ s_i=(1,-1).
+\end{matrix}
+\right.</script><p>权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。</p>
+<p>第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
+<ol>
+<li>在f-SNE时（所有workers都选择<code>(1,1)</code>策略），高质量workers有更高权重，</li>
+</ol>
+<h2 id="Complete-Information-Discriminatory-Reward-Policy"><a href="#Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="Complete Information: Discriminatory Reward Policy"></a>Complete Information: Discriminatory Reward Policy</h2><h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Optimal-Reward-Design"><a href="#Platform’s-Optimal-Reward-Design" class="headerlink" title="Platform’s Optimal Reward Design"></a>Platform’s Optimal Reward Design</h3><h2 id="Numerical-Results"><a href="#Numerical-Results" class="headerlink" title="Numerical Results"></a>Numerical Results</h2><h3 id="Incomplete-Information-1"><a href="#Incomplete-Information-1" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h3><h3 id="Complete-Information"><a href="#Complete-Information" class="headerlink" title="Complete Information"></a>Complete Information</h3><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
         <tag>Stackelberg game</tag>
       </tags>
   </entry>
@@ -3067,8 +3107,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
       </tags>
   </entry>
   <entry>
@@ -5770,11 +5810,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4208" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9909" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4208'));
+        var myChart = echarts.init(document.getElementById('echarts9909'));
         // 指定图表的配置项和数据
         var option = {
     title: {
