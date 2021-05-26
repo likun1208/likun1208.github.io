@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing</title>
+    <url>/2021/05/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Online%20Organizing%20Large-scale%20Heterogeneous%20Tasks%20and%20Multi-skilled%20Participants%20in%20Mobile%20Crowdsensing/</url>
+    <content><![CDATA[<h1 id="Online-Organizing-Large-scale-Heterogeneous-Tasks-and-Multi-skilled-Participants-in-Mobile-Crowdsensing"><a href="#Online-Organizing-Large-scale-Heterogeneous-Tasks-and-Multi-skilled-Participants-in-Mobile-Crowdsensing" class="headerlink" title="Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing"></a>Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing</h1><p>是TMC的审稿。</p>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>目的：在线收集大规模异构任务和多技能参与者</p>
+<p>方法：层次树和时间序列</p>
+<p>内容：计算模式、树的创建方法和任务分配策略</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>场景：多技能参与者的在线众包平台上实时分配大规模异构任务</p>
+<p>面临的问题：</p>
+<ol>
+<li>丰富的技能类型。技能类型太多，甚至需要一些领域的专业知识才能合理分类，平台应该如何处理。</li>
+<li>不规则的任务时空要求。</li>
+<li>多任务时空重叠。针对相同内容的任务，平台可以去除冗余；不同内容的任务，平台分给同一个workers可以减少其移动成本。</li>
+<li>参与者和任务的动态性。任务和参与者随时到达或者离开平台。考虑参与者接了任务却没完成就离线的情况。任务一旦被分配了就不能被删除。</li>
+<li>多技能参与者。</li>
+<li>参与感知和机会感知。两种类型的参与者都应该能参与进来。</li>
+<li>点推荐和轨迹推荐。两种任务推荐算法共存。</li>
+</ol>
+<p>现有文献主要在线多任务分配问题的不同方面提出了具体解决方案：</p>
+<ol>
+<li>针对即时任务分配问题，提出了基于贪婪的任务分配算法</li>
+<li>针对时空异构任务分配，提出了分布式参与者选择框架</li>
+<li>在任务动态异构的场景，考虑任务成本和能力等约束，选择能满足任务需求的最少数量的参与者</li>
+<li>自组织移动众包框架，任务提供者可以主动、实时地向周围的移动参与者发布任务，从而快速获取高质量的传感数据。</li>
+<li>两阶段任务分配框架，将机会感知和参与感知的优势结合起来。</li>
+<li>多时空约束（包括任务位置、时间窗口、参与者轨迹等）的任务分配问题</li>
+<li>不同预算的多任务，满足信息质量需求，考虑不同参与者的激励需求、传感能力和移动性。</li>
+</ol>
+<p>上述解决方案的问题：没能同时解决这些问题</p>
+<p>存在这一问题的原因：数据结构过于简单</p>
+<p>本文方案：</p>
+<ol>
+<li>原子化时间和空间——处理不规则时空问题，简化多任务时空重叠问题</li>
+<li>将异构任务划分为原子任务，使用层次树进行组织——包括技能层、时间层、空间层和原子化任务层（叶节点），技能是需求驱动的，并不提前列出所有技能。技能层、时间层和空间层是可扩展、自适应的。</li>
+<li>使用时间序列组织动态参与者，将空间、时间和技能约束等封装，根据时间限制加入队列，参与感知和机会感知都可以，点推荐和轨迹推荐共存。</li>
+<li>综合上述，得到在线大规模异构任务分配算法。</li>
+</ol>
+<p>本文贡献：</p>
+<ol>
+<li>第一个研究这个的</li>
+<li>两个数据结构结合</li>
+<li>实验表明了有效性</li>
+</ol>
+<p>本文组织结构：略</p>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><h2 id="3-Methodology"><a href="#3-Methodology" class="headerlink" title="3. Methodology"></a>3. Methodology</h2><h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4. Evaluation"></a>4. Evaluation</h2><h2 id="5-Conclusion-and-future-work"><a href="#5-Conclusion-and-future-work" class="headerlink" title="5. Conclusion and future work"></a>5. Conclusion and future work</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+        <tag>审稿意见</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Github项目数据统计</title>
     <url>/2021/04/30/Github%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</url>
     <content><![CDATA[<h1 id="Github项目数据统计"><a href="#Github项目数据统计" class="headerlink" title="Github项目数据统计"></a>Github项目数据统计</h1><p>​      由于需要统计Dapp项目的发展历程数据，在查资料时看到了<a href="https://zhuanlan.zhihu.com/p/32759663" target="_blank" rel="noopener">以太坊 Dapp 调研</a>，这份统计只包含了2017年12月20日及之前的数据，而现在已经是2021年了，因此我模仿这个进行了新的统计。</p>
@@ -49,11 +103,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts1792" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7728" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1792'));
+        var myChart = echarts.init(document.getElementById('echarts7728'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -109,11 +163,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5350" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3527" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5350'));
+        var myChart = echarts.init(document.getElementById('echarts3527'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -163,11 +217,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts183" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9102" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts183'));
+        var myChart = echarts.init(document.getElementById('echarts9102'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -240,7 +294,7 @@ title: {
 <p>常规方法：多数投票——符合多数解决方案的workers获得报酬</p>
 <p>存在问题：未考虑workers的异构性</p>
 <p>本文方法：两阶段Stackelberg博弈</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文场景：</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>本文场景：</p>
 <ol>
 <li>workers求解准确率异构（即，不同workers以不同概率生成高质量数据）</li>
 <li>考虑数据质量与平台成本之间的平衡</li>
@@ -269,9 +323,9 @@ title: {
 <li>刻画了workers异构性对平台均衡的影响</li>
 <li>刻画了得知workers异构性的价值</li>
 </ol>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Information-Elicitation"><a href="#Information-Elicitation" class="headerlink" title="Information Elicitation"></a>Information Elicitation</h3><p>略</p>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><h3 id="Information-Elicitation"><a href="#Information-Elicitation" class="headerlink" title="Information Elicitation"></a>Information Elicitation</h3><p>略</p>
 <h3 id="Information-Aggregation"><a href="#Information-Aggregation" class="headerlink" title="Information Aggregation"></a>Information Aggregation</h3><p>略</p>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Workers’-Decision-Problem"><a href="#Workers’-Decision-Problem" class="headerlink" title="Workers’ Decision Problem"></a>Workers’ Decision Problem</h3><h4 id="Workers-and-Task"><a href="#Workers-and-Task" class="headerlink" title="Workers and Task"></a>Workers and Task</h4><p>集合：$N=\{1,2,…,N\}$表示到达平台的workers</p>
+<h2 id="3-Model"><a href="#3-Model" class="headerlink" title="3. Model"></a>3. Model</h2><h3 id="Workers’-Decision-Problem"><a href="#Workers’-Decision-Problem" class="headerlink" title="Workers’ Decision Problem"></a>Workers’ Decision Problem</h3><h4 id="Workers-and-Task"><a href="#Workers-and-Task" class="headerlink" title="Workers and Task"></a>Workers and Task</h4><p>集合：$N=\{1,2,…,N\}$表示到达平台的workers</p>
 <p>待求解问题的答案是二选一，记作$X=\{-1,1\}$</p>
 <p>$x\in X$表示该任务的正确答案</p>
 <p>$x_i^{estimate}\in X$表示第$i$个worker对任务答案的估计值</p>
@@ -365,7 +419,7 @@ x_p^{estimate}=
 <p>$R$：平台的一致性奖励</p>
 <p>$\beta$：平台对聚合准确率的权重</p>
 <p>$E[R^T]$：所有workers一致性奖励的期望</p>
-<h2 id="Incomplete-Information"><a href="#Incomplete-Information" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h2><p>每个worker的准确率只有自己知道，其他workers和平台都不知道。</p>
+<h2 id="4-Incomplete-Information"><a href="#4-Incomplete-Information" class="headerlink" title="4. Incomplete Information"></a>4. Incomplete Information</h2><p>每个worker的准确率只有自己知道，其他workers和平台都不知道。</p>
 <h3 id="Workers’-Decisions-at-Stage-II"><a href="#Workers’-Decisions-at-Stage-II" class="headerlink" title="Workers’ Decisions at Stage II"></a>Workers’ Decisions at Stage II</h3><h4 id="Workers’-Heterogeneity"><a href="#Workers’-Heterogeneity" class="headerlink" title="Workers’ Heterogeneity"></a>Workers’ Heterogeneity</h4><p>workers异构性的体现：</p>
 <ol>
 <li>准确率异构——&gt;$k$个高准确率$p_h$workers，用集合$N_h$表示，$N-k$个低准确率$p_l$，用集合$N_l$表示，$1\leq k\leq N-1,0.5&lt;p_l&lt;p_h\leq 1$，这些参数的数值是公开信息。</li>
@@ -440,7 +494,7 @@ R_f,&\ if\ \beta\geq1/\eta_f.
 <li>当p-SNE存在，且效率高于f-SNE，对应图4中的$k&gt;k^{THR}$区域，平台会根据$\beta$来引导均衡从而最大化收益。当$\beta$较小时，由于较低的准确率评价，平台不会提供任何激励，R=0，从而n-SNE是帕累托最优，对应图3中$k&gt;k^{THR}$区域中下面的白色部分。当$\beta$合适时，即图3中的蓝色区域，平台会选择$R=R_p^l$从而得到p-SNE。当$\beta$很大时，即图3中的灰色区域，平台会选择$R=R_f$，得到f-SNE，同时在一致性奖励方面支出很大。</li>
 <li>当p-SNE不存在，或其效率低于f-SNE，对应图4中的$k&lt;k^{THR}$区域，类似前面的分析，$\beta$较小时，是n-SNE；反之则是p-SNE。</li>
 </ol>
-<h2 id="Complete-Information-Weighted-Aggregation"><a href="#Complete-Information-Weighted-Aggregation" class="headerlink" title="Complete Information: Weighted Aggregation"></a>Complete Information: Weighted Aggregation</h2><p>每个worker的准确率$p_i$是公开信息</p>
+<h2 id="5-Complete-Information-Weighted-Aggregation"><a href="#5-Complete-Information-Weighted-Aggregation" class="headerlink" title="5. Complete Information: Weighted Aggregation"></a>5. Complete Information: Weighted Aggregation</h2><p>每个worker的准确率$p_i$是公开信息</p>
 <h3 id="Workers’-Decisions"><a href="#Workers’-Decisions" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p>这一步和前面的<strong>博弈1</strong>、<strong>命题1</strong>一样。</p>
 <h3 id="Platform’s-Reward-Design"><a href="#Platform’s-Reward-Design" class="headerlink" title="Platform’s Reward Design"></a>Platform’s Reward Design</h3><p>平台使用加权多数规则（weighted majority rule）来决定最终的聚合准确率：</p>
 <script type="math/tex; mode=display">
@@ -464,9 +518,43 @@ p_i,\ &if\ s_i=(1,1), \\
 \right.</script><p>权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。</p>
 <p>第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
 <ol>
-<li>在f-SNE时（所有workers都选择<code>(1,1)</code>策略），高质量workers有更高权重，</li>
+<li>在f-SNE时（所有workers都选择<code>(1,1)</code>策略），高质量workers有更高权重，高低质量的权重都是正数；</li>
+<li>在p-SNE时（高质量workers采取<code>(1,1)</code>而低质量workers采取<code>(0,rd)</code>），高质量workers权重为正数，低质量workers权重为0；</li>
+<li>在n-SNE时（所有workers都选择<code>(0,rd)</code>策略），大家权重都是0，平台随机得到最终答案。</li>
 </ol>
-<h2 id="Complete-Information-Discriminatory-Reward-Policy"><a href="#Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="Complete Information: Discriminatory Reward Policy"></a>Complete Information: Discriminatory Reward Policy</h2><h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><h3 id="Platform’s-Optimal-Reward-Design"><a href="#Platform’s-Optimal-Reward-Design" class="headerlink" title="Platform’s Optimal Reward Design"></a>Platform’s Optimal Reward Design</h3><h2 id="Numerical-Results"><a href="#Numerical-Results" class="headerlink" title="Numerical Results"></a>Numerical Results</h2><h3 id="Incomplete-Information-1"><a href="#Incomplete-Information-1" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h3><h3 id="Complete-Information"><a href="#Complete-Information" class="headerlink" title="Complete Information"></a>Complete Information</h3><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+<p>数字符号定义如下：</p>
+<ol>
+<li>$P_f^{wm},P_p^{wm},P_n^{wm}$分别表示在加权多数规则情况下，f-SNE、p-SNE和f-SNE对应的聚合准确率；</li>
+<li>$\eta_f^{wm},\eta_p^{wm},\eta_n^{wm}$分别表示在加权多数规则情况下，f-SNE、p-SNE和f-SNE对应的效率。</li>
+</ol>
+<p>计算方式：</p>
+<p>$\eta_f^{wm}=(P_f^{wm}-P_n^{wm})/E[R_f^T]$</p>
+<p>$\eta_p^{wm}=(P_p^{wm}-P_n^{wm})/E[R_p^T]$</p>
+<p>$\eta_n^{wm}=(P_n^{wm}-P_n^{wm})/E[R_n^T]=0$</p>
+<p>workers的均衡解行为和不完全信息一致，每种均衡对应的总一致性奖励（$E[R_f^T],E[R_p^T],E[R_n^T]$）也一致。</p>
+<p><strong>命题4：</strong>给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$</p>
+<p><strong>证明：</strong>在p-SNE，低准确率workers采取<code>(0,rd)</code>，高准确率workers采取<code>(1,1)</code>，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取<code>(1,1)</code>，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。</p>
+<p><em>补充：这个证明没看懂，个人对命题4的理解是说，两个均衡解共存时，f-SNE是所有workers都努力并如实报告，p-SNE是只有高质量workers努力并如实报告，显然f-SNE多了低质量workers努力贡献的准确率，因此总的准确率会更高。</em></p>
+<p>由此，可以刻画平台的最优决策，和<strong>定理1</strong>一样，只有符号表达替换了。</p>
+<p><img src="https://i.loli.net/2021/05/18/1Rf8TAgeHwkzsEn.png" alt="image-20210518162745417"></p>
+<p>图5是新的均衡图解。蓝色区域更大了，也就是说在完全信息的场景下，平台更可能只让高质量workers努力和正确上报。</p>
+<p><strong>定理2：</strong>令$\prod^{inc<em>}$和$\prod^{com</em>}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com<em>}\geq \prod^{inc</em>}$。</p>
+<h2 id="6-Complete-Information-Discriminatory-Reward-Policy"><a href="#6-Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="6. Complete Information: Discriminatory Reward Policy"></a>6. Complete Information: Discriminatory Reward Policy</h2><p>第5章中，平台给不同准确率的workers相同的奖励；本章中则采取有差别的奖励策略，即便是和多数一致方案相同，也会因为准确率不同而得到不同的奖励：低准确率得到的奖励是$R_{low}$，高准确率得到的奖励是$R_{high}$。</p>
+<h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p><strong>命题5：</strong>workers的SNE是</p>
+<ol>
+<li>$R_{low}$和$R_{high}$都大于等于0时，$s_i^*=(0,rd),\forall i$是一个SNE；</li>
+<li>存在两个阈值$R_f^l$和$R_f^h$均大于0，使得当$R_{low}\geq R_f^l$且$R_{high}\geq R_f^h$时，$s_i^*=(1,1),\forall i$是一个SNE；</li>
+<li>存在两个阈值$R_p^l$和$R_p^h$均大于0，使得当$R_{low}\leq R_p^l$且$R_{high}\geq R_p^h$时，高质量workers采取$(1,1)$而低质量workers采取$(0,rd)$是SNE；</li>
+<li>存在两个阈值$R_{pl}^l$和$R_{pl}^h$均大于0，使得当$R_{low}\geq R_{pl}^l$且$R_{high}\leq R_{ph}^h$时，低质量workers采取$(1,1)$而高质量workers采取$(0,rd)$是SNE。</li>
+</ol>
+<h3 id="Platform’s-Optimal-Reward-Design"><a href="#Platform’s-Optimal-Reward-Design" class="headerlink" title="Platform’s Optimal Reward Design"></a>Platform’s Optimal Reward Design</h3><p><strong>定理3：</strong></p>
+<ol>
+<li>使用$\prod_{UP}^{com<em>}$和$\prod_{DP}^{com</em>}$表示平台在均等奖励和差分奖励的情况下的最优支出，则有：$\prod_{DP}^{com<em>}\geq\prod_{UP}^{com</em>}$</li>
+<li>存在阈值$\bar{\beta}$，使得当$\beta\geq \bar{\beta}$时，如果UP的最优SNE是n-SNE，且DP的最优SNE不是f-SNE、p-SNE或者pl-SNE，则DP的社会财富比UP高。</li>
+</ol>
+<p>定理3说明从平台来看，采取差分奖励策略会带来不比均等奖励策略糟糕的支出和社会财富。DP并不一定会损害社会财富，反而会带来双赢的场面。</p>
+<h2 id="7-Numerical-Results"><a href="#7-Numerical-Results" class="headerlink" title="7. Numerical Results"></a>7. Numerical Results</h2><p>分析高质量workers的数量$k$和高质量workers准确率$p_h$对平台与workers收益的影响。</p>
+<h3 id="Incomplete-Information"><a href="#Incomplete-Information" class="headerlink" title="Incomplete Information"></a>Incomplete Information</h3><h3 id="Complete-Information"><a href="#Complete-Information" class="headerlink" title="Complete Information"></a>Complete Information</h3><h2 id="8-Conclusion"><a href="#8-Conclusion" class="headerlink" title="8. Conclusion"></a>8. Conclusion</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -5810,11 +5898,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts9909" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2508" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9909'));
+        var myChart = echarts.init(document.getElementById('echarts2508'));
         // 指定图表的配置项和数据
         var option = {
     title: {
