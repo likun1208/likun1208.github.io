@@ -27,7 +27,7 @@ description: 众包中的多数投票--探索众包工人异构性对激励机�
 
 本文方法：两阶段Stackelberg博弈
 
-## Introduction
+## 1. Introduction
 
 本文场景：
 
@@ -60,7 +60,7 @@ description: 众包中的多数投票--探索众包工人异构性对激励机�
 4. 刻画了workers异构性对平台均衡的影响
 5. 刻画了得知workers异构性的价值
 
-## Related Work
+## 2. Related Work
 
 ### Information Elicitation
 
@@ -70,7 +70,7 @@ description: 众包中的多数投票--探索众包工人异构性对激励机�
 
 略
 
-## Model
+## 3. Model
 
 ### Workers' Decision Problem
 
@@ -246,7 +246,7 @@ $\beta$：平台对聚合准确率的权重
 
 $E[R^T]$：所有workers一致性奖励的期望
 
-## Incomplete Information
+## 4. Incomplete Information
 
 每个worker的准确率只有自己知道，其他workers和平台都不知道。
 
@@ -353,7 +353,7 @@ $\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$
 1. 当p-SNE存在，且效率高于f-SNE，对应图4中的$k>k^{THR}$区域，平台会根据$\beta$来引导均衡从而最大化收益。当$\beta$较小时，由于较低的准确率评价，平台不会提供任何激励，R=0，从而n-SNE是帕累托最优，对应图3中$k>k^{THR}$区域中下面的白色部分。当$\beta$合适时，即图3中的蓝色区域，平台会选择$R=R_p^l$从而得到p-SNE。当$\beta$很大时，即图3中的灰色区域，平台会选择$R=R_f$，得到f-SNE，同时在一致性奖励方面支出很大。
 2. 当p-SNE不存在，或其效率低于f-SNE，对应图4中的$k<k^{THR}$区域，类似前面的分析，$\beta$较小时，是n-SNE；反之则是p-SNE。
 
-## Complete Information: Weighted Aggregation
+## 5. Complete Information: Weighted Aggregation
 
 每个worker的准确率$p_i$是公开信息
 
@@ -391,20 +391,72 @@ $$
 
 第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：
 
-1. 在f-SNE时（所有workers都选择`(1,1)`策略），高质量workers有更高权重，
+1. 在f-SNE时（所有workers都选择`(1,1)`策略），高质量workers有更高权重，高低质量的权重都是正数；
+2. 在p-SNE时（高质量workers采取`(1,1)`而低质量workers采取`(0,rd)`），高质量workers权重为正数，低质量workers权重为0；
+3. 在n-SNE时（所有workers都选择`(0,rd)`策略），大家权重都是0，平台随机得到最终答案。
+
+数字符号定义如下：
+
+1. $P_f^{wm},P_p^{wm},P_n^{wm}$分别表示在加权多数规则情况下，f-SNE、p-SNE和f-SNE对应的聚合准确率；
+2. $\eta_f^{wm},\eta_p^{wm},\eta_n^{wm}$分别表示在加权多数规则情况下，f-SNE、p-SNE和f-SNE对应的效率。
+
+计算方式：
+
+$\eta_f^{wm}=(P_f^{wm}-P_n^{wm})/E[R_f^T]$
+
+$\eta_p^{wm}=(P_p^{wm}-P_n^{wm})/E[R_p^T]$
+
+$\eta_n^{wm}=(P_n^{wm}-P_n^{wm})/E[R_n^T]=0$
+
+workers的均衡解行为和不完全信息一致，每种均衡对应的总一致性奖励（$E[R_f^T],E[R_p^T],E[R_n^T]$）也一致。
+
+**命题4：**给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$
+
+**证明：**在p-SNE，低准确率workers采取`(0,rd)`，高准确率workers采取`(1,1)`，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取`(1,1)`，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。
+
+*补充：这个证明没看懂，个人对命题4的理解是说，两个均衡解共存时，f-SNE是所有workers都努力并如实报告，p-SNE是只有高质量workers努力并如实报告，显然f-SNE多了低质量workers努力贡献的准确率，因此总的准确率会更高。*
+
+由此，可以刻画平台的最优决策，和**定理1**一样，只有符号表达替换了。
+
+![image-20210518162745417](https://i.loli.net/2021/05/18/1Rf8TAgeHwkzsEn.png)
+
+图5是新的均衡图解。蓝色区域更大了，也就是说在完全信息的场景下，平台更可能只让高质量workers努力和正确上报。
+
+**定理2：**令$\prod^{inc*}$和$\prod^{com*}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com*}\geq \prod^{inc*}$。
 
 
-## Complete Information: Discriminatory Reward Policy
+
+## 6. Complete Information: Discriminatory Reward Policy
+
+第5章中，平台给不同准确率的workers相同的奖励；本章中则采取有差别的奖励策略，即便是和多数一致方案相同，也会因为准确率不同而得到不同的奖励：低准确率得到的奖励是$R_{low}$，高准确率得到的奖励是$R_{high}$。
 
 ### Workers' Decisions
 
+**命题5：**workers的SNE是
+
+1. $R_{low}$和$R_{high}$都大于等于0时，$s_i^*=(0,rd),\forall i$是一个SNE；
+2. 存在两个阈值$R_f^l$和$R_f^h$均大于0，使得当$R_{low}\geq R_f^l$且$R_{high}\geq R_f^h$时，$s_i^*=(1,1),\forall i$是一个SNE；
+3. 存在两个阈值$R_p^l$和$R_p^h$均大于0，使得当$R_{low}\leq R_p^l$且$R_{high}\geq R_p^h$时，高质量workers采取$(1,1)$而低质量workers采取$(0,rd)$是SNE；
+4. 存在两个阈值$R_{pl}^l$和$R_{pl}^h$均大于0，使得当$R_{low}\geq R_{pl}^l$且$R_{high}\leq R_{ph}^h$时，低质量workers采取$(1,1)$而高质量workers采取$(0,rd)$是SNE。
+
 ### Platform's Optimal Reward Design
 
-## Numerical Results
+**定理3：**
+
+1. 使用$\prod_{UP}^{com*}$和$\prod_{DP}^{com*}$表示平台在均等奖励和差分奖励的情况下的最优支出，则有：$\prod_{DP}^{com*}\geq\prod_{UP}^{com*}$
+2. 存在阈值$\bar{\beta}$，使得当$\beta\geq \bar{\beta}$时，如果UP的最优SNE是n-SNE，且DP的最优SNE不是f-SNE、p-SNE或者pl-SNE，则DP的社会财富比UP高。
+
+定理3说明从平台来看，采取差分奖励策略会带来不比均等奖励策略糟糕的支出和社会财富。DP并不一定会损害社会财富，反而会带来双赢的场面。
+
+## 7. Numerical Results
+
+分析高质量workers的数量$k$和高质量workers准确率$p_h$对平台与workers收益的影响。
 
 ### Incomplete Information
 
+
+
 ### Complete Information
 
-## Conclusion
+## 8. Conclusion
 
