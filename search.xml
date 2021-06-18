@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Leetcode记录-2</title>
+    <url>/2021/06/18/Leetcode%E8%AE%B0%E5%BD%95-2/</url>
+    <content><![CDATA[<h1 id="两数相加"><a href="#两数相加" class="headerlink" title="两数相加"></a>两数相加</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a href="https://leetcode-cn.com/problems/add-two-numbers/" target="_blank" rel="noopener">链接</a></p>
+<p>给你两个<strong>非空</strong>的链表，表示两个非负的整数。它们每位数字都是按照<strong>逆序</strong>的方式存储的，并且每个节点只能存储<strong>一位</strong>数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p><strong>示例1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]</span><br><span class="line">输出：[7,0,8]</span><br><span class="line">解释：342 + 465 &#x3D; 807.</span><br></pre></td></tr></table></figure>
+<p><strong>示例2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [0], l2 &#x3D; [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
+<p><strong>示例3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [9,9,9,9,9,9,9], l2 &#x3D; [9,9,9,9]</span><br><span class="line">输出：[8,9,9,9,0,0,0,1]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li><p>每个链表中的节点数在范围 <code>[1, 100]</code> 内</p>
+</li>
+<li><p><code>0 &lt;= Node.val &lt;= 9</code></p>
+</li>
+<li><p>题目数据保证列表表示的数字不含前导零</p>
+</li>
+</ol>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">        ListNode* l3 = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode* p = l3;</span><br><span class="line">        <span class="keyword">while</span>(l1 != <span class="literal">nullptr</span> || l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> l1val;</span><br><span class="line">            <span class="keyword">int</span> l2val;</span><br><span class="line">            <span class="keyword">if</span> (l1 == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                l1val = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                l1val = l1-&gt;val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (l2 == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                l2val = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                l2val = l2-&gt;val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tmp = l1val+l2val;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                tmp += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tmp&gt;<span class="number">9</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                i = <span class="number">1</span>;</span><br><span class="line">                tmp = tmp%<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                i = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode* q = <span class="keyword">new</span> ListNode(tmp);</span><br><span class="line">            p-&gt;next = q;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (l1 != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (l2 != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l3-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><ol>
+<li>要注意空指针，无论是取值还是往下一个节点移动都要判断是否是空指针；</li>
+<li>这里的<code>if else</code>语句其实可以用三目运算符简写成一行；</li>
+<li>这个题并不能把链表转数字加起来求和再转链表，因为输入的参数会超出数字长度；</li>
+<li>链表本质上是指针+结构体的组合，现在我觉得我又会写链表了！</li>
+</ol>
+<h2 id="其他解法"><a href="#其他解法" class="headerlink" title="其他解法"></a>其他解法</h2><p><a href="https://leetcode-cn.com/problems/add-two-numbers/solution/liang-shu-xiang-jia-by-leetcode-solution/" target="_blank" rel="noopener">参考链接</a></p>
+<ol>
+<li><p>相同思路但写法简单一些</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode root = new ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode cursor = root;</span><br><span class="line">        int carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l1 != null || l2 != null || carry != <span class="number">0</span>) &#123;</span><br><span class="line">            int l1Val = l1 != null ? l1.val : 0;</span><br><span class="line">            int l2Val = l2 != null ? l2.val : 0;</span><br><span class="line">            int sumVal = l1Val + l2Val + carry;</span><br><span class="line">            carry = sumVal / <span class="number">10</span>;</span><br><span class="line">            </span><br><span class="line">            ListNode sumNode = new ListNode(sumVal % <span class="number">10</span>);</span><br><span class="line">            cursor.next = sumNode;</span><br><span class="line">            cursor = sumNode;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(l1 != null) l1 = l1.next;</span><br><span class="line">            <span class="keyword">if</span>(l2 != null) l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更短的写法，这个写法很巧妙</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode dummyHead = new ListNode(<span class="number">-1</span>), pre = dummyHead;</span><br><span class="line">        int t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l1 != null || l2 != null || t != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1 != null) &#123;</span><br><span class="line">                t += l1.val;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (l2 != null) &#123;</span><br><span class="line">                t += l2.val;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pre.next = new ListNode(t % <span class="number">10</span>);</span><br><span class="line">            pre = pre.next;</span><br><span class="line">            t /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dummyHead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing</title>
     <url>/2021/05/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Online%20Organizing%20Large-scale%20Heterogeneous%20Tasks%20and%20Multi-skilled%20Participants%20in%20Mobile%20Crowdsensing/</url>
     <content><![CDATA[<h1 id="Online-Organizing-Large-scale-Heterogeneous-Tasks-and-Multi-skilled-Participants-in-Mobile-Crowdsensing"><a href="#Online-Organizing-Large-scale-Heterogeneous-Tasks-and-Multi-skilled-Participants-in-Mobile-Crowdsensing" class="headerlink" title="Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing"></a>Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing</h1><p>是TMC的审稿。</p>
@@ -237,11 +283,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts1562" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6434" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1562'));
+        var myChart = echarts.init(document.getElementById('echarts6434'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -297,11 +343,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts8442" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3629" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8442'));
+        var myChart = echarts.init(document.getElementById('echarts3629'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -351,11 +397,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts561" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8198" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts561'));
+        var myChart = echarts.init(document.getElementById('echarts8198'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -693,8 +739,8 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
         <tag>Stackelberg game</tag>
       </tags>
   </entry>
@@ -3329,8 +3375,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
       </tags>
   </entry>
   <entry>
@@ -6032,11 +6078,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts8609" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4781" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8609'));
+        var myChart = echarts.init(document.getElementById('echarts4781'));
         // 指定图表的配置项和数据
         var option = {
     title: {
