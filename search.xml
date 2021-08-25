@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Leetcode记录-3</title>
+    <url>/2021/08/25/Leetcode%E8%AE%B0%E5%BD%95-2%20-%20%E5%89%AF%E6%9C%AC/</url>
+    <content><![CDATA[<h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><p>从今天起，先跟着<a href="https://github.com/changgyhub/leetcode_101" target="_blank" rel="noopener">LeetCode 101</a>做题，首先是贪心算法。</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode记录-2</title>
     <url>/2021/06/18/Leetcode%E8%AE%B0%E5%BD%95-2/</url>
     <content><![CDATA[<h1 id="两数相加"><a href="#两数相加" class="headerlink" title="两数相加"></a>两数相加</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a href="https://leetcode-cn.com/problems/add-two-numbers/" target="_blank" rel="noopener">链接</a></p>
@@ -283,11 +295,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts6434" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8428" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6434'));
+        var myChart = echarts.init(document.getElementById('echarts8428'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -343,11 +355,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3629" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3438" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3629'));
+        var myChart = echarts.init(document.getElementById('echarts3438'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -397,11 +409,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts8198" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1718" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8198'));
+        var myChart = echarts.init(document.getElementById('echarts1718'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6078,11 +6090,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4781" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7196" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4781'));
+        var myChart = echarts.init(document.getElementById('echarts7196'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -6676,6 +6688,28 @@ R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中�
 <h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><p>构建可视网络的思路大致是：从右向左扫描点（也就是从最后一个点开始），每扫描到一个点就看它右边是否有没被挡住可以直接相连的点，如果有就连起来，这样一直扫到最左边的点（也就是第一个点），网络就构建好了。</p>
 <p>实际上这个网络扫描的方向并不一定要这样，也可以从左往右。</p>
 <p>时间复杂度的分析和证明省略。</p>
+<p>该算法的具体流程如下：</p>
+<p>​    输入：POI集合根据x坐标升序排列</p>
+<ol>
+<li>扫描线自右向左扫描</li>
+<li>当扫描到$P_n$、$P_{n-1}$、$P_{n-2}$的时候：<ol>
+<li>$P_n$、$P_{n-1}$、$P_{n-2}$加到集合V里，集合V用来存放已经扫描过的点；</li>
+<li>如果$P_i$是集合V的凸包的顶点，就把$P_i$加到集合$C^P(V)$里；</li>
+<li>如果$L_i$是集合V的凸包的边，就把$L_i$加到集合$C^E(V)$里；</li>
+<li>把集合$C^E(V)$加到集合E里，集合E用来存放可视线；</li>
+</ol>
+</li>
+<li>令$i=n-2$</li>
+<li>重复循环一下流程：<ol>
+<li>令$i=i-1$</li>
+<li>遍历集合$C^P(V)$中的点记作$P_k$，如果点$P_i$、$P_k$之间的连线与集合$C^E(V)$的交集是点$P_k$，则把$P_k$加入集合$A_i$，集合$A_i$用来存放点$P_i$的可视点</li>
+<li>遍历集合$A_i$中的所有$P_k$，把点$P_i$、$P_k$之间的连线加入到之前的边集合E中</li>
+<li>把$P_i$加入集合V中</li>
+<li>按之前的规则更新集合$C^P(V)$和$C^E(V)$</li>
+</ol>
+</li>
+<li>$i=0$时结束循环，集合E就是所有可视边</li>
+</ol>
 <h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><ol>
 <li>总共有$n$个兴趣点</li>
 <li>兴趣点异构，总共有$j$个类型</li>
@@ -9900,7 +9934,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p><strong>Hexo</strong> 提供了默认主题 <strong>landscape</strong>，主题的位置在 <strong>blog -&gt;themes</strong> 文件夹下。主题根据自己喜好可以在网上找到，通过 <strong>Git</strong> 进行相应的下载。接下来以Next主题为例。</p>
 <ol>
 <li>还是在blog文件夹下，命令行里输入<code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code>，这里是用<code>git clone</code>把<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">next主题</a>下载并存放到themes -&gt; next 文件夹里。需要注意的是，<code>git clone</code>这个命令下载起来特别慢，但浏览器直接去github下载的话速度还行，所以也可以直接下载解压改文件夹的名字并放到对应的地方。</li>
-<li>修改 <strong>/blog/config.yml</strong> 文件，将其中的 <strong>theme</strong> 改成 <strong>next</strong>。如果文件夹的名字不是next，或者用了其他主题等，这里的theme改成对应的文件夹名字就行。</li>
+<li>修改 <strong>/blog/config.yml</strong> 文件，将其中的 <strong>theme</strong> 对应的内容改成 <strong>next</strong>（比如最初是<code>theme: landscape</code>，现在要换成<code>next</code>主题，就改成<code>theme: next</code>）。如果文件夹的名字不是next，或者用了其他主题等，这里的theme字段改成对应的文件夹名字就行。</li>
 <li>接下来可以输入<code>hexo g</code> 和<code>hexo s</code>来查看新的本地博客。</li>
 </ol>
 <h2 id="建立Github博客"><a href="#建立Github博客" class="headerlink" title="建立Github博客"></a>建立Github博客</h2><ol>

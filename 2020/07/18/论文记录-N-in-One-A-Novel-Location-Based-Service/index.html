@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.3k</span>
+            <span class="post-count">2.6k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">8 分钟</span>
+            <span class="post-count">9 分钟</span>
         </span>
     </span>
 </div>
@@ -154,6 +154,28 @@ R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中�
 <h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><p>构建可视网络的思路大致是：从右向左扫描点（也就是从最后一个点开始），每扫描到一个点就看它右边是否有没被挡住可以直接相连的点，如果有就连起来，这样一直扫到最左边的点（也就是第一个点），网络就构建好了。</p>
 <p>实际上这个网络扫描的方向并不一定要这样，也可以从左往右。</p>
 <p>时间复杂度的分析和证明省略。</p>
+<p>该算法的具体流程如下：</p>
+<p>​    输入：POI集合根据x坐标升序排列</p>
+<ol>
+<li>扫描线自右向左扫描</li>
+<li>当扫描到$P_n$、$P_{n-1}$、$P_{n-2}$的时候：<ol>
+<li>$P_n$、$P_{n-1}$、$P_{n-2}$加到集合V里，集合V用来存放已经扫描过的点；</li>
+<li>如果$P_i$是集合V的凸包的顶点，就把$P_i$加到集合$C^P(V)$里；</li>
+<li>如果$L_i$是集合V的凸包的边，就把$L_i$加到集合$C^E(V)$里；</li>
+<li>把集合$C^E(V)$加到集合E里，集合E用来存放可视线；</li>
+</ol>
+</li>
+<li>令$i=n-2$</li>
+<li>重复循环一下流程：<ol>
+<li>令$i=i-1$</li>
+<li>遍历集合$C^P(V)$中的点记作$P_k$，如果点$P_i$、$P_k$之间的连线与集合$C^E(V)$的交集是点$P_k$，则把$P_k$加入集合$A_i$，集合$A_i$用来存放点$P_i$的可视点</li>
+<li>遍历集合$A_i$中的所有$P_k$，把点$P_i$、$P_k$之间的连线加入到之前的边集合E中</li>
+<li>把$P_i$加入集合V中</li>
+<li>按之前的规则更新集合$C^P(V)$和$C^E(V)$</li>
+</ol>
+</li>
+<li>$i=0$时结束循环，集合E就是所有可视边</li>
+</ol>
 <h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><ol>
 <li>总共有$n$个兴趣点</li>
 <li>兴趣点异构，总共有$j$个类型</li>
