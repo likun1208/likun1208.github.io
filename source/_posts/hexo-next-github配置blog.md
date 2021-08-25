@@ -28,7 +28,7 @@ categories: 博客配置
 **Hexo** 提供了默认主题 **landscape**，主题的位置在 **blog ->themes** 文件夹下。主题根据自己喜好可以在网上找到，通过 **Git** 进行相应的下载。接下来以Next主题为例。
 
 1. 还是在blog文件夹下，命令行里输入`git clone https://github.com/theme-next/hexo-theme-next themes/next`，这里是用`git clone`把[next主题](https://github.com/theme-next/hexo-theme-next)下载并存放到themes -> next 文件夹里。需要注意的是，`git clone`这个命令下载起来特别慢，但浏览器直接去github下载的话速度还行，所以也可以直接下载解压改文件夹的名字并放到对应的地方。
-2. 修改 **/blog/config.yml** 文件，将其中的 **theme** 改成 **next**。如果文件夹的名字不是next，或者用了其他主题等，这里的theme改成对应的文件夹名字就行。
+2. 修改 **/blog/config.yml** 文件，将其中的 **theme** 对应的内容改成 **next**（比如最初是`theme: landscape`，现在要换成`next`主题，就改成`theme: next`）。如果文件夹的名字不是next，或者用了其他主题等，这里的theme字段改成对应的文件夹名字就行。
 3. 接下来可以输入`hexo g` 和`hexo s`来查看新的本地博客。
 
 ## 建立Github博客
