@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks</title>
+    <url>/2021/10/19/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-An%20Efficient%20Anonymous%20Authentication%20and%20Reputation%20Management%20Scheme%20for%20Mobile%20Crowdsensing%20in%20Vehicular%20Networks/</url>
+    <content><![CDATA[<h1 id="车联网中的高效匿名认证与信誉管理框架"><a href="#车联网中的高效匿名认证与信誉管理框架" class="headerlink" title="车联网中的高效匿名认证与信誉管理框架"></a>车联网中的高效匿名认证与信誉管理框架</h1><p>这篇是投稿到<a href="mailto:onbehalfof@manuscriptcentral.com">IEEE Transactions on Vehicular Technology</a>的论文，现在要写审稿意见。</p>
+<p>作者：三个暨南大学，一个澳门城市大学</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>车联网的众包系统中，匿名认证和信誉管理很重要，也面临很多问题。本文提出了一个既提高参与者相互认证效率，又实现传感车辆声誉管理的新方案。具体来说，匿名身份验证机制用于实现数据请求者、云服务器和传感车辆之间的相互认证，信誉评分更新方法将评分转化为模糊的信誉评级，以提高不可连接性（？）。传感数据使用Paillier算法保护。模拟实验中分析了隐私、计算和通信成本，表明效率优于现有方案。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Related-Word"><a href="#Related-Word" class="headerlink" title="Related Word"></a>Related Word</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h2 id="Problem-Statement"><a href="#Problem-Statement" class="headerlink" title="Problem Statement"></a>Problem Statement</h2><h2 id="The-Design-Of-Our-Scheme"><a href="#The-Design-Of-Our-Scheme" class="headerlink" title="The Design Of Our Scheme"></a>The Design Of Our Scheme</h2><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h2 id="Performance-evaluation"><a href="#Performance-evaluation" class="headerlink" title="Performance evaluation"></a>Performance evaluation</h2><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>众包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode记录-3</title>
     <url>/2021/08/25/Leetcode%E8%AE%B0%E5%BD%95-2%20-%20%E5%89%AF%E6%9C%AC/</url>
     <content><![CDATA[<h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><p>从今天起，先跟着<a href="https://github.com/changgyhub/leetcode_101" target="_blank" rel="noopener">LeetCode 101</a>做题，首先是贪心算法。</p>
@@ -295,11 +309,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts8428" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6366" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8428'));
+        var myChart = echarts.init(document.getElementById('echarts6366'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -355,11 +369,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3438" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2489" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3438'));
+        var myChart = echarts.init(document.getElementById('echarts2489'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -409,11 +423,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1718" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8737" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1718'));
+        var myChart = echarts.init(document.getElementById('echarts8737'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6090,11 +6104,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts7196" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9458" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7196'));
+        var myChart = echarts.init(document.getElementById('echarts9458'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7027,8 +7041,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
   <entry>
     <title>Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing</title>
     <url>/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/</url>
-    <content><![CDATA[<p>今天的我真的超级难过了。但是再难过也没用，看看论文好了，希望等月底能好点。</p>
-<a id="more"></a>
+    <content><![CDATA[<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
 <li>本文研究问题：异构群智感知系统（也就是众包）中对未知worker的招募</li>
 <li>本文场景：requester招募workers收集某城市交通路口一段时间内的交通数据，整个收集过程分为多轮，每轮包含一些和地点有关的任务，对应一个交通路口。每个任务有权重，表示重要性。每个worker能做一个或多个任务，且不同worker能做的任务可能不一样。worker会告诉平台自己能做的任务和期望收到的费用。worker完成任务的质量服从未知分布。</li>
@@ -9915,13 +9928,20 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
     <title>hexo + next + github配置blog</title>
     <url>/2020/01/30/hexo-next-github%E9%85%8D%E7%BD%AEblog/</url>
     <content><![CDATA[<h2 id="安装各种东西"><a href="#安装各种东西" class="headerlink" title="安装各种东西"></a>安装各种东西</h2><ol>
-<li>node.js：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js官网链接</a> 点击下载安装即可。</li>
-<li>Git： <a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git官网链接</a> 点击下载安装即可。</li>
-<li>deployer-git： 命令行里输入<code>npm install hexo-deployer-git --save</code>。</li>
-<li>Hexo：<ol>
+<li><p>node.js：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js官网链接</a> 点击下载安装即可。</p>
+</li>
+<li><p>Git： <a href="https://www.git-scm.com/download/win" target="_blank" rel="noopener">Git官网链接</a> 点击下载安装即可。</p>
+</li>
+<li><p>deployer-git： 命令行里输入<code>npm install hexo-deployer-git --save</code>。</p>
+</li>
+<li><p>Hexo：</p>
+<ol>
 <li>准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；</li>
 <li>输入命令<code>npm install -g hexo-cli</code></li>
 </ol>
+</li>
+<li><p>这里补充一点：安装的版本很重要，如果hexo和node中某个版本较高，后面配置的时候会冲突，使用<code>hexo -v</code>可以查看版本。我目前使用的版本如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo: 4.2.0</span><br><span class="line">hexo-cli: 4.2.0</span><br><span class="line">os: Windows_NT 10.0.19043 win32 x64</span><br><span class="line">node: 12.20.0</span><br><span class="line">v8: 7.8.279.23-node.45</span><br><span class="line">uv: 1.40.0</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.9</span><br><span class="line">ares: 1.16.1</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.41.0</span><br><span class="line">napi: 7</span><br><span class="line">llhttp: 2.1.3</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1g</span><br><span class="line">cldr: 37.0</span><br><span class="line">icu: 67.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 13.0</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <a id="more"></a>
