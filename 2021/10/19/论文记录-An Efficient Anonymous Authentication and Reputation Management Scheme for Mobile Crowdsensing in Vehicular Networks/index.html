@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2.2k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
@@ -153,11 +153,67 @@ f(x|\alpha,\beta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\al
 </ol>
 <p>安全目标：防止前面提到的四种攻击</p>
 <h2 id="The-Design-Of-Our-Scheme"><a href="#The-Design-Of-Our-Scheme" class="headerlink" title="The Design Of Our Scheme"></a>The Design Of Our Scheme</h2><h3 id="System-initialization"><a href="#System-initialization" class="headerlink" title="System initialization"></a>System initialization</h3><ol>
-<li>TA初始化：TA首先运行系统生成算法<code>Gen(k)</code>生成系统参数$\{p,q,P_1,P_2,G_1,G_2,G_T,\hat{e}\}$，该算法中的<code>k</code>是安全参数，$G_1,G_2,G_T$是三个$p$阶循环群，$\hat{e}$是双线性映射，$P_1\in G_1,P_2\in G_2$. 接下来TA计算$G=\hat{e}(P_1,P_2)$，定义一个非对称加密算法<code>Ene()</code>和一个加密哈希函数$H(0,1)^<em>\rightarrow Z_n^</em>$，其中$n=p\cdot q$，此外，TA初始化密码对$(Sk_T,Pk_T)(Sk_T\in Z_n^*,Pk_T=Sk_t\cdot P_1)$，并计算认证参数$A=\frac{1}{Sk_T}\cdot P_2$. 最后，TA将$(p,q,Sk_T)$作为隐私，公开$(n,P_1,P_2,G_1,G_2,G_T,\hat{e},Pk_T,H,Enc(),A)$</li>
-<li>云服务器注册：</li>
+<li>TA初始化：TA首先运行系统生成算法<code>Gen(k)</code>生成系统参数$\{p,q,P_1,P_2,G_1,G_2,G_T,\hat{e}\}$​，该算法中的<code>k</code>是安全参数，$G_1,G_2,G_T$​是三个$p$​阶循环群，$\hat{e}$​是双线性映射，$P_1\in G_1,P_2\in G_2$​. 接下来TA计算$G=\hat{e}(P_1,P_2)$​，定义一个非对称加密算法<code>Ene()</code>和一个加密哈希函数$H(0,1)^<em>\rightarrow Z_n^</em>$​，其中$n=p\cdot q$​，此外，TA初始化密码对$(Sk_T,Pk_T)(Sk_T\in Z_n^*,Pk_T=Sk_T\cdot P_1)$​，并计算认证参数$A=\frac{1}{Sk_T}\cdot P_2$​. 最后，TA将$(p,q,Sk_T)$​作为隐私，公开$(n,P_1,P_2,G_1,G_2,G_T,\hat{e},Pk_T,H,Enc(),A)$​</li>
+<li>云服务器注册：TA把密码对$(Sk_C,Pk_C)(Sk_C\in Z_n^*,Pk_C=Sk_C\cdot P_1)$​分配给云服务器</li>
+<li>数据请求者注册：当一个新的数据请求者$D_i$​​注册时，TA分配给它一个独一无二的标识$Rid_{D_i}$​​​​​和两个密码对，其中一个是非对称加密，并基于此计算身份认证$Cert_{D_i}$​​，另一个是同态加密，由Paillier算法生成</li>
+<li>传感车辆注册：当一个新的传感车辆$V_i$​注册时，TA分配给它一个独一无二的标识$Sid_{V_i}$​。然后TA选择随机数$r_i$​并用<code>Enc()</code>计算假名$Pid_{V_i}$​，同时，TA把密码对$(Sk_{V_i},Pk_{V_i})(Sk_{V_i}\in Z_n^*,Pk_{V_i}=Sk_{V_i}\cdot P_2)$​，并计算身份验认证$Cert_{V_i}$​</li>
 </ol>
-<h3 id="Sensing-task-assignment"><a href="#Sensing-task-assignment" class="headerlink" title="Sensing task assignment"></a>Sensing task assignment</h3><h3 id="Sensing-vehicle-selection"><a href="#Sensing-vehicle-selection" class="headerlink" title="Sensing vehicle selection"></a>Sensing vehicle selection</h3><h3 id="Data-collection-and-processing"><a href="#Data-collection-and-processing" class="headerlink" title="Data collection and processing"></a>Data collection and processing</h3><h3 id="Reputation-and-certificate-updating"><a href="#Reputation-and-certificate-updating" class="headerlink" title="Reputation and certificate updating"></a>Reputation and certificate updating</h3><h3 id="Sensing-vehicle-revocation"><a href="#Sensing-vehicle-revocation" class="headerlink" title="Sensing vehicle revocation"></a>Sensing vehicle revocation</h3><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h2 id="Performance-evaluation"><a href="#Performance-evaluation" class="headerlink" title="Performance evaluation"></a>Performance evaluation</h2><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<p>车联网中有不同类型的车辆。我们可以根据不同的权力级别将其分为三类，分别表示为高级权力（HL）（例如执法车辆）、中级权力（如公共服务车辆）和低级权力（LL）（例如私人控制车辆）。针对这三种，TA对其初始化信誉评分$Rs_{V_i}^0$​时会有不同的值：高级是0.9，中级是0.5，低级是0.1。</p>
+<p>精确的信誉评分会转化为信誉评级$Rl_{V_i}^0$，采用k匿名算法来避免信誉链接攻击，每个等级的SV数量至少是k个，具体的评级<sup><a href="#fn_1" id="reffn_1">1</a></sup>：</p>
+<script type="math/tex; mode=display">
+Rl_{V_i}^0=\left\{
+\begin{aligned}
+L_1=0,if\ \ 0<Rs_{V_i}^0<\frac{1}{n}\\
+L_2=\frac{1}{n},if\ \ \frac{1}{n}<Rs_{V_i}^0<\frac{2}{n}\\
+...\\
+L_n=\frac{n-1}{n}, otherwise
+\end{aligned}
+\right.</script><p>最后，TA把$\{Sk_{V_i},Pk_{V_i},Cert_{V_i},Pid_{V_i},Rl_{V_i}^0\}$通过安全信道发给$V_i$。</p>
+<h3 id="Sensing-task-assignment"><a href="#Sensing-task-assignment" class="headerlink" title="Sensing task assignment"></a>Sensing task assignment</h3><p>数据请求者$D_i$确定传感数据类型、任务序列号$Tid$、内容$m$、位置$L_m$、到期时间$T_m$和最小信誉等级要求$Rl$。</p>
+<p>然后$D_i$​决定任务为$\{Tid,m,L_m,T_m,Rl\}$​并定义传感数据$d$​的标准值$d_0$​和错误值阈值$\Delta d$​。</p>
+<p>最后，$D_i$把$m$​和同态加密公钥发送给云服务器。</p>
+<p>云服务器验证$D_i$的身份公钥，如果没通过，则身份无效；如果通过，则云服务器向SV广播$\{Tid,T_m,T_{C_2},Rl\}$。</p>
+<h3 id="Sensing-vehicle-selection"><a href="#Sensing-vehicle-selection" class="headerlink" title="Sensing vehicle selection"></a>Sensing vehicle selection</h3><p>收到任务的SV们如果想做任务，就发送自己的公钥、信誉评级、身份认证等给云服务器，云服务器经过一番验证，向通过验证的SV们发送$\{C_2,C_3,C_4,H(\vartheta_i)\}$，$H(\vartheta_i)$是用来标识该SV被选中了。</p>
+<h3 id="Data-collection-and-processing"><a href="#Data-collection-and-processing" class="headerlink" title="Data collection and processing"></a>Data collection and processing</h3><p>收到传感任务内容的SV们对$\{C_2,C_3,C_4\}$进行解密，得到任务内容$m$，并完成任务得到传感数据$d_{V_i}$。为了实现数据隐私，每个SV对数据进行同态加密。</p>
+<p>最后SV们把一系列参数上传云服务器。</p>
+<p>云服务器首先检查参数中的时间参数，是否超过任务期限<sup><a href="#fn_2" id="reffn_2">2</a></sup>；其次检查$H(\vartheta_i)$​​是否存在；然后找任务对应的$D_i$获取标准值和错误值阈值，接着$D_i$就把经过一番加密的数据发送给云服务器。</p>
+<p>由于传感数据、标准值、错误值阈值都是同态加密，所以云服务器直接对加密后的文本进行运算验证即可。云服务器将通过验证的传感数据聚合起来一起发给对应的$D_i$。</p>
+<p>$D_i$用私钥解密得到聚合数据。</p>
+<p>云服务器最后要根据传感数据计算信誉评分的反馈值，在错误值阈值范围内的就反馈1，否则反馈0.</p>
+<blockquote id="fn_2">
+<sup>2</sup>. 这里的问题是，如果时间参数是SV自己传的，那么如何保证是真实的而不是为了避免过期的假参数。<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<h3 id="Reputation-and-certificate-updating"><a href="#Reputation-and-certificate-updating" class="headerlink" title="Reputation and certificate updating"></a>Reputation and certificate updating</h3><p> 对于每个车辆$V_i$，TA根据反馈的报告更新其信誉评分和身份认证。反馈报告用连续随机变量X表示信誉评分，并用beta分布评估信誉评分。传感任务成功完成和失败分别用$F_{V_i}=1$和$F_{V_i}=0$来表示。</p>
+<p>具体来说，TA收集$\omega$份$V_i$的反馈报告，其中$\omega_i$次成功，$\omega_j$次失败，因此TA用beta分布表示$V_i$的任务表现，分布式中的$\alpha$和$\beta$分别表示成功和失败的次数。由此可知，$V_i$的评分X服从beta分布，期望是$\frac{\alpha}{\alpha+\beta}$，具体评分$Rs_{V_i}=\frac{\alpha}{\alpha+\beta}=\frac{\omega_i}{\omega}$。</p>
+<p>为了提升信誉评分的准确率，我们引入了遗忘因子$F_f\in [0,1]$和平衡权重$B_\omega$来减少时间和反馈错误对信誉评分的影响。</p>
+<p>因此，最终的评分公式如下<sup><a href="#fn_3" id="reffn_3">3</a></sup>：</p>
+<script type="math/tex; mode=display">
+Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_i)+(F_f\omega_{j-1}+B_\omega u_i)}</script><p>其中，$B_\omega=\frac{s_i}{s_i+u_i}$</p>
+<blockquote id="fn_3">
+<sup>3</sup>. 这里的问题是，首先这个公式中的s_i和u_i需要解释，虽然前面表格中有了，但这里也应该再说一下。其次这个公式整个都需要解释，比如\omega_{i-1}是表达什么，前一个车辆的成功次数吗？为什么这个车辆的评分会和前一个车辆发生关系？此外，上面这段话中，在车辆V_i那里，字母i表示对第i个车，而到了s_i和u_i的时候，就表示第i次反馈报告，这样的符号很容易引起混淆。<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<p>更新评分以后，TA把评分存到本地数据库并转成评级数，然后更新身份认证，更新过程也是和前面差不多的加密算法。</p>
+<h3 id="Sensing-vehicle-revocation"><a href="#Sensing-vehicle-revocation" class="headerlink" title="Sensing vehicle revocation"></a>Sensing vehicle revocation</h3><p>TA计算车辆$V_i$的失败率，如果这个车辆的评分低且失败率高，就不再更新这个车的评分，相当于不允许接入了。<sup><a href="#fn_4" id="reffn_4">4</a></sup></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>这一部分是分析隐私和安全性问题，都是加密算法保障的，就不详细看了。</p>
+<h2 id="Performance-evaluation"><a href="#Performance-evaluation" class="headerlink" title="Performance evaluation"></a>Performance evaluation</h2><p>分析了计算量和通信负担，评估了遗忘因子和平衡权重对评分更新算法的影响。</p>
+<p>实验部分的问题有以下几点：</p>
+<ol>
+<li>没说实验环境和数据来源等；</li>
+<li>实验中，参与者最多10个，这对于众包的场景不太合理；</li>
+<li>实验展示了遗忘因子和平衡权重对评分的影响，但是没有说明原因，希望能补充解释这两个因素是如何影响评分的。</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
+<li>提出了有效的匿名认证机制</li>
+<li>提出了新的信誉评分系统，基于beta分布</li>
+<li>分析了隐私和安全问题，并进行了模拟实验</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://www.zhihu.com/question/39641890" target="_blank" rel="noopener">双线性配对</a></li>
+</ol>
+<h2 id="审稿意见"><a href="#审稿意见" class="headerlink" title="审稿意见"></a>审稿意见</h2><ol>
+<li>公式4中的n需要解释</li>
+<li>有一些符号表达并没在表1中列出，建议补充完整</li>
+<li>加上前面文中的一些问题，总的来说大修吧</li>
 </ol>
  
       <!-- reward -->
