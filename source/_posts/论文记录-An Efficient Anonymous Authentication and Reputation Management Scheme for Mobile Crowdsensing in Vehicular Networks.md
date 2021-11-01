@@ -1,7 +1,10 @@
 ---
 title: '论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks'
 date: 2021-10-19 10:08:36
-tags: crowdsourcing
+tags: 
+  - crowdsourcing
+  - 审稿意见
+  - 车联网
 categories: 论文
 description: 是导师安排的审稿任务
 ---
@@ -208,4 +211,4 @@ TA计算车辆$V_i$的失败率，如果这个车辆的评分低且失败率高�
 
 1. 公式4中的n需要解释
 2. 有一些符号表达并没在表1中列出，建议补充完整
-3. 加上前面文中的一些问题，总的来说大修吧
+3. 加上前面文中的一些问题，总的来说大修吧+
