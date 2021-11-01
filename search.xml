@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Optimal_and_Quantized_Mechanism_Design_for_Fresh_Data_Acquisition</title>
+    <url>/2021/11/01/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Optimal_and_Quantized_Mechanism_Design_for_Fresh_Data_Acquisition/</url>
+    <content><![CDATA[<h1 id="新鲜数据采集的优化量化机制设计"><a href="#新鲜数据采集的优化量化机制设计" class="headerlink" title="新鲜数据采集的优化量化机制设计"></a>新鲜数据采集的优化量化机制设计</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h2 id="System-Model-and-Problem-Formulation"><a href="#System-Model-and-Problem-Formulation" class="headerlink" title="System Model and Problem Formulation"></a>System Model and Problem Formulation</h2><h2 id="Single-Source-Optimal-Mechanism-Design"><a href="#Single-Source-Optimal-Mechanism-Design" class="headerlink" title="Single-Source Optimal Mechanism Design"></a>Single-Source Optimal Mechanism Design</h2><h2 id="Multi-source-Optimal-Mechanism"><a href="#Multi-source-Optimal-Mechanism" class="headerlink" title="Multi-source Optimal Mechanism"></a>Multi-source Optimal Mechanism</h2><h2 id="Quantized-Optimal-Mechanism"><a href="#Quantized-Optimal-Mechanism" class="headerlink" title="Quantized Optimal Mechanism"></a>Quantized Optimal Mechanism</h2><h2 id="General-Virtual-Cost-Function"><a href="#General-Virtual-Cost-Function" class="headerlink" title="General Virtual Cost Function"></a>General Virtual Cost Function</h2><h2 id="Performance-Comparison"><a href="#Performance-Comparison" class="headerlink" title="Performance Comparison"></a>Performance Comparison</h2><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+        <tag>mechanism design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks</title>
     <url>/2021/10/19/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-An%20Efficient%20Anonymous%20Authentication%20and%20Reputation%20Management%20Scheme%20for%20Mobile%20Crowdsensing%20in%20Vehicular%20Networks/</url>
     <content><![CDATA[<h1 id="车联网中的高效匿名认证与信誉管理框架"><a href="#车联网中的高效匿名认证与信誉管理框架" class="headerlink" title="车联网中的高效匿名认证与信誉管理框架"></a>车联网中的高效匿名认证与信誉管理框架</h1><p>这篇是投稿到<a href="mailto:onbehalfof@manuscriptcentral.com">IEEE Transactions on Vehicular Technology</a>的论文，现在要写审稿意见。</p>
@@ -120,14 +132,16 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <h2 id="审稿意见"><a href="#审稿意见" class="headerlink" title="审稿意见"></a>审稿意见</h2><ol>
 <li>公式4中的n需要解释</li>
 <li>有一些符号表达并没在表1中列出，建议补充完整</li>
-<li>加上前面文中的一些问题，总的来说大修吧</li>
+<li>加上前面文中的一些问题，总的来说大修吧+</li>
 </ol>
 ]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
+        <tag>审稿意见</tag>
         <tag>crowdsourcing</tag>
+        <tag>车联网</tag>
       </tags>
   </entry>
   <entry>
@@ -372,8 +386,8 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>审稿意见</tag>
+        <tag>crowdsourcing</tag>
       </tags>
   </entry>
   <entry>
@@ -425,11 +439,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts6336" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8740" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6336'));
+        var myChart = echarts.init(document.getElementById('echarts8740'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -485,11 +499,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5191" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6995" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5191'));
+        var myChart = echarts.init(document.getElementById('echarts6995'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -539,11 +553,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5766" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7771" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5766'));
+        var myChart = echarts.init(document.getElementById('echarts7771'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -883,7 +897,7 @@ p_i,\ &if\ s_i=(1,1), \\
       <tags>
         <tag>crowdsourcing</tag>
         <tag>game theory</tag>
-        <tag>Stackelberg game</tag>
+        <tag>Stackelberg博弈</tag>
       </tags>
   </entry>
   <entry>
@@ -986,6 +1000,7 @@ p_i,\ &if\ s_i=(1,1), \\
       </categories>
       <tags>
         <tag>灾害应对网络</tag>
+        <tag>审稿意见</tag>
       </tags>
   </entry>
   <entry>
@@ -6220,11 +6235,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4788" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8998" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4788'));
+        var myChart = echarts.init(document.getElementById('echarts8998'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7267,17 +7282,6 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </tags>
   </entry>
   <entry>
-    <title>论文记录-重构比特币费率市场</title>
-    <url>/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E9%87%8D%E6%9E%84%E6%AF%94%E7%89%B9%E5%B8%81%E8%B4%B9%E7%8E%87%E5%B8%82%E5%9C%BA/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>blockchain</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python课程期末作业</title>
     <url>/2020/06/13/python%E8%AF%BE%E7%A8%8B%E6%9C%9F%E6%9C%AB%E4%BD%9C%E4%B8%9A/</url>
     <content><![CDATA[<p>实际上在这之前还有两课讲<code>scikit</code>库，不过没作业，就不整理内容了。</p>
@@ -7911,8 +7915,8 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
         <category>论文</category>
       </categories>
       <tags>
+        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
-        <tag>crowd sensing</tag>
       </tags>
   </entry>
   <entry>
