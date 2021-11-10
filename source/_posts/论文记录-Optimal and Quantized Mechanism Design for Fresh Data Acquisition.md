@@ -1,5 +1,5 @@
 ---
-title: '论文记录-Optimal_and_Quantized_Mechanism_Design_for_Fresh_Data_Acquisition'
+title: '论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition'
 date: 2021-11-01 16:58:36
 tags: 
   - crowdsourcing
@@ -81,7 +81,7 @@ $$
 
 由于每个数据源都不知道其他数据源的具体成本$\widetilde{c}_{-i}$，只知道相关的先验分布，因此可得到下述贝叶斯均衡：
 
-**定义1**（贝叶斯均衡）：贝叶斯均衡是：对于每一个数据源$i$，在机制$m$和其他数据源的报告$\widetilde{c}_{-i}$不改变的情况下，使得该数据源收益最大的那个报告$\widetilde{c}^*(m)=\{\widetilde{c}_i^*(m)\}$
+**定义1**（贝叶斯均衡）：贝叶斯均衡是：对于每一个数据源$i$，在机制$m$和其他数据源的报告$\widetilde{c}_{-i}$不改变的情况下，使得该数据源收益最大的那个报告$\tilde{\boldsymbol{c}}^{*}(m)=\left\{\tilde{c}_{i}^{*}(m)\right\}_{j \in \mathcal{T}}$
 
 而目标的目的是设计一个最优机制来最小化自己的总期望支出（长期平均值），总支出由AoI支出和数据源支出组成，函数如下：
 $$
