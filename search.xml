@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Best reply structure and equilibrium convergence in generic games</title>
+    <url>/2021/11/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Best%20reply%20structure%20and%20equilibrium%20convergence%20in%20generic%20games/</url>
+    <content><![CDATA[<h1 id="最优回复结构和泛型博弈中的均衡收敛"><a href="#最优回复结构和泛型博弈中的均衡收敛" class="headerlink" title="最优回复结构和泛型博弈中的均衡收敛"></a>最优回复结构和泛型博弈中的均衡收敛</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>博弈论是决策者之间战略互动的一组数学模型，应用于各种问题，如合作的出现、语言形成、道路和互联网的拥堵。同样的数学工具也被用来模拟生态学和种群生物学中的进化。一个长期存在的问题是，当玩家通过重复进行博弈来学习时，他们是否会收敛到一个均衡点。对于一般情况，人们知之甚少，因为答案取决于博弈的性质和学习算法。在这里，我们引入了一个形式主义，我们称之为最佳回复结构，它给出了一个对于一个广泛类型的学习算法在任意两个正则形式的博弈中的收敛概率的粗略估计。类似于我们的方法在其他领域中应用的例子是生态学中的定性稳定性理论和使用雷诺数来理解流体动力学中的湍流。</p>
+<p>解决博弈论均衡收敛问题的标准方法是关注具有特殊数学性质的博弈类，选择它们作为现实世界情景的程式化模型。例如，在位势博弈（potential games，也翻译成潜在博弈）中，单方面改变策略的所有收益差异都可以用一个全局势函数来表示;  拥塞博弈<sup><a href="#fn_1" id="reffn_1">1</a></sup>属于这一类，所以位势博弈可以作为交通的程式化模型。位势博弈中大多数学习算法收敛到一个纳什或相关的均衡在潜在的对策，在优势可解博弈（dominance-solvable game）、协调博弈（coordination game）、超模博弈（supermodular game）和弱环博弈（weakly acyclic game）中也是如此。研究具有特殊属性的博弈在机制设计等某一方玩家可以选择博弈形式的情况下是非常有用的。在这些情况下，也可以设计玩家将要使用的学习算法，并选择最有可能收敛到均衡的算法，例如在线拍卖和网络路由。</p>
+<p>然而，仍然有一些问题，其博弈和学习算法不是由某一方设计的，而是由博弈本身的属性特点决定的。例如，一个金融市场可以被看作是一种博弈，其中有许多与交易者买卖资产相关联的可能行为。结果可能会收敛到一个均衡，或者它可能内生波动。如果这个系统不是为了鼓励收敛而设计的，那么我们应该期待这两种行为中的哪一种？</p>
+<p>为了解决这个问题，我们采用了一种在20世纪90年代理论生态学和90年代发育生物学非常有效的方法，这种方法在物理学中非常普遍。这种方法的一个例子是May发表在理论生态学的一篇开创性论文。他研究了一个随机产生的捕食者-被捕食者相互作用的集合，他把这个集合作为一般生态系统的零模型。他的主要结论是随机的生态系统会随着它们的变大而变得更加不稳定。当然，梅很清楚，真正的生态系统不是随机的;  相反，它们是由进化选择和其他力量塑造的。许多大型生态系统已经存在了很长一段时间，这表明它们实际上是稳定的。因此，这一矛盾表明，真正的生态系统并不是梅模型中使用的随机整体的典型成员，这就提出了一个重要问题:  这些生态系统究竟是如何非典型化的，以及它们是如何以及为什么进化到稳定。四十五年后，正确回答这个问题仍然是一个活跃的研究课题。例如，约翰逊等人最近发现，真正的生态系统具有一种他们称之为营养连贯性的特性，并表明，将这种特性作为随机生成的生态系统集合的约束条件，可以确保稳定性。</p>
+<p>在本文中，我们将类似的方法应用到博弈论中，将随机生成的两人博弈集合作为一个零模型。为了方便处理，我们研究标准形式的博弈，因为它可以系统地列举所有可能的博弈。通过增加可变的约束以理解它们对收敛到均衡的影响，零模型得到了改进。在这里，我们详细研究了一个参数$G$，它调节了两个参与者的收益之间的相关性。这调节了博弈中的竞争强度，包括零和博弈作为$G=-1$的一个特例。我们也勾勒出一个玩家如何构造其他的约束，例如，研究潜在博弈的偏差。通过这种方法，我们可以看到在特定类别的博弈中的偏差是如何影响学习动态的稳定性的。</p>
+<p>随机生成的博弈和一般的学习算法没有可以得到精确解的数学性质。为了克服这个局限性，我们发展了一个形式主义，以获得近似收敛概率，这个近似概率是一个简单指标的函数。与流体动力学的类比阐释了这些近似解是如何发挥作用的。当流体离开平衡时，它通常会从稳定(或层流)流动过渡到不稳定(或紊流)流动。虽然描述流体动力学的纳维－斯托克斯方程没有解析解，但是这种转变仍然可以用一个叫做雷诺数的无量纲参数来粗略地描述。雷诺数越大，湍流发生的可能性越大。尽管这个预测并不准确ーー它只是一个经验法则ーー但它仍然非常有用。我们对博弈的类似估计并没有一个简单的封闭形式，但它具有类似的预测能力。我们的方法的另一个类比是理论生态学的定性稳定性理论。生态学中的许多模型都考虑食物网中不同物种之间相互作用的程度。例如，这些模型考虑了兔子吃多少草和狐狸吃多少兔子。质量稳定性方法只考虑了捕食者-被捕食者关系的特征，即兔子吃草，狐狸吃兔子。这使得仅仅从生态系统食物网的拓扑特性就可以获得生态系统稳定性的近似评估成为可能。与定性稳定性理论一样，我们的方法只依赖于对策的拓扑性质，而不依赖于收益的细节。</p>
+<p>我们的形式主义是基于最优回复动态，在这种动态下，每个玩家都以最优回复对手的最后一次行动。最优回复动力学在博弈论中是众所周知的，它被广泛用于发展学习的直觉，但是我们以一种新的方式使用它，以获得一般博弈中收敛的近似概率。在最优回复动态下，系统要么渐近收敛到一个对应于纯策略纳什均衡的固定点，要么陷入一个循环。我们考虑在基于最优回复循环与博弈固定点相对大小的博弈中的一个非常简单的非收敛指标。请注意，我们并没有假设玩家遵循最优回复动态。相反，我们假设收益矩阵的最优回复结构构成了一阶骨架，构成了玩家们试图学习的博弈骨干，这对于理解许多学习算法的收敛性是有用的。</p>
+<p>为了验证这一假设，我们选择了一组从真人博弈实验中得到的学习算法，包括强化学习、虚拟博弈<sup><a href="#fn_2" id="reffn_2">2</a></sup>、有噪声和无噪声的经验加权、k-level学习。我们也引入了（二种群）复制因子动力学在生态学和种群生物学中的重要性。基于最优回复动力学的方法预测了这些算法在R2≥0.78时的不收敛频率。</p>
+<p>在这里，我们想强调的是，我们的目标是描述性的，而不是规范性的。在机制设计中，人或机器使用具有良好收敛性能的算法。例如，一些算法收敛到相关均衡——一种纳什均衡的概括，允许玩家在所有博弈中对一个共同的信号进行协调。其中一种算法是遗憾匹配算法，在这种算法中，玩家考虑所有过去的比赛历史，并计算如果他们采取任何其他行动，他们的回报会是什么。虽然这些算法可能由机器或具有足够记录能力的人执行，但除非经过专门训练，否则它们似乎不太可能被真人使用。据我们所知，这些算法只有间接的经验支持。我们关注的是经过实验测试的算法。当它们到达一个固定点时，这些算法会收敛到一个纳什均衡点，或者一个接近一个的点，而不是一个更一般的相关平衡。</p>
+<p>在展示了最优回复结构形式主义的工作原理之后，我们分析了最优回复循环或不动点如何随着博弈中两个属性的变化而变化。我们根据玩家可用的动作数$N$来定义一个游戏的复杂程度。一个简单的游戏只有几个动作，而一个复杂的游戏有许多动作。博弈的竞争力由两个参与者的收益之间的相关性$G$来定义。负相关越多，竞争就越激烈。最优回复循环与固定点相比之下的相对占有率跟踪了我们所考虑的六种算法的收敛频率，因为我们改变了这些博弈的两个性质，除了竞争性博弈中的虚拟博弈。</p>
+<p>我们发现，上述观点的一个极端——简单且非竞争性的博弈——不太可能具有循环，而另一个极端——复杂且竞争性的博弈——则很可能有循环。前文提到的几种博弈（位势博弈、优势可解博弈、协调博弈、超模博弈、弱环博弈）在构造上都是非循环的。这几类中的任何一个都可能是简单且非竞争性博弈的典型案例，但它们肯定不是复杂且竞争性博弈中的典型例子。这与人们的直觉相吻合，即复杂的博弈更难学，当一个玩家的收益意味着另一个玩家的损失时，玩家之间更难合作。我们的形式化方法使这一直觉定量化。例如，如果每个玩家有两个动作，且两个玩家的收益没有相关性，则非循环博弈占据了其中的85%，反之，如果有10个动作，收益相关性为-0.7，则非循环博弈只占有2.7%。</p>
+<p>我们还展示了如何使用最优回复形式来研究某一类博弈的稳定性，例如位势博弈，以了解它们在偏离给定情景下的稳定性。我们证明了这种稳定性的变化可以是非线性的，例如，位势博弈的小扰动会导致不收敛的概率大幅度增加。</p>
+<p>在收益不相关的情况下，我们使用受统计力学启发的组合方法来分析计算不同长度的最佳回复循环的频率。受统计力学启发而产生的方法在博弈论中并不新鲜。先前的研究已经量化了纯策略纳什均衡点(22-25)、混合策略均衡(26,27)和帕帕累托均衡(28)的性质，但是我们是第一个量化最佳回复循环的频率和长度并显示它们与博弈论策略学习的相关性的研究。</p>
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><h3 id="Best-reply-structure"><a href="#Best-reply-structure" class="headerlink" title="Best reply structure"></a>Best reply structure</h3>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition</title>
     <url>/2021/11/01/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Optimal%20and%20Quantized%20Mechanism%20Design%20for%20Fresh%20Data%20Acquisition/</url>
     <content><![CDATA[<h1 id="新鲜数据采集的优化量化机制设计"><a href="#新鲜数据采集的优化量化机制设计" class="headerlink" title="新鲜数据采集的优化量化机制设计"></a>新鲜数据采集的优化量化机制设计</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h2 id="System-Model-and-Problem-Formulation"><a href="#System-Model-and-Problem-Formulation" class="headerlink" title="System Model and Problem Formulation"></a>System Model and Problem Formulation</h2><h3 id="System-Model"><a href="#System-Model" class="headerlink" title="System Model"></a>System Model</h3><p>数据源集合：$\mathcal{I}=\{1\leq i\leq I\}$，生成数据包并发送给目标</p>
@@ -507,11 +531,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3756" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1142" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3756'));
+        var myChart = echarts.init(document.getElementById('echarts1142'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -567,11 +591,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts55" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1003" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts55'));
+        var myChart = echarts.init(document.getElementById('echarts1003'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -621,11 +645,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts4117" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8792" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4117'));
+        var myChart = echarts.init(document.getElementById('echarts8792'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -963,8 +987,8 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
         <tag>Stackelberg博弈</tag>
       </tags>
   </entry>
@@ -3600,8 +3624,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
       </tags>
   </entry>
   <entry>
@@ -6303,11 +6327,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4852" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5768" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4852'));
+        var myChart = echarts.init(document.getElementById('echarts5768'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7238,7 +7262,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </tags>
   </entry>
   <entry>
-    <title>Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing</title>
+    <title>论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing</title>
     <url>/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/</url>
     <content><![CDATA[<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
@@ -7983,8 +8007,8 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>game theory</tag>
+        <tag>crowdsourcing</tag>
       </tags>
   </entry>
   <entry>
