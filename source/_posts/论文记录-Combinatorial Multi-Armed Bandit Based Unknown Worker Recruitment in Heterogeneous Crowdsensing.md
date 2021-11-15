@@ -1,5 +1,5 @@
 ---
-title: Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing
+title: '论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing'
 date: 2020-07-05 14:31:25
 tags: 
 	- crowdsourcing
