@@ -2,8 +2,8 @@
 title: 论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing
 date: 2021-05-26 13:26:13
 tags:
-	- crowdsourcing
-	- 审稿意见
+    - crowdsourcing
+    - 审稿意见
 categories: 论文
 description: 是TMC的审稿意见
 ---
@@ -148,8 +148,6 @@ description: 是TMC的审稿意见
 
 ![image-20210601104812332](https://i.loli.net/2021/06/01/WQcLDaMinhOsIk9.png)
 
-
-
 具体来说，首先判定一番，发现$l_4$会让参与者无法按时到目的地，所以排除；$l_1$会让参与者离目的地更远（从5变成5.4），所以排除；$l_2$和$l_3$都可，且此时这俩位置都只有1个任务，在短距离优先的情况下就分配$l_2$了。
 
 任务树采用深度优先遍历的方式。
@@ -251,8 +249,6 @@ weakness:
 3. 本文实验部分假设参与者最高移动速度不超过`1KM/min`，最低速度不低于`0.5KM/min`，这个速度设置主要是汽车的速度范围，没有考虑其他交通方式如步行、骑行等，如果可以放宽速度限制范围，会更合理一些；
 4. 本文实验部分如果可以增加与现有算法的性能简要对比，会更有说服力。
 
-
-
 英文版本：
 
 This paper argues that many current solutions to online multi-task  assignment problems can not solve different problems at the same time.  And the reason is that the data structures they used are too simple to solve these problems. This paper proposes a task organization model based  on hierarchical tree and a participant organization model based on time series queue, and designs a task allocation algorithm. According to  different computing patterns, tree creation methods and task allocation strategy, this paper uses randomly generated data set to carry out  simulation experiment analysis. The performance of the algorithm is evaluated according to four indexes: algorithm running time, task participant matching rate, participant travel distance and redundant tasks removed.  It is concluded that  parallel computing can reduce the running time of the algorithm;  time-first hierarchical tree can improve the matching rate of tasks and  participants, and short-distance-first principle can reduce the travel  distance of participants.
@@ -272,4 +268,3 @@ weakness:
 4. What is the specific form of the check-in distribution mentioned in Section 4?
 5. The experimental part of this paper assumes that "The maximum moving speed of participants does not exceed 1KM/min, and the minimum moving speed is not lower than 0.5KM/min." This speed limit is  mainly the speed range of cars, did not consider other modes of  transport such as walking, cycling. If the speed limit can be relaxed,  it will be more reasonable.
 6. The evaluation part will be more convincing if it can be compared with the performance of existing algorithms.
-

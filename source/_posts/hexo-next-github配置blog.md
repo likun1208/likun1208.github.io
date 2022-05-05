@@ -8,11 +8,38 @@ categories: 博客配置
 ## 安装各种东西
 
 1. node.js：[Node.js官网链接](https://nodejs.org/zh-cn/) 点击下载安装即可。
+
 2. Git： [Git官网链接](https://www.git-scm.com/download/win) 点击下载安装即可。
+
 3. deployer-git： 命令行里输入`npm install hexo-deployer-git --save`。
+
 4. Hexo：
    1. 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；
    2. 输入命令`npm install -g hexo-cli`
+   
+5. 这里补充一点：安装的版本很重要，如果hexo和node中某个版本较高，后面配置的时候会冲突，使用`hexo -v`可以查看版本。我目前使用的版本如下：
+
+   ```
+   hexo: 4.2.0
+   hexo-cli: 4.2.0
+   os: Windows_NT 10.0.19043 win32 x64
+   node: 12.20.0
+   v8: 7.8.279.23-node.45
+   uv: 1.40.0
+   zlib: 1.2.11
+   brotli: 1.0.9
+   ares: 1.16.1
+   modules: 72
+   nghttp2: 1.41.0
+   napi: 7
+   llhttp: 2.1.3
+   http_parser: 2.9.3
+   openssl: 1.1.1g
+   cldr: 37.0
+   icu: 67.1
+   tz: 2019c
+   unicode: 13.0
+   ```
 
 <!--more-->
 

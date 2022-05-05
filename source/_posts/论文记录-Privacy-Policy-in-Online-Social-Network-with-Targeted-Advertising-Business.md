@@ -3,8 +3,8 @@ title: 论文记录-Privacy Policy in Online Social Network with Targeted Advert
   Business
 date: 2020-04-15 20:39:30
 tags: 
-	- game theory
-	- stackelberg博弈
+    - game theory
+    - stackelberg博弈
 category: 论文
 ---
 
@@ -82,4 +82,3 @@ category: 论文
 #### Numerical Result
 
 1. 这部分很少，没说数值实验具体是怎么做的
-
