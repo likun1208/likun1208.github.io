@@ -2,9 +2,9 @@
 title: 论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification
 date: 2021-04-15 14:00:13
 tags:
-	- crowdsourcing
-	- game theory
-	- Stackelberg博弈
+    - crowdsourcing
+    - game theory
+    - Stackelberg game
 categories: 论文
 description: 众包中的多数投票--探索众包工人异构性对激励机制设计的影响
 ---
@@ -93,6 +93,7 @@ workers的任务质量依赖于努力程度，记作$e_i\in \{0,1\}$
 workers可通过付出一定代价来努力从而提高任务质量（即准确率）
 
 第$i$个worker的求解方案准确率记作$p_i\in (0.5,1])$
+
 $$
 P(x_i^{estimate}=x)=\left\{
 \begin{matrix}
@@ -101,9 +102,11 @@ p_i,\ \ &if\ \ e_i=1\ \ with\ \ a\ \ cost\ \ c_i\geq 0, \\
 \end{matrix}
 \right.
 $$
+
 workers异构性的体现：$N$个workers中有$k$个高质量的求解准确率为$p_h$，和$N-k$个低质量的求解准确率为$p_l$，$0.5<p_l<p_h\leq 1$
 
 workers的上报策略：$v_i=\{1,-1,rd\}$，其中，努力的workers可以选择$\{1,-1\}$分别表示如实报告和谎报；而不努力的workers可以选择$rd$表示以0.5的概率随机上报
+
 $$
 x_i^{report}=
 \left\{
@@ -114,6 +117,7 @@ x_i^{estimate},\ \ &if\ \  v_i=1\\
 \end{matrix}
 \right.
 $$
+
 本文不考虑多个workers共谋等情况。
 
 workers的策略记作$s_i=(e_i,v_i)$，属于集合$S_i=\{(0,rd),(1,1),(1,-1)\}$
@@ -133,6 +137,7 @@ workers的策略记作$s_i=(e_i,v_i)$，属于集合$S_i=\{(0,rd),(1,1),(1,-1)\}
 除了第$i$个worker以外，其余workers的多数投票方案记作$x_{-i}^{majority}$
 
 从第$i$个worker的角度来看，多数投票方案是：
+
 $$
 x_{-i}^{majority}=
 \left \{
@@ -143,6 +148,7 @@ tie,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}=0.
 \end{matrix}
 \right.
 $$
+
 第$i$个worker的上报值与多数投票方案一致或者多数投票方案是tie的情况下，该worker会得到奖励；反之则不会。
 
 第$i$个worker得到奖励R的概率记作$P_i(R,p,s)$，$p=(p_j,\forall j\in N)$，$s=(e,v)$，$e=(e_j,\forall j \in N)$，$v=(v_j,\forall j \in N)$
@@ -156,20 +162,20 @@ worker的收益函数：$u_i(R,s)=R*P_i(R,p,s)+v_il_i-e_ic_i$
 1. $N$：N个workers的集合
 
 2. $S$：第$i$个worker的策略空间为$s_i\in S_i=\{(0,rd),(1,1),(1,-1)\}$。所有workers的策略记作$s=(s_i,\forall i\in N)$，所有workers的可行策略集合记作$S=\prod_{i\in N}S_i$。
-
+   
    *这里应该是集合的笛卡尔积，不过这个表达不太确定是否正确。*
 
 3. $u$：向量$u=(u_i,\forall i \in N)$包含了所有workers的收益
 
 该博弈中，给定报酬$R$和其他workers的决策$s_{-i}=(e_{-i},v_{-i})=((e_j,v_j),\forall j \neq i)$，第$i$个worker需要求解下述优化问题。
 
-**问题1：**第$i$个worker的收益最大化
+**问题1：** 第$i$个worker的收益最大化
 
 $max\ \ u_i(R,s,s_{-i})$
 
 $var.\ \ s_i\in\{(0,rd),(1,1),(1,-1)\}.$
 
-**定义1：**纳什均衡：在给定$R$的情况下，如果对于所有$s_i'\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^*,s_{-i}^*)\geq u_i(R,s_i',s_{-i}^*)$，则认为策略$s^*=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。
+**定义1：** 纳什均衡：在给定$R$的情况下，如果对于所有$s_i'\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^*,s_{-i}^*)\geq u_i(R,s_i',s_{-i}^*)$，则认为策略$s^*=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。
 
 注意：第$i$个worker的策略选择是前面**问题1**的优化解决方案，是与平台支付报酬$R$和其他worker策略$s_{-i}$相关的函数。
 
@@ -178,6 +184,7 @@ $var.\ \ s_i\in\{(0,rd),(1,1),(1,-1)\}.$
 #### Accuracy of Aggregated Estimate
 
 平台根据所有workers的上报值进行多数投票猜测最终的值
+
 $$
 x_p^{estimate}=
 \left \{
@@ -188,6 +195,7 @@ x_p^{estimate}=
 \end{matrix}
 \right.
 $$
+
 $P_a(R,p,N)$表示上述公式得到的聚合解决方案是正确的概率
 
 假设：N是基数且$N\geq 4$
@@ -199,12 +207,14 @@ workers总一致性奖励期望记作$E[R^T]$
 #### Platform's Payoff Maximization Problem
 
 平台收益函数：
+
 $$
 \prod(R)=\beta P_a(R,p,N)-E[R^T]
 $$
+
 $\beta>0$表示平台对准确率分配的权重
 
-**问题2：**平台的收益最大化：
+**问题2：** 平台的收益最大化：
 
 $max \prod(R)$
 
@@ -263,13 +273,13 @@ workers异构性的体现：
 
 假设：同类型worker（准确率相同）会选择相同的策略
 
-**定义2：**对称纳什均衡（SNE）
+**定义2：** 对称纳什均衡（SNE）
 
 1. n-SNE：所有workers都不努力和如实报告
 2. f-SNE：所有workers都努力和如实报告
 3. p-SNE：高质量workers努力和如实报告，低质量workers则相反
 
-**命题1：**workers之间的SNE
+**命题1：** workers之间的SNE
 
 1. 当$R\geq 0$时一定存在一个n-SNE
 2. 存在一个阈值$R_f\geq 0$，当$R\geq R_f$时，一定存在一个f-SNE
@@ -291,11 +301,11 @@ workers异构性的体现：
 
 帕累托最优均衡解：
 
-**命题2：**给定一致性奖励$R$，一定存在一个帕累托最优均衡解。
+**命题2：** 给定一致性奖励$R$，一定存在一个帕累托最优均衡解。
 
 这意味着可以通过调整一致性奖励来引导worker的努力策略和上报策略。
 
-**命题3：**策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。
+**命题3：** 策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。
 
 这意味着不会出现低质量workers努力而高质量workers随机的场面。对于给定的R，高质量workers有更高的概率拿到奖励。在努力成本不变的前提下，高准确率workers更愿意选择(1,1)的策略。换言之，多数投票方案更能吸引高准确率workers。然而，在完全信息的场景下这一条并不成立。
 
@@ -319,29 +329,31 @@ $\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$
 
 平台的最优决策R：
 
-**定理1：**给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$
+**定理1：** 给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$
 
 1. 如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：
+   
    $$
    R^* = 
-   \left\{
-   \begin{matrix}
-   0,\ &if\ \beta<\frac{1}{\eta_p}, \\
-   R_p^l,\  &if\ \frac{1}{\eta_p}\leq\beta<\frac{E[R_f^T]-E[R_p^T]}{P_f-P_p}\\
-   R_f,\  &if\ \beta \geq \frac{E[R_f^T]-E[R_p^T]}{P_f-P_p};\\
-   \end{matrix}
-   \right.
+\left\{
+\begin{matrix}
+0,\ &if\ \beta<\frac{1}{\eta_p}, \\
+R_p^l,\  &if\ \frac{1}{\eta_p}\leq\beta<\frac{E[R_f^T]-E[R_p^T]}{P_f-P_p}\\
+R_f,\  &if\ \beta \geq \frac{E[R_f^T]-E[R_p^T]}{P_f-P_p};\\
+\end{matrix}
+\right.
    $$
-   
+
 2. 其他情况下的平台最优一致性奖励为：
+   
    $$
    R^*=
-   \left \{
-   \begin{matrix}
-   0,&\ if\ \beta<1/\eta_f,\\
-   R_f,&\ if\ \beta\geq1/\eta_f.
-   \end{matrix}
-   \right.
+\left \{
+\begin{matrix}
+0,&\ if\ \beta<1/\eta_f,\\
+R_f,&\ if\ \beta\geq1/\eta_f.
+\end{matrix}
+\right.
    $$
 
 ![image-20210507094050695](https://i.loli.net/2021/05/07/E2af8LhbsgiKpUC.png)
@@ -364,6 +376,7 @@ $\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$
 ### Platform's Reward Design
 
 平台使用加权多数规则（weighted majority rule）来决定最终的聚合准确率：
+
 $$
 x_p^{estimate}=
 \left\{
@@ -374,7 +387,9 @@ x_p^{estimate}=
 \end{matrix}
 \right.
 $$
+
 其中，
+
 $$
 w_i(p_i,s_i)=log\frac{\rho(p_i,s_i)}{1-\rho(p_i,s_i)}, \\
 \rho(p_i,s_i)=
@@ -389,7 +404,7 @@ $$
 
 权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。
 
-第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：
+第$i$个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：
 
 1. 在f-SNE时（所有workers都选择`(1,1)`策略），高质量workers有更高权重，高低质量的权重都是正数；
 2. 在p-SNE时（高质量workers采取`(1,1)`而低质量workers采取`(0,rd)`），高质量workers权重为正数，低质量workers权重为0；
@@ -410,9 +425,9 @@ $\eta_n^{wm}=(P_n^{wm}-P_n^{wm})/E[R_n^T]=0$
 
 workers的均衡解行为和不完全信息一致，每种均衡对应的总一致性奖励（$E[R_f^T],E[R_p^T],E[R_n^T]$）也一致。
 
-**命题4：**给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$
+**命题4：** 给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$
 
-**证明：**在p-SNE，低准确率workers采取`(0,rd)`，高准确率workers采取`(1,1)`，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取`(1,1)`，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。
+**证明：** 在p-SNE，低准确率workers采取`(0,rd)`，高准确率workers采取`(1,1)`，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取`(1,1)`，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。
 
 *补充：这个证明没看懂，个人对命题4的理解是说，两个均衡解共存时，f-SNE是所有workers都努力并如实报告，p-SNE是只有高质量workers努力并如实报告，显然f-SNE多了低质量workers努力贡献的准确率，因此总的准确率会更高。*
 
@@ -422,9 +437,7 @@ workers的均衡解行为和不完全信息一致，每种均衡对应的总一�
 
 图5是新的均衡图解。蓝色区域更大了，也就是说在完全信息的场景下，平台更可能只让高质量workers努力和正确上报。
 
-**定理2：**令$\prod^{inc*}$和$\prod^{com*}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com*}\geq \prod^{inc*}$。
-
-
+**定理2**： 令$\prod^{inc*}$和$\prod^{com*}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com*}\geq \prod^{inc*}$。
 
 ## 6. Complete Information: Discriminatory Reward Policy
 
@@ -432,7 +445,7 @@ workers的均衡解行为和不完全信息一致，每种均衡对应的总一�
 
 ### Workers' Decisions
 
-**命题5：**workers的SNE是
+**命题5**：workers的SNE是
 
 1. $R_{low}$和$R_{high}$都大于等于0时，$s_i^*=(0,rd),\forall i$是一个SNE；
 2. 存在两个阈值$R_f^l$和$R_f^h$均大于0，使得当$R_{low}\geq R_f^l$且$R_{high}\geq R_f^h$时，$s_i^*=(1,1),\forall i$是一个SNE；
@@ -454,9 +467,6 @@ workers的均衡解行为和不完全信息一致，每种均衡对应的总一�
 
 ### Incomplete Information
 
-
-
 ### Complete Information
 
 ## 8. Conclusion
-

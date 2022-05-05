@@ -2,8 +2,8 @@
 title: 论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification
 date: 2020-12-25 09:38:43
 tags: 
-	- crowdsourcing
-	- game theory
+    - crowdsourcing
+    - game theory
 category: 论文
 description: 无验证的众包系统中的策略性信息披露
 ---
@@ -93,37 +93,37 @@ description: 无验证的众包系统中的策略性信息披露
 ### Platform's Decisions and Payoff
 
 1. 平台的信息披露策略：
-
+   
    1. 平台拥有的信息优势：workers求解准确率的分布，也就是高准确率workers的数量$k$
-
+   
    2. 平台和workers之间非对称信息披露的贝叶斯说服框架：
-
-      1. 平台和workers都不知道$k$，平台需要进行长期信息披露策略：
-
-         1. 平台虽然不知道$k$，但是知道$k$的分布，从而得到先验信念$\mu^{prior}=(\mu_{high}^{prior},\mu_{low}^{prior})$，其中$\mu_{high}^{prior}=Pr(k=k^{high})$，$\mu_{low}^{prior}=Pr(k=k^{low})$。$\mu_{high}^{prior}+\mu_{low}^{prior}=1$，且$k^{high}$和$k^{low}$是$k$的两个可能取值。
-
-         2. 这个先验同时也是workers的，大家都一样。
-
-         3. 注意，出于简化，上述公式中$k$的分布是两点分布，本方法同样适用于其他分布的情况。
-
-         4. 在$k$被发现之前，平台会预定一个信息披露策略（？是否公开——从后文看是公开的，或者说是workers能发现其规律）。
-
-         5. 平台可以有多个任务，每个任务有各自对应的$k$，在workers到来之前（也即是在$k$被发现之前），平台会先决定信息披露策略，并承诺会按这个策略执行，从而建立良好信誉。
-
-         6. $\epsilon = (\epsilon^h, \epsilon^l)\in [0,1]^2$：平台的信息披露策略。假设当$k=k^{low}$时，平台宣称$k_p^{anu}=k^{high}$的概率是$\epsilon^h$，而反之，当$k=k^{high}$时，平台宣称$k_p^{anu}=k^{low}$的概率是$\epsilon^l$。
-
-         7. 总结一下就是平台会按下列概率决策：
-
-            $Pr(k_p^{anu}=k^{high}|k=k^{low})=\epsilon^h$
-
-            $Pr(k_p^{anu}=k^{low}|k=k^{low})=1-\epsilon^h$
-
-            $Pr(k_p^{anu}=k^{high}|k=k^{high})=1-\epsilon^l$
       
+      1. 平台和workers都不知道$k$，平台需要进行长期信息披露策略：
+         
+         1. 平台虽然不知道$k$，但是知道$k$的分布，从而得到先验信念$\mu^{prior}=(\mu_{high}^{prior},\mu_{low}^{prior})$，其中$\mu_{high}^{prior}=Pr(k=k^{high})$，$\mu_{low}^{prior}=Pr(k=k^{low})$。$\mu_{high}^{prior}+\mu_{low}^{prior}=1$，且$k^{high}$和$k^{low}$是$k$的两个可能取值。
+         
+         2. 这个先验同时也是workers的，大家都一样。
+         
+         3. 注意，出于简化，上述公式中$k$的分布是两点分布，本方法同样适用于其他分布的情况。
+         
+         4. 在$k$被发现之前，平台会预定一个信息披露策略（？是否公开——从后文看是公开的，或者说是workers能发现其规律）。
+         
+         5. 平台可以有多个任务，每个任务有各自对应的$k$，在workers到来之前（也即是在$k$被发现之前），平台会先决定信息披露策略，并承诺会按这个策略执行，从而建立良好信誉。
+         
+         6. $\epsilon = (\epsilon^h, \epsilon^l)\in [0,1]^2$：平台的信息披露策略。假设当$k=k^{low}$时，平台宣称$k_p^{anu}=k^{high}$的概率是$\epsilon^h$，而反之，当$k=k^{high}$时，平台宣称$k_p^{anu}=k^{low}$的概率是$\epsilon^l$。
+         
+         7. 总结一下就是平台会按下列概率决策：
+            
+            $Pr(k_p^{anu}=k^{high}|k=k^{low})=\epsilon^h$
+            
+            $Pr(k_p^{anu}=k^{low}|k=k^{low})=1-\epsilon^h$
+            
+            $Pr(k_p^{anu}=k^{high}|k=k^{high})=1-\epsilon^l$
+            
             $Pr(k_p^{anu}=k^{low}|k=k^{high})=\epsilon^l$
-
+            
             即：k有两个取值，一个high，一个low，当真实的k是high时，平台说谎的概率是$\epsilon^l$；当真实的k是low时，平台说谎的概率是$\epsilon^h$。
-
+      
       2. workers执行任务，平台观察到$k$，workers尚且不知道；
       
       3. 平台依据之前决定的策略公开$k_p^{anu}$，可能和真实$k$不同，平台决定的$\epsilon$会影响workers对$k$的后验信念，从而影响平台的信誉和收益。
@@ -133,9 +133,9 @@ description: 无验证的众包系统中的策略性信息披露
 2. 平台的奖励设计策略：$R$，决定worker均衡收益
 
 3. 平台的收益：准确率和代价之间的均衡
-
+   
    $U_p(\epsilon,R,k;s)=\beta P_a(\epsilon,R,k;s)-E\{R^{tot}(\epsilon,R,k;s)\}$
-
+   
    1. $P_a(\epsilon,R,k;s)$表示workers的任务聚合准确率，使用少数服从多数的规则来计算该概率。
    2. $\beta$表示平台对聚合准确率的估值（从公式上理解感觉更像是说当聚合结果是正确的时候所得到的收益）
    3. $E\{R^{tot}(\epsilon,R,k;s)\}$表示对总的一致性奖励的预期支出（这里的$R^{tot}$是指什么？）
@@ -149,72 +149,73 @@ description: 无验证的众包系统中的策略性信息披露
 1. 前提：给定平台策略$\epsilon$和$R$，每个worker选择自己的努力程度和报告策略$s_i$来最大化自身收益
 
 2. worker的信念更新：平台公布$k_p^{anu}$之前，workers有对$k$的先验信念$\mu^{prior}$（是每人一个还是所有worker共用？）
-
+   
    1. 平台公布$k_p^{anu}$后，workers基于先验信念和平台公布值更新后验信念$\mu_w^{post,str}|k_p^{anu}$，其中$w\in \{high,low\}$。计算如下：
+      
       $$
       \mu_{high}^{post,str}|k^{high}(\epsilon)=\frac{(1-\epsilon^l)\mu_{high}^{prior}}{(1-\epsilon^l)\mu_{high}^{prior}+\epsilon^h\mu_{low}^{prior}}
       $$
-
+      
       $$
       \mu_{low}^{post,str}|k^{high}(\epsilon)=\frac{\epsilon^h\mu_{low}^{prior}}{(1-\epsilon^l)\mu_{high}^{prior}+\epsilon^h\mu_{low}^{prior}}
       $$
-
+      
       $$
       \mu_{high}^{post,str}|k^{low}(\epsilon)=\frac{\epsilon^l\mu_{low}^{prior}}{\epsilon^l\mu_{high}^{prior}+(1-\epsilon^h)\mu_{low}^{prior}}
       $$
-
+      
       $$
       \mu_{low}^{post,str}|k^{low}(\epsilon)=\frac{(1-\epsilon^h)\mu_{low}^{prior}}{\epsilon^l\mu_{high}^{prior}+(1-\epsilon^h)\mu_{low}^{prior}}
       $$
-
-      推导过程用到了[贝叶斯公式](https://zhuanlan.zhihu.com/p/134036707)。
-
-      前两行表示平台宣布$k=k^{high}$时，worker对$k$实际值的后验信念；后两行表示平台宣布$k=k^{low}$时，worker对$k$实际值的后验信念。
       
+      推导过程用到了[贝叶斯公式](https://zhuanlan.zhihu.com/p/134036707)。
+      
+      前两行表示平台宣布$k=k^{high}$时，worker对$k$实际值的后验信念；后两行表示平台宣布$k=k^{low}$时，worker对$k$实际值的后验信念。
+   
    2. 显然，第一个公式里，随着$\epsilon^h$的增加，workers对k为high的后验信念逐渐减小，也就是说，如果平台在k实际为low时说谎的概率增加，则workers在听到平台说k为high时，会怀疑平台说谎；类似地，在第四个公式中，随着$\epsilon^l$的增加，workers对k为low的后验信念逐渐减小，也就是说，如果平台在k实际为high时说谎的概率增加，则workers在听到平台说k为low时，会怀疑平台，进而减小后验信念。
 
 3. worker的均衡策略：worker根据后验信念做出是否努力以及是否如实汇报的决策，本文关注对称纳什均衡——相同类型（任务求解准确率）的worker会有相同的决策。
-
+   
    1. 定义1：
-
+      
       1. $n-SNE$：$(s_i^*=(0,rd), \forall i\in N)$，没有worker会努力和如实报告
       2. $f-SNE$：$(s_i^*=(1,1), \forall i\in N)$， 所有worker都努力和如实报告
       3. $p-SNE$：$(s_i^*=(1,1), \forall i\in N_h, s_j^*=(0,rd), \forall j\in N_l)$，高准确率的worker会努力和如实报告，低准确率的worker会不努力和随机报告
-
+   
    2. 定理1：
-
+      
       1. 给定任意$\epsilon\in [0,1]^2$，$R\geq 0$时一定存在一个$n-SNE$.
       2. 给定任意$\epsilon\in [0,1]^2$，始终存在阈值$R_f^{str}(\epsilon, k_p^{anu})> 0$，使得当且仅当$R>R_f^{str}(\epsilon,k_p^{anu})$时存在$f-SNE$.
       3. 当$\epsilon\in \Phi=\{\epsilon\in [0,1]^2|condition (11) \}$成立时，存在两个阈值$0<R_{pl}^{str}(\epsilon,k_p^{anu})\leq R_{ph}^{str}(\epsilon, k_p^{anu})$，使得当且仅当$R_{pl}^{str}(\epsilon,k_p^{anu})\leq R \leq R_{ph}^{str}(\epsilon, k_p^{anu})$时，存在$p-SNE$. $condition (11)$如下：
-
+      
       $$
       \frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority} \tag{11}
       $$
-
-      ​		在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers都决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-
-      ​		$P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-
-      ​		$P_{k^{high}}^{majority}$是指：$k^{high}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-
-      ​		$P_{k^{low}}^{majority}$是指：$k^{low}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
-
-      ​		这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。
+      
+      ​        在该公式中，$P_{k^{high}-1}^{majority}$是指：当$k^{high}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers都决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+      
+      ​        $P_{k^{low}-1}^{majority}$是指：当$k^{low}-1$个高准确率workers决定采取策略$(1,1)$且剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+      
+      ​        $P_{k^{high}}^{majority}$是指：$k^{high}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+      
+      ​        $P_{k^{low}}^{majority}$是指：$k^{low}$个高准确率worker决定采取策略$(1,1)$，剩下的其他workers决定采取策略$(0,rd)$时，$N-1$个workers的解决方案中的大多数是正确的概率（也就是多数一致方案是正确的概率）
+      
+      ​        这个公式算起来很复杂，它表达的场景是：当选择努力时，高准确率worker相信他们更有可能拿到奖励（而不是低准确率worker），也就是说高准确率worker认为自己是大多数的那部分。反之，当这个公式不满足时，高准确率worker会觉得自己拿到奖励的概率很低，从而使得高准确率worker的期望收益很低。此时，高准确率worker不会努力，而是选择降低成本，进而不存在$p-SNE$。
 
 4. 推论1：
-
+   
    1. 对于一个固定的$\epsilon^l$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^h$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^h$增加而减小。
-
+      
       说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{high}$（也就是说在$k^{low}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台需要提供更高报酬（也就是更大的$R$）。分析原因：这种情况会让workers觉得实际的$k$并不是$k^{high}$而是$k^{low}$，也就是说$\mu_{high}^{post,str}|k^{high}(\epsilon)$会减小，因此通过多数一致获得的奖励会减少，而为了激励workers，平台就需要提高奖励，从而提高workers的期望收益。
-
+   
    2. 对于一个固定的$\epsilon^h$，如果$k_p^{anu}=k^{high}$，则定理1中的$R_f^{str}(\epsilon,k_p^{anu})$和$R_{pl}^{str}(\epsilon,k_p^{anu})$随$\epsilon^l$增加而增加；反之，如果$k_p^{anu}=k^{low}$，则这两个都随$\epsilon^l$增加而减小。
-
+      
       说明：如果平台更喜欢把$k_p^{anu}$谎报成$k^{low}$（也就是说在$k^{high}$时说谎），那么为了达成$f-SNE$和$p-SNE$，平台也一样需要提高报酬来激励。这里的推导可以看前面workers更新后验信念那里的公式来理解。
-
+   
    3. 对于适当的$\epsilon$和$R$，定理1中的几个不同的$SNE$可以共存。
 
 5. 定理2：帕累托最优：对于任意给定$\epsilon$和$R$，workers之间存在一个帕累托最优均衡解。
-
+   
    本文假设当多个均衡解共存时，workers会选择帕累托最优。
 
 ### Platform Reward Design in Stage II
@@ -222,44 +223,48 @@ description: 无验证的众包系统中的策略性信息披露
 这一部分分析对于给定的$\epsilon$，平台观察$k$并决定$R$，从而在第三阶段达到帕累托最优。
 
 1. 定义2：$z\in \{n,f,p\}$表示均衡解索引
-
+   
    1. $P_z(k)$：均衡$z-SNE$的任务聚合准确率
-
+   
    2. $E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}$：均衡$z-SNE$的总期望一致性奖励
-
+   
    3. $B_z(\epsilon,k,k_p^{anu})$：对于每单位$R$，均衡解从$n-SNE$提升到$z-SNE$所带来的平均准确率的提升，计算方式如下：
+      
       $$
       B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}}
       $$
-      
 
 2. 定理3：
-
+   
    1. 如果$(11)$成立且$B_p(\epsilon,k,k_p^{anu})>B_f(\epsilon,k,k_p^{anu})$，则平台的最优奖励为：
+      
       $$
       R^*=\left\{
-      \begin{aligned}
-      &0, &if \ \ \beta<\frac{1}{B_p(\epsilon,k,k_p^{anu})}\\
-      &R_{pl}^{str}(\epsilon,k_p^{anu}), &if\ \ \frac{1}{B_p(\epsilon,k,k_p^{anu})} \leq \beta<\widetilde\beta(\epsilon,k,k_p^{anu}) \\
-      &R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \widetilde\beta(\epsilon,k,k_p^{anu})
-      \end{aligned}
-      \right.
+\begin{aligned}
+&0, &if \ \ \beta<\frac{1}{B_p(\epsilon,k,k_p^{anu})}\\
+&R_{pl}^{str}(\epsilon,k_p^{anu}), &if\ \ \frac{1}{B_p(\epsilon,k,k_p^{anu})} \leq \beta<\widetilde\beta(\epsilon,k,k_p^{anu}) \\
+&R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \widetilde\beta(\epsilon,k,k_p^{anu})
+\end{aligned}
+\right.
       $$
+      
       其中，$\widetilde\beta(\epsilon,k,k_p^{anu})=\frac{E\{R_f^{tot}(\epsilon,k,k_p^{anu})-E\{R_p^{tot}(\epsilon,k,k_p^{anu})}{P_f(k)-P_p(k)}$
-
+   
    2. 如果$(11)$不成立或者$B_p(\epsilon,k,k_p^{anu})<B_f(\epsilon,k,k_p^{anu})$，则平台的最优奖励为：
+      
       $$
       R^*=\left\{
-      \begin{aligned}
-      &0, &if \ \ \beta<\frac{1}{B_f(\epsilon,k,k_p^{anu})}\\
-      &R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \frac{1}{B_f(\epsilon,k,k_p^{anu})}
-      \end{aligned}
-      \right.
+\begin{aligned}
+&0, &if \ \ \beta<\frac{1}{B_f(\epsilon,k,k_p^{anu})}\\
+&R_{f}^{str}(\epsilon,k_p^{anu}), &if\ \ \beta\geq \frac{1}{B_f(\epsilon,k,k_p^{anu})}
+\end{aligned}
+\right.
       $$
+      
       注意，$(11)$是达到$p-SNE$所必须的条件。
 
 3. 定理3说明了：
-
+   
    1. 如果$p-SNE$存在，且它比$f-SNE$的单位收益准确率提升更高，且平台的估值$\beta$是温和的，平台会通过选择$R^*=R_{pl}^{str}(\epsilon,k_p^{anu})$引出$p-SNE$作为第三阶段的帕累托均衡来最大化自己的收益。
    2. 如果$p-SNE$不存在，或者它比$f-SNE$的单位收益准确率提升低，那么$p-SNE$对平台而言就不是最好的均衡解。当$\beta$很大时，平台会通过选择$R^*=R_f^{str}(\epsilon,k_p^{anu})$引出$f-SNE$作为第三阶段的帕累托最优。
 
@@ -270,53 +275,55 @@ description: 无验证的众包系统中的策略性信息披露
 重复一下前文的符号表示：
 
 > $\epsilon = (\epsilon^h, \epsilon^l)\in [0,1]^2$：平台的信息披露策略。假设当$k=k^{low}$时，平台宣称$k_p^{anu}=k^{high}$的概率是$\epsilon^h$，而反之，当$k=k^{high}$时，平台宣称$k_p^{anu}=k^{low}$的概率是$\epsilon^l$。
->
+> 
 > 总结一下就是平台会按下列概率决策：
->
+> 
 > $Pr(k_p^{anu}=k^{high}|k=k^{low})=\epsilon^h$
->
+> 
 > $Pr(k_p^{anu}=k^{low}|k=k^{low})=1-\epsilon^h$
->
+> 
 > $Pr(k_p^{anu}=k^{high}|k=k^{high})=1-\epsilon^l$
->
+> 
 > $Pr(k_p^{anu}=k^{low}|k=k^{high})=\epsilon^l$
->
+> 
 > 即：k有两个取值，一个high，一个low，当真实的k是high时，平台说谎的概率是$\epsilon^l$；当真实的k是low时，平台说谎的概率是$\epsilon^h$。
 
 1. 定理4：对平台而言，设置为$\epsilon^h=1,\epsilon^l=0$并不总是最优解。
-
+   
    换言之，宣称$k_p^{anu}=k^{high}$并不总是最好的，具体分析如下：
-
+   
    首先，复习内容：$k$的真实值影响第2阶段中的奖励设计，而平台对$k$的宣称值$k_p^{anu}$影响第3阶段中workers的行为。考虑一下4种情况：
-
+   
    1. Case $(h,h)$: $k=k^{high}$ 且 $k_p^{anu}=k^{high}$，出现概率$Q_{h,h}(\epsilon)=\mu_{high}^{prior}(1-\epsilon^l)$
    2. Case $(h,l)$: $k=k^{high}$ 且 $k_p^{anu}=k^{low}$，出现概率$Q_{h,l}(\epsilon)=\mu_{high}^{prior}\epsilon^l$
    3. Case $(l,h)$: $k=k^{low}$ 且 $k_p^{anu}=k^{high}$，出现概率$Q_{l,h}(\epsilon)=\mu_{low}^{prior}\epsilon^h$
    4. Case $(l,l)$: $k=k^{low}$ 且 $k_p^{anu}=k^{low}$，出现概率$Q_{l,l}(\epsilon)=\mu_{low}^{prior}(1-\epsilon^h)$
-
+   
    固定$\epsilon^l$，平台的期望收益为：
-
+   
    $$
    E\{U_p(\epsilon^h)\}=Q_{h,h}(\epsilon^h)U_{h,h}(\epsilon^h)+Q_{h,l}(\epsilon^h)U_{h,l}(\epsilon^h)+Q_{l,h}(\epsilon^h)U_{l,h}(\epsilon^h)+Q_{l,l}(\epsilon^h)U_{l,l}(\epsilon^h)
    $$
+   
    $U_{h,h}$表示在Case $(h,h)$的情况下，平台在第2阶段最优化奖励值后的最大收益。其他几个U也是类似的含义。
-
+   
    接下来分析期望收益随披露策略的变化趋势。
 
 2. 引理1：
-
+   
    1. $U_{h,h}(\epsilon^h),U_{l,h}(\epsilon^h),Q_{l,l}(\epsilon^h)$随$\epsilon^h$增加而减小。
    2. $U_{h,l}(\epsilon^h),U_{l,l}(\epsilon^h),Q_{l,h}(\epsilon^h)$随$\epsilon^h$增加而增加。
-
+   
    分析：$Q_{l,l}(\epsilon^h)$和$Q_{l,h}(\epsilon^h)$随$\epsilon^h$的变化从定义即可看出。接下来用Case $(h,h)$ 中的 $U_{h,h}(\epsilon^h)$作为例子来分析。在推论1中可知，随$\epsilon^h$增加，平台需要支付更大的奖励$R$来激励workers，而这会减小平台的收益。其他几个U也是类似的分析思路。
-
+   
    而由于$E\{U_p(\epsilon^h)\}$的几部分单调性不同，因此无法直接分析出平台收益随$\epsilon^h$的变化趋势。同样的，$E\{U_p(\epsilon^l)\}$也无法分析变化趋势。从而得出定理4的结论。
 
 具体的平台披露策略因为太复杂了，所以没法分析，在实验部分进行了数值实验。
 
 ## NUMERICAL RESULTS
 
-这一部分进行数值实验，研究两类workers：策略型和天真型，天真型的符号表达沿用前文中策略型的，只是把$str$改成了$nai$，具体如下：
+这一部分进行数值实验，研究两类workers：策略型和天真型，天真型的符号表达沿用前文中策略型的，只是把str改成了nai，具体如下：
+
 $$
 \left\{
 \begin{aligned}
@@ -325,6 +332,7 @@ $$
 \end{aligned}
 \right.
 $$
+
 接下来的实验结果说明：平台始终向天真的工人宣布高平均工人准确率是最佳的（也就是$k=k^{high}$），但对策略型工人来说并非如此。我们还显示了一个反直觉的结果，表明平台的收益随高准确率workers的准确率提高而提高，随高准确率workers的数量提高而减小。
 
 ### Impact of Worker Characteristics
@@ -428,9 +436,11 @@ $\mu_{high}^{post,str}|k_p^{anu}(\epsilon)$和$\mu_{low}^{post,str}|k_p^{anu}(\e
 其他workers的多数一致方案是错误的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}-1}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}-1}^{majority})$
 
 一个努力且如实报告的高质量worker得到收益的概率为：
+
 $$
 p_h(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})+(1-p_h)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}-1}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}-1}^{majority})) \tag{1}
 $$
+
 对于一个低质量worker而言，该workers努力时得到正确答案概率：$p_l$，得到错误答案概率：$1-p_l$，其他workers中，高质量workers的数量$k$为$k^{high}$或者$k^{low}$，且对应的概率分别是两个后验概率$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)$和$\mu_{low}^{post,str}|k_p^{anu}(\epsilon)$，而这两种情况下其他workers的多数一致方案是正确和错误的概率分别是$P_{k^{high}}^{majority}$和$P_{k^{low}}^{majority}$，即可得：
 
 其他workers的多数一致方案是正确的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority}$，
@@ -438,21 +448,25 @@ $$
 其他workers的多数一致方案是错误的概率：$\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}}^{majority})$
 
 一个努力且如实报告的低质量worker得到收益的概率为：
+
 $$
 p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})+(1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{high}}^{majority})+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)(1-P_{k^{low}}^{majority})) \tag{2}
 $$
+
 公式(1)大于公式(2)所推导出的公式和论文中的$condition(11)$不一样，暂时没想到其他的思路。
 
 这里推导出的是：
+
 $$
 (1-p_h)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_h-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \\
 (1-p_l)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)+\mu_{low}^{post,str}|k_p^{anu}(\epsilon))+(2p_l-1)(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority})
 $$
+
 论文里的11是：
+
 $$
 \frac{2p_h-1}{2p_l-1}(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}-1}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}-1}^{majority})\geq \mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{post,str}|k_p^{anu}(\epsilon)P_{k^{low}}^{majority} \tag{11}
 $$
-
 
 ### 一些问题
 

@@ -3,7 +3,7 @@ title: 论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing
 date: 2020-05-14 11:40:43
 tags: 
 	- game theory
-	- crowdsourcing
+	- crowd sensing
 category: 论文
 ---
 
