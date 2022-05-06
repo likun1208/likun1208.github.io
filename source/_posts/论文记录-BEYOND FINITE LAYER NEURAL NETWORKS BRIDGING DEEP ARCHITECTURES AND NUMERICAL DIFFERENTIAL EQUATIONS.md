@@ -2,8 +2,8 @@
 title: 论文记录-FractalNet的ODE建模
 date: 2020-05-23 16:23:43
 tags: 
-	- deep learning
-	- OED
+    - deep learning
+    - OED
 category: 论文
 ---
 
@@ -14,4 +14,3 @@ category: 论文
 论文2：FRACTALNET: ULTRA-DEEP NEURAL NETWORKS WITHOUT RESIDUALS
 
 <!--more-->
-
