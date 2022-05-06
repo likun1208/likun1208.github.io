@@ -1,6 +1,507 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Web3行业总结</title>
+    <url>/2022/05/06/Web3%E8%A1%8C%E4%B8%9A%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="Web3-0总结"><a href="#Web3-0总结" class="headerlink" title="Web3.0总结"></a>Web3.0总结</h1><h2 id="定义与特点"><a href="#定义与特点" class="headerlink" title="定义与特点"></a>定义与特点</h2><p>2014年 Gavin Wood：</p>
+<ol>
+<li><p>让互联网更去中心化、可验证、安全而发起的一组广泛的运动和协议；</p>
+</li>
+<li><p>愿景是实现无服务器、去中心化的互联网，即用户掌握自己身份、数据和命运的互联网；</p>
+</li>
+<li><p>将启动新全球数字经济系统，创造新业务模式和新市场，打破平台垄断，推动广泛的、自下而上的创新。</p>
+</li>
+</ol>
+<p>Web3.0 是信息聚联与价值共享的用户互联网，是下一代互联网技术体系，是 用户共建、隐私保护、平台开放的生态体系，是去平台中心化的组织形式所构建的新型经济系统，是以用户为中心的互联网，用户既是内容的生产者和所有者，也是内容的传播者和价值拥有者。</p>
+<p>概述：</p>
+<ol>
+<li><p>Web3.0 是信息聚联与价值共享的用户互联网</p>
+</li>
+<li><p>Web3.0 是下一代互联网技术体系，是 用户共建、隐私保护、平台开放的生态体系</p>
+</li>
+<li><p>Web3.0 是去平台中心化的组织形式所构建的新型经济系统</p>
+</li>
+<li><p>Web3.0 是以 用户 为中心的互联网，用户既是内容的生产者和所有者，也是内容的传播者和价值拥有者</p>
+</li>
+</ol>
+<p>特点：开放、隐私、共建</p>
+<p>核心特征：将去平台中心化 实现用户自主价值创造 、价值确权 、 价值交换三位一体 使现实世界与虚拟世界双向渗透</p>
+<p>主要特点：</p>
+<ol>
+<li><p>用户或将拥有更高的权限</p>
+</li>
+<li><p>用户有可能通过所拥有的数据获利</p>
+</li>
+<li><p>虚拟世界与现实世界融合</p>
+</li>
+<li><p>实现价值安全、透明、可信的转移</p>
+</li>
+</ol>
+<p>Web3.0生态主要组成要素及特点：</p>
+<ol>
+<li><p>用户身份：传统中心化身份容易产生安全和隐私风险，web3构建了一个去中心化的身份标识，以DID作为web3的用户身份表现形式；</p>
+</li>
+<li><p>组织形式：web3的核心观点是用户共建、用户所有，所以会形成用户共建自治的组织形式，即DAO；</p>
+</li>
+<li><p>经济系统：数字资产是web3的核心要素，数据资产将以通证的形式构成整个经济系统。截至2021年4月2日，DeFi各项目总计拥有约712万活跃用户，相比自2021年1月的160.78万增长了约3.5倍，NFT主流项目资产规模合计也超过100亿美元，成为元宇宙项目中发展最为迅猛的领域；</p>
+</li>
+<li><p>呈现形式：web3中的所有活动和交互都需要依赖于特定的应用来实现，通过dApp的交互最终构成动态的web3世界；5）从中心化存储到去中心化存储：去中心化的存储方案即IPFS，为web3提供基础支撑。在web3生态中，区块链是核心支撑，其具有的技术、金融和社会属性将帮助构建一个去中心化的、可信的数字化价值交互网络。</p>
+</li>
+</ol>
+<p>5个特征：</p>
+<ol>
+<li><p>计算和特定的计算设备解绑分离：Web3.0构成了一种全新的计算范式，计算和存储行为并不会因为特定的设备出现问题，这个计算和服务就被关停。</p>
+</li>
+<li><p>基于密码学技术实现身份认证及数据确权：不同于以往传统互联网基于中心化机构和数据库来进行授权和认证。身份必将成为一种主权资产。这个身份不管是人的身份，同时还包含机器等终端在Web3.0中的身份。</p>
+</li>
+<li><p>数据的记录和存储都是通过不可篡改的方式进行：Web3.0中，数据的存储倾向于永不删除和修改，而是不断累加数据，但是这种模式的前提是，存储成本极低，规模极大。</p>
+</li>
+<li><p>资源分配通过基于通证的市场机制来进行：区别于以往的中心化授权调配的方式，而是双方通过通证的交易来进行资源的配置优化。</p>
+</li>
+<li><p>权益分配上的去中心化和透明化。</p>
+</li>
+</ol>
+<p>Web3背景下的商业逻辑：</p>
+<ol>
+<li><p>去中心化的通用数字身份认证体系</p>
+</li>
+<li><p>数据确权</p>
+</li>
+<li><p>价值分配结构优化</p>
+</li>
+<li><p>产品设计和服务定价权向用户转移</p>
+</li>
+</ol>
+<p>Web3.0的发展路径应该是资产、身份和数据</p>
+<h2 id="历史与发展"><a href="#历史与发展" class="headerlink" title="历史与发展"></a>历史与发展</h2><p><img src="https://s2.loli.net/2022/05/06/bNOo6RnIBpYLXEQ.png" alt=""></p>
+<h3 id="Web1：单向、只读互联网"><a href="#Web1：单向、只读互联网" class="headerlink" title="Web1：单向、只读互联网"></a>Web1：单向、只读互联网</h3><p>1991年—2004年，门户网站提供信息，用户被动浏览，内容创造者很少，绝大多数用户只能接受平台信息的投喂。</p>
+<h3 id="Web2：双向、可读写互联网"><a href="#Web2：双向、可读写互联网" class="headerlink" title="Web2：双向、可读写互联网"></a>Web2：双向、可读写互联网</h3><p>2004年至今，允许用户自主生成内容，与网站和他人进行交互和协作。网络是专有的、封闭的，属于某个互联网公司的，用户自身并未真正拥有这些平台上的用户数据。</p>
+<h3 id="Web3：聚联、价值互联网"><a href="#Web3：聚联、价值互联网" class="headerlink" title="Web3：聚联、价值互联网"></a>Web3：聚联、价值互联网</h3><p>内容由用户创造，数据归用户所有，每个人都能掌握自己的（数字）身份、资产和数据，进而掌握自己的命运。</p>
+<h3 id="和国外对比"><a href="#和国外对比" class="headerlink" title="和国外对比"></a>和国外对比</h3><p>市场差异：中国是战略驱动型 美国是产业驱动型<br>应用场景：中国以元宇宙 、 沉浸式体验和可视化相关产业为主 美国优势在于基础设施和 链上经济发展</p>
+<h2 id="发展Web3的必要性"><a href="#发展Web3的必要性" class="headerlink" title="发展Web3的必要性"></a>发展Web3的必要性</h2><h3 id="从Web2的现状问题出发"><a href="#从Web2的现状问题出发" class="headerlink" title="从Web2的现状问题出发"></a>从Web2的现状问题出发</h3><ol>
+<li><p>Web2.0 的中心化平台遵循可预测的生命周期，平台与网络参与者的关系已经从正和变为零和；</p>
+</li>
+<li><p>Web2.0 发展到后期逐渐显现的寡头垄断局面，让用户的数据安全和隐私保护问题变得更加尖锐；</p>
+</li>
+<li><p>Web1.0 到Web2.0，用户实现了内容的消费者向内容生产者的转变，但并未相应地转变生产关系。</p>
+</li>
+</ol>
+<h3 id="Web3的作用"><a href="#Web3的作用" class="headerlink" title="Web3的作用"></a>Web3的作用</h3><p>Web3.0 将解决 Web2.0 时代互联网大多数控制权集中在各个中心化公司的核心问题，实现价值向用户的安全、透明、可信转移</p>
+<p><img src="https://s2.loli.net/2022/05/06/ORoW7FsyB3w2Vax.png" alt=""></p>
+<h3 id="发展驱动力"><a href="#发展驱动力" class="headerlink" title="发展驱动力"></a>发展驱动力</h3><ol>
+<li><p>战略层面：美国的战略推动者是产业界，中国则应发挥自身战略驱动型市场优势，顶层设计先行；Web3.0已成美国构建虚拟世界金融话语权的手段，中国需要建立自身特色的 Web3.0 体系</p>
+</li>
+<li><p>政策层面：反垄断监管持续推进，用户数据安全、隐私保护成为关注重点</p>
+</li>
+<li><p>技术层面：区块链技术特性适配Web3.0 设想，且技术趋于成熟，应用场景不断落地</p>
+</li>
+<li><p>产业层面：Web3.0行业发展周期即将从幼稚期迈入成长期，未来各个细分领域将会迎来快速发展</p>
+</li>
+<li><p>金融层面：数字货币逐渐获主流经济体认可，各国倾向于自主发行数字货币，对加密货币监管态度不一</p>
+</li>
+</ol>
+<h2 id="行业市场现状"><a href="#行业市场现状" class="headerlink" title="行业市场现状"></a>行业市场现状</h2><p>Web3.0协议栈的各部分都是以去中心化、点对点的加密协议为特征，是一个无信任交易或协作基础设施，以达到用户能控制自己的资产、身份和数据的目的。从这个角度看，一定是资产是先行，因为资产相关领域具有可投机性，可以吸引大批资金和人员进入。如果从资产入手，下一步可能会解决的是身份，如果不解决身份问题是没办法解决数据问题的，因为没有个人的标识就没有办法去掌握自己的数据。所以应该是从资产、身份和数据这样的时间线去推进。</p>
+<h3 id="商业趋势"><a href="#商业趋势" class="headerlink" title="商业趋势"></a>商业趋势</h3><ol>
+<li><p>将Web2.0 的Apps 升级为Web3.0 的DApps。</p>
+</li>
+<li><p>重构Web3.0 网络的基础设施和应用协议，并初步形成Web3.0 的核心堆栈。</p>
+</li>
+<li><p>Web3.0 的新项目获客模式创新：定向奖励精准用户。</p>
+</li>
+</ol>
+<h3 id="典型项目"><a href="#典型项目" class="headerlink" title="典型项目"></a>典型项目</h3><ol>
+<li><p>开放：ENS、MASK Network 和Polkdot</p>
+</li>
+<li><p>隐私：Horizen、NuCypher</p>
+</li>
+<li><p>共建：Mirror、Gitcoin</p>
+</li>
+</ol>
+<h3 id="生态体系现状"><a href="#生态体系现状" class="headerlink" title="生态体系现状"></a>生态体系现状</h3><ol>
+<li><p>底层基础设施：行业整体产业链各环节已比较完备，部分环节海外仍处垄断地位</p>
+</li>
+<li><p>软件层与交互层现状：VR/AR行业发展迎来拐点，终端硬件出货量将持续走高</p>
+</li>
+<li><p>应用层现状：应用集中游戏和社交，致力于沉浸体验、观看体验、交互体验</p>
+</li>
+<li><p>NFT：NFT资产类型不断丰富中，但仍存在资产无法满足流动性需求的庞氏骗局风险；中国NFT 生态应用尚在孕育中，中国本土化之路刚刚开始，建议先建立监管体系</p>
+</li>
+<li><p>GameFi：GameFi将加速用户和 NFT 资产积累，推动更多企业和资本深入布局 Web3.0</p>
+</li>
+<li><p>DAO：去中心化组织应该更侧重于去平台化，让用户从被平台捆绑的状态中解放</p>
+</li>
+<li><p>DeFi：DeFi作为 Web3.0 生态中的金融体系，维持虚拟世界的核心信任体系，但未来尚不明朗</p>
+</li>
+</ol>
+<h3 id="中美对比"><a href="#中美对比" class="headerlink" title="中美对比"></a>中美对比</h3><ol>
+<li><p>国家层面：中国从顶层设计自上而下布局，美国从产业端自下而上推动</p>
+</li>
+<li><p>产业层面：美国优势领域在于底层基础设施和应用层，中国着力发展软件层和交互层</p>
+</li>
+<li><p>企业层面：中国企业更注重底层赛道布局，应用层布局不足，美国企业布局更为全面；美国科技巨头布局时间跨度更长；中国近三年才开始布局并加大海外投资收购力度</p>
+</li>
+</ol>
+<h3 id="元宇宙"><a href="#元宇宙" class="headerlink" title="元宇宙"></a>元宇宙</h3><ol>
+<li>Web3.0与元宇宙是一体两面的关系，二者具有多样状态，可重合、可交叉、可分离</li>
+</ol>
+<h2 id="关键技术"><a href="#关键技术" class="headerlink" title="关键技术"></a>关键技术</h2><p>区块链是Web 3 0 的关键技术 其去中心化 、防篡改特征是价值归属用户 、 用户隐私保护的基础；此外 操作系统 、分布式存储等底层技术VR/AR 、 3 D 建模等沉浸式 、 可视化技术也需与 Web 3 0 发展相适配.</p>
+<p><img src="https://s2.loli.net/2022/05/06/fX2NdFY3x5RbHlB.png" alt=""></p>
+<h3 id="分类方法1"><a href="#分类方法1" class="headerlink" title="分类方法1"></a>分类方法1</h3><h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><ol>
+<li>应用层通常都是去中心化应用协议，类别繁多，目前已经有所发展的主要包括：DEFI、GameFi、Social Messaging、Media、Ecomerce、Security。</li>
+</ol>
+<h4 id="用户控制层"><a href="#用户控制层" class="headerlink" title="用户控制层"></a>用户控制层</h4><ol>
+<li>用户控制层包括：Exchange、Wallet、DAO、Broswers 等。</li>
+</ol>
+<h4 id="可扩展传输层"><a href="#可扩展传输层" class="headerlink" title="可扩展传输层"></a>可扩展传输层</h4><ol>
+<li>统称为Layer2 协议。主要包括6 类：侧链、状态通道、Plasma、Optimisitc Rollup、ZK Rollup、Volidium等。</li>
+</ol>
+<h4 id="组件层"><a href="#组件层" class="headerlink" title="组件层"></a>组件层</h4><ol>
+<li><p>组件建立在计算层上，重复使用标准化的智能合约模版。</p>
+</li>
+<li><p>组件层不是必不可少的。</p>
+</li>
+<li><p>可选组件主要包括：查询层（The Graph、dfuse）、预言机（Chainlink、Band Protocol）、DID、DDNS、Digital Assets（BTC、ETH 等）、Crypto Currencies（ERC20、ERC721 等）、Stablecoin（USDC、DAI）等。</p>
+</li>
+</ol>
+<h4 id="计算层"><a href="#计算层" class="headerlink" title="计算层"></a>计算层</h4><ol>
+<li>计算层允许人类指示状态层做他们想做的事。具体指状态转换机，如EVM、WASM 等。</li>
+</ol>
+<h4 id="状态层"><a href="#状态层" class="headerlink" title="状态层"></a>状态层</h4><ol>
+<li><p>状态层主要是公链的集合，如Bitcoin、Ethereum、Solana等；</p>
+</li>
+<li><p>状态层还可以细分为状态转化层、共识层、分片层、P2P 层等。</p>
+</li>
+</ol>
+<h4 id="存储层"><a href="#存储层" class="headerlink" title="存储层"></a>存储层</h4><ol>
+<li>成本高，链外分布式存储，IPFS、Arweare 和Swarm。</li>
+</ol>
+<p>除了上述核心堆栈外，Web3.0 还有一些距离终端用户较远的基础设施，比如：可信执行环境（TEE）、互联网协议（IP）、混合网络数据包路由等。</p>
+<h3 id="分类方法2"><a href="#分类方法2" class="headerlink" title="分类方法2"></a>分类方法2</h3><ol>
+<li><p>协议层</p>
+</li>
+<li><p>应用层</p>
+</li>
+<li><p>网络基础层</p>
+</li>
+</ol>
+<h3 id="分类方法3"><a href="#分类方法3" class="headerlink" title="分类方法3"></a>分类方法3</h3><ol>
+<li><p>交互层</p>
+</li>
+<li><p>平台层</p>
+</li>
+<li><p>基础层</p>
+</li>
+</ol>
+<h3 id="分类方法4"><a href="#分类方法4" class="headerlink" title="分类方法4"></a>分类方法4</h3><p><img src="https://s2.loli.net/2022/05/06/sUKBNh65QxqeMvk.png" alt=""></p>
+<h3 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h3><ol>
+<li><p>零知识证明</p>
+</li>
+<li><p>EVM</p>
+</li>
+<li><p>跨链</p>
+</li>
+<li><p>分片、L2、链外计算</p>
+</li>
+<li><p>预言机</p>
+</li>
+<li><p>人工智能超算</p>
+</li>
+<li><p>去信任的交互协议和平台</p>
+</li>
+<li><p>分布式存储</p>
+</li>
+</ol>
+<h3 id="隐私相关技术"><a href="#隐私相关技术" class="headerlink" title="隐私相关技术"></a>隐私相关技术</h3><ol>
+<li><p>隐私匿名币</p>
+</li>
+<li><p>智能合约隐私</p>
+</li>
+<li><p>Layer1 和 Layer2 各自的技术</p>
+</li>
+<li><p>多方安全技术</p>
+</li>
+<li><p>同态加密</p>
+</li>
+<li><p>可信执行环境TEE</p>
+</li>
+</ol>
+<h2 id="未来趋势"><a href="#未来趋势" class="headerlink" title="未来趋势"></a>未来趋势</h2><p>中国经济未来的增长点在于数字经济Web3.0是数字经济发展的关键。目前海外Web3.0 体系仍存在一定经济金融风险。中国应发挥战略驱动作用完善监管体系,在合规框架下探索Web3.0的中国化之潞。</p>
+<h3 id="发展挑战"><a href="#发展挑战" class="headerlink" title="发展挑战"></a>发展挑战</h3><p>商业逻辑变化可能导致经济风险，监管需相应适配</p>
+<ol>
+<li><p>国家层面：探索带来认知升级挑战，各国发展路径不一</p>
+</li>
+<li><p>产业层面：底层技术需持续攻破</p>
+</li>
+<li><p>经济层面：具有一定资本操纵和经济风险，监管难度加大</p>
+</li>
+<li><p>企业层面：短期内互联网中心化特征难以打破</p>
+</li>
+</ol>
+<h3 id="投融资分析"><a href="#投融资分析" class="headerlink" title="投融资分析"></a>投融资分析</h3><p>海外Web3.0 投资如火如荼，中国侧重元宇宙“沉浸式应用”</p>
+<h3 id="发展趋势"><a href="#发展趋势" class="headerlink" title="发展趋势"></a>发展趋势</h3><ol>
+<li><p>全球或将分区发展，全新商业模式亟待探索</p>
+<ol>
+<li><p>海外投资：海外机构将加大对Web3.0的投资</p>
+</li>
+<li><p>商业模式：流量价值依旧重要，激励机制对流量影响较大</p>
+</li>
+<li><p>企业探索：大量Web2.0的公司或将尝试进入 Web3.0</p>
+</li>
+<li><p>国家监管：各国在本国合规政策下探索不同的发展道路</p>
+</li>
+</ol>
+</li>
+<li><p>中国化之路：数字经济体系下构建中国Web3.0生态，新型科技在合规市场提供服务</p>
+<ol>
+<li><p>中国经济未来的增长点在于数字经济</p>
+</li>
+<li><p>Web3.0是数字经济发展的关键</p>
+</li>
+<li><p>Web3.0在中国发展首先需要发展新型科技</p>
+</li>
+<li><p>中国需在合规框架下探索路线</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="监管趋势"><a href="#监管趋势" class="headerlink" title="监管趋势"></a>监管趋势</h3><ol>
+<li><p>对于沟通Web3.0 和Web2.0 两个世界的通道/业务，将首当其冲，寻求适合的监管模式，以适应Web3.0 的发展；</p>
+</li>
+<li><p>隐私和匿名方面，有可能存在底层实现KYC，应用层实现适度匿名；</p>
+</li>
+<li><p>DAO 治理过程中，势必会引入监管作为治理一方。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>行业总结</category>
+      </categories>
+      <tags>
+        <tag>web3</tag>
+        <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-众包相关论文调研</title>
+    <url>/2022/05/06/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E4%BC%97%E5%8C%85%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E8%B0%83%E7%A0%94/</url>
+    <content><![CDATA[<h3 id="1-Two-Stage-Auction-Mechanism-for-Long-Term-Participation-in-Crowdsourcing"><a href="#1-Two-Stage-Auction-Mechanism-for-Long-Term-Participation-in-Crowdsourcing" class="headerlink" title="1-Two-Stage Auction Mechanism for Long Term Participation in Crowdsourcing"></a>1-Two-Stage Auction Mechanism for Long Term Participation in Crowdsourcing</h3><p>针对小型任务的众包（例如：图像打标签、录音），workers愿意完成的任务数量上限不同，并且会在投标阶段谎报；拍卖随时间推移重复多轮，失败的workers可能退出系统。</p>
+<p>针对的问题：workers竞标时说的任务数量不一定真的能完成。workers通常可以负担大量的工作，尽管由于时间限制和边际收益递减会有一定的限制。此外，workers很难确保他们所有的工作都符合requester设定的质量标准，因此，requester需要根据工作的实际数量支付报酬。</p>
+<p>本文思路：workers的投标包括单个任务的报酬、自己愿意完成的最大任务数量和自己实际完成的任务数量。基于迈尔森拍卖机制推广得到两阶段博弈机制（这部分公式非常相似），证明了该机制的激励相容和个体理性；提出了使得requester能在成本效率和公平性之间取得平衡的任务分配机制，从而让wokers有意愿长期留在系统中参与众包。</p>
+<p>使用参数进行了仿真实验分析。</p>
+<blockquote>
+<p>这篇文章后面出现了直接成本和间接成本，还没有细看是什么。</p>
+</blockquote>
+<h3 id="2-Quality-Aware-Incentive-Mechanisms-Under-Social-Influences-in-Data-Crowdsourcing"><a href="#2-Quality-Aware-Incentive-Mechanisms-Under-Social-Influences-in-Data-Crowdsourcing" class="headerlink" title="2-Quality Aware Incentive Mechanisms Under Social Influences in Data Crowdsourcing"></a>2-Quality Aware Incentive Mechanisms Under Social Influences in Data Crowdsourcing</h3><p>利用用户之间的社会影响作为激励来激励用户的参与，以降低招募用户的成本。设计了激励机制，以实现高质量的众包数据和低成本的激励用户参与为目标。</p>
+<p>把用户的社会影响力看作是一个影响用户完成任务所需成本的参数。设计两阶段博弈，第一阶段通过任务分配最大化质量，第二阶段通过决定招募用户的顺序来最小化成本。</p>
+<p>在完全信息情景下，设计了任务分配和用户招聘机制，以优化数据质量，同时降低激励成本。在部分信息场景中，用户的质量和成本是未知的。由用户上报质量和成本，假设是异构任务，利用任务之间的相互关系来克服信息不对称。在动态社会影响场景中，考察了用户社会影响力的动态性，并为用户设计额外的奖励，以充分利用社会影响力，实现最大限度的成本节约。</p>
+<p>使用数值结果来评估激励机制。</p>
+<h3 id="3-SocialRecruiter-Dynamic-Incentive-Mechanism-for-Mobile-Crowdsourcing-Worker-Recruitment-With-Social-Networks"><a href="#3-SocialRecruiter-Dynamic-Incentive-Mechanism-for-Mobile-Crowdsourcing-Worker-Recruitment-With-Social-Networks" class="headerlink" title="3-SocialRecruiter: Dynamic Incentive Mechanism for Mobile Crowdsourcing Worker Recruitment With Social Networks"></a>3-SocialRecruiter: Dynamic Incentive Mechanism for Mobile Crowdsourcing Worker Recruitment With Social Networks</h3><p>现有研究大都在大量workers的场景下分析如何选择workers，本文则针对有限人数的众包系统中的参与不足问题，提出利用社会网络招募完成任务的员工，扩大员工库。提出了一种动态激励机制，SocialRecruiter，鼓励众包平台上的工作人员通过社交网络传播任务，从而邀请朋友加入众包平台，进一步传播和完成任务。</p>
+<p>受SIR传染病模型的启发，本文提出了一个新的任务特定的传染病模型来刻画用户在任务传播和通过社会网络完成任务时的状态变化。为了鼓励员工完成和传播任务，根据员工的行为给予宣传奖励和完成奖励。特别是，为了在财务预算内最大限度地完成任务，根据实时员工招聘进度，在每个周期动态更新奖励的宣传和完成情况。</p>
+<p>在两个真实数据集上的大量实验结果表明，社会化招聘者在员工招聘和任务完成方面的表现优于最先进的方法。</p>
+<blockquote>
+<p>这个和任务分配以及众包其实关系不大，有点拼多多拉新用户砍一刀的感觉。</p>
+</blockquote>
+<h3 id="4-A-Game-Theoretical-Approach-for-Secure-Crowdsourcing-Based-Indoor-Navigation-System-With-Reputation-Mechanism"><a href="#4-A-Game-Theoretical-Approach-for-Secure-Crowdsourcing-Based-Indoor-Navigation-System-With-Reputation-Mechanism" class="headerlink" title="4-A Game Theoretical Approach for Secure Crowdsourcing Based Indoor Navigation System With Reputation Mechanism"></a>4-A Game Theoretical Approach for Secure Crowdsourcing Based Indoor Navigation System With Reputation Mechanism</h3><p>本文的共谋场景在于：恶意接包方和发包方勾结从而在声誉系统中刷好评。针对众包中的共谋问题，引入完全可信的雾服务器平台进行众包数据交易。提出了一种新的基于响应者行为的声誉激励机制，使用攻防博弈来建模雾服务器平台和响应者之间的相互作用，通过这种相互作用建立一个社会福利最佳化问题，使系统的社会福利最大化。其次，利用复制动力学方程求出了博弈均衡，并讨论了博弈的稳定性。进行了仿真实验。</p>
+<blockquote>
+<p>从摘要看也和任务分配没什么关系。</p>
+</blockquote>
+<h3 id="5-Hierarchical-Pricing-Mechanism-With-Financial-Stability-for-Decentralized-Crowdsourcing-A-Smart-Contract-Approach"><a href="#5-Hierarchical-Pricing-Mechanism-With-Financial-Stability-for-Decentralized-Crowdsourcing-A-Smart-Contract-Approach" class="headerlink" title="5-Hierarchical Pricing Mechanism With Financial Stability for Decentralized Crowdsourcing A Smart Contract Approach"></a>5-Hierarchical Pricing Mechanism With Financial Stability for Decentralized Crowdsourcing A Smart Contract Approach</h3><p>传统众包平台的集中性会带来信息披露和审计不透明问题，本文引入区块链系统，通过两个专用的智能合约集成了任务分配和资源借贷的功能。其次，为了保证区块链激活市场的金融稳定性，并使接受任务的难度与工作人员的能力相匹配，我们设计了一种基于经济建模方法和异质代理理论的动态分层定价机制。在这种机制下，根据顾客报酬和员工资源的市场价值，市场被动态地划分为多个层次。提出了额外的限制，以避免工人在资源借贷过程中可能的恶意交易行为。我们从理论上证明了模型的合理性，并对模型的动力学性质进行了论证。我们证明了市场价格和需求是收敛的，并测试了执行这两个智能合同的成本。最后，大量的实验结果验证了该平台的正确性和可行性，并证实了分层定价机制能够保持市场的稳定性。</p>
+<blockquote>
+<p>时间问题没来得及看这篇中分配任务的合约是怎么设计的。</p>
+</blockquote>
+<h3 id="第6篇是我的，略"><a href="#第6篇是我的，略" class="headerlink" title="第6篇是我的，略"></a>第6篇是我的，略</h3><h3 id="7-Strategic-Information-Revelation-Mechanism-in-Crowdsourcing-Applications-Without-Verification"><a href="#7-Strategic-Information-Revelation-Mechanism-in-Crowdsourcing-Applications-Without-Verification" class="headerlink" title="7-Strategic Information Revelation Mechanism in Crowdsourcing Applications Without Verification"></a>7-Strategic Information Revelation Mechanism in Crowdsourcing Applications Without Verification</h3><p>这篇是看过的黄建伟老师的论文。</p>
+<ul>
+<li>本文研究：无需验证解决方案、激励员工提供高质量解决方案的众包平台</li>
+<li>本文假设：信息不对称、平台具有信息优势——平台知道有关workers解决方案的平均准确性的更多信息，可以向workers策略性披露信息。根据平台公开的信息，workers判断自己认真完成任务后所获得的奖励。</li>
+<li>workers类型：<ol>
+<li>naive workers：完全信任平台公开的信息</li>
+<li>strategic workers：基于平台公开信息更新自己的先验信念</li>
+</ol>
+</li>
+<li>本文发现：<ol>
+<li>对于naive workers：始终宣布高平均精度</li>
+<li>对于strategic workers：有动机宣布低于实际值的平均精度</li>
+<li>平台的回报可能减少高精度workers</li>
+</ol>
+</li>
+</ul>
+<h3 id="8-Generalized-Lottery-Trees-Budget-Balanced-Incentive-Tree-Mechanisms-for-Crowdsourcing"><a href="#8-Generalized-Lottery-Trees-Budget-Balanced-Incentive-Tree-Mechanisms-for-Crowdsourcing" class="headerlink" title="8-Generalized Lottery Trees Budget-Balanced Incentive Tree Mechanisms for Crowdsourcing"></a>8-Generalized Lottery Trees Budget-Balanced Incentive Tree Mechanisms for Crowdsourcing</h3><p>现有研究大多假设用户已经处于众包系统中并知道众包任务，然而，在没有这种假设的现实生活场景中，更有效的做法是利用激励树机制，激励用户的直接贡献和对其他用户的诱惑。本文提出预算平衡激励树机制，称为广义彩票树。</p>
+<blockquote>
+<p>也和任务分配没有关系</p>
+</blockquote>
+<h3 id="9-Incentive-Mechanism-for-Spatial-Crowdsourcing-with-Unknown-Social-Aware-Workers-A-Three-Stage-Stackelberg-Game-Approach"><a href="#9-Incentive-Mechanism-for-Spatial-Crowdsourcing-with-Unknown-Social-Aware-Workers-A-Three-Stage-Stackelberg-Game-Approach" class="headerlink" title="9-Incentive Mechanism for Spatial Crowdsourcing with Unknown Social-Aware Workers A Three-Stage Stackelberg Game Approach"></a>9-Incentive Mechanism for Spatial Crowdsourcing with Unknown Social-Aware Workers A Three-Stage Stackelberg Game Approach</h3><p>在空间众包场景下，大多数现有的工作假设工人的素质是事先知道的，或不能考虑到所有各方的效用一起，特别是没有考虑到社会网络的影响。针对同时招募高素质的工人和最大限度地发挥各方的效用这一目标，提出了一种基于多臂老虎机和三阶段 Stackelberg 博弈的激励机制，称为 TACT。首先设计了一个贪婪选臂方案来招募工人，这不仅可以解决探索-剥削的困境，而且考虑到工人的社会关系。在招聘结果的基础上，进一步设计了考虑劳动者社会利益的效用函数，并将支付计算问题建模为三阶段 Stackelberg 博弈。接下来，推导出最优策略群，使每一方都能最大化自己的效用，从而形成一个多赢的局面。并从理论上证明了Stackelberg 均衡的唯一存在性和最坏后悔界的存在性。</p>
+<p>我们在一个真实的轨迹上进行了广泛的模拟，以证实 TACT 的性能。</p>
+<blockquote>
+<p>这个主要是招募workers，具体是否有任务分配还不了解。</p>
+</blockquote>
+<h3 id="列表中的第10篇和前面第3篇重复了。"><a href="#列表中的第10篇和前面第3篇重复了。" class="headerlink" title="列表中的第10篇和前面第3篇重复了。"></a>列表中的第10篇和前面第3篇重复了。</h3><h3 id="11-Differentially-Private-Mechanisms-for-Budget-Limited-Mobile-Crowdsourcing"><a href="#11-Differentially-Private-Mechanisms-for-Budget-Limited-Mobile-Crowdsourcing" class="headerlink" title="11-Differentially Private Mechanisms for Budget Limited Mobile Crowdsourcing"></a>11-Differentially Private Mechanisms for Budget Limited Mobile Crowdsourcing</h3><p>本文考虑了在激励用户参与众包这一过程中的隐私问题。在本文的场景中，移动众包平台的目标是在一个预算限制下最大化众包收入，而用户期望是最大化他们的效用，同时保护他们的成本隐私。大致浏览了一下应该是用多臂赌博机在预算限制下实现最大化收入，用差分隐私实现隐私保护。</p>
+<blockquote>
+<p>偏重隐私保护，不确定是否有任务分配和定价等内容。</p>
+</blockquote>
+<h3 id="12-Privacy-Preserving-Incentive-Mechanisms-for-Truthful-Data-Quality-in-Data-Crowdsourcing"><a href="#12-Privacy-Preserving-Incentive-Mechanisms-for-Truthful-Data-Quality-in-Data-Crowdsourcing" class="headerlink" title="12-Privacy-Preserving Incentive Mechanisms for Truthful Data Quality in Data Crowdsourcing"></a>12-Privacy-Preserving Incentive Mechanisms for Truthful Data Quality in Data Crowdsourcing</h3><p>接包方的任务质量与数据是隐私信息，因此她有动机谎报。此外，接包方的质量和数据可能依赖于一些敏感信息（例如位置），这可以从对手的任务分配和数据聚合的结果中推断出来（没理解这句话）。本文设计了保护隐私的机制（PDQE）来获取接包方的质量和数据。在这些机制中，本文设计了不同的私有任务分配和数据聚合算法，以防止从这些算法的结果推断接包方的质量和数据。与此同时，这些机制还鼓励接包方如实报告质量和数据，并做出预期的努力。我们首先关注单个任务的机制(S-PDQE)，然后将其扩展到多个任务的情况(M-PDQE)。我们进一步证明，这两种机制实现了一个有限的性能差距相比，最优策略。</p>
+<p>我们使用基于真实数据的仿真来评估所提出的机制，这些仿真证实了它们在真实数据质量提取、数据准确性和隐私保护等方面的优良性能。</p>
+<blockquote>
+<p>这篇应该有涉及任务分配的内容，时间关系没有详细看了。</p>
+</blockquote>
+<h3 id="13-Reward-or-Penalty-Aligning-Incentives-of-Stakeholders-in-Crowdsourcing"><a href="#13-Reward-or-Penalty-Aligning-Incentives-of-Stakeholders-in-Crowdsourcing" class="headerlink" title="13-Reward or Penalty Aligning Incentives of Stakeholders in Crowdsourcing"></a>13-Reward or Penalty Aligning Incentives of Stakeholders in Crowdsourcing</h3><p>本文针对二值众包问题场景（例如接包方只需要回答是或者否），考虑三方利益：接包方、发包方和众包平台，分析四个评价指标：质量、成本、延迟和平台改进。从整个众包系统的角度出发，设计了一个众包机制，将利益相关者的动机结合起来。具体来说，根据接包方的报告解决方案给予其奖励或处罚，在此基础上，找到了一系列合适的奖惩函数对，并计算出接包方的个人秩序值，这些秩序值可以根据接包方的报告信念和个人历史绩效提供不同的奖惩数额，同时保持接包方的激励。该机制有助于延迟控制，促进众包系统的质量和平台演进，并改进上述四个关键评价指标。理论分析和实验结果分别验证和评价了提出的机理。</p>
+<blockquote>
+<p>没有细看方法，粗略浏览感觉像是根据先验信念等估计接包方的准确性等。</p>
+</blockquote>
+<h3 id="14-Strategic-Social-Team-Crowdsourcing-Forming-a-Team-of-Truthful-Workers-for-Crowdsourcing-in-Social-Networks"><a href="#14-Strategic-Social-Team-Crowdsourcing-Forming-a-Team-of-Truthful-Workers-for-Crowdsourcing-in-Social-Networks" class="headerlink" title="14-Strategic Social Team Crowdsourcing Forming a Team of Truthful Workers for Crowdsourcing in Social Networks"></a>14-Strategic Social Team Crowdsourcing Forming a Team of Truthful Workers for Crowdsourcing in Social Networks</h3><p>本文针对的场景是社交网络中的团队众包，即发包方雇佣一个专业workers团队，而团队内的接包方有社交关联，可以协同工作。在传统的最大化社会福利的机制下，存在自私的接包方会损害发包方的利益，为避免这一问题，本文提出了两种有效机制来优化社会福利，同时降低不同规模应用的时间复杂度。对于小规模的应用，如果任务需要少量的技能，则首先从社会网络中提取出一个二叉树网络，然后在二叉树中形成一个基于动态规划的最优团队。对于任务需要大量技能的大规模应用，根据工人的社会结构、技能和工作成本使用贪婪算法形成团队。</p>
+<blockquote>
+<p>这篇应该有任务分配问题，不过还没看是怎么分配的。</p>
+</blockquote>
+<h3 id="15-Eliciting-Information-from-Heterogeneous-Mobile-Crowdsourced-Workers-Without-Verification"><a href="#15-Eliciting-Information-from-Heterogeneous-Mobile-Crowdsourced-Workers-Without-Verification" class="headerlink" title="15-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification"></a>15-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification</h3><p>本文场景：</p>
+<ol>
+<li>workers求解准确率异构（即，不同workers以不同概率生成高质量数据）</li>
+<li>考虑数据质量与平台成本之间的平衡</li>
+</ol>
+<p>本文方法：多数投票机制</p>
+<p>需要解决的问题：</p>
+<ol>
+<li>给定奖励，多数投票机制下，异构workers会如何行动；</li>
+<li>workers的异构性如何影响平台的最优奖励设计和均衡；</li>
+<li>在提升平台均衡方面，知道workers异构方案准确性有什么价值。</li>
+</ol>
+<p>本文的两阶段博弈：</p>
+<ol>
+<li>平台决定多数投票机制的奖励等级，目标是最大化收益，该收益考虑了workers解决方案质量和平台总支出之间的均衡；</li>
+<li>每个worker选择自己的努力等级和报告策略，目标是最大化自己收益。</li>
+</ol>
+<p>本文考虑两种情况：</p>
+<ol>
+<li>不完全信息博弈（平台不知道workers的准确率）</li>
+<li>完全信息博弈（平台知道workers的准确率）</li>
+</ol>
+<p>本文贡献：</p>
+<ol>
+<li>分析了IEWV问题中异构workers场景下的平台均衡</li>
+<li>分析了多均衡共存的场景</li>
+<li>刻画了workers的最优策略</li>
+<li>刻画了workers异构性对平台均衡的影响</li>
+<li>刻画了得知workers异构性的价值</li>
+</ol>
+<h3 id="16-Data-Poisoning-Attacks-and-Defenses-in-Dynamic-Crowdsourcing-with-Online-Data-Quality-Learning"><a href="#16-Data-Poisoning-Attacks-and-Defenses-in-Dynamic-Crowdsourcing-with-Online-Data-Quality-Learning" class="headerlink" title="16-Data Poisoning Attacks and Defenses in Dynamic Crowdsourcing with Online Data Quality Learning"></a>16-Data Poisoning Attacks and Defenses in Dynamic Crowdsourcing with Online Data Quality Learning</h3><p>为了提高数据的准确性和成本效益，工人的数据质量可以通过在线方式从他们的数据中学习，可以用于任务分配和数据聚合。然而，众包很容易受到数据病毒攻击，攻击者报告恶意数据以降低聚合数据的准确性。</p>
+<p>本文研究了任务按顺序分配和执行的动态众包中的恶意数据攻击，探讨了作为一种防御机制的在线质量学习如何通过发现低质量的恶意工作者来抵御攻击。首先关注每个接包方的质量都被请求者准确学习的渐近设置，然后在此基础上转向一般的有误差非渐近设置。对于每个设置，首先描述了攻击策略可以有效降低聚合数据准确性的条件。结果表明，恶意噪声方差需要在一定范围内的攻击是有效的。然后分析了有效攻击策略的危害。研究结果表明，由于有效的攻击，在线质量学习算法的遗憾性会增加。为了进一步减轻攻击，研究了基于估计的数据聚合作为防御机制的中值和最大影响。研究结果为数据中毒攻击的影响提供了有用的见解，当在线高质量学习被用来抵御攻击时。我们通过基于真实数据的大量仿真结果对提出的攻击和防御方案进行了评估，验证了攻击和防御方案的有效性。</p>
+<blockquote>
+<p>这篇论文偏向数据污染问题，和我们可能关系不大。</p>
+</blockquote>
+<h3 id="17-Using-Truth-Detection-to-Incentivize-Workers-in-Mobile-Crowdsourcing"><a href="#17-Using-Truth-Detection-to-Incentivize-Workers-in-Mobile-Crowdsourcing" class="headerlink" title="17-Using Truth Detection to Incentivize Workers in Mobile Crowdsourcing"></a>17-Using Truth Detection to Incentivize Workers in Mobile Crowdsourcing</h3><p>众包模式相比于传统机构的工作模式，其工人通常是高度分散的，且工作过程也是不受监督的，这给他们上报低质量的解决方案提供了温床。并且这种现象在众包平台无法验证工人解决方案的质量时尤为突出。比如，在慕课上的学生作业互评，就曾出现过网上学生恶意打分的现象。</p>
+<p>在平台无法验证工人提交的解决方案时，现有的众包激励机制主要通过对比不同工人上报方案之间的相似性来进行奖励，而这有可能造成众包工人共谋。比如，目前比较流行的激励方法是输出一致机制。在输出一致机制中，当一个工人和其他工人的上报方案高度一致时，这个工人会获得奖励。可是，在上述机制下，如果平台不能对工人进行有效的管控，那么工人之间可以共谋上报相同但低质量的方案。这种情况对平台来说是灾难性的，因为不仅平台得到的方案质量低，而且还需要给每一个工人发放奖励。</p>
+<p>为了缓解上述的工人共谋问题，我们创新性地提出一种测谎机制。具体而言，工人们不再因为自己的上报方案和其他工人相似而获得奖励，而是根据工人回答一个指定测谎问题的答案进行计算。我们可以发现，基于该测谎问题的激励设计会可以有效缓解工人共谋。这是因为，众包工人能否获得奖励只和自己对测谎问题的回答有关，而不和他人的上报方案有关。</p>
+<p>其实在现实世界中，我们已经发现测谎技术的一些应用场景了。比如一些欧洲国家在边境检查的时候利用测谎技术来对过境人士的身份进行认证（详情请见：<a href="https://iborderctrl.no/%EF%BC%89%E3%80%82%E7%84%B6%E8%80%8C%EF%BC%8C%E6%B5%8B%E8%B0%8E%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E8%BF%98%E4%B8%8D%E5%A4%9F%E6%88%90%E7%86%9F%EF%BC%8C%E4%B8%80%E8%88%AC%E8%80%8C%E8%A8%80%E8%83%BD%E8%BE%BE%E5%88%B0%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E4%B9%9F%E4%B8%8D%E9%AB%98%EF%BC%88%E6%99%AE%E9%81%8D%E4%BD%8E%E4%BA%8E65%%EF%BC%89%E3%80%82%E4%B8%BA%E4%BA%86%E6%9C%80%E5%A4%A7%E5%8C%96%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%88%A9%E7%9B%8A%EF%BC%8C%E6%88%91%E4%BB%AC%E6%8F%90%E5%87%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E8%BF%91%E4%BC%BC%E5%87%B8%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%9C%BA%E5%88%B6%E4%BC%98%E5%8C%96%E6%A1%86%E6%9E%B6%E3%80%82%E5%9C%A8%E8%AF%A5%E6%A1%86%E6%9E%B6%E4%B8%8B%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%91%E7%8E%B0%E5%8D%B3%E4%BD%BF%E6%B5%8B%E8%B0%8E%E7%B2%BE%E5%BA%A6%E5%8F%AA%E6%9C%8960%%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%94%B6%E7%9B%8A%E5%8F%AF%E4%BB%A5%E8%B6%85%E8%BF%87%E5%9C%A8%E6%B5%8B%E8%B0%8E%E7%B2%BE%E5%BA%A6%E4%B8%BA100%%E4%B8%8B%E5%B9%B3%E5%8F%B0%E6%94%B6%E7%9B%8A%E7%9A%8485%%E3%80%82%E8%BF%99%E8%A1%A8%E6%98%8E%E6%88%91%E4%BB%AC%E6%8F%90%E5%87%BA%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%9C%BA%E5%88%B6%E6%9C%89%E8%89%AF%E5%A5%BD%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%A1%A8%E7%8E%B0%E3%80%82" target="_blank" rel="noopener">https://iborderctrl.no/）。然而，测谎机制的底层技术还不够成熟，一般而言能达到的准确率也不高（普遍低于65%）。为了最大化平台的利益，我们提出了一个近似凸的测谎机制优化框架。在该框架下，我们发现即使测谎精度只有60%，我们的机制实现的平台收益可以超过在测谎精度为100%下平台收益的85%。这表明我们提出的测谎机制有良好的系统表现。</a></p>
+<blockquote>
+<p>这篇是黄建伟老师团队的，上述总结为公众号直接复制。看参考文献有贝叶斯实话血清的那个论文，推测是用了一样的方法。</p>
+</blockquote>
+<h3 id="18-Towards-Personalized-Task-Oriented-Worker-Recruitment-in-Mobile-Crowdsensing"><a href="#18-Towards-Personalized-Task-Oriented-Worker-Recruitment-in-Mobile-Crowdsensing" class="headerlink" title="18-Towards Personalized Task-Oriented Worker Recruitment in Mobile Crowdsensing"></a>18-Towards Personalized Task-Oriented Worker Recruitment in Mobile Crowdsensing</h3><p>移动众包系统中的任务通常具有时间敏感性和位置依赖性，这在员工招募中也起着至关重要的作用。基于此，本文提出了一种新颖的基于个性化任务驱动的移动众包系统员工招募机制，该机制基于对员工偏好的详细刻画，充分利用内容信息(例如，任务类别，任务描述)与上下文信息(例如，任务时间，任务位置)从工人出勤的隐性反馈，以准确地模型工人对任务的偏好。大致方法是做了一个分类器，识别workers所属的类别，进而分配相同类别的任务。</p>
+<h3 id="19-Eliciting-Joint-Truthful-Answers-and-Profiles-from-Strategic-Workers-in-Mobile-Crowdsourcing-Systems"><a href="#19-Eliciting-Joint-Truthful-Answers-and-Profiles-from-Strategic-Workers-in-Mobile-Crowdsourcing-Systems" class="headerlink" title="19-Eliciting Joint Truthful Answers and Profiles from Strategic Workers in Mobile Crowdsourcing Systems"></a>19-Eliciting Joint Truthful Answers and Profiles from Strategic Workers in Mobile Crowdsourcing Systems</h3><p>在移动众包场景中，workers需要上传自己的个人信息（例如位置、专业能力等），本文设计激励机制保证workers上传的是真实信息，并招募志愿者进行了真实实验。</p>
+<p>这篇论文也是针对二值回答的众包问题，用的方法基于贝叶斯推断，看上去和黄建伟老师那个有点像，没细看。</p>
+<h3 id="20-Heterogeneous-Multi-Task-Assignment-in-Mobile-Crowdsensing-Using-Spatiotemporal-Correlation"><a href="#20-Heterogeneous-Multi-Task-Assignment-in-Mobile-Crowdsensing-Using-Spatiotemporal-Correlation" class="headerlink" title="20-Heterogeneous Multi-Task Assignment in Mobile Crowdsensing Using Spatiotemporal Correlation"></a>20-Heterogeneous Multi-Task Assignment in Mobile Crowdsensing Using Spatiotemporal Correlation</h3><p>现有的多任务分配方法大多侧重于同类任务，由于不同的时空任务需求和感知环境，众包系统中的任务往往在许多方面存在差异(如空间覆盖率、时间间隔)。为此，本文提出并形式化了移动众包系统中一个重要的异构多任务分配问题（HMTA），并尝试最大化数据质量和最小化总的激励预算。利用异构任务之间的隐含时空相关性，提出了一种两阶段 HMTA 问题求解方法，有效地处理共享资源池中的多个并发任务。最后，为了提高分配搜索效率，设计了一个分解组合框架来适应大规模的问题/情景。我们广泛地使用两个大规模的真实世界数据集来评估我们的方法。实验结果验证了该方法的有效性和有效性。</p>
+<blockquote>
+<p>具体是怎么解决的还没细看。</p>
+</blockquote>
+<h3 id="21-Secure-Crowdsensed-Data-Trading-Based-on-Blockchain"><a href="#21-Secure-Crowdsensed-Data-Trading-Based-on-Blockchain" class="headerlink" title="21-Secure Crowdsensed Data Trading Based on Blockchain"></a>21-Secure Crowdsensed Data Trading Based on Blockchain</h3><p>本文提出了一个基于区块链的众包数据交易(BCDT)系统，该系统靠智能合约保证数据交易的可靠性，采用基于区块链的反向拍卖(BRA)将感知任务分配给接包方，该机制可以保证数据收集者如实报告数据收集成本，防止卖方操纵拍卖。此外还实现了一个基于同态密码的安全真相发现和可靠性评级机制(STDR) ，该机制可以激励接包方上传真实数据，鼓励发包方在不泄露数据隐私的情况下，根据收集到的数据对接包方的可靠性进行真实评级。在以太坊测试网络上进行了智能合约的性能测试。</p>
+<h3 id="列表中的第22篇和前面第2篇重复了。"><a href="#列表中的第22篇和前面第2篇重复了。" class="headerlink" title="列表中的第22篇和前面第2篇重复了。"></a>列表中的第22篇和前面第2篇重复了。</h3><h3 id="23-Two-Stage-Game-Design-of-Payoff-Decision-Making-Scheme-for-Crowdsourcing-Dilemmas"><a href="#23-Two-Stage-Game-Design-of-Payoff-Decision-Making-Scheme-for-Crowdsourcing-Dilemmas" class="headerlink" title="23-Two Stage Game Design of Payoff Decision-Making Scheme for Crowdsourcing Dilemmas"></a>23-Two Stage Game Design of Payoff Decision-Making Scheme for Crowdsourcing Dilemmas</h3><p>为了解决发包方和众包平台之间的合作困境，首先提出了一种基于信誉质量规则的发包方动态支付方法，然后开发了一种估算平台成本的合作评估算法，最后设计了一个共同确定算法来判断平台是否采用了合作策略。</p>
+<p>为了解决众包平台与员工之间的服务质量困境，首先提出了一种拍卖筛选方法来估算员工的合理招聘范围，并利用成本评价算法对其进行优化，然后利用报酬分配方法来激励员工按时、高质量地完成任务。</p>
+<h3 id="24-Data-Driven-Pricing-for-Sensing-Effort-Elicitation-in-Mobile-Crowd-Sensing-Systems"><a href="#24-Data-Driven-Pricing-for-Sensing-Effort-Elicitation-in-Mobile-Crowd-Sensing-Systems" class="headerlink" title="24-Data-Driven Pricing for Sensing Effort Elicitation in Mobile Crowd Sensing Systems"></a>24-Data-Driven Pricing for Sensing Effort Elicitation in Mobile Crowd Sensing Systems</h3><p>一些众包场景通过数据聚合来评估接包方的数据质量，但面临接包方策略性降低传感工作效率（存疑，原文是strategic reduction of their sensing effort）的问题，基于此，本文提出了一种名为 Theseus 的支付机制，它处理工人的这种战略行为，并激励工人的高努力感知。我们确保，在Theseus诱导的非合作博弈的贝叶斯纳什均衡点中，所有参与的工作人员都将尽可能地花费在感知上，从而提高了他们的数据质量。</p>
+<blockquote>
+<p>该机制具体是怎么实现的没有看。</p>
+</blockquote>
+<h3 id="25-Truthful-Mobile-Crowdsensing-for-Strategic-Users-With-Private-Data-Quality"><a href="#25-Truthful-Mobile-Crowdsensing-for-Strategic-Users-With-Private-Data-Quality" class="headerlink" title="25-Truthful Mobile Crowdsensing for Strategic Users With Private Data Quality"></a>25-Truthful Mobile Crowdsensing for Strategic Users With Private Data Quality</h3><p>众包数据准确性与接包方的私有信息相关，接包方可能出于个人利益控制这些信息和自己的努力程度，进而导致发包方对数据准确性有错误认知。本文设计了质量和努力启发(QEE)的真实众感机制，激励策略型用户如实地揭示他们的个人质量，如实地按照请求者的要求做出努力。QEE机制通过克服用户数据对其私有质量和隐藏努力的复杂依赖性来实现真实的设计。在 QEE 机制下，我们证明了发包方的最优努力分配(RO)只分配给具有最小“虚拟估值”的最优用户，这取决于用户的质量和质量的分布。我们还发现，随着用户数量的增加，RO 努力分配和社会最优努力分配之间的性能差距减小，并渐近收敛到0。我们进一步讨论了 QEE 机制的一些扩展。</p>
+<blockquote>
+<p>具体实现方法没看。</p>
+</blockquote>
+<h3 id="26-Differentially-Private-Incentive-Mechanism-for-Crowdsourced-Radio-Environment-Map-Construction"><a href="#26-Differentially-Private-Incentive-Mechanism-for-Crowdsourced-Radio-Environment-Map-Construction" class="headerlink" title="26-Differentially Private Incentive Mechanism for Crowdsourced Radio Environment Map Construction"></a>26-Differentially Private Incentive Mechanism for Crowdsourced Radio Environment Map Construction</h3><p>本文提出了一种基于众包的频谱感知的差分私有逆向拍卖机制。提出的机制允许 DBA 选择预算限制的频谱感知参与者，同时提供差别投标隐私、近似真实性和近似准确性最大化。</p>
+<h3 id="27-Mechanism-design-games-for-thwarting-malicious-behavior-in-crowdsourcing-applications"><a href="#27-Mechanism-design-games-for-thwarting-malicious-behavior-in-crowdsourcing-applications" class="headerlink" title="27-Mechanism design games for thwarting malicious behavior in crowdsourcing applications"></a>27-Mechanism design games for thwarting malicious behavior in crowdsourcing applications</h3><p>是春池的论文。</p>
+<p>采用发包方主导的契约型反恶意众包机制，根据个体恶意众包和集群恶意众包的不同特性，发包方将针对性地提出满足激励相容原则的契约，迫使接包方按照契约根据自己的真实私有信息（包括与恶意攻击相关的真实信息）制定最优策略，并据此可使发包方反推自己的最优策略，实现资源的最佳配置（最优任务量和最优酬金），通过经济手段遏制恶意众包。</p>
+<p>设计接包方参与的契约型反恶意众包机制，使得接包方可针对契约制定提出意见、发包方在意见约束下制定契约，最终实现隐私保护的全局帕累托最优。</p>
+<h3 id="28-Minimizing-Entropy-for-Crowdsourcing-with-Combinatorial-Multi-Armed-Bandit"><a href="#28-Minimizing-Entropy-for-Crowdsourcing-with-Combinatorial-Multi-Armed-Bandit" class="headerlink" title="28-Minimizing Entropy for Crowdsourcing with Combinatorial Multi-Armed Bandit"></a>28-Minimizing Entropy for Crowdsourcing with Combinatorial Multi-Armed Bandit</h3><p>衡量最终聚合结果的不确定性的工作者结果的经验熵，自然成为评估众包任务结果的一个合适的度量。因此，本文设计了一个工人选择机制，使参与者提交的结果的经验熵最小化。具体来说，我们将连续到达任务下的工作者选择规划为一个组合多臂老虎机问题，该问题将每个工作者视为一只手臂，旨在学习最佳的手臂组合，以最小化累积的经验熵。利用信息论方法，详细推导了经验熵极小化的置信上界估计，并将其应用到最小熵置信上界(ME-UCB)算法中，以平衡勘探与开发。</p>
+<blockquote>
+<p>总的来说就i是用多臂赌博机的模型，把经验熵作为衡量赌博机的遗憾函数。</p>
+</blockquote>
+<h3 id="29-Truthful-Incentive-Mechanisms-for-Crowdsourcing"><a href="#29-Truthful-Incentive-Mechanisms-for-Crowdsourcing" class="headerlink" title="29-Truthful Incentive Mechanisms for Crowdsourcing"></a>29-Truthful Incentive Mechanisms for Crowdsourcing</h3><p>针对接包方之间的竞争与合作，建立3种众包模型，并分别设计激励机制。</p>
+<p>SS模型：一个发包方，一个投标（指每个接包方报价时只能报一个任务和自己愿意做任务的最低报酬）</p>
+<p>SM模型：一个发包方，多个投标（指每个接包方报价时可以报多个任务和对应的最低报酬）</p>
+<p>MM模型：多个发包方，多个投标</p>
+<blockquote>
+<p>具体的方法还需要之后再看。</p>
+</blockquote>
+<h3 id="30-Crowdsourcing-System-for-Numerical-Tasks-based-on-Latent-Topic-Aware-Worker-Reliability"><a href="#30-Crowdsourcing-System-for-Numerical-Tasks-based-on-Latent-Topic-Aware-Worker-Reliability" class="headerlink" title="30-Crowdsourcing System for Numerical Tasks based on Latent Topic Aware Worker Reliability"></a>30-Crowdsourcing System for Numerical Tasks based on Latent Topic Aware Worker Reliability</h3><p>本文针对的场景是采用依据主题进行任务分配的众包系统，本文旨在对数值任务中潜在主题的细粒度工作者可靠性进行精确估计，以进一步提高结果质量。提出了一种基于工作者行为的贝叶斯概率模型——高斯潜在主题模型(GLTM) ，用于挖掘数值任务的潜在主题，并估计工作者的主题级可靠性。利用该算法，提出了一种真值推理算法 ti-GLTM，可以同时准确推断任务的真值和主题，并动态更新工作者的主题级可靠性。我们还设计了一种在线任务分配机制，称为 MRA-GLTM，该机制利用最大限度减少模糊度原则为工作者分配合适的任务。</p>
+<h3 id="31-MOMD-A-multi-object-multi-dimensional-auction-for-crowdsourced-mobile-video-streaming"><a href="#31-MOMD-A-multi-object-multi-dimensional-auction-for-crowdsourced-mobile-video-streaming" class="headerlink" title="31-MOMD A multi-object multi-dimensional auction for crowdsourced mobile video streaming"></a>31-MOMD A multi-object multi-dimensional auction for crowdsourced mobile video streaming</h3><p>针对场景：移动视频流资源共享，让附近的移动视频用户聚合他们的网络资源，以提高视频流的性能。</p>
+<p>问题：用户自私，用户的异步下载行为以及对多比特率编码视频的私有估值</p>
+<p>本文方法：基于多目标多维拍卖的激励框架，通过这个框架，用户可以下载多个不同比特率的视频片段给多个邻近的用户(和他们自己)。基于这一激励框架，我们提出了维克里分数拍卖，这是第一个多目标多维度拍卖，达到了真实性和效率。</p>
+<h3 id="32-Incentivizing-crowdsourcing-systems-with-network-effects"><a href="#32-Incentivizing-crowdsourcing-systems-with-network-effects" class="headerlink" title="32-Incentivizing crowdsourcing systems with network effects"></a>32-Incentivizing crowdsourcing systems with network effects</h3><p>将网络效应看作是内在奖励的影响因素，并研究其对外在奖励设计的影响。我们没有假设参与者是固定的，而是展示了参与用户的数量进化到一个稳定的平衡，这要归功于网络效应和众包者提供的外部奖励之间的微妙互动。考虑到网络效应，我们设计了更复杂的外部奖励机制，并为众包者提出了新的最优策略以获得更高的效用。</p>
+<blockquote>
+<p>这个网络效应实际上和前面的社会关系、社会影响等是一样的。</p>
+</blockquote>
+<h3 id="33-Truthful-online-double-auctions-for-dynamic-mobile-crowdsourcing"><a href="#33-Truthful-online-double-auctions-for-dynamic-mobile-crowdsourcing" class="headerlink" title="33-Truthful online double auctions for dynamic mobile crowdsourcing"></a>33-Truthful online double auctions for dynamic mobile crowdsourcing</h3><p>把移动众包场景中发包方和接包方的双向互动建模为在线双向拍卖，明确考虑到用户和供应商的动态特性。我们提出了一个通用框架，用于设计动态移动众包的真实在线双向拍卖。该框架是表达性的，可以与不同的价格时间表。我们提出了四个价格表的价格排序在线双向拍卖来实现该框架，适用于不同的场景。</p>
+<h3 id="34-How-to-crowdsource-tasks-truthfully-without-sacrificing-utility-Online-incentive-mechanisms-with-budget-constraint"><a href="#34-How-to-crowdsource-tasks-truthfully-without-sacrificing-utility-Online-incentive-mechanisms-with-budget-constraint" class="headerlink" title="34-How to crowdsource tasks truthfully without sacrificing utility Online incentive mechanisms with budget constraint"></a>34-How to crowdsource tasks truthfully without sacrificing utility Online incentive mechanisms with budget constraint</h3><p>现有的大多数机制仅适用于所有用户信息都是先验知道的离线场景。相反，我们关注的是一个更加现实的场景，在这个场景中，用户以随机顺序一个接一个地到达网上。基于在线拍卖模型，我们研究了用户到达时向众包者提交其私有类型的问题，众包者的目标是在指定的截止日期之前选择一个用户子集，以最大化选定用户在预算线下提供的服务的价值(假设是一个非负的单调子模块函数)。我们设计了两个在线机制，OMZ 和 OMG，分别满足零到达-离开时间和更一般情况下的计算效率、个体理性、预算可行性、真实性、消费者主权和持续竞争性。</p>
+<blockquote>
+<p>这篇看起来是结合了拍卖和排队论</p>
+</blockquote>
+<h3 id="35-Reputation-based-incentive-protocols-in-crowdsourcing-applications"><a href="#35-Reputation-based-incentive-protocols-in-crowdsourcing-applications" class="headerlink" title="35-Reputation-based incentive protocols in crowdsourcing applications"></a>35-Reputation-based incentive protocols in crowdsourcing applications</h3><p>内在的激励问题存在于众包应用中，因为员工和请求者都是自私的，他们的目标是战略性地最大化他们自己的利益。本文提出了一种基于重复博弈的新的博弈论模型来激励员工努力工作。针对工人追求自身利益时出现的非合作均衡与理想帕累托有效结果之间的社会福利差距，本文提出了一类基于社会规范的激励协议，将声誉机制与众包网站目前实施的定价机制相结合，以改善这类应用中出现的非合作均衡的性能。我们首先在一个众包网站上制定交换双边市场，请求者和工作者相互匹配，并重复博弈。随后，我们研究了协议设计者如何为该网站寻找一个最优且可持续的(均衡)协议以获得最高的社会福利的问题。我们证明了提议的激励协议可以使网站运行接近帕累托最优。此外，我们还研究了另一个场景，其中协议设计者的目标是最大化网站的收入，并评估最优协议的性能。</p>
+<h3 id="36-TRAC-Truthful-auction-for-location-aware-collaborative-sensing-in-mobile-crowdsourcing"><a href="#36-TRAC-Truthful-auction-for-location-aware-collaborative-sensing-in-mobile-crowdsourcing" class="headerlink" title="36-TRAC: Truthful auction for location-aware collaborative sensing in mobile crowdsourcing"></a>36-TRAC: Truthful auction for location-aware collaborative sensing in mobile crowdsourcing</h3><p>在这篇文章中，我们解决了激励智能手机用户加入智能手机移动众包应用程序的问题。与现有的机构设计工作不同，我们在智能手机传感任务分配时，独特地考虑了位置信息的关键维度。然而，位置感知在很大程度上增加了理论和计算的复杂度。在本文中，我们引入了一个逆向拍卖框架来建立平台和智能手机之间的交互模型。我们严格地证明，最佳地确定中标是 NP 难的。本文设计了一种由两个主要部件组成的 TRAC 机构。第一部分是一个近似最优的近似算法，用于确定中标的多项式时间计算复杂度，它逼近的最优解在1 + ln (n) ，其中 n 是一个智能手机可以容纳的感知任务的最大数量。第二个组成部分是一个关键的支付方案，它保证提交的智能手机报价反映了执行感应任务的实际成本。</p>
+<blockquote>
+<p>这篇具体是什么方法还没看。</p>
+</blockquote>
+<h3 id="37-Incentivize-crowd-under-budget-constraint"><a href="#37-Incentivize-crowd-under-budget-constraint" class="headerlink" title="37-Incentivize crowd under budget constraint"></a>37-Incentivize crowd under budget constraint</h3><p>在这篇论文中，我们关注于激励群体工作者将一系列二元任务标记为严格的预算线。在众包系统中，我们正确地描述了任务的难度级别和工人的质量，在众包系统中，收集到的标签用序列贝叶斯方法进行聚合。为了激励员工进行群体标记任务，员工和平台之间的互动被建模为一个反向拍卖。我们揭示了平台效用最大化可能是难以解决的，为此我们提出了一个激励机制，用多项式时间计算复杂度来确定中标和付款。并从理论上证明了我们的机制是真实的、个体理性的、预算可行的。</p>
+<h3 id="38-Free-Market-of-Crowdsourcing-Incentive-Mechanism-Design-for-Mobile-Sensing"><a href="#38-Free-Market-of-Crowdsourcing-Incentive-Mechanism-Design-for-Mobile-Sensing" class="headerlink" title="38-Free Market of Crowdsourcing Incentive Mechanism Design for Mobile Sensing"></a>38-Free Market of Crowdsourcing Incentive Mechanism Design for Mobile Sensing</h3><p>现有研究没有考虑到智能手机用户在感兴趣的领域的机会主义性质。具体来说，对于一般的智能手机感应应用程序，该平台会在每个用户到达时分配任务，并根据用户的回复立即做出决定。为了适应这种一般情况，我们设计了三种基于在线逆向拍卖的在线激励机制： TBA、 TOIM 和 TOIMAD。TBA 旨在追求平台效用最大化，TOIM 和 TOIM-ad 则实现了真实性的关键属性。所有的机制都具有期望的计算效率、个体理性和收益性。此外，与最佳离线解决方案相比，它们具有很强的竞争力。</p>
+<blockquote>
+<p>这篇也是用了拍卖，看上去可能还考虑了前面的社会关系。</p>
+</blockquote>
+<h3 id="39-Expertise-Aware-Truth-Analysis-and-Task-Allocation-in-Mobile-Crowdsourcing"><a href="#39-Expertise-Aware-Truth-Analysis-and-Task-Allocation-in-Mobile-Crowdsourcing" class="headerlink" title="39-Expertise-Aware Truth Analysis and Task Allocation in Mobile Crowdsourcing"></a>39-Expertise-Aware Truth Analysis and Task Allocation in Mobile Crowdsourcing</h3><p>针对众包数据准确性问题，现有方案大多从噪声数据中推断和利用移动用户的可靠性来识别真实性的技术，并将任务分配给具有较高可靠性的用户。但是存在问题：用户可能只对某些问题(在某些领域)具有专业知识，而对其他问题没有专业知识，从而导致真值分析的估计精度低和任务分配无效。</p>
+<p>基于此，本文提出了专家意见真值分析和任务分配(ETA 2) 方案，它可以有效地推断用户的专家意见，然后根据推断出的专家意见评估真相和分配任务。ETA 2依赖于一种新颖的语义分析方法来识别专家，以及一种专家意识的真理分析方法来发现真理。针对 ETA 2中基于专家意识的任务分配问题，本文提出并解决了两个基于优化目标的问题: 最大质量任务分配问题和最小成本任务分配问题。基于两个实际数据集和一个合成数据集的实验结果表明，ETA 2的性能明显优于现有的解决方案。</p>
+<blockquote>
+<p>这篇具体是怎么进行任务分配的还需要再看看。</p>
+</blockquote>
+<h3 id="40-Online-mobile-Micro-Task-Allocation-in-spatial-crowdsourcing"><a href="#40-Online-mobile-Micro-Task-Allocation-in-spatial-crowdsourcing" class="headerlink" title="40-Online mobile Micro-Task Allocation in spatial crowdsourcing"></a>40-Online mobile Micro-Task Allocation in spatial crowdsourcing</h3><p>现有的研究大多集中在离线场景上，给出了微任务和群体工作者的所有时空信息。然而，由于微任务和群体工作者在实际应用中是动态出现的，而且他们的时空信息是不能事先知道的，因此这种方法是不切实际的。针对现有离线方法的不足，本文首先提出了一个更为实用的微任务分配问题，称为空间众包(GOMA)中的全球在线微任务分配问题。我们首先将在线最大加权二部匹配问题的最新算法扩展到<br> GOMA 问题作为基线算法。虽然基线算法为最坏情况提供了理论保证，但由于最坏情况发生的概率在现实世界中非常低，其实际平均性能不够好。因此，我们考虑了在线算法的平均性能，即在线随机序列模型，提出了一个基于两阶段的框架，在此基础上我们提出了在线随机序列模型下1/4竞争比的 TGOA 算法。为了提高其效率，我们进一步设计了 TGOA-Greedy 算法，该算法运行速度快于 TGOA 算法，但竞争比为1/8。</p>
+<h3 id="41-Multi-Objective-Optimization-based-Allocation-of-Hetrogeneous-Spatial-Crowdsourcing-Tasks"><a href="#41-Multi-Objective-Optimization-based-Allocation-of-Hetrogeneous-Spatial-Crowdsourcing-Tasks" class="headerlink" title="41-Multi-Objective Optimization based Allocation of Hetrogeneous Spatial Crowdsourcing Tasks"></a>41-Multi-Objective Optimization based Allocation of Hetrogeneous Spatial Crowdsourcing Tasks</h3><p>在本文中，我们考虑一个空间众包场景：除了特定的空间约束，每个任务有一个有效的持续时间，操作复杂性，预算限制，和所需的工人数量。每个志愿工作者在完成日常工作的同时完成指定的任务。该系统具有期望的任务概率覆盖率和预算线。在这种情况下，我们研究了一个重要的问题，即异质空间众包任务分配问题(HSC-TA)，该问题致力于为多目标最佳化问题搜索一组具有代表性的帕累托最优分配方案，使分配的任务覆盖最大化，同时激励成本最小化。为了适应异质空间众包中的多种约束条件，我们建立了一个与分配过程相一致的工作者移动行为预测模型。证明了 HSC-TA 问题是 np 难问题。我们提出了有效的启发式方法，包括多轮线性权重优化和增强的多目标粒子群优化算法，以实现足够的帕累托最优分配。</p>
+<h3 id="42-Group-Oriented-Task-Allocation-for-Crowdsourcing-in-Social-Networks"><a href="#42-Group-Oriented-Task-Allocation-for-Crowdsourcing-in-Social-Networks" class="headerlink" title="42-Group-Oriented Task Allocation for Crowdsourcing in Social Networks"></a>42-Group-Oriented Task Allocation for Crowdsourcing in Social Networks</h3><p>以往的众包研究通常采用面向个人的方法，将任务外包给个人员工或基于团队组成的方法，将任务外包给人为组成的员工团队。如今，工人们通常通过社交网络自然而然地组织成群。为了解决实际众包系统中的群体工作者这一常见问题，本文探讨了一种新颖的众包范式，其中任务分配目标是自然存在的工作者群体，而不是像以前那样是个体工作者或人工组成的团队。由于一个自然群体可能不具备完成复杂任务所需的所有技能，并且需要与社会网络环境中的其他群体进行协调，因此提出了语境众包价值的概念，通过与其语境群体进行协调来衡量一个群体完成任务的能力，语境群体决定了该群体被分配任务的优先级;然后，设计了任务分配算法，包括分配群体和实际参与执行任务的工人。在现实数据集上的实验表明，与以往的基准个体导向和团队组建方法相比，我们提出的面向群体的方法几乎总是能够获得更好的协同性能、一致性能、冲突性能、适应性和降低成本的有效性。</p>
+<h3 id="43-Target-Tracking-via-Crowdsourcing-A-Mechanism-Design-Approach"><a href="#43-Target-Tracking-via-Crowdsourcing-A-Mechanism-Design-Approach" class="headerlink" title="43-Target Tracking via Crowdsourcing A Mechanism Design Approach"></a>43-Target Tracking via Crowdsourcing A Mechanism Design Approach</h3><p>本文提出了一种基于众包的近视目标跟踪框架，在无线传感器网络中设计了一种最优的激励相容机制，该机制包含自私和利益驱动的传感器。在传感器带宽有限的典型无线传感器网络中，融合中心(FC)必须在传感器之间分配传输到 FC 的总比特数。在这里考虑的公式中，FC 通过向自私的传感器征求出价来进行拍卖，这反映了它们对能源成本的估值。此外，该模型还保证了传感器的合理性和真实性。最后一个问题是多项选择背包问题问题(MCKP) ，这个问题用动态规划方法在伪多项式时间中得到了解决。仿真结果表明了该方法在跟踪性能和传感器网络生存期方面的有效性。</p>
+<blockquote>
+<p>这篇是针对近视目标跟踪的，不清楚是否涉及任务分配等。</p>
+</blockquote>
+<h3 id="44-Crowdsourcing-Sensing-to-Smartphones-A-Randomized-Auction-Approach"><a href="#44-Crowdsourcing-Sensing-to-Smartphones-A-Randomized-Auction-Approach" class="headerlink" title="44-Crowdsourcing Sensing to Smartphones A Randomized Auction Approach"></a>44-Crowdsourcing Sensing to Smartphones A Randomized Auction Approach</h3><p>因为对于来自众包者的某个给定的传感作业，只选择一小部分智能手机执行传感任务，其余的则不予选择，所以向移动用户提供众包的最先进的拍卖机制通常具有确定性。这种确定性拍卖机制的一个明显缺点是减少了感知作业的多样性。因此，收集到的传感数据的质量也下降了。这是由于未能利用移动众包网络中大量不同的移动用户的内在优势。针对社会成本最小化问题，提出了一种随机组合拍卖机制，证明了该机制是 np 难的。设计了一种近似最优的任务分配算法，该算法具有多项式时间复杂度，并以此为基础构造了整个随机拍卖机制。与确定性拍卖机制相比，提出的随机拍卖机制增加了给定感知任务的贡献用户的多样性。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Fast randomized consensus using shared memory</title>
+    <url>/2022/03/03/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Fast%20randomized%20consensus%20using%20shared%20memory/</url>
+    <content><![CDATA[<h1 id="使用共享内存的快速随机共识"><a href="#使用共享内存的快速随机共识" class="headerlink" title="使用共享内存的快速随机共识"></a>使用共享内存的快速随机共识</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>我们提出了一个新的随机算法，用于在读写共享寄存器进行通信的异步进程之间达成共识。过去已知的最快的算法时间复杂度为指数运行时间，我们的算法是多项式的，$O(n^4)$。该算法的应用包括从并发数据结构中消除关键部分，以及构建渐进无偏的共享硬币。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>共识协议</strong>：一组$n$个通过将操作应用于<strong>共享对象</strong>进行通信的异步处理器。</p>
+<p>​    对象：信道、读写寄存器数组等</p>
+<p><strong>进程</strong>：从输入值开始（0或1），运行到选择决策值后停止</p>
+<p>当共识协议是<strong>一致</strong>、<strong>有效</strong>、<strong>无等待</strong>时，就是<strong>正确</strong>的。</p>
+<p>​    共识协议的<strong>一致</strong>：没有两个进程选择不同的决策值。</p>
+<p>​    共识协议的<strong>有效</strong>：决策值是某些进程的输入值。</p>
+<p>​    共识协议的<strong>无等待</strong>：每个进程都在有限数量步骤后决定。</p>
+<p>编码共享数据的并发访问的传统方式：依赖于<strong>临界区</strong></p>
+<p>​    <strong>临界区</strong>：同一时间只允许一个进程操作对象</p>
+<p>临界区不适用于异步、容错系统：如果在一个临界区中，错误进程停止或延迟了，非容错进程也会被停止和延迟。反之，如果并发数据对象的实现保证任何进程将在$n$个步骤中完成任何操作，而不受其他停止故障或速度变化的进程的影响，则该实现是免等待的。如果针对对象$X$存在一个共识协议，则我们可以使用$X$构建针对任一并发数据对象的无等待实现。</p>
+<p>如果共享对象$X$是提供读写操作的寄存器数组，那就无法达成共识了。如果$X$是提供TAS指令（把给定的内存地址设置为1，然后返回之前的旧值的原子操作）或FAA指令（内存位置增加一个数量的原子操作）的寄存器数组，则可以在两个进程间达成共识，但不能在三个进程间达成共识。然而，在这两种情况下，任意数量的进程之间仍然可以在概率上达成共识。本文提出了两种新的随机共识协议，一种是进程通过读取和写入共享寄存器进行通信，另一种是通过应用FAA操作进行通信。这些协议是一致的，非平凡的，它们保证每个进程在有限的预期步骤数之后决定。读写协议中，目前最快的算法时间复杂度是$2^{O(n^2)}$，本文则改进为$n^2$次写操作和$n^4$次读操作；FAA协议则预期需要$n^2$次FAA操作。</p>
+<p>我们描述了一个简单的协议，如果对手调度程序以同步方式运行进程，该协议具有指数级的预期运行时间。每个进程在每轮中掷出一个无偏的硬币，当所有$n$个进程同时掷出”正确”值时，协议停止。在任何特定回合终止的概率为$\frac{1}{2}^n$。因此，在终止之前的预期回合数为$2^n$。加速协议的一种方法是用进程共享的单个无偏硬币替换$n$个独立的硬币翻转。但是，在异步系统中实现无偏的共享硬币被证明是不可能的（见下文第8节）。</p>
+<p>类似于Chor，Merritt和Shmoys[13]提出的见解，它足以确保进程有足够的可能性翻转相同的值，并且对手调度程序对选择哪个值的影响足够弱。我们的共识协议的核心是一个弱共享硬币协议，它保证：</p>
+<ol>
+<li>进程可能观察到相同的结果；</li>
+<li>对手调度程序对该结果的影响很小；</li>
+<li>协议在进程数量上具有预期的运行时间多项式。</li>
+</ol>
+<p>共识通常被视为一种博弈。进程一方试图与对手调度器达成协议。进程将读和写操作应用到共享寄存器，对手选择操作实际发生的时间。我们的对手非常强大，它拥有关于进程协议、它们的内部状态和共享内存状态的完整信息。它不局限于多项式资源，因此它不能被加密方案所超越。然而，对手无法预测未来的硬币投掷。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Best reply structure and equilibrium convergence in generic games</title>
     <url>/2021/11/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Best%20reply%20structure%20and%20equilibrium%20convergence%20in%20generic%20games/</url>
     <content><![CDATA[<h1 id="最优回复结构和泛型博弈中的均衡收敛"><a href="#最优回复结构和泛型博弈中的均衡收敛" class="headerlink" title="最优回复结构和泛型博弈中的均衡收敛"></a>最优回复结构和泛型博弈中的均衡收敛</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>博弈论是决策者之间战略互动的一组数学模型，应用于各种问题，如合作的出现、语言形成、道路和互联网的拥堵。同样的数学工具也被用来模拟生态学和种群生物学中的进化。一个长期存在的问题是，当玩家通过重复进行博弈来学习时，他们是否会收敛到一个均衡点。对于一般情况，人们知之甚少，因为答案取决于博弈的性质和学习算法。在这里，我们引入了一个形式主义，我们称之为最佳回复结构，它给出了一个对于一个广泛类型的学习算法在任意两个正则形式的博弈中的收敛概率的粗略估计。类似于我们的方法在其他领域中应用的例子是生态学中的定性稳定性理论和使用雷诺数来理解流体动力学中的湍流。</p>
@@ -231,8 +732,8 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
         <category>论文</category>
       </categories>
       <tags>
-        <tag>审稿意见</tag>
         <tag>crowdsourcing</tag>
+        <tag>审稿意见</tag>
         <tag>车联网</tag>
       </tags>
   </entry>
@@ -478,8 +979,8 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
         <category>论文</category>
       </categories>
       <tags>
-        <tag>审稿意见</tag>
         <tag>crowdsourcing</tag>
+        <tag>审稿意见</tag>
       </tags>
   </entry>
   <entry>
@@ -531,11 +1032,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts1142" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts889" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1142'));
+        var myChart = echarts.init(document.getElementById('echarts889'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -591,11 +1092,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1003" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7614" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1003'));
+        var myChart = echarts.init(document.getElementById('echarts7614'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -645,11 +1146,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts8792" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4301" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8792'));
+        var myChart = echarts.init(document.getElementById('echarts4301'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -807,10 +1308,10 @@ tie,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}=0.
 </li>
 </ol>
 <p>该博弈中，给定报酬$R$和其他workers的决策$s_{-i}=(e_{-i},v_{-i})=((e_j,v_j),\forall j \neq i)$，第$i$个worker需要求解下述优化问题。</p>
-<p><strong>问题1：</strong>第$i$个worker的收益最大化</p>
+<p><strong>问题1：</strong> 第$i$个worker的收益最大化</p>
 <p>$max\ \ u_i(R,s,s_{-i})$</p>
 <p>$var.\ \ s_i\in\{(0,rd),(1,1),(1,-1)\}.$</p>
-<p><strong>定义1：</strong>纳什均衡：在给定$R$的情况下，如果对于所有$s_i’\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^<em>,s_{-i}^</em>)\geq u_i(R,s_i’,s_{-i}^<em>)$，则认为策略$s^</em>=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。</p>
+<p><strong>定义1：</strong> 纳什均衡：在给定$R$的情况下，如果对于所有$s_i’\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^<em>,s_{-i}^</em>)\geq u_i(R,s_i’,s_{-i}^<em>)$，则认为策略$s^</em>=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。</p>
 <p>注意：第$i$个worker的策略选择是前面<strong>问题1</strong>的优化解决方案，是与平台支付报酬$R$和其他worker策略$s_{-i}$相关的函数。</p>
 <h3 id="Platform’s-Reward-Design-Problem"><a href="#Platform’s-Reward-Design-Problem" class="headerlink" title="Platform’s Reward Design Problem"></a>Platform’s Reward Design Problem</h3><h4 id="Accuracy-of-Aggregated-Estimate"><a href="#Accuracy-of-Aggregated-Estimate" class="headerlink" title="Accuracy of Aggregated Estimate"></a>Accuracy of Aggregated Estimate</h4><p>平台根据所有workers的上报值进行多数投票猜测最终的值</p>
 <script type="math/tex; mode=display">
@@ -827,7 +1328,7 @@ x_p^{estimate}=
 <h4 id="Platform’s-Payoff-Maximization-Problem"><a href="#Platform’s-Payoff-Maximization-Problem" class="headerlink" title="Platform’s Payoff Maximization Problem"></a>Platform’s Payoff Maximization Problem</h4><p>平台收益函数：</p>
 <script type="math/tex; mode=display">
 \prod(R)=\beta P_a(R,p,N)-E[R^T]</script><p>$\beta&gt;0$表示平台对准确率分配的权重</p>
-<p><strong>问题2：</strong>平台的收益最大化：</p>
+<p><strong>问题2：</strong> 平台的收益最大化：</p>
 <p>$max \prod(R)$</p>
 <p>$var. R\geq0$</p>
 <h3 id="Two-Stage-Game"><a href="#Two-Stage-Game" class="headerlink" title="Two-Stage Game"></a>Two-Stage Game</h3><p>阶段1：平台决定R</p>
@@ -854,13 +1355,13 @@ x_p^{estimate}=
 <li>努力时的成本和内在奖励/惩罚相同——&gt;$c_i=c,l_i=l,l&lt;c$</li>
 </ol>
 <h4 id="Workers’-Equilibrium-Behaviors"><a href="#Workers’-Equilibrium-Behaviors" class="headerlink" title="Workers’ Equilibrium Behaviors"></a>Workers’ Equilibrium Behaviors</h4><p>假设：同类型worker（准确率相同）会选择相同的策略</p>
-<p><strong>定义2：</strong>对称纳什均衡（SNE）</p>
+<p><strong>定义2：</strong> 对称纳什均衡（SNE）</p>
 <ol>
 <li>n-SNE：所有workers都不努力和如实报告</li>
 <li>f-SNE：所有workers都努力和如实报告</li>
 <li>p-SNE：高质量workers努力和如实报告，低质量workers则相反</li>
 </ol>
-<p><strong>命题1：</strong>workers之间的SNE</p>
+<p><strong>命题1：</strong> workers之间的SNE</p>
 <ol>
 <li>当$R\geq 0$时一定存在一个n-SNE</li>
 <li>存在一个阈值$R_f\geq 0$，当$R\geq R_f$时，一定存在一个f-SNE</li>
@@ -880,9 +1381,9 @@ x_p^{estimate}=
 <li>$k\geq k_2:$ 高准确率workers足够多时，存在p-SNE，且$R_p^l&lt;R_f$。当k很大时，高质量workers在p-SNE得到报酬的概率与在f-SNE得到报酬的概率相近，低质量workers也会被激励选择(1,1)策略。</li>
 </ol>
 <p>帕累托最优均衡解：</p>
-<p><strong>命题2：</strong>给定一致性奖励$R$，一定存在一个帕累托最优均衡解。</p>
+<p><strong>命题2：</strong> 给定一致性奖励$R$，一定存在一个帕累托最优均衡解。</p>
 <p>这意味着可以通过调整一致性奖励来引导worker的努力策略和上报策略。</p>
-<p><strong>命题3：</strong>策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。</p>
+<p><strong>命题3：</strong> 策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。</p>
 <p>这意味着不会出现低质量workers努力而高质量workers随机的场面。对于给定的R，高质量workers有更高的概率拿到奖励。在努力成本不变的前提下，高准确率workers更愿意选择(1,1)的策略。换言之，多数投票方案更能吸引高准确率workers。然而，在完全信息的场景下这一条并不成立。</p>
 <h3 id="Platform’s-Reward-Design-at-Stage-I"><a href="#Platform’s-Reward-Design-at-Stage-I" class="headerlink" title="Platform’s Reward Design at Stage I"></a>Platform’s Reward Design at Stage I</h3><p>$P_f,P_p,P_n:$ workers在三种均衡下的聚合准确率</p>
 <p>$E[R_f^T],E[R_p^T],E[R_n^T]:$ 三种均衡下的总期望一致性奖励</p>
@@ -893,7 +1394,7 @@ x_p^{estimate}=
 <p>$\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$</p>
 <p>上面这个计算式反过来（也就是$\frac{1}{\eta_f}$）的含义是：对于单位准确率而言，从均衡n-SNE提高到f-SNE所需要支出的平均一致性奖励。$\eta_p$也是类似的含义。</p>
 <p>平台的最优决策R：</p>
-<p><strong>定理1：</strong>给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
+<p><strong>定理1：</strong> 给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
 <ol>
 <li><p>如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：</p>
 <script type="math/tex; mode=display">
@@ -944,7 +1445,7 @@ p_i,\ &if\ s_i=(1,1), \\
 1-p_i,\ &if\ s_i=(1,-1).
 \end{matrix}
 \right.</script><p>权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。</p>
-<p>第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
+<p>第$i$个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
 <ol>
 <li>在f-SNE时（所有workers都选择<code>(1,1)</code>策略），高质量workers有更高权重，高低质量的权重都是正数；</li>
 <li>在p-SNE时（高质量workers采取<code>(1,1)</code>而低质量workers采取<code>(0,rd)</code>），高质量workers权重为正数，低质量workers权重为0；</li>
@@ -960,15 +1461,15 @@ p_i,\ &if\ s_i=(1,1), \\
 <p>$\eta_p^{wm}=(P_p^{wm}-P_n^{wm})/E[R_p^T]$</p>
 <p>$\eta_n^{wm}=(P_n^{wm}-P_n^{wm})/E[R_n^T]=0$</p>
 <p>workers的均衡解行为和不完全信息一致，每种均衡对应的总一致性奖励（$E[R_f^T],E[R_p^T],E[R_n^T]$）也一致。</p>
-<p><strong>命题4：</strong>给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$</p>
-<p><strong>证明：</strong>在p-SNE，低准确率workers采取<code>(0,rd)</code>，高准确率workers采取<code>(1,1)</code>，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取<code>(1,1)</code>，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。</p>
+<p><strong>命题4：</strong> 给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$</p>
+<p><strong>证明：</strong> 在p-SNE，低准确率workers采取<code>(0,rd)</code>，高准确率workers采取<code>(1,1)</code>，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取<code>(1,1)</code>，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。</p>
 <p><em>补充：这个证明没看懂，个人对命题4的理解是说，两个均衡解共存时，f-SNE是所有workers都努力并如实报告，p-SNE是只有高质量workers努力并如实报告，显然f-SNE多了低质量workers努力贡献的准确率，因此总的准确率会更高。</em></p>
 <p>由此，可以刻画平台的最优决策，和<strong>定理1</strong>一样，只有符号表达替换了。</p>
 <p><img src="https://i.loli.net/2021/05/18/1Rf8TAgeHwkzsEn.png" alt="image-20210518162745417"></p>
 <p>图5是新的均衡图解。蓝色区域更大了，也就是说在完全信息的场景下，平台更可能只让高质量workers努力和正确上报。</p>
-<p><strong>定理2：</strong>令$\prod^{inc<em>}$和$\prod^{com</em>}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com<em>}\geq \prod^{inc</em>}$。</p>
+<p><strong>定理2</strong>： 令$\prod^{inc<em>}$和$\prod^{com</em>}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com<em>}\geq \prod^{inc</em>}$。</p>
 <h2 id="6-Complete-Information-Discriminatory-Reward-Policy"><a href="#6-Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="6. Complete Information: Discriminatory Reward Policy"></a>6. Complete Information: Discriminatory Reward Policy</h2><p>第5章中，平台给不同准确率的workers相同的奖励；本章中则采取有差别的奖励策略，即便是和多数一致方案相同，也会因为准确率不同而得到不同的奖励：低准确率得到的奖励是$R_{low}$，高准确率得到的奖励是$R_{high}$。</p>
-<h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p><strong>命题5：</strong>workers的SNE是</p>
+<h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p><strong>命题5</strong>：workers的SNE是</p>
 <ol>
 <li>$R_{low}$和$R_{high}$都大于等于0时，$s_i^*=(0,rd),\forall i$是一个SNE；</li>
 <li>存在两个阈值$R_f^l$和$R_f^h$均大于0，使得当$R_{low}\geq R_f^l$且$R_{high}\geq R_f^h$时，$s_i^*=(1,1),\forall i$是一个SNE；</li>
@@ -987,9 +1488,9 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
-        <tag>Stackelberg博弈</tag>
+        <tag>game theory</tag>
+        <tag>Stackelberg game</tag>
       </tags>
   </entry>
   <entry>
@@ -1092,7 +1593,6 @@ p_i,\ &if\ s_i=(1,1), \\
       </categories>
       <tags>
         <tag>灾害应对网络</tag>
-        <tag>审稿意见</tag>
       </tags>
   </entry>
   <entry>
@@ -3429,8 +3929,6 @@ Tooltip = My Tooltip
 B_z(\epsilon,k,k_p^{anu})=\frac{P_z(k)-P_n(k)}{E\{R_z^{tot}(\epsilon,k,k_p^{anu})\}}</script></li>
 </ol>
 </li>
-</ol>
-<ol>
 <li><p>定理3：</p>
 <ol>
 <li><p>如果$(11)$成立且$B_p(\epsilon,k,k_p^{anu})&gt;B_f(\epsilon,k,k_p^{anu})$，则平台的最优奖励为：</p>
@@ -3497,7 +3995,7 @@ E\{U_p(\epsilon^h)\}=Q_{h,h}(\epsilon^h)U_{h,h}(\epsilon^h)+Q_{h,l}(\epsilon^h)U
 </li>
 </ol>
 <p>具体的平台披露策略因为太复杂了，所以没法分析，在实验部分进行了数值实验。</p>
-<h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><p>这一部分进行数值实验，研究两类workers：策略型和天真型，天真型的符号表达沿用前文中策略型的，只是把$str$改成了$nai$，具体如下：</p>
+<h2 id="NUMERICAL-RESULTS"><a href="#NUMERICAL-RESULTS" class="headerlink" title="NUMERICAL RESULTS"></a>NUMERICAL RESULTS</h2><p>这一部分进行数值实验，研究两类workers：策略型和天真型，天真型的符号表达沿用前文中策略型的，只是把str改成了nai，具体如下：</p>
 <script type="math/tex; mode=display">
 \left\{
 \begin{aligned}
@@ -3624,8 +4122,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
       </tags>
   </entry>
   <entry>
@@ -6327,11 +6825,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts5768" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1049" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5768'));
+        var myChart = echarts.init(document.getElementById('echarts1049'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7262,9 +7760,10 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </tags>
   </entry>
   <entry>
-    <title>论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing</title>
+    <title>Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing</title>
     <url>/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>今天的我真的超级难过了。但是再难过也没用，看看论文好了，希望等月底能好点。</p>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
 <li>本文研究问题：异构群智感知系统（也就是众包）中对未知worker的招募</li>
 <li>本文场景：requester招募workers收集某城市交通路口一段时间内的交通数据，整个收集过程分为多轮，每轮包含一些和地点有关的任务，对应一个交通路口。每个任务有权重，表示重要性。每个worker能做一个或多个任务，且不同worker能做的任务可能不一样。worker会告诉平台自己能做的任务和期望收到的费用。worker完成任务的质量服从未知分布。</li>
@@ -7371,6 +7870,17 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       <tags>
         <tag>crowdsourcing</tag>
         <tag>Combinatorial Multi Armed Bandit</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-重构比特币费率市场</title>
+    <url>/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E9%87%8D%E6%9E%84%E6%AF%94%E7%89%B9%E5%B8%81%E8%B4%B9%E7%8E%87%E5%B8%82%E5%9C%BA/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
       </tags>
   </entry>
   <entry>
@@ -8008,7 +8518,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </categories>
       <tags>
         <tag>game theory</tag>
-        <tag>crowdsourcing</tag>
+        <tag>crowd sensing</tag>
       </tags>
   </entry>
   <entry>
@@ -8784,7 +9294,8 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </li>
 </ol>
 <h2 id="7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><a href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead" class="headerlink" title="7. SSChain: A full sharding protocol for public blockchain  without data migration overhead"></a>7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</h2><ol>
-<li>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</li>
+<li><p>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</p>
+</li>
 <li><p>节点可以自由加入分片而无需刷新，为避免随之而来的51%攻击问题，本文提出了一个双层结构：</p>
 <ol>
 <li>根链验证分片的区块，避免恶意节点攻击，激励机制保证矿工愿意加入</li>
@@ -8794,11 +9305,16 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </li>
 <li><p>同一分片内的交易有更低的确认延迟和更少的交易费用，进而鼓励用户片内交易</p>
 </li>
-<li>解耦事务验证和状态更新，拆分跨分片事务</li>
-<li>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</li>
-<li>跨分片事务：切分成分片内事务，或者由根链处理</li>
-<li>根链：PoW，分类帐修剪机制</li>
-<li>事务分片：<ol>
+<li><p>解耦事务验证和状态更新，拆分跨分片事务</p>
+</li>
+<li><p>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</p>
+</li>
+<li><p>跨分片事务：切分成分片内事务，或者由根链处理</p>
+</li>
+<li><p>根链：PoW，分类帐修剪机制</p>
+</li>
+<li><p>事务分片：</p>
+<ol>
 <li>事务地址包含比特币地址和分片ID</li>
 <li>交易分类：<ol>
 <li>inputs和outputs在一个分片内</li>
@@ -8814,8 +9330,10 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </li>
 </ol>
 </li>
-<li>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</li>
-<li>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：<ol>
+<li><p>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</p>
+</li>
+<li><p>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：</p>
+<ol>
 <li>为了维护系统安全，根链占用了整个网络的很大一部分算力。由于切分块是由根链网络验证的，恶意对手至少需要根链哈希能力的一半才能进行双倍开销攻击。</li>
 <li>算力被鼓励平均分配到碎片中，这样每个碎片都可以正常工作。</li>
 </ol>

@@ -216,7 +216,8 @@
 </li>
 </ol>
 <h2 id="7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><a href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead" class="headerlink" title="7. SSChain: A full sharding protocol for public blockchain  without data migration overhead"></a>7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</h2><ol>
-<li>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</li>
+<li><p>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</p>
+</li>
 <li><p>节点可以自由加入分片而无需刷新，为避免随之而来的51%攻击问题，本文提出了一个双层结构：</p>
 <ol>
 <li>根链验证分片的区块，避免恶意节点攻击，激励机制保证矿工愿意加入</li>
@@ -226,11 +227,16 @@
 </li>
 <li><p>同一分片内的交易有更低的确认延迟和更少的交易费用，进而鼓励用户片内交易</p>
 </li>
-<li>解耦事务验证和状态更新，拆分跨分片事务</li>
-<li>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</li>
-<li>跨分片事务：切分成分片内事务，或者由根链处理</li>
-<li>根链：PoW，分类帐修剪机制</li>
-<li>事务分片：<ol>
+<li><p>解耦事务验证和状态更新，拆分跨分片事务</p>
+</li>
+<li><p>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</p>
+</li>
+<li><p>跨分片事务：切分成分片内事务，或者由根链处理</p>
+</li>
+<li><p>根链：PoW，分类帐修剪机制</p>
+</li>
+<li><p>事务分片：</p>
+<ol>
 <li>事务地址包含比特币地址和分片ID</li>
 <li>交易分类：<ol>
 <li>inputs和outputs在一个分片内</li>
@@ -246,8 +252,10 @@
 </li>
 </ol>
 </li>
-<li>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</li>
-<li>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：<ol>
+<li><p>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</p>
+</li>
+<li><p>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：</p>
+<ol>
 <li>为了维护系统安全，根链占用了整个网络的很大一部分算力。由于切分块是由根链网络验证的，恶意对手至少需要根链哈希能力的一半才能进行双倍开销攻击。</li>
 <li>算力被鼓励平均分配到碎片中，这样每个碎片都可以正常工作。</li>
 </ol>
@@ -377,7 +385,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2020-2021
+        2020-2022
         <i class="ri-heart-fill heart_icon"></i> Kun Li
       </li>
     </ul>

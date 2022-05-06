@@ -188,10 +188,10 @@ tie,\ \ if\ \ \sum_{j\in N,j\neq i}x_j^{report}=0.
 </li>
 </ol>
 <p>该博弈中，给定报酬$R$和其他workers的决策$s_{-i}=(e_{-i},v_{-i})=((e_j,v_j),\forall j \neq i)$，第$i$个worker需要求解下述优化问题。</p>
-<p><strong>问题1：</strong>第$i$个worker的收益最大化</p>
+<p><strong>问题1：</strong> 第$i$个worker的收益最大化</p>
 <p>$max\ \ u_i(R,s,s_{-i})$</p>
 <p>$var.\ \ s_i\in\{(0,rd),(1,1),(1,-1)\}.$</p>
-<p><strong>定义1：</strong>纳什均衡：在给定$R$的情况下，如果对于所有$s_i’\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^<em>,s_{-i}^</em>)\geq u_i(R,s_i’,s_{-i}^<em>)$，则认为策略$s^</em>=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。</p>
+<p><strong>定义1：</strong> 纳什均衡：在给定$R$的情况下，如果对于所有$s_i’\in S_i$，和所有$i\in N$，都有$u_i(R,s_i^<em>,s_{-i}^</em>)\geq u_i(R,s_i’,s_{-i}^<em>)$，则认为策略$s^</em>=\prod_{i\in N}s_i^*$构成了博弈$\Omega_1$的一个纳什均衡。</p>
 <p>注意：第$i$个worker的策略选择是前面<strong>问题1</strong>的优化解决方案，是与平台支付报酬$R$和其他worker策略$s_{-i}$相关的函数。</p>
 <h3 id="Platform’s-Reward-Design-Problem"><a href="#Platform’s-Reward-Design-Problem" class="headerlink" title="Platform’s Reward Design Problem"></a>Platform’s Reward Design Problem</h3><h4 id="Accuracy-of-Aggregated-Estimate"><a href="#Accuracy-of-Aggregated-Estimate" class="headerlink" title="Accuracy of Aggregated Estimate"></a>Accuracy of Aggregated Estimate</h4><p>平台根据所有workers的上报值进行多数投票猜测最终的值</p>
 <script type="math/tex; mode=display">
@@ -208,7 +208,7 @@ x_p^{estimate}=
 <h4 id="Platform’s-Payoff-Maximization-Problem"><a href="#Platform’s-Payoff-Maximization-Problem" class="headerlink" title="Platform’s Payoff Maximization Problem"></a>Platform’s Payoff Maximization Problem</h4><p>平台收益函数：</p>
 <script type="math/tex; mode=display">
 \prod(R)=\beta P_a(R,p,N)-E[R^T]</script><p>$\beta&gt;0$表示平台对准确率分配的权重</p>
-<p><strong>问题2：</strong>平台的收益最大化：</p>
+<p><strong>问题2：</strong> 平台的收益最大化：</p>
 <p>$max \prod(R)$</p>
 <p>$var. R\geq0$</p>
 <h3 id="Two-Stage-Game"><a href="#Two-Stage-Game" class="headerlink" title="Two-Stage Game"></a>Two-Stage Game</h3><p>阶段1：平台决定R</p>
@@ -235,13 +235,13 @@ x_p^{estimate}=
 <li>努力时的成本和内在奖励/惩罚相同——&gt;$c_i=c,l_i=l,l&lt;c$</li>
 </ol>
 <h4 id="Workers’-Equilibrium-Behaviors"><a href="#Workers’-Equilibrium-Behaviors" class="headerlink" title="Workers’ Equilibrium Behaviors"></a>Workers’ Equilibrium Behaviors</h4><p>假设：同类型worker（准确率相同）会选择相同的策略</p>
-<p><strong>定义2：</strong>对称纳什均衡（SNE）</p>
+<p><strong>定义2：</strong> 对称纳什均衡（SNE）</p>
 <ol>
 <li>n-SNE：所有workers都不努力和如实报告</li>
 <li>f-SNE：所有workers都努力和如实报告</li>
 <li>p-SNE：高质量workers努力和如实报告，低质量workers则相反</li>
 </ol>
-<p><strong>命题1：</strong>workers之间的SNE</p>
+<p><strong>命题1：</strong> workers之间的SNE</p>
 <ol>
 <li>当$R\geq 0$时一定存在一个n-SNE</li>
 <li>存在一个阈值$R_f\geq 0$，当$R\geq R_f$时，一定存在一个f-SNE</li>
@@ -261,9 +261,9 @@ x_p^{estimate}=
 <li>$k\geq k_2:$ 高准确率workers足够多时，存在p-SNE，且$R_p^l&lt;R_f$。当k很大时，高质量workers在p-SNE得到报酬的概率与在f-SNE得到报酬的概率相近，低质量workers也会被激励选择(1,1)策略。</li>
 </ol>
 <p>帕累托最优均衡解：</p>
-<p><strong>命题2：</strong>给定一致性奖励$R$，一定存在一个帕累托最优均衡解。</p>
+<p><strong>命题2：</strong> 给定一致性奖励$R$，一定存在一个帕累托最优均衡解。</p>
 <p>这意味着可以通过调整一致性奖励来引导worker的努力策略和上报策略。</p>
-<p><strong>命题3：</strong>策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。</p>
+<p><strong>命题3：</strong> 策略空间（$s_i^*=(0,rd),\forall i\in N_h,s_j=(1,1),\forall i\in N_l$）不存在均衡解。</p>
 <p>这意味着不会出现低质量workers努力而高质量workers随机的场面。对于给定的R，高质量workers有更高的概率拿到奖励。在努力成本不变的前提下，高准确率workers更愿意选择(1,1)的策略。换言之，多数投票方案更能吸引高准确率workers。然而，在完全信息的场景下这一条并不成立。</p>
 <h3 id="Platform’s-Reward-Design-at-Stage-I"><a href="#Platform’s-Reward-Design-at-Stage-I" class="headerlink" title="Platform’s Reward Design at Stage I"></a>Platform’s Reward Design at Stage I</h3><p>$P_f,P_p,P_n:$ workers在三种均衡下的聚合准确率</p>
 <p>$E[R_f^T],E[R_p^T],E[R_n^T]:$ 三种均衡下的总期望一致性奖励</p>
@@ -274,7 +274,7 @@ x_p^{estimate}=
 <p>$\eta_n=\frac{P_n-P_n}{E[R_n^T]}=0$</p>
 <p>上面这个计算式反过来（也就是$\frac{1}{\eta_f}$）的含义是：对于单位准确率而言，从均衡n-SNE提高到f-SNE所需要支出的平均一致性奖励。$\eta_p$也是类似的含义。</p>
 <p>平台的最优决策R：</p>
-<p><strong>定理1：</strong>给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
+<p><strong>定理1：</strong> 给定任意参数$(\beta,N,c,l,p_l,p_h,k)$，平台可以引导workers达到f-SNE和对应的效率$\eta_f$</p>
 <ol>
 <li><p>如果p-SNE存在，且$\eta_p\geq \eta_f$，平台的最优一致性奖励为：</p>
 <script type="math/tex; mode=display">
@@ -325,7 +325,7 @@ p_i,\ &if\ s_i=(1,1), \\
 1-p_i,\ &if\ s_i=(1,-1).
 \end{matrix}
 \right.</script><p>权重公式既能提高聚合准确率，又会显著影响平台决定的报酬。</p>
-<p>第i个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
+<p>第$i$个worker的权重$w_i(p_i,s_i)$由其准确率和策略共同决定，因此：</p>
 <ol>
 <li>在f-SNE时（所有workers都选择<code>(1,1)</code>策略），高质量workers有更高权重，高低质量的权重都是正数；</li>
 <li>在p-SNE时（高质量workers采取<code>(1,1)</code>而低质量workers采取<code>(0,rd)</code>），高质量workers权重为正数，低质量workers权重为0；</li>
@@ -341,15 +341,15 @@ p_i,\ &if\ s_i=(1,1), \\
 <p>$\eta_p^{wm}=(P_p^{wm}-P_n^{wm})/E[R_p^T]$</p>
 <p>$\eta_n^{wm}=(P_n^{wm}-P_n^{wm})/E[R_n^T]=0$</p>
 <p>workers的均衡解行为和不完全信息一致，每种均衡对应的总一致性奖励（$E[R_f^T],E[R_p^T],E[R_n^T]$）也一致。</p>
-<p><strong>命题4：</strong>给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$</p>
-<p><strong>证明：</strong>在p-SNE，低准确率workers采取<code>(0,rd)</code>，高准确率workers采取<code>(1,1)</code>，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取<code>(1,1)</code>，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。</p>
+<p><strong>命题4：</strong> 给定参数$(\beta,N,c,l,p_l,p_h,k)$，如果f-SNE和p-SNE共存，则$P_f^{wm}\geq P_p^{wm}$</p>
+<p><strong>证明：</strong> 在p-SNE，低准确率workers采取<code>(0,rd)</code>，高准确率workers采取<code>(1,1)</code>，根据计算权重的公式，低质量workers权重为0，高质量workers权重为正数，基于此可计算得到$P_p^{wm}$。在f-SNE，所有workers采取<code>(1,1)</code>，按照p-SNE分配权重是可行的，此时$P_f^{wm}= P_p^{wm}$。由于权重计算公式是最优的，因此可得$P_f^{wm}\geq P_p^{wm}$。</p>
 <p><em>补充：这个证明没看懂，个人对命题4的理解是说，两个均衡解共存时，f-SNE是所有workers都努力并如实报告，p-SNE是只有高质量workers努力并如实报告，显然f-SNE多了低质量workers努力贡献的准确率，因此总的准确率会更高。</em></p>
 <p>由此，可以刻画平台的最优决策，和<strong>定理1</strong>一样，只有符号表达替换了。</p>
 <p><img src="https://i.loli.net/2021/05/18/1Rf8TAgeHwkzsEn.png" alt="image-20210518162745417"></p>
 <p>图5是新的均衡图解。蓝色区域更大了，也就是说在完全信息的场景下，平台更可能只让高质量workers努力和正确上报。</p>
-<p><strong>定理2：</strong>令$\prod^{inc<em>}$和$\prod^{com</em>}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com<em>}\geq \prod^{inc</em>}$。</p>
+<p><strong>定理2</strong>： 令$\prod^{inc<em>}$和$\prod^{com</em>}$表示平台在不完全信息和完全信息情况下对应的最优收益。给定参数$(\beta,N,c,l,p_l,p_h,k)$，可得：$\prod^{com<em>}\geq \prod^{inc</em>}$。</p>
 <h2 id="6-Complete-Information-Discriminatory-Reward-Policy"><a href="#6-Complete-Information-Discriminatory-Reward-Policy" class="headerlink" title="6. Complete Information: Discriminatory Reward Policy"></a>6. Complete Information: Discriminatory Reward Policy</h2><p>第5章中，平台给不同准确率的workers相同的奖励；本章中则采取有差别的奖励策略，即便是和多数一致方案相同，也会因为准确率不同而得到不同的奖励：低准确率得到的奖励是$R_{low}$，高准确率得到的奖励是$R_{high}$。</p>
-<h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p><strong>命题5：</strong>workers的SNE是</p>
+<h3 id="Workers’-Decisions-1"><a href="#Workers’-Decisions-1" class="headerlink" title="Workers’ Decisions"></a>Workers’ Decisions</h3><p><strong>命题5</strong>：workers的SNE是</p>
 <ol>
 <li>$R_{low}$和$R_{high}$都大于等于0时，$s_i^*=(0,rd),\forall i$是一个SNE；</li>
 <li>存在两个阈值$R_f^l$和$R_f^h$均大于0，使得当$R_{low}\geq R_f^l$且$R_{high}\geq R_f^h$时，$s_i^*=(1,1),\forall i$是一个SNE；</li>
@@ -420,7 +420,7 @@ p_i,\ &if\ s_i=(1,1), \\
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stackelberg%E5%8D%9A%E5%BC%88/" rel="tag">Stackelberg博弈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crowdsourcing/" rel="tag">crowdsourcing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stackelberg-game/" rel="tag">Stackelberg game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crowdsourcing/" rel="tag">crowdsourcing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li></ul>
 
     </footer>
   </div>
@@ -456,7 +456,7 @@ p_i,\ &if\ s_i=(1,1), \\
     <ul>
       <li>
         Copyrights &copy;
-        2020-2021
+        2020-2022
         <i class="ri-heart-fill heart_icon"></i> Kun Li
       </li>
     </ul>
