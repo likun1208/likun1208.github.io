@@ -2,8 +2,8 @@
 title: '论文记录-N-in-One: A Novel Location-Based-Service'
 date: 2020-07-18 15:51:56
 tags: 
-	- LBS
-	- POI
+    - LBS
+    - POI
 category: 论文
 description: 针对LBS中的POI问题的研究
 ---
@@ -87,7 +87,7 @@ L层邻近POI：可视网络中，比$P_i$扫描得早、且从$P_i$出发可通
 
 该算法的具体流程如下：
 
-​	输入：POI集合根据x坐标升序排列
+​    输入：POI集合根据x坐标升序排列
 
 1. 扫描线自右向左扫描
 2. 当扫描到$P_n$、$P_{n-1}$、$P_{n-2}$的时候：

@@ -98,7 +98,7 @@ search:
   format: html
   limit: 10000
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local
   pluginRootPath: live2dw/
   pluginJsPath: lib/
@@ -108,6 +108,8 @@ live2d:
     # use: live2d-widget-model-shizuku  #选择哪种模型
     # use: live2d-widget-model-wanko
     use: live2d-widget-model-z16
+    # use: live2d-widget-model-gongzi
+    # use: gongzi
   display: #放置位置和大小
     position: right
     width: 175

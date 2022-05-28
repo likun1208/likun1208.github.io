@@ -1,0 +1,168 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "zhonglicat.moc3",
+    "Textures": [
+      "zhonglicat.2048/texture_00.png"
+    ],
+    "Physics": "zhonglicat.physics3.json",
+    "Motions": {
+      "Tap": [
+        {
+          "Name": "gongping",
+          "File": "motions/gongping.motion3.json",
+          "Sound": "sounds/公平.wav"
+        },
+        {
+          "Name": "shiyanzhifa",
+          "File": "motions/shiyanzhifa.motion3.json",
+          "Sound": "sounds/shiyanzhifa.wav"
+        },
+        {
+          "Name": "dazhaohu",
+          "File": "motions/dazhaohu.motion3.json",
+          "Sound": "sounds/【原神】钟离官方语音公布 - 1.官方语音1(Av500488390,P1).wav"
+        }
+      ],
+      "emotion": [
+        {
+          "Name": "weixiao",
+          "Expression": "weixiao"
+        },
+        {
+          "Name": "yansu",
+          "Expression": "yansu"
+        },
+        {
+          "Name": "longjiao",
+          "Expression": "longjiao"
+        },
+        {
+          "Name": "cat",
+          "Expression": "cat"
+        }
+      ]
+    },
+    "Expressions": [
+      {
+        "Name": "weixiao",
+        "File": "expressions/weixiao.exp3.json"
+      },
+      {
+        "Name": "yansu",
+        "File": "expressions/yansu.exp3.json"
+      },
+      {
+        "Name": "longjiao",
+        "File": "expressions/longjiao.exp3.json"
+      },
+      {
+        "Name": "cat",
+        "File": "expressions/cat.exp3.json"
+      }
+    ]
+  },
+  "Controllers": {
+    "ParamHit": {},
+    "ParamLoop": {},
+    "KeyTrigger": {},
+    "EyeBlink": {
+      "MinInterval": 500,
+      "MaxInterval": 6000,
+      "Items": [
+        {
+          "Id": "ParamEyeLOpen",
+          "Min": 0.0,
+          "Max": 1.0,
+          "BlendMode": 2,
+          "Input": 0
+        },
+        {
+          "Id": "ParamEyeROpen",
+          "Min": 0.0,
+          "Max": 1.0,
+          "BlendMode": 2,
+          "Input": 0
+        }
+      ],
+      "Enabled": true
+    },
+    "LipSync": {
+      "Gain": 5.0
+    },
+    "MouseTracking": {
+      "SmoothTime": 0.15,
+      "Enabled": true
+    },
+    "AutoBreath": {
+      "Enabled": true
+    },
+    "ExtraMotion": {
+      "Enabled": true
+    },
+    "Accelerometer": {
+      "Enabled": true
+    },
+    "Microphone": {},
+    "Transform": {},
+    "FaceTracking": {
+      "AngleZ": [
+        {
+          "Id": "ParamAngleZ",
+          "Min": -30.0,
+          "Max": 30.0,
+          "DefaultValue": 0.0,
+          "Input": 0
+        }
+      ],
+      "PositionZ": [
+        {
+          "Id": "ParamBodyUpper",
+          "Min": -10.0,
+          "Max": 10.0,
+          "DefaultValue": 0.0,
+          "Input": 0
+        }
+      ],
+      "Enabled": true
+    },
+    "ParamValue": {},
+    "PartOpacity": {},
+    "ArtmeshOpacity": {},
+    "ArtmeshColor": {},
+    "ArtmeshCulling": {
+      "DefaultMode": 0
+    },
+    "IntimacySystem": {}
+  },
+  "HitAreas": [
+    {
+      "Name": "weixiao",
+      "Id": "ArtMesh8",
+      "Motion": "emotion:weixiao"
+    },
+    {
+      "Name": "yansu",
+      "Id": "ArtMesh10",
+      "Motion": "emotion:yansu"
+    },
+    {
+      "Name": "shiyanzhifa",
+      "Id": "bozi",
+      "Motion": "Tap:shiyanzhifa"
+    },
+    {
+      "Name": "gongping",
+      "Id": "qianfa",
+      "Motion": "Tap:gongping"
+    },
+    {
+      "Name": "dazhaohu",
+      "Id": "body",
+      "Motion": "Tap:dazhaohu"
+    }
+  ],
+  "Options": {
+    "PositionY": -1.0
+  }
+}

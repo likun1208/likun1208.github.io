@@ -14,11 +14,12 @@ categories: 博客配置
 3. deployer-git： 命令行里输入`npm install hexo-deployer-git --save`。
 
 4. Hexo：
+   
    1. 准备好一个用于存放博客文件的文件夹（比如Github），在该文件夹的根目录下运行刚才装完git以后会出现的git-bash.exe（这里其实直接用cmd进入命令行然后进入博客文件夹也可以）；
    2. 输入命令`npm install -g hexo-cli`
-   
-5. 这里补充一点：安装的版本很重要，如果hexo和node中某个版本较高，后面配置的时候会冲突，使用`hexo -v`可以查看版本。我目前使用的版本如下：
 
+5. 这里补充一点：安装的版本很重要，如果hexo和node中某个版本较高，后面配置的时候会冲突，使用`hexo -v`可以查看版本。我目前使用的版本如下：
+   
    ```
    hexo: 4.2.0
    hexo-cli: 4.2.0
@@ -63,14 +64,14 @@ categories: 博客配置
 1. 在[Github官网](https://github.com/)注册账号并登陆，点首页右上角的加号新建一个仓库(Repository)，仓库的名字为用户名.github.io（比如我的是kun-bin.github.io），这里一定要是这个格式，不然之后没法直接访问博客网站。然后其他的都是默认内容，点create repository就可以了。如果仓库名字输入错了，之后可以在github上这个仓库页面的setting选项中修改。
 
 2. 打开 **/blog/config.yml**文件修改deploy 属性(注意“：”之后有空格 ) 否则配置失败。
-
+   
    ```
    deploy:
      type: git
      repository: https://github.com/kun-bin/kun-bin.github.io.git
      branch: master
    ```
-
+   
    注意这里repository要替换成自己的仓库地址。
 
 3. 初始化本地仓库：在blog文件夹下的命令行输入`git init`
@@ -86,7 +87,7 @@ categories: 博客配置
 目前在blog文件夹里有一个config.yml文件，我们称之为站点配置文件；而在themes/next文件夹里也有一个config.yml文件，称之为主题配置文件。
 
 1. 基本信息：打开站点配置文件，找到site模块，可以修改博客标题、作者、描述、语言等等信息，
-
+   
    ```undefined
    title: 标题
    subtitle: 副标题
@@ -97,7 +98,7 @@ categories: 博客配置
    ```
 
 2. 菜单配置：初始网页只有两个菜单：home和archive，可以打开主题配置文件，找到menu模块，把需要的菜单前面的#删了，并注意把||**前面**的空格删了，不然可能会点了菜单以后报错（类似Cannot GET /tags/%20/这样的错）。
-
+   
    ```cpp
    menu:
      home: /|| home                          //首页
@@ -109,20 +110,21 @@ categories: 博客配置
      #sitemap: /sitemap.xml|| sitemap        //站点地图
      #commonweal: /404/|| heartbeat          //公益404
    ```
-   这里||后面的单词是指菜单对应的图标，可以自己修改。此外，日程表那个模块，因为实际上调用的是谷歌日历，国内显然没法用，所以不建议使用。
    
-3. 建立菜单对应的页面：还是在blog文件夹下打开命令行，输入`hexo new page "categories"`，然后在~/blog/source 文件夹中即可看到categories文件夹，打开里面的index.md文件，设置如下（注意：后面要加空格）：
+   这里||后面的单词是指菜单对应的图标，可以自己修改。此外，日程表那个模块，因为实际上调用的是谷歌日历，国内显然没法用，所以不建议使用。
 
+3. 建立菜单对应的页面：还是在blog文件夹下打开命令行，输入`hexo new page "categories"`，然后在~/blog/source 文件夹中即可看到categories文件夹，打开里面的index.md文件，设置如下（注意：后面要加空格）：
+   
    ```
    title: categories
    date: 2020-01-30 08:54:26
    type: "categories"
    ```
-
+   
    tags页面也是一样的方式来建立。
 
 4. 主题风格：一共有四个风格可以选择，打开主题配置文件 找到`Scheme Settings`，把想用的风格前面的#去掉，比如我这里用了Mist。
-
+   
    ```bash
    # Schemes
    # scheme: Muse
@@ -136,11 +138,11 @@ categories: 博客配置
 6. 头像设置：主题配置文件找到`avatar`，修改avatar后面的路径为自己头像的路径，头像文件要放到`themes/next/source/images`中，比如头像文件名为`header.jpg`，就把那一行写成`avatar: /images/header.jpg`。如果前面有#就去掉#。
 
 7. 添加搜索：
-
+   
    1. 还是blog文件夹的命令行里，输入`npm install hexo-generator-searchdb --save`。
-
+   
    2. 打开站点配置文件找到`Extensions`在下面添加
-
+      
       ```bash
       # 搜索
       search:
@@ -149,7 +151,7 @@ categories: 博客配置
         format: html
         limit: 10000
       ```
-
+   
    3. 打开主题配置文件找到`Local search`，将`enable`设置为`true`。
 
 8. 还有很多能配置的，比如侧边栏头像下面有github链接，点击页面出现爱心符号，博客背景动态变化等，可自行搜索。
@@ -165,7 +167,7 @@ categories: 博客配置
 3. 进主题配置文件进行自己需要的修改，比如调整logo、友情链接、启用公式等等；
 
 4. 需要注意的是，这个主题的分类（categories）、标签（tags）等文件和next主题稍微不一样，需要改一下，以分类为例，进入`...\source\categories`文件夹，可以看到一个`index.md`文件，打开以后无论里面有什么内容，都彻底改成以下的：
-
+   
    ```markdown
    ---
    title: categories
@@ -174,7 +176,7 @@ categories: 博客配置
    layout: "categories"
    ---
    ```
-
+   
    相应地，其他用到的文件夹里的`index.md`也这样改。
 
 5. 安装好以后进行`hexo clean`等等操作，就可以看到新主题的博客了，不过可能和我的屏幕尺寸有关，在文章页面中，固定的目录栏有些靠右，以至于目录显示不完整，而浮动的目录栏有些靠左了，会挡住正文，当目录很长时，文章几乎没法看了。这时需要打开主题中对目录栏的配置，`\themes\ayer\source-src\css\_partial`文件夹中的`tocbot.styl`文件，第一部分`.tocbot`的`right`属性从`-28rem`改成`-25rem`，这样固定目录栏就相对偏左一些，能显示完整了；第六部分`.is-position-fixed`的`right`属性从`6rem`改成`0`，这样浮动目录栏就会贴着右边，从而不挡左边了；
@@ -192,11 +194,11 @@ categories: 博客配置
 2. 下载[matery.css](https://pan.miaodrew.workers.dev/Drew/web/css/matery.css?rootId=0AAjrE2SiYnTaUk9PVA)，放到主题文件夹中的`\source\css`文件夹中。
 
 3. 打开`\layout\_partial\head.ejs`文件，在`head`标记中添加一行：
-
+   
    `<link rel="stylesheet" type="text/css" href="/css/matery.css">`
-
+   
    这一行直接加到`<head>`的下一行就好，在我的文件里是加到了第10行，如下图：
-
+   
    ![image-20210227182758974](https://i.loli.net/2021/02/27/hAeoFcx8wIYlL2S.png)
 
 ### GitHub风格日历
@@ -206,15 +208,15 @@ categories: 博客配置
 2. 打开`post-calendar.ejs`文件，看第7行的内容是否为`<script type="text/javascript" src="/js/echarts.min.js"></script>`，如果不是则改成这样。
 
 3. 在打算添加文章日历的地方，输入以下这行代码
-
+   
    `<%- partial('_widget/post-calendar') %>`
-
+   
    例如我要加到归档页面（`archive`），就打开`\layout\archive.ejs`文件，进行添加。不过Ayer主题的这个文件里就下面这行内容：
-
+   
    `<%- partial('_partial/archive', {pagination: config.archive, index: true}) %>`
-
+   
    如果直接在这一行前面或者后面添加日历代码，显示效果会不太好，而且会被左边的侧栏挡住，因此找到`\layout\_partial\archive.ejs`文件，在添加日历代码的时候可以多尝试几个位置，看哪个合适。我打算把日历放到“归档”这两个字的下面，文章列表的上面，于是整个文件的内容如下：
-
+   
    ```ejs
    <section class="outer">
      <% if (theme.ads && theme.ads.length != 0){ %>
@@ -294,12 +296,12 @@ categories: 博客配置
 3. 在需要添加标签云的地方，输入代码：`<%- partial('_widget/tag-cloud') %>`
 
 4. 例如我要将这个添加到原本的标签页面，则找到`\layout\tags.ejs`文件，添加标签云代码。需要注意的是，Ayer主题本身会在这个页面自动生成标签，因此需要把`tags.ejs`文件中原本的标签内容那行去掉，整个文件改成了以下内容：
-
+   
    ```ejs
    <section class="outer">
      <% if (site.tags.length){ %>
        <h1 class="page-type-title"><%= __('tags') %></h1>
-   	<%- partial('_widget/tag-cloud') %>
+       <%- partial('_widget/tag-cloud') %>
      <% } %>
    </section>
    ```
@@ -317,7 +319,7 @@ categories: 博客配置
 3. 在需要添加分类雷达图的地方，输入代码：`<%- partial('_widget/category-radar') %>`
 
 4. 例如我要添加到原本的分类（`category`）页面，就找到`\layout\categories.ejs`，这里我不打算去掉原本的分类内容，因此不删除原本的代码，直接添加雷达图代码，修改后的文件整体如下：
-
+   
    ```ejs
    <section class="outer">
      <% if (site.categories.length){ %>
@@ -331,7 +333,7 @@ categories: 博客配置
    ```
 
 5. 如果觉得这个雷达图和主题格格不入，想给它加个边框，则可以在刚才的`categories.ejs`文件最开头的地方粘贴以下代码：
-
+   
    ```ejs
    <style type="text/css">
            #contentss {
@@ -352,15 +354,15 @@ categories: 博客配置
            }
    </style>
    ```
-
+   
    然后下面的雷达图代码修改为：
-
+   
    ```ejs
    <div id="contentss">
    <%- partial('_widget/category-radar') %></div>`或者`<%- partial('_widget/post-calendar') %>
    </div>
    ```
-
+   
    边框的大小样式颜色等等可以自行修改。不过Ayer主题不加边框就挺合适了，因此我没加。
 
 6. 整体效果如下（这个截图是一开始没注意，把雷达图加到了标签页面，但是不影响雷达图的展示；此外，很显然分类名字过长就会显示不完整，这应该和雷达图的大小有关，懒得改了）：
@@ -370,29 +372,35 @@ categories: 博客配置
 ## 如何发布新的博客
 
 1. 在blog文件夹的命令行里输入`hexo new "标题"`，然后进入**/blog/sources/_post/**找到对应的markdown文件就可以开始写了，也可以直接在这个文件夹下新建一个markdown文件，然后添加对应的文件头。写博客的时候根据需求在文件头里填写tags和categories的信息，然后hexo会自动建立好tags和categories的内容并给文章分类。
-
+   
    文件头信息如下编写：
-```
+   
+   ```
+   
+   ```
+
 ---
+
 title:
 date:
 tags:
 categories:
----
-```
 
+---
+
+```
 2. 写好以后保存，然后还是blog文件夹的命令行，输入`hexo clean && hexo g && hexo d`，就发布成功了。
 
 3. 如果一个文章想设置多个标签，那么在编写文件头信息的时候，要按下面的方式写：
+```
 
-   ```
    tags:
-   	- tag1
-   	- tag2
-   	...
-   ```
+       - tag1
+       - tag2
+       ...
 
-   这里`tags:` 后面一定要换行，下面的`-`后面注意有空格。
+```
+这里`tags:` 后面一定要换行，下面的`-`后面注意有空格。
 
 ## 一些后续问题
 
@@ -401,14 +409,14 @@ categories:
 ```html
 {%- if page.prev or page.next %}
  <nav class="pagination">
-   {{
-     paginator({
-       prev_text: '<i class="fa fa-angle-left" aria-label="'+__('accessibility.prev_page')+'"></i>',
-       next_text: '<i class="fa fa-angle-right" aria-label="'+__('accessibility.next_page')+'"></i>',
-       mid_size: 1,
-       escape: false
-     })
-   }}
+{{
+  paginator({
+    prev_text: '<i class="fa fa-angle-left" aria-label="'+__('accessibility.prev_page')+'"></i>',
+    next_text: '<i class="fa fa-angle-right" aria-label="'+__('accessibility.next_page')+'"></i>',
+    mid_size: 1,
+    escape: false
+  })
+}}
  </nav>
 {%- endif %}
 ```
@@ -432,14 +440,14 @@ categories:
 7. SSH Keys那里点`New SSH Key`，名字随便设置，密钥部分粘贴第五步复制的那个，然后保存；
 
 8. 接下来回博客目录，找到`_config.yml`，也就是站点配置文件，把最下面`deploy`属性中的`repository: `内容修改成`git@github.com:你的name/你的username.github.io.git`的样子，比如：
-
+   
    ```html
    deploy:
      type: git
      repository: git@github.com:likun1208/likun1208.github.io.git
      branch: master
    ```
-
+   
    这里有的地方也把`repository:`写成`repo:`，应该都行。
 
 9. 然后命令行里`hexo d`，会要求输入之前第四步里的那个密码；
@@ -450,21 +458,21 @@ categories:
 
 今天研究了一下把博客所有文件上传到github仓库的一个分支，这样可以在多个电脑上同步写博客而不需要用U盘来回复制。首先，如果前面没有自己定义分支的名字，那么我们的网站内容是存放在`master`分支的，在这一步，我们会新建一个`hexo`分支，来存放博客文件（指主题文件和博客markdown文件等）。具体来说，当我们需要在多个电脑之间迁移博客时，会受影响的文件如下：
 
-|  文件（夹）  |                      说明                       |
-| :----------: | :---------------------------------------------: |
-|  scaffolds/  |                 博客文章的模版                  |
-|   source/    | 所有博客文章，以及about、tags、categories等page |
-|   themes/    |                   网站的主题                    |
-|  .gitignore  |         在push时需要忽略的文件和文件夹          |
-| _config.yml  |                  站点配置文件                   |
-| package.json |              依赖包的名称和版本号               |
+| 文件（夹）        | 说明                                  |
+|:------------:|:-----------------------------------:|
+| scaffolds/   | 博客文章的模版                             |
+| source/      | 所有博客文章，以及about、tags、categories等page |
+| themes/      | 网站的主题                               |
+| .gitignore   | 在push时需要忽略的文件和文件夹                   |
+| _config.yml  | 站点配置文件                              |
+| package.json | 依赖包的名称和版本号                          |
 
 1. 在github网站上找到自己的博客项目，新建`hexo`分支，并设置为主分支；
 
 2. 在本地博客文件夹里打开git bash，输入`git clone git@github.com:用户名/用户名.github.io.git`，把`hexo`分支复制到本地，这里的用户名请自行替换；
 
 3. 在博客文件夹里找到`.gitignore`文件，如果没有这个文件就自己新建一下，注意这个文件开头就是`.`，整个名字就是`.gitignore`，然后打开它里面写入以下内容，表示同步的时候忽略这些文件：
-
+   
    ```
    .DS_Store
    Thumbs.db
@@ -478,13 +486,13 @@ categories:
 4. 注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的`.git`文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了；
 
 5. 然后在git bash里输入以下命令，即可完成`hexo`分支的上传：
-
+   
    ```
    git add .
    git commit –m "add branch"
    git push
    ```
-
+   
    这里的add branch可以改成其他内容，表示这次上传的说明注释；
 
 6. 到此就完成了上传，这样换电脑以后，按照前面的内容把git和hexo以及其他相关东西都安装配置好以后，通过git把这个项目文件下载到本地，就又可以编辑博客了；
@@ -494,6 +502,81 @@ categories:
 8. 总结一下就是，每次写博客之前，首先`git pull`把github上的博客内容下载到本地；写完新的内容，首先进行`hexo clean, hexo g, hexo d`把内容渲染成网页并发布，接着`git add ., git commit -m "description", git push`把新增和修改的内容也上传到github，这样就可以实现白天在实验室写，晚上回宿舍写的操作了；
 
 9. 以上操作也可以通过github的桌面版程序来完成，还挺方便。
+
+## 新版live2d
+
+前面的内容提到了hexo本身可以安装插件并设置live2d的开关，打开以后加载对应模型就能显示了，但是在实际使用的过程中，我发现它支持的是旧版本的live2d，无法显示新版本的，因此研究一番试图加载新版本的。
+
+首先简单说明一下，目前市面上的live2d模型有3个版本，最古老的是2.0版本，它只能用旧版的live2d cubism生成（官网没有对应的版本了），其次是3.0版本，它能用目前所有版本的[Live2D Cubism](https://www.live2d.com/zh-CHS/)软件生成，最新的是4.0版本，能用最新的live2d cubisim制作。虽然可以用同一个软件制作，但是3.0和4.0是不同的，差别在于sdk版本。它们在live2d的模型配置文件（.model.json）中的version都是3，然而用live2d cubism viewer打开查看moc3文件的信息就能发现sdk版本的差异了，这也导致网页渲染的时候要用不同的东西。
+
+### 3.0版本的处理
+
+在查找资料的过程中，我首先找到的是众多3.0版本的资料，对比一番可以发现虽然大家原理和代码语法都差不多，但[这个](https://weidows.github.io/post/Web/JavaScript/live2d-moc3/README/)是集大成作，它的行数最少，使用起来很简单，只需要找到主题文件夹中`layout`目录下的`layout.ejs`文件（`index.ejs`应该也可以），然后在最后的`</body>`前面添加以下几行代码：
+
+```html
+<!-- Live2DCubismCore -->
+<script src="https://fastly.jsdelivr.net/gh/Weidows-projects/live2d-moc3/dist/live2dcubismcore.min.js"></script>
+<!-- Include Pixi. -->
+<script src="https://fastly.jsdelivr.net/gh/Weidows-projects/live2d-moc3/dist/pixi.min.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/Weidows-projects/live2d-moc3/dist/live2d.min.js"></script>
+
+<script>addEventListener("DOMContentLoaded",function(){let models=[{left:"0px",bottom:"0px",basePath:"https://fastly.jsdelivr.net/gh/likun1208/Live2d_modules@gh-pages/assets",role:"test05261",background:"",opacity:1,mobile:false,},];new Live2dLoader(models)});</script>
+```
+
+代码中前3行是加载live2d相关的js文件，第四行是加载模型文件，这一步需要把自己要用的模型上传到GitHub，或者用别人Github中已有的文件。具体来说，需要在Github上建立一个仓库用来存模型文件，然后把模型文件放到仓库中，模型文件夹的名字与模型的`model3.json`文件的名字一定要保持一致，比如我这里的模型文件夹是`gongzi`，那么里面的文件一定是`gongzi.model3.json`，其他文件名不重要。
+
+最后在`js`代码中，`basePath`设置为如上述代码所示的`"https://fastly.jsdelivr.net/gh/likun1208/Live2d_modules@gh-pages/assets"`，因为我的模型是在仓库的`assets`文件夹中，如果直接放仓库里就不要加`assets`了，前面的`gh-pages`是分支名，没分支可以不加，再往前的`Live2d_modules`是仓库名，`likun1208`是用户名，`https://fastly.jsdelivr.net/gh/`是cdn加速，不详细介绍了。总之把`basePath`按这个方式设置好以后，再把`role`设置成模型文件夹的名字，也就是我这里的`gongzi`，必要的步骤就完成了，其他可设置的一系列参数在前面提到的参考文档中可以看到。
+
+在把这些准备好以后，要记得把hexo本身的那个live2d关掉，不然两个都会出现。最后部署博客页面就能看到模型了。
+
+### 4.0版本的处理
+
+但是很可惜我想用的模型是4.0版本的，前面那段js会报错，在发现自己重做3.0版本模型特别艰难之后，我走上了寻找4.0解决方案的道路，并查到了[这个项目](https://github.com/Konata09/Live2dOnWeb)，它能自动识别模型版本并用对应的方式渲染，哪个版本都兼容，还可以放多个模型来回切换，这非常好。
+
+需要注意的是，如果模型中有expression等字段，它是无法解析的，虽然不影响模型显示，但是对应的表情动作都不会生效。所支持的字段可以查看项目中给的模型例子然后照着写。
+
+具体在hexo博客中的使用，首先需要把项目文件整个都下载好，把其中的`dist`和`model`这两个文件夹复制到主题文件夹中的`source`文件夹下，把其中的`waifu-tips.js`和`waifu-tips.json`这两个文件复制到前述`source`文件夹中的`js`文件夹下，现在的文件目录如下（没提到的文件未列出）：
+
+```
+- blog
+    -themes
+        -ayer(主题文件夹)
+            -source
+                - dist
+                - model
+                - js
+                    waifu-tips.js
+                    waifu-tips.json
+```
+
+文件都放好以后，打开`waifu-tips.js`，在前面有一行`'modelUrl': 'model', // 存放模型的文件夹路径，末尾不需要斜杠`，把这一行修改为`'modelUrl': '/model', // 存放模型的文件夹路径，末尾不需要斜杠`（在model前面加`/`，不然网站解析的时候就不是绝对路径了）；打开前面提到过的主题文件夹中`layout`目录下的`layout.ejs`文件，在最后的`</body>`前面加下列内容：
+
+```html
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+```
+
+关于`waifu-tips.js`中模型列表等各类内容的配置直接参考项目说明即可。
+
+需要注意的是，这里`<canvas id="live2d2" style="top:150px"></canvas>`和它下一行的内容中，`style=top:150px`是我自己加的，正常模型不需要加这个。我加它的原因是要用的达达利亚模型画布比模型本身大一圈，自己没法修改，只能调整模型位置让它贴到页面边缘。不确定如果换个尺寸的显示屏，这里会不会又出问题，总之姑且先这样了。
+
+接下来重新部署网站，就能看到模型了。
 
 ## 参考链接：
 
@@ -518,3 +601,9 @@ https://blog.csdn.net/White_Idiot/article/details/80685990
 https://cloud.tencent.com/developer/article/1597223
 
 https://cndrew.cn/2020/03/03/calender/
+
+[👉live2d-moc3-web-集成渲染库 | ⭐️齐下无贰⭐️](https://weidows.github.io/post/Web/JavaScript/live2d-moc3/README/)
+
+[GitHub - LitStronger/live2d-moc3: live2d, 适用于加载新版moc3游戏角色模型(碧蓝航线)。附带使用例子](https://github.com/LitStronger/live2d-moc3)
+
+[GitHub - Konata09/Live2dOnWeb: Add Live2D widget in your website. Support Cubism 2, 3, 4](https://github.com/Konata09/Live2dOnWeb)

@@ -1,0 +1,191 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "gongzi.moc3",
+    "Textures": [
+      "gongzi.4096/texture_00.png"
+    ],
+    "Physics": "gongzi.physics3.json",
+    "PhysicsV2": {
+      "File": "gongzi.physics3.json"
+    },
+    "Motions": {
+      "Tap": [
+        {
+          "Name": "初次见面",
+          "File": "motions/初次见面.motion3.json",
+          "Sound": "sounds/初次见面.wav",
+          "Text": "我是愚人众执行官第十一席，「公子」达达利亚。而你——，也是能招致纷争之人，实在愉快。我们应该会很合得来吧？"
+        },
+        {
+          "Name": "征服世界",
+          "File": "motions/征服世界.motion3.json",
+          "Sound": "sounds/征服世界.wav",
+          "Text": "记住了，伙伴，\r我是终有一天要征服世界的人！"
+        },
+        {
+          "Name": "关于我们",
+          "File": "motions/关于我们.motion3.json",
+          "Sound": "sounds/关于我们.wav",
+          "Text": "与你同行的事情，在别的执行官当中，已经传开了吧。哼，真想看看那帮人脸上的表情，哈哈哈。"
+        }
+      ],
+      "emotion": [
+        {
+          "Name": "兴奋",
+          "Expression": "兴奋"
+        },
+        {
+          "Name": "失落",
+          "Expression": "失落"
+        },
+        {
+          "Name": "狐狸",
+          "Expression": "狐狸"
+        },
+        {
+          "Name": "星星眼",
+          "Expression": "星星眼"
+        },
+        {
+          "Name": "笑",
+          "Expression": "笑"
+        }
+      ]
+    },
+    "Expressions": [
+      {
+        "Name": "兴奋",
+        "File": "expressions/xingfen.exp3.json"
+      },
+      {
+        "Name": "失落",
+        "File": "expressions/shiluo.exp3.json"
+      },
+      {
+        "Name": "狐狸",
+        "File": "expressions/hu.exp3.json"
+      },
+      {
+        "Name": "星星眼",
+        "File": "expressions/star eyes.exp3.json"
+      },
+      {
+        "Name": "笑",
+        "File": "expressions/xiao.exp3.json"
+      }
+    ]
+  },
+  "Controllers": {
+    "ParamHit": {},
+    "ParamLoop": {},
+    "KeyTrigger": {},
+    "EyeBlink": {
+      "MinInterval": 500,
+      "MaxInterval": 6000,
+      "Items": [
+        {
+          "Id": "ParamEyeLOpen",
+          "Min": 0.0,
+          "Max": 1.0,
+          "BlendMode": 2,
+          "Input": 0
+        },
+        {
+          "Id": "ParamEyeROpen",
+          "Min": 0.0,
+          "Max": 1.0,
+          "BlendMode": 2,
+          "Input": 0
+        }
+      ],
+      "Enabled": true
+    },
+    "LipSync": {
+      "Gain": 5.0,
+      "Items": [
+        {
+          "Id": "ParamMouthForm",
+          "Min": 0.0,
+          "Max": 1.0,
+          "Input": 0
+        },
+        {
+          "Id": "ParamMouthOpenY",
+          "Min": 0.0,
+          "Max": 1.0,
+          "Input": 0
+        }
+      ],
+      "Enabled": true
+    },
+    "MouseTracking": {
+      "SmoothTime": 0.15,
+      "Enabled": true
+    },
+    "AutoBreath": {
+      "Enabled": true
+    },
+    "ExtraMotion": {
+      "Enabled": true
+    },
+    "Accelerometer": {
+      "Enabled": true
+    },
+    "Microphone": {},
+    "Transform": {},
+    "FaceTracking": {
+      "AngleZ": [
+        {
+          "Id": "ParamAngleZ",
+          "Min": -30.0,
+          "Max": 30.0,
+          "DefaultValue": 0.0,
+          "Input": 0
+        }
+      ],
+      "PositionZ": [
+        {
+          "Id": "ParamBodyUpper",
+          "Min": -10.0,
+          "Max": 10.0,
+          "DefaultValue": 0.0,
+          "Inverted": true,
+          "Input": 0
+        }
+      ],
+      "Enabled": true
+    },
+    "ParamValue": {},
+    "PartOpacity": {},
+    "ArtmeshOpacity": {},
+    "ArtmeshColor": {},
+    "ArtmeshCulling": {
+      "DefaultMode": 0
+    },
+    "IntimacySystem": {}
+  },
+  "HitAreas": [
+    {
+      "Name": "初次见面",
+      "Id": "face",
+      "Order": 3,
+      "Motion": "Tap:初次见面"
+    },
+    {
+      "Name": "征服世界",
+      "Id": "mask",
+      "Order": 1,
+      "Motion": "Tap:征服世界"
+    },
+    {
+      "Name": "关于我们",
+      "Id": "body",
+      "Order": 2,
+      "Motion": "Tap:关于我们"
+    }
+  ],
+  "Options": {
+    "PositionY": -2.0
+  }
+}

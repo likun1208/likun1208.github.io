@@ -50,13 +50,13 @@
 
 ### For hexo < 5.0
 
-``` shell
+```shell
 git clone https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer
 ```
 
 ### For hexo >= 5.0
 
-``` shell
+```shell
 npm i hexo-theme-ayer -S
 ```
 
@@ -67,18 +67,19 @@ npm i hexo-theme-ayer -S
 
 Modify `theme` setting in `_config.yml` to `ayer`
 
-``` yml
+```yml
 theme: ayer
 ```
 
 ## Update
 
-``` bash
+```bash
 cd themes/ayer
 git pull
 ```
 
 ## Multi Language Support
+
 zh-CN（中文简体） en（English） zh-TW（中文繁体） ja（Japanese） es（Spanish） de（German） fr（French） ru（Russian） ko（Korean） vi（Vietnamese） nl（Dutch） no（Norwegian） pt（Portuguese）
 
 English is default languge, if you want to change, modify `language` option in `_config.yml` file in your blog's root folder.
@@ -87,7 +88,7 @@ English is default languge, if you want to change, modify `language` option in `
 
 let me know if you have any questions.
 
-``` yml
+```yml
 # Menu-Sidebar
 menu:
   Home: /
@@ -317,10 +318,11 @@ minivaline:
 ## Plugins
 
 + [hexo-generator-search](https://github.com/wzpan/hexo-generator-search) (for Local Search)
-	
+  
   ```yml
   $ npm install hexo-generator-searchdb --save
   ```
+  
   Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration file):
   
   ```yml
@@ -332,7 +334,7 @@ minivaline:
   ```
 
 + [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) (for RSS)
-
+  
   ```yml
   $ npm install hexo-generator-feed --save
   ```
@@ -348,28 +350,37 @@ minivaline:
       content:
       content_limit: 140
       content_limit_delim: ' '
-      order_by: -date	
+      order_by: -date    
   ```
-  
+
 + [hexo-generator-index-pin-top](https://github.com/netcan/hexo-generator-index-pin-top) (for Sticky Post)
-	
-	``` bash
+  
+  ```bash
   $ npm uninstall hexo-generator-index --save
   $ npm install hexo-generator-index-pin-top --save
   ```
-## Categories
-``` bash
+  
+  ## Categories
+  
+  ```bash
   hexo new page categories
-```
-Then paste following codes to file: /source/categories/index.md
-``` md
+  ```
+  
+  Then paste following codes to file: /source/categories/index.md
+  
+  ```md
+  
+  ```
+
 ---
+
 title: categories
 type: categories
 layout: "categories"
----
-```
 
+---
+
+```
 ## Tags
 Same as categories.
 
@@ -377,20 +388,24 @@ Same as categories.
 ``` bash
 hexo new page friends
 ```
+
 Then paste following codes to file: /source/friends/index.md
-``` md
+
+```md
 ---
 title: friends
 type: friends
 layout: "friends"
 ---
 ```
+
 Then edit `friends_link` in `_config.yml` 
 
 ## Gallery
+
 Need to write in the head of the markdown, this is not a good way to write, I hope to get a better way to write on github.
 
-``` md
+```md
 ---
 title: Gallery
 
@@ -406,18 +421,19 @@ albums: [
 Use Tocbot to parse the title tags (h1~h6) in the content and insert the directory. 
 
 + ayer/_config.yml
-
-	``` bash
-	# Toc
+  
+  ```bash
+  # Toc
   toc: true
-	```
-+ If Toc is turned on in ayer/_config.yml, then Tocbot will generate a Toc article directory in the title tag of each blog parsing content, but not all blogs require Toc, so in the Front-matter section of markdown Can be closed:
+  ```
 
-	``` md
-	---
++ If Toc is turned on in ayer/_config.yml, then Tocbot will generate a Toc article directory in the title tag of each blog parsing content, but not all blogs require Toc, so in the Front-matter section of markdown Can be closed:
+  
+  ```md
+  ---
   no_toc: true
   ---
-	```
+  ```
 
 ---
 
