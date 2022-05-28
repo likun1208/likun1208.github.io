@@ -100,7 +100,7 @@
                     color: '#3C4858'
                 }
             },
-            indicator: [{"name":"博客配置","max":18},{"name":"无分类项","max":18},{"name":"Leetcode","max":18},{"name":"Let's Build A Simple Interpreter","max":18},{"name":"Renpy","max":18},{"name":"行业总结","max":18},{"name":"blender","max":18},{"name":"CK3","max":18},{"name":"slides","max":18},{"name":"课程笔记","max":18},{"name":"编辑器配置","max":18},{"name":"Problem Solving with Algorithms and Data Structures","max":18},{"name":"论文","max":18},{"name":"读书笔记","max":18}],
+            indicator: [{"name":"Leetcode","max":18},{"name":"博客配置","max":18},{"name":"无分类项","max":18},{"name":"Let's Build A Simple Interpreter","max":18},{"name":"Renpy","max":18},{"name":"行业总结","max":18},{"name":"blender","max":18},{"name":"CK3","max":18},{"name":"slides","max":18},{"name":"课程笔记","max":18},{"name":"编辑器配置","max":18},{"name":"Problem Solving with Algorithms and Data Structures","max":18},{"name":"论文","max":18},{"name":"读书笔记","max":18}],
             nameGap: 5,
             center: ['50%','55%'],
             radius: '66%'
@@ -475,6 +475,25 @@
 
     
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":175,"height":350},"mobile":{"show":false},"log":false});</script></body>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
 
 </html>
