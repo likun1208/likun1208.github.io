@@ -7,65 +7,35 @@
     ],
     "Physics": "zhonglicat.physics3.json",
     "Motions": {
-      "Tap": [
-        {
+      "Tapgongping": [
+         {
           "Name": "gongping",
           "File": "motions/gongping.motion3.json",
-          "Sound": "sounds/公平.wav"
-        },
+          "Sound": "sounds/公平.mp3"
+        }
+      ],
+      "Tapshiyanzhifa": [
         {
           "Name": "shiyanzhifa",
           "File": "motions/shiyanzhifa.motion3.json",
-          "Sound": "sounds/shiyanzhifa.wav"
-        },
+          "Sound": "sounds/shiyanzhifa.mp3"
+        }
+      ],
+      "dazhaohu": [
         {
           "Name": "dazhaohu",
           "File": "motions/dazhaohu.motion3.json",
-          "Sound": "sounds/【原神】钟离官方语音公布 - 1.官方语音1(Av500488390,P1).wav"
-        }
-      ],
-      "emotion": [
-        {
-          "Name": "weixiao",
-          "Expression": "weixiao"
-        },
-        {
-          "Name": "yansu",
-          "Expression": "yansu"
-        },
-        {
-          "Name": "longjiao",
-          "Expression": "longjiao"
-        },
-        {
-          "Name": "cat",
-          "Expression": "cat"
+          "Sound": "sounds/【原神】钟离官方语音公布 - 1.官方语音1(Av500488390,P1).mp3"
         }
       ]
-    },
-    "Expressions": [
-      {
-        "Name": "weixiao",
-        "File": "expressions/weixiao.exp3.json"
-      },
-      {
-        "Name": "yansu",
-        "File": "expressions/yansu.exp3.json"
-      },
-      {
-        "Name": "longjiao",
-        "File": "expressions/longjiao.exp3.json"
-      },
-      {
-        "Name": "cat",
-        "File": "expressions/cat.exp3.json"
-      }
-    ]
+    }
   },
   "Controllers": {
     "ParamHit": {},
     "ParamLoop": {},
-    "KeyTrigger": {},
+    "KeyTrigger": {
+      "Enabled": true
+    },
     "EyeBlink": {
       "MinInterval": 500,
       "MaxInterval": 6000,
