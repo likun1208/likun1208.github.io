@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Echarts的配置 |  左边
+    获取B站数据说明 |  左边
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -42,7 +42,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Echarts的配置"
+  id="post-获取B站视频数据说明"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -53,18 +53,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Echarts的配置
+  获取B站数据说明
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/10/31/Echarts%E7%9A%84%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2020-10-31T12:11:23.000Z" itemprop="datePublished">2020-10-31</time>
+      <a href="/2022/05/29/%E8%8E%B7%E5%8F%96B%E7%AB%99%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E8%AF%B4%E6%98%8E/" class="article-date">
+  <time datetime="2022-05-29T03:01:05.000Z" itemprop="datePublished">2022-05-29</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">博客配置</a>
+    <a class="article-category-link" href="/categories/%E6%97%A0%E5%88%86%E7%B1%BB%E9%A1%B9/">无分类项</a>
   </div>
   
 <div class="word_count">
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">740</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -88,107 +88,53 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>今天发现了一个可以用在markdown的前端画图js，<a href="https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="noopener">ECharts</a>。在hexo的next主题中使用它需要进行一些配置。</p>
-<a id="more"></a>
-<p>首先需要说明的是，hexo的网页渲染方式有ejs和swig两种。</p>
-<p>对于ejs方式的主题，直接在主题目录下的<code>layout\_partial\head.ejs</code>中加入：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://echarts.baidu.com/dist/echarts.common.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在博客站点文件的命令行中执行<code>npm install hexo-tag-echarts --save</code>即可。</p>
-<p>而对于swig方式的主题要复杂一些。</p>
-<ol>
-<li><p>下载ECharts的js文件：<a href="https://echarts.apache.org/zh/download.html" target="_blank" rel="noopener">下载链接</a></p>
+  <h1 id="获取B站数据说明"><a href="#获取B站数据说明" class="headerlink" title="获取B站数据说明"></a>获取B站数据说明</h1><h2 id="用到的包"><a href="#用到的包" class="headerlink" title="用到的包"></a>用到的包</h2><ol>
+<li><p><code>bilibili_api</code>：必用，获取视频数据的接口</p>
 </li>
-<li><p>然后在<code>next\layout\</code>文件夹下，找到<code>_layout.swig</code>文件，并用文本查看器打开，在下面代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;main id=<span class="string">"main"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main-inner"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content-wrap"</span>&gt;</span><br><span class="line">      &lt;div id=<span class="string">"content"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &#123;% include '_third-party/</span>duoshuo-hot-articles.swig<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">      &#123;% include '</span>_partials/comments.swig<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &#123;% if theme.sidebar.display !== '</span>remove<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">      &#123;% block sidebar %&#125;&#123;% endblock %&#125;</span></span><br><span class="line"><span class="string">    &#123;% endif %&#125;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/main&gt;</span></span><br></pre></td></tr></table></figure>
-<p>的<strong>前面</strong>添加：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- echarts --&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"/js/src/echarts.common.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>保存退出。</p>
+<li><p><code>json</code>：选用，用于格式化输出获取的字典数据</p>
 </li>
-<li><p>在博客站点文件的命令行中执行<code>npm install hexo-tag-echarts --save</code>。</p>
+<li><p><code>time</code>：选用，用于转换获取的时间戳数据</p>
+</li>
+<li><p><code>csv</code>：选用，用于将数据输出到csv文件</p>
+</li>
+<li><p>其他说明：如果需要更高级的表格数据输出，建议用pandas</p>
 </li>
 </ol>
-<p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts6277" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6277'));
-        // 指定图表的配置项和数据
-        var option = {
-    title: {
-        text: "某站点用户访问来源",
-        subtext: "ECharts示例",
-        x: "center"
-    },
-    tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        orient: "vertical",
-        x: "left",
-        data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"]
-    },
-    toolbox: {
-        show: true,
-        feature: {
-            mark: {
-                show: true
-            },
-            dataView: {
-                show: true,
-                readOnly: true
-            },
-            restore: {
-                show: true
-            },
-            saveAsImage: {
-                show: true
-            }
-        }
-    },
-    calculable: true,
-    series: [
-        {
-            name: "访问来源",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-                {
-                    value: 335,
-                    name: "直接访问"
-                },
-                {
-                    value: 310,
-                    name: "邮件营销"
-                },
-                {
-                    value: 234,
-                    name: "联盟广告"
-                },
-                {
-                    value: 135,
-                    name: "视频广告"
-                },
-                {
-                    value: 1548,
-                    name: "搜索引擎"
-                }
-            ]
-        }
-    ]
-}
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script> 
+<h2 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h2><p>通过下列代码可以获取指定<code>bv</code>号的视频数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v = video.Video(bvid)        <span class="comment"># 实例化video类</span></span><br><span class="line">info = <span class="keyword">await</span> v.get_info()    <span class="comment"># 获取信息</span></span><br></pre></td></tr></table></figure>
+<p><code>info</code>是一个字典类型的数据，包含了视频的标题、作者、播放量等等大量信息，我们可以用以下代码格式化输出来看一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(json.dumps(info,indent=<span class="number">4</span>,ensure_ascii=<span class="literal">False</span>))    <span class="comment"># 格式化输出</span></span><br></pre></td></tr></table></figure>
+<p>输出结果如下图，这个字段信息很多，就不一一列出说明了。</p>
+<p><img src="https://s2.loli.net/2022/05/29/oHEL1jBekdJzXZ2.png" alt=""></p>
+<p><img src="https://s2.loli.net/2022/05/29/IVlywznM7u9cdJK.png" alt=""></p>
+<p>目前我们需要获取的是标题、发布时间、播放量和三连数据，可以看出，标题对应的字段是<code>title</code>，发布时间是<code>pubdate</code>，而播放量和三连数据则是在<code>stat</code>中的<code>view, favorite, coin, like</code>，需要注意的是这里发布时间是用的时间戳，因此要使用<code>time</code>来转换成标准时间。总的来说，就是以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">title = info[<span class="string">'title'</span>]                                    <span class="comment"># 获取标题</span></span><br><span class="line">view = info[<span class="string">'stat'</span>][<span class="string">'view'</span>]                              <span class="comment"># 获取播放量</span></span><br><span class="line">like = info[<span class="string">'stat'</span>][<span class="string">'like'</span>]                              <span class="comment"># 获取点赞</span></span><br><span class="line">coin = info[<span class="string">'stat'</span>][<span class="string">'coin'</span>]                              <span class="comment"># 获取投币</span></span><br><span class="line">favorite = info[<span class="string">'stat'</span>][<span class="string">'favorite'</span>]                      <span class="comment"># 获取收藏</span></span><br><span class="line">time_tmp = info[<span class="string">'pubdate'</span>]                               <span class="comment"># 获取发布时间</span></span><br><span class="line">timeArray = time.localtime(time_tmp)                     <span class="comment"># 时间戳转为标准时间的数组形式</span></span><br><span class="line">time_pub= time.strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>, timeArray)  <span class="comment"># 时间数组转为常见的可直接输出的字符串形式</span></span><br></pre></td></tr></table></figure>
+<p>在得到数据以后，可以直接打印输出、写入本地文件或者进行后续其他需要的操作，这里我们要把数据作为函数返回值，因此把它们放到一个列表中，从而一起返回，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">videoinfo = [title, time_pub, view, like, coin, favorite]</span><br><span class="line"><span class="keyword">return</span> videoinfo</span><br></pre></td></tr></table></figure>
+<p>获取数据的部分到此结束，需要注意的是，由于最初获取数据用到了<code>awati</code>，因此该函数是异步的，在声明的时候需要用如下形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(bvid)</span>:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>接下来是如何把数据写入文件。</p>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><p>首先是设置<code>bv</code>号，然后异步地调用前面写好的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bvid = <span class="string">"BV1MR4y1K7Tv"</span></span><br><span class="line">info = asyncio.get_event_loop().run_until_complete(main(bvid))</span><br></pre></td></tr></table></figure>
+<p>如果要连续获取多个视频的信息，就可以直接循环。</p>
+<p>接下来由于输出的文件格式比较特殊，所以要对获取到的数据列表进行处理，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="literal">None</span>,<span class="literal">None</span>,info[<span class="number">0</span>],<span class="string">"https://www.bilibili.com/video/"</span>+bvid,info[<span class="number">1</span>],<span class="literal">None</span>,<span class="literal">None</span>,info[<span class="number">2</span>],<span class="literal">None</span>,<span class="literal">None</span>,<span class="literal">None</span>,<span class="literal">None</span>,str(info[<span class="number">3</span>])+<span class="string">'/'</span>+str(info[<span class="number">4</span>])+<span class="string">'/'</span>+str(info[<span class="number">5</span>])]</span><br></pre></td></tr></table></figure>
+<p>这行代码的含义是把列表的前两个字段设置为空，接着是<code>info</code>中的第一个数据即标题，随之是视频链接，再次是投稿时间，接着继续两个空，然后是播放量，在四个空位之后是<code>点赞/投币/收藏</code>这种形式的三连数据。之所以置空，是因为要写入表格中在这些位置有其他列，需要用其他方式写入数据。</p>
+<p>数据按格式排好后就可以写入了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"bilibili.csv"</span>, <span class="string">'a'</span>, newline=<span class="string">''</span>, encoding=<span class="string">'utf-8-sig'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.writer(f)</span><br><span class="line">    f_csv.writerow(list)</span><br></pre></td></tr></table></figure>
+<p>第一行表示以追加写入的方式打开<code>bilibili.csv</code>这个文件，文件编码是<code>utf-8-sig</code>，<code>a</code>表示是追加写入，也就是在文件最后一行新增要写入的内容，<code>newline</code>表示换行符为空，最后的<code>as f</code>表示把打开的这个文件变量命名为<code>f</code>，这个名字只影响后面对文件变量的操作，不影响文件名本身。</p>
+<p>第二行是调用函数表示要对文件<code>f</code>进行写入操作，第三行是指将名为<code>list</code>的列表作为新的一行直接写入到csv文件中。</p>
+<p>写入文件以后就结束。 </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://bili.moyu.moe/#/" target="_blank" rel="noopener">bilibili-api 开发文档</a></p>
+ 
       <!-- reward -->
       
     </div>
@@ -240,12 +186,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/10/31/Echarts%E7%9A%84%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2022/05/29/%E8%8E%B7%E5%8F%96B%E7%AB%99%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E8%AF%B4%E6%98%8E/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
 
     </footer>
   </div>
@@ -253,19 +199,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-4/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            ck3mod制作笔记-4
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/10/05/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-3/" class="article-nav-link">
+      <a href="/2022/05/06/Web3%E8%A1%8C%E4%B8%9A%E6%80%BB%E7%BB%93/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">ck3mod制作笔记-3</div>
+        <div class="article-nav-title">Web3行业总结</div>
       </a>
     
   </nav>
