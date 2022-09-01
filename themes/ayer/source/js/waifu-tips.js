@@ -29,16 +29,16 @@ const live2d_settings = {
     'tryWebp': true,                            // 如果浏览器支持 WebP 格式，将优先加载 WebP 格式的贴图，例如默认贴图文件为 klee.8192/texture_00.png，
                                                 // 启用后将优先加载 klee.8192/texture_00.png.webp，文件不存在会自动 fallback
     // 工具栏设置
-    'showToolMenu': true,                       // 显示 工具栏
+    'showToolMenu': false,                       // 显示 工具栏
     'canCloseLive2d': true,                     // 显示 关闭看板娘 按钮
     'canSwitchModel': true,                     // 显示 模型切换 按钮
-    'canSwitchHitokoto': true,                  // 显示 一言切换 按钮
-    'canTakeScreenshot': true,                  // 显示 看板娘截图 按钮
+    'canSwitchHitokoto': false,                  // 显示 一言切换 按钮
+    'canTakeScreenshot': false,                  // 显示 看板娘截图 按钮
     'canTurnToHomePage': true,                  // 显示 返回首页 按钮
-    'canTurnToAboutPage': true,                 // 显示 跳转关于页 按钮
+    'canTurnToAboutPage': false,                 // 显示 跳转关于页 按钮
     'showVolumeBtn': false,                     // 显示 音量控制 按钮，仅作显示，相关逻辑需自己实现
     // 提示消息设置
-    'showHitokoto': true,                       // 空闲时显示一言
+    'showHitokoto': false,                       // 空闲时显示一言
     'hitokotoAPI': '',                          // 一言 API，可选 'hitokoto.cn'(默认), 'lwl12.com', 'jinrishici.com'(古诗词), 'fghrsh.net'
     'showWelcomeMessage': true,                 // 显示进入页面欢迎词
     'showCopyMessage': true,                    // 显示复制内容提示，默认只对 '#articleContent' 元素内的复制进行监视，如果你的文章内容不在这个标签下，可以在下方搜索并修改
@@ -47,7 +47,7 @@ const live2d_settings = {
     'live2dHeight': 680,                        // 看板娘高度，不需要单位
     'live2dWidth': 500,                         // 看板娘宽度，不需要单位
     'waifuMinWidth': '1040px',                 // 页面小于宽度小于指定数值时隐藏看板娘，例如 'disable'(禁用)，推荐 '1040px'
-    'waifuEdgeSide': 'right:0',                 // 看板娘贴边方向，例如 'left:0'(靠左 0px)，'right:30'(靠右 30px)，可以被下面的模型设置覆盖
+    'waifuEdgeSide': 'left:50',                 // 看板娘贴边方向，例如 'left:0'(靠左 0px)，'right:30'(靠右 30px)，可以被下面的模型设置覆盖
     // 其他杂项设置
     'debug': true,                              // 全局 DEBUG 设置
     'debugMousemove': false,                    // 在控制台打印指针移动坐标，仅在 debug 为 true 时可用
