@@ -130,7 +130,7 @@
 <p><strong>定义1</strong>  POI聚类的直径：覆盖该聚类所有兴趣点的最小圆直径</p>
 <p><strong>定义2</strong>  POI聚类的中心：覆盖该聚类所有兴趣点的最小圆圆心</p>
 <p>最小圆问题：直径取决于聚类中距离最远的两点之间的距离上限</p>
-<p><strong>评估函数：</strong></p>
+<p><strong>评估函数</strong>：</p>
 <script type="math/tex; mode=display">
 R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中，$e_j$是对该聚类内第$j$个兴趣点的评估值，$\alpha_j$是对应的权重；$D(\Pi)$是聚类的直径，体现了聚类的离散程度，$\beta$是对应的权重；$d(\Pi,c)$是当前位置$c$到聚类中心的距离，$\gamma$是对应权重。所有权重由用户自己决定。</p>
 <h3 id="Overview-of-Our-Algorithm-for-the-Ranking-Mode"><a href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode" class="headerlink" title="Overview of Our Algorithm for the Ranking Mode"></a>Overview of Our Algorithm for the Ranking Mode</h3><p>用户兴趣区域内有$n$个POI，集合表示为$\Omega$，$||\Omega||=n$</p>
@@ -210,7 +210,7 @@ R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中�
 <p>就此将聚类视作其中心点，将该问题转变为<code>maximizing range sum</code>（最大子序列？）</p>
 <p>当一个兴趣点属于多个聚类时，我们称它被多个聚类复用了。这种情况如果该兴趣点不可用，则会导致区域内大量聚类都不可用，这不好。</p>
 <p><strong>定义3.2</strong>  一个矩形区域内聚类集合的瓶颈值$B$是指，该区域内被复用次数最多的兴趣点所对应的复用次数。</p>
-<p><strong>定义3.3</strong>  矩形的权重由该区域内聚类的评分和该区域的瓶颈值决定，计算公式如下：</p>
+<p><strong>定义3.3</strong> 矩形的权重由该区域内聚类的评分和该区域的瓶颈值决定，计算公式如下：</p>
 <script type="math/tex; mode=display">
 W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$和$\eta$都是常数系数。</p>
 <p>找服务区的算法流程：</p>
