@@ -29,7 +29,7 @@ const live2d_settings = {
     'tryWebp': true,                            // 如果浏览器支持 WebP 格式，将优先加载 WebP 格式的贴图，例如默认贴图文件为 klee.8192/texture_00.png，
                                                 // 启用后将优先加载 klee.8192/texture_00.png.webp，文件不存在会自动 fallback
     // 工具栏设置
-    'showToolMenu': true,                       // 显示 工具栏
+    'showToolMenu': false,                       // 显示 工具栏
     'canCloseLive2d': true,                     // 显示 关闭看板娘 按钮
     'canSwitchModel': true,                     // 显示 模型切换 按钮
     'canSwitchHitokoto': true,                  // 显示 一言切换 按钮
