@@ -43,24 +43,26 @@
 </ol>
 <p>法律和仲裁的背景增加了一个特点，即在某个时候，如果双方仍有分歧，则由法官对争议进行裁决。</p>
 <p>它规定了一个明确的程序，并且偏好表现出对解决的不耐烦，在这个意义上，延迟是昂贵的。这个例子的一个主要预测是，协议立即发生，均衡价格是唯一的。唯一性需要详细的证明，但由此产生的没有延迟是合理的：延迟的协议会被双方预料到，因此在任何较早的时间，提议的一方可以提供对双方有利的条款。例如，卖方可以提前提出一个较高的价格，而买方宁愿接受这个价格，也不愿承担等待以后预期的较低价格的成本。</p>
-<p>均衡价格取决于谁第一个报价。如果当卖家报价时它是$p_s$，买家报价时它是$p_b$，则$p_s$是买家为了在下一轮能报价$p_b$的不得不拒绝的最高价格，而$p_b$是卖家不能拒绝的最低价格并在下一轮中报价$p_s$。</p>
+<p>均衡价格取决于谁第一个报价。如果卖家报价$p_s$，买家报价$p_b$，则$p_s$是买家为了在下一轮能报价$p_b$的不能拒绝的最高价格，而$p_b$是卖家不能拒绝的最低价格并在下一轮中报价$p_s$。</p>
 <p>在第2种情况下（延迟成本等价于投资收益中放弃的利息收益），这两个价格由下面的公式决定：</p>
 <script type="math/tex; mode=display">
 v-p_s=[v-p_b]\delta_b\\
 p_b-c=[p_s-c]\delta_s</script><p>这个公式粗浅的理解如下：左边是最初报价就达成共识的收益，右边是讨价还价后用贴现因子折算之后的收益，如果上述等式成立，则说明，如果第一轮是卖家报价，则该报价所对应的买家收益，与之后买家自己报价折算后的收益相等；如果第一轮是买家报价，则该报价所对应的卖家收益，也与之后卖家自己报价折算后的收益相等。由此达成均衡。在这种情况下，当利率相近且报价之间的时间间隔较小时，任何一种价格都能提供几乎均匀的分红。</p>
 <p>而在第一种情况下，则会产生一种不对称的分蛋糕结果：成本较小的一方如果能先报价，则会得到整个蛋糕，反之，则会得到除了能抵消对方成本以外的剩下蛋糕。如果某一方有替代选项，例如买家能去其他地方以价格$p$购买该商品，则当卖家先报价时，预测价格是$p$和$p_s$中较小的一个。</p>
 <p>在这个例子中，拖延显然是没有必要的。如果各方能预见到最终的分裂，而且程序允许更早的解决，那么他们就有动力迅速决定事情。类似的主张也适用于Mnookin和Kornhauser(7)研究的 “法律阴影下的讨价还价”。在法律索赔的审前讨价还价中，如果法院对纠纷的最终解决方式事先是明确的，那么当事人就有强烈的动机去和解。Bulow和Rogoff(8)提供了这些观点的另一个应用，即银行和主权国家之间关于重组债务合同的讨价还价。</p>
-<p>然而，这个命题需要限定，为了说明这一点，我们描述了一个支持多个均衡的程序性修改，从而允许延迟。假设时间是连续的，且参数$\Delta$和$\Delta’$表示两个固定的时间段。每一方可以在任意时间$t\ge0$提出一个价格，只要他在对方之前的报价之后至少等待了$\Delta$，在他自己之前的报价之后至少等待了$\Delta’$，如果有的话。当一方重复另一方的报价或他们同时提出相同的价格时，就达成了协议。这种修改后的程序有一个优点，即它减轻了对报价时间的限制。然而，作为均衡结果，它允许在零时和更晚的时间有广泛的价格；因此，延迟是可能的，但不是必须的。拖延的近因是立即达成协议的多样性，允许对任何试图提前解决的人附加 “烙印”。</p>
-<p>假设当他们都保持沉默直到同时报价$p^0$时，一个价格为$p^0$的延迟协议出现，接下来的内容完全没有看懂，但是似乎它的意思就是说前文描述的讨价还价博弈中的延迟通过数学推导能够避免，但是如果情况复杂，则延迟在一些情况下是无法避免的，一个典型的例子就是一方并不了解另一方。</p>
-<h2 id="Models-of-Informational-Effects"><a href="#Models-of-Informational-Effects" class="headerlink" title="Models of Informational Effects"></a>Models of Informational Effects</h2><p>关于信息差异如何导致延迟，有三个主要例子被研究。根据参考文献，我们把它们称为损耗、筛选和信号的模型。</p>
-<h3 id="Attrition-损耗"><a href="#Attrition-损耗" class="headerlink" title="Attrition 损耗"></a>Attrition 损耗</h3><p>损耗模型假设偏好符合情况1，但是每一方都不确定其他人的延迟成本，只假设其符合一个确定的概率分布。虽然是为了描述动物之间为生存或繁殖而竞争而开发的，但损耗模型也适用于讨价还价。因为它的成本是相互的，延迟类似于一场战斗，以确定较强的一方（成本较小的一方），然后像上面的基本模型一样要求得到整个馅饼。损耗模型恰当地描述了为生存或市场份额而竞争的公司之间的军备竞赛和价格战，以及其他隐性议价的情况。它们捕捉到了回顾性的遗憾感：如果一开始就确定较强的一方，那么战斗的浪费是可以避免的；但悲剧的是，战斗可能是对实力的唯一可信的测试。双方的动机前瞻性地说明了一类更广泛的声誉模式：每一方的持续斗争都是对可能更强大的声誉的投资，如果对方先投降，就能获得有利的回报。</p>
+<p>然而，这个命题需要限定，为了说明这一点，我们描述了一个支持多个均衡的程序性修改，从而使得延迟是必要的。假设时间是连续的，且参数$\Delta$和$\Delta’$表示两个固定的时间段。每一方可以在任意时间$t\ge0$提出一个价格，只要他在对方上一轮报价后至少等待了$\Delta$，且在他自己上一轮报价后至少等待了$\Delta’$（如果自己有上一轮报价的话）。当一方重复另一方的报价或他们同时提出相同的价格时，就达成了协议。这种修改后的程序有一个优点，即它减轻了对报价时间的限制。然而，作为均衡结果，它允许在零时和更晚的时间有广泛的价格；因此，延迟是可能的，但不是必须的。拖延的近因是立即达成协议的多样性，允许对任何试图提前解决的人附加 “烙印”。</p>
+<p>假设当他们都保持沉默直到同时报价$p^0$时，一个价格为$p^0$的延迟协议出现，接下来的内容完全没有看懂，大致意思是说，这个修改了程序的讨价还价博弈由于有着多重均衡，而使得博弈双方总是无法达成共识，从而导致了延迟的出现。这种延迟是所有允许多重均衡的博弈的特点。事实上，如果同时提出的建议被排除在外，比如说通过忽略其中一个建议，那么同样存在着一个唯一的均衡，没有延迟。</p>
+<p>多重性也会在其他博弈程序中出现。Fernandez和Glazer[10]分析了以工会和公司之间的讨价还价为例的在固定间隔内交替报价的程序，新增的一个特点是在每个没有就新合同达成协议的时期，工会可以选择罢工或者按前一个合同规定的工资工作[11]。工会可利用的这种报复性选择的多重性，允许有一系列的即时工资协议；因此，就像前面的例子一样，仪式性的延迟也是可能的。</p>
+<p>第二个条件是，各方必须能够预见最终的协议。当任何一方拥有关于该过程的某些方面的私人信息时，这一点就失效了。例如，在法律背景下，一方可能知道受制于证据或随后在审判证词中披露的信息。其他的可能性是，程序是模糊的，或者任何一方对另一方的偏好不确定。我们用后者来说明私人信息的影响。</p>
+<h2 id="Models-of-Informational-Effects"><a href="#Models-of-Informational-Effects" class="headerlink" title="Models of Informational Effects"></a>Models of Informational Effects</h2><p>关于信息差异如何导致延迟，有三个主要例子被研究。根据参考文献[12]，我们把它们称为损耗、筛选和信号的模型。</p>
+<h3 id="Attrition-损耗"><a href="#Attrition-损耗" class="headerlink" title="Attrition 损耗"></a>Attrition 损耗</h3><p>损耗模型假设偏好符合情况1，但是每一方都不确定其他人的延迟成本，只假设其符合一个确定的概率分布。虽然是为了描述动物之间为生存或繁殖而竞争而开发的，但损耗模型也适用于讨价还价。因为它的成本是相互的，延迟类似于一场战斗，以确定较强的一方（成本较小的一方），然后像上面的基本模型一样要求得到整个蛋糕。损耗模型恰当地描述了为生存或市场份额而竞争的公司之间的军备竞赛和价格战，以及其他隐性议价的情况。它们捕捉到了回顾性的遗憾感：如果一开始就确定较强的一方，那么战斗的浪费是可以避免的；但悲剧的是，战斗可能是对实力的唯一可信的测试。双方的动机前瞻性地说明了一类更广泛的声誉模式：每一方的持续斗争都是对可能更强大的声誉的投资，如果对方先投降，就能获得有利的回报。</p>
 <p>损耗模型似乎与工资和价格的明确讨价还价不太相关，因为它们依赖于影响利润的延迟成本的信息隐私，而且它们对赢家通吃结果的预测似乎不现实。</p>
 <h3 id="Screening-筛选"><a href="#Screening-筛选" class="headerlink" title="Screening 筛选"></a>Screening 筛选</h3><p>筛选模型通常假设偏好符合情况2，在最简单的版本中，卖方对买方的估价是不确定的。尽管$v$对买方来说是已知的，但卖方认为它是一个符合某一公开的概率分布的随机变量。我们进一步简化，假设卖方在离散时间$t=0,\Delta,2\Delta,…$时进行报价。</p>
 <p>在这个版本中，卖方使用 “撇脂 “策略对买方的可能类型进行排序。也就是说，他提供连续较低的价格，直到买方接受。这种策略利用了高价值买家对交易的不耐烦。买家等待低于其估值的价格，然后在进一步拖延的成本超过等待下一个更低价格的优势时接受。预测到买方的行为，卖方设计了一个最佳的报价序列，均衡基本上是唯一的，假设卖方的成本严格小于买方的所有可能的值，所以交易的收益肯定是正的。</p>
 <p>然而，这个模型对延迟的预测是短暂的。随着报价之间的间隔$\Delta$的缩短，最大的延迟缩减为零，卖方的报价下降到买方的最小可能值。只要均衡具有上述唯一均衡的一些一般特征，这一引人注目的属性就会在更一般的版本（包括交替报价）中持续存在。因此，只有在报价不频繁的情况下，重大延迟才是必要的。</p>
 <p>关于报价频率的理论（除了简单的物理限制和 “继续尝试 “的诱因）必须与重要的声誉方面相抗衡。在罢工期间，公司拒绝工会提出的工资会产生一种激励，即迅速提出更低的工资以缩短罢工时间。但是，工会可以预见到科斯属性：准备好的提议经常鼓励公司预见到并等待更低的工资提议，这最终会产生快速的协议，但条件对工会是不利的。通过在提供更低的工资之前忍受相当长的罢工时间，使公司为拒绝的后果付出代价，这是工会获得可观份额的力量的来源。因此，筛选模型有一个微妙的含义：建立一个强硬的声誉（被理解为维持成员的士气以在相当长的时间内不妥协地维持工资要求的能力）是一个成功战略的主要特征。建立声誉可能涉及到与一家公司或一个行业中的许多公司在连续的合同谈判中反复讨价还价。在这个意义上，延迟是由于买方价值的不确定性而加剧的，这就证明了卖方的撇脂策略，以及建立声誉的首要动机是不经常修改报价。</p>
-<h3 id="Signaling-信号"><a href="#Signaling-信号" class="headerlink" title="Signaling 信号"></a>Signaling 信号</h3><p>与上述声誉解释一样，信号模型提供了报价之间的重要间隔的解释。然而，它通过解决买方的动机来证明低价是合理的，从而避免了科斯产权理论。接下来这段话也没看懂，大致意思应该是讲允许随时报价，但必须双方轮流，一方报价后另一方要等一段时间。假设买方的价值是私有的。</p>
-<p>现有一种信号装置，其运作方式如下：在收到卖方提出的价格后，买方可以在间隔时间$\Delta$后接受，或者等待更长的时间，以表明他的价值很小，然后提出一个更低的价格。为了使这种信号可信，他必须等待足够长的时间来反驳任何关于他的价值可能很高的猜想。因此，他等待的时间和他提出的价格必须是这样的，如果他的价值更高，那么这样做是无利可图的。只要强制区间A足够短，弱技术假设就意味着有这种形式的唯一均衡。特别是，如果卖方的价值足够高，他最初提出一个被买方接受的价格，否则，他通过等待一个适当长的时间间隔来提出他的价值（因为现在他的价值已经被可信地发出信号），即最初描述的没有不确定性的基本模型所预测的价格。</p>
+<h3 id="Signaling-信号"><a href="#Signaling-信号" class="headerlink" title="Signaling 信号"></a>Signaling 信号</h3><p>与上述声誉解释一样，信号模型提供了报价之间的重要间隔的解释。然而，它通过解决买方的动机来证明低价是合理的，从而避免了科斯产权理论。该模型中允许随时报价，但必须双方轮流，一方报价后另一方要等一段时间。假设买方的价值是私有的。</p>
+<p>现有一种信号装置，其运作方式如下：在收到卖方提出的价格后，买方可以在间隔时间$\Delta$后接受，或者等待更长的时间，以表明他的价值很小，然后提出一个更低的价格。为了使这种信号可信，他必须等待足够长的时间来反驳任何关于他的价值可能很高的猜想。因此，他等待的时间和他提出的价格必须是这样的，如果他的价值更高，那么这样做是无利可图的。只要强制区间$\Delta$足够短，弱技术假设就意味着有这种形式的唯一均衡。特别是，如果卖方的价值足够高，他最初提出一个被买方接受的价格，否则，他通过等待一个适当长的时间间隔来提出他的价值（因为现在他的价值已经被可信地发出信号），即最初描述的没有不确定性的基本模型所预测的价格。</p>
 <p>在双方都有私人信息的情况下，也会得到类似的结果。更没有耐心的一方，比如说卖方，在提出最初的建议之前，会等待足够长的时间来发出可信的成本信号；然后，如果买方的价值非常高，他会迅速接受，否则会等待足够长的时间来发出可信的价值信号，然后提出反建议，卖方会迅速接受。根据这种情况，双方通常在没有私人信息的情况下就预测的价格达成一致：与筛选模型不同，信息差异对商定的条款影响不大。延迟的作用仅仅是可信地传达彼此的私人信息。后悔的因素体现在事后意识到早期对卖方的成本和买方的价值进行可信的核查可以避免延迟的成本。</p>
 <p>根据这一设想，拖延是信息不对称的必然结果。特别是，最多只有两个正式报价，其余的都是多余的拖延，例如在工资谈判中，公司发出的信号，即它无法承担高工资。从严酷的形式来看，这种观点违反了偶然的观察，但一些特征，如可变的反应间隔和稀少的认真报价是现实的。此外，工资是公平的，因为在没有信息差异的情况下，工资是相同的。筛选模型有很大的不同，因为它们预测工资和延迟主要取决于程序性参数，如报价的频率，反过来又取决于对士气或声誉的辅助考虑；此外，如果报价频繁，那么结果就会对拥有优势信息的一方非常有利。</p>
 <p>这三种延迟模式代表着极端情况，其中有可能出现各种混合情况。例如，如果当事人的延迟成本是(i)和(ii)的混合物，那么结果也是损耗和信号结果的混合物：与纯粹的损耗模型相比，延迟可能更短，分割更公平。新的特征也出现了。买方的最高值意味着立即接受，但最低值也会导致买方终止谈判，即使交易的收益是正面的：可信的信号传递太昂贵了。如果卖方的成本和买方的价值是相关的或有因果关系的，就会出现更多的可能性；特别是，即使双方都知道收益必须是正的，也可能阻止收益的实现。</p>
@@ -1160,11 +1162,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts4723" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4154" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4723'));
+        var myChart = echarts.init(document.getElementById('echarts4154'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1220,11 +1222,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts404" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts963" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts404'));
+        var myChart = echarts.init(document.getElementById('echarts963'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1274,11 +1276,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2184" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6197" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2184'));
+        var myChart = echarts.init(document.getElementById('echarts6197'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6953,11 +6955,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1314" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1760" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1314'));
+        var myChart = echarts.init(document.getElementById('echarts1760'));
         // 指定图表的配置项和数据
         var option = {
     title: {
