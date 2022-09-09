@@ -1162,11 +1162,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts5946" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts411" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5946'));
+        var myChart = echarts.init(document.getElementById('echarts411'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1222,11 +1222,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5410" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1034" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5410'));
+        var myChart = echarts.init(document.getElementById('echarts1034'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1276,11 +1276,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9135" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9153" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9135'));
+        var myChart = echarts.init(document.getElementById('echarts9153'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6955,11 +6955,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1813" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7310" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1813'));
+        var myChart = echarts.init(document.getElementById('echarts7310'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7914,15 +7914,102 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <li>基础思路：每一轮根据之前的结果更新对收益的期望，期望计算方法为[之前采取该选项所得到的所有收益]/[之前采取过该选项的次数]，也就是平均每次得到的收益；只要时间够长，这个算出来的期望就会接近真实收益。</li>
 </ol>
 <h2 id="System-model-and-problem"><a href="#System-model-and-problem" class="headerlink" title="System model and problem"></a>System model and problem</h2><ol>
-<li><p>字母符号表示：</p>
-<p>| 名称                                         | 含义                                                      |<br>| ————————————————————— | ———————————————————————————- |<br>| t                                          | 当前轮数，第t轮                                                |<br>| N                                          | N个workers的集合，第i个worker                                  |<br>| M                                          | M个任务的集合，第j个任务                                           |<br>| B                                          | 预算                                                      |<br>| $w_j$                                      | 第j个任务的权重，所有权重加起来的和是1                                    |<br>| L                                          | 每个worker会向平台提交L个任务候选                                    |<br>| $p_i^l=<M_i^l,c_i^l>$                      | 第i个worker提交的第l个选项，其中$M_i^l$表示该worker的任务候选集合，$c_i^l$表示收费 |<br>| $c_i^l=\varepsilon_i f(\vert M_i^l \vert)$ | 每个worker的收费与该选项包含的任务数正相关，每个worker的收费系数不同                |<br>| $P_i=\{p_i^l \vert 1&lt;=l&lt;=L\}$              | 第i个worker提交的选项集合                                        |<br>| $P=U_{i\in N}P_i $                         | 所有选项集合                                                  |<br>| $q_{i,j}^t \vert j\in M_i^l$               | 第i个worker在第t轮完成第j个任务的质量                                 |<br>| $P^t\subset P$                             | 第t轮中平台对所有workers所选的选项集合                                 |<br>| $p_i^l\in P^t$                             | 第t轮平台对第i个worker选了其第l个选项                                 |<br>| $u^j(P^t)$                                 | 第t轮采用方案$P^t$时的第j个任务的最终质量（所有完成任务结果中最好的那个）                |<br>| $u(P^t)$                                   | 第t轮采用方案$P^t$时所有任务的最终质量和，也就是上一个符号乘权重再加起来                 |<br>| $n_i^l(t)$                                 | 第i个worker的第l个选项被选的次数                                    |<br>| $n_i(t)$                                   | 第i个worker被学习过的次数                                        |<br>| $\overline{q}_{i(t)}$                      | 截至到第t轮学习到的第i个worker的质量                                  |</p>
-<p>需要注意：虽然worker可以提交L个任务候选，但是每一轮只能最终完成一个选项，这里假设$c_i^1$到$c_i^L$是从小到大排的，也就是说最后一个的收费最高，且实际中，c的取值一般和M的长度（就是任务数量）正相关。</p>
+<li>字母符号表示：</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t</td>
+<td>当前轮数，第t轮</td>
+</tr>
+<tr>
+<td>N</td>
+<td>N个workers的集合，第i个worker</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M个任务的集合，第j个任务</td>
+</tr>
+<tr>
+<td>B</td>
+<td>预算</td>
+</tr>
+<tr>
+<td>$w_j$</td>
+<td>第j个任务的权重，所有权重加起来的和是1</td>
+</tr>
+<tr>
+<td>L</td>
+<td>每个worker会向平台提交L个任务候选</td>
+</tr>
+<tr>
+<td>$p_i^l=<M_i^l,c_i^l>$</td>
+<td>第i个worker提交的第l个选项，其中$M_i^l$表示该worker的任务候选集合，$c_i^l$表示收费</td>
+</tr>
+<tr>
+<td>$c_i^l=\varepsilon_i f(\vert M_i^l \vert)$</td>
+<td>每个worker的收费与该选项包含的任务数正相关，每个worker的收费系数不同</td>
+</tr>
+<tr>
+<td>$P_i=\{p_i^l \vert 1&lt;=l&lt;=L\}$</td>
+<td>第i个worker提交的选项集合</td>
+</tr>
+<tr>
+<td>$P=U_{i\in N}P_i $</td>
+<td>所有选项集合</td>
+</tr>
+<tr>
+<td>$q_{i,j}^t \vert j\in M_i^l$</td>
+<td>第i个worker在第t轮完成第j个任务的质量</td>
+</tr>
+<tr>
+<td>$P^t\subset P$</td>
+<td>第t轮中平台对所有workers所选的选项集合</td>
+</tr>
+<tr>
+<td>$p_i^l\in P^t$</td>
+<td>第t轮平台对第i个worker选了其第l个选项</td>
+</tr>
+<tr>
+<td>$u^j(P^t)$</td>
+<td>第t轮采用方案$P^t$时的第j个任务的最终质量（所有完成任务结果中最好的那个）</td>
+</tr>
+<tr>
+<td>$u(P^t)$</td>
+<td>第t轮采用方案$P^t$时所有任务的最终质量和，也就是上一个符号乘权重再加起来</td>
+</tr>
+<tr>
+<td>$n_i^l(t)$</td>
+<td>第i个worker的第l个选项被选的次数</td>
+</tr>
+<tr>
+<td>$n_i(t)$</td>
+<td>第i个worker被学习过的次数</td>
+</tr>
+<tr>
+<td>$\overline{q}_{i(t)}$</td>
+<td>截至到第t轮学习到的第i个worker的质量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>   需要注意：虽然worker可以提交L个任务候选，但是每一轮只能最终完成一个选项，这里假设$c_i^1$到$c_i^L$是从小到大排的，也就是说最后一个的收费最高，且实际中，c的取值一般和M的长度（就是任务数量）正相关。</p>
 <ul>
-<li>这里有个奇怪的问题，我以为每个选项就是单独一个任务，然后c是对应的收费，但是看起来每个选项是任务集合，然后c是收费，也就是说比如有5个任务用abcde表示，某个worker的选项就会是{a,b,收费3}{b,c,d,收费5}{a,c,d,e,收费10}，这样看起来好奇怪。希望后面有解释。</li>
-<li>虽然这样的设定有点别扭，不过解释是说：每一轮每个worker完成$|M_i^l|$个任务，也就会学习到到$|M_i^l|$个任务质量，就是说任务质量会被学习$|M_i^l|$次，这和传统CMAB不一样。</li>
-<li>每轮每个worker最多定一个选项（也可以不选）</li>
-</ul>
+<li><p>这里有个奇怪的问题，我以为每个选项就是单独一个任务，然后c是对应的收费，但是看起来每个选项是任务集合，然后c是收费，也就是说比如有5个任务用abcde表示，某个worker的选项就会是{a,b,收费3}{b,c,d,收费5}{a,c,d,e,收费10}，这样看起来好奇怪。希望后面有解释。</p>
 </li>
+<li><p>虽然这样的设定有点别扭，不过解释是说：每一轮每个worker完成$|M_i^l|$个任务，也就会学习到到$|M_i^l|$个任务质量，就是说任务质量会被学习$|M_i^l|$次，这和传统CMAB不一样。</p>
+</li>
+<li><p>每轮每个worker最多定一个选项（也可以不选）</p>
+</li>
+</ul>
+<ol>
 <li><p>要研究的问题：给定预算，每轮招募K个workers，使得所有轮中完成的所有任务的权重加起来最大。</p>
 </li>
 <li><p>数学模型：</p>
@@ -7990,7 +8077,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
 <li>没啥总结的，这个论文就这样了</li>
 <li>之后有时间就看看性能证明那里，不过个人觉得十有八九是已有证明改编的</li>
-<li>看了一点证明，还没完全看懂，大致了解思路了，不过不打算继续看了……</li>
+<li>看了一点证明，还没完全看懂，大致了解思路了，不过不打算继续看了…..</li>
 </ol>
 ]]></content>
       <categories>
