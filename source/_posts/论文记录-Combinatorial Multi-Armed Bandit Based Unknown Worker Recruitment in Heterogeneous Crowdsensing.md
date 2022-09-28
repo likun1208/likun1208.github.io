@@ -41,7 +41,7 @@ category: 论文
 | B                                          | 预算                                                      |
 | $w_j$                                      | 第j个任务的权重，所有权重加起来的和是1                                    |
 | L                                          | 每个worker会向平台提交L个任务候选                                    |
-| $p_i^l=<M_i^l,c_i^l>$                      | 第i个worker提交的第l个选项，其中$M_i^l$表示该worker的任务候选集合，$c_i^l$表示收费 |
+| $p_i^l=\langle M_i^l,c_i^l \rangle$        | 第i个worker提交的第l个选项，其中$M_i^l$表示该worker的任务候选集合，$c_i^l$表示收费 |
 | $c_i^l=\varepsilon_i f(\vert M_i^l \vert)$ | 每个worker的收费与该选项包含的任务数正相关，每个worker的收费系数不同                |
 | $P_i=\{p_i^l \vert 1<=l<=L\}$              | 第i个worker提交的选项集合                                        |
 | $P=U_{i\in N}P_i $                         | 所有选项集合                                                  |

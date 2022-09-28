@@ -2,8 +2,8 @@
 title: 论文记录-Dynamic Task Pricing in Multi-Requester Mobile Crowd Sensing with Markov Correlated Equilibrium
 date: 2020-05-14 11:40:43
 tags: 
-	- game theory
-	- crowd sensing
+    - game theory
+    - crowd sensing
 category: 论文
 ---
 
@@ -29,7 +29,5 @@ category: 论文
 6. 两种场景：
    1. 所有workers同时到达
    2. workers动态到达
-
-
 
 这篇暂时先不往后看了，师弟组会讲过了

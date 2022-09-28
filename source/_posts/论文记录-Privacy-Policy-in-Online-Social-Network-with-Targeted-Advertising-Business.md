@@ -1,10 +1,9 @@
 ---
-title: 论文记录-Privacy Policy in Online Social Network with Targeted Advertising
-  Business
+title: 论文记录-Privacy Policy in Online Social Network with Targeted Advertising Business
 date: 2020-04-15 20:39:30
 tags: 
     - game theory
-    - stackelberg博弈
+    - stackelberg game
 category: 论文
 ---
 
