@@ -1,6 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Using game theory to thwart multistage privacy intrusions when sharing data</title>
+    <url>/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/</url>
+    <content><![CDATA[<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
+<h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
+<p>思路：再识别风险评估框架</p>
+<p>常规方法：数据接收者只使用一种资源</p>
+<p>存在问题：攻击者可以访问多种资源来增加攻击成功率</p>
+<p>本文方法：构建完全信息双人Stackelberg博弈模型来表示再识别博弈，提出基于隐私-效用权衡的最优数据共享策略</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>背景：生物医学数据共享有很大好处，但带来隐私问题</p>
+<p>面临的问题：针对匿名生物医学数据的再识别攻击</p>
+<ol>
+<li><p>简化的攻击模型会导致隐私风险被高估或低估；</p>
+</li>
+<li><p>攻击逐渐从过去的单阶段（将去除标识符的数据库与没有去除标识符的数据库通过一些共有属性链接起来）转变为现在的多阶段（每阶段披露目标个体的一部分信息）</p>
+</li>
+</ol>
+<p>本文：通过明确建模和量化数据主体在面对多阶段攻击时的隐私-效用权衡来评估和战略性地减轻风险，弥补了更复杂的攻击模型和数据共享决策之间的差距。</p>
+<p>攻击模型：Gymrek提出的两阶段攻击——针对基因组计划数据库的姓氏推断与进一步的其他数据库链接推断</p>
+<p>现有方法：</p>
+<ol>
+<li><p>从监管和技术两个角度出发</p>
+</li>
+<li><p>关注最坏的情况——影响不明确</p>
+<ol>
+<li><p>不考虑攻击成本——高估隐私风险</p>
+</li>
+<li><p>没有测量参数影响就设置参数——牺牲数据效用</p>
+</li>
+</ol>
+</li>
+<li><p>由此出现了引入博弈论的风险评估</p>
+</li>
+</ol>
+<p>本文：</p>
+<ol>
+<li><p>博弈论模型可以向数据主体揭示最佳的共享策略</p>
+</li>
+<li><p>使用真实世界的数据集或大规模模拟数据集进行反多阶段攻击的实验</p>
+</li>
+<li><p>博弈论模型可以有效地评估和有效地减轻隐私风险</p>
+</li>
+<li><p>模型所推荐的细粒度共享策略可以最大限度地减少数据主体被成功再识别的可能性，同时最大限度地提高数据效用，并保持发布的数据集的有效性和数据共享过程的公平性</p>
+</li>
+</ol>
+<h2 id="Materials-and-Methods"><a href="#Materials-and-Methods" class="headerlink" title="Materials and Methods"></a>Materials and Methods</h2><p>研究场景：数据主体选择在公共库中分享多少主体的基因数据</p>
+<p>研究目标：决定主体的最优共享策略，平衡数据共享带来的经济效益与再识别风险</p>
+<p>再识别风险来源：</p>
+<ol>
+<li><p>有动机和手段试图确定匿名共享数据集中的主体身份的人</p>
+</li>
+<li><p>已经向公众提供的关于主体的其他数据</p>
+</li>
+</ol>
+<p>攻击模型：Gymrek攻击</p>
+<ol>
+<li><p>第一阶段：根据目标基因库和遗传族谱数据库进行姓氏推断</p>
+</li>
+<li><p>第二阶段：将姓氏推断结果和公共数据库进行链接，从而确定数据主体的身份</p>
+</li>
+</ol>
+<p>博弈模型：Stackelberg 博弈 或 leader-follower 博弈</p>
+<ol>
+<li><p>假设数据主体和攻击者对攻击成功的概率有相同的信念</p>
+</li>
+<li><p>数据主体作为leader，选择共享多少数据</p>
+</li>
+<li><p>攻击者作为follower，选择是否进行再识别攻击</p>
+</li>
+<li><p>攻击者不知道被隐藏的信息，只能估计成功的概率，而数据主体则掌握更多信息</p>
+</li>
+</ol>
+<p>主体决策：$s=<s_1,...,s_j,...,s_m>\in B^m$表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
+<p>对手决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
+<p>对手攻击方式：两阶段Gymrek攻击，可以有更多个阶段，每阶段推断出一些新的信息</p>
+<p>博弈过程：主体（leader）先决定自己的策略<code>s</code>，攻击者（follower）观察数据并基于此决定是否攻击，即攻击者的策略是主体策略的函数</p>
+<p>引入新的符号和假设：</p>
+<ol>
+<li><p>$b(s)$表示策略<code>s</code>为主体带来的经济效益，公开信息，假设该函数非递减</p>
+</li>
+<li><p>如果一个记录成功被再识别，假设该主体损失<code>L</code>，攻击者获得`L``</p>
+</li>
+</ol>
+<p>攻击成功的概率取决于数据主体采取的策略，数据主体对这个概率以及再识别风险比攻击者更清楚，攻击者只能大致估计。</p>
+<p>首先，假设数据主体和攻击者对每个策略分配的成功率都相同，记作$p(s)$。在已知$p(s)$的情况下，数据主体和攻击者可以最大化各自的期望收益。</p>
+<p>然后，将期望收益视作真实收益，可得完美信息下的Stackbelberg博弈，并研究均衡。</p>
+<p>数据主体的期望收益函数：$v_d(s,a)=b(s)-Lp(s)a$</p>
+<p>攻击者的收益函数：$v_a(s,a)=(Lp(s)-C)a$</p>
+<p>其中，<code>C</code>是攻击者的攻击成本</p>
+<ol>
+<li><p>如果攻击者不攻击则其收益为0</p>
+</li>
+<li><p>可以通过重定义$b(s)$和重识别$p(s)$将该模型推广到其他数据共享的场景中</p>
+</li>
+</ol>
+<p>令$\phi(s)=\{a|(Lp(s)-C)a\geq(Lp(s)-C)(1-a)\}$，函数$\phi(s)$表示攻击者针对主体策略<code>s</code>的最优策略</p>
+<p>均衡解对应的主体优化问题：$max_{s,a\in\phi(s)}b(s)-Lp(s)a$</p>
+<p>主体求解方法：逆向归纳法——先计算攻击者对所有可能策略<code>s</code>的最优对策$\phi(s)$，然后选择自己的最优策略。</p>
+<p>该方法问题：数据主体</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
+  </entry>
+  <entry>
+    <title>论文记录-Budgeted Unknown Worker Recruitment for Heterogeneous Crowdsensing Using CMAB</title>
+    <url>/2022/09/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Budgeted%20Unknown%20Worker%20Recruitment%20for%20Heterogeneous%20Crowdsensing%20Using%20CMAB/</url>
+    <content><![CDATA[<a id="more"></a>
+<p>这篇论文是在<a href="https://likun1208.github.io/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/https://likun1208.github.io/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/">之前看过的论文</a>的基础上扩展的，因此前面的内容暂时先不看，直接看多出来的部分，这部分针对的问题是一些workers总被分配任务而另一些则没有任务。</p>
+<h2 id="FAIRNESS-CONSTRAINT-OF-WORKERS"><a href="#FAIRNESS-CONSTRAINT-OF-WORKERS" class="headerlink" title="FAIRNESS CONSTRAINT OF WORKERS"></a>FAIRNESS CONSTRAINT OF WORKERS</h2><p>公平性：众包平台必须保障每一个worker的最小选择频率，从而避免出现一些workers任务很多而另一些没有任务的场面。</p>
+<p>因为：没任务的workers会永久性离开平台，导致workers数量减少，这有损于其他requesters的数据结果。因此公平性约束潜在地保障了所有requesters的全局长期传感性能。</p>
+<p>方法：</p>
+<ol>
+<li><p>引入参数$\eta_i$：多轮招募中第$i$个worker至少被招募的部分</p>
+</li>
+<li><p>公平性约束：$\liminf _{B \rightarrow \infty} \mathbb{E}\left[n_i(\tau(B))\right] \geq \tau(B) \cdot \eta_i$, for $\forall i \in \mathcal{N}$</p>
+<p>其中，$\tau(B)$表示预算为B时招募的总轮数，$n_i(\tau(B))$表示预算为B时第i个worker被招募的总轮数</p>
+</li>
+<li><p>引入虚队列，队列长度计算：$V_i(t)=\max \left\{0, V_i(t-1)+\eta_i-\mathbb{I}\left\{i_{t-1}=i\right\}\right\}$</p>
+</li>
+<li><p>将队列长度也纳入多臂赌博机的计算公式中：</p>
+<script type="math/tex; mode=display">
+p_{i}^{l}=\underset{p_{i^{\prime}}^{l^{\prime}} \in\left(\mathcal{P} \backslash \mathcal{P}^{t}\right)}{\operatorname{argmax}}\left\{\frac{u_{\left[\widehat{q}_{i}(t-1)\right]}\left(\mathcal{P}^{t} \cup\left\{p_{i^{\prime}}^{l^{\prime}}\right\}\right)-u_{\left[\widehat{q}_{i}(t-1)\right]}\left(\mathcal{P}^{t}\right)}{c_{i^{\prime}}^{l^{\prime}}}+\varrho \cdot V_{i}(t)\right\}</script></li>
+</ol>
+<ol>
+<li>其余内容没有改变</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+        <tag>Combinatorial Multi Armed Bandit</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Theories of Bargaining Delays</title>
     <url>/2022/08/31/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Theories%20of%20Bargaining%20Delays/</url>
     <content><![CDATA[<h1 id="Theories-of-Bargaining-Delays"><a href="#Theories-of-Bargaining-Delays" class="headerlink" title="Theories of Bargaining Delays"></a>Theories of Bargaining Delays</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>各类争端的解决过程中可能会出现罢工、谈判等延迟现象，而这是有代价的。博弈论说明程序性特征可能会导致拖延，但主要原因可能是各方之间的信息差异。本文描述了几个模型，并与罢工的数据相关。</p>
@@ -1162,11 +1295,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts8073" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5932" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8073'));
+        var myChart = echarts.init(document.getElementById('echarts5932'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1222,11 +1355,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts474" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2368" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts474'));
+        var myChart = echarts.init(document.getElementById('echarts2368'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1276,11 +1409,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts8856" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1282" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8856'));
+        var myChart = echarts.init(document.getElementById('echarts1282'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1884,7 +2017,7 @@ P_0+P_1z+P_2z^2+...+P_Nz^N\\
 <script type="math/tex; mode=display">
 \alpha = \prod_{k=1}^N P_k \tag{3b}</script><script type="math/tex; mode=display">
 s_k = -(1-p_k)/p_k \tag{3c}</script><p>上述过程用matlab可以写成：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[P,Q]</span>=<span class="title">ProbMofN</span><span class="params">(p)</span></span></span><br><span class="line"><span class="comment">% 给定N个元素的向量p，它表示N个独立重复实验的成功概率，该函数的返回值包括：</span></span><br><span class="line"><span class="comment">% P：N+1个元素，表示0次成功、1次成功、2次成功...N次成功（泊松-二项式的pdf）</span></span><br><span class="line"><span class="comment">% Q：N+1个元素，表示至少0次成功、至少1次成功、...、至少N次成功的概率（泊松-二项式的cdf）</span></span><br><span class="line">p(p==<span class="number">0</span>)=[];	<span class="comment">% 消除等于0的元素</span></span><br><span class="line">n=<span class="built_in">length</span>(p);</span><br><span class="line">alpha=prob(p);</span><br><span class="line">s=-(<span class="number">1</span>-p)./p;</span><br><span class="line">S=poly(s); <span class="comment">% S就是根为向量s的多项式的N+1个系数的向量，也就是说，S(1)*x^N+...+S(N)*x+S(N+1)</span></span><br><span class="line"></span><br><span class="line">temp_P=alpha*S;</span><br><span class="line">temp_Q=cumsum(temp_P);</span><br><span class="line"></span><br><span class="line">P=temp_P[N+<span class="number">1</span>:<span class="number">-1</span>:<span class="number">1</span>];</span><br><span class="line">Q=temp_Q[N+<span class="number">1</span>:<span class="number">-1</span>:<span class="number">1</span>];</span><br><span class="line"><span class="comment">%================================</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span>=<span class="title">invProbMofN</span><span class="params">(P)</span></span></span><br><span class="line"><span class="comment">% 给定N个元素的向量P，它表示N次实验后，0次成功、1次成功、...、N次成功的概率，该函数的返回值为：</span></span><br><span class="line"><span class="comment">% p：N个元素的向量，表示每次实验的成功率</span></span><br><span class="line">N1=<span class="built_in">length</span>(P); <span class="comment">% N1=N+1</span></span><br><span class="line">S=P[N1:<span class="number">-1</span>:<span class="number">1</span>]; </span><br><span class="line">s=roots(S); <span class="comment">% s是N个元素的向量，表示生成函数的根</span></span><br><span class="line">p=<span class="number">1.</span>/(<span class="number">1</span>-s); <span class="comment">% p是N个元素的向量，表示每次事件的成功率</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[P,Q]</span>=<span class="title">ProbMofN</span><span class="params">(p)</span></span></span><br><span class="line"><span class="comment">% 给定N个元素的向量p，它表示N个独立重复实验的成功概率，该函数的返回值包括：</span></span><br><span class="line"><span class="comment">% P：N+1个元素，表示0次成功、1次成功、2次成功...N次成功（泊松-二项式的pdf）</span></span><br><span class="line"><span class="comment">% Q：N+1个元素，表示至少0次成功、至少1次成功、...、至少N次成功的概率（泊松-二项式的cdf）</span></span><br><span class="line">p(p==<span class="number">0</span>)=[];    <span class="comment">% 消除等于0的元素</span></span><br><span class="line">n=<span class="built_in">length</span>(p);</span><br><span class="line">alpha=prob(p);</span><br><span class="line">s=-(<span class="number">1</span>-p)./p;</span><br><span class="line">S=poly(s); <span class="comment">% S就是根为向量s的多项式的N+1个系数的向量，也就是说，S(1)*x^N+...+S(N)*x+S(N+1)</span></span><br><span class="line"></span><br><span class="line">temp_P=alpha*S;</span><br><span class="line">temp_Q=cumsum(temp_P);</span><br><span class="line"></span><br><span class="line">P=temp_P[N+<span class="number">1</span>:<span class="number">-1</span>:<span class="number">1</span>];</span><br><span class="line">Q=temp_Q[N+<span class="number">1</span>:<span class="number">-1</span>:<span class="number">1</span>];</span><br><span class="line"><span class="comment">%================================</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span>=<span class="title">invProbMofN</span><span class="params">(P)</span></span></span><br><span class="line"><span class="comment">% 给定N个元素的向量P，它表示N次实验后，0次成功、1次成功、...、N次成功的概率，该函数的返回值为：</span></span><br><span class="line"><span class="comment">% p：N个元素的向量，表示每次实验的成功率</span></span><br><span class="line">N1=<span class="built_in">length</span>(P); <span class="comment">% N1=N+1</span></span><br><span class="line">S=P[N1:<span class="number">-1</span>:<span class="number">1</span>]; </span><br><span class="line">s=roots(S); <span class="comment">% s是N个元素的向量，表示生成函数的根</span></span><br><span class="line">p=<span class="number">1.</span>/(<span class="number">1</span>-s); <span class="comment">% p是N个元素的向量，表示每次事件的成功率</span></span><br></pre></td></tr></table></figure>
 <p>这样的计算过程虽然很好用，但是在对泊松-二项式pdf进行进一步分析或推导新结论时不太方便。于是本文提出了近似表达式。</p>
 ]]></content>
       <categories>
@@ -6955,11 +7088,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1176" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9938" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1176'));
+        var myChart = echarts.init(document.getElementById('echarts9938'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -9373,7 +9506,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </categories>
       <tags>
         <tag>game theory</tag>
-        <tag>stackelberg博弈</tag>
+        <tag>stackelberg game</tag>
       </tags>
   </entry>
   <entry>
