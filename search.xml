@@ -3,9 +3,7 @@
   <entry>
     <title>论文记录-Using game theory to thwart multistage privacy intrusions when sharing data</title>
     <url>/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/</url>
-    <content><![CDATA[<hr>
-<hr>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
 <h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
 <p>思路：再识别风险评估框架</p>
 <p>常规方法：数据接收者只使用一种资源</p>
@@ -74,7 +72,7 @@
 <li><p>攻击者不知道被隐藏的信息，只能估计成功的概率，而数据主体则掌握更多信息</p>
 </li>
 </ol>
-<p>主体决策：$s=<s_1,...,s_j,...,s_m>\in B^m$表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
+<p>主体决策：$s=<s_1,...,s_j,...,s_m>\in B^m$ 表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
 <p>对手决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
 <p>对手攻击方式：两阶段Gymrek攻击，可以有更多个阶段，每阶段推断出一些新的信息</p>
 <p>博弈过程：主体（leader）先决定自己的策略<code>s</code>，攻击者（follower）观察数据并基于此决定是否攻击，即攻击者的策略是主体策略的函数</p>
@@ -82,7 +80,7 @@
 <ol>
 <li><p>$b(s)$表示策略<code>s</code>为主体带来的经济效益，公开信息，假设该函数非递减</p>
 </li>
-<li><p>如果一个记录成功被再识别，假设该主体损失<code>L</code>，攻击者获得`L``</p>
+<li><p>如果一个记录成功被再识别，假设该主体损失<code>L</code>，攻击者获得<code>L</code></p>
 </li>
 </ol>
 <p>攻击成功的概率取决于数据主体采取的策略，数据主体对这个概率以及再识别风险比攻击者更清楚，攻击者只能大致估计。</p>
@@ -125,7 +123,78 @@ max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{
 </blockquote>
 <p>选择进入博弈：在一些情况，数据主体只有两种选择：加入并完全共享信息 或者 退出不共享任何信息。这样的场景可以由前文定义的博弈来刻画，其数据主体的策略被限制为两个选项：完全共享$s=<1,...1>$和完全不共享$s=<0,...0>$。</p>
 <p>遍历求解博弈耗时多，附录中介绍了可以用于加速求解的算法，稍后再看。</p>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h3><h3 id="Experiments-based-on-a-large-scale-simulated-population"><a href="#Experiments-based-on-a-large-scale-simulated-population" class="headerlink" title="Experiments based on a large-scale simulated population"></a>Experiments based on a large-scale simulated population</h3><h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h3><p>分别在真实数据集和仿真数据集上进行实验，后者更大一些</p>
+<p>在基因数据集<code>D</code>中共享数据的<code>n</code>个数据主体的平均收益：$\overline{V}=\sum_{i=1}^{n}V_i$，其中$V_i$表示第<code>i</code>个数据主体的最优收益</p>
+<p>平均数据效用：$\overline{U}=\sum_{i=1}^{n}U_i$</p>
+<p>主体平均隐私：$\overline{P}=\sum_{i=1}^{n}P_i$</p>
+<p>第<code>i</code>个数据主体的数据效用：$U_i=b(s_i^*)/B$，即部分共享带来的收益除以完全共享带来的收益</p>
+<p>第<code>i</code>个数据主体的隐私：$P_i=1-p(s_i^<em>)a_i^</em>$，即1减去隐私风险（被成功攻击的概率）</p>
+<p>第<code>i</code>个数据主体的最优收益：$V_i=v_d(s_i^<em>,a_i^</em>)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，<code>L</code>是再识别成功带来的损失。</p>
+<blockquote>
+<p>作为有效性的主要衡量标准，这些主体的平均报酬与效用和隐私的衡量标准呈正相关。</p>
+</blockquote>
+<p>实验设置：20个模拟数据属性，4个博弈场景，4个baseline场景，8种数据保护情况</p>
+<p>攻击者目标：在理性权衡攻击收益的基础上，尽可能再识别数据集<code>D</code>中的所有数据。</p>
+<p>8种情况的简要说明：</p>
+<ol>
+<li><p>no protection：无保护，数据集<code>D</code>中的每个主体都共享其数据记录中的所有属性</p>
+</li>
+<li><p>demographics only：数据集<code>D</code>中的每个主体仅共享人口统计学属性</p>
+</li>
+<li><p>random opt-in：数据集<code>D</code>中的每个主体根据实际设置，以一定的概率随机决定共享整个数据记录</p>
+</li>
+<li><p>random masking：数据集<code>D</code>中的每个主体随机决定以固定的概率分享其数据记录中的每个属性</p>
+</li>
+<li><p>opt-in game：主体只能决定选择加入共享整个数据记录或选择退出</p>
+</li>
+<li><p>masking game：主体可以在共享前隐藏一部分数据</p>
+</li>
+<li><p>no-attack masking game：假设主体不选择任何会使对手攻击的策略</p>
+</li>
+<li><p>one-stage masking game：假设攻击只有一阶段，二阶段的那个数据集不可用</p>
+</li>
+</ol>
+<p>评估在每种情况下采用的数据保护/共享策略的效果：有用性和公平性</p>
+<ol>
+<li><p>数据共享方案的有用性是基于共享数据和未受保护数据的分布之间的距离（详见附录S7）。</p>
+</li>
+<li><p>数据共享方案的公平性（例如，有用性方面的公平性或隐私方面的公平性）是基于每个人口群体对应的具体措施的基尼系数（详见附录S8）。</p>
+</li>
+</ol>
+<h3 id="Experiments-based-on-a-large-scale-simulated-population"><a href="#Experiments-based-on-a-large-scale-simulated-population" class="headerlink" title="Experiments based on a large-scale simulated population"></a>Experiments based on a large-scale simulated population</h3><p>这部分是针对大规模仿真数据的实验</p>
+<p>从平均收益来看有以下结论：</p>
+<ol>
+<li><p>受试者的平均收益在没有保护的情况下是最低的，在有掩膜的博弈中是最高的。</p>
+</li>
+<li><p>与选择进入博弈相比，受试者的平均收益在掩膜博弈中得到了很大的改善。说明在数据共享过程中提供某种程度的细化选择的基本优势之一。</p>
+</li>
+<li><p>当攻击者使用较少的数据资源，从而在攻击中保持较少的阶段时，掩膜博弈效果更好。</p>
+</li>
+<li><p>无论是共享所有的数据还是只分享人口统计资料，或者是一个随机的策略，都会给受试者带来负的或可忽略的平均回报。</p>
+</li>
+</ol>
+<p>从效用与隐私的结合看有以下结论：</p>
+<ol>
+<li><p>与其他情况相比，掩膜博弈能同时实现高效用和高隐私</p>
+</li>
+<li><p>受试者在无攻击掩膜博弈中的策略在大量共享数据的情况下保证了完全的隐私保护</p>
+</li>
+<li><p>当攻击只有一个阶段时，还能实现稍高的数据效用水平</p>
+</li>
+<li><p>与掩膜博弈相比，随机选择加入场景和随机掩膜场景给受试者带来了类似的隐私水平，但数据效用的水平却低得多</p>
+</li>
+<li><p>相比之下，与选择加入游戏相比，纯人口统计学方案给受试者带来类似的效用水平，但隐私水平较低</p>
+</li>
+<li><p>与无保护方案的结果相比，纯人口统计学方案总是为主体提供高得多的隐私水平，这突出了Gymrek攻击中姓氏推理阶段的力量</p>
+</li>
+<li><p>在博弈论的保护下，姓氏推断阶段的力量可以减少到最低限度，这一点从掩膜博弈和它的单阶段变化之间的差异可以看出</p>
+</li>
+</ol>
+<p>其他实验现象就不细看了，总结下来都是说掩膜博弈在效用、公平性、有用性这几方面更好。</p>
+<p>还分析了后向归纳和剪枝贪婪在不同场景的计算效率。</p>
+<h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><p>这部分仍然是大规模仿真数据，分析了敏感性和稳定性。</p>
+<h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><p>这部分是真实数据集的实验。</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
   </entry>
   <entry>
     <title>论文记录-Budgeted Unknown Worker Recruitment for Heterogeneous Crowdsensing Using CMAB</title>
@@ -1321,11 +1390,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts2491" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3919" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2491'));
-
+        var myChart = echarts.init(document.getElementById('echarts3919'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1378,15 +1447,14 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1489" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4574" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1489'));
-
+        var myChart = echarts.init(document.getElementById('echarts4574'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1433,15 +1501,14 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1833" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5037" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1833'));
-
+        var myChart = echarts.init(document.getElementById('echarts5037'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1487,7 +1554,6 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
@@ -1780,8 +1846,8 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
         <tag>Stackelberg game</tag>
       </tags>
   </entry>
@@ -4414,8 +4480,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
       </tags>
   </entry>
   <entry>
@@ -7117,11 +7183,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3014" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2929" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3014'));
-
+        var myChart = echarts.init(document.getElementById('echarts2929'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -7188,7 +7254,6 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         }
     ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>]]></content>
