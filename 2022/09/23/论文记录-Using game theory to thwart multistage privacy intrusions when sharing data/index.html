@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="/css/matery.css">
   <meta charset="utf-8" />
     
-  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  <meta name="description" content="共享数据时使用博弈论进行隐私保护" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
@@ -61,8 +61,12 @@
      
     <div class="article-meta">
       <a href="/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/" class="article-date">
-  <time datetime="2022-09-23T11:01:15.745Z" itemprop="datePublished">2022-09-23</time>
-</a>   
+  <time datetime="2022-09-23T11:02:32.000Z" itemprop="datePublished">2022-09-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
@@ -92,8 +96,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
-<h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
+  <h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
 <p>思路：再识别风险评估框架</p>
 <p>常规方法：数据接收者只使用一种资源</p>
 <p>存在问题：攻击者可以访问多种资源来增加攻击成功率</p>
@@ -161,7 +164,7 @@
 <li><p>攻击者不知道被隐藏的信息，只能估计成功的概率，而数据主体则掌握更多信息</p>
 </li>
 </ol>
-<p>主体决策：$s=<s_1,...,s_j,...,s_m>\in B^m$ 表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
+<p>主体决策：$s=\langle s_1,…,s_j,…,s_m \rangle \in B^m$ 表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
 <p>对手决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
 <p>对手攻击方式：两阶段Gymrek攻击，可以有更多个阶段，每阶段推断出一些新的信息</p>
 <p>博弈过程：主体（leader）先决定自己的策略<code>s</code>，攻击者（follower）观察数据并基于此决定是否攻击，即攻击者的策略是主体策略的函数</p>
@@ -216,9 +219,9 @@ max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{
 <p>在基因数据集<code>D</code>中共享数据的<code>n</code>个数据主体的平均收益：$\overline{V}=\sum_{i=1}^{n}V_i$，其中$V_i$表示第<code>i</code>个数据主体的最优收益</p>
 <p>平均数据效用：$\overline{U}=\sum_{i=1}^{n}U_i$</p>
 <p>主体平均隐私：$\overline{P}=\sum_{i=1}^{n}P_i$</p>
-<p>第<code>i</code>个数据主体的数据效用：$U_i=b(s_i^*)/B$，即部分共享带来的收益除以完全共享带来的收益</p>
-<p>第<code>i</code>个数据主体的隐私：$P_i=1-p(s_i^<em>)a_i^</em>$，即1减去隐私风险（被成功攻击的概率）</p>
-<p>第<code>i</code>个数据主体的最优收益：$V_i=v_d(s_i^<em>,a_i^</em>)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，<code>L</code>是再识别成功带来的损失。</p>
+<p>第<code>i</code>个数据主体的数据效用：$U_i=b(s_i^\ast)/B$，即部分共享带来的收益除以完全共享带来的收益</p>
+<p>第<code>i</code>个数据主体的隐私：$P_i=1-p(s_i^\ast)a_i^\ast$，即1减去隐私风险（被成功攻击的概率）</p>
+<p>第<code>i</code>个数据主体的最优收益：$V_i=v_d(s_i^\ast, a_i^\ast)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，<code>L</code>是再识别成功带来的损失。</p>
 <blockquote>
 <p>作为有效性的主要衡量标准，这些主体的平均报酬与效用和隐私的衡量标准呈正相关。</p>
 </blockquote>
@@ -340,6 +343,8 @@ max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stackelberg-game/" rel="tag">Stackelberg game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li></ul>
+
     </footer>
   </div>
 
