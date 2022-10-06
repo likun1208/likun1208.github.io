@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.5k</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
@@ -92,7 +92,9 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
+  <hr>
+<hr>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">论文记录-Using</span> <span class="string">game</span> <span class="string">theory</span> <span class="string">to</span> <span class="string">thwart</span> <span class="string">multistage</span> <span class="string">privacy</span> <span class="string">intrusions</span> <span class="string">when</span> <span class="string">sharing</span> <span class="string">data</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022</span><span class="number">-09</span><span class="number">-23</span> <span class="number">19</span><span class="string">:02:32</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">game</span> <span class="string">theory</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Stackelberg</span> <span class="string">game</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">论文</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">共享数据时使用博弈论进行隐私保护</span></span><br></pre></td></tr></table></figure>
 <h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
 <p>思路：再识别风险评估框架</p>
 <p>常规方法：数据接收者只使用一种资源</p>
@@ -187,8 +189,32 @@
 <p>令$\phi(s)=\{a|(Lp(s)-C)a\geq(Lp(s)-C)(1-a)\}$，函数$\phi(s)$表示攻击者针对主体策略<code>s</code>的最优策略</p>
 <p>均衡解对应的主体优化问题：$max_{s,a\in\phi(s)}b(s)-Lp(s)a$</p>
 <p>主体求解方法：逆向归纳法——先计算攻击者对所有可能策略<code>s</code>的最优对策$\phi(s)$，然后选择自己的最优策略。</p>
-<p>该方法问题：数据主体</p>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
+<p>该方法问题：数据主体掌握了完整的数据，因此他们可以计算再识别概率$p(s)$，而攻击者则不能。</p>
+<p>解决方法：攻击者使用再识别概率的估计值，记作$\hat{p}(s)$，并以此计算自己的收益和最优对策函数。数据主体同样可以用估计值来计算攻击者的策略，但他们会随后用真实的再识别风险概率计算自己的最优选择。</p>
+<p>总结一下：攻击者和数据主体都可以用$\hat{p}(s)$来估计计算$\phi(s)$，记作$\hat\phi(s)=\{a|(L\hat{p}(s)-C)a\ge(L\hat{p}(s)-C)(1-a)\}$，在得到攻击者最优策略后，数据主体使用真实概率计算自己的最优策略$max_{s,a\in\hat\phi(s)}b(s)-Lp(s)a$。</p>
+<blockquote>
+<p>说明：利用了Stackelberg博弈中leader只能做一次决策这一特点，使得该方法可以在计算过程中使用不同的再识别风险概率函数。</p>
+</blockquote>
+<p>在两阶段攻击中，给定主体策略<code>s</code>，第一阶段攻击成功概率$p_1(s)$、在一阶段攻击成功基础上的第二阶段攻击成功概率$p_2(s)$、攻击者估计的一阶段成功概率$\hat{p}_1(s)$、攻击者估计的忽略一阶段情况下二阶段成功概率$p’(s)$的计算方式如下：</p>
+<script type="math/tex; mode=display">
+p(s)=p_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))    \\
+\hat{p}(s)=\hat{p}_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))\\
+a'(s)=\left\{
+\begin{aligned}
+1,\hat{p}_1(s)p_2(s) > p'(s)\\
+0, \hat{p}_1(s)p_2(s)\le p'(s)
+\end{aligned}
+\right.</script><p>如果一阶段攻击更好，则$a’(s)$为1，反之则为0. 上面几个参数的具体值取决于攻击模型和攻击中用的数据集。</p>
+<p>由此，如果$a’(s)$为1，优化问题可以表达为：</p>
+<script type="math/tex; mode=display">
+max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{a|(L\hat{p}_1(s)p_2(s)-C)a\ge(L\hat{p}_1(s)p_2(s)-C)(1-a)\}$</p>
+<p>详细推公式过程在附录，稍后再看。</p>
+<blockquote>
+<p>所有的参数都可以根据用例进行合理的设置。具体来说，它们可以根据特定的数据集、攻击模型或受试者提供的估价进行调整。此外，正如结果所示，广泛的敏感性和稳健性分析（即压力测试）可以帮助验证参数设置对环境或主体知识的不确定性的敏感性和稳健性。</p>
+</blockquote>
+<p>选择进入博弈：在一些情况，数据主体只有两种选择：加入并完全共享信息 或者 退出不共享任何信息。这样的场景可以由前文定义的博弈来刻画，其数据主体的策略被限制为两个选项：完全共享$s=<1,...1>$和完全不共享$s=<0,...0>$。</p>
+<p>遍历求解博弈耗时多，附录中介绍了可以用于加速求解的算法，稍后再看。</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h3><h3 id="Experiments-based-on-a-large-scale-simulated-population"><a href="#Experiments-based-on-a-large-scale-simulated-population" class="headerlink" title="Experiments based on a large-scale simulated population"></a>Experiments based on a large-scale simulated population</h3><h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
       <!-- reward -->
       
     </div>
