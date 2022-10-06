@@ -1,3 +1,7 @@
+---
+
+---
+
 ```yaml
 title: 论文记录-Using game theory to thwart multistage privacy intrusions when sharing data
 date: 2022-09-23 19:02:32
@@ -130,10 +134,49 @@ description: 共享数据时使用博弈论进行隐私保护
 
 > 说明：利用了Stackelberg博弈中leader只能做一次决策这一特点，使得该方法可以在计算过程中使用不同的再识别风险概率函数。
 
+在两阶段攻击中，给定主体策略`s`，第一阶段攻击成功概率$p_1(s)$、在一阶段攻击成功基础上的第二阶段攻击成功概率$p_2(s)$、攻击者估计的一阶段成功概率$\hat{p}_1(s)$、攻击者估计的忽略一阶段情况下二阶段成功概率$p'(s)$的计算方式如下：
 
+$$
+p(s)=p_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))    \\
+\hat{p}(s)=\hat{p}_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))\\
+a'(s)=\left\{
+\begin{aligned}
+1,\hat{p}_1(s)p_2(s) > p'(s)\\
+0, \hat{p}_1(s)p_2(s)\le p'(s)
+\end{aligned}
+\right.
+$$
+
+如果一阶段攻击更好，则$a'(s)$为1，反之则为0. 上面几个参数的具体值取决于攻击模型和攻击中用的数据集。
+
+由此，如果$a'(s)$为1，优化问题可以表达为：
+
+$$
+max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a
+$$
+
+其中，$\hat\phi(s)=\{a|(L\hat{p}_1(s)p_2(s)-C)a\ge(L\hat{p}_1(s)p_2(s)-C)(1-a)\}$
+
+详细推公式过程在附录，稍后再看。
+
+> 所有的参数都可以根据用例进行合理的设置。具体来说，它们可以根据特定的数据集、攻击模型或受试者提供的估价进行调整。此外，正如结果所示，广泛的敏感性和稳健性分析（即压力测试）可以帮助验证参数设置对环境或主体知识的不确定性的敏感性和稳健性。
+
+选择进入博弈：在一些情况，数据主体只有两种选择：加入并完全共享信息 或者 退出不共享任何信息。这样的场景可以由前文定义的博弈来刻画，其数据主体的策略被限制为两个选项：完全共享$s=<1,...1>$和完全不共享$s=<0,...0>$。
+
+遍历求解博弈耗时多，附录中介绍了可以用于加速求解的算法，稍后再看。
 
 
 
 ## Results
+
+### Experimental design
+
+### Experiments based on a large-scale simulated population
+
+### Sensitivity and robustness analyses on parameters and settings based on simulated datasets
+
+### Experiments based on Craig Venter’s data and the Ysearch dataset
+
+
 
 ## Discussion
