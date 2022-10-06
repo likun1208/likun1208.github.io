@@ -1,4 +1,4 @@
-```yaml
+---
 title: 论文记录-Using game theory to thwart multistage privacy intrusions when sharing data
 date: 2022-09-23 19:02:32
 tags:
@@ -6,7 +6,7 @@ tags:
     - Stackelberg game
 categories: 论文
 description: 共享数据时使用博弈论进行隐私保护
-```
+---
 
 # Using game theory to thwart multistage privacy intrusions when sharing data
 
@@ -86,7 +86,7 @@ description: 共享数据时使用博弈论进行隐私保护
 
 4. 攻击者不知道被隐藏的信息，只能估计成功的概率，而数据主体则掌握更多信息
 
-主体决策：$s=<s_1,...,s_j,...,s_m>\in B^m$ 表示要共享的数据，其中`m`是记录中的属性数量，如果第`j`个属性被隐藏，则$s_j=0$，反之如果第`j`个属性被共享，则$s_j=1$
+主体决策：$s=\langle s_1,...,s_j,...,s_m \rangle \in B^m$ 表示要共享的数据，其中`m`是记录中的属性数量，如果第`j`个属性被隐藏，则$s_j=0$，反之如果第`j`个属性被共享，则$s_j=1$
 
 对手决策：$a\in \{0,1\}$表示是否进行再识别攻击，`a=1`表示攻击，`a=0`表示不攻击
 
@@ -173,11 +173,11 @@ $$
 
 主体平均隐私：$\overline{P}=\sum_{i=1}^{n}P_i$
 
-第`i`个数据主体的数据效用：$U_i=b(s_i^*)/B$，即部分共享带来的收益除以完全共享带来的收益
+第`i`个数据主体的数据效用：$U_i=b(s_i^\ast)/B$，即部分共享带来的收益除以完全共享带来的收益
 
-第`i`个数据主体的隐私：$P_i=1-p(s_i^*)a_i^*$，即1减去隐私风险（被成功攻击的概率）
+第`i`个数据主体的隐私：$P_i=1-p(s_i^\ast)a_i^\ast$，即1减去隐私风险（被成功攻击的概率）
 
-第`i`个数据主体的最优收益：$V_i=v_d(s_i^*,a_i^*)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，`L`是再识别成功带来的损失。
+第`i`个数据主体的最优收益：$V_i=v_d(s_i^\ast, a_i^\ast)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，`L`是再识别成功带来的损失。
 
 > 作为有效性的主要衡量标准，这些主体的平均报酬与效用和隐私的衡量标准呈正相关。
 
