@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.5k</span>
+            <span class="post-count">4.1k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">12 分钟</span>
+            <span class="post-count">14 分钟</span>
         </span>
     </span>
 </div>
@@ -165,7 +165,7 @@
 </li>
 </ol>
 <p>主体决策：$s=\langle s_1,…,s_j,…,s_m \rangle \in B^m$ 表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
-<p>对手决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
+<p>攻击者决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
 <p>对手攻击方式：两阶段Gymrek攻击，可以有更多个阶段，每阶段推断出一些新的信息</p>
 <p>博弈过程：主体（leader）先决定自己的策略<code>s</code>，攻击者（follower）观察数据并基于此决定是否攻击，即攻击者的策略是主体策略的函数</p>
 <p>引入新的符号和假设：</p>
@@ -284,9 +284,38 @@ max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{
 </ol>
 <p>其他实验现象就不细看了，总结下来都是说掩膜博弈在效用、公平性、有用性这几方面更好。</p>
 <p>还分析了后向归纳和剪枝贪婪在不同场景的计算效率。</p>
-<h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><p>这部分仍然是大规模仿真数据，分析了敏感性和稳定性。</p>
-<h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><p>这部分是真实数据集的实验。</p>
-<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
+<h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><p>这部分仍然是大规模仿真数据，分析了在攻击成本、数据集记录数和再识别成功数这三方面的敏感性和稳定性。</p>
+<p>实验设置：8个场景，11组实验，针对不同的参数使用不同的测试集进行了20次实验</p>
+<p>实验结论：掩膜博弈更好</p>
+<p>一些其他与各参数相关的实验不记录了，与博弈无关，更偏向生物医学</p>
+<p>此外，分析了少数人支持系数，说明了掩膜博弈在公平性方面同样优秀</p>
+<h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><p>这部分是真实数据集的实验，同样说明了掩膜博弈更好。</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>本文：针对再识别攻击，为数据主体提供共享策略</p>
+<p>发现：</p>
+<ol>
+<li><p>额外阶段会增加再识别的准确率，但同样更有利于我们通过博弈的方式反攻击，因为可以误导攻击者从而使其推断出错误的中间信息，从而减轻隐私风险。</p>
+</li>
+<li><p>如果数据库不允许进行部分数据共享（即：只能加入并完全共享或者退出），大多数理性的数据主体会选择退出；反之，如果允许部分共享，则大多数主体愿意共享大部分数据，这表明向主体提供选择可以鼓励更大程度的数据共享，同时避免再识别。</p>
+</li>
+<li><p>本文方案使得主体可以选择共享大量数据，获取高收益，同时不会面临再识别风险。</p>
+</li>
+<li><p>敏感性分析说明了参数对主体策略的影响，由此能进一步研究：政策制定者如何增加对隐私泄露的惩罚、数据持有者如何增加对数据共享的奖励等。</p>
+</li>
+</ol>
+<p>不足之处和后续研究：</p>
+<ol>
+<li><p>仅考虑了一个攻击者和两阶段攻击实验</p>
+</li>
+<li><p>使用的决策模型较为简单，假设数据主体之间的决策相互独立，或所有主体选择相同的策略</p>
+</li>
+<li><p>目前的博弈模型所模拟的博弈双方并没有完全推理出所有的不确定性。双方都可能有不完全和/或不完善的信息。为了更加现实，可以使用更复杂的博弈论模型，如贝叶斯博弈，来模拟不完全和/或不完善的信息</p>
+</li>
+<li><p>没有研究数据持有者的最优策略，它们有动机控制付给数据主体的报酬</p>
+</li>
+<li><p>博弈模型可能会在发布的数据集中引起非随机缺失（MNAR）的值，这对数据集的使用可能会有不可忽略的影响</p>
+</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
