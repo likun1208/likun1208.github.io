@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Eliciting Thinking Hierarchy without a Prior</title>
+    <url>/2022/10/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Thinking%20Hierarchy%20without%20a%20Prior/</url>
+    <content><![CDATA[<h1 id="Eliciting-Thinking-Hierarchy-without-a-Prior"><a href="#Eliciting-Thinking-Hierarchy-without-a-Prior" class="headerlink" title="Eliciting Thinking Hierarchy without a Prior"></a>Eliciting Thinking Hierarchy without a Prior</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>针对无法验证答案的众包任务，传统思路：选择大多数人支持的答案</p>
+<p>存在问题：大多数人犯系统性错误，会导致最终结果出错</p>
+<p>本文希望：在没有任何先验的情况下，在所有答案中建立一个等级制度，使得根据该制度得到的排名较高的答案（可能不被大多数人支持）来自更可靠的人</p>
+<p>本文提出：</p>
+<ol>
+<li><p>一个新的模型来描述人们的思维层次</p>
+</li>
+<li><p>两种算法来学习没有任何先验的思维层次</p>
+</li>
+<li><p>一种基于上述理论框架的新的公开回答的众包方法</p>
+</li>
+</ol>
+<p>本文实验：</p>
+<ol>
+<li><p>本文方法所学习到的排名靠前的答案的准确度远远高于全体投票（在一个问题中，全体投票的答案得到了74名受访者的支持，但正确答案只得到了3名受访者的支持。我们的方法在没有任何先验的情况下将正确答案排在最高位置）</p>
+</li>
+<li><p>本文模型有很高的拟合度，特别是对于我们排名第一的答案是正确的问题</p>
+</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>群体智慧在面对系统性错误的时候往往会得出错误结果</p>
+<p>一个例子：圆A的半径是圆B半径的1/3，圆A绕着圆B转了一圈后回到起点。圆A总共会旋转多少次？</p>
+<p><img src="https://github.com/likun1208/image/blob/master/2109.jpg?raw=true" alt="圆圈问题"></p>
+<p>根据实验，有11个人认为是1次，8个人选2次，134个人选3次，16个人选4次，27个人选6次，21个人选9次。显然在多数一致的众包任务中，这个题的答案会被认为是3次，单其实正确答案是4次，只有16个人选。</p>
+<p>如果事先了解所有受访者的先验水平，我们也许能根据大家的专业水平来确定正确答案，但是在大多数众包场景中，往往没这样的先验知识。</p>
+<p>为了解决上述问题，Prelc等人[15]提出了一种创新的方法，他们准备了多个选择，要求受访者挑选一个选项，并预测其他人的选择分布。他们使用预测结果来构建一个关于选择的先验分布，然后选择比先验分布更受欢迎的选择，这样就纠正了偏见（是2017年的nature）。许多其他工作[10, 5, 16]发展了使用先验或预测来纠正偏差的想法。</p>
+<p>然而，首先，将以前的方法应用于运行中的例子，即圆圈问题，是不适用的，因为它们需要先验知识来设计选择。让受访者报告所有选择的整体分布也很费力。第二，以前的工作主要是利用预测来纠正偏见，而利用他们的预测来建立一个思维层次是内在的有趣。这也导致了答案之间的层次性。著名的认知分层理论（CHT）[21, 22, 3]在人们玩游戏的场景中建立了一个思维理论，这样我们就可以学习不同复杂程度的玩家的行动。然而，CHT只是为游戏理论环境设计的。我们对在一般的问题解决场景中建立一个思维理论感到好奇。该问题的关键在于，水平较高的人知道水平较低的人的想法，但反之则不然[3, 9]。我们想应用这个见解来学习不同复杂程度的人的答案，称为思维层次，而不需要任何先验。</p>
+<p><strong>关键问题</strong>：我们的目标是建立一个实用的方法，在没有任何先验的情况下学习思维层次。基于思维层次，我们可以对答案进行排序，这样，排名较高的答案，可能不被大多数人支持，但是来自更可靠的人。</p>
+<p>层次性思维方式的优势除了在于选出正确答案以外，还有以下几点：</p>
+<ol>
+<li><p>一些主观性问题可能有多个高质量答案，完整的层次结构能提供更丰富的结果。</p>
+</li>
+<li><p>答案的层次性有助于更好地理解人们的思维方式，尤其当我们试图征求人们对某项政策的意见时这一点更重要。</p>
+</li>
+</ol>
+<p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的问题和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
+<p><img src="https://github.com/likun1208/image/blob/master/fig2.png?raw=true" alt="圆圈问题的答案-预测矩阵"></p>
+<p>为了学习思维层次，我们提出了一个新颖的模型。我们的模型描述了不同复杂程度的人如何回答问题，更重要的是，预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。我们表明，鉴于回答者的答案和预测的联合分布，我们可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT），这可能是一个独立的兴趣。基于对NCT的分析，我们提供了两个简单的答案排序算法，并表明在适当的假设下，这些算法将学习潜在的思维层次，给定应答者的答案和预测的联合分布。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Using game theory to thwart multistage privacy intrusions when sharing data</title>
     <url>/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/</url>
     <content><![CDATA[<h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
@@ -1425,11 +1474,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts8395" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts319" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8395'));
+        var myChart = echarts.init(document.getElementById('echarts319'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1485,11 +1534,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5471" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7852" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5471'));
+        var myChart = echarts.init(document.getElementById('echarts7852'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1539,11 +1588,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts5246" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2277" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5246'));
+        var myChart = echarts.init(document.getElementById('echarts2277'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1881,8 +1930,8 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
         <tag>Stackelberg game</tag>
       </tags>
   </entry>
@@ -4515,8 +4564,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>crowdsourcing</tag>
+        <tag>game theory</tag>
       </tags>
   </entry>
   <entry>
@@ -7218,11 +7267,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4046" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6587" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4046'));
+        var myChart = echarts.init(document.getElementById('echarts6587'));
         // 指定图表的配置项和数据
         var option = {
     title: {
