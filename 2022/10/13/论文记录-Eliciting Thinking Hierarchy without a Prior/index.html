@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.5k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -132,8 +132,15 @@
 </ol>
 <p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的问题和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
 <p><img src="https://github.com/likun1208/image/blob/master/fig2.png?raw=true" alt="圆圈问题的答案-预测矩阵"></p>
-<p>为了学习思维层次，我们提出了一个新颖的模型。我们的模型描述了不同复杂程度的人如何回答问题，更重要的是，预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。我们表明，鉴于回答者的答案和预测的联合分布，我们可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT），这可能是一个独立的兴趣。基于对NCT的分析，我们提供了两个简单的答案排序算法，并表明在适当的假设下，这些算法将学习潜在的思维层次，给定应答者的答案和预测的联合分布。</p>
- 
+<p>为了学习思维层次，本文提出了一个新颖的模型，它描述了不同复杂程度的人如何回答问题，和预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。本文表明，鉴于回答者的答案和预测的联合分布，可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT）。基于对NCT的分析，本文提供了两个简单的答案排序算法，并表明在适当的假设下，给定应答者的答案和预测的联合分布，这些算法将学习潜在的思维层次。</p>
+<blockquote>
+<p>直接一些来说，就是专业人士不仅能答对，还能知道业余者会犯什么错。</p>
+</blockquote>
+<p>最后，本文将答案和预测的联合分布表示为答案-预测矩阵，并在该矩阵上实现了基于NCT的答案排序算法。默认的排序算法是使矩阵上三角区域内的元素的平方和最大化，在变体的排序算法中，为了让不同的答案具有相同的复杂程度，答案被分割以压缩矩阵，该算法使压缩后的矩阵的上三角区域的平方和最大化。</p>
+<p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
+<p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略</p>
+<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
       <!-- reward -->
       
     </div>

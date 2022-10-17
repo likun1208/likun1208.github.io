@@ -39,8 +39,15 @@
 </ol>
 <p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的问题和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
 <p><img src="https://github.com/likun1208/image/blob/master/fig2.png?raw=true" alt="圆圈问题的答案-预测矩阵"></p>
-<p>为了学习思维层次，我们提出了一个新颖的模型。我们的模型描述了不同复杂程度的人如何回答问题，更重要的是，预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。我们表明，鉴于回答者的答案和预测的联合分布，我们可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT），这可能是一个独立的兴趣。基于对NCT的分析，我们提供了两个简单的答案排序算法，并表明在适当的假设下，这些算法将学习潜在的思维层次，给定应答者的答案和预测的联合分布。</p>
-]]></content>
+<p>为了学习思维层次，本文提出了一个新颖的模型，它描述了不同复杂程度的人如何回答问题，和预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。本文表明，鉴于回答者的答案和预测的联合分布，可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT）。基于对NCT的分析，本文提供了两个简单的答案排序算法，并表明在适当的假设下，给定应答者的答案和预测的联合分布，这些算法将学习潜在的思维层次。</p>
+<blockquote>
+<p>直接一些来说，就是专业人士不仅能答对，还能知道业余者会犯什么错。</p>
+</blockquote>
+<p>最后，本文将答案和预测的联合分布表示为答案-预测矩阵，并在该矩阵上实现了基于NCT的答案排序算法。默认的排序算法是使矩阵上三角区域内的元素的平方和最大化，在变体的排序算法中，为了让不同的答案具有相同的复杂程度，答案被分割以压缩矩阵，该算法使压缩后的矩阵的上三角区域的平方和最大化。</p>
+<p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
+<p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略</p>
+<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -1474,11 +1481,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts319" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5704" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts319'));
+        var myChart = echarts.init(document.getElementById('echarts5704'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1534,11 +1541,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7852" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6564" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7852'));
+        var myChart = echarts.init(document.getElementById('echarts6564'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1588,11 +1595,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2277" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6192" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2277'));
+        var myChart = echarts.init(document.getElementById('echarts6192'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7267,11 +7274,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts6587" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4732" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6587'));
+        var myChart = echarts.init(document.getElementById('echarts4732'));
         // 指定图表的配置项和数据
         var option = {
     title: {
