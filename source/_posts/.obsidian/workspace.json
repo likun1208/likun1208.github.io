@@ -1,0 +1,150 @@
+{
+  "main": {
+    "id": "14a30f015da43150",
+    "type": "split",
+    "children": [
+      {
+        "id": "e79fae9536096b4e",
+        "type": "tabs",
+        "dimension": 99.99999999999999,
+        "children": [
+          {
+            "id": "74461ebc059b422f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f420e0646157f564",
+    "type": "split",
+    "children": [
+      {
+        "id": "30638da60fd3459c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d2f862628380c3b8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "757f34b327524655",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8cd0b6fe1826bc01",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "79fb20bbeecb1939",
+    "type": "split",
+    "children": [
+      {
+        "id": "5da77e2203ed3d27",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "640222b84857f632",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f2ca66051fe98933",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "821a010db496cda2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "4d60559f4d94c0b0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 285.5
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "74461ebc059b422f",
+  "lastOpenFiles": [
+    "2022-10-17.md",
+    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+    "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
+    "论文记录-分片相关.md"
+  ]
+}
