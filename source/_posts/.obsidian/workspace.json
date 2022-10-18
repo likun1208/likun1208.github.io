@@ -6,7 +6,6 @@
       {
         "id": "e79fae9536096b4e",
         "type": "tabs",
-        "dimension": 99.99999999999999,
         "children": [
           {
             "id": "74461ebc059b422f",
@@ -70,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "79fb20bbeecb1939",
@@ -140,7 +139,7 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "74461ebc059b422f",
+  "active": "d2f862628380c3b8",
   "lastOpenFiles": [
     "2022-10-17.md",
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",

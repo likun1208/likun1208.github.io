@@ -76,6 +76,21 @@ description: 没有先验知识的情况下从众多答案中选择正确的那�
 
 ## Learning Thinking Hierarchy
 ### Thinking hierarchy
+给定一个问题`q`（例如圆圈问题），`T`表示思维类型的集合，`A`表示可能出现的回答的集合，这两个都是有限集，$\Delta_A$表示`A`的所有可能分布。
+
+**Generating answers**：说明不同思维类型的人是如何得出答案的。
+
+**定义2.1**：思维类型`W`的预言机：一个生成预言机的答案（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机）将问题映射到集合`A`中的（随机）答案。每一个类型`t`都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。
+
+每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型`t`的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。
+
+**例2.2**：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&0&0.2\\0&1&0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。
+
+**Generating predictions**：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型`t`的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t'}$等于$O_{t'}$，其中$\sum_{t'}p_{t\rightarrow t'}=1$。
+
+**Combination: answer-prediction joint distribution M**：`M`表示一个$|A|\times |A|$的矩阵，其中$M_{a,g}$是受访者回答`a`且预测他人回答`g`的概率，$\Lambda$表示一个$|T|\times |T|$的矩阵，其中$\Lambda_{t,t'}$是受访者为类型`t`且预测他人类型`t'`的概率。
+
+**例2.3**：在本例中，
 
 ### Non-negative Congruence Triangularization (NCT)
 
