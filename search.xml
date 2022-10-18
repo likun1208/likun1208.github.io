@@ -47,7 +47,15 @@
 <p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
 <p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
 <h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略</p>
-<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
+<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><p>给定一个问题<code>q</code>（例如圆圈问题），<code>T</code>表示思维类型的集合，<code>A</code>表示可能出现的回答的集合，这两个都是有限集，$\Delta_A$表示<code>A</code>的所有可能分布。</p>
+<p><strong>Generating answers</strong>：说明不同思维类型的人是如何得出答案的。</p>
+<p><strong>定义2.1</strong>：思维类型<code>W</code>的预言机：一个生成预言机的答案（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机）将问题映射到集合<code>A</code>中的（随机）答案。每一个类型<code>t</code>都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。</p>
+<p>每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型<code>t</code>的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。</p>
+<p><strong>例2.2</strong>：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&amp;0&amp;0.2\\0&amp;1&amp;0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。</p>
+<p><strong>Generating predictions</strong>：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型<code>t</code>的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t’}$等于$O_{t’}$，其中$\sum_{t’}p_{t\rightarrow t’}=1$。</p>
+<p><strong>Combination: answer-prediction joint distribution M</strong>：<code>M</code>表示一个$|A|\times |A|$的矩阵，其中$M_{a,g}$是受访者回答<code>a</code>且预测他人回答<code>g</code>的概率，$\Lambda$表示一个$|T|\times |T|$的矩阵，其中$\Lambda_{t,t’}$是受访者为类型<code>t</code>且预测他人类型<code>t&#39;</code>的概率。</p>
+<p><strong>例2.3</strong>：在本例中，</p>
+<h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -1481,11 +1489,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts5704" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4435" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5704'));
+        var myChart = echarts.init(document.getElementById('echarts4435'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1541,11 +1549,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6564" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts834" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6564'));
+        var myChart = echarts.init(document.getElementById('echarts834'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1595,11 +1603,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6192" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3561" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6192'));
+        var myChart = echarts.init(document.getElementById('echarts3561'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7274,11 +7282,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4732" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2036" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4732'));
+        var myChart = echarts.init(document.getElementById('echarts2036'));
         // 指定图表的配置项和数据
         var option = {
     title: {

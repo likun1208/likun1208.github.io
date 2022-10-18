@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
@@ -140,7 +140,15 @@
 <p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
 <p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
 <h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略</p>
-<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
+<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><p>给定一个问题<code>q</code>（例如圆圈问题），<code>T</code>表示思维类型的集合，<code>A</code>表示可能出现的回答的集合，这两个都是有限集，$\Delta_A$表示<code>A</code>的所有可能分布。</p>
+<p><strong>Generating answers</strong>：说明不同思维类型的人是如何得出答案的。</p>
+<p><strong>定义2.1</strong>：思维类型<code>W</code>的预言机：一个生成预言机的答案（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机）将问题映射到集合<code>A</code>中的（随机）答案。每一个类型<code>t</code>都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。</p>
+<p>每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型<code>t</code>的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。</p>
+<p><strong>例2.2</strong>：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&amp;0&amp;0.2\\0&amp;1&amp;0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。</p>
+<p><strong>Generating predictions</strong>：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型<code>t</code>的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t’}$等于$O_{t’}$，其中$\sum_{t’}p_{t\rightarrow t’}=1$。</p>
+<p><strong>Combination: answer-prediction joint distribution M</strong>：<code>M</code>表示一个$|A|\times |A|$的矩阵，其中$M_{a,g}$是受访者回答<code>a</code>且预测他人回答<code>g</code>的概率，$\Lambda$表示一个$|T|\times |T|$的矩阵，其中$\Lambda_{t,t’}$是受访者为类型<code>t</code>且预测他人类型<code>t&#39;</code>的概率。</p>
+<p><strong>例2.3</strong>：在本例中，</p>
+<h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2> 
       <!-- reward -->
       
     </div>
