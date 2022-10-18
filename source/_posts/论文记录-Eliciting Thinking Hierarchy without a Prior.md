@@ -84,15 +84,29 @@ description: 没有先验知识的情况下从众多答案中选择正确的那�
 
 每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型`t`的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。
 
-**例2.2**：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&0&0.2\\0&1&0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。
+**例2.2（运行示例）**：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&0&0.2\\0&1&0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。
 
 **Generating predictions**：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型`t`的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t'}$等于$O_{t'}$，其中$\sum_{t'}p_{t\rightarrow t'}=1$。
 
 **Combination: answer-prediction joint distribution M**：`M`表示一个$|A|\times |A|$的矩阵，其中$M_{a,g}$是受访者回答`a`且预测他人回答`g`的概率，$\Lambda$表示一个$|T|\times |T|$的矩阵，其中$\Lambda_{t,t'}$是受访者为类型`t`且预测他人类型`t'`的概率。
 
-**例2.3**：在本例中，
+**例2.3**：在本例中，当类型`0`的受访者进行预测时，她会以概率`1`再次运行预言机$O_0$。当类型`1`的受访者进行预测时，她会以`0.5`的概率运行预言机$O_0$，`0.5`的概率运行预言机$O_1$。且受访者有`0.7`的概率是类型`0`，`0.3`的概率是类型`1`。则$\Lambda=[\begin{matrix}p_0p_{0\rightarrow 0}&p_0p_{0\rightarrow 1}\\p_1p_{1\rightarrow 0}&p_1p_{1\rightarrow 1}\end{matrix}]=[\begin{matrix}0.7&0\\0.15&0.15\end{matrix}]$
+
+**观点2.4**：基于以上生成过程，$M=W^{\top}\Lambda W$。
+**证明**：对于每一个受访者，她回答`a`且预测`g`的概率为
+$$M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)$$
+我们对所有受访者可能的类型进行求和，假定她的类型为`t`，则她会运行预言机$O_t$来得到答案，且有概率$w_t(a)$得到答案`a`。我们对她所有可能为了预测而运行的预言机进行求和，假定她运行$O_{t'}$，则预测为`g`的概率是$w_{t'}(g)$。
+
+**关键假设**：上三角(`upper-triangular`)$\Lambda$. 我们假设，水平较低的人永远无法运行水平较高的预言机。类型$\pi:\lbrace 1,2,3,...,|T| \rbrace \mapsto T$的线性排序将排名位置映射到类型。例如，$\pi(1)\in T$是排序最高的类型。
+
+**假设2.5**：我们假设，在类型的适当排序$\pi$下，$\Lambda$是一个上三角矩阵。形式上而言，存在$\pi$使得$\forall i > j, \Lambda_{\pi(i),\pi(j)}=0$。任意能使$\Lambda$为上三角形式的$\pi$都是这些类型的一种有效的思维层次。
+
+在运行示例（例2.2）中，有效的思维层次是$\pi(1)$为类型1，$\pi(2)$为类型0。需要注意的是，在上面的假设中，并不要求$\forall i \leq j, \Lambda_{\pi(i),\pi(j)}>0$，当$\Lambda$为对角矩阵时，类型之间不能相互预测，而且同样复杂，因此任何排序都是有效的思维层次。
+
+给定由未知的`w`和$\Lambda$生成的`M`，算法可以寻找其思维层次，并输出矩阵$W^\ast$，它等价于行顺序是有效思维层次的行置换后的`W`。形式上而言，存在一种有效的思维层次$\pi$使得$W^\ast$的第`i`行是$W$的第$\pi(i)$行，即$w_i^\ast=w_{\pi(i)}$。
 
 ### Non-negative Congruence Triangularization (NCT)
+
 
 ### Inferring the thinking hierarchy with answer-prediction joint distribution M
 
