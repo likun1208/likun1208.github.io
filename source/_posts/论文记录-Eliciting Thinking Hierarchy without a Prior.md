@@ -106,7 +106,19 @@ $$M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\pri
 给定由未知的`w`和$\Lambda$生成的`M`，算法可以寻找其思维层次，并输出矩阵$W^\ast$，它等价于行顺序是有效思维层次的行置换后的`W`。形式上而言，存在一种有效的思维层次$\pi$使得$W^\ast$的第`i`行是$W$的第$\pi(i)$行，即$w_i^\ast=w_{\pi(i)}$。
 
 ### Non-negative Congruence Triangularization (NCT)
+在上述模型中，推断思维层次引出了一个新的矩阵分解问题，这个问题类似于对称非负矩阵分解问题(NMF)。
 
+**定义2.6**：非负同余三角化(NCT)。给定非负矩阵`M`，`NCT`旨在寻找非负矩阵`W`（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，使得$M=W^\top\Lambda W$。在一个基于 Frobenius 范数的近似版本中，给定矩阵`W`的集合，`NCT`旨在寻找非负矩阵`W`（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，从而最小化：
+$$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2$$
+得到的最小值被定义为：`M`关于$\mathcal{W}$的不适度(lack-of-fit)。
+
+类似NMF，要求结果的严格唯一性是不可能的。令$P_{\Lambda}$表示能使得$\Pi^\top\Lambda\Pi$仍然是上三角的置换矩阵的集合。如果$(W,\Lambda)$是一个解，则当`D`是所有元素为正数的对角矩阵且$\Pi\in P_\Lambda$时，$(\Pi^{-1}DW, \Pi^\top D^{-1}\Lambda D^{-1}\Pi)$也是一个解。我们将唯一性结果陈述如下，并在附录C中证明。
+
+**定理2.7**：唯一性。如果$|T|\leq |A|$，且`W`的`T`列包含一个置换正对角矩阵，则$M=W^\top\Lambda W$的`NCT`是唯一的，因为对于所有的$W'^\top\Lambda' W'=W^\top\Lambda W$，都存在一个正对角矩阵`D`和一个$|T|\times |T|$置换矩阵$\Pi\in P_\Lambda$，使得$W'=\Pi^{-1}DW$。
+
+当我们将`W`限制为半正交时，就可以在不需要寻找最优$\Lambda$的情况下得到`NCT`的简洁格式。$\mathcal{I}$是所有半正交矩阵`W`的集合，其中`W`的每一列有且仅有一个非零元素，且$WW^\top=I$。例如，例2.2中的矩阵`W`可以被标准化为半正交矩阵，下面的引理来自于 Frobenius 范数的扩展，我们在附录C中进行证明。
+
+**引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
 
 ### Inferring the thinking hierarchy with answer-prediction joint distribution M
 
