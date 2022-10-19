@@ -61,7 +61,40 @@
 <p><strong>假设2.5</strong>：我们假设，在类型的适当排序$\pi$下，$\Lambda$是一个上三角矩阵。形式上而言，存在$\pi$使得$\forall i &gt; j, \Lambda_{\pi(i),\pi(j)}=0$。任意能使$\Lambda$为上三角形式的$\pi$都是这些类型的一种有效的思维层次。</p>
 <p>在运行示例（例2.2）中，有效的思维层次是$\pi(1)$为类型1，$\pi(2)$为类型0。需要注意的是，在上面的假设中，并不要求$\forall i \leq j, \Lambda_{\pi(i),\pi(j)}&gt;0$，当$\Lambda$为对角矩阵时，类型之间不能相互预测，而且同样复杂，因此任何排序都是有效的思维层次。</p>
 <p>给定由未知的<code>w</code>和$\Lambda$生成的<code>M</code>，算法可以寻找其思维层次，并输出矩阵$W^\ast$，它等价于行顺序是有效思维层次的行置换后的<code>W</code>。形式上而言，存在一种有效的思维层次$\pi$使得$W^\ast$的第<code>i</code>行是$W$的第$\pi(i)$行，即$w_i^\ast=w_{\pi(i)}$。</p>
-<h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
+<h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><p>在上述模型中，推断思维层次引出了一个新的矩阵分解问题，这个问题类似于对称非负矩阵分解问题(NMF)。</p>
+<p><strong>定义2.6</strong>：非负同余三角化(NCT)。给定非负矩阵<code>M</code>，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，使得$M=W^\top\Lambda W$。在一个基于 Frobenius 范数的近似版本中，给定矩阵<code>W</code>的集合，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，从而最小化：</p>
+<script type="math/tex; mode=display">\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2</script><p>得到的最小值被定义为：<code>M</code>关于$\mathcal{W}$的不适度(lack-of-fit)。</p>
+<p>类似NMF，要求结果的严格唯一性是不可能的。令$P_{\Lambda}$表示能使得$\Pi^\top\Lambda\Pi$仍然是上三角的置换矩阵的集合。如果$(W,\Lambda)$是一个解，则当<code>D</code>是所有元素为正数的对角矩阵且$\Pi\in P_\Lambda$时，$(\Pi^{-1}DW, \Pi^\top D^{-1}\Lambda D^{-1}\Pi)$也是一个解。我们将唯一性结果陈述如下，并在附录C中证明。</p>
+<p><strong>定理2.7</strong>：唯一性。如果$|T|\leq |A|$，且<code>W</code>的<code>T</code>列包含一个置换正对角矩阵，则$M=W^\top\Lambda W$的<code>NCT</code>是唯一的，因为对于所有的$W’^\top\Lambda’ W’=W^\top\Lambda W$，都存在一个正对角矩阵<code>D</code>和一个$|T|\times |T|$置换矩阵$\Pi\in P_\Lambda$，使得$W’=\Pi^{-1}DW$。</p>
+<p>当我们将<code>W</code>限制为半正交时，就可以在不需要寻找最优$\Lambda$的情况下得到<code>NCT</code>的简洁格式。$\mathcal{I}$是所有半正交矩阵<code>W</code>的集合，其中<code>W</code>的每一列有且仅有一个非零元素，且$WW^\top=I$。例如，例2.2中的矩阵<code>W</code>可以被标准化为半正交矩阵，下面的引理来自于 Frobenius 范数的扩展，我们在附录C中进行证明。</p>
+<p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right|_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><p>给定<code>M</code>，推断其思维层次，等价于求解<code>NCT</code>问题。虽然我们并没有<code>M</code>，但我们可以获取其代理。为了简化实际应用，我们基于引理2.8引入了两个简单的排序算法。排序算法以<code>M</code>为输入，输出所有回答的线性排序结果$\pi:\lbrace 1,2,…,|A| \rbrace \mapsto A$，它表示了排序位置到回答的映射。</p>
+<p><strong>回答排序算法（默认）</strong>：记作AR(M)，该算法计算</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Pi}^* \leftarrow \arg \max _{\Pi \in \mathcal{P}} \sum_{i \leq j}\left(\boldsymbol{\Pi} \mathbf{M} \boldsymbol{\Pi}^{\top}\right)_{i, j}^2</script><p>其中，$\mathcal{P}$是所有$|A|\times |A|$的置换矩阵的集合。对于所有<code>i</code>，在每一个置换矩阵$\Pi$和一个线性顺序$\pi:\Pi_{i,\pi(i)}=1$ 之间都存在一个一对一的映射。因此，最优$\Pi^\ast$会引出所有回答的最优排序，而默认算法也可以表示为：</p>
+<script type="math/tex; mode=display">
+\pi^* \leftarrow \arg \max _\pi \sum_{i \leq j} M_{\pi(i), \pi(j)}^2</script><p>默认算法隐含假设$|T|=|A|$，且所有预言机都是确定的。为了允许$|T|\leq|A|$和不确定的预言机，我们引入了一个变体，将$\mathcal{P}$推广到半正交矩阵$\mathcal{I}$的一个子集。每一个$|T|\times |A|$的半正交矩阵<code>W</code>表示一个硬聚类，每一类$t\in T$包含了所有使得$W_{t,a}&gt;0$成立的回答。例如，例2.2中的矩阵<code>W</code>可以被标准化为半正交矩阵，并表示一个硬聚类<code>{4},{6,3}</code>。因此，变体算法将把回答划分为多个聚类，并为之分配一个层次结构。</p>
+<p><strong>回答排序算法（变体）</strong>：记作$AR^{+}(M,\mathcal{W})$，该算法计算</p>
+<script type="math/tex; mode=display">
+\mathbf{W}^{*} \leftarrow \arg \max _{\mathbf{W} \in \mathcal{I}} \sum_{i \leq j}\left(\mathbf{W M W}^{\top}\right)_{i, j}^{2}</script><p>其中，$\mathcal{W}\subset \mathcal{I}$。$\mathbf{W}^{\ast}$被标准化为每行之和是1。</p>
+<p>$\mathbf{W}^{\ast} \Rightarrow$ Answer rank  输出$\mathbf{W}^{\ast}$表示了所有回答的硬聚类。我们按照如下方式对所有回答进行排序：对于任意$i&lt;j$，聚类<code>i</code>中的回答比聚类<code>j</code>中的回答有着更高的排序。对于所有<code>i</code>，任意两个聚类<code>i</code>中的回答<code>a</code>和<code>a&#39;</code>，如果$W_{i,a}^\ast &gt;W_{i,a’}^\ast$，则<code>a</code>排序高于<code>a&#39;</code>。</p>
+<p><strong>理论论证</strong>：当<code>M</code>完全符合模型约束条件，即隐含的<code>W</code>为置换矩阵或硬聚类时，我们的算法就找到了思维层次。否则，我们的算法会找到由 Frobenius 范数度量的“最接近”的解。</p>
+<p><strong>定理2.9</strong>：当存在$\Pi_0 \in \mathcal{P}$和非负上三角矩阵$\Lambda_0$使得$\mathbf{M}=\boldsymbol{\Pi}_{0}^{\top} \boldsymbol{\Lambda}_{0} \boldsymbol{\Pi}_{0}$，算法AR(M)可以找到思维层次。一般来说，AR(M)会输出$\boldsymbol{\Pi}^\ast$，其中$\boldsymbol{\Pi}^\ast,\Lambda^\ast = Up(\boldsymbol{\Pi}^\ast M {\boldsymbol{\Pi}^\ast}^\top)$是$\arg \min _{\Pi \in \mathcal{P}, \Lambda}\left|\mathbf{M}-\boldsymbol{\Pi}^{\top} \Lambda \Pi\right|_{F}^{2}$的一个解。把$\mathcal{P}$换成$\mathcal{W}\subset \mathcal{I}$，把AR(M)换成$AR^{+}(M,\mathcal{W})$，上述语句仍然成立。</p>
+<p>证明仍然在附录C。</p>
+<h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><p>在实践中，我们没有完美的<code>M</code>。我们使用下面的开放式反应范式来获得<code>M</code>的代理。</p>
+<p><strong>回答-预测范式</strong>：受访者会被问两个问题：</p>
+<ol>
+<li>你的回答是什么？</li>
+<li>你认为其他人会回答什么？</li>
+</ol>
+<p>在圆圈问题中，可能的反馈是：“回答4，预测3”、“回答3，预测6，9，1”等。我们用<code>A</code>表示所有回答的集合。在圆圈问题的例子中，$A=\lbrace 1,2,3,4,6,9 \rbrace$。我们同样允许受访者不进行预测或者预测多个值。</p>
+<p><strong>回答-预测矩阵</strong>：我们聚合反馈并通过回答-预测矩阵将其可视化。回答-预测矩阵<code>A</code>是一个$|A|\times |A|$的方阵，其中$|A|$是受访者提供的不同答案的数量。每一项$A_{a,g}, a,g\in A$是回答<code>a</code>且预测<code>g</code>的受访者的数量。</p>
+<p>我们将证明，在适当的假设下，回答-预测矩阵<code>A</code>的期望与<code>M</code>成正比。首先，为了便于分析，我们假设每个受访者的预测都是独立样本。其次，由于我们允许人们有选择地提供预测，因此我们还需要假设每个受访者愿意提供的预测数量与她的类型和答案无关。我们将形式化的结果陈述如下，并在附录 C中进行证明。</p>
+<p><strong>定理2.10</strong>：当每一个受访者的预测都是独立样本，并且她给出的预测数量与她的类型和答案无关时，回答-预测矩阵<code>A</code> 的期望与<code>M</code>成正比。</p>
+<h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><p>我们进行了四组研究，分别是：研究1(35道数学题) ，研究2(30道围棋题) ，研究3(44道常识题)和研究4(43道汉字发音题)。</p>
+<p><strong>数据收集</strong>：</p>
+<p><strong>数据处理</strong>：</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -1495,11 +1528,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts6025" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3615" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6025'));
+        var myChart = echarts.init(document.getElementById('echarts3615'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1555,11 +1588,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts32" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1592" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts32'));
+        var myChart = echarts.init(document.getElementById('echarts1592'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1609,11 +1642,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9331" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5420" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9331'));
+        var myChart = echarts.init(document.getElementById('echarts5420'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7288,11 +7321,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts7364" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8925" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7364'));
+        var myChart = echarts.init(document.getElementById('echarts8925'));
         // 指定图表的配置项和数据
         var option = {
     title: {
