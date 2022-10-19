@@ -127,11 +127,47 @@ $$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mat
 $$
 \boldsymbol{\Pi}^* \leftarrow \arg \max _{\Pi \in \mathcal{P}} \sum_{i \leq j}\left(\boldsymbol{\Pi} \mathbf{M} \boldsymbol{\Pi}^{\top}\right)_{i, j}^2
 $$
-其中，
+其中，$\mathcal{P}$是所有$|A|\times |A|$的置换矩阵的集合。对于所有`i`，在每一个置换矩阵$\Pi$和一个线性顺序$\pi:\Pi_{i,\pi(i)}=1$ 之间都存在一个一对一的映射。因此，最优$\Pi^\ast$会引出所有回答的最优排序，而默认算法也可以表示为：
+$$
+\pi^* \leftarrow \arg \max _\pi \sum_{i \leq j} M_{\pi(i), \pi(j)}^2
+$$
+默认算法隐含假设$|T|=|A|$，且所有预言机都是确定的。为了允许$|T|\leq|A|$和不确定的预言机，我们引入了一个变体，将$\mathcal{P}$推广到半正交矩阵$\mathcal{I}$的一个子集。每一个$|T|\times |A|$的半正交矩阵`W`表示一个硬聚类，每一类$t\in T$包含了所有使得$W_{t,a}>0$成立的回答。例如，例2.2中的矩阵`W`可以被标准化为半正交矩阵，并表示一个硬聚类`{4},{6,3}`。因此，变体算法将把回答划分为多个聚类，并为之分配一个层次结构。
+
+**回答排序算法（变体）**：记作$AR^{+}(M,\mathcal{W})$，该算法计算
+$$
+\mathbf{W}^{*} \leftarrow \arg \max _{\mathbf{W} \in \mathcal{I}} \sum_{i \leq j}\left(\mathbf{W M W}^{\top}\right)_{i, j}^{2} 
+$$
+其中，$\mathcal{W}\subset \mathcal{I}$。$\mathbf{W}^{\ast}$被标准化为每行之和是1。
+
+$\mathbf{W}^{\ast} \Rightarrow$ Answer rank  输出$\mathbf{W}^{\ast}$表示了所有回答的硬聚类。我们按照如下方式对所有回答进行排序：对于任意$i<j$，聚类`i`中的回答比聚类`j`中的回答有着更高的排序。对于所有`i`，任意两个聚类`i`中的回答`a`和`a'`，如果$W_{i,a}^\ast >W_{i,a'}^\ast$，则`a`排序高于`a'`。
+
+**理论论证**：当`M`完全符合模型约束条件，即隐含的`W`为置换矩阵或硬聚类时，我们的算法就找到了思维层次。否则，我们的算法会找到由 Frobenius 范数度量的“最接近”的解。
+
+**定理2.9**：当存在$\Pi_0 \in \mathcal{P}$和非负上三角矩阵$\Lambda_0$使得$\mathbf{M}=\boldsymbol{\Pi}_{0}^{\top} \boldsymbol{\Lambda}_{0} \boldsymbol{\Pi}_{0}$，算法AR(M)可以找到思维层次。一般来说，AR(M)会输出$\boldsymbol{\Pi}^\ast$，其中$\boldsymbol{\Pi}^\ast,\Lambda^\ast = Up(\boldsymbol{\Pi}^\ast M {\boldsymbol{\Pi}^\ast}^\top)$是$\arg \min _{\Pi \in \mathcal{P}, \Lambda}\left\|\mathbf{M}-\boldsymbol{\Pi}^{\top} \Lambda \Pi\right\|_{F}^{2}$的一个解。把$\mathcal{P}$换成$\mathcal{W}\subset \mathcal{I}$，把AR(M)换成$AR^{+}(M,\mathcal{W})$，上述语句仍然成立。
+
+证明仍然在附录C。
 
 ### A proxy for answer-prediction joint distribution M
+在实践中，我们没有完美的`M`。我们使用下面的开放式反应范式来获得`M`的代理。
+
+**回答-预测范式**：受访者会被问两个问题：
+1. 你的回答是什么？
+2. 你认为其他人会回答什么？
+
+在圆圈问题中，可能的反馈是：“回答4，预测3”、“回答3，预测6，9，1”等。我们用`A`表示所有回答的集合。在圆圈问题的例子中，$A=\lbrace 1,2,3,4,6,9 \rbrace$。我们同样允许受访者不进行预测或者预测多个值。
+
+**回答-预测矩阵**：我们聚合反馈并通过回答-预测矩阵将其可视化。回答-预测矩阵`A`是一个$|A|\times |A|$的方阵，其中$|A|$是受访者提供的不同答案的数量。每一项$A_{a,g}, a,g\in A$是回答`a`且预测`g`的受访者的数量。
+
+我们将证明，在适当的假设下，回答-预测矩阵`A`的期望与`M`成正比。首先，为了便于分析，我们假设每个受访者的预测都是独立样本。其次，由于我们允许人们有选择地提供预测，因此我们还需要假设每个受访者愿意提供的预测数量与她的类型和答案无关。我们将形式化的结果陈述如下，并在附录 C中进行证明。
+
+**定理2.10**：当每一个受访者的预测都是独立样本，并且她给出的预测数量与她的类型和答案无关时，回答-预测矩阵`A` 的期望与`M`成正比。
 
 ## Studies
+我们进行了四组研究，分别是：研究1(35道数学题) ，研究2(30道围棋题) ，研究3(44道常识题)和研究4(43道汉字发音题)。
+
+**数据收集**：
+
+**数据处理**：
 
 ### Results
 
