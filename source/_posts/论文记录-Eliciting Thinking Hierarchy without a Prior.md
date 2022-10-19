@@ -121,6 +121,13 @@ $$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mat
 **引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
 
 ### Inferring the thinking hierarchy with answer-prediction joint distribution M
+给定`M`，推断其思维层次，等价于求解`NCT`问题。虽然我们并没有`M`，但我们可以获取其代理。为了简化实际应用，我们基于引理2.8引入了两个简单的排序算法。排序算法以`M`为输入，输出所有回答的线性排序结果$\pi:\lbrace 1,2,...,|A| \rbrace \mapsto A$，它表示了排序位置到回答的映射。
+
+**回答排序算法（默认）**：记作AR(M)，该算法计算
+$$
+\boldsymbol{\Pi}^* \leftarrow \arg \max _{\Pi \in \mathcal{P}} \sum_{i \leq j}\left(\boldsymbol{\Pi} \mathbf{M} \boldsymbol{\Pi}^{\top}\right)_{i, j}^2
+$$
+其中，
 
 ### A proxy for answer-prediction joint distribution M
 
