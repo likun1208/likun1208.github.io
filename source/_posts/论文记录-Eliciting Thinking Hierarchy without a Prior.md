@@ -97,6 +97,25 @@ description: 没有先验知识的情况下从众多答案中选择正确的那�
 $$M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)$$
 我们对所有受访者可能的类型进行求和，假定她的类型为`t`，则她会运行预言机$O_t$来得到答案，且有概率$w_t(a)$得到答案`a`。我们对她所有可能为了预测而运行的预言机进行求和，假定她运行$O_{t'}$，则预测为`g`的概率是$w_{t'}(g)$。
 
+一些补充说明：这里从证明到2.4的过程我其实没完全搞明白，姑且写一下理解：
+
+首先$w_t(a)$就是矩阵`W`的第`t`行第`a`列的元素，中间的$p_tp_{t\rightarrow t'}$是矩阵$\Lambda$的第`t`行第`t'`列的元素，最后的$w_{t'}(g)$是第`t'`行第`g`列的元素。
+
+接下来回顾一下矩阵相乘的公式：
+矩阵`A`和矩阵`B`相乘得到矩阵`C`，其计算方法是：
+$$
+C_{i,j} = \sum_{k=0}A_{i,k}B_{k,j}
+$$
+由此可以推导出，三个矩阵连乘法的计算方式：
+$$
+D_{i,m}=\sum_{j=0}(\sum_{k=0}A_{i,k}B_{k,j})C_{j,m}=\sum_{j=0,k=0}A_{i,k}B_{k,j}C_{j,m}
+$$
+回到前面2.4的公式来看，
+$$
+M_{a, g}=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}}W_{t,a}\Lambda_{t,t'}W_{t',g}
+$$
+显然，如果能把第一个$W_{t,a}$的行列交换一下，这个公式就可以改写为三个矩阵连乘了，而这恰好就是矩阵转置，即$W_{t,a}=W_{a,t}^\top$。由此，就可以得出$M=W^{\top}\Lambda W$。
+
 **关键假设**：上三角(`upper-triangular`)$\Lambda$. 我们假设，水平较低的人永远无法运行水平较高的预言机。类型$\pi:\lbrace 1,2,3,...,|T| \rbrace \mapsto T$的线性排序将排名位置映射到类型。例如，$\pi(1)\in T$是排序最高的类型。
 
 **假设2.5**：我们假设，在类型的适当排序$\pi$下，$\Lambda$是一个上三角矩阵。形式上而言，存在$\pi$使得$\forall i > j, \Lambda_{\pi(i),\pi(j)}=0$。任意能使$\Lambda$为上三角形式的$\pi$都是这些类型的一种有效的思维层次。
@@ -109,7 +128,7 @@ $$M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\pri
 在上述模型中，推断思维层次引出了一个新的矩阵分解问题，这个问题类似于对称非负矩阵分解问题(NMF)。
 
 **定义2.6**：非负同余三角化(NCT)。给定非负矩阵`M`，`NCT`旨在寻找非负矩阵`W`（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，使得$M=W^\top\Lambda W$。在一个基于 Frobenius 范数的近似版本中，给定矩阵`W`的集合，`NCT`旨在寻找非负矩阵`W`（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，从而最小化：
-$$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2$$
+$$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$$
 得到的最小值被定义为：`M`关于$\mathcal{W}$的不适度(lack-of-fit)。
 
 类似NMF，要求结果的严格唯一性是不可能的。令$P_{\Lambda}$表示能使得$\Pi^\top\Lambda\Pi$仍然是上三角的置换矩阵的集合。如果$(W,\Lambda)$是一个解，则当`D`是所有元素为正数的对角矩阵且$\Pi\in P_\Lambda$时，$(\Pi^{-1}DW, \Pi^\top D^{-1}\Lambda D^{-1}\Pi)$也是一个解。我们将唯一性结果陈述如下，并在附录C中证明。
@@ -118,7 +137,7 @@ $$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mat
 
 当我们将`W`限制为半正交时，就可以在不需要寻找最优$\Lambda$的情况下得到`NCT`的简洁格式。$\mathcal{I}$是所有半正交矩阵`W`的集合，其中`W`的每一列有且仅有一个非零元素，且$WW^\top=I$。例如，例2.2中的矩阵`W`可以被标准化为半正交矩阵，下面的引理来自于 Frobenius 范数的扩展，我们在附录C中进行证明。
 
-**引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
+**引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
 
 ### Inferring the thinking hierarchy with answer-prediction joint distribution M
 给定`M`，推断其思维层次，等价于求解`NCT`问题。虽然我们并没有`M`，但我们可以获取其代理。为了简化实际应用，我们基于引理2.8引入了两个简单的排序算法。排序算法以`M`为输入，输出所有回答的线性排序结果$\pi:\lbrace 1,2,...,|A| \rbrace \mapsto A$，它表示了排序位置到回答的映射。
@@ -228,3 +247,19 @@ $\mathbf{W}^{\ast} \Rightarrow$ Answer rank  输出$\mathbf{W}^{\ast}$表示了�
 1. 本文提出了思维层次模型和无先验情况下寻找思维层次的方法
 2. 实验说明本文方法的优越性
 3. 方法可用于众包的语音识别，图像描述，植物物种识别等
+
+## 附录
+## 算法流程
+#### 默认算法
+1. 总体思路是挨个看哪种顺序得到的上三角平方和最大
+2. 利用了动态规划的思想，先把矩阵拆成2维的，看2维情况下怎么排列最合适，然后在每一个2维的左上增加三维，看3维怎么排列最合适。
+
+这个过程如下图所示：
+![默认算法示意图](https://github.com/likun1208/image/blob/master/ETHP-11.png?raw=true)
+
+#### 变体算法
+
+### 证明
+#### 引理2.8的证明
+**引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
+
