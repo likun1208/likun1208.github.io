@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">7.1k</span>
+            <span class="post-count">8k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">26 分钟</span>
+            <span class="post-count">30 分钟</span>
         </span>
     </span>
 </div>
@@ -118,10 +118,10 @@
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>群体智慧在面对系统性错误的时候往往会得出错误结果</p>
 <p>一个例子：圆A的半径是圆B半径的1/3，圆A绕着圆B转了一圈后回到起点。圆A总共会旋转多少次？</p>
 <p><img src="https://github.com/likun1208/image/blob/master/2109.jpg?raw=true" alt="圆圈问题"></p>
-<p>根据实验，有11个人认为是1次，8个人选2次，134个人选3次，16个人选4次，27个人选6次，21个人选9次。显然在多数一致的众包任务中，这个题的答案会被认为是3次，单其实正确答案是4次，只有16个人选。</p>
+<p>根据实验，有11个人认为是1次，8个人选2次，134个人选3次，16个人选4次，27个人选6次，21个人选9次。显然在多数一致的众包任务中，这个题的答案会被认为是3次，但其实正确答案是4次，只有16个人选。</p>
 <p>如果事先了解所有受访者的先验水平，我们也许能根据大家的专业水平来确定正确答案，但是在大多数众包场景中，往往没这样的先验知识。</p>
 <p>为了解决上述问题，Prelc等人[15]提出了一种创新的方法，他们准备了多个选择，要求受访者挑选一个选项，并预测其他人的选择分布。他们使用预测结果来构建一个关于选择的先验分布，然后选择比先验分布更受欢迎的选择，这样就纠正了偏见（是2017年的nature）。许多其他工作[10, 5, 16]发展了使用先验或预测来纠正偏差的想法。</p>
-<p>然而，首先，将以前的方法应用于运行中的例子，即圆圈问题，是不适用的，因为它们需要先验知识来设计选择。让受访者报告所有选择的整体分布也很费力。第二，以前的工作主要是利用预测来纠正偏见，而利用他们的预测来建立一个思维层次是内在的有趣。这也导致了答案之间的层次性。著名的认知分层理论（CHT）[21, 22, 3]在人们玩游戏的场景中建立了一个思维理论，这样我们就可以学习不同复杂程度的玩家的行动。然而，CHT只是为游戏理论环境设计的。我们对在一般的问题解决场景中建立一个思维理论感到好奇。该问题的关键在于，水平较高的人知道水平较低的人的想法，但反之则不然[3, 9]。我们想应用这个见解来学习不同复杂程度的人的答案，称为思维层次，而不需要任何先验。</p>
+<p>然而，首先，将以前的方法应用于运行中的例子，即圆圈问题，是不适用的，因为它们需要先验知识来设计选择。让受访者报告所有选择的整体分布也很费力。第二，以前的工作主要是利用预测来纠正偏见，而利用他们的预测来建立一个思维层次是内在的问题。这也导致了答案之间的层次性。著名的认知分层理论（CHT）[21, 22, 3]在人们玩游戏的场景中建立了一个思维理论，这样我们就可以学习不同复杂程度的玩家的行动。然而，CHT只是为游戏理论环境设计的。我们对在一般的问题解决场景中建立一个思维理论感到好奇。该问题的关键在于，水平较高的人知道水平较低的人的想法，但反之则不然[3, 9]。我们想应用这个见解来学习不同复杂程度的人的答案，称为思维层次，而不需要任何先验。</p>
 <p><strong>关键问题</strong>：我们的目标是建立一个实用的方法，在没有任何先验的情况下学习思维层次。基于思维层次，我们可以对答案进行排序，这样，排名较高的答案，可能不被大多数人支持，但是来自更可靠的人。</p>
 <p>层次性思维方式的优势除了在于选出正确答案以外，还有以下几点：</p>
 <ol>
@@ -130,7 +130,7 @@
 <li><p>答案的层次性有助于更好地理解人们的思维方式，尤其当我们试图征求人们对某项政策的意见时这一点更重要。</p>
 </li>
 </ol>
-<p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的问题和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
+<p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的回答和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
 <p><img src="https://github.com/likun1208/image/blob/master/fig2.png?raw=true" alt="圆圈问题的答案-预测矩阵"></p>
 <p>为了学习思维层次，本文提出了一个新颖的模型，它描述了不同复杂程度的人如何回答问题，和预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。本文表明，鉴于回答者的答案和预测的联合分布，可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT）。基于对NCT的分析，本文提供了两个简单的答案排序算法，并表明在适当的假设下，给定应答者的答案和预测的联合分布，这些算法将学习潜在的思维层次。</p>
 <blockquote>
@@ -139,10 +139,16 @@
 <p>最后，本文将答案和预测的联合分布表示为答案-预测矩阵，并在该矩阵上实现了基于NCT的答案排序算法。默认的排序算法是使矩阵上三角区域内的元素的平方和最大化，在变体的排序算法中，为了让不同的答案具有相同的复杂程度，答案被分割以压缩矩阵，该算法使压缩后的矩阵的上三角区域的平方和最大化。</p>
 <p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
 <p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
-<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略，以下是从他们公众号的介绍里复制来的内容：</p>
+<p>正如前文所言，在没有先验的情况下，很难对这些答案采取支持度以外的排序方式。Prelec [1], Prelec et al. [2] 通过在单选题中额外询问回答者对各个选项分布的预测，进而构造先验信息，并汇总答案为支持度“令人意外地高”的选项，并实验证明该方法比多数决有效。Rothschild and Wolfers [3] 在民调时除了询问“你会选谁”，还额外询问选民“你觉得谁会得到更多的支持”，并实验证明额外信息具有更高的信息量。</p>
+<p>类似地，我们采用了一套基于填空题的问卷调查方式：  </p>
+<p><strong>“你的答案是？”</strong></p>
+<p><strong>“你觉得别人会答什么？”</strong>  </p>
+<p>与之前工作不同，在以上框架下，询问者无需任何先验设计选项，回答者无需提供分布信息。针对答案的汇总，Kong and Schoenebeck [4] 提出一个猜想：“专业度高的人可以预测专业度低的答案，反之不然。”  </p>
+<p>这个猜想和行为经济学有限理性理论中的等级 k（Level-k）[5] 以及认知等级（Cognitive Hierarchy）[6] 理论相似，都认为人在逻辑思考推理中存在不同的等级。等级 k 和认知等级理论认为高等级知道低等级的存在并采取针对低等级的最优策略。</p>
 <h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><p>给定一个问题<code>q</code>（例如圆圈问题），<code>T</code>表示思维类型的集合，<code>A</code>表示可能出现的回答的集合，这两个都是有限集，$\Delta_A$表示<code>A</code>的所有可能分布。</p>
 <p><strong>Generating answers</strong>：说明不同思维类型的人是如何得出答案的。</p>
-<p><strong>定义2.1</strong>：思维类型<code>W</code>的预言机：一个生成预言机的答案（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机）将问题映射到集合<code>A</code>中的（随机）答案。每一个类型<code>t</code>都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。</p>
+<p><strong>定义2.1</strong>：思维类型的预言机<code>W</code>：一个生成答案的预言机（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机，感觉是后者）将问题映射到集合<code>A</code>中的（随机）答案。每一个类型<code>t</code>都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。</p>
 <p>每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型<code>t</code>的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。</p>
 <p><strong>例2.2（运行示例）</strong>：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&amp;0&amp;0.2\\0&amp;1&amp;0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。</p>
 <p><strong>Generating predictions</strong>：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型<code>t</code>的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t’}$等于$O_{t’}$，其中$\sum_{t’}p_{t\rightarrow t’}=1$。</p>
@@ -150,17 +156,27 @@
 <p><strong>例2.3</strong>：在本例中，当类型<code>0</code>的受访者进行预测时，她会以概率<code>1</code>再次运行预言机$O_0$。当类型<code>1</code>的受访者进行预测时，她会以<code>0.5</code>的概率运行预言机$O_0$，<code>0.5</code>的概率运行预言机$O_1$。且受访者有<code>0.7</code>的概率是类型<code>0</code>，<code>0.3</code>的概率是类型<code>1</code>。则$\Lambda=[\begin{matrix}p_0p_{0\rightarrow 0}&amp;p_0p_{0\rightarrow 1}\\p_1p_{1\rightarrow 0}&amp;p_1p_{1\rightarrow 1}\end{matrix}]=[\begin{matrix}0.7&amp;0\\0.15&amp;0.15\end{matrix}]$</p>
 <p><strong>观点2.4</strong>：基于以上生成过程，$M=W^{\top}\Lambda W$。<br><strong>证明</strong>：对于每一个受访者，她回答<code>a</code>且预测<code>g</code>的概率为</p>
 <script type="math/tex; mode=display">M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)</script><p>我们对所有受访者可能的类型进行求和，假定她的类型为<code>t</code>，则她会运行预言机$O_t$来得到答案，且有概率$w_t(a)$得到答案<code>a</code>。我们对她所有可能为了预测而运行的预言机进行求和，假定她运行$O_{t’}$，则预测为<code>g</code>的概率是$w_{t’}(g)$。</p>
+<p>一些补充说明：这里从证明到2.4的过程我其实没完全搞明白，姑且写一下理解：</p>
+<p>首先$w_t(a)$就是矩阵<code>W</code>的第<code>t</code>行第<code>a</code>列的元素，中间的$p_tp_{t\rightarrow t’}$是矩阵$\Lambda$的第<code>t</code>行第<code>t&#39;</code>列的元素，最后的$w_{t’}(g)$是第<code>t&#39;</code>行第<code>g</code>列的元素。</p>
+<p>接下来回顾一下矩阵相乘的公式：<br>矩阵<code>A</code>和矩阵<code>B</code>相乘得到矩阵<code>C</code>，其计算方法是：</p>
+<script type="math/tex; mode=display">
+C_{i,j} = \sum_{k=0}A_{i,k}B_{k,j}</script><p>由此可以推导出，三个矩阵连乘法的计算方式：</p>
+<script type="math/tex; mode=display">
+D_{i,m}=\sum_{j=0}(\sum_{k=0}A_{i,k}B_{k,j})C_{j,m}=\sum_{j=0,k=0}A_{i,k}B_{k,j}C_{j,m}</script><p>回到前面2.4的公式来看，</p>
+<script type="math/tex; mode=display">
+M_{a, g}=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}}W_{t,a}\Lambda_{t,t'}W_{t',g}</script><p>显然，如果能把第一个$W_{t,a}$的行列交换一下，这个公式就可以改写为三个矩阵连乘了，而这恰好就是矩阵转置，即$W_{t,a}=W_{a,t}^\top$。由此，就可以得出$M=W^{\top}\Lambda W$。</p>
 <p><strong>关键假设</strong>：上三角(<code>upper-triangular</code>)$\Lambda$. 我们假设，水平较低的人永远无法运行水平较高的预言机。类型$\pi:\lbrace 1,2,3,…,|T| \rbrace \mapsto T$的线性排序将排名位置映射到类型。例如，$\pi(1)\in T$是排序最高的类型。</p>
 <p><strong>假设2.5</strong>：我们假设，在类型的适当排序$\pi$下，$\Lambda$是一个上三角矩阵。形式上而言，存在$\pi$使得$\forall i &gt; j, \Lambda_{\pi(i),\pi(j)}=0$。任意能使$\Lambda$为上三角形式的$\pi$都是这些类型的一种有效的思维层次。</p>
 <p>在运行示例（例2.2）中，有效的思维层次是$\pi(1)$为类型1，$\pi(2)$为类型0。需要注意的是，在上面的假设中，并不要求$\forall i \leq j, \Lambda_{\pi(i),\pi(j)}&gt;0$，当$\Lambda$为对角矩阵时，类型之间不能相互预测，而且同样复杂，因此任何排序都是有效的思维层次。</p>
 <p>给定由未知的<code>w</code>和$\Lambda$生成的<code>M</code>，算法可以寻找其思维层次，并输出矩阵$W^\ast$，它等价于行顺序是有效思维层次的行置换后的<code>W</code>。形式上而言，存在一种有效的思维层次$\pi$使得$W^\ast$的第<code>i</code>行是$W$的第$\pi(i)$行，即$w_i^\ast=w_{\pi(i)}$。</p>
 <h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><p>在上述模型中，推断思维层次引出了一个新的矩阵分解问题，这个问题类似于对称非负矩阵分解问题(NMF)。</p>
 <p><strong>定义2.6</strong>：非负同余三角化(NCT)。给定非负矩阵<code>M</code>，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，使得$M=W^\top\Lambda W$。在一个基于 Frobenius 范数的近似版本中，给定矩阵<code>W</code>的集合，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，从而最小化：</p>
-<script type="math/tex; mode=display">\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_F^2</script><p>得到的最小值被定义为：<code>M</code>关于$\mathcal{W}$的不适度(lack-of-fit)。</p>
+<script type="math/tex; mode=display">\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2</script><p>得到的最小值被定义为：<code>M</code>关于$\mathcal{W}$的不适度(lack-of-fit)。</p>
 <p>类似NMF，要求结果的严格唯一性是不可能的。令$P_{\Lambda}$表示能使得$\Pi^\top\Lambda\Pi$仍然是上三角的置换矩阵的集合。如果$(W,\Lambda)$是一个解，则当<code>D</code>是所有元素为正数的对角矩阵且$\Pi\in P_\Lambda$时，$(\Pi^{-1}DW, \Pi^\top D^{-1}\Lambda D^{-1}\Pi)$也是一个解。我们将唯一性结果陈述如下，并在附录C中证明。</p>
 <p><strong>定理2.7</strong>：唯一性。如果$|T|\leq |A|$，且<code>W</code>的<code>T</code>列包含一个置换正对角矩阵，则$M=W^\top\Lambda W$的<code>NCT</code>是唯一的，因为对于所有的$W’^\top\Lambda’ W’=W^\top\Lambda W$，都存在一个正对角矩阵<code>D</code>和一个$|T|\times |T|$置换矩阵$\Pi\in P_\Lambda$，使得$W’=\Pi^{-1}DW$。</p>
 <p>当我们将<code>W</code>限制为半正交时，就可以在不需要寻找最优$\Lambda$的情况下得到<code>NCT</code>的简洁格式。$\mathcal{I}$是所有半正交矩阵<code>W</code>的集合，其中<code>W</code>的每一列有且仅有一个非零元素，且$WW^\top=I$。例如，例2.2中的矩阵<code>W</code>可以被标准化为半正交矩阵，下面的引理来自于 Frobenius 范数的扩展，我们在附录C中进行证明。</p>
-<p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}\left|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right|_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<p>这里总的来说就是：让回答排名靠前且预测排名靠后的受访者尽量多</p>
 <h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><p>给定<code>M</code>，推断其思维层次，等价于求解<code>NCT</code>问题。虽然我们并没有<code>M</code>，但我们可以获取其代理。为了简化实际应用，我们基于引理2.8引入了两个简单的排序算法。排序算法以<code>M</code>为输入，输出所有回答的线性排序结果$\pi:\lbrace 1,2,…,|A| \rbrace \mapsto A$，它表示了排序位置到回答的映射。</p>
 <p><strong>回答排序算法（默认）</strong>：记作AR(M)，该算法计算</p>
 <script type="math/tex; mode=display">
@@ -227,6 +243,12 @@
 <li>实验说明本文方法的优越性</li>
 <li>方法可用于众包的语音识别，图像描述，植物物种识别等</li>
 </ol>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><h4 id="默认算法"><a href="#默认算法" class="headerlink" title="默认算法"></a>默认算法</h4><ol>
+<li>总体思路是挨个看哪种顺序得到的上三角平方和最大</li>
+<li>利用了动态规划的思想，先把矩阵拆成2维的，看2维情况下怎么排列最合适，然后在每一个2维的左上增加三维，看3维怎么排列最合适。</li>
+</ol>
+<p>这个过程如下图所示：<br><img src="https://github.com/likun1208/image/blob/master/ETHP-11.png?raw=true" alt="默认算法示意图"></p>
+<h4 id="变体算法"><a href="#变体算法" class="headerlink" title="变体算法"></a>变体算法</h4><h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="引理2-8的证明"><a href="#引理2-8的证明" class="headerlink" title="引理2.8的证明"></a>引理2.8的证明</h4><p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
  
       <!-- reward -->
       
