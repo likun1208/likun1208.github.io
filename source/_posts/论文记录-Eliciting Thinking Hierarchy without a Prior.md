@@ -276,4 +276,28 @@ $\mathbf{W}^{\ast} \Rightarrow$ Answer rank  输出$\mathbf{W}^{\ast}$表示了�
 ### 证明
 #### 引理2.8的证明
 **引理2.8**：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。
+$$
+\begin{array}{l}
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 &= Tr((\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W})(\mathbf{M}^\top-\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W}))\\
+& = ||\mathbf{M}||_F^2-Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})-Tr(\mathbf{M}\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W} \mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda}\boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+||\boldsymbol{\Lambda}||_F^2
+\end{array}
+$$
 
+接下来，
+$$
+\begin{array}{l}
+||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 &=Tr((\boldsymbol{\Lambda}-\mathbf{WMW^\top})(\boldsymbol{\Lambda}^\top-\mathbf{WM^\top W^\top}))\\
+&= ||\boldsymbol{\Lambda}||_F^2-2Tr(\mathbf{\Lambda WM^\top W^\top})+||\mathbf{WMW^\top}||_F^2
+\end{array}
+$$
+需要注意的是：$Tr(\mathbf{\Lambda WM^\top W^\top})=Tr(\mathbf{W^\top \Lambda WM^\top })$，由此可得：
+$$
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 = ||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 -||\mathbf{WMW^\top}||_F^2+||\mathbf{M}||_F^2
+$$
+因此，
+$$
+\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_{F}^{2}=\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\boldsymbol{\Lambda}-\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}-\left\|\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}
+$$
+最优上三角矩阵$\boldsymbol\Lambda^\ast$ 应该是$\mathbf{W} \mathbf{M} \mathbf{W}^{\top}$的上三角部分，即，对于所有$i\leq j$，$\Lambda_{i,j}^\ast=\mathbf{W} \mathbf{M} \mathbf{W}^{\top}_{i,j}$。当$\Lambda$取最优时，$||\boldsymbol{\Lambda}^{*}-\mathbf{W M W}^{\top}||_{F}^{2}-||\mathbf{W M W}^{\top}||_{F}^{2}$就等于$-\sum_{i\leq j}(\mathbf{W M W}^{\top})_{i,j}^2$。因此，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$。

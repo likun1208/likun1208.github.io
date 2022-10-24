@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "f63441df26f06e5b",
+        "id": "88b21982e1414b20",
         "type": "tabs",
         "children": [
           {
-            "id": "55826ebc8d99dc8d",
+            "id": "99584dc3abe02754",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md"
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md"
               }
             }
           }
@@ -139,10 +139,11 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "55826ebc8d99dc8d",
+  "active": "99584dc3abe02754",
   "lastOpenFiles": [
-    "().md",
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+    "().md",
     "2022-10-17.md",
     "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
     "论文记录-分片相关.md"
