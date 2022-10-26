@@ -7,11 +7,11 @@
   <link rel="stylesheet" type="text/css" href="/css/matery.css">
   <meta charset="utf-8" />
     
-  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  <meta name="description" content="贝叶斯实话血清" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Echarts的配置 |  左边
+    论文记录-A Bayesian Truth Serum for Subjective Data |  左边
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -42,7 +42,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Echarts的配置"
+  id="post-论文记录-A Bayesian Truth Serum for Subjective Data"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -53,18 +53,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Echarts的配置
+  论文记录-A Bayesian Truth Serum for Subjective Data
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/10/31/Echarts%E7%9A%84%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2020-10-31T12:11:23.000Z" itemprop="datePublished">2020-10-31</time>
+      <a href="/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/" class="article-date">
+  <time datetime="2022-10-24T08:33:40.000Z" itemprop="datePublished">2022-10-24</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">博客配置</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
   </div>
   
 <div class="word_count">
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">740</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -81,114 +81,52 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>今天发现了一个可以用在markdown的前端画图js，<a href="https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="noopener">ECharts</a>。在hexo的next主题中使用它需要进行一些配置。</p>
-<a id="more"></a>
-<p>首先需要说明的是，hexo的网页渲染方式有ejs和swig两种。</p>
-<p>对于ejs方式的主题，直接在主题目录下的<code>layout\_partial\head.ejs</code>中加入：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://echarts.baidu.com/dist/echarts.common.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在博客站点文件的命令行中执行<code>npm install hexo-tag-echarts --save</code>即可。</p>
-<p>而对于swig方式的主题要复杂一些。</p>
+  <h1 id="A-Bayesian-Truth-Serum-for-Subjective-Data"><a href="#A-Bayesian-Truth-Serum-for-Subjective-Data" class="headerlink" title="A Bayesian Truth Serum for Subjective Data"></a>A Bayesian Truth Serum for Subjective Data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>因为没有评估真实性的公共标准，因此主观判断作为科学和政策的重要信息来源是不可靠的。本文提出了一种在客观事实不可知的情况下获取真实主观数据的评分方法。这种方法不是传统的少数服从多数，而是选择那些比集体预测更常见的答案。这种对评分标准的简单调整，消除了所有有利于多数人的偏见，即使是那些认为自己的答案代表了少数人的观点的受访者，真实的答案也会使预期得分最大化。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>主观数据的重要性略</p>
+<p>主观数据的价值受限于数据源的质量，但又没有一个标准来评价这个质量</p>
+<p>本文提出了一种诱导主观信息的方法，是为客观事实本质上或实际上不可知的情况而设计的(6)。该方法包括一个信息评分系统，从理性（即贝叶斯）期望值最大化的受访者样本中诱导出真实的答案。与其他贝叶斯诱导机制不同（7-9），该方法并不假定研究者知道不同回答之间的概率关系。因此，它可以由一个对该领域完全不了解的研究者应用于以前没有问过的问题。与早期没有答案的理论测试方法(5)或德尔菲法(10)不同的是，它并不推崇共识答案。因此，受访者没有理由将他们的答案偏向于可能的群体平均值。即使有人确信自己的答案代表了少数人的观点，真实的回答仍然是正确的策略。</p>
+<p>简单来说就是不再采用多数人共识作为答案，而是采用比集体预测更常见的作为答案。<br>    个人觉得就是用集体预测构建了一个先验，然后选比先验更常见的答案</p>
+<p>这项评分标准针对单一问题，例如：</p>
 <ol>
-<li><p>下载ECharts的js文件：<a href="https://echarts.apache.org/zh/download.html" target="_blank" rel="noopener">下载链接</a></p>
-</li>
-<li><p>然后在<code>next\layout\</code>文件夹下，找到<code>_layout.swig</code>文件，并用文本查看器打开，在下面代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;main id=<span class="string">"main"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main-inner"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content-wrap"</span>&gt;</span><br><span class="line">      &lt;div id=<span class="string">"content"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &#123;% include '_third-party/</span>duoshuo-hot-articles.swig<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">      &#123;% include '</span>_partials/comments.swig<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &#123;% if theme.sidebar.display !== '</span>remove<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">      &#123;% block sidebar %&#125;&#123;% endblock %&#125;</span></span><br><span class="line"><span class="string">    &#123;% endif %&#125;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/main&gt;</span></span><br></pre></td></tr></table></figure>
-<p>的<strong>前面</strong>添加：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- echarts --&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"/js/src/echarts.common.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>保存退出。</p>
-</li>
-<li><p>在博客站点文件的命令行中执行<code>npm install hexo-tag-echarts --save</code>。</p>
-</li>
+<li>你估计人类能活过2100年的概率是多少(概率以百分比计量) ？</li>
+<li>你会在下一届总统选举中投票吗(肯定/可能/可能不会/肯定不会) ？</li>
+<li>在过去的一年里，你是否有超过20个性伴侣(是/否)</li>
+<li>毕加索是你最喜欢的20世纪画家吗(是/否) ？</li>
 </ol>
-<p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts9867" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9867'));
-        // 指定图表的配置项和数据
-        var option = {
-    title: {
-        text: "某站点用户访问来源",
-        subtext: "ECharts示例",
-        x: "center"
-    },
-    tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        orient: "vertical",
-        x: "left",
-        data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"]
-    },
-    toolbox: {
-        show: true,
-        feature: {
-            mark: {
-                show: true
-            },
-            dataView: {
-                show: true,
-                readOnly: true
-            },
-            restore: {
-                show: true
-            },
-            saveAsImage: {
-                show: true
-            }
-        }
-    },
-    calculable: true,
-    series: [
-        {
-            name: "访问来源",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-                {
-                    value: 335,
-                    name: "直接访问"
-                },
-                {
-                    value: 310,
-                    name: "邮件营销"
-                },
-                {
-                    value: 234,
-                    name: "联盟广告"
-                },
-                {
-                    value: 135,
-                    name: "视频广告"
-                },
-                {
-                    value: 1548,
-                    name: "搜索引擎"
-                }
-            ]
-        }
-    ]
-}
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script> 
+<p>每个受访者都会提供一个个人答案，并预测答案的经验分布(即，支持每个答案的人的比例)。本文对预测的准确性进行评分，也就是说，对它们与经验频率的匹配程度进行评分。作为主要关注对象的个人答案，其评分标准是令人惊讶的普遍性。在预测频率为5%的情况下，一个被10%的人认可的答案将是令人惊讶的普遍现象，并将获得较高的信息分；如果预测的平均频率为25%，这将是一个令人惊讶的不常见的答案，因此获得较低的分数。</p>
+<p>该方法利用了关于人口频率的贝叶斯推理中一个被忽视的含义。在大多数情况下，人们应该预期其他人会低估自己的意见或个人特征的真实频率。这一含义是更常见的贝叶斯论证的必然结果，即对某一特定意见或特征在人群中的频率的最高预测应该来自持有该意见或特征的个人，因为持有该意见构成了一个关于其流行程度的有效和有利的信号。例如，将毕加索评为自己最喜欢画家的人应该——而且通常也是如此——对持有该观点的人群的百分比给出更高的估计，因为他们自己的感受是一个有信息量的样本。因此，毕加索爱好者有理由相信，与其他人的估计相比，他们对毕加索受欢迎程度的最佳估计会更高，他们会认为，毕加索的真实受欢迎程度被人们低估了。因此，一个人的真实意见也是最有可能出人意料的意见。（最后这句话和前文有什么关系我没理解）</p>
+<p>这个结论的有效性并不取决于个人真实的答案是否被认为是罕见的或广泛的。例如，一个回答问题时有超过20个性伴侣的男性可能觉得很少有人属于这种滥交的类别。然而，根据贝叶斯推理，他应该期望他个人对这个百分比的估计（例如5%）会比从整个人口中收集的估计的平均值（例如2%）高一些。他有超过20个性伴侣的事实证明，包括伴侣较少的人在内的一般人群会低估这种情况的普遍性。</p>
+<p>在说真话能最大化自己的期望信息分（也就是前面说的那个评分系统）时，说真话是个体理性和集体理性，是唯一的均衡。</p>
+<p>均衡结果依赖于两个假设：</p>
+<ol>
+<li>受访者数量必须足够大，使得单个回答不会影响经验分布。这些结果对于大的有限种群来说确实成立，但对于可数的无限种群来说，说明起来更简单，就像这里所做的那样。受访者以$r\in \lbrace 1,2,… \rbrace$为索引，他们针对多选项问题的真实回答记为$t^r=(t_1^r,…,t_m^r)(t_k^r\in\lbrace 0,1\rbrace, \sum_k x_k^r=1)$。$t_k^r$表示第$k$个回答是否是第$r$个受访者的真实答案，如果是则值为1，否则为0。真实答案也被称为个人意见或特点。</li>
+<li>受访者将个人意见视为关于人口分布的非个人信息信号，这是一个未知参数，$\omega = (\omega_1,…,\omega_m)\in \Omega$。形式上，本文假设所有受访者的公共知识是：后验信念$p(\omega |t^s)$ 都服从于$\omega$的单一分布的贝叶斯更新，也称之为公共先验，记作$p(\omega)$，且，当且仅当$t^r=t^s$时$p(\omega|t^r)=p(\omega|t^s)$。因此，个人意见提供了关于$\omega$的证据，但推论是非个人的：受访者相信其他与他们意见相同的人也会得出关于人口频率的相同推论。因此，我们可以用$t_j$表示意见为$j$的受访者，并在联合概率和条件概率中取消受访者上标：$Prob\lbrace t_j^r=1 |t_j^s=1\rbrace$变为$p(t_j|t_i)$，其他的也类似改写。</li>
+</ol>
+<p>对于一个二值问题，一个人可以如下推断模型。每一个受访者私下进行一次有偏硬币抛掷，它出现头像那一面的概率是$\omega_H$。抛掷结果代表他的个人意见。以此为基准点，他构造了一个后验分布，$p(\omega_H|t^r)$，其期望是预测的出现头像的频率。例如，如果先验是均匀分布，则抛掷硬币后的后验分布是$[0,1]$的三角分布，倾向于正面还是反面取决于硬币结果，期望值是$\frac{1}{3}$或$\frac{2}{3}$。如果先验不是均匀分布，而是强烈地偏向于相反的结果(例如，反面) ，那么在抛出头像那面之后，头像的预期频率可能仍然相当低——这对应于一些一看就不常见的特征，例如一年有超过20个性伴侣。</p>
+<p>该方法的一个重要简化是不提取先验/后验分布，只提取答案和预测频率，答案和预测分别记作$x^r=(x_1^r,…,x_m^r)(x_k^r\in\lbrace 0,1\rbrace,\sum_k x_k^r=1)$和$y^r=(y_1^r,…,y_m^r)(y_k^r\geq 0,\sum_ky_k^r=1)$。我们按照下列公式计算人口认可频率$\bar{x_k}$，和预测频率的（几何）平均$\bar{y_k}$</p>
+<script type="math/tex; mode=display">
+\bar{x}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} x_{k}^{r},</script><script type="math/tex; mode=display">
+\log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r}</script><p>我们不使用预设的答案键，而是根据答案的信息得分来评估答案，这个得分就是实际背书频率与预测背书频率的对数比。</p>
+<script type="math/tex; mode=display">\log \frac{\bar{x}_{k}}{\bar{y}_{k}}</script><p>至少一个答案的信息分非负。预测中的偏差往往会降低所有$\bar{y_k}$值，从而提高信息分值。</p>
+<p>受访者的总分将信息分数与预测准确性的单独分数结合起来：<br>受访者$r$的得分 = 信息分 + 预测分 = </p>
+<script type="math/tex; mode=display">\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\alpha \sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}, 0<\alpha</script><p>上述公式是博弈的完全收益方程，它是对称的，如果 a = 1则为零和。第一部分是信息分，除了被受访者$r$选择的那个答案以外，其他答案的$x_k^r$都是<code>0</code>。第二部分是与经验分布和受访者$r$对该分布的预测之间的相对熵成正比的惩罚。最优预测分为0，是指预测完全符合现实，即$y_k^r=\bar{x_k}$。期望预测分可以通过报告期望频率$y_k^r=E\lbrace \bar{x_k}|t^r \rbrace$来最大化。系数$\alpha$表示预测误差的权重。</p>
+<p>接下来用硬币的例子来说明该公式是如何发挥作用的。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -240,12 +178,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/10/31/Echarts%E7%9A%84%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/" rel="tag">math</a></li></ul>
 
     </footer>
   </div>
@@ -253,19 +191,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-4/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            ck3mod制作笔记-4
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/10/05/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-3/" class="article-nav-link">
+      <a href="/2022/10/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Thinking%20Hierarchy%20without%20a%20Prior/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">ck3mod制作笔记-3</div>
+        <div class="article-nav-title">论文记录-Eliciting Thinking Hierarchy without a Prior</div>
       </a>
     
   </nav>

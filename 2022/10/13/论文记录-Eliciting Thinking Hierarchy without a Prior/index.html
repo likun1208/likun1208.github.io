@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8k</span>
+            <span class="post-count">8.4k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">30 分钟</span>
+            <span class="post-count">32 分钟</span>
         </span>
     </span>
 </div>
@@ -249,6 +249,22 @@ M_{a, g}=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \
 </ol>
 <p>这个过程如下图所示：<br><img src="https://github.com/likun1208/image/blob/master/ETHP-11.png?raw=true" alt="默认算法示意图"></p>
 <h4 id="变体算法"><a href="#变体算法" class="headerlink" title="变体算法"></a>变体算法</h4><h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="引理2-8的证明"><a href="#引理2-8的证明" class="headerlink" title="引理2.8的证明"></a>引理2.8的证明</h4><p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 &= Tr((\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W})(\mathbf{M}^\top-\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W}))\\
+& = ||\mathbf{M}||_F^2-Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})-Tr(\mathbf{M}\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W} \mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda}\boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+||\boldsymbol{\Lambda}||_F^2
+\end{array}</script><p>接下来，</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 &=Tr((\boldsymbol{\Lambda}-\mathbf{WMW^\top})(\boldsymbol{\Lambda}^\top-\mathbf{WM^\top W^\top}))\\
+&= ||\boldsymbol{\Lambda}||_F^2-2Tr(\mathbf{\Lambda WM^\top W^\top})+||\mathbf{WMW^\top}||_F^2
+\end{array}</script><p>需要注意的是：$Tr(\mathbf{\Lambda WM^\top W^\top})=Tr(\mathbf{W^\top \Lambda WM^\top })$，由此可得：</p>
+<script type="math/tex; mode=display">
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 = ||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 -||\mathbf{WMW^\top}||_F^2+||\mathbf{M}||_F^2</script><p>因此，</p>
+<script type="math/tex; mode=display">
+\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_{F}^{2}=\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\boldsymbol{\Lambda}-\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}-\left\|\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}</script><p>最优上三角矩阵$\boldsymbol\Lambda^\ast$ 应该是$\mathbf{W} \mathbf{M} \mathbf{W}^{\top}$的上三角部分，即，对于所有$i\leq j$，$\Lambda_{i,j}^\ast=\mathbf{W} \mathbf{M} \mathbf{W}^{\top}_{i,j}$。当$\Lambda$取最优时，$||\boldsymbol{\Lambda}^{*}-\mathbf{W M W}^{\top}||_{F}^{2}-||\mathbf{W M W}^{\top}||_{F}^{2}$就等于$-\sum_{i\leq j}(\mathbf{W M W}^{\top})_{i,j}^2$。因此，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$。</p>
  
       <!-- reward -->
       
@@ -313,6 +329,15 @@ M_{a, g}=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \
 
    
   <nav class="article-nav">
+    
+      <a href="/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-A Bayesian Truth Serum for Subjective Data
+          
+        </div>
+      </a>
     
     
       <a href="/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/" class="article-nav-link">
