@@ -4,10 +4,13 @@
     <title>论文记录-A Bayesian Truth Serum for Subjective Data</title>
     <url>/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/</url>
     <content><![CDATA[<h1 id="A-Bayesian-Truth-Serum-for-Subjective-Data"><a href="#A-Bayesian-Truth-Serum-for-Subjective-Data" class="headerlink" title="A Bayesian Truth Serum for Subjective Data"></a>A Bayesian Truth Serum for Subjective Data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>因为没有评估真实性的公共标准，因此主观判断作为科学和政策的重要信息来源是不可靠的。本文提出了一种在客观事实不可知的情况下获取真实主观数据的评分方法。这种方法不是传统的少数服从多数，而是选择那些比集体预测更常见的答案。这种对评分标准的简单调整，消除了所有有利于多数人的偏见，即使是那些认为自己的答案代表了少数人的观点的受访者，真实的答案也会使预期得分最大化。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>主观数据的重要性略</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>主观数据的重要性略</p>
 <p>主观数据的价值受限于数据源的质量，但又没有一个标准来评价这个质量</p>
 <p>本文提出了一种诱导主观信息的方法，是为客观事实本质上或实际上不可知的情况而设计的(6)。该方法包括一个信息评分系统，从理性（即贝叶斯）期望值最大化的受访者样本中诱导出真实的答案。与其他贝叶斯诱导机制不同（7-9），该方法并不假定研究者知道不同回答之间的概率关系。因此，它可以由一个对该领域完全不了解的研究者应用于以前没有问过的问题。与早期没有答案的理论测试方法(5)或德尔菲法(10)不同的是，它并不推崇共识答案。因此，受访者没有理由将他们的答案偏向于可能的群体平均值。即使有人确信自己的答案代表了少数人的观点，真实的回答仍然是正确的策略。</p>
-<p>简单来说就是不再采用多数人共识作为答案，而是采用比集体预测更常见的作为答案。<br>    个人觉得就是用集体预测构建了一个先验，然后选比先验更常见的答案</p>
+<p>简单来说就是不再采用多数人共识作为答案，而是采用比集体预测更常见的作为答案。</p>
+<blockquote>
+<p>个人觉得就是用集体预测构建了一个先验，然后选比先验更常见的答案</p>
+</blockquote>
 <p>这项评分标准针对单一问题，例如：</p>
 <ol>
 <li>你估计人类能活过2100年的概率是多少(概率以百分比计量) ？</li>
@@ -24,15 +27,81 @@
 <li>受访者数量必须足够大，使得单个回答不会影响经验分布。这些结果对于大的有限种群来说确实成立，但对于可数的无限种群来说，说明起来更简单，就像这里所做的那样。受访者以$r\in \lbrace 1,2,… \rbrace$为索引，他们针对多选项问题的真实回答记为$t^r=(t_1^r,…,t_m^r)(t_k^r\in\lbrace 0,1\rbrace, \sum_k x_k^r=1)$。$t_k^r$表示第$k$个回答是否是第$r$个受访者的真实答案，如果是则值为1，否则为0。真实答案也被称为个人意见或特点。</li>
 <li>受访者将个人意见视为关于人口分布的非个人信息信号，这是一个未知参数，$\omega = (\omega_1,…,\omega_m)\in \Omega$。形式上，本文假设所有受访者的公共知识是：后验信念$p(\omega |t^s)$ 都服从于$\omega$的单一分布的贝叶斯更新，也称之为公共先验，记作$p(\omega)$，且，当且仅当$t^r=t^s$时$p(\omega|t^r)=p(\omega|t^s)$。因此，个人意见提供了关于$\omega$的证据，但推论是非个人的：受访者相信其他与他们意见相同的人也会得出关于人口频率的相同推论。因此，我们可以用$t_j$表示意见为$j$的受访者，并在联合概率和条件概率中取消受访者上标：$Prob\lbrace t_j^r=1 |t_j^s=1\rbrace$变为$p(t_j|t_i)$，其他的也类似改写。</li>
 </ol>
-<p>对于一个二值问题，一个人可以如下推断模型。每一个受访者私下进行一次有偏硬币抛掷，它出现头像那一面的概率是$\omega_H$。抛掷结果代表他的个人意见。以此为基准点，他构造了一个后验分布，$p(\omega_H|t^r)$，其期望是预测的出现头像的频率。例如，如果先验是均匀分布，则抛掷硬币后的后验分布是$[0,1]$的三角分布，倾向于正面还是反面取决于硬币结果，期望值是$\frac{1}{3}$或$\frac{2}{3}$。如果先验不是均匀分布，而是强烈地偏向于相反的结果(例如，反面) ，那么在抛出头像那面之后，头像的预期频率可能仍然相当低——这对应于一些一看就不常见的特征，例如一年有超过20个性伴侣。</p>
-<p>该方法的一个重要简化是不提取先验/后验分布，只提取答案和预测频率，答案和预测分别记作$x^r=(x_1^r,…,x_m^r)(x_k^r\in\lbrace 0,1\rbrace,\sum_k x_k^r=1)$和$y^r=(y_1^r,…,y_m^r)(y_k^r\geq 0,\sum_ky_k^r=1)$。我们按照下列公式计算人口认可频率$\bar{x_k}$，和预测频率的（几何）平均$\bar{y_k}$</p>
+<h2 id="关于先验和后验的一个例子"><a href="#关于先验和后验的一个例子" class="headerlink" title="关于先验和后验的一个例子"></a>关于先验和后验的一个例子</h2><p>对于一个二值问题，一个人可以如下推断模型。每一个受访者私下进行一次有偏硬币抛掷，它出现头像那一面的概率是$\omega_H$。抛掷结果代表他的个人意见。以此为基准点，他构造了一个后验分布，$p(\omega_H|t^r)$，其期望是预测的出现头像的频率。例如，如果先验是均匀分布，则抛掷硬币后的后验分布是$[0,1]$的三角分布，倾向于正面还是反面取决于硬币结果，期望值是$\frac{1}{3}$或$\frac{2}{3}$。如果先验不是均匀分布，而是强烈地偏向于相反的结果(例如，反面) ，那么在抛出头像那面之后，头像的预期频率可能仍然相当低——这对应于一些一看就不常见的特征，例如一年有超过20个性伴侣。</p>
+<blockquote>
+<p>在接下来的内容中，我们把硬币头像那一面称为正面(head)，另一边成为反面(tail)。</p>
+</blockquote>
+<p>从先验计算后验的过程如下：<br>首先，贝叶斯公式为：</p>
+<script type="math/tex; mode=display">
+P(H|D)=\frac{P(D|H)P(H)}{P(D)}</script><p>其中，<code>H</code>是假设，<code>D</code>是数据，<code>P(H)</code>是先验概率（先验概率顾名思义是看到数据前的猜测），<code>P(H|D)</code>是后验概率（后验概率顾名思义是拿到数据之后的猜测），<code>P(D)</code>是数据发生的概率，<code>P(D|H)</code>是在这个假设下数据发生的概率，也叫似然函数 。 而<code>P(D)</code>和<code>P(D|H)</code>的关系是：</p>
+<script type="math/tex; mode=display">
+P(D)=\sum_{all\ H}[P(D \mid H) \times P(H)]</script><p>最初硬币是公平和不公平的概率分别是0.5，前者抛出正面和反面的概率也分别是0.5，后者抛出正面和反面的概率分别是1和0。我们把几个事件用如下字母表示：</p>
+<ol>
+<li>硬币是公平的——A</li>
+<li>硬币是不公平的——B</li>
+<li>硬币扔出正面——H</li>
+<li>硬币扔出反面——T</li>
+</ol>
+<p>则显然，$P(A)=P(B)=0.5$。</p>
+<p>如果一个受访者扔出了正面，则贝叶斯公式中的<code>D</code>为<code>正面</code>，在<code>A</code>和<code>B</code>两个事件发生的情况下，扔出正面的概率为：<br>$P(D|A)=0.5, P(D|B)=1$.</p>
+<p>我们的要求是已知<code>D=正面</code>的情况下，判断这个硬币是<code>A</code>和<code>B</code>的概率分别有多少，也就是说要计算<code>P(A|D)</code>和<code>P(B|D)</code>。</p>
+<p>利用贝叶斯公式，我们还有一个变量<code>P(D)</code>不知道，但是可以如下计算：</p>
+<script type="math/tex; mode=display">
+P(D)=P(D|A)P(A)+P(D|B)P(B)=0.5*0.5+1*0.5=0.75</script><script type="math/tex; mode=display">
+P(A|D)=\frac{P(D|A)P(A)}{P(D)}=0.5*0.5/0.75=\frac{1}{3}</script><script type="math/tex; mode=display">
+P(B|D)=\frac{P(D|B)P(B)}{P(D)}=1*0.5/0.75=\frac{2}{3}</script><p>也就是说，在扔出正面之后，认为硬币是公平的概率会变成$\frac{1}{3}$，而认为硬币不公平的概率会变成$\frac{2}{3}$。</p>
+<p>而如果扔出了反面，从直觉上来说就可以判断出硬币肯定是公平的，从数学计算上来说，当<code>D=反面</code>时，$P(D|A)=0.5, P(D|B)=0$.</p>
+<script type="math/tex; mode=display">
+P(D)=P(D|A)P(A)+P(D|B)P(B)=0.5*0.5+0*0.5=0.25</script><script type="math/tex; mode=display">
+P(A|D)=\frac{P(D|A)P(A)}{P(D)}=0.5*0.5/0.25=1</script><script type="math/tex; mode=display">
+P(B|D)=\frac{P(D|B)P(B)}{P(D)}=0*0.5/0.75=0</script><p>可以看出来扔出反面后认为硬币是公平的概率会变成1，而不公平的概率会变成0.</p>
+<h2 id="具体计算方法"><a href="#具体计算方法" class="headerlink" title="具体计算方法"></a>具体计算方法</h2><p>该方法的一个重要简化是不提取先验/后验分布，只提取答案和预测频率，答案和预测分别记作$x^r=(x_1^r,…,x_m^r)(x_k^r\in\lbrace 0,1\rbrace,\sum_k x_k^r=1)$和$y^r=(y_1^r,…,y_m^r)(y_k^r\geq 0,\sum_ky_k^r=1)$。我们按照下列公式计算人口认可频率$\bar{x_k}$，和预测频率的（几何）平均$\bar{y_k}$</p>
 <script type="math/tex; mode=display">
 \bar{x}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} x_{k}^{r},</script><script type="math/tex; mode=display">
-\log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r}</script><p>我们不使用预设的答案键，而是根据答案的信息得分来评估答案，这个得分就是实际背书频率与预测背书频率的对数比。</p>
+\log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r}</script><p>我们不使用预设的答案键，而是根据答案的信息得分来评估答案，这个得分就是实际频率与预测频率的对数比。</p>
 <script type="math/tex; mode=display">\log \frac{\bar{x}_{k}}{\bar{y}_{k}}</script><p>至少一个答案的信息分非负。预测中的偏差往往会降低所有$\bar{y_k}$值，从而提高信息分值。</p>
 <p>受访者的总分将信息分数与预测准确性的单独分数结合起来：<br>受访者$r$的得分 = 信息分 + 预测分 = </p>
 <script type="math/tex; mode=display">\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\alpha \sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}, 0<\alpha</script><p>上述公式是博弈的完全收益方程，它是对称的，如果 a = 1则为零和。第一部分是信息分，除了被受访者$r$选择的那个答案以外，其他答案的$x_k^r$都是<code>0</code>。第二部分是与经验分布和受访者$r$对该分布的预测之间的相对熵成正比的惩罚。最优预测分为0，是指预测完全符合现实，即$y_k^r=\bar{x_k}$。期望预测分可以通过报告期望频率$y_k^r=E\lbrace \bar{x_k}|t^r \rbrace$来最大化。系数$\alpha$表示预测误差的权重。</p>
-<p>接下来用硬币的例子来说明该公式是如何发挥作用的。</p>
+<p>接下来用硬币的例子来说明该公式是如何发挥作用的。想象有下述两种等可能性的事件：</p>
+<ol>
+<li>硬币是公平的</li>
+<li>硬币不公平，它永远会扔出正面<br>在这个表述里，硬币是公平的先验概率为$\frac{1}{2}$</li>
+</ol>
+<p>接下来找一群人，让他们私下抛硬币并报告自己是哪一面，则可以分析出以下两种情况：</p>
+<ol>
+<li>一个扔出了反面的观测者会意识到这个硬币属于第一种情况，并由此预测整个群体观察到的正面和反面频率是五五开的。</li>
+<li>一个扔出了正面的观测者会把“硬币是公平的”这件事的概率从先验的$\frac{1}{2}$降低到后验的$\frac{1}{3}$，进而使得他对扔出反面的预期概率降低到$\frac{1}{6}$，而扔出正面的预期概率就是$\frac{5}{6}$。</li>
+</ol>
+<p>我们从扔出反面的观测者的角度思考问题，其他人对抛硬币出反面这一结果的预期频率应该是$\frac{1}{2}$和$\frac{1}{6}$的混合，也就是说比他自己预测的$\frac{1}{2}$要小，因此他会期待实际结果中的反面更常见，从而得到较高的信息分。而相反，他会希望正面不常见，因为$\frac{1}{2}$和$\frac{5}{6}$的混合比他自己预测的$\frac{1}{2}$要大，这会导致一个较低的信息分。</p>
+<p>类似的，扔出正面的观测者就会希望实际结果中正面更常见。由此可以发现，大家都会希望自己扔出的那一面更常见，而为此也会如实上报自己的结果从而试图增加这部分信息分。</p>
+<p>该示例说明了信息分的一般属性。也就是说，如果最佳答案是由预期的信息得分精确定义的且其他受访者如实回答并给出真实的预测频率，那么一个真实的答案构成了对最令人惊讶的常见答案的最佳猜测。此属性不依赖于可能的答案的数量或先验。它直接导致均衡结果。</p>
+<p>假设：</p>
+<ol>
+<li>每一个意见为$t^r$的受访者$r$通过对共同的先验$p(\omega)$应用贝叶斯法则形成了对意见的群体分布的后验$p(\omega|t^r)$。</li>
+<li>当且仅当$t^r=t^s$时，$p(\omega|t^r)=p(\omega|t^s)$</li>
+<li>分数按照前面的那个信息分+预测分来计算</li>
+</ol>
+<p>则：</p>
+<ol>
+<li>(T1) 对于任意$\alpha&gt;0$，说真话是纳什均衡：说真话可以最大化每一个相信其他人也会说真话的受访者的期望总分。</li>
+<li>(T2) 期望均衡信息分是非负的，并且在所有受访者都说真话时取最大值。</li>
+<li>(T3) 当$\alpha=1$时，博弈是零和的，总分在说真话均衡中为$log p(\omega|t^r)+K$，$K$由零和约束设置。</li>
+</ol>
+<p>说真话是指回答和预测都是真实的，即：$x^r=t^r$且$y^r=E\lbrace \omega|t^r \rbrace$。</p>
+<p>T2指出，尽管存在其他均衡，可以通过将多个真实意见映射到一个反应类别中或通过随机化来构建，但这些揭示性较低的均衡会导致所有受访者的信息得分较低。如果需要，我们可以通过在公式2中给予信息分相对更多的权重来增强讲真话的战略优势。在$\alpha$足够小的情况下，讲真话均衡中的预期总分将以帕累托方式支配任何其他均衡中的预期分值。</p>
+<p>T3说明，通过设置$\alpha=1$，我们可以将该博弈呈现为一个纯粹的竞争性的零和竞赛。总分根据受访者对答案的真实分布的预期程度进行排名。需要注意的是：评分系统只要求提供真实答案的预期分布$E\lbrace \omega|t^r \rbrace$而不是后验分布$p(\omega|t^r)$，后者是一个<code>m</code>维的概率密度函数。我们可以通过一个不直接引出这些概率的方法来推断哪些受访者对$\alpha$的实际值赋予了更多的概率。</p>
+<p>在以往关于激励机制的经济学研究中，标准的做法是假设评分者（或中心）知道先验和后验，并将这种知识纳入评分函数。原则上，先验的任何变化，无论是问题措辞的变化、样本构成的变化，还是新的公共信息的变化，都需要重新计算计分函数。相比之下，我的方法采用了一个通用的一刀切的打分方程，不提先验或后验概率。这对实际应用有三个好处。首先，问题不需要局限于一些预先测试过的、可获得经验估计的基本比率和条件概率的集合；相反，人们可以利用自然语言的全部资源，为每个应用定制一套新问题。第二，可以对不同的人群进行相同的调查，或者在动态环境下进行调查（这与政治民意调查有关）。第三，人们可以诚实地指示受访者在制定自己的答案时不要猜测他人的答案。真实的答案对任何先验来说都是最佳的，而且没有公开的概率供他们考虑，或许还可以拒绝。</p>
+<p>当涉及到为复杂、独特的问题打分时，这些都是决定性的优势。特别是，人们可以应用这种方法来获得关于任何明确陈述的命题的真实价值的诚实的概率判断，即使实际的真理是遥不可及的，也没有先验。例如，最近由一位著名的英国天文学家撰写的《我们最后的世纪》一书中，人类在2100年后生存的机会不超过50：50。这是一个挑衅性的评估，它不会很快被检验。用现在的方法，人们可以提出这样的问题：这是我们最后的世纪吗？并将其提交给一个专家样本，他们将各自提供一个主观概率，并估计其他概率的概率分布。T1意味着对主观概率的诚实报告将使预期信息得分最大化。专家们将面临类似的讲真话的激励，就像他们对实际结果下注一样，例如，在期货市场上，结果可以及时确定，以便评分。</p>
+<p>我们用离散计算来说明。假设概率以1%为精度被分为100份，由此这个问题就成了一个有100个选项的选择题（在实际生活中，我们往往会有更少的类别，和更平滑的经验频率）。人口向量$\omega=\lbrace \omega_{00},…,\omega_{99} \rbrace$表示专家们之间的关于概率的未知分布。给定任意先验，$p(\omega)$，计算作为真实个人概率和被大众所认可的概率的函数的预期信息分数是一项费力但简单的工作。计算结果如下图所示，其中<code>A(90)</code>和<code>B(90)</code>分别表示两种不同先验（分别记作$p_A(\omega)$和$p_B(\omega)$）下专家认为90%的概率地球会在2100年之前毁灭。因此，专家们有着相同的评估，但对于他们的评估与其他人的评估之间的关系却有着不同的理论。虽然A90和B90不同，但在这两种情况下，预期信息分都是由90%的真实认可来计算的。这证实了T1。在这两种情况下，每个专家都认为他的主观概率相对于人群是悲观的。以个人估计的90%为条件，对他人概率的期望值在$p_A(\omega)$的情况下只有65%，在$p_A(\omega)$的情况下只有54%。</p>
+<p>如果主观概率变成<code>50%</code>，这两条线会移动到<code>A(50)</code>和<code>B(50)</code>，则此时二者的最优策略就也会变成<code>50%</code>。总的来说就是无论主观信念怎么变，说实话都是最好的选择。</p>
+<p>A线和B线的不同之处在于，A线的先验概率被假定为50%，B线为20%。B线的期望分数较高，因为90%的估计值在这种情况下更令人惊讶。<br><img src="https://github.com/likun1208/image/blob/master/BayesianTruth.jpg?raw=true" alt="概率统计图"></p>
+<p>假设评分者能精确为估计值打分，则对比信息分与这个精确分是有意义的。激发关于可公开验证的事件的诚实概率的标准工具是对数适当得分规则。根据该规则，一个专家在<code>n</code>个互斥事件上宣布其概率分布为$z=(z_1,…,z_n)$，如果事件$i$发生了，则他得到的评分为$K+log z_i$。举个例子，一位专家对人类将在2100年之前灭亡的真实主观概率估计为90%，但他宣布的概率<code>z</code>可能不是90%，根据<code>z</code>可以计算出他的分数是$0.9log z+0.1log(1-z)$，再次强调，这里假设我们知道他真实的估计概率是90%。这个分数计算公式会在$z=0.9$时取最大值，就是图中PS90对应的那条线。可以看出来它和用信息分计算的A90、B90的趋势是基本一样的。</p>
+<p>非个人信息性先验的假设可能在两方面会失败。首先，在存在关于人口频率的公共信息的情况下，一个真实的答案可能不会对这些频率提供信息。例如，一个人的性别对他们判断人口中的男女比例的影响很小。这意味着$t^r \neq t^s$但$p(\omega|t^r)=p(\omega|t^s)$，且诚实和欺骗性答案的预期信息分之间的差异几乎为零（尽管仍然是正数）。如下图所示，补救措施是将性别问题与一个与性别有关的意见问题结合起来。</p>
+<p>第二，具有不同品味或特征的受访者可能出于不同的原因选择相同的答案，从而形成不同的后验。例如，具有非标准政治观点的人可能会把他或她对某位候选人的喜欢当作大多数人都会喜欢其他候选人的证据。这意味着尽管$t^r=t^s$，但是$p(\omega|t^r) \neq p(\omega|t^s)$。在这里，补救的办法也是扩大问卷，让当事人同时透露意见和特征。</p>
+<p>最后一个例子，一个艺术评估，说明了这两种补救措施。这个例子假设存在专家和门外汉，以及一个二元性质的状态：一个特定的艺术家是否代表原创才能的问题。根据假设，艺术专家能很好地识别这种区别，但普通人的辨别能力很差，事实上，喜欢衍生艺术家的机会比喜欢原创艺术家的机会要大。专家的比例是众所周知的，其他的概率也是如此（表1）。</p>
+<p>本例和其他例子中的信息分反映了与某一观点或特征相关的信息量。在表格中，专家有明显的优势，尽管他们在样本中占少数，因为他们的意见对人口频率的信息量更大。一般来说，意见<code>i</code>的期望信息分就等于分布$p(\omega|t_k,t_i)$和$p(\omega|t_k)$之间的期望相对熵，后者是所有$t_k$的平均值。换句话说，<code>i</code>的预期得分是信息论的衡量标准，即赞同<code>i</code>的意见会在多大程度上改变他人对人口分布的后验信念。专家的认可将导致信念的更大转变，因为它对驱动两个部分意见的基本变量的信息量更大。这种影响的衡量标准对专家群体的规模或专家与非专家意见之间的关联方向相当不敏感。</p>
+<p><img src="https://github.com/likun1208/image/blob/master/BayesianTruth-2.png?raw=true" alt="表格"></p>
+<p>通过建立说实话的激励机制，我并不是说人们在没有明确的经济回报的情况下就会欺骗或者不愿意提供信息。相反，人们担心的是，缺乏外部标准可能会助长自我欺骗和虚假的信心，即使是在善意的人之间。一个未来学家，或者一个艺术评论家，可以轻松地花一生的时间做出判断，而不用面对医生、科学家或者商业投资者的现实检查。在缺乏现实检验的情况下，人们很容易给予主流共识以特殊地位。明确得分的好处恰恰是抵消了非正式的压力，要求同意(或者也许是要突出(和不同意)。事实上，仅仅存在一个真相诱导评分系统就为社会科学提供了方法论上的保证，表明如果需要的话，主观数据可以通过一个既不基于信仰(所有的答案都同样好)也不偏向于例外观点的过程来获得。</p>
 ]]></content>
       <categories>
         <category>论文</category>
@@ -1648,11 +1717,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3744" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9642" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3744'));
+        var myChart = echarts.init(document.getElementById('echarts9642'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1708,11 +1777,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3412" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts13" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3412'));
+        var myChart = echarts.init(document.getElementById('echarts13'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1762,11 +1831,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1964" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2645" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1964'));
+        var myChart = echarts.init(document.getElementById('echarts2645'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7441,11 +7510,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts9867" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1694" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9867'));
+        var myChart = echarts.init(document.getElementById('echarts1694'));
         // 指定图表的配置项和数据
         var option = {
     title: {
