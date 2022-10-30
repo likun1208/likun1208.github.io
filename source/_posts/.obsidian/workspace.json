@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "88b21982e1414b20",
+        "id": "bcd7b943688f8cf3",
         "type": "tabs",
         "children": [
           {
-            "id": "99584dc3abe02754",
+            "id": "47b23f6f5b532216",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md"
+                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md"
               }
             }
           }
@@ -136,10 +136,10 @@
     "direction": "horizontal",
     "width": 285.5
   },
-  "active": "99584dc3abe02754",
+  "active": "47b23f6f5b532216",
   "lastOpenFiles": [
-    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
     "().md",
     "2022-10-17.md",
     "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
