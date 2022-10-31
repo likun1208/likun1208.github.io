@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A solution to the single-question crowd wisdom problem.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A solution to the single-question crowd wisdom problem.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+                "file": "论文记录-A solution to the single-question crowd wisdom problem.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md"
+                "file": "论文记录-A solution to the single-question crowd wisdom problem.md"
               }
             }
           }
@@ -138,8 +138,8 @@
   },
   "active": "47b23f6f5b532216",
   "lastOpenFiles": [
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "().md",
     "2022-10-17.md",
     "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
