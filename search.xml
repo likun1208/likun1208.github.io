@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-A solution to the single-question crowd wisdom problem</title>
+    <url>/2022/10/31/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20solution%20to%20the%20single-question%20crowd%20wisdom%20problem/</url>
+    <content><![CDATA[<h1 id="A-solution-to-the-single-question-crowd-wisdom-problem"><a href="#A-solution-to-the-single-question-crowd-wisdom-problem" class="headerlink" title="A solution to the single-question crowd wisdom problem"></a>A solution to the single-question crowd wisdom problem</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ol>
+<li>群体智慧一度被认为优于个体观点，在一些领域已经逐渐用投票来取代专家决策</li>
+<li>民主投票有局限性</li>
+<li>本文方法：选择比人们预测的更受欢迎的答案</li>
+</ol>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>假设你对美国地理知识一无所知，现在提问：</p>
+<ol>
+<li>费城是宾夕法尼亚州的首府吗？</li>
+<li>哥伦比亚是南卡罗来纳州的首府吗？<br>你去找很多人问这两个问题，希望他们中的主流观点是正确的，这个方法在哥伦比亚的问题上是有效的，但在费城的问题上，大多数人都会回答“是”，而这是个错误答案。显然民主投票的方法是有问题的。</li>
+</ol>
+<p>针对该问题的标准回应是根据信任对投票进行加权平均。对于二值问题，信任度$c$表示一个受访者的投票有$c$的主观概率是正确的，有$1-c$的概率是错误的。概率可以线性或非线性平均，产生置信加权投票算法。然而该方法仅在正确答案是高置信的，而这在费城和哥伦比亚的问题中也不适用，因为这两个问题的两个选项的置信度都很相似，没法从中找出一个主流的回答。</p>
+<p>本文提出一种替代算法，它要求受访者预测其他人对该问题的回答的分布，并选择那些比预测得到更多支持的回答。算法的直观描述如下：想象有两个平行宇宙，正宇宙里费城不是宾州的首府，而反宇宙里费城就是首府。针对“费城是否为宾州首府”这个问题，正宇宙里认为“是”的人比反宇宙要少。该问题可以形式化为扔有偏硬币的问题，该硬币在正宇宙有<code>60%</code>的概率扔出“是”，而在反宇宙有<code>90%</code>的概率扔出“是”。两个宇宙的主流观点都是“是”，人们知道硬币是有偏差的，但不知道哪个宇宙是正宇宙。因此，他们对赞成票的预测频率将在60%到90%之间。然而，正宇宙中的赞成票会收敛到60%，于是反对票就是那个比预测能得到更多支持的答案，同时也是正确答案。</p>
+<p>我们将这个选择原则称为“出乎意料的受欢迎”（SP）算法，并在补充材料中严格定义了它。在一个问题(P)中，数据显示投赞成票的受访者相信几乎所有人都同意他们，而投反对票的人认为自己会占少数。投赞成票的平均预测百分比很高，导致实际投赞成票的百分比低于这些预测。因此，出乎意料受欢迎的回答是“否”，而这正是正确答案。相反，在哥伦比亚问题中，预测的赞成票低于实际的赞成票，出乎意料受欢迎的答案和实际确实受欢迎的答案是一致的，由此多数人的判断是正确的。</p>
+<p>是否可以利用受访者的信心构建一个同样有效的算法？假设受访者知道先验的世界概率和硬币偏见。每个受访者观察他们的私人硬币投掷结果，并通过应用贝叶斯规则计算他们的信心。假设的算法将需要从报告的信任度的大样本中识别正宇宙的硬币。图2通过反例证明了不存在这样的算法(附件中的定理1提供了一个一般不可能的结果)。它展示了对于两个不同的有偏见的硬币问题，一个正确答案是肯定的，另一个正确答案是否定的，信心的相同分布是如何产生的。诚然，真实的人可能不会遵循理想化的贝叶斯模型。我们的观点是，如果基于后验概率(投票和信心)的方法对理想中的受访者无效，那么对真正的受访者也可能无效。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+        <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-A Bayesian Truth Serum for Subjective Data</title>
     <url>/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/</url>
     <content><![CDATA[<h1 id="A-Bayesian-Truth-Serum-for-Subjective-Data"><a href="#A-Bayesian-Truth-Serum-for-Subjective-Data" class="headerlink" title="A Bayesian Truth Serum for Subjective Data"></a>A Bayesian Truth Serum for Subjective Data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>因为没有评估真实性的公共标准，因此主观判断作为科学和政策的重要信息来源是不可靠的。本文提出了一种在客观事实不可知的情况下获取真实主观数据的评分方法。这种方法不是传统的少数服从多数，而是选择那些比集体预测更常见的答案。这种对评分标准的简单调整，消除了所有有利于多数人的偏见，即使是那些认为自己的答案代表了少数人的观点的受访者，真实的答案也会使预期得分最大化。</p>
@@ -1717,11 +1743,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts7768" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5454" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7768'));
+        var myChart = echarts.init(document.getElementById('echarts5454'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1777,11 +1803,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6599" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9916" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6599'));
+        var myChart = echarts.init(document.getElementById('echarts9916'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1831,11 +1857,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts8007" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9013" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8007'));
+        var myChart = echarts.init(document.getElementById('echarts9013'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7510,11 +7536,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts2741" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6750" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2741'));
+        var myChart = echarts.init(document.getElementById('echarts6750'));
         // 指定图表的配置项和数据
         var option = {
     title: {
