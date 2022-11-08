@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks</title>
+    <url>/2022/11/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Secure%20Balance%20Planning%20of%20Off-blockchain%20Payment%20Channel%20Networks/</url>
+    <content><![CDATA[<h1 id="Secure-Balance-Planning-of-Off-blockchain-Payment-Channel-Networks"><a href="#Secure-Balance-Planning-of-Off-blockchain-Payment-Channel-Networks" class="headerlink" title="Secure Balance Planning of Off-blockchain Payment Channel Networks"></a>Secure Balance Planning of Off-blockchain Payment Channel Networks</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-A solution to the single-question crowd wisdom problem</title>
     <url>/2022/10/31/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20solution%20to%20the%20single-question%20crowd%20wisdom%20problem/</url>
     <content><![CDATA[<h1 id="A-solution-to-the-single-question-crowd-wisdom-problem"><a href="#A-solution-to-the-single-question-crowd-wisdom-problem" class="headerlink" title="A solution to the single-question crowd wisdom problem"></a>A solution to the single-question crowd wisdom problem</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ol>
@@ -1748,11 +1759,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts1417" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9493" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1417'));
+        var myChart = echarts.init(document.getElementById('echarts9493'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1808,11 +1819,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts4439" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4013" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4439'));
+        var myChart = echarts.init(document.getElementById('echarts4013'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1862,11 +1873,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6385" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1413" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6385'));
+        var myChart = echarts.init(document.getElementById('echarts1413'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2217,7 +2228,7 @@ p_i,\ &if\ s_i=(1,1), \\
         <category>slides</category>
       </categories>
       <tags>
-        <tag>区块链</tag>
+        <tag>blockchain</tag>
       </tags>
   </entry>
   <entry>
@@ -7541,11 +7552,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3328" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5844" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3328'));
+        var myChart = echarts.init(document.getElementById('echarts5844'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -9959,7 +9970,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
       </categories>
       <tags>
         <tag>game theory</tag>
-        <tag>stackelberg game</tag>
+        <tag>Stackelberg game</tag>
       </tags>
   </entry>
   <entry>
