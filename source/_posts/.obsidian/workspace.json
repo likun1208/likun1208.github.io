@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+                "file": "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md"
+                "file": "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md"
               }
             }
           }
@@ -138,15 +138,15 @@
   },
   "active": "47b23f6f5b532216",
   "lastOpenFiles": [
-    "论文记录-A solution to the single-question crowd wisdom problem.md",
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "论文记录-BEYOND FINITE LAYER NEURAL NETWORKS BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS.md",
-    "论文记录-Best reply structure and equilibrium convergence in generic games.md",
-    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
-    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
-    "().md",
-    "2022-10-17.md",
-    "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md"
+    "论文记录-Theories of Bargaining Delays.md",
+    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
+    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
+    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
+    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
+    "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
+    "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
+    "论文记录-Fast randomized consensus using shared memory.md"
   ]
 }

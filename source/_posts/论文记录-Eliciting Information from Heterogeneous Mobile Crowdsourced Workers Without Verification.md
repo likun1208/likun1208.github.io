@@ -4,7 +4,7 @@ date: 2021-04-15 14:00:13
 tags:
     - crowdsourcing
     - game theory
-    - Stackelberg game
+    - stackelberg game
 categories: 论文
 description: 众包中的多数投票--探索众包工人异构性对激励机制设计的影响
 ---

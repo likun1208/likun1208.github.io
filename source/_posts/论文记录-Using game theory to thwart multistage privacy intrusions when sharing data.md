@@ -3,7 +3,7 @@ title: 论文记录-Using game theory to thwart multistage privacy intrusions wh
 date: 2022-09-23 19:02:32
 tags:
     - game theory
-    - Stackelberg game
+    - stackelberg game
 categories: 论文
 description: 共享数据时使用博弈论进行隐私保护
 ---
