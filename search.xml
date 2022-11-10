@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks</title>
+    <url>/2022/11/10/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Peer%20Prediction-Based%20Trustworthiness%20Evaluation%20and%20Trustworthy%20Service%20Rating%20in%20Social%20Networks/</url>
+    <content><![CDATA[<h1 id="Peer-Prediction-Based-Trustworthiness-Evaluation-and-Trustworthy-Service-Rating-in-Social-Networks"><a href="#Peer-Prediction-Based-Trustworthiness-Evaluation-and-Trustworthy-Service-Rating-in-Social-Networks" class="headerlink" title="Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks"></a>Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>trustworthiness</tag>
+        <tag>peer prediction</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks</title>
     <url>/2022/11/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Secure%20Balance%20Planning%20of%20Off-blockchain%20Payment%20Channel%20Networks/</url>
     <content><![CDATA[<h1 id="Secure-Balance-Planning-of-Off-blockchain-Payment-Channel-Networks"><a href="#Secure-Balance-Planning-of-Off-blockchain-Payment-Channel-Networks" class="headerlink" title="Secure Balance Planning of Off-blockchain Payment Channel Networks"></a>Secure Balance Planning of Off-blockchain Payment Channel Networks</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>链下支付渠道可以通过实现“无需向区块链提交单笔支付即可在两个区块链节点之间进行大量小额支付”这一点来显著提高区块链的可扩展性。多个支付渠道可以形成一个支付网络，从而使得没有直接相连的两个节点也可以进行支付。构建支付网络的一个关键挑战在于决定应该将多少资金存入支付渠道作为初始余额，这严重影响了支付网络的性能，却少有研究。本文通过设计支付网络的余额规划服务<code>PnP</code>来解决这一问题。考虑到节点之间估计的支付需求，<code>PnP</code>可以决定通道余额，以较高的概率满足这些需求。它不依赖于任何可信第三方，并能以较低的开销提供强大的保护来防止恶意攻击。它包含两个创新点：加密排序和机会约束的平衡规划算法。在一个由30个节点组成的测试平台上的实验结果表明，<code>PnP</code>可以比其他设计多实现30%的支付。</p>
@@ -11,13 +23,20 @@
 <li>节点之间的多个支付渠道可以构成支付网络，从而使得没有支付渠道直接相连的两个节点可以通过多跳的方式实现链下交易。如今已经有了实现这样功能的网络，例如比特币的Lighting Network和以太坊的Raiden Network。（注意这个闪电网络和闪电贷不是一个东西）</li>
 <li>建立支付渠道的关键问题在于初始余额。如果钱给少了，则这个渠道要时不时重新构建，导致了更频繁的区块链访问操作。而钱给多了又是不必要的。如果考虑多跳交易的支付网络，这个问题就更复杂了。 现有研究大多假设支付渠道里的钱是足够的，但这并不现实。而一个考虑了这个问题的研究则引入了中心化的可信第三方，这更容易受到恶意攻击了。</li>
 <li>本文研究了支付网络中的余额规划问题，即给定节点们的支付需求估计，如何决定支付渠道的初始余额。本文设计了一个余额规划服务<code>PnP</code>来实现这一点，它可以集成到现有的支付网络中。<code>PnP</code>可以利用对支付需求的了解，即使有估计误差，也能将渠道总存款降到最低。它不依赖可信第三方，因此可以抵御来自恶意节点的攻击。此外，它的通信和计算开销很低。<code>PnP</code>通过解决两个主要挑战来实现上述优势。<ol>
-<li>这个</li>
-<li>那个</li>
+<li>很难精确估计节点的支付需求。直觉上的想法是根据历史需求预测未来需求从而设计算法，但是实际需求往往或多或少，一旦渠道余额用完，所有关联该渠道的交易就都会失败。当然也能改进预测方法来得到更准确的估计，但不能从根本上解决这个问题。本文的解决方法是：将这个余额规划问题表达为机会约束优化问题，进而设计算法从而从理论上保证高概率满足支付需求。</li>
+<li>恶意节点攻击问题。现有工作很多都假设存在可行第三方，但这不现实。<code>PnP</code>能防御一定比例的拜占庭攻击。它随机选择一组节点作为决策委员会来产生正确的余额规划结果。它通过解决两个问题来保障安全性：谁应该被选中加入委员会，以及决策委员会如何在正确规划结果上达成共识。本文为委员会成员选举设计了加密排序机制。委员会中的每个节点独立运行本文提出的余额规划算法并通过拜占庭协议达成共识。</li>
 </ol>
 </li>
-<li>本文在Ind上做了实验。 </li>
+<li>本文在Ind上搭建虚拟支付网络做了实验，因为<code>PnP</code>是第一个余额规划研究，所以在对比的时候是和它的一些变种（不同设计选择）对比。</li>
+<li>本文主要贡献如下：<ol>
+<li>设计了<code>PnP</code>作为支付网络的余额规划，是第一个研究这个的。</li>
+<li>为了防御攻击，设计了加密排序来选择决策委员会来运行规划算法。</li>
+<li>描述了最小化支付渠道保证金又同时满足所有节点支付需求这一问题。使用机会约束来描述支付需求的不确定性，并使用近似技术解决相关问题。</li>
+<li>在testbed上的30个节点测试了<code>PnP</code>，实验表明效果很好。</li>
 </ol>
-]]></content>
+</li>
+</ol>
+<h2 id="PRELIMINARIES-AND-MOTIVATION"><a href="#PRELIMINARIES-AND-MOTIVATION" class="headerlink" title="PRELIMINARIES AND MOTIVATION"></a>PRELIMINARIES AND MOTIVATION</h2><h3 id="支付渠道"><a href="#支付渠道" class="headerlink" title="支付渠道"></a>支付渠道</h3><h3 id="支付网络"><a href="#支付网络" class="headerlink" title="支付网络"></a>支付网络</h3><h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><h3 id="委员会选举"><a href="#委员会选举" class="headerlink" title="委员会选举"></a>委员会选举</h3><h3 id="非直连余额规划"><a href="#非直连余额规划" class="headerlink" title="非直连余额规划"></a>非直连余额规划</h3>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -164,7 +183,7 @@ P(B|D)=\frac{P(D|B)P(B)}{P(D)}=0*0.5/0.75=0</script><p>可以看出来扔出反�
       </categories>
       <tags>
         <tag>game theory</tag>
-        <tag>math</tag>
+        <tag>trustworthiness</tag>
       </tags>
   </entry>
   <entry>
@@ -1773,11 +1792,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts6449" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3844" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6449'));
+        var myChart = echarts.init(document.getElementById('echarts3844'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -1833,11 +1852,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2422" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9485" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2422'));
+        var myChart = echarts.init(document.getElementById('echarts9485'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -1887,11 +1906,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6620" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7172" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6620'));
+        var myChart = echarts.init(document.getElementById('echarts7172'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7566,11 +7585,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3847" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2066" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3847'));
+        var myChart = echarts.init(document.getElementById('echarts2066'));
         // 指定图表的配置项和数据
         var option = {
     title: {
