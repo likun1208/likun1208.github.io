@@ -102,9 +102,37 @@ y_{i j}=& P_{i}\left(x_{j}=1\right) \\
 &+P\left(x_{j}=1 \mid S_{i}=l\right) P\left(S_{i}=l\right)
 \end{aligned}
 $$
+其中，$P_{i}\left(x_{j}=1 \mid Q=h\right)$和$P_{i}\left(x_{j}=1 \mid Q=l\right)$可以从用户$j$在网络中之前发布过的报告$x_j$中获取。前者表示当用户$i$判断服务质量为高质量（即$S_i=h$）时用户$j$提交的报告也说服务是高质量。用户$i$的判断是私有信息，只有他自己知道，而先验信念$P_i(Q=h)$是用户$i$对服务质量的主观先验，与$P(S_i=h)$相同。类似地，$P_i(Q=l)$也等于$P(S_i=l)$。因此，我们可以得到上面公式中用$\triangleq$相连的等式。
+2. 发给云的后验信念报告：体验过服务后，用户$i$决定他自己对服务质量的判断$S_i=s_i$，然后将他关于对等用户$j$会上报该服务的质量评估为高质量这件事的后验信念（或称之为预测报告）发送给云，记作$y_{ij}^{'}(s_i)\in[0,1]$。则$y_{ij}^{'}$可以表示如下：
+$$
+\begin{aligned}
+y_{i j}^{\prime}\left(s_{i}\right)=& P_{i}\left(x_{j}=1 \mid S_{i}=s_{i}\right) \\
+=& P\left(x_{j}=1 \mid Q=h\right) P\left(Q=h \mid S_{i}=s_{i}\right) \\
+&+P\left(x_{j}=1 \mid Q=l\right) P\left(Q=l \mid S_{i}=s_{i}\right) .
+\end{aligned}
+$$
+与前文分析类似，$y_{ij}^{'}$可以被分为以下两种情况：
+$$
+\begin{aligned}
+y_{i j}^{\prime}(l) &=\frac{\varphi_{1}\left(1-P_{f, j}\right)+\varphi_{2} P_{m, j}}{\varphi_{1}+\varphi_{2}} \\
+y_{i j}^{\prime}(h) &=\frac{\varphi_{3}\left(1-P_{f, j}\right)+\varphi_{4} P_{m, j}}{\varphi_{3}+\varphi_{4}}
+\end{aligned}
+$$
 其中，
-2. 后验信念
-3. 
+$$
+\begin{array}{l}
+\varphi_{1}=P_{f a, i} P(Q=h), \quad \varphi_{2}=\left(1-P_{m d, i}\right) P(Q=l), \\
+\varphi_{3}=\left(1-P_{f a, i}\right) P(Q=h), \quad \varphi_{4}=P_{m d, i} P(Q=l)
+\end{array}
+$$
+如前文定义，$x_{ij}$是用户$i$在体验服务之前对$x_j=1$的先验判断。在用户$i$体验服务并发送报告$s_i=h$后，他理所当然有很大概率会判断$x_j=1$，即$y_{ij}^{'}(h)>y_{ij}$，这意味着用户$i$的先验信念$x_j=1$会被提高。与之相反，如果用户$i$收到了低质量服务，则$y_{ij}>y_{ij}^{'}(l)$。但是，当存在会提供不真实的服务评价的恶意用户时，上述不等式的关系将不再成立。引理1证明了会使得$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$出现的充分条件。
+引理1：在私有先验预测机制中，对于每个用户$i$，他对用户$j$的先验和后验信念报告分别是$y_{ij}$和$y^{'}_{ij}$，当所有用户都满足$P_{fa}+P_{md}<1$且$P_f+P_m<1$时，$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$成立。
+证明：在附录，先不看了
+注意：假设$P_{fa}<0.5$且$P_{md}<0.5$，对于所有用户而言，$P_{fa}+P_{md}<1$都成立。根据公式1和2，对于诚实用户即$\theta_i=0$，我们可得$P_{f,i}+P_{m,i}<1$.另一方面，对于不诚实用户（$\theta_i=1$），$P_{f,i}+P_{m,i}<1$能否成立取决于他的两个谎报概率$P_{f,i}^c$和$P_{m,i}^c$。有着相对高的$P_f^c>0.5$且/或$P_m^c$的彻底的恶意用户会同样有高$P_f>0.5$且/或$P_m>0.5$。有上述两种或两种之一作弊行为的用户可以根据他们以前的报告很容易被识别出来，因为其中的错误报告概率很高。如果评分系统移除有着较高的$P_f$和/或$P_m$的用户报告，则这些恶意报告就不会在系统更新服务评价时造成影响。因此，要实现连续的欺骗，恶意用户需要控制他们的$P_f^c$和$P_m^c$，从而伪装成偶尔可信的用户，以确保$P_f<0.5$且$P_m<0.5$。因此，引理1中的条件$P_f+P_m<1$是合理的，且这种情况下，不等式$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$始终成立。
+
+3. 推断意见报告：
+
+ 
 
 
 
