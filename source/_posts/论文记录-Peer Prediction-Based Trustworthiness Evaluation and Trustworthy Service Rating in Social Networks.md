@@ -103,6 +103,7 @@ y_{i j}=& P_{i}\left(x_{j}=1\right) \\
 \end{aligned}
 $$
 其中，$P_{i}\left(x_{j}=1 \mid Q=h\right)$和$P_{i}\left(x_{j}=1 \mid Q=l\right)$可以从用户$j$在网络中之前发布过的报告$x_j$中获取。前者表示当用户$i$判断服务质量为高质量（即$S_i=h$）时用户$j$提交的报告也说服务是高质量。用户$i$的判断是私有信息，只有他自己知道，而先验信念$P_i(Q=h)$是用户$i$对服务质量的主观先验，与$P(S_i=h)$相同。类似地，$P_i(Q=l)$也等于$P(S_i=l)$。因此，我们可以得到上面公式中用$\triangleq$相连的等式。
+
 2. 发给云的后验信念报告：体验过服务后，用户$i$决定他自己对服务质量的判断$S_i=s_i$，然后将他关于对等用户$j$会上报该服务的质量评估为高质量这件事的后验信念（或称之为预测报告）发送给云，记作$y_{ij}^{'}(s_i)\in[0,1]$。则$y_{ij}^{'}$可以表示如下：
 $$
 \begin{aligned}
@@ -128,15 +129,111 @@ $$
 如前文定义，$x_{ij}$是用户$i$在体验服务之前对$x_j=1$的先验判断。在用户$i$体验服务并发送报告$s_i=h$后，他理所当然有很大概率会判断$x_j=1$，即$y_{ij}^{'}(h)>y_{ij}$，这意味着用户$i$的先验信念$x_j=1$会被提高。与之相反，如果用户$i$收到了低质量服务，则$y_{ij}>y_{ij}^{'}(l)$。但是，当存在会提供不真实的服务评价的恶意用户时，上述不等式的关系将不再成立。引理1证明了会使得$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$出现的充分条件。
 引理1：在私有先验预测机制中，对于每个用户$i$，他对用户$j$的先验和后验信念报告分别是$y_{ij}$和$y^{'}_{ij}$，当所有用户都满足$P_{fa}+P_{md}<1$且$P_f+P_m<1$时，$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$成立。
 证明：在附录，先不看了
-注意：假设$P_{fa}<0.5$且$P_{md}<0.5$，对于所有用户而言，$P_{fa}+P_{md}<1$都成立。根据公式1和2，对于诚实用户即$\theta_i=0$，我们可得$P_{f,i}+P_{m,i}<1$.另一方面，对于不诚实用户（$\theta_i=1$），$P_{f,i}+P_{m,i}<1$能否成立取决于他的两个谎报概率$P_{f,i}^c$和$P_{m,i}^c$。有着相对高的$P_f^c>0.5$且/或$P_m^c$的彻底的恶意用户会同样有高$P_f>0.5$且/或$P_m>0.5$。有上述两种或两种之一作弊行为的用户可以根据他们以前的报告很容易被识别出来，因为其中的错误报告概率很高。如果评分系统移除有着较高的$P_f$和/或$P_m$的用户报告，则这些恶意报告就不会在系统更新服务评价时造成影响。因此，要实现连续的欺骗，恶意用户需要控制他们的$P_f^c$和$P_m^c$，从而伪装成偶尔可信的用户，以确保$P_f<0.5$且$P_m<0.5$。因此，引理1中的条件$P_f+P_m<1$是合理的，且这种情况下，不等式$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$始终成立。
+备注：假设$P_{fa}<0.5$且$P_{md}<0.5$，对于所有用户而言，$P_{fa}+P_{md}<1$都成立。根据公式1和2，对于诚实用户即$\theta_i=0$，我们可得$P_{f,i}+P_{m,i}<1$.另一方面，对于不诚实用户（$\theta_i=1$），$P_{f,i}+P_{m,i}<1$能否成立取决于他的两个谎报概率$P_{f,i}^c$和$P_{m,i}^c$。有着相对高的$P_f^c>0.5$且/或$P_m^c$的彻底的恶意用户会同样有高$P_f>0.5$且/或$P_m>0.5$。有上述两种或两种之一作弊行为的用户可以根据他们以前的报告很容易被识别出来，因为其中的错误报告概率很高。如果评分系统移除有着较高的$P_f$和/或$P_m$的用户报告，则这些恶意报告就不会在系统更新服务评价时造成影响。因此，要实现连续的欺骗，恶意用户需要控制他们的$P_f^c$和$P_m^c$，从而伪装成偶尔可信的用户，以确保$P_f<0.5$且$P_m<0.5$。因此，引理1中的条件$P_f+P_m<1$是合理的，且这种情况下，不等式$y_{i j}^{\prime}(h)>y_{i j}>y_{i j}^{\prime}(l)$始终成立。
 
-3. 推断意见报告：
+3. 推断意见报告：用户$i$发送他对同事$j$会报告$x_j=1$这件事的先验和后验信念概率，而不是报告自己对服务质量的私有评价$S_i$或$x_i$。我们可以注意到，$x_i$和$x_j$都不由相关用户直接提供。在基础私有先验对等预测中，用户$i$仅向云发送报告$y_{ij}$和$y_{ij}^{'}(s_i)$，基于此，DPC推断意见报告$x_i$并将它向社交服务评估平台公布。推断意见报告$x_i$的计算方式如下：
+$$
+x_{i}=x\left(y_{i j}, y_{i j}^{\prime}\right)=\left\{\begin{array}{ll}
+1, & y_{i j}^{\prime}>y_{i j} \\
+0, & y_{i j}^{\prime}<y_{i j}
+\end{array}\right.
+$$
+备注：根据引理1，当用户$i$和用户$j$都满足$P_{fa}+P_{md}<1$且$P_f+P_m<1$时，$y_{ij}^{'}(h)>y_{ij}>y_{ij}^{'}(l)$。换言之，当用户$i$在体验服务后对它的质量判断为高质量（$S_i=h$），不等式$y_{ij}^{'}(h)$始终成立。由此，根据公式8，DPC推断意见报告为$x_i=1$因为$y_{ij}^{'}>y_{ij}$。因此这个推断报告$x_i=1$与用户$i$的真实判断$S_i=h$是一致的。对称地，当$S_i=l$时，公式8仍然可以推断真实意见报告$x_i=0$。因此，在$P_{fa}+P_{md}<1$和$P_f+P_m<1$的条件下，由公式8所决定的规则可以如实反映诚实用户的判断。
 
- 
+4. 用户可信度：基于报告$y_{ij}$和$y_{ij}^{'}$，DPC通过一个确定的计分规则来计算用户$i$的可信度，信任度低的用户被归类为恶意用户，他们的报告将在服务评级系统中不被考虑。接下来，我们首先介绍严格正确的计分规则，它可以激励用户提供真实的报告$y_{ij}$和$y_{ij}^{'}$。
 
+定义1（严格正确的计分规则）：如果一个二进制评分规则导致代理人可以通过如实提供自己的报告$y\in[0,1]$来最大化自己的得分，则该规则就是正确的，且如果一个代理人当且仅当如实报告时能最大化得分，则该规则是严格正确的。
 
+分别如(9)和(10)所示的二元对数和二次函数评分规则是严格正确的，这在[30]中已经得到证明：
+
+对数：
+$$
+\begin{array}{l}
+R_{l}(y, \omega=1)=\ln y \\
+R_{l}(y, \omega=0)=\ln (1-y) .
+\end{array}
+$$
+
+二次函数：
+$$
+\begin{array}{l}
+R_{q}(y, \omega=1)=2 y-y^{2} \\
+R_{q}(y, \omega=0)=1-y^{2}
+\end{array}
+$$
+在上面两组公式中，$\omega\in\lbrace 0,1\rbrace$表示一个二值报告。
+
+我们定义用户$i$的可信度为关于$y_{ij},y_{ij}^{'},x_j$的函数：
+$$
+T_{i}=\alpha R\left(y_{i j}, x_{j}\right)+(1-\alpha) R\left(y_{i j}^{\prime}, x_{j}\right)+\beta
+$$
+ 其中，$R(y,\omega)$是严格正确评分规则，$\alpha\in[0,1]$是先验和后验重要性的权重参数。此外，可信度在服务和评分过程中会进行累积。负面的信任度可以是金钱上的惩罚，也可以是对相应用户提供报告的限制，而负面的收益将作为正面的收益转移给用户，作为对他们荣誉和准确报告的奖励。因此，为了保证预算均衡，$\beta$如下计算：
+ $$
+ \beta=-\frac{1}{N} \sum_{k=1}^{N}\left[\alpha R\left(y_{k j}, x_{j}\right)+(1-\alpha) R\left(y_{k j}^{\prime}, x_{j}\right)\right]
+ $$
+在公式11（$T_i$的公式）中，$y_{ij}$和$y_{ij}^{'}$分别是用户$i$判定$S_i=s_i$前后的报告，$x_j$是DPC根据用户$j$的报告推断出的用户$j$的隐性意见报告。此外，根据上述分析，我们可以注意到，用户$i$的可信度是由用户$j$的推断意见报告$x_j$、用户$i$的先验信念报告$y_{ij}$和后验信念报告$y_{ij}^{'}$决定的。换句话说，一个用户的可信度与系统中其他用户的报告或推断的报告无关。因此，恶意用户的合作作弊对用户可信度的评价影响不大，这是由（11）定义的。
 
 ### 激励相容
+如[33]所说，用户$i$提出的先验信念报告$y_{ij}$和后验信念报告$y_{ij}^{'}(s_i)$在时间上是分离的，因为它们分别发生在做出判断$S_i=s_i$前后。因此，$y_{ij}$和$y_{ij}^{'}(s_i)$是独立的，可得：
+$$
+\begin{aligned}
+E\left[T_{i}\right]=& E\left[\alpha R\left(y_{i j}, x_{j}\right)\right]+E\left[(1-\alpha) R\left(y_{i j}^{\prime}, x_{j}\right)\right]+E[\beta] \\
+=& \alpha\left(1-\frac{1}{N}\right) E\left[R\left(y_{i j}, x_{j}\right)\right] \\
+&+(1-\alpha)\left(1-\frac{1}{N}\right) E\left[R\left(y_{i j}^{\prime}, x_{j}\right) \mid S_{i}=s_{i}\right] \\
+&-\frac{1}{N} \sum_{k=1, k \neq i}^{N}\left[\alpha R\left(y_{k j}, x_{j}\right)+(1-\alpha) R\left(y_{k j}^{\prime}, x_{j}\right)\right],
+\end{aligned}
+$$
+其中，$\alpha\left(1-\frac{1}{N}\right) R\left(y_{i j}, x_{j}\right)$和$(1-\alpha)\left(1-\frac{1}{N}\right) R\left(y_{i j}^{\prime}, x_{j}\right)$仍然是严格正确的[32]。
+
+1. 二值对数评分规则
+令$p_1=P(x_j=1)$且$p_2=P(x_j=1|S_i=s_i)$，由此可得：
+$$
+\begin{aligned}
+E\left[T_{i}\right]=& \alpha\left(1-\frac{1}{N}\right)\left[p_{1} \ln y_{i j}+\left(1-p_{1}\right) \ln \left(1-y_{i j}\right)\right] \\
+=& \alpha\left(1-\frac{1}{N}\right)\left[p_{1} \ln y_{i j}^{\prime}+\left(1-p_{1}\right) \ln \left(1-y_{i j}^{\prime}\right)\right] \\
+&-\frac{1}{N} \sum_{k=1, k \neq i}^{N}\left[\alpha R\left(y_{k j}, x_{j}\right)+(1-\alpha) R\left(y_{k j}^{\prime}, x_{j}\right)\right] .
+\end{aligned}
+$$
+分别求偏导：
+$$
+\begin{array}{l}
+\frac{\partial E\left[T_{i}\right]}{\partial y_{i j}}=\alpha\left(1-\frac{1}{N}\right) \frac{p_{1}-y_{i j}}{y_{i j}\left(1-y_{i j}\right)}=0 \\
+\frac{\partial E\left[T_{i}\right]}{\partial y_{i j}^{\prime}}=\alpha\left(1-\frac{1}{N}\right) \frac{p_{1}-y_{i j}^{\prime}}{y_{i j}^{\prime}\left(1-y_{i j}^{\prime}\right)}=0 .
+\end{array}
+$$
+因此可得最优值：
+$$
+\begin{array}{l}
+\hat{y}_{i j}=p_{1}=P\left(x_{j}=1\right) \\
+\hat{y}_{i j}^{\prime}=p_{2}=P\left(x_{j}=1 \mid S_{i}=s_{i}\right)
+\end{array}
+$$
+然后求二阶偏导，令$y_{ij}=\hat{y}_{ij}$且$y_{ij}^{'}=\hat{y}_{ij}^{'}$，可得：
+$$
+\begin{array}{l}
+\left.\frac{\partial E^{2}\left[T_{i}\right]}{\partial y_{i j}^{2}}\right|_{y_{i j}=\hat{y}_{i j}}=\alpha\left(1-\frac{1}{N}\right) \frac{y_{i j}\left(y_{i j}-1\right)}{y_{i j}^{2}\left(1-y_{i j}\right)^{2}}<0, \\
+\left.\frac{\partial E^{2}\left[T_{i}\right]}{\partial y_{i j}^{\prime 2}}\right|_{y_{i j}^{\prime}=\hat{y}_{i j}^{\prime}}=\alpha\left(1-\frac{1}{N}\right) \frac{y_{i j}^{\prime}\left(y_{i j}^{\prime}-1\right)}{y_{i j}^{\prime 2}\left(1-y_{i j}^{\prime}\right)^{2}}<0 .
+\end{array}
+$$
+因此，当$y_{ij}=p_1$且$y_{ij}^{'}=p_2$时，$E[T_i]$可达到最大值，这意味着当且仅当用户$i$如实报告$y_{ij}$和$y_{ij}^{'}$时他可以获取最大的可信度。
+
+2. 二值二次函数评分规则：
+$$
+\begin{aligned}
+E\left[T_{i}\right] \\
+=& \alpha\left(1-\frac{1}{N}\right)\left[p_{1}\left(2 y_{i j}-y_{i j}^{2}\right)+\left(1-p_{1}\right)\left(1-y_{i j}^{2}\right)\right] \\
+&+(1-\alpha)\left(1-\frac{1}{N}\right)\left[p_{2}\left(2 y_{i j}^{\prime}-y_{i j}^{\prime}{ }^{2}\right)+\left(1-p_{2}\right)\left(1-y_{i j}^{\prime}{ }^{2}\right)\right] \\
+&-\frac{1}{N} \sum_{k=1, k \neq i}^{N}\left[\alpha R\left(y_{k j}, x_{j}\right)+(1-\alpha) R\left(y_{k j}^{\prime}, x_{j}\right)\right] .
+\end{aligned}
+$$
+仍然是求偏导，可以得到和对数函数一样的最优值。然后求二阶偏导，可得下述不等式恒成立：
+$$
+\frac{\partial E^{2}\left[T_{i}\right]}{\partial y_{i j}^{2}}=\frac{\partial E^{2}\left[T_{i}\right]}{\partial y_{i j}^{\prime 2}}=-2 \alpha\left(1-\frac{1}{N}\right)<0
+$$
+
+备注：
+
+
 
 ## 基于用户可信度和不可靠度的服务评级
 ### 用户报告的不可靠度
