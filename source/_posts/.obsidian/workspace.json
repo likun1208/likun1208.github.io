@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md"
+                "file": "论文记录-A Bayesian Truth Serum for Subjective Data.md"
               }
             }
           }
@@ -138,10 +138,10 @@
   },
   "active": "47b23f6f5b532216",
   "lastOpenFiles": [
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-A solution to the single-question crowd wisdom problem.md",
+    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
     "论文记录-Theories of Bargaining Delays.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",

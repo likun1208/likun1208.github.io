@@ -170,3 +170,111 @@ A线和B线的不同之处在于，A线的先验概率被假定为50%，B线为2
 ## 我的问题
 1. 公式里的$\bar{y_k}$如果是0怎么办？
 2. 信息分那里为什么要取对数？如果不取对数，效果是不是仍然一样？大小关系感觉没变。
+
+## 其他资料
+[资料来源](https://wesselb.github.io/assets/write-ups/Bruinsma,%20A%20Bayesian%20Truth%20Serum.pdf)
+假设一些人参加了一个带有主观问题的调查。你被要求对这个问题的答案分布做出最佳猜测。作为一个人，你的猜测并非完全不知情：你知道自己对这个调查问题的看法。尽管这个样本可能不能说明人口的分布情况，但它确实构成了一个有效的样本，因此应该说明一些问题；也就是说，在某种程度上，一个人的意见是一个信息丰富的 "一个样本"。
+
+你的最优猜测记作$f$，它由每一个答案的频率组成。与人口群体的平均最优猜测即公共预测$<f>$相比，可以预计$f-<f>$会在你的意见取最高值，因为与常见的预测不同，你的最佳猜测是由你的意见提供的，尽管是非常轻微的；这种现象在实践中确实被观察到。因此，如果你是一个元理性的贝叶斯代理人，并意识到这种情况，你应该相信你的意见具有最高的概率，比通常预测的更常见。
+
+贝叶斯吐真剂是基于上述现象的。在BTS中，答案的评分标准是衡量一个答案与常见预测值相比有多普遍。事实上，如上所述，从受访者的角度来看，诚实回答就能获得最高分的概率最大。
+
+### 模型
+除了给出每个问题的回答$x^n$，BTS还要求受访者$n$给出他对该问题答案分布的最优猜测$f^n$，这些随机变量的模型如下图所示，
+
+![BTS模型图](https://github.com/likun1208/image/blob/master/BTS-1.png?raw=true)
+
+每一个个体$n$都持有意见$t^n$，我们将$t^n=i$简化表达为$t^n_i$。所有个体的意见都有条件独立，条件是给定潜在变量$\omega$，对于每个个体而言分布都是$p(t_i^n|\omega)=w_i$。此外，给定个体$n$的意见$t^n$，他们会根据回答策略$p(x^n|t^n)$来给出答案$x^n$，我们将$x^n=i$简化表达为$x^n_i$。个体$n$对其他回答$i$的频率预测记作$f^n_i$。需要注意的是，假设存在潜在变量$\omega$使得$p(t^n_i|\omega)=\omega_i$就意味着假设个体意见$t^n$服从一个可交换序列。
+
+一般来说我们讨论哪一个个体都是无所谓的。为了简化，我们省略个体索引，例如$t_i$表示意见为$i$的个体，$x_j$表示回答为$j$的个体，$f_k$表示个体对回答$k$的频率预测为$f_k$。
+
+## 评分
+给定回答$x^n$和预测频率$f^n$，BTS的评分为：
+$$
+\begin{aligned}
+S\left(x_{i}, f\right) &=\overbrace{\log \frac{\langle x\rangle_{i}}{\langle f\rangle_{i}}}^{\text {information score }}-\overbrace{\sum_{j}\langle x\rangle_{j} \log \frac{f_{j}}{\langle x\rangle_{j}}}^{\text {prediction penalty }}, \\
+\langle x\rangle_{i} &=\text { average of }\left(\mathbb{1}\left(x^{n}=i\right)\right), \\
+\langle f\rangle &=\text { geometric average of }\left(f^{n}\right) .
+\end{aligned}
+$$
+评分函数由两部分组成：
+1. 信息分衡量的是答案$i$与公共预测相比的常见程度。
+2. 预测惩罚形成了真实和预测的答案频率之间的Kullback-Leibler（KL）散度。
+
+KL散度描述了我们用分布$Q$来估计数据的真实分布$P$的编码损失。
+
+## 属性
+**假设3.1**：可交换性。个体意见$t^n$组成了一个可交换序列。该假设证明了BTS所假设的图形模型的合理性。
+
+**假设3.2**：随机相关性。不同意见表示$\omega$的不同先验分布：如果$i\neq j$，则$p(\omega|t_i)\neq p(\omega|t_j)$。该假设是一个技术上的便利，将被用来得出最大化者的唯一性的结论。
+
+**假设3.3**：样本量足够大。$<x>$和$<f>$的方差足够小从而可以用极限来求近似。
+
+**定理3.1**：说真话是均衡解。假设一个受访者持有意见$k$、回答$i$和预测$f$，且其他人都如实回答和预测。则该受访者也最好如实回答和预测：
+$$
+\max _{(i, f)} \mathbb{E}\left(S\left(x_{i}, f\right) \mid t_{k}\right)=\left(k, p\left(t \mid t_{k}\right)\right)
+$$
+此外，
+$$
+\mathbb{E}\left(\text { information score }\left(x_{i}\right) \mid t_{i}\right)=\sum_{j} p\left(t_{j} \mid t_{i}\right) \mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{i}, t_{j}\right) \| p\left(\omega \mid t_{j}\right)\right) \text {. }
+$$
+证明：如果其他人如实回答和预测，则
+$$
+\langle x\rangle_{i} \approx p\left(t_{i} \mid \omega\right)=\omega_{i}, \quad \log \langle f\rangle_{i} \approx \sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(t_{i} \mid t_{j}\right)=\sum_{j} \omega_{j} \log p\left(t_{i} \mid t_{j}\right)
+$$
+信息分仅取决于$i$，而预测惩罚仅取决于$f$，因此我们可以分开考虑它们。
+首先，
+$$
+\begin{aligned}
+\mathbb{E}\left(\text { information score }\left(x_{i}\right) \mid t_{k}\right) & =\int p\left(\omega \mid t_{k}\right) \sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{p\left(t_{i} \mid \omega\right)}{p\left(t_{i} \mid t_{j}\right)} \\
+& =\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid t_{i}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega \\
+& \leq \sum_{j} p\left(t_{j} \mid t_{i}\right) \operatorname{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{i}, t_{j}\right) \| p\left(\omega \mid t_{j}\right)\right)
+\end{aligned}
+$$
+当且仅当$k=i$时取等号。
+第二，
+$$
+\begin{aligned}
+\mathbb{E}\left(\text { prediction penalty }(f) \mid t_{k}\right) & =\int p\left(\omega \mid t_{k}\right) \sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{f_{j}}{p\left(t_{j} \mid \omega\right)} \frac{p\left(t_{j} \mid t_{k}\right)}{p\left(t_{j} \mid t_{k}\right)} \mathrm{d} \omega \\
+& =\int p\left(\omega \mid t_{k}, t_{j}\right) \sum_{j} p\left(t_{j} \mid t_{k}\right) \log \frac{f_{j}}{p\left(t_{j} \mid t_{k}\right)} \frac{p\left(\omega \mid t_{k}\right)}{p\left(\omega \mid t_{k}, t_{j}\right)} \mathrm{d} \omega \\
+& \leq-\mathrm{D}_{\mathrm{KL}}\left(f_{j} \| p\left(t_{j} \mid t_{k}\right)\right)-\sum_{j} p\left(t_{j} \mid t_{k}\right) \mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{k}, t_{j}\right) \| p\left(\omega \mid t_{k}\right)\right)
+\end{aligned}
+$$
+当且仅当$f_j=p(t_j|t_k)$时取等号。
+
+定理3.1说明了说真话是贝叶斯纳什均衡。它还表明，讲真话的信息分数，也是最佳的信息分数，衡量的是另一个人的后验分布在得知你的意见后平均变化的程度；这表明专家可能享有更高的预期信息分数。下面的命题表明，讲真话也是最优贝叶斯纳什均衡。
+
+**定理3.2**：说真话是最优均衡。说真话的均衡解是最大化期望信息分的均衡。
+
+证明：在任意一个均衡中
+$$
+\langle x\rangle_{i} \approx p\left(x_{i} \mid \omega\right), \quad \log \langle f\rangle_{i} \approx \sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(x_{i} \mid t_{j}\right)
+$$
+则：
+$$
+\begin{array}{l}
+\left.\mathbb{E} \text { (information score }\left(x_{i}\right) \mid t_{k}\right) \\
+\quad=\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid x_{i}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega \\
+\quad=\underbrace{\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega}_{\text {truth-telling equilibrium }}+\sum_{j} p\left(t_{j} \mid t_{k}\right) \underbrace{\int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid x_{i}, t_{j}\right)}{p\left(\omega \mid t_{k}, t_{j}\right)} \mathrm{d} \omega .}_{-\mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{k}, t_{j}\right) \| p\left(\omega \mid x_{i}, t_{j}\right)\right) \leq 0}
+\end{array}
+$$
+最后，在说真话的均衡中，BTS是零和博弈，分数表征了与先验期望频率相比一个答案有多普遍。
+
+**定理3.3**：零和博弈。在说真话博弈中，分数在极限时加起来是0：
+$$
+\sum_{i} p\left(t_{i} \mid \omega\right) S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=0 .
+$$
+此外，
+$$
+S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=\log \frac{\omega_{i}}{\mathbb{E}_{p(\omega)}\left(\omega_{i}\right)}+\operatorname{constant}(\omega) .
+$$
+证明：
+$$
+S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=\sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{j}\right)}=\log p\left(\omega \mid t_{i}\right)-\sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(\omega \mid t_{j}\right)
+$$
+
+
+
+
+
+
