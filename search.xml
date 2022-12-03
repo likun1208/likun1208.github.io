@@ -267,6 +267,11 @@ E\left[T_{i}\right] \\
 <p>本文提出一种替代算法，它要求受访者预测其他人对该问题的回答的分布，并选择那些比预测得到更多支持的回答。算法的直观描述如下：想象有两个平行宇宙，正宇宙里费城不是宾州的首府，而反宇宙里费城就是首府。针对“费城是否为宾州首府”这个问题，正宇宙里认为“是”的人比反宇宙要少。该问题可以形式化为扔有偏硬币的问题，该硬币在正宇宙有<code>60%</code>的概率扔出“是”，而在反宇宙有<code>90%</code>的概率扔出“是”。两个宇宙的主流观点都是“是”，人们知道硬币是有偏差的，但不知道哪个宇宙是正宇宙。因此，他们对赞成票的预测频率将在60%到90%之间。然而，正宇宙中的赞成票会收敛到60%，于是反对票就是那个比预测能得到更多支持的答案，同时也是正确答案。</p>
 <p>我们将这个选择原则称为“出乎意料的受欢迎”（SP）算法，并在补充材料中严格定义了它。在一个问题(P)中，数据显示投赞成票的受访者相信几乎所有人都同意他们，而投反对票的人认为自己会占少数。投赞成票的平均预测百分比很高，导致实际投赞成票的百分比低于这些预测。因此，出乎意料受欢迎的回答是“否”，而这正是正确答案。相反，在哥伦比亚问题中，预测的赞成票低于实际的赞成票，出乎意料受欢迎的答案和实际确实受欢迎的答案是一致的，由此多数人的判断是正确的。</p>
 <p>是否可以利用受访者的信心构建一个同样有效的算法？假设受访者知道先验的世界概率和硬币偏见。每个受访者观察他们的私人硬币投掷结果，并通过应用贝叶斯规则计算他们的信心。假设的算法将需要从报告的信任度的大样本中识别正宇宙的硬币。图2通过反例证明了不存在这样的算法(附件中的定理1提供了一个一般不可能的结果)。它展示了对于两个不同的有偏见的硬币问题，一个正确答案是肯定的，另一个正确答案是否定的，信心的相同分布是如何产生的。诚然，真实的人可能不会遵循理想化的贝叶斯模型。我们的观点是，如果基于后验概率(投票和信心)的方法对理想中的受访者无效，那么对真正的受访者也可能无效。</p>
+<p>相比之下，SP算法有一个理论上的保证，即它总是根据现有证据选择最佳答案（补充资料中的定理2）。定理3将该算法扩展到多选题，并显示了投票预测如何能够识别出对正确答案给予最高概率的受访者。这些结果是基于一个共同的理论模型，该模型将有偏见的硬币的例子推广到多个多面硬币上。</p>
+<p>为了测试SP算法，我们用四种类型的语义和知觉内容进行了研究（详情见SI）。研究1a, b, c使用了50个美国州首府问题，用不同的人群重复其格式（P）。研究2采用了80个一般知识问题。</p>
+<p>研究3要求专业皮肤科医生将80张皮肤病变图片诊断为良性或恶性。研究4a、b向非专业人士和艺术专业人士展示了90件20世纪的艺术品（图3），并要求他们预测正确的市场价格类别。所有的研究都包括一个二分法的投票问题，总共产生了490个项目。研究1c、2和3另外还测量了信心。预测的投票频率是通过对所有受访者的预测进行平均来计算的（详情见补充资料）。</p>
+<p>我们首先测试了四种算法的配对准确性：多数票、SP、信心加权票和最大信心，后者选择平均信心最高的答案。在所有490个项目中，相对于简单的多数票，SP算法减少了21.3%的错误（通过双侧匹配对符号测试，P &lt; 0.0005）。在测量信心的290个项目中，相对于多数票，减少了35.8%（P &lt; 0.001），相对于信心加权票，减少了24.2%（P = 0.0107），相对于最大信心，减少了22.2%（P &lt; 0.13）。</p>
+<p>当同一研究中不同正确答案的频率不平衡时，百分比的一致可能是偶然的高。因此，我们通过分类相关系数，如Cohen’s kappa、F1得分或Matthews相关，评估一项研究中的分类准确性。SP算法在每项研究中的卡帕值都是最高的（图4）；其他系数产生类似的排名（扩展数据图1-3）。</p>
 ]]></content>
       <categories>
         <category>论文</category>
@@ -383,7 +388,65 @@ P(B|D)=\frac{P(D|B)P(B)}{P(D)}=0*0.5/0.75=0</script><p>可以看出来扔出反�
 <li>公式里的$\bar{y_k}$如果是0怎么办？</li>
 <li>信息分那里为什么要取对数？如果不取对数，效果是不是仍然一样？大小关系感觉没变。</li>
 </ol>
-]]></content>
+<h2 id="其他资料"><a href="#其他资料" class="headerlink" title="其他资料"></a>其他资料</h2><p><a href="https://wesselb.github.io/assets/write-ups/Bruinsma,%20A%20Bayesian%20Truth%20Serum.pdf" target="_blank" rel="noopener">资料来源</a><br>假设一些人参加了一个带有主观问题的调查。你被要求对这个问题的答案分布做出最佳猜测。作为一个人，你的猜测并非完全不知情：你知道自己对这个调查问题的看法。尽管这个样本可能不能说明人口的分布情况，但它确实构成了一个有效的样本，因此应该说明一些问题；也就是说，在某种程度上，一个人的意见是一个信息丰富的 “一个样本”。</p>
+<p>你的最优猜测记作$f$，它由每一个答案的频率组成。与人口群体的平均最优猜测即公共预测$<f>$相比，可以预计$f-<f>$会在你的意见取最高值，因为与常见的预测不同，你的最佳猜测是由你的意见提供的，尽管是非常轻微的；这种现象在实践中确实被观察到。因此，如果你是一个元理性的贝叶斯代理人，并意识到这种情况，你应该相信你的意见具有最高的概率，比通常预测的更常见。</p>
+<p>贝叶斯吐真剂是基于上述现象的。在BTS中，答案的评分标准是衡量一个答案与常见预测值相比有多普遍。事实上，如上所述，从受访者的角度来看，诚实回答就能获得最高分的概率最大。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>除了给出每个问题的回答$x^n$，BTS还要求受访者$n$给出他对该问题答案分布的最优猜测$f^n$，这些随机变量的模型如下图所示，</p>
+<p><img src="https://github.com/likun1208/image/blob/master/BTS-1.png?raw=true" alt="BTS模型图"></p>
+<p>每一个个体$n$都持有意见$t^n$，我们将$t^n=i$简化表达为$t^n_i$。所有个体的意见都有条件独立，条件是给定潜在变量$\omega$，对于每个个体而言分布都是$p(t_i^n|\omega)=w_i$。此外，给定个体$n$的意见$t^n$，他们会根据回答策略$p(x^n|t^n)$来给出答案$x^n$，我们将$x^n=i$简化表达为$x^n_i$。个体$n$对其他回答$i$的频率预测记作$f^n_i$。需要注意的是，假设存在潜在变量$\omega$使得$p(t^n_i|\omega)=\omega_i$就意味着假设个体意见$t^n$服从一个可交换序列。</p>
+<p>一般来说我们讨论哪一个个体都是无所谓的。为了简化，我们省略个体索引，例如$t_i$表示意见为$i$的个体，$x_j$表示回答为$j$的个体，$f_k$表示个体对回答$k$的频率预测为$f_k$。</p>
+<h2 id="评分"><a href="#评分" class="headerlink" title="评分"></a>评分</h2><p>给定回答$x^n$和预测频率$f^n$，BTS的评分为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S\left(x_{i}, f\right) &=\overbrace{\log \frac{\langle x\rangle_{i}}{\langle f\rangle_{i}}}^{\text {information score }}-\overbrace{\sum_{j}\langle x\rangle_{j} \log \frac{f_{j}}{\langle x\rangle_{j}}}^{\text {prediction penalty }}, \\
+\langle x\rangle_{i} &=\text { average of }\left(\mathbb{1}\left(x^{n}=i\right)\right), \\
+\langle f\rangle &=\text { geometric average of }\left(f^{n}\right) .
+\end{aligned}</script><p>评分函数由两部分组成：</p>
+<ol>
+<li>信息分衡量的是答案$i$与公共预测相比的常见程度。</li>
+<li>预测惩罚形成了真实和预测的答案频率之间的Kullback-Leibler（KL）散度。</li>
+</ol>
+<p>KL散度描述了我们用分布$Q$来估计数据的真实分布$P$的编码损失。</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong>假设3.1</strong>：可交换性。个体意见$t^n$组成了一个可交换序列。该假设证明了BTS所假设的图形模型的合理性。</p>
+<p><strong>假设3.2</strong>：随机相关性。不同意见表示$\omega$的不同先验分布：如果$i\neq j$，则$p(\omega|t_i)\neq p(\omega|t_j)$。该假设是一个技术上的便利，将被用来得出最大化者的唯一性的结论。</p>
+<p><strong>假设3.3</strong>：样本量足够大。$<x>$和$<f>$的方差足够小从而可以用极限来求近似。</p>
+<p><strong>定理3.1</strong>：说真话是均衡解。假设一个受访者持有意见$k$、回答$i$和预测$f$，且其他人都如实回答和预测。则该受访者也最好如实回答和预测：</p>
+<script type="math/tex; mode=display">
+\max _{(i, f)} \mathbb{E}\left(S\left(x_{i}, f\right) \mid t_{k}\right)=\left(k, p\left(t \mid t_{k}\right)\right)</script><p>此外，</p>
+<script type="math/tex; mode=display">
+\mathbb{E}\left(\text { information score }\left(x_{i}\right) \mid t_{i}\right)=\sum_{j} p\left(t_{j} \mid t_{i}\right) \mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{i}, t_{j}\right) \| p\left(\omega \mid t_{j}\right)\right) \text {. }</script><p>证明：如果其他人如实回答和预测，则</p>
+<script type="math/tex; mode=display">
+\langle x\rangle_{i} \approx p\left(t_{i} \mid \omega\right)=\omega_{i}, \quad \log \langle f\rangle_{i} \approx \sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(t_{i} \mid t_{j}\right)=\sum_{j} \omega_{j} \log p\left(t_{i} \mid t_{j}\right)</script><p>信息分仅取决于$i$，而预测惩罚仅取决于$f$，因此我们可以分开考虑它们。<br>首先，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}\left(\text { information score }\left(x_{i}\right) \mid t_{k}\right) & =\int p\left(\omega \mid t_{k}\right) \sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{p\left(t_{i} \mid \omega\right)}{p\left(t_{i} \mid t_{j}\right)} \\
+& =\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid t_{i}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega \\
+& \leq \sum_{j} p\left(t_{j} \mid t_{i}\right) \operatorname{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{i}, t_{j}\right) \| p\left(\omega \mid t_{j}\right)\right)
+\end{aligned}</script><p>当且仅当$k=i$时取等号。<br>第二，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}\left(\text { prediction penalty }(f) \mid t_{k}\right) & =\int p\left(\omega \mid t_{k}\right) \sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{f_{j}}{p\left(t_{j} \mid \omega\right)} \frac{p\left(t_{j} \mid t_{k}\right)}{p\left(t_{j} \mid t_{k}\right)} \mathrm{d} \omega \\
+& =\int p\left(\omega \mid t_{k}, t_{j}\right) \sum_{j} p\left(t_{j} \mid t_{k}\right) \log \frac{f_{j}}{p\left(t_{j} \mid t_{k}\right)} \frac{p\left(\omega \mid t_{k}\right)}{p\left(\omega \mid t_{k}, t_{j}\right)} \mathrm{d} \omega \\
+& \leq-\mathrm{D}_{\mathrm{KL}}\left(f_{j} \| p\left(t_{j} \mid t_{k}\right)\right)-\sum_{j} p\left(t_{j} \mid t_{k}\right) \mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{k}, t_{j}\right) \| p\left(\omega \mid t_{k}\right)\right)
+\end{aligned}</script><p>当且仅当$f_j=p(t_j|t_k)$时取等号。</p>
+<p>定理3.1说明了说真话是贝叶斯纳什均衡。它还表明，讲真话的信息分数，也是最佳的信息分数，衡量的是另一个人的后验分布在得知你的意见后平均变化的程度；这表明专家可能享有更高的预期信息分数。下面的命题表明，讲真话也是最优贝叶斯纳什均衡。</p>
+<p><strong>定理3.2</strong>：说真话是最优均衡。说真话的均衡解是最大化期望信息分的均衡。</p>
+<p>证明：在任意一个均衡中</p>
+<script type="math/tex; mode=display">
+\langle x\rangle_{i} \approx p\left(x_{i} \mid \omega\right), \quad \log \langle f\rangle_{i} \approx \sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(x_{i} \mid t_{j}\right)</script><p>则：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\left.\mathbb{E} \text { (information score }\left(x_{i}\right) \mid t_{k}\right) \\
+\quad=\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid x_{i}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega \\
+\quad=\underbrace{\sum_{j} p\left(t_{j} \mid t_{k}\right) \int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{j}\right)} \mathrm{d} \omega}_{\text {truth-telling equilibrium }}+\sum_{j} p\left(t_{j} \mid t_{k}\right) \underbrace{\int p\left(\omega \mid t_{k}, t_{j}\right) \log \frac{p\left(\omega \mid x_{i}, t_{j}\right)}{p\left(\omega \mid t_{k}, t_{j}\right)} \mathrm{d} \omega .}_{-\mathrm{D}_{\mathrm{KL}}\left(p\left(\omega \mid t_{k}, t_{j}\right) \| p\left(\omega \mid x_{i}, t_{j}\right)\right) \leq 0}
+\end{array}</script><p>最后，在说真话的均衡中，BTS是零和博弈，分数表征了与先验期望频率相比一个答案有多普遍。</p>
+<p><strong>定理3.3</strong>：零和博弈。在说真话博弈中，分数在极限时加起来是0：</p>
+<script type="math/tex; mode=display">
+\sum_{i} p\left(t_{i} \mid \omega\right) S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=0 .</script><p>此外，</p>
+<script type="math/tex; mode=display">
+S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=\log \frac{\omega_{i}}{\mathbb{E}_{p(\omega)}\left(\omega_{i}\right)}+\operatorname{constant}(\omega) .</script><p>证明：</p>
+<script type="math/tex; mode=display">
+S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=\sum_{j} p\left(t_{j} \mid \omega\right) \log \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{j}\right)}=\log p\left(\omega \mid t_{i}\right)-\sum_{j} p\left(t_{j} \mid \omega\right) \log p\left(\omega \mid t_{j}\right)</script>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -1998,11 +2061,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts644" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1545" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts644'));
+        var myChart = echarts.init(document.getElementById('echarts1545'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -2058,11 +2121,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9330" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1583" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9330'));
+        var myChart = echarts.init(document.getElementById('echarts1583'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2112,11 +2175,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts567" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6714" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts567'));
+        var myChart = echarts.init(document.getElementById('echarts6714'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7791,11 +7854,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4146" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5204" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4146'));
+        var myChart = echarts.init(document.getElementById('echarts5204'));
         // 指定图表的配置项和数据
         var option = {
     title: {
