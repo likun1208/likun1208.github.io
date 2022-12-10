@@ -4,5 +4,6 @@
   "cssTheme": "Blue Topaz",
   "showViewHeader": true,
   "nativeMenus": false,
-  "baseFontSize": 17
+  "baseFontSize": 16,
+  "baseFontSizeAction": true
 }

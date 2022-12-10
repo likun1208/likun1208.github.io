@@ -171,13 +171,157 @@ A线和B线的不同之处在于，A线的先验概率被假定为50%，B线为2
 1. 公式里的$\bar{y_k}$如果是0怎么办？
 2. 信息分那里为什么要取对数？如果不取对数，效果是不是仍然一样？大小关系感觉没变。
 
+## 补充材料
+是这篇论文作者附的一系列证明。
+
+有一个无限可数的受访者群体，记作$r,s,...\in I=\lbrace 1,2,...\rbrace$，它们都面对同一个有着$m$个候选答案的多选项问题。受访者$r$的私有“信号”通过$m$维单位向量$t^r\in E^m$提供，该向量中，坐标对应了受访者$r$所选答案的元素的值是1，其他元素值为0。持有意见$i$的受访者记作$t_i$。
+
+说明：我们用上标来指示个体，下标指示个体的类别，即$t^r$表示某个具体的受访者$r\in I$的意见，而$t_i$表示持有意见$i$的受访者。
+
+每个受访者支持一个回答，并预测其他受访者中支持其他可能回答的频率。回答用$n$维单位向量$x^r=(x_1^r,...,x_m^r)\in E^m,(x_k^r\in\lbrace 0,1 \rbrace,\sum_k x_k^r=1)$来表示，而预测用相对频率分布$y^r=(y_1^r,...,y_m^r)\in \Delta^m(y_l^r\geq 0,\sum_k y_k^r=1)$来表示。$x_k^r$根据个体$r$是否支持这个答案而取值1或者0；$y_k^r$是个体$r$对支持答案$k$的受访者的比例的估计。$(x,y)$是回答和预测组成的向量（可数无限）
+
+任意受访者的得分取决于他的回答、预测和经验平均：
+$$
+\begin{array}{c}
+\bar{x}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} x_{k}^{r}, \\
+\log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r} .
+\end{array}
+$$
+其中，$\bar{x_k}$是答案$k$的平均频率，$\bar{y_k}$是回应$k$的预测频率的几何平均。如果$y_k^r=0$，则设$\bar{y_k}=0$，且设$log(0/0)=0$，$0log(0)=0$。
+
+受访者$r$的得分，是$(x,y)$的函数，为：
+$$
+u^{r}(x, y)=\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\alpha \sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}
+$$
+第一项为信息分，是受访者$r$所支持的答案对应的$log(\frac{\bar{x_k}}{\bar{y_k}})$。第二项是预测分。
+
+### 信息假设
+1. A1：存在集合S的成员意见的公共先验$p(t^r,...,t^s)$。
+2. A2：先验是可交换的：对于所有组合$\pi$，都有$p(t^r,...,t^s)=p(t^{\pi(r)},...,t^{\pi(s)})$。
+3. A3：不同的意见代表不同的后验分布：$p(\cdot|t^r)=p(\cdot|t^s)$就意味着$t^r=t^s$。
+
+A1是贝叶斯博弈理论的标准假设。A2是至关重要的。根据De Finetti定理，它意味着$\Omega=\Delta^m$上存在一个概率分布$p(\omega)$，它将共同先验表达为条件独立随机变量的联合分布：
+$$
+\begin{array}{l} 
+p\left(t^{r}, ..., t^{S}\right)=\int_\Omega \prod_{q \in S} p\left(t^{q} \mid \omega\right) p(\omega) d \omega \\
+p\left(t_{k}^{r} \mid \omega\right)=\omega_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{q=1}^{n} t_{k}^{q} .
+\end{array}
+$$
+换句话说，受访者相信他们的意见是独立的，是以意见的人口频率$\omega$为条件的。条件独立性的假设可以直接引用，而不是从可交换性中推导出来。然而，交换性强调了关键的基本属性，即具有相同意见的受访者对人口中的意见分布具有相同的后验信念。最后一个假设（A3）是随机相关性的一个版本；它只影响到讲真话的纳什均衡是否严格。
+
+### 贝叶斯纳什均衡策略
+受访者$r$的回答策略是一个函数$x^r(t^r)=(x_1^r(t^r),...,x_m^r(t^r)):E^m \rightarrow \Delta^m$，表示如果受访者$r$的真实回答是$t^r$，则他有概率$x_k^r(t^r)$给出答案$x_k$。如果$x^r(t^r)=t^r$则该策略是真实的。
+
+受访者$r$的预测策略同样是一个函数$y^{r}\left(t^{r}\right)=\left(y_{1}^{r}\left(t^{r}\right), \ldots, y_{m}^{r}\left(t^{r}\right)\right): E^{m} \rightarrow \Delta^{m}$，表示如果受访者$r$持有意见$t^r$，则他会预测人群中有占比$y_k^r$的人会回答$k$。我们不需要考虑预测随机性，因为收益函数是关于$y_k^r$的严格凸函数(convex)。
+
+二元组$(x^r(t^r),y^r(t^r))$是受访者$r$的策略。$(x(t),y(t))$表示所有受访者的策略。$(x^{-r}(t^{-r}),y^{-r}(t^{-r}))$是除了受访者$r$以外其他所有受访者的策略。如果所有的答案都是真实的，并且预测符合贝叶斯法则，那么$(x(t),y(t))$就是集体真实的。
+
+**定义**：如果对于所有受访者$r$、回答$x_k^r$和预测$y^r$，下列式子都成立，则$(x(t),y(t))$是贝叶斯纳什均衡(BNE)。
+$$
+E\left\{u^{r}(x(t), y(t)) \mid t^{r}\right\} \geq E\left\{u^{r}\left(x^{r}, y^{r}, x^{-r}\left(t^{r}\right), y^{-r}\left(t^{r}\right)\right) \mid t^{r}\right\}, \text { for all } x^{r} \in E^{m}, y^{r} \in \Delta^{m}
+$$
+
+如果不等式是严格的，则该BNE也是严格的
+
+**定理1**：如果A1~A3成立，则集体说真话是严格贝叶斯纳什均衡。
+证明：如果大家都说真话，则人口平均是：
+$$
+\begin{aligned}
+\bar{x}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} x_{k}^{s} =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} t_{k}^{s} =\omega_{k},\\
+
+\log \bar{y}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log y_{k}^{s} 
+=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log p\left(t_{k} \mid t^{s}\right) 
+=\sum_{j=1}^{n} \omega_{j} \log p\left(t_{k} \mid t_{j}\right)
+\end{aligned}
+$$
+
+考虑持有意见$i$且相信其他人都说真话的个体，他应该支持哪个答案才能最大化自己的期望评分呢？因为期望预测错误并不取决于他自己的回答，我们可以先忽略评分公式的第二部分，只看第一部分信息分。如果他支持答案$j$，则他的期望信息分为：
+$$
+\begin{aligned}
+E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\} & =\int_{\Omega} p\left(\omega \mid t_{i}\right) E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid \omega\right\} d \omega \\
+& =\int_{\Omega} p\left(\omega \mid t_{i}\right) \sum_{k=1}^{m} \omega_{k} \log \frac{\omega_{j}}{p\left(t_{j} \mid t_{k}\right)} d \omega \\
+& =\sum_{k=1}^{m} \int_{\Omega} p\left(\omega, t_{k} \mid t_{i}\right) \log \frac{\omega_{j}}{p\left(t_{j} \mid t_{k}\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{\omega_{j}}{p\left(t_{j} \mid t_{k}\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(t_{j} \mid \omega\right) p\left(t_{k} \mid t_{j}, \omega\right)}{p\left(t_{j} \mid t_{k}\right) p\left(t_{k} \mid \omega\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{k}\right)} d \omega
+\end{aligned}
+$$
+
+这个公式第一行计算了先验分布$p(\omega|t_i)$下的$log(\frac{\bar{x_j}}{\bar{y_j}})$的期望，第二行是从集体如实上报推导而来，第三行使用条件独立将$\omega_k p(\omega|t_i)$改写为$p(\omega,t_k|t_i)$。第四行是使用贝叶斯规则从第三行推出的。第五行我们再次使用条件独立将$\omega_j$改写为$p(t_j|\omega)$，然后插入$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$。第六行也是随之根据贝叶斯规则推导而来。
+
+由此，我们可以对比如实回答答案$i$和谎报答案$j$的信息分：
+$$
+\begin{array}{l} 
+E\left\{\ln \frac{\bar{x}_{i}}{\bar{y}_{i}} \mid t_{i}\right\}-E\left\{\ln \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\}=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
+-\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
+=-\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{k}, t_{i}\right)} d \omega \\
+>-\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \log \left(\int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{k}, t_{i}\right)} d \omega\right) \\
+=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \log \left(\int_{\Omega} p\left(\omega \mid t_{k}, t_{j}\right) d \omega\right)=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \ln (1)=0
+\end{array}
+$$
+
+
+该不等式来源于Jensen不等式，且当A3成立时是严格的。它证明了当其他人都如实回答和预测时，说真话能最大化期望信息分。
+
+接下来该证明同样应该如实预测。这次我们忽略信息分，来计算个体意见是$i$的条件下的期望预测分：
+$$
+\begin{aligned}
+E\left\{\sum_{k=1}^{m} \bar{x}_{k} \log \frac{y_{k}}{\bar{x}_{k}} \mid t_{i}\right\} & =\sum_{k=1}^{m} E\left\{\bar{x}_{k} \mid t_{i}\right\} \log y_{k}-E\left\{\sum_{k=1}^{m} \bar{x}_{k} \log \bar{x}_{k} \mid t_{i}\right\} \\
+& =\sum_{k=1}^{m} E\left\{\omega_{k} \mid t_{i}\right\} \log y_{k}-E\left\{\sum_{k=1}^{m} \omega_{k} \log \omega_{k} \mid t_{i}\right\} .
+\end{aligned}
+$$
+
+这里假定会如实回答，因此$\bar{x_k}=\omega_k$。第二个期望不包括$y_k$，因此，能最大化评分的针对$k$个答案占比的预测，就是回答$k$的期望频率，或者说等价于随机选一个人会持有意见$k$的概率：$y_k=E\lbrace \omega_k|t_i\rbrace=p(t_k|t_i)$。
+
+由此完成了集体说真话是BNE的证明。
+
+**定理2**：如果A1~A3成立，则对于所有受访者而言下述内容都成立：
+1. 任意BNE中的期望信息分是非负的
+2. 说真话对应的均衡解下的期望信息分会微弱地高于其他任意BNE对应的期望信息分
+
+证明(a)：期望信息分可以通过在定理1的公式那里设置$j=i$来计算：
+$$
+E\left\{\ln \frac{\bar{x}_{i}}{\bar{y}_{i}} \mid t_{i}\right\}=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \ln \frac{p\left(\omega \mid t_{k}, t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \geq 0
+$$
+这其实是分布$p(\omega|t_k,t_i)$和$p(\omega|t_k)$之间的相对熵，对所有$t_k$取平均。它衡量了“知道$t_i$”这件事能在多大程度上提升其他人对$\omega$的预测，也称为“数据期望效用”——将$t_i$看作数据（参考文献25的定理2.31）。当$i$的回答不会改变其他人对$\omega$的预测时，这个表达式最小为0。这证明了定理2的第一条。
+
+证明(b)：我们考虑$q(\omega,\bar{x})$的联合分布，它是由一个特定的BNE推导而来的，该BNE记作$(x(t),y(t))$，$q$的边际与$p$重合，$q(\omega)=p(\omega)$。当真实意见是$i$而支持的答案是$j$时，期望信息分是：
+$$
+\begin{aligned}
+E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\} & =\int_{\Omega} p\left(\omega \mid t_{i}\right) E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid \omega\right\} d \omega \\
+& =\int_{\Omega} p\left(\omega \mid t_{i}\right) \sum_{k=1}^{m} \omega_{k} \log \frac{\bar{x}_{j}}{q\left(x_{j} \mid t_{k}\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{\bar{x}_{j}}{q\left(x_{j} \mid t_{k}\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{\bar{x}_{j}}{q\left(x_{j} t_{k}\right)} d \bar{x} \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(x_{j} \mid \bar{x}\right) q\left(t_{k} \mid x_{j} \bar{x}\right)}{q\left(x_{j} t_{k}\right) q\left(t_{k} \mid \bar{x}\right)} d \bar{x} \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, x_{j}\right)}{q\left(\bar{x} \mid t_{k}\right)} d \bar{x}
+\end{aligned}
+$$
+这和定理1中的证明很像，除了第二行不再假设一个说真话的均衡。
+
+现在我们将$q\left(\omega, \bar{x} \mid t_{i},t_{k}\right)$和$q\left(\omega, \bar{x} \mid t_{k}\right)$之间的相对熵扩展到两个不同的方式，先把$\omega$作为条件，再把$\bar{x}$作为条件：
+$$
+\begin{array}{l} 
+\int_{\Omega, \bar{X}} q\left(\omega, \bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\omega, \bar{x} \mid t_{k}, t_{i}\right)}{q\left(\omega, \bar{x} \mid t_{k}\right)} d \omega d \bar{x}= \\
+= \int_{\Omega} q\left(\omega \mid t_{k}, t_{i}\right) \log \frac{q\left(\omega \mid t_{k}, t_{i}\right)}{q\left(\omega \mid t_{k}\right)} d \omega \\
++\int_{\bar{X}, \Omega} q\left(\bar{x} \mid \omega, t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid \omega, t_{k}, t_{i}\right)}{q\left(\bar{x} \mid \omega, t_{k}\right)} d \bar{x} d \omega \\
+= \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, t_{i}\right)}{q\left(\bar{x} \mid t_{k}\right)} d \bar{x} \\
+\quad+\int_{\Omega, \bar{X}} q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right) \log \frac{q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right)}{q\left(\omega \mid \bar{x}, t_{k}\right)} d \omega d \bar{x}
+\end{array}
+$$
+第二行仅
+
+
+
+
+
+
 ## 其他资料
 [资料来源](https://wesselb.github.io/assets/write-ups/Bruinsma,%20A%20Bayesian%20Truth%20Serum.pdf)
 假设一些人参加了一个带有主观问题的调查。你被要求对这个问题的答案分布做出最佳猜测。作为一个人，你的猜测并非完全不知情：你知道自己对这个调查问题的看法。尽管这个样本可能不能说明人口的分布情况，但它确实构成了一个有效的样本，因此应该说明一些问题；也就是说，在某种程度上，一个人的意见是一个信息丰富的 "一个样本"。
 
 你的最优猜测记作$f$，它由每一个答案的频率组成。与人口群体的平均最优猜测即公共预测$\langle f\rangle$相比，可以预计$f-\langle f\rangle$会在你的意见取最高值，因为与常见的预测不同，你的最佳猜测是由你的意见提供的，尽管是非常轻微的；这种现象在实践中确实被观察到。因此，如果你是一个元理性的贝叶斯代理人，并意识到这种情况，你应该相信你的意见具有最高的概率，比通常预测的更常见。
 
-贝叶斯吐真剂是基于上述现象的。在BTS中，答案的评分标准是衡量一个答案与常见预测值相比有多普遍。事实上，如上所述，从受访者的角度来看，诚实回答就能获得最高分的概率最大。
+贝叶斯吐真剂是基于上述现象的。在BTS中，答案的评分标准是衡量一个答案与常见预测值相比有多普遍。事实上，如上所述，从受访者的角度来看，诚实回答就能获得最高分的概率最大。 
 
 ### 模型
 除了给出每个问题的回答$x^n$，BTS还要求受访者$n$给出他对该问题答案分布的最优猜测$f^n$，这些随机变量的模型如下图所示，
@@ -190,7 +334,7 @@ A线和B线的不同之处在于，A线的先验概率被假定为50%，B线为2
 
 【记录一下个人理解】BTS的模型应该是指，首先人群中持有的各个意见服从某个潜在分布$\omega$，在此基础上，随便一个受访者的个人意见是$i$的概率就记作$\omega_i$，而根据前文可知，个人意见会对回答和预测产生影响，从而使得受访者得出回答$x^n$和$f^n$，这俩应该都是向量，其中前者是受访者的答案对应的那个向量元素为1，其他都是0，表示他就选了这个答案；后者则是所有元素都小于1并且求和为1，表示后者对每个答案的频率预测，并且这些预测总和应该是1。
 
-## 评分
+### 评分
 给定回答$x^n$和预测频率$f^n$，BTS的评分为：
 $$
 \begin{aligned}
@@ -209,11 +353,13 @@ KL散度描述了我们用分布$Q$来估计数据的真实分布$P$的编码损
 
 通常来说，如果一个人持有某种意见，那么他会产生偏见，从主观上认为持有该意见的人相对多，也就是说他自己的预测频率会比真实的频率高一些，有点类似信息茧房。从数学上来说，受访者提出的预测实际上是一个条件概率，条件就是他自己的意见，公式表达一下就是$P(我觉得大家有x的概率选A，y的概率选B，z的概率选C，等等|我的意见是B)$。举个例子，关于是否作弊这个问题，$P(你觉得很多人都作弊|你作弊了)>P（你觉得很多人都作弊|你没作弊）$。在这样的情况下，在预测总频率的时候，我们就会想：会有人不选这个答案，他们对这个答案的预测就会低一些。假如一个人本来觉得有20%的人会选这个答案，这样考虑一番之后他就会把自己预测的频率降低一些，比如降到15%。由此，信息分的分母就会变小，而此时这个人的真实意见就是那个出乎意料受欢迎的意见。
 
+如何避免他人发言对偏见的影响
+
 这里参考了[一个视频](https://www.youtube.com/watch?v=uOIqIeDFpS4)，不过感觉这个视频没太讲清楚，没说明白为什么说真话最好。
 
 第二部分预测惩罚那里，是根据个人对所有答案频率的预测与所有答案真实频率的差距来计算的预测分，这个分越大，说明预测偏得越远。
 
-## 属性
+### 属性
 **假设3.1**：可交换性。个体意见$t^n$组成了一个可交换序列。该假设证明了BTS所假设的图形模型的合理性。
 
 **假设3.2**：随机相关性。不同意见表示$\omega$的不同先验分布：如果$i\neq j$，则$p(\omega|t_i)\neq p(\omega|t_j)$。该假设是一个技术上的便利，将被用来得出最大化者的唯一性的结论。
@@ -247,9 +393,6 @@ $$
 \end{aligned}
 $$
 当且仅当$k=i$时取等号。
-
-这里是计算信息分的期望，个体持有意见$k$，则他的信息分可以
-
 
 第二，
 $$
