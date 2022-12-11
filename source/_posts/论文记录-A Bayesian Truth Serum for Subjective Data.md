@@ -308,12 +308,65 @@ $$
 \quad+\int_{\Omega, \bar{X}} q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right) \log \frac{q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right)}{q\left(\omega \mid \bar{x}, t_{k}\right)} d \omega d \bar{x}
 \end{array}
 $$
-第二行仅
+第二行仅考虑了$q(\omega,\bar{x})$对于$\omega$的边界，因此我们可以用$p$代替$q$；因为$\bar{x}$完全取决于$\omega$，所以第三行是0。现在我们可以将第二行如下改写，并将第四行如下扩展：
+$$
+\begin{array}{l} 
+\int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
+= \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, x_{j}\right)}{q\left(\bar{x} \mid t_{k}\right)} d \bar{x} \\
+\quad+\int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, t_{i}\right)}{q\left(\bar{x} \mid t_{k}, x_{j}\right)} d \bar{x} \\
+\quad+\int_{\Omega, \bar{X}} q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right) \log \frac{q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right)}{q\left(\omega \mid \bar{x}, t_{k}\right)} d \omega d \bar{x}
+\end{array}
+$$
+对所有$t_k$求和可以得到一个表达式，该表达式关系到讲真话均衡中的预期信息分数和替代均衡中的预期信息分数。
+$$
+\begin{array}{l}
+\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
+=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, x_{j}\right)}{q\left(\bar{x} \mid t_{k}\right)} d \bar{x} \\
++\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\bar{X}} q\left(\bar{x} \mid t_{k}, t_{i}\right) \log \frac{q\left(\bar{x} \mid t_{k}, t_{i}\right)}{q\left(\bar{x} \mid t_{k}, x_{j}\right)} d \bar{x} \\
++\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega, \bar{X}} q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right) \log \frac{q\left(\omega \mid \bar{x}, t_{k}, t_{i}\right)}{q\left(\omega \mid x, t_{k}\right)} d \omega d \bar{x}
+\end{array}
+$$
+第一行是说真话均衡的期望信息分，第二行是在其他均衡中支持答案$j$的信息分，第三行和第四行是相对熵。这证明了期望信息分在不说真话的均衡里只会更低。
 
+**定理3**：如果A1~A3成立，且$\alpha=1$，则该博弈是零和博弈，且在说真话的均衡中，持有意见$i$的受访者的总分为$log p(\omega|t_i)+K$。
 
+证明：对于$\alpha=1$，评分公式为：
+$$
+u^{r}(x, y)=\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}
+$$
+所有受访者的平均总分比等于0：
+$$
+\begin{aligned}
+\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} u^{r}(x, y) & =\lim _{n \rightarrow \infty} \frac{1}{n}\left(\sum_{r=1}^{n} \sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}\right)+\lim _{n \rightarrow \infty} \frac{1}{n}\left(\sum_{r=1}^{n} \sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}\right) \\
+& =\sum_{k}\left(\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} x_{k}^{r}\right) \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\sum_{k} \bar{x}_{k}\left(\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log \frac{y_{k}^{\prime}}{\bar{x}_{k}}\right) \\
+& =\sum_{k} \bar{x}_{k} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\sum_{k} \bar{x}_{k} \log \frac{\bar{y}_{k}}{\bar{x}_{k}}=0 .
+\end{aligned}
+$$
+为了计算说真话均衡中的总分，我们需要用期望信息分的类似表达莱补充期望预测分，说真话均衡意味着最前面计算期望预测分的公式中的$y_k=p(t_k|t_i)$：
+$$
+\begin{aligned}
+E\left\{\sum_{k=1}^{m} \bar{x}_{k} \log \frac{y_{k}}{\bar{x}_{k}} \mid t_{i}\right\} & =E\left\{\sum_{k=1}^{m} \omega_{k} \log \frac{p\left(t_{k} \mid t_{i}\right)}{\omega_{k}} \mid t_{i}\right\} \\
+& =\int_{\Omega} p\left(\omega \mid t_{i}\right) \sum_{k=1}^{m} \omega_{k} \log \frac{p\left(t_{k} \mid t_{i}\right)}{\omega_{k}} d \omega \\
+& =\sum_{k=1}^{m} \int_{\Omega} p\left(\omega, t_{k} \mid t_{i}\right) \log \frac{p\left(t_{k} \mid t_{i}\right)}{\omega_{k}} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(t_{k} \mid t_{i}\right)}{\omega_{k}} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(t_{k} \mid t_{i}\right) p\left(t_{k} \mid \omega\right)}{p\left(t_{k} \mid \omega\right) p\left(t_{k} \mid t_{i}, \omega\right)} d \omega \\
+& =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{k}, t_{i}\right)} d \omega \leq 0
+\end{aligned}
+$$
+这也是对所有$t_k$取平均后，$p(\omega|t_k)$和$p(\omega|t_k,t_i)$的分布之间的相对熵。它测量了通过了解另一个人的意见$k$而产生的$i$对$\omega$的信念的（负数的）熵减。如果了解其他人的回答并不会改变$i$对$\omega$的信念，则期望预测分为0。
 
-
-
+在说真话均衡解中，期望总分就是结合了前面的两组公式：
+$$
+\begin{aligned}
+E\left\{\frac{\bar{x}_{i}}{\bar{y}_{i}}+\sum_{k=1}^{m} \bar{x}_{k} \log \frac{p\left(t_{k} \mid t_{i}\right)}{\bar{x}_{k}} \mid t_{i}\right\} & =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
+& =\int_{\Omega} p\left(\omega \mid t_{i}\right) \sum_{k=1}^{m} \omega_{k} \log \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega
+\end{aligned}
+$$
+那么，当人口平均是$\omega$时，支持$i$的人的后验评分为：
+$$
+\sum_{k=1}^{m} \omega_{k} \ln \frac{p\left(\omega \mid t_{i}\right)}{p\left(\omega \mid t_{k}\right)}=\ln p\left(\omega \mid t_{i}\right)-\sum_{k=1}^{m} \omega_{k} \ln p\left(\omega \mid t_{k}\right)
+$$
+第二项是由零和约束决定的常数。由此证明了定理3.
 
 ## 其他资料
 [资料来源](https://wesselb.github.io/assets/write-ups/Bruinsma,%20A%20Bayesian%20Truth%20Serum.pdf)
