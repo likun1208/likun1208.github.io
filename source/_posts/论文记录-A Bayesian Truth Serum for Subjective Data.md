@@ -4,6 +4,7 @@ date: 2022-10-24 16:33:40
 tags:
     - game theory
     - trustworthiness
+    - BTS
 categories: 论文
 description: 贝叶斯实话血清
 ---
@@ -176,7 +177,7 @@ A线和B线的不同之处在于，A线的先验概率被假定为50%，B线为2
 
 有一个无限可数的受访者群体，记作$r,s,...\in I=\lbrace 1,2,...\rbrace$，它们都面对同一个有着$m$个候选答案的多选项问题。受访者$r$的私有“信号”通过$m$维单位向量$t^r\in E^m$提供，该向量中，坐标对应了受访者$r$所选答案的元素的值是1，其他元素值为0。持有意见$i$的受访者记作$t_i$。
 
-说明：我们用上标来指示个体，下标指示个体的类别，即$t^r$表示某个具体的受访者$r\in I$的意见，而$t_i$表示持有意见$i$的受访者。
+说明：我们用上标来指示个体，下标指示个体的类别，即$t^r$表示某个具体的受访者$r\in I$的意见，是一个向量，而$t_i$表示持有意见$i$的受访者。
 
 每个受访者支持一个回答，并预测其他受访者中支持其他可能回答的频率。回答用$n$维单位向量$x^r=(x_1^r,...,x_m^r)\in E^m,(x_k^r\in\lbrace 0,1 \rbrace,\sum_k x_k^r=1)$来表示，而预测用相对频率分布$y^r=(y_1^r,...,y_m^r)\in \Delta^m(y_l^r\geq 0,\sum_k y_k^r=1)$来表示。$x_k^r$根据个体$r$是否支持这个答案而取值1或者0；$y_k^r$是个体$r$对支持答案$k$的受访者的比例的估计。$(x,y)$是回答和预测组成的向量（可数无限）
 
@@ -187,7 +188,7 @@ $$
 \log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r} .
 \end{array}
 $$
-其中，$\bar{x_k}$是答案$k$的平均频率，$\bar{y_k}$是回应$k$的预测频率的几何平均。如果$y_k^r=0$，则设$\bar{y_k}=0$，且设$log(0/0)=0$，$0log(0)=0$。
+其中，$\bar{x_k}$是答案$k$的平均频率，$\bar{y_k}$是答案$k$的预测频率的几何平均。如果$y_k^r=0$，则设$\bar{y_k}=0$，且设$log(0/0)=0$，$0log(0)=0$。
 
 受访者$r$的得分，是$(x,y)$的函数，为：
 $$
@@ -203,11 +204,13 @@ $$
 A1是贝叶斯博弈理论的标准假设。A2是至关重要的。根据De Finetti定理，它意味着$\Omega=\Delta^m$上存在一个概率分布$p(\omega)$，它将共同先验表达为条件独立随机变量的联合分布：
 $$
 \begin{array}{l} 
-p\left(t^{r}, ..., t^{S}\right)=\int_\Omega \prod_{q \in S} p\left(t^{q} \mid \omega\right) p(\omega) d \omega \\
+p\left(t^{r}, ..., t^{s}\right)=\int_\Omega \prod_{q \in S} p\left(t^{q} \mid \omega\right) p(\omega) d \omega \\
 p\left(t_{k}^{r} \mid \omega\right)=\omega_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{q=1}^{n} t_{k}^{q} .
 \end{array}
 $$
 换句话说，受访者相信他们的意见是独立的，是以意见的人口频率$\omega$为条件的。条件独立性的假设可以直接引用，而不是从可交换性中推导出来。然而，交换性强调了关键的基本属性，即具有相同意见的受访者对人口中的意见分布具有相同的后验信念。最后一个假设（A3）是随机相关性的一个版本；它只影响到讲真话的纳什均衡是否严格。
+
+这里$\omega$应该是指人口频率的分布情况，$\omega_k$是指在这样的人口频率下，支持第$k$个答案的人口百分比。
 
 ### 贝叶斯纳什均衡策略
 受访者$r$的回答策略是一个函数$x^r(t^r)=(x_1^r(t^r),...,x_m^r(t^r)):E^m \rightarrow \Delta^m$，表示如果受访者$r$的真实回答是$t^r$，则他有概率$x_k^r(t^r)$给出答案$x_k$。如果$x^r(t^r)=t^r$则该策略是真实的。
@@ -228,12 +231,12 @@ $$
 $$
 \begin{aligned}
 \bar{x}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} x_{k}^{s} =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} t_{k}^{s} =\omega_{k},\\
-
 \log \bar{y}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log y_{k}^{s} 
 =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log p\left(t_{k} \mid t^{s}\right) 
 =\sum_{j=1}^{n} \omega_{j} \log p\left(t_{k} \mid t_{j}\right)
 \end{aligned}
 $$
+【记录一下我的理解】这里$y_k^s$表示受访者$s$持有意见$t^s$，他预测其他人有概率$y_k^s$支持答案$k$，由于假设其他人都说真话，也就是说支持答案$k$意味着持有意见$t^k$，因此$y_k^s$就可以表示持有意见$t^s$的受访者认为其他人持有意见$t^k$的概率，也就写作$p(t_k|t^s)$。接下来，虽然不知道这里为什么要把$s$变成$j$，但是前面的$s$和后面的$j$应该是等价的，表示支持某个回答的受访者。而在这个无限数量的人群中，任意一个受访者支持持有意见$t^j$的概率就是$\omega_j$，显然可以把前面的除以$n$取极限的形式直接改写成人口频率的形式，由此得到了$\sum_{j=1}^n \omega_j log p(t_k|t_j)$。
 
 考虑持有意见$i$且相信其他人都说真话的个体，他应该支持哪个答案才能最大化自己的期望评分呢？因为期望预测错误并不取决于他自己的回答，我们可以先忽略评分公式的第二部分，只看第一部分信息分。如果他支持答案$j$，则他的期望信息分为：
 $$
@@ -247,7 +250,24 @@ E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\} & =\int_{\Omega}
 \end{aligned}
 $$
 
-这个公式第一行计算了先验分布$p(\omega|t_i)$下的$log(\frac{\bar{x_j}}{\bar{y_j}})$的期望，第二行是从集体如实上报推导而来，第三行使用条件独立将$\omega_k p(\omega|t_i)$改写为$p(\omega,t_k|t_i)$。第四行是使用贝叶斯规则从第三行推出的。第五行我们再次使用条件独立将$\omega_j$改写为$p(t_j|\omega)$，然后插入$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$。第六行也是随之根据贝叶斯规则推导而来。
+这个公式第一行计算了先验分布$p(\omega|t_i)$下的$log(\frac{\bar{x_j}}{\bar{y_j}})$的期望，大致意思就是说当受访者持有意见$i$时，他对人群整体的分布有一个先验的连续条件概率，因此用积分的形式计算最终的期望，$p(\omega|t_i)$表示先验概率，$E(xxx)$表示在这样的先验概率下的期望信息分，是一个条件期望。
+
+第二行是从集体如实上报推导而来，按照期望的定义，$E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid \omega\right\}$的计算应该就是
+在别人都说真话的情况下，$\bar{x}_j$就可以改写成$\omega_j$，而$log \bar{y}_j$则改写为$\sum_{k=1}^{n} \omega_{k} \log p\left(t_{j} \mid t_{k}\right)$。接下来是条件期望的公式套用，根据[链接](https://zhuanlan.zhihu.com/p/417592820)可知，由此第一行的那个条件期望就可以改写成$\sum$
+
+
+
+
+第三行使用条件独立将$\omega_k p(\omega|t_i)$改写为$p(\omega,t_k|t_i)$。首先$\omega_k$可以直接写作$p(t_k|\omega)$，由此$\omega_k p(\omega|t_i)$就变成$p(t_k|\omega)p(\omega|t_i)$，在条件$\omega$下，$t_k$和$t_i$独立，所以$p(t_k|\omega)=p(t_k|\omega,t_i)$，于是就可以进一步改写成$p(t_k|\omega,t_i)p(\omega|t_i)$。根据贝叶斯条件概率的公式，$P(AB)=P(B)P(A|B)$，给这个公式加上条件概率就是$P(AB|C)=P(B|C)P(A|BC)$，这个式子就可以变成$p(t_k,\omega|t_i)$了。
+
+第四行是使用贝叶斯规则从第三行推出的。还是根据前面的贝叶斯条件概率公式，对应到这里，就可以把$p(\omega,t_k|t_i)$改写为$p(t_k|t_i)p(\omega|t_k,t_i)$，而前面的$p(t_k|t_i)$与$\omega$的积分无关，所以可以提出来放积分外面。
+
+第五行我们再次使用条件独立将$\omega_j$改写为$p(t_j|\omega)$，然后插入$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$，具体来说就是把第四行的$\omega_j$直接改写成$p(t_j|\omega)$，而因为$t_k$和$t_j$在条件$\omega$下是独立的，所以$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$。
+
+第六行也是随之根据贝叶斯规则推导而来，过程如下：
+$$
+\frac{p(t_j|\omega)p(t_k|t_j,\omega)}{p(t_j|t_k)p(t_k|\omega)}=\frac{\frac{p(t_j,\omega)p(t_k,t_j,\omega)}{p(\omega)p(t_j,\omega)}}{\frac{p(t_j,t_k)p(t_k,\omega)}{p(t_k)p(\omega)}}=\frac{\frac{p(t_k,t_j,\omega)}{p(t_k,t_j)}}{\frac{p(t_k,\omega)}{p(t_k)}}=\frac{p(\omega|t_k,t_j)}{p(\omega|t_k)}
+$$
 
 由此，我们可以对比如实回答答案$i$和谎报答案$j$的信息分：
 $$
