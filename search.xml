@@ -1,6 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-A Robust Bayesian Truth Serum for Small Populations</title>
+    <url>/2023/01/02/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Robust%20Bayesian%20Truth%20Serum%20for%20Small%20Populations/</url>
+    <content><![CDATA[<h1 id="A-Robust-Bayesian-Truth-Serum-for-Small-Populations"><a href="#A-Robust-Bayesian-Truth-Serum-for-Small-Populations" class="headerlink" title="A Robust Bayesian Truth Serum for Small Populations"></a>A Robust Bayesian Truth Serum for Small Populations</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>对等预测机制允许在真实的世界状态方面真实地引出私人信号（例如，经验或意见），而这个基础真相是不可观察的。最初的对等预测方法对于任意数量大于2的实体而言都是激励相容的，但依赖于所有实体共享的公共先验和机制。而贝叶斯吐真剂BTS则放宽了这个假设。BTS仍然假设代理共享同一个公共先验，但机制不需要知道该先验。然而，BTS仅在实体数量足够大的时候才激励相容，且需要的确切实体数量并不确定，而是取决于私有先验。本文提出了针对二值信息的稳定BTS，它对于任意实体数量大于3的场景都激励相容，利用二次函数评分规则的一个特性。RBTS是第一个针对$n \geq 3$的场景提供了严格激励相容而无需知道公共先验的对等预测机制。此外，与原始的BTS不同，我们的机制在数字上是稳健的，而且事后是个体理性的（<em>ex post</em> individually rational）。</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>先略</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>先略</p>
+<h2 id="The-Setting"><a href="#The-Setting" class="headerlink" title="The Setting"></a>The Setting</h2><p>存在数量大于等于3的理性且风险中立的代理，其目标是最大化自己的期望收益。他们都共享同一个概率统计信念系统，该系统由两部分组成：状态和信号。状态$T$是一个随机遍历，取值$\lbrace 1,…,m\rbrace,m\geq 2$，代表了世界的真实状态。每一个实体$i$观察一个信号，记作随机变量$S_i$，是取值在$\lbrace 0,1 \rbrace$的二值变量，有时也记作$\lbrace l,h \rbrace$分别表示低和高。信号可以看作是代表了实体的经验或者意见。一个普通的信号用随机变量$S$表示。所有实体都有公共先验，由$Pr(T=t)$和$Pr(S=h|T=t)$组成，指给定任意可能状态$t$会观察到高级信号的条件概率。我们要求先验是可接受的：</p>
+<p><strong>定义</strong>1：如果公共先验满足以下属性，那么它就是可接受的：</p>
+<ol>
+<li>有两个或更多的状态，即$m\geq 2$。</li>
+<li>每一个状态都有正概率出现，即对于所有$t\in\lbrace 1,…,m \rbrace$来说，$Pr(T=t)&gt;0$。</li>
+<li>状态之间是不同的，对于任意$t\neq t’$，都有$Pr(S=h|T=t)\neq Pr(S=h|T=t’)$。所有状态都按惯例排序，即$Pr(S=h|T=1)&lt;…&lt;Pr(S=h|T=m)$。我们把这称为同种异构的特性。</li>
+<li>以状态为条件的信号信念是完全混合的，对于所有$t$，$0&lt;Pr(S=h|T=t)&lt;1$。</li>
+</ol>
+<p>可接受性是一个弱要求。尤其要注意的是，任何先验都可以转化为可接受的先验，因为(1)对于具有正概率的状态，所有以状态为条件的信号信念是完全混合的；(2)对于至少两个具有正概率的状态，以状态为条件的信号信念是不同的。任何两个具有相同信号信念概率的状态都可以合并成一个新的状态，而概率为零的状态可以被放弃。该机制不需要任何关于可接受性以外的先验知识。</p>
+<p>给定实体$i$的信号$s_i$，它可以更新自己关于另一个实体$j$会收到高级信号的概率的后验信念$P(S_j=h|S_i=s_i)$。因为公共先验，我们可以用$p_h=Pr(S_j=h|S_i=h)$和$p_l=Pr(S_j=h|S_i=l)$来分别表示一个普通实体在自己持有高和低信号的条件下对其他实体会持有高级信号的后验信念。我们将之称为一阶信号后验，且：</p>
+<script type="math/tex; mode=display">
+p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=s_i\right)</script><p>其中关于状态的后验可以用通常的方式从贝叶斯规则中确定，等于</p>
+<script type="math/tex; mode=display">
+\operatorname{Pr}\left(T=t \mid S_i=s_i\right)=\frac{\operatorname{Pr}\left(S_i=s_i \mid T=t\right) \operatorname{Pr}(T=t)}{\operatorname{Pr}\left(S_i=s_i\right)}</script><p>而分母则是：</p>
+<script type="math/tex; mode=display">
+\operatorname{Pr}\left(S_i=s_i\right)=\sum_{t=1}^m \operatorname{Pr}\left(S_i=s_i \mid T=t\right) \operatorname{Pr}(T=t)</script><p>这些信号后验可以在实体知道两个信号的情况下进行类似的计算。我们扩展了这个符号，因此$p_{\lbrace h,l \rbrace}$表示在知道一个高信号和一个低信号之后的二阶后验。例如，对于实体$i$，我们可知对于任意不同的$j,k\neq i$，都有$p_{\lbrace h,l \rbrace}=\operatorname{Pr}\left(S_k=h \mid S_i=h, S_j=l\right)$。在这种情况下，实体$i$首先更新关于状态$T$的后验，即$Pr(T=t|S_i=s_i)$，这成为信念，以便进行第二轮的贝叶斯更新。</p>
+<h2 id="The-Bayesian-Truth-Serum"><a href="#The-Bayesian-Truth-Serum" class="headerlink" title="The Bayesian Truth Serum"></a>The Bayesian Truth Serum</h2><p>在这一节中，我们解释了Prelc（2004）的原始贝叶斯真理血清（BTS）。虽然我们介绍的是这个机制的二进制版本，但BTS是针对任意数量的信号而定义的。</p>
+<p>在BTS中，每一个实体$i$都需要提供两个报告：</p>
+<ol>
+<li>信息报告：$x_i\in\lbrace 0,1 \rbrace$表示实体$i$报告的信号</li>
+<li>预测报告：$y_i\in[0,1]$表示实体$i$对人群中高信号出现的频率的预测</li>
+</ol>
+<p>BTS中实体$i$的分数包括以下3步：</p>
+<ol>
+<li>对于任意实体$j\neq i$，计算除了$i$和$j$以外，所有实体报告信号的算术平均：<script type="math/tex; mode=display">
+\bar{x}_{-i j}=\frac{1}{n}\left(\left(\sum_{k \neq i, j} x_k\right)+1\right)</script></li>
+<li>对于任意实体$j\neq i$，计算除了$i$和$j$以外，所有实体对高低两种信号频率的预测的几何平均：<script type="math/tex; mode=display">
+\bar{y}_{-i j}=\left(\prod_{k \neq i, j} y_k\right)^{\frac{1}{n-2}}, \quad \bar{y}_{-i j}^{\prime}=\left(\prod_{k \neq i, j}\left(1-y_k\right)\right)^{\frac{1}{n-2}}</script></li>
+<li>计算实体$i$的BTS评分：<script type="math/tex; mode=display">
+\begin{aligned}
+& u_i=\underbrace{\sum_{j \neq i}\left(x_i \ln \left(\frac{\bar{x}_{-i j}}{\bar{y}_{-i j}}\right)+\left(1-x_i\right) \ln \left(\frac{1-\bar{x}_{-i j}}{\bar{y}_{-i j}^{\prime}}\right)\right)}_{\text {information score }} \\
+& +\underbrace{\sum_{j \neq i}\left(\bar{x}_{-i j} \ln \left(\frac{y_i}{\bar{x}_{-i j}}\right)+\left(1-\bar{x}_{-i j}\right) \ln \left(\frac{1-y_i}{1-\bar{x}_{-i j}}\right)\right)}_{\text {prediction score }}
+\end{aligned}</script>这里注释提到，BTS有两种，一种是无限数量的实体，一种是有限数量的实体，这篇论文关注的是后者。此外BTS使用了拉普拉斯平滑来避免出现为0的概率。</li>
+</ol>
+<p>这对$n \rightarrow \infty$来说很简单，因为公式中对$j\neq i$的求和可以用只用一个随机选择的$j\neq i$计算的信息分和预测分来代替。</p>
+<p>如果所有代理人（1）报告他们的真实信号和（2）预测人口中高信号的频率是他们的信号后验，则BTS机制是严格的贝叶斯-纳什激励相容。</p>
+<p><strong>定理</strong>1：当$n\rightarrow \infty$且所有先验可接受时，BTS是严格贝叶斯纳什激励相容的。</p>
+<p>Prelec评论说，这个结果对于适当大的、有限的$n$也是成立的，实际的门槛取决于共同的先验。然而，BTS不需要为小群体的实体调整激励。此外，对于小群体来说，它不需要满足临时个体理性（interim IR），也就是说，实体的期望收益可以是负的。</p>
+<p><strong>定理</strong>2：当$n=3$时，BTS并不满足贝叶斯纳什激励相容或个体理性。</p>
+<p>BTS的这种局限性可以从Prelec对BTS的处理中得到理解。一般来说，BTS兼容Bayes-Nash激励所需的代理数量取决于先验，而且很难确定。尽管如此，不同地方对BTS的讨论仍然没有注意到这个重要的注意事项，例如（Jurca和Faltings 2008；Chen和Pennock 2010）。出于这个原因，我们提供一个具体的例子。这个例子不是唯一的，也不依赖于$n=3$。</p>
+<p><strong>例</strong>1：（BTS且$n=3$）考虑三个代理人共享以下先验，$m=2$（两个状态）：$Pr(T=2)=0.7, Pr(S=h|T=2)=0.8, Pr(S=h|T=1)=0.1$。基于此，后验信号信念分别是$p_{\{h\}}=\operatorname{Pr}\left(S_j=h \mid S_i=h\right)=0.764$和$p_{\{l\}}=\operatorname{Pr}\left(S_j=h \mid S_i=l\right)=0.339$。</p>
+<p>考虑实体$i=1$，假设实体2和3都说真话。假设$S_1=h$，即实体1真实的报告是$x_1=1,y_1=0.764$。则当实体1说真话时，对应着实体$j=2$的评分公式计算的期望分数应该是：</p>
+<script type="math/tex; mode=display">
+E\left[\ln \left(\frac{\bar{X}_{-12}}{\bar{Y}_{-12}}\right)+\bar{X}_{-12} \ln \left(\frac{0.764}{\bar{X}_{-12}}\right)+\left(1-\bar{X}_{-12}\right) \ln \left(\frac{1-0.764}{1-\bar{X}_{-12}}\right)\right]</script><p>该期望值是相对随机变量$\bar{X}_{-12}$和$\bar{Y}_{-12}$而言的。当概率$p_{\{h\}}=0.764$时，实体1会认为$\bar{x}_{-12}=(1+1)/3=2/3$且$\bar{y}_{-12}=0.764$，同时概率$1-p_{\{h\}}=0.236$，可得$\bar{x}_{-12}=(0+1)/3=1/3$且$\bar{y}_{-12}=p_{\{l\}}=0.339$。给定上述内容，我们可以得到期望信息分是$0.764ln(\frac{2/3}{0.764})+0.236ln(\frac{1/3}{0.339})=-0.108$，而期望预测分是$0.764((2/3)ln(\frac(0.764)(2/3))+(1/3)ln(\frac{0.236}{1/3}))+0.236((1/3)ln(\frac{0.764}{1/3})+(2/3)ln(\frac{0.236}{2/3})=-0.117$，由此可得期望分是-0.225。而当公式中的$j=3$时，用同样的方法计算得到的实体1说真话对应的分数是-0.450，因此BTS不满足个体理性。</p>
+<p>如果实体1谎报，且$x_1=0$，而仍然报告$y_1=0.764$，则期望信息分（$j=2$）会是$E[ln(\frac{1-\bar{X}_{-13}}{\bar{Y}’_{-13}})]=0.764ln(\frac{1/3}{0.236})+0.236ln(\frac{2/3}{0.661})=0.266$，预测分是0.149，类似的，考虑$j=3$可得总期望分是0.298，也就是说实体1谎报更好。</p>
+<p><strong>例</strong>2：（BTS且$n\rightarrow \infty$）考虑相同的先验但是数量更多的实体。在极限的情况下，关注实体1的信念，随机变量$\bar{X}_{-ij},\bar{Y}_{-ij},\bar{Y}’_{-ij}$以1的概率各自取值：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\bar{X}_{-1 j} & =\lim _{n \rightarrow \infty} \frac{1}{n}\left((n-2) p_{\{h\}}+1\right)=p_{\{h\}} \\
+\bar{Y}_{-1 j} & =\lim _{n \rightarrow \infty}\left(\left(p_{\{h\}}^{(n-2) p_{\{h\}}}\right)\left(p_{\{l\}}^{(n-2)\left(1-p_{\{h\}}\right)}\right)\right)^{1 /(n-2)} \\
+& =\left(p_{\{h\}}^{p_{\{h\}}}\right)\left(p_{\{l\}}^{1-p_{\{h\}}}\right)=0.631, \\
+\bar{Y}_{-1 j}^{\prime} & =\left(1-p_{\{h\}}\right)^{p_{\{h\}}}\left(1-p_{\{l\}}\right)^{1-p_{\{h\}}}=0.301 .
+\end{aligned}</script><p>如果实体1如实报告（$x_1=1,y_1=0.764$），则它的期望信息分是$ln(\frac{0.764}{0.631})=0.191$，期望预测分是$0.764ln(0.764/0.764)+(1-0.764)ln(\frac{1-0.764}{1-0.764})=0$，即总分0.191。谎报$x_1=0$则会得到期望信息分为-0.243。在这个例子中，$n$足够大，取极限时BTS是贝叶斯纳什激励相容的。</p>
+<p>在证明了BTS中取值较小的$n$的激励调整和临时IR的失败后，我们还对其数字上的稳健性做了如下观察：</p>
+<p><strong>定理</strong>3：对后验报告$y_i\in\lbrace0,1 \rbrace$而言BTS的分数是无界负数。</p>
+<h2 id="Robust-Bayesian-Truth-Serum"><a href="#Robust-Bayesian-Truth-Serum" class="headerlink" title="Robust Bayesian Truth Serum"></a>Robust Bayesian Truth Serum</h2><p>在本节中，我们介绍了稳健贝叶斯真理血清（RBTS）。RBTS对于每一个$n\geq 3$来说都是激励相容的，事后个体理性的（意味着对于任何结果，没有实体的收益是负的），并且在数字上是稳健的。我们首先介绍正确计分规则（不太确定这里的proper怎么翻译）。</p>
+<p><strong>正确计分规则</strong>是可以用于激励理性的实体如实宣称自己关于对未来事件的可能性的私人信念的函数。</p>
+<p><strong>定义</strong>2：（二值计分规则）给定可能的结果$\Omega=\{0,1\}$和关于结果$\omega=1$的概率的报告$y\in[0,1]$，一个二值计分规则$R(y,\omega)$根据报告$y$和发生的结果$\omega$分配一个分数。</p>
+<p>首先，实体需要回答自己的信念报告$y\in[0,1]$。其次，事件$\omega\in\{0,1\}$发生了（由机制来观察）。最后，实体收到报酬$R(y,\omega)$。</p>
+<p><strong>定义</strong>3：（严格正确计分规则）如果一个二值计分规则能使得一个实体在如实报告自己信念$p\in[0,1]$时最大化自己的期望得分，则该规则是正确的。且如果一个实体仅在如实报告时才能最大化期望得分，则该规则是严格正确的。</p>
+<p>一个严格正确计分规则的例子是二值二次函数计分规则$R_q$，经过归一化处理，给出的分数在0和1之间：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& R_q(y, \omega=1)=2 y-y^2 \\
+& R_q(y, \omega=0)=1-y^2 .
+\end{aligned}</script><p><strong>定理</strong>4：（例，Selten，1998）二值二次计分规则$R_q$是严格正确的。</p>
+<p>请注意，如果人们对正确计分规则进行正负变换，该规则仍然是正确的。关于一般的适当得分规则的更详细讨论，我们参考Gneiting和Raftery（2007）的文章。</p>
+<h3 id="The-RBTS-Mechanism"><a href="#The-RBTS-Mechanism" class="headerlink" title="The RBTS Mechanism"></a>The RBTS Mechanism</h3><p>首先，每一个实体$i$都需要提供两个报告：</p>
+<ol>
+<li>信息报告</li>
+<li>预测报告</li>
+</ol>
+<p>在第二步，针对每个实体$i$，选择一个参考实体$j=i+1$（模数$n$，这里没看懂）和一个对等实体$k=i+2$（模数$n$）并计算</p>
+<script type="math/tex; mode=display">
+y_i^{\prime}=\left\{\begin{array}{lll}
+y_j+\delta, & \text { if } & x_i=1 \\
+y_j-\delta, & \text { if } & x_i=0
+\end{array}\right.</script><p>其中$\delta=min(y_j,1-y_j)$。实体$i$的RBTS分数为：</p>
+<script type="math/tex; mode=display">
+u_i=\underbrace{R_q\left(y_i^{\prime}, x_k\right)}_{\text {information score }}+\underbrace{R_q\left(y_i, x_k\right)}_{\text {prediction score }}</script><p><strong>例</strong>3：（RBTS且$n=3$）我们使用和例1中一样的设定来解释RBTS，即$p_{\{h\}}=0.764,p_{\{l\}}=0.339$。此外，我们可以注意到$p_{\{h,h\}}=0.795$且$p_{\{l,h\}}=0.664$。考虑实体1的视角，令实体2和3扮演参考$j$和对等$k$的角色。假设实体2和3都说真话。首先解释$S_1=h,S_2=l,S_3=l$时的计算。如果实体1说真话，因为$y_2=0.339$且$\delta=0.339$，可得$y’=y_2+\delta=0.339+0.339=0.678$。因为$x_3=1$，实体1的信息分是$2y_1’-y_1’^2=2(0.678)-0.678^2=0.896$。因为$y_1=0.764$且$x_3=1$，预测分是$2(0.764)-0.764^2=0.944$。总分是1.84.</p>
+<p>为了确定当$S_1=h$时实体1说真话是最优解，我们需要考虑期望得分，进而考虑实体2和3的信号的分布。针对预测报告，因为$R_q(y_1,x_3)$是严格正确的，所以一定是真实的。实体1的期望预测分是$0.764(2(0.764)-0.764^2)+0.236(2(0.236)-0.236^2)=0.820$。针对期望信息分，首先考虑如实报告$x_1=1$。在这种情况下，$y_1’$是由实体2的实际预测报告向上取整的，实体1的期望信息分是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \operatorname{Pr}\left(S_2=h \mid S_1=h\right) \\
+& \quad\left[\quad \operatorname{Pr}\left(S_3=h \mid S_1=h, S_2=h\right) R_q(0.764+0.236,1)\right. \\
+& \left.\quad+\operatorname{Pr}\left(S_3=l \mid S_1=h, S_2=h\right) R_q(0.764+0.236,0)\right] \\
+& +\operatorname{Pr}\left(S_2=l \mid S_1=h\right) \\
+& {\left[\quad \operatorname{Pr}\left(S_3=h \mid S_1=h, S_2=l\right) R_q(0.339+0.339,1)\right.} \\
+& \left.\quad+\operatorname{Pr}\left(S_3=l \mid S_1=h, S_2=l\right) R_q(0.339+0.339,0)\right] \\
+& =\quad p_{\{h\}}\left[p_{\{h, h\}}\left(2(1)-1^2\right)+\left(1-p_{\{h, h\}}\right)\left(1-1^2\right)\right] \\
+& \quad+\left(1-p_{\{h\}}\right)\left[p_{\{h, l\}}\left(2(0.678)-0.678^2\right)\right. \\
+& \left.+\left(1-p_{\{h, l\}}\right)\left(1-0.678^2\right)\right]=0.79 .
+\end{aligned}</script><p>针对报告$x_1=0$，期望信息分是：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& p_{\{h\}}\left[\quad p_{\{h, h\}} R_q(0.764-0.236,1)\right. \\
+& \left.+\left(1-p_{\{h, h\}}\right) R_q(0.764-0.236,0)\right] \\
+& +\left(1-p_{\{h\}}\right)\left[\quad p_{\{h, l\}} R_q(0.339-0.339,1)\right. \\
+& \left.+\left(1-p_{\{h, l\}}\right) R_q(0.339-0.339,0)\right]=0.664 \\
+&
+\end{aligned}</script><p>实体1说真话时期望信息分最高。</p>
+<p>注意，对于任意$n\geq 3$，RBTS是严格贝叶斯纳什激励相容且可接受先验的。我们会在下一部分证明这一点。</p>
+<h2 id="IC（激励相容）"><a href="#IC（激励相容）" class="headerlink" title="IC（激励相容）"></a>IC（激励相容）</h2><p>先略。</p>
+<h3 id="A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method"><a href="#A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method" class="headerlink" title="A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method"></a>A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method</h3><h2 id="Other-Properties-and-Discussion"><a href="#Other-Properties-and-Discussion" class="headerlink" title="Other Properties and Discussion"></a>Other Properties and Discussion</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+        <tag>trustworthiness</tag>
+        <tag>BTS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks</title>
     <url>/2022/11/10/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Peer%20Prediction-Based%20Trustworthiness%20Evaluation%20and%20Trustworthy%20Service%20Rating%20in%20Social%20Networks/</url>
     <content><![CDATA[<h1 id="Peer-Prediction-Based-Trustworthiness-Evaluation-and-Trustworthy-Service-Rating-in-Social-Networks"><a href="#Peer-Prediction-Based-Trustworthiness-Evaluation-and-Trustworthy-Service-Rating-in-Social-Networks" class="headerlink" title="Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks"></a>Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>随着基于社交网络的在线应用的发展，出现了许多不同的方法来评估这些应用所提供的服务。终端用户就消费者的体验或意见所做的报告通常被用来评价不同的在线服务的质量。因此，确保用户报告的真实性，以及检测恶意用户的不诚实报告，都成为实现此类服务评级准确性的重要问题。在本文中，我们提出并评估了一个基于私人先验的同伴预测的可信服务评级系统，该系统要求用户报告他们对其同伴是否会报告高质量的服务意见的先验和后验信念。这些报告被送到一个数据处理中心，该中心通过应用严格恰当的评分规则来评估用户的可信度，并删除从可信度等级低的用户那里收到的报告。这种同行预测方法与激励用户诚实报告的激励措施相兼容。此外，还提出了一个不可靠指数，以识别恶意用户，以及在对质量进行判断时有高错误率的故障或不可靠的用户。因此，具有高不可靠值的报告也将被排除在服务评级系统之外。通过结合可信度和不可靠度，恶意用户面临的困境是，当他们的报告是虚假的，他们不能同时获得高可信度和低不可靠度的评级。仿真结果表明，所提出的基于同伴预测的可信服务评级能够有效地识别恶意行为和不可靠行为，并激励用户如实报告，而且所提出的系统能够达到比较高的服务评级准确率。</p>
@@ -390,14 +509,14 @@ P(B|D)=\frac{P(D|B)P(B)}{P(D)}=0*0.5/0.75=0</script><p>可以看出来扔出反�
 </ol>
 <h2 id="补充材料"><a href="#补充材料" class="headerlink" title="补充材料"></a>补充材料</h2><p>是这篇论文作者附的一系列证明。</p>
 <p>有一个无限可数的受访者群体，记作$r,s,…\in I=\lbrace 1,2,…\rbrace$，它们都面对同一个有着$m$个候选答案的多选项问题。受访者$r$的私有“信号”通过$m$维单位向量$t^r\in E^m$提供，该向量中，坐标对应了受访者$r$所选答案的元素的值是1，其他元素值为0。持有意见$i$的受访者记作$t_i$。</p>
-<p>说明：我们用上标来指示个体，下标指示个体的类别，即$t^r$表示某个具体的受访者$r\in I$的意见，而$t_i$表示持有意见$i$的受访者。</p>
+<p>说明：我们用上标来指示个体，下标指示个体的类别，即$t^r$表示某个具体的受访者$r\in I$的意见，是一个向量，而$t_i$表示持有意见$i$的受访者。</p>
 <p>每个受访者支持一个回答，并预测其他受访者中支持其他可能回答的频率。回答用$n$维单位向量$x^r=(x_1^r,…,x_m^r)\in E^m,(x_k^r\in\lbrace 0,1 \rbrace,\sum_k x_k^r=1)$来表示，而预测用相对频率分布$y^r=(y_1^r,…,y_m^r)\in \Delta^m(y_l^r\geq 0,\sum_k y_k^r=1)$来表示。$x_k^r$根据个体$r$是否支持这个答案而取值1或者0；$y_k^r$是个体$r$对支持答案$k$的受访者的比例的估计。$(x,y)$是回答和预测组成的向量（可数无限）</p>
 <p>任意受访者的得分取决于他的回答、预测和经验平均：</p>
 <script type="math/tex; mode=display">
 \begin{array}{c}
 \bar{x}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} x_{k}^{r}, \\
 \log \bar{y}_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{r=1}^{n} \log y_{k}^{r} .
-\end{array}</script><p>其中，$\bar{x_k}$是答案$k$的平均频率，$\bar{y_k}$是回应$k$的预测频率的几何平均。如果$y_k^r=0$，则设$\bar{y_k}=0$，且设$log(0/0)=0$，$0log(0)=0$。</p>
+\end{array}</script><p>其中，$\bar{x_k}$是答案$k$的平均频率，$\bar{y_k}$是答案$k$的预测频率的几何平均。如果$y_k^r=0$，则设$\bar{y_k}=0$，且设$log(0/0)=0$，$0log(0)=0$。</p>
 <p>受访者$r$的得分，是$(x,y)$的函数，为：</p>
 <script type="math/tex; mode=display">
 u^{r}(x, y)=\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\alpha \sum_{k} \bar{x}_{k} \log \frac{y_{k}^{r}}{\bar{x}_{k}}</script><p>第一项为信息分，是受访者$r$所支持的答案对应的$log(\frac{\bar{x_k}}{\bar{y_k}})$。第二项是预测分。</p>
@@ -409,9 +528,10 @@ u^{r}(x, y)=\sum_{k} x_{k}^{r} \log \frac{\bar{x}_{k}}{\bar{y}_{k}}+\alpha \sum_
 <p>A1是贝叶斯博弈理论的标准假设。A2是至关重要的。根据De Finetti定理，它意味着$\Omega=\Delta^m$上存在一个概率分布$p(\omega)$，它将共同先验表达为条件独立随机变量的联合分布：</p>
 <script type="math/tex; mode=display">
 \begin{array}{l} 
-p\left(t^{r}, ..., t^{S}\right)=\int_\Omega \prod_{q \in S} p\left(t^{q} \mid \omega\right) p(\omega) d \omega \\
+p\left(t^{r}, ..., t^{s}\right)=\int_\Omega \prod_{q \in S} p\left(t^{q} \mid \omega\right) p(\omega) d \omega \\
 p\left(t_{k}^{r} \mid \omega\right)=\omega_{k}=\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{q=1}^{n} t_{k}^{q} .
 \end{array}</script><p>换句话说，受访者相信他们的意见是独立的，是以意见的人口频率$\omega$为条件的。条件独立性的假设可以直接引用，而不是从可交换性中推导出来。然而，交换性强调了关键的基本属性，即具有相同意见的受访者对人口中的意见分布具有相同的后验信念。最后一个假设（A3）是随机相关性的一个版本；它只影响到讲真话的纳什均衡是否严格。</p>
+<p>这里$\omega$应该是指人口频率的分布情况，$\omega_k$是指在这样的人口频率下，支持第$k$个答案的人口百分比。</p>
 <h3 id="贝叶斯纳什均衡策略"><a href="#贝叶斯纳什均衡策略" class="headerlink" title="贝叶斯纳什均衡策略"></a>贝叶斯纳什均衡策略</h3><p>受访者$r$的回答策略是一个函数$x^r(t^r)=(x_1^r(t^r),…,x_m^r(t^r)):E^m \rightarrow \Delta^m$，表示如果受访者$r$的真实回答是$t^r$，则他有概率$x_k^r(t^r)$给出答案$x_k$。如果$x^r(t^r)=t^r$则该策略是真实的。</p>
 <p>受访者$r$的预测策略同样是一个函数$y^{r}\left(t^{r}\right)=\left(y_{1}^{r}\left(t^{r}\right), \ldots, y_{m}^{r}\left(t^{r}\right)\right): E^{m} \rightarrow \Delta^{m}$，表示如果受访者$r$持有意见$t^r$，则他会预测人群中有占比$y_k^r$的人会回答$k$。我们不需要考虑预测随机性，因为收益函数是关于$y_k^r$的严格凸函数(convex)。</p>
 <p>二元组$(x^r(t^r),y^r(t^r))$是受访者$r$的策略。$(x(t),y(t))$表示所有受访者的策略。$(x^{-r}(t^{-r}),y^{-r}(t^{-r}))$是除了受访者$r$以外其他所有受访者的策略。如果所有的答案都是真实的，并且预测符合贝叶斯法则，那么$(x(t),y(t))$就是集体真实的。</p>
@@ -422,11 +542,11 @@ E\left\{u^{r}(x(t), y(t)) \mid t^{r}\right\} \geq E\left\{u^{r}\left(x^{r}, y^{r
 <script type="math/tex; mode=display">
 \begin{aligned}
 \bar{x}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} x_{k}^{s} =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} t_{k}^{s} =\omega_{k},\\
-
 \log \bar{y}_{k} & =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log y_{k}^{s} 
 =\lim _{n \rightarrow \infty} \frac{1}{n} \sum_{s=1}^{n} \log p\left(t_{k} \mid t^{s}\right) 
 =\sum_{j=1}^{n} \omega_{j} \log p\left(t_{k} \mid t_{j}\right)
-\end{aligned}</script><p>考虑持有意见$i$且相信其他人都说真话的个体，他应该支持哪个答案才能最大化自己的期望评分呢？因为期望预测错误并不取决于他自己的回答，我们可以先忽略评分公式的第二部分，只看第一部分信息分。如果他支持答案$j$，则他的期望信息分为：</p>
+\end{aligned}</script><p>【记录一下我的理解】这里$y_k^s$表示受访者$s$持有意见$t^s$，他预测其他人有概率$y_k^s$支持答案$k$，由于假设其他人都说真话，也就是说支持答案$k$意味着持有意见$t^k$，因此$y_k^s$就可以表示持有意见$t^s$的受访者认为其他人持有意见$t^k$的概率，也就写作$p(t_k|t^s)$。接下来，虽然不知道这里为什么要把$s$变成$j$，但是前面的$s$和后面的$j$应该是等价的，表示支持某个回答的受访者。而在这个无限数量的人群中，任意一个受访者支持持有意见$t^j$的概率就是$\omega_j$，显然可以把前面的除以$n$取极限的形式直接改写成人口频率的形式，由此得到了$\sum_{j=1}^n \omega_j log p(t_k|t_j)$。</p>
+<p>考虑持有意见$i$且相信其他人都说真话的个体，他应该支持哪个答案才能最大化自己的期望评分呢？因为期望预测错误并不取决于他自己的回答，我们可以先忽略评分公式的第二部分，只看第一部分信息分。如果他支持答案$j$，则他的期望信息分为：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\} & =\int_{\Omega} p\left(\omega \mid t_{i}\right) E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid \omega\right\} d \omega \\
@@ -435,8 +555,14 @@ E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\} & =\int_{\Omega}
 & =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{\omega_{j}}{p\left(t_{j} \mid t_{k}\right)} d \omega \\
 & =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(t_{j} \mid \omega\right) p\left(t_{k} \mid t_{j}, \omega\right)}{p\left(t_{j} \mid t_{k}\right) p\left(t_{k} \mid \omega\right)} d \omega \\
 & =\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{j}\right)}{p\left(\omega \mid t_{k}\right)} d \omega
-\end{aligned}</script><p>这个公式第一行计算了先验分布$p(\omega|t_i)$下的$log(\frac{\bar{x_j}}{\bar{y_j}})$的期望，第二行是从集体如实上报推导而来，第三行使用条件独立将$\omega_k p(\omega|t_i)$改写为$p(\omega,t_k|t_i)$。第四行是使用贝叶斯规则从第三行推出的。第五行我们再次使用条件独立将$\omega_j$改写为$p(t_j|\omega)$，然后插入$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$。第六行也是随之根据贝叶斯规则推导而来。</p>
-<p>由此，我们可以对比如实回答答案$i$和谎报答案$j$的信息分：</p>
+\end{aligned}</script><p>这个公式第一行计算了先验分布$p(\omega|t_i)$下的$log(\frac{\bar{x_j}}{\bar{y_j}})$的期望，大致意思就是说当受访者持有意见$i$时，他对人群整体的分布有一个先验的连续条件概率，因此用积分的形式计算最终的期望，$p(\omega|t_i)$表示先验概率，$E(xxx)$表示在这样的先验概率下的期望信息分，是一个条件期望。</p>
+<p>第二行是从集体如实上报推导而来，按照期望的定义，$E\left\{\log \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid \omega\right\}$的计算应该就是<br>在别人都说真话的情况下，$\bar{x}_j$就可以改写成$\omega_j$，而$log \bar{y}_j$则改写为$\sum_{k=1}^{n} \omega_{k} \log p\left(t_{j} \mid t_{k}\right)$。接下来是条件期望的公式套用，根据<a href="https://zhuanlan.zhihu.com/p/417592820" target="_blank" rel="noopener">链接</a>可知，由此第一行的那个条件期望就可以改写成$\sum$</p>
+<p>第三行使用条件独立将$\omega_k p(\omega|t_i)$改写为$p(\omega,t_k|t_i)$。首先$\omega_k$可以直接写作$p(t_k|\omega)$，由此$\omega_k p(\omega|t_i)$就变成$p(t_k|\omega)p(\omega|t_i)$，在条件$\omega$下，$t_k$和$t_i$独立，所以$p(t_k|\omega)=p(t_k|\omega,t_i)$，于是就可以进一步改写成$p(t_k|\omega,t_i)p(\omega|t_i)$。根据贝叶斯条件概率的公式，$P(AB)=P(B)P(A|B)$，给这个公式加上条件概率就是$P(AB|C)=P(B|C)P(A|BC)$，这个式子就可以变成$p(t_k,\omega|t_i)$了。</p>
+<p>第四行是使用贝叶斯规则从第三行推出的。还是根据前面的贝叶斯条件概率公式，对应到这里，就可以把$p(\omega,t_k|t_i)$改写为$p(t_k|t_i)p(\omega|t_k,t_i)$，而前面的$p(t_k|t_i)$与$\omega$的积分无关，所以可以提出来放积分外面。</p>
+<p>第五行我们再次使用条件独立将$\omega_j$改写为$p(t_j|\omega)$，然后插入$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$，具体来说就是把第四行的$\omega_j$直接改写成$p(t_j|\omega)$，而因为$t_k$和$t_j$在条件$\omega$下是独立的，所以$\frac{p(t_k|t_j,\omega)}{p(t_k|\omega)}=1$。</p>
+<p>第六行也是随之根据贝叶斯规则推导而来，过程如下：</p>
+<script type="math/tex; mode=display">
+\frac{p(t_j|\omega)p(t_k|t_j,\omega)}{p(t_j|t_k)p(t_k|\omega)}=\frac{\frac{p(t_j,\omega)p(t_k,t_j,\omega)}{p(\omega)p(t_j,\omega)}}{\frac{p(t_j,t_k)p(t_k,\omega)}{p(t_k)p(\omega)}}=\frac{\frac{p(t_k,t_j,\omega)}{p(t_k,t_j)}}{\frac{p(t_k,\omega)}{p(t_k)}}=\frac{p(\omega|t_k,t_j)}{p(\omega|t_k)}</script><p>由此，我们可以对比如实回答答案$i$和谎报答案$j$的信息分：</p>
 <script type="math/tex; mode=display">
 \begin{array}{l} 
 E\left\{\ln \frac{\bar{x}_{i}}{\bar{y}_{i}} \mid t_{i}\right\}-E\left\{\ln \frac{\bar{x}_{j}}{\bar{y}_{j}} \mid t_{i}\right\}=\sum_{k=1}^{m} p\left(t_{k} \mid t_{i}\right) \int_{\Omega} p\left(\omega \mid t_{k}, t_{i}\right) \log \frac{p\left(\omega \mid t_{k}, t_{i}\right)}{p\left(\omega \mid t_{k}\right)} d \omega \\
@@ -595,6 +721,7 @@ S\left(x_{i}, p\left(t \mid t_{i}\right)\right)=\sum_{j} p\left(t_{j} \mid \omeg
       <tags>
         <tag>game theory</tag>
         <tag>trustworthiness</tag>
+        <tag>BTS</tag>
       </tags>
   </entry>
   <entry>
@@ -2203,11 +2330,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3489" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6615" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3489'));
+        var myChart = echarts.init(document.getElementById('echarts6615'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -2263,11 +2390,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9263" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9443" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9263'));
+        var myChart = echarts.init(document.getElementById('echarts9443'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2317,11 +2444,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts567" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2260" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts567'));
+        var myChart = echarts.init(document.getElementById('echarts2260'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -7996,11 +8123,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts3801" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts908" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3801'));
+        var myChart = echarts.init(document.getElementById('echarts908'));
         // 指定图表的配置项和数据
         var option = {
     title: {
