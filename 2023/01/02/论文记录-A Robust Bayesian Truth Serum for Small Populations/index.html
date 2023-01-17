@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.2k</span>
+            <span class="post-count">5k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">17 分钟</span>
+            <span class="post-count">21 分钟</span>
         </span>
     </span>
 </div>
@@ -110,7 +110,8 @@
 <p>可接受性是一个弱要求。尤其要注意的是，任何先验都可以转化为可接受的先验，因为(1)对于具有正概率的状态，所有以状态为条件的信号信念是完全混合的；(2)对于至少两个具有正概率的状态，以状态为条件的信号信念是不同的。任何两个具有相同信号信念概率的状态都可以合并成一个新的状态，而概率为零的状态可以被放弃。该机制不需要任何关于可接受性以外的先验知识。</p>
 <p>给定实体$i$的信号$s_i$，它可以更新自己关于另一个实体$j$会收到高级信号的概率的后验信念$P(S_j=h|S_i=s_i)$。因为公共先验，我们可以用$p_h=Pr(S_j=h|S_i=h)$和$p_l=Pr(S_j=h|S_i=l)$来分别表示一个普通实体在自己持有高和低信号的条件下对其他实体会持有高级信号的后验信念。我们将之称为一阶信号后验，且：</p>
 <script type="math/tex; mode=display">
-p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=s_i\right)</script><p>其中关于状态的后验可以用通常的方式从贝叶斯规则中确定，等于</p>
+p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=s_i\right)</script><p>【个人理解】这个式子是指一个普通实体自己持有高信号的情况下，认为其他实体也持有高信号的概率。具体计算起来，就是自己持有信号$s_i$的情况下状态是$T=t$的条件概率，乘以状态是$T=t$的情况下，实体$j$持有高信号的概率，然后对所有可能的$t$求和，得到的总概率就是$p_h$。我其实觉得末尾的$S_i=s_i$应该是$S_i=h$，这样才能说得通。</p>
+<p>其中关于状态的后验可以用通常的方式从贝叶斯规则中确定，等于</p>
 <script type="math/tex; mode=display">
 \operatorname{Pr}\left(T=t \mid S_i=s_i\right)=\frac{\operatorname{Pr}\left(S_i=s_i \mid T=t\right) \operatorname{Pr}(T=t)}{\operatorname{Pr}\left(S_i=s_i\right)}</script><p>而分母则是：</p>
 <script type="math/tex; mode=display">
@@ -133,6 +134,7 @@ p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatornam
 & +\underbrace{\sum_{j \neq i}\left(\bar{x}_{-i j} \ln \left(\frac{y_i}{\bar{x}_{-i j}}\right)+\left(1-\bar{x}_{-i j}\right) \ln \left(\frac{1-y_i}{1-\bar{x}_{-i j}}\right)\right)}_{\text {prediction score }}
 \end{aligned}</script>这里注释提到，BTS有两种，一种是无限数量的实体，一种是有限数量的实体，这篇论文关注的是后者。此外BTS使用了拉普拉斯平滑来避免出现为0的概率。</li>
 </ol>
+<p>此外，这里和我之前理解的不那么一样，具体来说，之前我以为是直接计算所有人的算术平均和几何平均，但是从这个论文来看，它是分别计算了去掉每一个实体以后的平均值并求和。在人很多的时候，去掉一个人对均值也没影响，而人很少的时候，这个均值就会有波动了，进而导致激励相容不一定成立。</p>
 <p>这对$n \rightarrow \infty$来说很简单，因为公式中对$j\neq i$的求和可以用只用一个随机选择的$j\neq i$计算的信息分和预测分来代替。</p>
 <p>如果所有代理人（1）报告他们的真实信号和（2）预测人口中高信号的频率是他们的信号后验，则BTS机制是严格的贝叶斯-纳什激励相容。</p>
 <p><strong>定理</strong>1：当$n\rightarrow \infty$且所有先验可接受时，BTS是严格贝叶斯纳什激励相容的。</p>
@@ -140,9 +142,25 @@ p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatornam
 <p><strong>定理</strong>2：当$n=3$时，BTS并不满足贝叶斯纳什激励相容或个体理性。</p>
 <p>BTS的这种局限性可以从Prelec对BTS的处理中得到理解。一般来说，BTS兼容Bayes-Nash激励所需的代理数量取决于先验，而且很难确定。尽管如此，不同地方对BTS的讨论仍然没有注意到这个重要的注意事项，例如（Jurca和Faltings 2008；Chen和Pennock 2010）。出于这个原因，我们提供一个具体的例子。这个例子不是唯一的，也不依赖于$n=3$。</p>
 <p><strong>例</strong>1：（BTS且$n=3$）考虑三个代理人共享以下先验，$m=2$（两个状态）：$Pr(T=2)=0.7, Pr(S=h|T=2)=0.8, Pr(S=h|T=1)=0.1$。基于此，后验信号信念分别是$p_{\{h\}}=\operatorname{Pr}\left(S_j=h \mid S_i=h\right)=0.764$和$p_{\{l\}}=\operatorname{Pr}\left(S_j=h \mid S_i=l\right)=0.339$。</p>
+<p>【个人理解】$P(T=2)=0.7,P(T=1)=0.3,P(S=h|T=2)=0.8,P(S=h|T=1)=0.1$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(S_i=h)&=\sum_{t=1}^m P\left(S_i=h \mid T=t\right) P(T=t)\\
+&=P(S_i=h|T=1)P(T=1)+P(S_i=h|T=2)P(T=2)\\
+&=0.1*0.3+0.8*0.7\\
+&=0.59
+\end{aligned}</script><script type="math/tex; mode=display">
+P(T=1|S_i=h)=\frac{P(S_i=h|T=1)P(T=1)}{P(S_i=h)}=\frac{0.1*0.3}{0.59}=0.0508</script><script type="math/tex; mode=display">
+P(T=2|S_i=h)=\frac{P(S_i=h|T=2)P(T=2)}{P(S_i=h)}=\frac{0.8*0.7}{0.59}=0.9491</script><script type="math/tex; mode=display">
+\begin{aligned}
+P(S_j=h|S_i=h)&=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=h\right) \\
+&=P(S_j=h|T=1)P(T=1|S_i=h)+P(S_j=h|T=2)P(T=2|S_i=h)\\
+&=0.1*0.0508+0.8*0.9491=0.764
+\end{aligned}</script><p>由此$p_{\{h\}}=\operatorname{Pr}\left(S_j=h \mid S_i=h\right)=0.764$，$p_{\{l\}}=\operatorname{Pr}\left(S_j=h \mid S_i=l\right)=0.339$也是类似的算法。</p>
+<p>根据上面这个计算，可以认为，一个自己持有高信号的实体，认为其他人也持有高信号的概率是0.764；而一个自己持有低信号的实体，认为其他人持有高信号的概率是0.339。</p>
 <p>考虑实体$i=1$，假设实体2和3都说真话。假设$S_1=h$，即实体1真实的报告是$x_1=1,y_1=0.764$。则当实体1说真话时，对应着实体$j=2$的评分公式计算的期望分数应该是：</p>
 <script type="math/tex; mode=display">
-E\left[\ln \left(\frac{\bar{X}_{-12}}{\bar{Y}_{-12}}\right)+\bar{X}_{-12} \ln \left(\frac{0.764}{\bar{X}_{-12}}\right)+\left(1-\bar{X}_{-12}\right) \ln \left(\frac{1-0.764}{1-\bar{X}_{-12}}\right)\right]</script><p>该期望值是相对随机变量$\bar{X}_{-12}$和$\bar{Y}_{-12}$而言的。当概率$p_{\{h\}}=0.764$时，实体1会认为$\bar{x}_{-12}=(1+1)/3=2/3$且$\bar{y}_{-12}=0.764$，同时概率$1-p_{\{h\}}=0.236$，可得$\bar{x}_{-12}=(0+1)/3=1/3$且$\bar{y}_{-12}=p_{\{l\}}=0.339$。给定上述内容，我们可以得到期望信息分是$0.764ln(\frac{2/3}{0.764})+0.236ln(\frac{1/3}{0.339})=-0.108$，而期望预测分是$0.764((2/3)ln(\frac(0.764)(2/3))+(1/3)ln(\frac{0.236}{1/3}))+0.236((1/3)ln(\frac{0.764}{1/3})+(2/3)ln(\frac{0.236}{2/3})=-0.117$，由此可得期望分是-0.225。而当公式中的$j=3$时，用同样的方法计算得到的实体1说真话对应的分数是-0.450，因此BTS不满足个体理性。</p>
+E\left[\ln \left(\frac{\bar{X}_{-12}}{\bar{Y}_{-12}}\right)+\bar{X}_{-12} \ln \left(\frac{0.764}{\bar{X}_{-12}}\right)+\left(1-\bar{X}_{-12}\right) \ln \left(\frac{1-0.764}{1-\bar{X}_{-12}}\right)\right]</script><p>该期望值是相对随机变量$\bar{X}_{-12}$和$\bar{Y}_{-12}$而言的。当概率$p_{\{h\}}=0.764$时，实体1会认为$\bar{x}_{-12}=(1+1)/3=2/3$且$\bar{y}_{-12}=0.764$，同时概率$1-p_{\{h\}}=0.236$，可得$\bar{x}_{-12}=(0+1)/3=1/3$且$\bar{y}_{-12}=p_{\{l\}}=0.339$。给定上述内容，我们可以得到期望信息分是$0.764ln(\frac{2/3}{0.764})+0.236ln(\frac{1/3}{0.339})=-0.108$，而期望预测分是$0.764((2/3)ln(\frac{0.764}{2/3})+(1/3)ln(\frac{0.236}{1/3}))+0.236((1/3)ln(\frac{0.764}{1/3})+(2/3)ln(\frac{0.236}{2/3})=-0.117$，由此可得期望分是-0.225。而当公式中的$j=3$时，用同样的方法计算得到的实体1说真话对应的分数是-0.450，因此BTS不满足个体理性。</p>
 <p>如果实体1谎报，且$x_1=0$，而仍然报告$y_1=0.764$，则期望信息分（$j=2$）会是$E[ln(\frac{1-\bar{X}_{-13}}{\bar{Y}’_{-13}})]=0.764ln(\frac{1/3}{0.236})+0.236ln(\frac{2/3}{0.661})=0.266$，预测分是0.149，类似的，考虑$j=3$可得总期望分是0.298，也就是说实体1谎报更好。</p>
 <p><strong>例</strong>2：（BTS且$n\rightarrow \infty$）考虑相同的先验但是数量更多的实体。在极限的情况下，关注实体1的信念，随机变量$\bar{X}_{-ij},\bar{Y}_{-ij},\bar{Y}’_{-ij}$以1的概率各自取值：</p>
 <script type="math/tex; mode=display">
@@ -201,7 +219,16 @@ u_i=\underbrace{R_q\left(y_i^{\prime}, x_k\right)}_{\text {information score }}+
 &
 \end{aligned}</script><p>实体1说真话时期望信息分最高。</p>
 <p>注意，对于任意$n\geq 3$，RBTS是严格贝叶斯纳什激励相容且可接受先验的。我们会在下一部分证明这一点。</p>
-<h2 id="IC（激励相容）"><a href="#IC（激励相容）" class="headerlink" title="IC（激励相容）"></a>IC（激励相容）</h2><p>先略。</p>
+<h2 id="IC（激励相容）"><a href="#IC（激励相容）" class="headerlink" title="IC（激励相容）"></a>IC（激励相容）</h2><p>在建立RBTS的激励相容性时，我们首先提出了一些技术性的定理。第一个定理还建立了随机相关性，因此，对于不同的信号观测，信号后验是不同的。然后，我们介绍了一个适当的评分规则，用于诱导信号而不是信念报告，并将其作为分析RBTS的基础部分。</p>
+<p><strong>引理</strong>5：对于所有可接受先验，$1&gt;p_{\{h\}}&gt;Pr(S_j=h)&gt;p_{\{l\}}&gt;0$都成立。</p>
+<p>证明：可接受先验的完全混合属性确保先验总是内部的，且$1&gt;p_{\{h\}}&gt;0$以及$1&gt;p_{\{l\}}&gt;0$。此外，如果$p_{\{h\}}&gt;Pr(S_j=h)$，则这意味着$Pr(S_j=h)&gt;p_{\{l\}}$，因为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\operatorname{Pr}\left(S_j=h\right)=  p_{\{h\}} \operatorname{Pr}\left(S_i=h\right) +\operatorname{Pr}\left(S_j=h \mid S_i=l\right) \operatorname{Pr}\left(S_i=l\right) \\
+&\Leftrightarrow \quad  \operatorname{Pr}\left(S_j=h\right)\left(1-p_{\{h\}}\right)=p_{\{l\}}\left(1-\operatorname{Pr}\left(S_j=h\right)\right) \\
+&\underbrace{\Rightarrow}_{p_{\{h\}}>\operatorname{Pr}\left(S_j=h\right)}  \operatorname{Pr}\left(S_j=h\right)>p_{\{l\}} .
+\end{aligned}</script><p>剩下的就是给定可接受先验的情况下证明$p_{\{h\}}&gt;Pr(S_j=h)$。证明的剩余部分由3步组成：</p>
+<p>首先，将每一个状态与$H$和$L$这两个组中的一个联系起来。</p>
 <h3 id="A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method"><a href="#A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method" class="headerlink" title="A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method"></a>A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method</h3><h2 id="Other-Properties-and-Discussion"><a href="#Other-Properties-and-Discussion" class="headerlink" title="Other Properties and Discussion"></a>Other Properties and Discussion</h2> 
       <!-- reward -->
       
@@ -266,6 +293,15 @@ u_i=\underbrace{R_q\left(y_i^{\prime}, x_k\right)}_{\text {information score }}+
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/01/16/2023%E5%B9%B42%E6%9C%881%E6%97%A5-6%E6%9C%8830%E6%97%A5%E9%A2%84%E7%AE%97/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2023年2月1日-6月30日预算
+          
+        </div>
+      </a>
     
     
       <a href="/2022/11/10/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Peer%20Prediction-Based%20Trustworthiness%20Evaluation%20and%20Trustworthy%20Service%20Rating%20in%20Social%20Networks/" class="article-nav-link">

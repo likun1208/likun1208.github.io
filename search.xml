@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2023年2月1日-6月30日预算</title>
+    <url>/2023/01/16/2023%E5%B9%B42%E6%9C%881%E6%97%A5-6%E6%9C%8830%E6%97%A5%E9%A2%84%E7%AE%97/</url>
+    <content><![CDATA[<h1 id="2023年2月1日-6月30日预算"><a href="#2023年2月1日-6月30日预算" class="headerlink" title="2023年2月1日-6月30日预算"></a>2023年2月1日-6月30日预算</h1><h2 id="预算表"><a href="#预算表" class="headerlink" title="预算表"></a>预算表</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">科目</th>
+<th style="text-align:center">金额（单位：元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">餐饮</td>
+<td style="text-align:center">7200</td>
+</tr>
+<tr>
+<td style="text-align:center">会员费</td>
+<td style="text-align:center">115</td>
+</tr>
+<tr>
+<td style="text-align:center">游戏</td>
+<td style="text-align:center">600</td>
+</tr>
+<tr>
+<td style="text-align:center">生活用品</td>
+<td style="text-align:center">300</td>
+</tr>
+<tr>
+<td style="text-align:center">服饰相关</td>
+<td style="text-align:center">500</td>
+</tr>
+<tr>
+<td style="text-align:center">其他支出</td>
+<td style="text-align:center">1285</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="测算依据"><a href="#测算依据" class="headerlink" title="测算依据"></a>测算依据</h2><p>从2月1日到6月30日共5个月，20周，150天，合计预算10000。</p>
+<ol>
+<li>餐饮：平均一日三餐合计30元，每日牛奶+酸奶合计10元，每周水果10元，每月外出聚餐+零食+饮料等按总共200计算，合计$(30+10)\times150+10\times20+200\times5=7200$。</li>
+<li>各类会员：网易云每月8元，B站每月15元，合计$23\times5=115$。</li>
+<li>游戏：原神每月98，合计490，FF14和其他游戏关联费用暂定110，合计600。</li>
+<li>生活用品：由于2022年双十一买了一批东西，因此上半年应该不用买太多，按每个月50算，再凑个整暂定300。</li>
+<li>服饰相关：应该不会买什么，暂定500。</li>
+<li>其他：考虑到一些临时性的额外支出等，凑个整算1285。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>账本</category>
+      </categories>
+      <tags>
+        <tag>预算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-A Robust Bayesian Truth Serum for Small Populations</title>
     <url>/2023/01/02/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Robust%20Bayesian%20Truth%20Serum%20for%20Small%20Populations/</url>
     <content><![CDATA[<h1 id="A-Robust-Bayesian-Truth-Serum-for-Small-Populations"><a href="#A-Robust-Bayesian-Truth-Serum-for-Small-Populations" class="headerlink" title="A Robust Bayesian Truth Serum for Small Populations"></a>A Robust Bayesian Truth Serum for Small Populations</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>对等预测机制允许在真实的世界状态方面真实地引出私人信号（例如，经验或意见），而这个基础真相是不可观察的。最初的对等预测方法对于任意数量大于2的实体而言都是激励相容的，但依赖于所有实体共享的公共先验和机制。而贝叶斯吐真剂BTS则放宽了这个假设。BTS仍然假设代理共享同一个公共先验，但机制不需要知道该先验。然而，BTS仅在实体数量足够大的时候才激励相容，且需要的确切实体数量并不确定，而是取决于私有先验。本文提出了针对二值信息的稳定BTS，它对于任意实体数量大于3的场景都激励相容，利用二次函数评分规则的一个特性。RBTS是第一个针对$n \geq 3$的场景提供了严格激励相容而无需知道公共先验的对等预测机制。此外，与原始的BTS不同，我们的机制在数字上是稳健的，而且事后是个体理性的（<em>ex post</em> individually rational）。</p>
@@ -17,7 +73,8 @@
 <p>可接受性是一个弱要求。尤其要注意的是，任何先验都可以转化为可接受的先验，因为(1)对于具有正概率的状态，所有以状态为条件的信号信念是完全混合的；(2)对于至少两个具有正概率的状态，以状态为条件的信号信念是不同的。任何两个具有相同信号信念概率的状态都可以合并成一个新的状态，而概率为零的状态可以被放弃。该机制不需要任何关于可接受性以外的先验知识。</p>
 <p>给定实体$i$的信号$s_i$，它可以更新自己关于另一个实体$j$会收到高级信号的概率的后验信念$P(S_j=h|S_i=s_i)$。因为公共先验，我们可以用$p_h=Pr(S_j=h|S_i=h)$和$p_l=Pr(S_j=h|S_i=l)$来分别表示一个普通实体在自己持有高和低信号的条件下对其他实体会持有高级信号的后验信念。我们将之称为一阶信号后验，且：</p>
 <script type="math/tex; mode=display">
-p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=s_i\right)</script><p>其中关于状态的后验可以用通常的方式从贝叶斯规则中确定，等于</p>
+p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=s_i\right)</script><p>【个人理解】这个式子是指一个普通实体自己持有高信号的情况下，认为其他实体也持有高信号的概率。具体计算起来，就是自己持有信号$s_i$的情况下状态是$T=t$的条件概率，乘以状态是$T=t$的情况下，实体$j$持有高信号的概率，然后对所有可能的$t$求和，得到的总概率就是$p_h$。我其实觉得末尾的$S_i=s_i$应该是$S_i=h$，这样才能说得通。</p>
+<p>其中关于状态的后验可以用通常的方式从贝叶斯规则中确定，等于</p>
 <script type="math/tex; mode=display">
 \operatorname{Pr}\left(T=t \mid S_i=s_i\right)=\frac{\operatorname{Pr}\left(S_i=s_i \mid T=t\right) \operatorname{Pr}(T=t)}{\operatorname{Pr}\left(S_i=s_i\right)}</script><p>而分母则是：</p>
 <script type="math/tex; mode=display">
@@ -40,6 +97,7 @@ p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatornam
 & +\underbrace{\sum_{j \neq i}\left(\bar{x}_{-i j} \ln \left(\frac{y_i}{\bar{x}_{-i j}}\right)+\left(1-\bar{x}_{-i j}\right) \ln \left(\frac{1-y_i}{1-\bar{x}_{-i j}}\right)\right)}_{\text {prediction score }}
 \end{aligned}</script>这里注释提到，BTS有两种，一种是无限数量的实体，一种是有限数量的实体，这篇论文关注的是后者。此外BTS使用了拉普拉斯平滑来避免出现为0的概率。</li>
 </ol>
+<p>此外，这里和我之前理解的不那么一样，具体来说，之前我以为是直接计算所有人的算术平均和几何平均，但是从这个论文来看，它是分别计算了去掉每一个实体以后的平均值并求和。在人很多的时候，去掉一个人对均值也没影响，而人很少的时候，这个均值就会有波动了，进而导致激励相容不一定成立。</p>
 <p>这对$n \rightarrow \infty$来说很简单，因为公式中对$j\neq i$的求和可以用只用一个随机选择的$j\neq i$计算的信息分和预测分来代替。</p>
 <p>如果所有代理人（1）报告他们的真实信号和（2）预测人口中高信号的频率是他们的信号后验，则BTS机制是严格的贝叶斯-纳什激励相容。</p>
 <p><strong>定理</strong>1：当$n\rightarrow \infty$且所有先验可接受时，BTS是严格贝叶斯纳什激励相容的。</p>
@@ -47,9 +105,25 @@ p_{\{h\}}=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatornam
 <p><strong>定理</strong>2：当$n=3$时，BTS并不满足贝叶斯纳什激励相容或个体理性。</p>
 <p>BTS的这种局限性可以从Prelec对BTS的处理中得到理解。一般来说，BTS兼容Bayes-Nash激励所需的代理数量取决于先验，而且很难确定。尽管如此，不同地方对BTS的讨论仍然没有注意到这个重要的注意事项，例如（Jurca和Faltings 2008；Chen和Pennock 2010）。出于这个原因，我们提供一个具体的例子。这个例子不是唯一的，也不依赖于$n=3$。</p>
 <p><strong>例</strong>1：（BTS且$n=3$）考虑三个代理人共享以下先验，$m=2$（两个状态）：$Pr(T=2)=0.7, Pr(S=h|T=2)=0.8, Pr(S=h|T=1)=0.1$。基于此，后验信号信念分别是$p_{\{h\}}=\operatorname{Pr}\left(S_j=h \mid S_i=h\right)=0.764$和$p_{\{l\}}=\operatorname{Pr}\left(S_j=h \mid S_i=l\right)=0.339$。</p>
+<p>【个人理解】$P(T=2)=0.7,P(T=1)=0.3,P(S=h|T=2)=0.8,P(S=h|T=1)=0.1$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(S_i=h)&=\sum_{t=1}^m P\left(S_i=h \mid T=t\right) P(T=t)\\
+&=P(S_i=h|T=1)P(T=1)+P(S_i=h|T=2)P(T=2)\\
+&=0.1*0.3+0.8*0.7\\
+&=0.59
+\end{aligned}</script><script type="math/tex; mode=display">
+P(T=1|S_i=h)=\frac{P(S_i=h|T=1)P(T=1)}{P(S_i=h)}=\frac{0.1*0.3}{0.59}=0.0508</script><script type="math/tex; mode=display">
+P(T=2|S_i=h)=\frac{P(S_i=h|T=2)P(T=2)}{P(S_i=h)}=\frac{0.8*0.7}{0.59}=0.9491</script><script type="math/tex; mode=display">
+\begin{aligned}
+P(S_j=h|S_i=h)&=\sum_{t=1}^m \operatorname{Pr}\left(S_j=h \mid T=t\right) \operatorname{Pr}\left(T=t \mid S_i=h\right) \\
+&=P(S_j=h|T=1)P(T=1|S_i=h)+P(S_j=h|T=2)P(T=2|S_i=h)\\
+&=0.1*0.0508+0.8*0.9491=0.764
+\end{aligned}</script><p>由此$p_{\{h\}}=\operatorname{Pr}\left(S_j=h \mid S_i=h\right)=0.764$，$p_{\{l\}}=\operatorname{Pr}\left(S_j=h \mid S_i=l\right)=0.339$也是类似的算法。</p>
+<p>根据上面这个计算，可以认为，一个自己持有高信号的实体，认为其他人也持有高信号的概率是0.764；而一个自己持有低信号的实体，认为其他人持有高信号的概率是0.339。</p>
 <p>考虑实体$i=1$，假设实体2和3都说真话。假设$S_1=h$，即实体1真实的报告是$x_1=1,y_1=0.764$。则当实体1说真话时，对应着实体$j=2$的评分公式计算的期望分数应该是：</p>
 <script type="math/tex; mode=display">
-E\left[\ln \left(\frac{\bar{X}_{-12}}{\bar{Y}_{-12}}\right)+\bar{X}_{-12} \ln \left(\frac{0.764}{\bar{X}_{-12}}\right)+\left(1-\bar{X}_{-12}\right) \ln \left(\frac{1-0.764}{1-\bar{X}_{-12}}\right)\right]</script><p>该期望值是相对随机变量$\bar{X}_{-12}$和$\bar{Y}_{-12}$而言的。当概率$p_{\{h\}}=0.764$时，实体1会认为$\bar{x}_{-12}=(1+1)/3=2/3$且$\bar{y}_{-12}=0.764$，同时概率$1-p_{\{h\}}=0.236$，可得$\bar{x}_{-12}=(0+1)/3=1/3$且$\bar{y}_{-12}=p_{\{l\}}=0.339$。给定上述内容，我们可以得到期望信息分是$0.764ln(\frac{2/3}{0.764})+0.236ln(\frac{1/3}{0.339})=-0.108$，而期望预测分是$0.764((2/3)ln(\frac(0.764)(2/3))+(1/3)ln(\frac{0.236}{1/3}))+0.236((1/3)ln(\frac{0.764}{1/3})+(2/3)ln(\frac{0.236}{2/3})=-0.117$，由此可得期望分是-0.225。而当公式中的$j=3$时，用同样的方法计算得到的实体1说真话对应的分数是-0.450，因此BTS不满足个体理性。</p>
+E\left[\ln \left(\frac{\bar{X}_{-12}}{\bar{Y}_{-12}}\right)+\bar{X}_{-12} \ln \left(\frac{0.764}{\bar{X}_{-12}}\right)+\left(1-\bar{X}_{-12}\right) \ln \left(\frac{1-0.764}{1-\bar{X}_{-12}}\right)\right]</script><p>该期望值是相对随机变量$\bar{X}_{-12}$和$\bar{Y}_{-12}$而言的。当概率$p_{\{h\}}=0.764$时，实体1会认为$\bar{x}_{-12}=(1+1)/3=2/3$且$\bar{y}_{-12}=0.764$，同时概率$1-p_{\{h\}}=0.236$，可得$\bar{x}_{-12}=(0+1)/3=1/3$且$\bar{y}_{-12}=p_{\{l\}}=0.339$。给定上述内容，我们可以得到期望信息分是$0.764ln(\frac{2/3}{0.764})+0.236ln(\frac{1/3}{0.339})=-0.108$，而期望预测分是$0.764((2/3)ln(\frac{0.764}{2/3})+(1/3)ln(\frac{0.236}{1/3}))+0.236((1/3)ln(\frac{0.764}{1/3})+(2/3)ln(\frac{0.236}{2/3})=-0.117$，由此可得期望分是-0.225。而当公式中的$j=3$时，用同样的方法计算得到的实体1说真话对应的分数是-0.450，因此BTS不满足个体理性。</p>
 <p>如果实体1谎报，且$x_1=0$，而仍然报告$y_1=0.764$，则期望信息分（$j=2$）会是$E[ln(\frac{1-\bar{X}_{-13}}{\bar{Y}’_{-13}})]=0.764ln(\frac{1/3}{0.236})+0.236ln(\frac{2/3}{0.661})=0.266$，预测分是0.149，类似的，考虑$j=3$可得总期望分是0.298，也就是说实体1谎报更好。</p>
 <p><strong>例</strong>2：（BTS且$n\rightarrow \infty$）考虑相同的先验但是数量更多的实体。在极限的情况下，关注实体1的信念，随机变量$\bar{X}_{-ij},\bar{Y}_{-ij},\bar{Y}’_{-ij}$以1的概率各自取值：</p>
 <script type="math/tex; mode=display">
@@ -108,7 +182,16 @@ u_i=\underbrace{R_q\left(y_i^{\prime}, x_k\right)}_{\text {information score }}+
 &
 \end{aligned}</script><p>实体1说真话时期望信息分最高。</p>
 <p>注意，对于任意$n\geq 3$，RBTS是严格贝叶斯纳什激励相容且可接受先验的。我们会在下一部分证明这一点。</p>
-<h2 id="IC（激励相容）"><a href="#IC（激励相容）" class="headerlink" title="IC（激励相容）"></a>IC（激励相容）</h2><p>先略。</p>
+<h2 id="IC（激励相容）"><a href="#IC（激励相容）" class="headerlink" title="IC（激励相容）"></a>IC（激励相容）</h2><p>在建立RBTS的激励相容性时，我们首先提出了一些技术性的定理。第一个定理还建立了随机相关性，因此，对于不同的信号观测，信号后验是不同的。然后，我们介绍了一个适当的评分规则，用于诱导信号而不是信念报告，并将其作为分析RBTS的基础部分。</p>
+<p><strong>引理</strong>5：对于所有可接受先验，$1&gt;p_{\{h\}}&gt;Pr(S_j=h)&gt;p_{\{l\}}&gt;0$都成立。</p>
+<p>证明：可接受先验的完全混合属性确保先验总是内部的，且$1&gt;p_{\{h\}}&gt;0$以及$1&gt;p_{\{l\}}&gt;0$。此外，如果$p_{\{h\}}&gt;Pr(S_j=h)$，则这意味着$Pr(S_j=h)&gt;p_{\{l\}}$，因为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\operatorname{Pr}\left(S_j=h\right)=  p_{\{h\}} \operatorname{Pr}\left(S_i=h\right) +\operatorname{Pr}\left(S_j=h \mid S_i=l\right) \operatorname{Pr}\left(S_i=l\right) \\
+&\Leftrightarrow \quad  \operatorname{Pr}\left(S_j=h\right)\left(1-p_{\{h\}}\right)=p_{\{l\}}\left(1-\operatorname{Pr}\left(S_j=h\right)\right) \\
+&\underbrace{\Rightarrow}_{p_{\{h\}}>\operatorname{Pr}\left(S_j=h\right)}  \operatorname{Pr}\left(S_j=h\right)>p_{\{l\}} .
+\end{aligned}</script><p>剩下的就是给定可接受先验的情况下证明$p_{\{h\}}&gt;Pr(S_j=h)$。证明的剩余部分由3步组成：</p>
+<p>首先，将每一个状态与$H$和$L$这两个组中的一个联系起来。</p>
 <h3 id="A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method"><a href="#A-Proper-Scoring-Rule-for-Eliciting-Signals-The-“Shadowing”-Method" class="headerlink" title="A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method"></a>A Proper Scoring Rule for Eliciting Signals: The “Shadowing” Method</h3><h2 id="Other-Properties-and-Discussion"><a href="#Other-Properties-and-Discussion" class="headerlink" title="Other Properties and Discussion"></a>Other Properties and Discussion</h2>]]></content>
       <categories>
         <category>论文</category>
@@ -2330,11 +2413,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts6615" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3693" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6615'));
+        var myChart = echarts.init(document.getElementById('echarts3693'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -2390,11 +2473,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9443" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4541" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9443'));
+        var myChart = echarts.init(document.getElementById('echarts4541'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2444,11 +2527,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2260" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4010" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2260'));
+        var myChart = echarts.init(document.getElementById('echarts4010'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -8123,11 +8206,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts908" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts69" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts908'));
+        var myChart = echarts.init(document.getElementById('echarts69'));
         // 指定图表的配置项和数据
         var option = {
     title: {
