@@ -13,26 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b3bbf0195a793453",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+                "file": "2023年2月1日-6月30日预算.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+                "file": "2023年2月1日-6月30日预算.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+                "file": "2023年2月1日-6月30日预算.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-A Robust Bayesian Truth Serum for Small Populations.md"
+                "file": "2023年2月1日-6月30日预算.md"
               }
             }
           }
@@ -159,17 +146,17 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b3bbf0195a793453",
+  "active": "47b23f6f5b532216",
   "lastOpenFiles": [
-    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+    "2023年2月1日-6月30日预算.md",
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
     "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
     "论文记录-BEYOND FINITE LAYER NEURAL NETWORKS BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS.md",
     "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-A solution to the single-question crowd wisdom problem.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
-    "论文记录-Theories of Bargaining Delays.md"
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md"
   ]
 }
