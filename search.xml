@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-A Survey of Deep Causal</title>
+    <url>/2023/01/27/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20of%20Deep%20Causal%20Model/</url>
+    <content><![CDATA[<h1 id="A-Survey-of-Deep-Causal-Model"><a href="#A-Survey-of-Deep-Causal-Model" class="headerlink" title="A Survey of Deep Causal Model"></a>A Survey of Deep Causal Model</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><ol>
+<li>因果推断应用场景<ol>
+<li>估计广告中观察数据的因果效应[3, 4, 5, 6, 7, 8, 9]  </li>
+<li>开发与因果治疗效果估计高度相关的推荐系统[10, 11, 12, 13, 14, 15, 16]  </li>
+<li>学习医学中患者的最佳治疗规则[17, 18, 19]  </li>
+<li>强化学习中的ITE估计[20,9, 21, 22, 23, 24, 25, 26, 27]  </li>
+<li>自然语言处理中的因果推理任务[28, 29, 30, 31, 32, 33]  </li>
+<li>新兴的计算机视觉和语言交互任务[34, 35, 36, 37, 38]  </li>
+<li>教育[39]  </li>
+<li>政策决定[40, 41, 42, 43, 44]  </li>
+</ol>
+</li>
+<li>深度学习与因果模型的结合  <ol>
+<li>深度学习模型的计算效率更高，精度更高，在各个领域都拥有良好的表现  </li>
+<li>许多深度学习模型是黑盒子，可解释性差，因为它们对输入和输出的相关性比因果关系更感兴趣[49, 50, 51]  </li>
+<li>深度学习模型已被广泛用于挖掘数据的因果关系，而不是相关关系[40, 42]  </li>
+<li>深度因果模型已经成为一种基于无偏估计的治疗效果的核心方法[19, 43, 44, 52]，因果推断领域的许多工作都利用深度因果模型来选择合理的治疗方案[53, 54, 55, 56]  </li>
+</ol>
+</li>
+<li>现状<ol>
+<li>长期以来，主流研究的一个特点是使用潜在结果框架作为解决观察性数据的因果推断问题的手段[63]。潜在结果框架也被称为Rubin因果模型[64]  </li>
+<li>考虑代表分布平衡的方法[40, 42, 43]，协变量混淆学习方法的影响[52, 65, 66, 67]，基于生成对抗网络的方法[44, 68, 69, 70]，其他相关内容[56, 33, 71]等等 </li>
+<li>由于深度学习方法有利于因果推断，因果推断也促进了深度学习方法的发展。除了提高因果效应估计的准确性外，对深度网络的研究还为开发深度学习算法提供了合理的依据[72, 73, 74]  </li>
+</ol>
+</li>
+<li>相关调研工作的主要主题：<ol>
+<li>因果推断的起始与发展[75]  </li>
+<li>反事实因果推理的机器学习可解释性[76]  </li>
+<li>图形化因果推理与机器学习的联系[77]  </li>
+<li>通过因果表征学习探索数据中的因果变量[78]  </li>
+<li>医疗保健的因果机器学习[79]  </li>
+<li>大数据情况下的因果学习和机器学习的关系[1]  </li>
+<li>潜在结果框架中观察数据的因果效应估计[2]  </li>
+<li>深度学习和变量范式视角在因果发现中的应用[80]  </li>
+<li>通过因果推理提取因果关系来优化推荐系统[81]  </li>
+<li>深度学习对解决传统因果学习问题的意义[83]</li>
+<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>主要来自[64, 2]</li>
+</ol>
+</li>
+</ol>
+<p>定义1：治疗效果估计（因果效应估计）：估计接受干预的特定样本的结果变化。治疗效果估计和提升模型有相同的目标，不同的是：提升模型是对随机实验数据的，治疗效果估计通常需要坚持必要的假设，适用于实验和观察数据。</p>
+<p>定义2：治疗（treatment）。治疗描述了应用于样本的方案或行动。作为一个医学术语，一个药物方案就是一种治疗。对于二元治疗，$T=1$是实验组，$T=0$是对照组。多个治疗方案可以用$T(T\in\lbrace0,1,2,…,T_N\rbrace)$来表示，其中$N+1$表示方案总数量。</p>
+<p>定义3：观察结果。观察性结果，也被称为事实性结果，是衡量样本的结果如何应用于治疗的措施。在某一治疗方案的情况下，观察结果记作$Y^F$，其中$Y^F=Y(T=T_i)$。</p>
+<p>定义4：反事实的结果。反事实的结果是与事实的结果不同的结果。在二元治疗的情况下，反事实结果记作$Y^{CF}=Y(T=1-T_i)$。在多治疗的情况下，$Y^{CF}(T=T_i^{‘})$表示治疗$T_i^{‘}$的反事实结果。</p>
+<p>定义5：剂量。剂量是指在某一特定治疗期间连续服用的数量。一般来说，有许多医学治疗涉及到连续的剂量参数，如血管压缩机。一组连续的剂量方案记作$D_T$。针对特定治疗的事实剂量记作$D^F=D(T=T_i)$。反事实剂量记作$D^{CF}(T=T_i^{‘})$。</p>
+<p>定义6：剂量-反应曲线。剂量-反应曲线表示在接受不同剂量的干预后，样品的反应效果随时间推移而变化。</p>
+<p>定义7：协变量。协变量是不受治疗选择影响的变量。</p>
+<h3 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h3><p>主要来自[2,77]</p>
+<p>假设1：稳定的样品处理值（SSTV）。</p>
+<p>假设2：可忽略性。</p>
+<p>假设3：重合。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>因果推断</tag>
+        <tag>deep learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2023年2月1日-6月30日预算</title>
     <url>/2023/01/16/2023%E5%B9%B42%E6%9C%881%E6%97%A5-6%E6%9C%8830%E6%97%A5%E9%A2%84%E7%AE%97/</url>
     <content><![CDATA[<h1 id="2023年2月1日-6月30日预算"><a href="#2023年2月1日-6月30日预算" class="headerlink" title="2023年2月1日-6月30日预算"></a>2023年2月1日-6月30日预算</h1><h2 id="预算表"><a href="#预算表" class="headerlink" title="预算表"></a>预算表</h2><div class="table-container">
@@ -2413,11 +2476,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3693" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1621" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3693'));
+        var myChart = echarts.init(document.getElementById('echarts1621'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -2473,11 +2536,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts4541" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9540" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4541'));
+        var myChart = echarts.init(document.getElementById('echarts9540'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2527,11 +2590,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts4010" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4446" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4010'));
+        var myChart = echarts.init(document.getElementById('echarts4446'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -8206,11 +8269,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts69" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3867" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts69'));
+        var myChart = echarts.init(document.getElementById('echarts3867'));
         // 指定图表的配置项和数据
         var option = {
     title: {

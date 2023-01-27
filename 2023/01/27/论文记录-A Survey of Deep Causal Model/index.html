@@ -7,11 +7,11 @@
   <link rel="stylesheet" type="text/css" href="/css/matery.css">
   <meta charset="utf-8" />
     
-  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  <meta name="description" content="深度因果推断综述" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    归档: 2021/5 |  左边
+    论文记录-A Survey of Deep Causal |  左边
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -41,135 +41,190 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-论文记录-A Survey of Deep Causal Model"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2021/5</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="container archive-calendar">
-    <div class="card">
-        <div id="post-calendar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/js/echarts.min.js"></script>
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('post-calendar'));
-
-    
-
-    let option = {
-        title: {
-            top: 0,
-            text: '文章日历',
-            left: 'center',
-            textStyle: {
-                color: '#3C4858'
-            }
-        },
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#555',
-            borderColor: '#777',
-            borderWidth: 1,
-            formatter: function (obj) {
-                var value = obj.value;
-                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
-            }
-        },
-        visualMap: {
-            show: true,
-            showLabel: true,
-            categories: [0, 1, 2, 3, 4],
-            calculable: true,
-            inRange: {
-                symbol: 'rect',
-                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
-            },
-            itemWidth: 12,
-            itemHeight: 12,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: 0
-        },
-        calendar: [{
-            left: 'center',
-            range: ["2022-01-27", "2023-01-27"],
-            cellSize: [13, 13],
-            splitLine: {
-                show: false
-            },
-            itemStyle: {
-                color: '#196127',
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            yearLabel: {
-                show: false
-            },
-            monthLabel: {
-                nameMap: 'cn',
-                fontSize: 11
-            },
-            dayLabel: {
-                formatter: '{start}  1st',
-                nameMap: 'cn',
-                fontSize: 11
-            }
-        }],
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            calendarIndex: 0,
-            data: [["2022-01-27", 0], ["2022-01-28", 0], ["2022-01-29", 0], ["2022-01-30", 0], ["2022-01-31", 0], ["2022-02-01", 0], ["2022-02-02", 0], ["2022-02-03", 0], ["2022-02-04", 0], ["2022-02-05", 0], ["2022-02-06", 0], ["2022-02-07", 0], ["2022-02-08", 0], ["2022-02-09", 0], ["2022-02-10", 0], ["2022-02-11", 0], ["2022-02-12", 0], ["2022-02-13", 0], ["2022-02-14", 0], ["2022-02-15", 0], ["2022-02-16", 0], ["2022-02-17", 0], ["2022-02-18", 0], ["2022-02-19", 0], ["2022-02-20", 0], ["2022-02-21", 0], ["2022-02-22", 0], ["2022-02-23", 0], ["2022-02-24", 0], ["2022-02-25", 0], ["2022-02-26", 0], ["2022-02-27", 0], ["2022-02-28", 0], ["2022-03-01", 0], ["2022-03-02", 0], ["2022-03-03", 1], ["2022-03-04", 0], ["2022-03-05", 0], ["2022-03-06", 0], ["2022-03-07", 0], ["2022-03-08", 0], ["2022-03-09", 0], ["2022-03-10", 0], ["2022-03-11", 0], ["2022-03-12", 0], ["2022-03-13", 0], ["2022-03-14", 0], ["2022-03-15", 0], ["2022-03-16", 0], ["2022-03-17", 0], ["2022-03-18", 0], ["2022-03-19", 0], ["2022-03-20", 0], ["2022-03-21", 0], ["2022-03-22", 0], ["2022-03-23", 0], ["2022-03-24", 0], ["2022-03-25", 0], ["2022-03-26", 0], ["2022-03-27", 0], ["2022-03-28", 0], ["2022-03-29", 0], ["2022-03-30", 0], ["2022-03-31", 0], ["2022-04-01", 0], ["2022-04-02", 0], ["2022-04-03", 0], ["2022-04-04", 0], ["2022-04-05", 0], ["2022-04-06", 0], ["2022-04-07", 0], ["2022-04-08", 0], ["2022-04-09", 0], ["2022-04-10", 0], ["2022-04-11", 0], ["2022-04-12", 0], ["2022-04-13", 0], ["2022-04-14", 0], ["2022-04-15", 0], ["2022-04-16", 0], ["2022-04-17", 0], ["2022-04-18", 0], ["2022-04-19", 0], ["2022-04-20", 0], ["2022-04-21", 0], ["2022-04-22", 0], ["2022-04-23", 0], ["2022-04-24", 0], ["2022-04-25", 0], ["2022-04-26", 0], ["2022-04-27", 0], ["2022-04-28", 0], ["2022-04-29", 0], ["2022-04-30", 0], ["2022-05-01", 0], ["2022-05-02", 0], ["2022-05-03", 0], ["2022-05-04", 0], ["2022-05-05", 0], ["2022-05-06", 2], ["2022-05-07", 0], ["2022-05-08", 0], ["2022-05-09", 0], ["2022-05-10", 0], ["2022-05-11", 0], ["2022-05-12", 0], ["2022-05-13", 0], ["2022-05-14", 0], ["2022-05-15", 0], ["2022-05-16", 0], ["2022-05-17", 0], ["2022-05-18", 0], ["2022-05-19", 0], ["2022-05-20", 0], ["2022-05-21", 0], ["2022-05-22", 0], ["2022-05-23", 0], ["2022-05-24", 0], ["2022-05-25", 0], ["2022-05-26", 0], ["2022-05-27", 0], ["2022-05-28", 0], ["2022-05-29", 1], ["2022-05-30", 0], ["2022-05-31", 0], ["2022-06-01", 0], ["2022-06-02", 0], ["2022-06-03", 0], ["2022-06-04", 0], ["2022-06-05", 0], ["2022-06-06", 0], ["2022-06-07", 0], ["2022-06-08", 0], ["2022-06-09", 0], ["2022-06-10", 0], ["2022-06-11", 0], ["2022-06-12", 0], ["2022-06-13", 0], ["2022-06-14", 0], ["2022-06-15", 0], ["2022-06-16", 0], ["2022-06-17", 0], ["2022-06-18", 0], ["2022-06-19", 0], ["2022-06-20", 0], ["2022-06-21", 0], ["2022-06-22", 0], ["2022-06-23", 0], ["2022-06-24", 0], ["2022-06-25", 0], ["2022-06-26", 0], ["2022-06-27", 0], ["2022-06-28", 0], ["2022-06-29", 0], ["2022-06-30", 0], ["2022-07-01", 0], ["2022-07-02", 0], ["2022-07-03", 0], ["2022-07-04", 0], ["2022-07-05", 0], ["2022-07-06", 0], ["2022-07-07", 0], ["2022-07-08", 0], ["2022-07-09", 0], ["2022-07-10", 0], ["2022-07-11", 0], ["2022-07-12", 0], ["2022-07-13", 0], ["2022-07-14", 0], ["2022-07-15", 0], ["2022-07-16", 0], ["2022-07-17", 0], ["2022-07-18", 0], ["2022-07-19", 0], ["2022-07-20", 0], ["2022-07-21", 0], ["2022-07-22", 0], ["2022-07-23", 0], ["2022-07-24", 0], ["2022-07-25", 0], ["2022-07-26", 0], ["2022-07-27", 0], ["2022-07-28", 0], ["2022-07-29", 0], ["2022-07-30", 0], ["2022-07-31", 0], ["2022-08-01", 0], ["2022-08-02", 0], ["2022-08-03", 0], ["2022-08-04", 0], ["2022-08-05", 0], ["2022-08-06", 0], ["2022-08-07", 0], ["2022-08-08", 0], ["2022-08-09", 0], ["2022-08-10", 0], ["2022-08-11", 0], ["2022-08-12", 0], ["2022-08-13", 0], ["2022-08-14", 0], ["2022-08-15", 0], ["2022-08-16", 0], ["2022-08-17", 0], ["2022-08-18", 0], ["2022-08-19", 0], ["2022-08-20", 0], ["2022-08-21", 0], ["2022-08-22", 0], ["2022-08-23", 0], ["2022-08-24", 0], ["2022-08-25", 0], ["2022-08-26", 0], ["2022-08-27", 0], ["2022-08-28", 0], ["2022-08-29", 0], ["2022-08-30", 0], ["2022-08-31", 1], ["2022-09-01", 0], ["2022-09-02", 0], ["2022-09-03", 0], ["2022-09-04", 0], ["2022-09-05", 0], ["2022-09-06", 0], ["2022-09-07", 0], ["2022-09-08", 0], ["2022-09-09", 0], ["2022-09-10", 0], ["2022-09-11", 1], ["2022-09-12", 0], ["2022-09-13", 0], ["2022-09-14", 0], ["2022-09-15", 0], ["2022-09-16", 0], ["2022-09-17", 0], ["2022-09-18", 0], ["2022-09-19", 0], ["2022-09-20", 0], ["2022-09-21", 0], ["2022-09-22", 0], ["2022-09-23", 1], ["2022-09-24", 0], ["2022-09-25", 0], ["2022-09-26", 0], ["2022-09-27", 0], ["2022-09-28", 0], ["2022-09-29", 0], ["2022-09-30", 0], ["2022-10-01", 0], ["2022-10-02", 0], ["2022-10-03", 0], ["2022-10-04", 0], ["2022-10-05", 0], ["2022-10-06", 0], ["2022-10-07", 0], ["2022-10-08", 0], ["2022-10-09", 0], ["2022-10-10", 0], ["2022-10-11", 0], ["2022-10-12", 0], ["2022-10-13", 1], ["2022-10-14", 0], ["2022-10-15", 0], ["2022-10-16", 0], ["2022-10-17", 0], ["2022-10-18", 0], ["2022-10-19", 0], ["2022-10-20", 0], ["2022-10-21", 0], ["2022-10-22", 0], ["2022-10-23", 0], ["2022-10-24", 1], ["2022-10-25", 0], ["2022-10-26", 0], ["2022-10-27", 0], ["2022-10-28", 0], ["2022-10-29", 0], ["2022-10-30", 0], ["2022-10-31", 1], ["2022-11-01", 0], ["2022-11-02", 0], ["2022-11-03", 0], ["2022-11-04", 0], ["2022-11-05", 0], ["2022-11-06", 0], ["2022-11-07", 0], ["2022-11-08", 1], ["2022-11-09", 0], ["2022-11-10", 1], ["2022-11-11", 0], ["2022-11-12", 0], ["2022-11-13", 0], ["2022-11-14", 0], ["2022-11-15", 0], ["2022-11-16", 0], ["2022-11-17", 0], ["2022-11-18", 0], ["2022-11-19", 0], ["2022-11-20", 0], ["2022-11-21", 0], ["2022-11-22", 0], ["2022-11-23", 0], ["2022-11-24", 0], ["2022-11-25", 0], ["2022-11-26", 0], ["2022-11-27", 0], ["2022-11-28", 0], ["2022-11-29", 0], ["2022-11-30", 0], ["2022-12-01", 0], ["2022-12-02", 0], ["2022-12-03", 0], ["2022-12-04", 0], ["2022-12-05", 0], ["2022-12-06", 0], ["2022-12-07", 0], ["2022-12-08", 0], ["2022-12-09", 0], ["2022-12-10", 0], ["2022-12-11", 0], ["2022-12-12", 0], ["2022-12-13", 0], ["2022-12-14", 0], ["2022-12-15", 0], ["2022-12-16", 0], ["2022-12-17", 0], ["2022-12-18", 0], ["2022-12-19", 0], ["2022-12-20", 0], ["2022-12-21", 0], ["2022-12-22", 0], ["2022-12-23", 0], ["2022-12-24", 0], ["2022-12-25", 0], ["2022-12-26", 0], ["2022-12-27", 0], ["2022-12-28", 0], ["2022-12-29", 0], ["2022-12-30", 0], ["2022-12-31", 0], ["2023-01-01", 0], ["2023-01-02", 1], ["2023-01-03", 0], ["2023-01-04", 0], ["2023-01-05", 0], ["2023-01-06", 0], ["2023-01-07", 0], ["2023-01-08", 0], ["2023-01-09", 0], ["2023-01-10", 0], ["2023-01-11", 0], ["2023-01-12", 0], ["2023-01-13", 0], ["2023-01-14", 0], ["2023-01-15", 0], ["2023-01-16", 1], ["2023-01-17", 0], ["2023-01-18", 0], ["2023-01-19", 0], ["2023-01-20", 0], ["2023-01-21", 0], ["2023-01-22", 0], ["2023-01-23", 0], ["2023-01-24", 0], ["2023-01-25", 0], ["2023-01-26", 0], ["2023-01-27", 1]]
-        }]
-
-    };
-
-    myChart.setOption(option);
-</script>
-
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2021" class="archive-year">2021</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Online%20Organizing%20Large-scale%20Heterogeneous%20Tasks%20and%20Multi-skilled%20Participants%20in%20Mobile%20Crowdsensing/" class="archive-article-date">
-  <time datetime="2021-05-26T05:26:13.000Z" itemprop="datePublished">05/26</time>
-</a>
+    <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2021/05/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Online%20Organizing%20Large-scale%20Heterogeneous%20Tasks%20and%20Multi-skilled%20Participants%20in%20Mobile%20Crowdsensing/"
-    >论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-A Survey of Deep Causal
+</h1>
  
 
     </header>
-    
-    
+     
+    <div class="article-meta">
+      <a href="/2023/01/27/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20of%20Deep%20Causal%20Model/" class="article-date">
+  <time datetime="2023-01-27T12:06:40.000Z" itemprop="datePublished">2023-01-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
   </div>
-</article>
-      
-      
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-  </div>
-  
-  
+      
+    <div class="tocbot"></div>
+
+
+
 
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="A-Survey-of-Deep-Causal-Model"><a href="#A-Survey-of-Deep-Causal-Model" class="headerlink" title="A Survey of Deep Causal Model"></a>A Survey of Deep Causal Model</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><ol>
+<li>因果推断应用场景<ol>
+<li>估计广告中观察数据的因果效应[3, 4, 5, 6, 7, 8, 9]  </li>
+<li>开发与因果治疗效果估计高度相关的推荐系统[10, 11, 12, 13, 14, 15, 16]  </li>
+<li>学习医学中患者的最佳治疗规则[17, 18, 19]  </li>
+<li>强化学习中的ITE估计[20,9, 21, 22, 23, 24, 25, 26, 27]  </li>
+<li>自然语言处理中的因果推理任务[28, 29, 30, 31, 32, 33]  </li>
+<li>新兴的计算机视觉和语言交互任务[34, 35, 36, 37, 38]  </li>
+<li>教育[39]  </li>
+<li>政策决定[40, 41, 42, 43, 44]  </li>
+</ol>
+</li>
+<li>深度学习与因果模型的结合  <ol>
+<li>深度学习模型的计算效率更高，精度更高，在各个领域都拥有良好的表现  </li>
+<li>许多深度学习模型是黑盒子，可解释性差，因为它们对输入和输出的相关性比因果关系更感兴趣[49, 50, 51]  </li>
+<li>深度学习模型已被广泛用于挖掘数据的因果关系，而不是相关关系[40, 42]  </li>
+<li>深度因果模型已经成为一种基于无偏估计的治疗效果的核心方法[19, 43, 44, 52]，因果推断领域的许多工作都利用深度因果模型来选择合理的治疗方案[53, 54, 55, 56]  </li>
+</ol>
+</li>
+<li>现状<ol>
+<li>长期以来，主流研究的一个特点是使用潜在结果框架作为解决观察性数据的因果推断问题的手段[63]。潜在结果框架也被称为Rubin因果模型[64]  </li>
+<li>考虑代表分布平衡的方法[40, 42, 43]，协变量混淆学习方法的影响[52, 65, 66, 67]，基于生成对抗网络的方法[44, 68, 69, 70]，其他相关内容[56, 33, 71]等等 </li>
+<li>由于深度学习方法有利于因果推断，因果推断也促进了深度学习方法的发展。除了提高因果效应估计的准确性外，对深度网络的研究还为开发深度学习算法提供了合理的依据[72, 73, 74]  </li>
+</ol>
+</li>
+<li>相关调研工作的主要主题：<ol>
+<li>因果推断的起始与发展[75]  </li>
+<li>反事实因果推理的机器学习可解释性[76]  </li>
+<li>图形化因果推理与机器学习的联系[77]  </li>
+<li>通过因果表征学习探索数据中的因果变量[78]  </li>
+<li>医疗保健的因果机器学习[79]  </li>
+<li>大数据情况下的因果学习和机器学习的关系[1]  </li>
+<li>潜在结果框架中观察数据的因果效应估计[2]  </li>
+<li>深度学习和变量范式视角在因果发现中的应用[80]  </li>
+<li>通过因果推理提取因果关系来优化推荐系统[81]  </li>
+<li>深度学习对解决传统因果学习问题的意义[83]</li>
+<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>主要来自[64, 2]</li>
+</ol>
+</li>
+</ol>
+<p>定义1：治疗效果估计（因果效应估计）：估计接受干预的特定样本的结果变化。治疗效果估计和提升模型有相同的目标，不同的是：提升模型是对随机实验数据的，治疗效果估计通常需要坚持必要的假设，适用于实验和观察数据。</p>
+<p>定义2：治疗（treatment）。治疗描述了应用于样本的方案或行动。作为一个医学术语，一个药物方案就是一种治疗。对于二元治疗，$T=1$是实验组，$T=0$是对照组。多个治疗方案可以用$T(T\in\lbrace0,1,2,…,T_N\rbrace)$来表示，其中$N+1$表示方案总数量。</p>
+<p>定义3：观察结果。观察性结果，也被称为事实性结果，是衡量样本的结果如何应用于治疗的措施。在某一治疗方案的情况下，观察结果记作$Y^F$，其中$Y^F=Y(T=T_i)$。</p>
+<p>定义4：反事实的结果。反事实的结果是与事实的结果不同的结果。在二元治疗的情况下，反事实结果记作$Y^{CF}=Y(T=1-T_i)$。在多治疗的情况下，$Y^{CF}(T=T_i^{‘})$表示治疗$T_i^{‘}$的反事实结果。</p>
+<p>定义5：剂量。剂量是指在某一特定治疗期间连续服用的数量。一般来说，有许多医学治疗涉及到连续的剂量参数，如血管压缩机。一组连续的剂量方案记作$D_T$。针对特定治疗的事实剂量记作$D^F=D(T=T_i)$。反事实剂量记作$D^{CF}(T=T_i^{‘})$。</p>
+<p>定义6：剂量-反应曲线。剂量-反应曲线表示在接受不同剂量的干预后，样品的反应效果随时间推移而变化。</p>
+<p>定义7：协变量。协变量是不受治疗选择影响的变量。</p>
+<h3 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h3><p>主要来自[2,77]</p>
+<p>假设1：稳定的样品处理值（SSTV）。</p>
+<p>假设2：可忽略性。</p>
+<p>假设3：重合。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2023/01/27/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20of%20Deep%20Causal%20Model/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/" rel="tag">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" rel="tag">因果推断</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/01/16/2023%E5%B9%B42%E6%9C%881%E6%97%A5-6%E6%9C%8830%E6%97%A5%E9%A2%84%E7%AE%97/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">2023年2月1日-6月30日预算</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -306,6 +361,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
