@@ -1,19 +1,19 @@
 {
   "main": {
-    "id": "14a30f015da43150",
+    "id": "dcc1dac7711c75eb",
     "type": "split",
     "children": [
       {
-        "id": "bcd7b943688f8cf3",
+        "id": "6061c2bf4000735d",
         "type": "tabs",
         "children": [
           {
-            "id": "47b23f6f5b532216",
+            "id": "3bdb549ab994a4e7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2023年2月1日-6月30日预算.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "f420e0646157f564",
+    "id": "314b1e6d43be6098",
     "type": "split",
     "children": [
       {
-        "id": "30638da60fd3459c",
+        "id": "4022037fd4d826cb",
         "type": "tabs",
         "children": [
           {
-            "id": "d2f862628380c3b8",
+            "id": "76ee4ba298bef021",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +43,7 @@
             }
           },
           {
-            "id": "757f34b327524655",
+            "id": "3f9fc3167e0e31ad",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -58,7 +58,7 @@
             }
           },
           {
-            "id": "8cd0b6fe1826bc01",
+            "id": "52d47ec536d0f17c",
             "type": "leaf",
             "state": {
               "type": "starred",
@@ -72,20 +72,20 @@
     "width": 200
   },
   "right": {
-    "id": "79fb20bbeecb1939",
+    "id": "7ab3221d9d212407",
     "type": "split",
     "children": [
       {
-        "id": "5da77e2203ed3d27",
+        "id": "2ae6e36e87353a8d",
         "type": "tabs",
         "children": [
           {
-            "id": "640222b84857f632",
+            "id": "2de6ace73a0217fd",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2023年2月1日-6月30日预算.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,19 +97,19 @@
             }
           },
           {
-            "id": "f2ca66051fe98933",
+            "id": "2a2d0a50398fa7ac",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2023年2月1日-6月30日预算.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "821a010db496cda2",
+            "id": "a711b3702b0f50cb",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -120,21 +120,21 @@
             }
           },
           {
-            "id": "4d60559f4d94c0b0",
+            "id": "b33de7d16782f4c3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "2023年2月1日-6月30日预算.md"
+                "file": "论文记录-A Survey of Deep Causal Model.md"
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -146,17 +146,6 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "47b23f6f5b532216",
-  "lastOpenFiles": [
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "2023年2月1日-6月30日预算.md",
-    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
-    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
-    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
-    "论文记录-BEYOND FINITE LAYER NEURAL NETWORKS BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS.md",
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
-    "论文记录-A solution to the single-question crowd wisdom problem.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md"
-  ]
+  "active": "3bdb549ab994a4e7",
+  "lastOpenFiles": []
 }
