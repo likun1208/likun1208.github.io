@@ -2,5 +2,12 @@
   "readableLineLength": false,
   "strictLineBreaks": true,
   "showLineNumber": true,
-  "promptDelete": false
+  "promptDelete": false,
+  "pdfExportSettings": {
+    "includeName": false,
+    "pageSize": "Tabloid",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
 }
