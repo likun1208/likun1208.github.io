@@ -138,9 +138,9 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "canvas:新建白板": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
-      "canvas:Create new canvas": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false
@@ -148,11 +148,28 @@
   },
   "active": "b5cd8d950f1755bb",
   "lastOpenFiles": [
+    "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
+    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
+    "论文记录-Theories of Bargaining Delays.md",
+    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
+    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
+    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
+    "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
+    "论文记录-Fast randomized consensus using shared memory.md",
+    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
+    "论文记录-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium.md",
+    "论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing.md",
+    "论文记录-BEYOND FINITE LAYER NEURAL NETWORKS BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS.md",
+    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
+    "论文记录-A solution to the single-question crowd wisdom problem.md",
+    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-因果框架对比.md",
     "论文记录-A Survey of Deep Causal Model.md",
     "论文记录-教育学中的因果推断.md",
-    "a1005dd730e2545dd4c655d30916ba8e.png",
-    "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
-    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md"
+    "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
