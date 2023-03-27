@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-A Survey of Deep Causal Model.md",
+                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-A Survey of Deep Causal Model.md",
+                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-A Survey of Deep Causal Model.md",
+                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-A Survey of Deep Causal Model.md"
+                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "b5cd8d950f1755bb",
   "lastOpenFiles": [
-    "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
     "论文记录-A Survey of Deep Causal Model.md",
+    "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
     "未命名.md",
     "论文记录-Causal Intervention for Leveraging Popularity Bias in.md",
     "论文记录-Caus.md",
