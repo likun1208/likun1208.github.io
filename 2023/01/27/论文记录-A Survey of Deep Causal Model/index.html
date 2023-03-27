@@ -132,10 +132,11 @@
 <li>深度学习和变量范式视角在因果发现中的应用[80]  </li>
 <li>通过因果推理提取因果关系来优化推荐系统[81]  </li>
 <li>深度学习对解决传统因果学习问题的意义[83]</li>
-<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>主要来自[64, 2]</li>
+<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]</li>
 </ol>
 </li>
 </ol>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>主要来自[64, 2]</p>
 <p>定义1：干预效果估计（因果效应估计）：估计接受干预的特定样本的结果变化。干预效果估计和提升模型有相同的目标，不同的是：提升模型是对随机实验数据的，干预效果估计通常需要坚持必要的假设，适用于实验和观察数据。</p>
 <p>定义2：干预（treatment）。干预描述了应用于样本的方案或行动。作为一个医学术语，一个药物方案就是一种干预。对于二元干预，$T=1$是实验组，$T=0$是对照组。多个干预方案可以用$T(T\in\lbrace0,1,2,…,T_N\rbrace)$来表示，其中$N+1$表示方案总数量。</p>
 <p>定义3：观察结果。观察性结果，也被称为事实性结果，是衡量样本的结果如何应用于干预的措施。在某一干预方案的情况下，观察结果记作$Y^F$，其中$Y^F=Y(T=T_i)$。</p>

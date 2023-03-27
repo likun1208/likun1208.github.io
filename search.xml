@@ -3,14 +3,18 @@
   <entry>
     <title>论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation</title>
     <url>/2023/03/27/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Causal%20Intervention%20for%20Leveraging%20Popularity%20Bias%20in%20Recommendation/</url>
-    <content><![CDATA[<h1 id="Causal-Intervention-for-Leveraging-Popularity-Bias-in-Recommendation"><a href="#Causal-Intervention-for-Leveraging-Popularity-Bias-in-Recommendation" class="headerlink" title="Causal Intervention for Leveraging Popularity Bias in Recommendation"></a>Causal Intervention for Leveraging Popularity Bias in Recommendation</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>推荐系统通常面临着人气偏差的问题：从数据的角度来看，项目在交互频率上表现出不均匀（通常是长尾）的分布；从方法的角度来看，协同过滤方法容易通过过度推荐热门项目来放大偏差。毫无疑问，在推荐系统中考虑人气偏差是非常关键的，现有的工作主要是通过基于倾向的无偏向学习或因果嵌入来消除偏差效应。然而，我们认为，数据中并非所有的偏见都是坏的，也就是说，有些项目因为其更好的内在质量而表现出更高的人气。盲目追求无偏见的学习可能会删除数据中的有益模式，降低推荐的准确性和用户满意度。</p>
+    <content><![CDATA[<h1 id="Causal-Intervention-for-Leveraging-Popularity-Bias-in-Recommendation"><a href="#Causal-Intervention-for-Leveraging-Popularity-Bias-in-Recommendation" class="headerlink" title="Causal Intervention for Leveraging Popularity Bias in Recommendation"></a>Causal Intervention for Leveraging Popularity Bias in Recommendation</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>推荐系统通常面临着人气偏差的问题：从数据的角度来看，项目在交互频率上表现出不均匀（通常是长尾）的分布；从方法的角度来看，协同过滤方法容易通过过度推荐热门项目来放大偏差。毫无疑问，在推荐系统中考虑人气偏差是非常关键的，现有的工作主要是通过基于倾向的无偏向学习或因果embedding来消除偏差效应。然而，我们认为，数据中并非所有的偏见都是坏的，也就是说，有些项目因为其更好的内在质量而表现出更高的人气。盲目追求无偏见的学习可能会删除数据中的有益模式，降低推荐的准确性和用户满意度。</p>
 <p>这项工作研究了推荐中的一个未被探索的问题—如何利用流行度偏差来提高推荐的准确性。关键在于两个方面：如何在训练过程中消除人气偏差的不良影响，以及如何在生成顶级𝐾推荐的推理阶段注入所需的人气偏差。这就对推荐生成过程的因果机制提出了质疑。沿着这个思路，我们发现物品流行度在暴露的物品和观察到的交互作用之间起到了混淆者的作用，造成了偏差放大的坏影响。为了实现我们的目标，我们提出了一种新的训练和推理范式，命名为 “人气-偏向解惑和调整”（PDA）。它在模型训练中去除混杂的流行偏向，并通过因果干预调整具有理想流行偏向的推荐分数。我们在潜伏因子模型上展示了新的范式，并在葵、豆瓣和腾讯的三个真实世界数据集上进行了广泛的实验。实证研究验证了去中心化的训练有助于发现用户的真实兴趣，而带有流行偏向的推理调整可以进一步提高推荐精度。我们在<a href="https://github.com/zyang1580/PDA" target="_blank" rel="noopener">Github</a> 上发布了我们的代码。</p>
 <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>推荐系统面临人气偏差问题，现有的关于流行偏向感知推荐的工作主要是进行无偏向学习或排名调整，可以分为：</p>
 <ol>
 <li>逆向倾向评分（IPS），通过对模型训练中的交互实例进行重新加权，将数据分布调整为均匀[17, 38]。虽然IPS方法有良好的理论基础，但由于估计倾向性的困难和模型的高方差，它们在实践中几乎没有效果。</li>
-<li>因果嵌入，它使用无偏的统一数据来指导模型学习无偏的嵌入[8, 27]，迫使模型放弃项目的流行。然而，获得这样的统一数据需要将项目随机地暴露给用户，这有可能会伤害用户体验。因此，数据通常是小规模的，使得学习的稳定性降低。</li>
+<li>因果embedding，它使用无偏的统一数据来指导模型学习无偏的embedding[8, 27]，迫使模型放弃商品流行度。然而，获得这样的统一数据需要将商品随机地推荐给用户，这有可能会伤害用户体验。因此，数据通常是小规模的，使得学习的稳定性降低。</li>
 <li>排名调整，对推荐列表进行事后的重新排名[3, 50]或对训练进行模型正则化[2, 50]。这两类方法都是启发式设计，有意提高不太受欢迎的项目的分数，然而这些方法的有效性缺乏理论基础。</li>
 </ol>
+<p>我们认为，推荐系统不应该消除人气偏差的影响，而应该利用人气偏差。我们的考虑是，并不是所有数据中的人气偏差都意味着坏的影响。例如，有些商品表现出更高的受欢迎程度，是因为它们有更好的内在质量或代表了当前的趋势，值得更多的推荐。盲目地消除流行偏见的影响，会失去数据中隐含的一些重要信号，不适当地压制高质量或流行的项目。此外，一些平台有必要在系统中引入期望的偏见，例如，推广那些有可能在未来成为流行的物品。这项工作旨在填补有效利用人气偏差来提高推荐准确性的研究空白。</p>
+<p><img src="https://github.com/likun1208/image/blob/master/ci-1.png?raw=true" alt="图1"></p>
+<p>为了理解商品流行度如何影响推荐过程，我们先借助因果图[35]的语言进行定性分析。图1(a)表明，传统的方法主要是进行用户-商品匹配来预测亲和力得分：$U$（用户节点）和$I$（物品节点）是原因，而$C$是结果节点，表示交互率。一个例子是隐语义模型[18, 32]，它将预测形成为用户embedding和项目embedding之间的内积。由于一个模型如何形成预测意味着它假设标记的数据是如何产生的，这个因果图也可以解释观察到的交互数据的假设产生过程。商品流行度虽然对数据生成过程有很大影响，但这种粗粒度的建模方法没有明确考虑。</p>
+<p>我们接下来考虑商品的受欢迎程度是如何影响这个过程的，从而丰富了 图1(b)中的因果图。节点Z表示商品流行度，有两条边指向$C$和$I$。首先，从Z到C的边表示商品流行度对交互率的直接影响，因为很多用户有从众心理，因此倾向于跟随大多数人消费受欢迎的物品[28, 48]。其次，从Z到I的边意味着商品的受欢迎程度会影响商品是否被更多推荐，因为推荐系统通常会继承数据中的偏差，更频繁地推荐受欢迎的商品。值得注意的是，我们发现$Z$是导致$I$和$C$的共同原因，在被推荐的项目和观察到的交互率之间充当混淆因素[35]。这意味着，流行度$Z$通过两条因果路径影响观察到的流行数据：1）$Z\rightarrow C$和2）$Z\rightarrow I \rightarrow C$，其中第二条路径包含偏见放大的负面影响，因为它增加了热门商品的交互率，尽管它们可能不太符合用户兴趣。</p>
 ]]></content>
       <categories>
         <category>论文</category>
@@ -203,10 +207,11 @@
 <li>深度学习和变量范式视角在因果发现中的应用[80]  </li>
 <li>通过因果推理提取因果关系来优化推荐系统[81]  </li>
 <li>深度学习对解决传统因果学习问题的意义[83]</li>
-<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>主要来自[64, 2]</li>
+<li>深度模型中的因果效应估计与有偏差的样本观测和当前工业应用中的挑战[本文]</li>
 </ol>
 </li>
 </ol>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>主要来自[64, 2]</p>
 <p>定义1：干预效果估计（因果效应估计）：估计接受干预的特定样本的结果变化。干预效果估计和提升模型有相同的目标，不同的是：提升模型是对随机实验数据的，干预效果估计通常需要坚持必要的假设，适用于实验和观察数据。</p>
 <p>定义2：干预（treatment）。干预描述了应用于样本的方案或行动。作为一个医学术语，一个药物方案就是一种干预。对于二元干预，$T=1$是实验组，$T=0$是对照组。多个干预方案可以用$T(T\in\lbrace0,1,2,…,T_N\rbrace)$来表示，其中$N+1$表示方案总数量。</p>
 <p>定义3：观察结果。观察性结果，也被称为事实性结果，是衡量样本的结果如何应用于干预的措施。在某一干预方案的情况下，观察结果记作$Y^F$，其中$Y^F=Y(T=T_i)$。</p>
@@ -2865,11 +2870,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts9897" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts529" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9897'));
+        var myChart = echarts.init(document.getElementById('echarts529'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -2925,11 +2930,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7202" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2391" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7202'));
+        var myChart = echarts.init(document.getElementById('echarts2391'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -2979,11 +2984,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7736" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4449" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7736'));
+        var myChart = echarts.init(document.getElementById('echarts4449'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -8658,11 +8663,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts7393" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3682" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7393'));
+        var myChart = echarts.init(document.getElementById('echarts3682'));
         // 指定图表的配置项和数据
         var option = {
     title: {
