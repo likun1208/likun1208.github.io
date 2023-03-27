@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+                "file": "论文记录-A Survey of Deep Causal Model.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md"
+                "file": "论文记录-A Survey of Deep Causal Model.md"
               }
             }
           }
@@ -148,11 +148,17 @@
   },
   "active": "b5cd8d950f1755bb",
   "lastOpenFiles": [
+    "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
+    "论文记录-A Survey of Deep Causal Model.md",
+    "未命名.md",
+    "论文记录-Causal Intervention for Leveraging Popularity Bias in.md",
+    "论文记录-Caus.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data - 副本.md",
+    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
     "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
     "论文记录-Theories of Bargaining Delays.md",
-    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
@@ -168,8 +174,6 @@
     "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-因果框架对比.md",
-    "论文记录-A Survey of Deep Causal Model.md",
-    "论文记录-教育学中的因果推断.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
