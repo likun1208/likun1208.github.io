@@ -22,14 +22,14 @@ const live2d_settings = {
     'modelUrl': '/model',                        // 存放模型的文件夹路径，末尾不需要斜杠
     'tipsMessage': 'waifu-tips.json',           // 看板娘提示消息文件的路径，可以留空不加载
     // 模型设置
-    'modelName': 'paimon',                      // 默认加载的模型名称，仅在无本地记录的情况下有效
-    'modelStorage': true,                       // 记忆模型，下次打开页面会加载上次选择的模型
+    'modelName': 'gongzi',                      // 默认加载的模型名称，仅在无本地记录的情况下有效
+    'modelStorage': false,                       // 记忆模型，下次打开页面会加载上次选择的模型
     'modelRandMode': false,                     // 随机切换模型
     'preLoadMotion': true,                      // 是否预载动作数据，只对 model3 模型有效，不预载可以提高 model3 模型的加载速度，但可能导致首次触发动作时卡顿
     'tryWebp': true,                            // 如果浏览器支持 WebP 格式，将优先加载 WebP 格式的贴图，例如默认贴图文件为 klee.8192/texture_00.png，
                                                 // 启用后将优先加载 klee.8192/texture_00.png.webp，文件不存在会自动 fallback
     // 工具栏设置
-    'showToolMenu': false,                       // 显示 工具栏
+    'showToolMenu': true,                       // 显示 工具栏
     'canCloseLive2d': true,                     // 显示 关闭看板娘 按钮
     'canSwitchModel': true,                     // 显示 模型切换 按钮
     'canSwitchHitokoto': false,                  // 显示 一言切换 按钮
@@ -47,7 +47,7 @@ const live2d_settings = {
     'live2dHeight': 580,                        // 看板娘高度，不需要单位
     'live2dWidth': 400,                         // 看板娘宽度，不需要单位
     'waifuMinWidth': '1040px',                 // 页面小于宽度小于指定数值时隐藏看板娘，例如 'disable'(禁用)，推荐 '1040px'
-    'waifuEdgeSide': 'left:40',                 // 看板娘贴边方向，例如 'left:0'(靠左 0px)，'right:30'(靠右 30px)，可以被下面的模型设置覆盖
+    'waifuEdgeSide': 'right:0',                 // 看板娘贴边方向，例如 'left:0'(靠左 0px)，'right:30'(靠右 30px)，可以被下面的模型设置覆盖
     // 其他杂项设置
     'debug': true,                              // 全局 DEBUG 设置
     'debugMousemove': false,                    // 在控制台打印指针移动坐标，仅在 debug 为 true 时可用
@@ -60,16 +60,10 @@ const live2d_settings = {
 // 模型列表
 const live2d_models = [
     {
-        name: 'paimon',                                     // 模型名称要与文件夹名相同
-        message: 'SDK4 Emergency Food bilibili@根瘤菌rkzj',  // 切换时的提示信息
+        name: 'gongzi',                                     // 模型名称要与文件夹名相同
+        message: 'tartalia', 				    // 切换时的提示信息
         version: 3,                                         // 模型版本，model3.json 结尾的都填3，model.json 结尾的填2
-        // position: 'left'                                 // 此模型的显示位置，会覆盖上面的全局设置，只对此模型生效
-    },
-    {
-        name: 'gongzi',
-        message: 'tartalia',
-        version: 3,
-        //position: 'left'
+        //position: 'left'                                  // 此模型的显示位置，会覆盖上面的全局设置，只对此模型生效
     },
     {
         name: 'zhonglicat',
@@ -601,7 +595,8 @@ ${live2d_settings.waifuEdgeSide}px;
 position:fixed;
 bottom:0;
 z-index:998;
-font-size:0
+font-size:0;
+pointer-events: none
 }
 
 #waifu-message {
@@ -610,7 +605,7 @@ width:-moz-fit-content;
 width:fit-content;
 height:auto;
 left:2rem;
-top:20px;
+top:50px;
 opacity:0;
 z-index:998;
 margin:auto;
@@ -644,7 +639,7 @@ z-index:997
 .waifu-tool {
 display:none;
 color:#d73b66;
-top:130px;
+top:380px;
 ${live2d_settings.waifuEdgeSide.split(":")[0]}:10px;
 position:absolute;
 z-index:998

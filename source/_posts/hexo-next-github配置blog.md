@@ -578,6 +578,34 @@ categories:
 
 接下来重新部署网站，就能看到模型了。
 
+### 鼠标穿透问题
+在用了很久以后，我发现模型总是会挡住页面的可点击内容，比如目录、文章标题等，估计是因为用的模型尺寸大一圈，有很高一片空白区域。这有些影响使用，于是想试着把模型改成可以鼠标穿透点击的效果。经过各种尝试，目前发现的一个解决方案确实有效，但是会导致无法显示模型的工具栏（有切换模型和回到首页等功能），也就是说只能固定显示一个模型，操作方法如下：打开`waifu-tips.js`，找到如下代码块：
+```html
+const waifuStyle = `
+#waifu {
+${live2d_settings.waifuEdgeSide}px;
+position:fixed;
+bottom:0;
+z-index:998;
+font-size:0
+}
+```
+
+在最后一行`font-size:0`末尾加个分号，然后增加一行：`pointer-events: none`，修改后的代码如下：
+```html
+const waifuStyle = `
+#waifu {
+${live2d_settings.waifuEdgeSide}px;
+position:fixed;
+bottom:0;
+z-index:998;
+font-size:0;
+pointer-events: none
+}
+```
+
+这实际上就是把整个模型改成了不响应鼠标事件的效果，自然就能让鼠标点击穿透到页面的其他链接，但也同时导致工具栏无法响应。目前还没找到其他既能显示工具栏又能鼠标穿透的方法，先这样吧。
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324

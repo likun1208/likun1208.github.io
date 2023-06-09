@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
+                "file": "hexo-next-github配置blog.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "02db6a876e82d3ce",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
+                "file": "hexo-next-github配置blog.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
+                "file": "hexo-next-github配置blog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md"
+                "file": "hexo-next-github配置blog.md"
               }
             }
           }
@@ -148,8 +156,8 @@
   },
   "active": "06394101ea7b59c2",
   "lastOpenFiles": [
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
+    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-A Survey of Deep Causal Model.md",
     "未命名.md",
     "论文记录-Causal Intervention for Leveraging Popularity Bias in.md",
