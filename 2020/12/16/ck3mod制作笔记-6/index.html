@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="这部分学习特质相关的内容。" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ck3mod制作笔记-6 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-ck3mod制作笔记-6"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ck3mod制作笔记-6
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/16/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-6/" class="article-date">
+  <time datetime="2020-12-16T06:35:13.000Z" itemprop="datePublished">2020-12-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CK3/">CK3</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="特质"><a href="#特质" class="headerlink" title="特质"></a>特质</h1><h2 id="基础格式"><a href="#基础格式" class="headerlink" title="基础格式"></a>基础格式</h2><ol>
+<li><p>特质相关的文件有两个，第一个是对特质的说明，存放在文件夹<code>Crusader Kings III\game\common\traits</code>中，文件名为<code>00_traits.txt</code>，同目录下有一个<code>_traits.info</code>是说明怎么写特质；第二个是本地化文本文件，<code>Crusader Kings III\game\localization\simp_chinese\traits_l_simp_chinese.yml</code>，其他语言的也是类似路径。</p>
+</li>
+<li><p>目前游戏里有277个特质，在<a href="https://ck3.parawikis.com/wiki/%E7%89%B9%E8%B4%A8" target="_blank" rel="noopener">wiki</a>中已经有人整理过特质的分类和效果等信息。</p>
+</li>
+<li><p>从<code>_traits.info</code>中我们可以看到，一个特质<code>trait_&lt;key&gt;</code>对应的描述在本地化文本中应该是<code>trait_&lt;key&gt;_desc</code>，而默认图标是<code>gfx/interface/icons/traits/&lt;trait&gt;.dds</code>文件。</p>
+</li>
+<li><p>特质默认加给玩家角色，也就是<code>root</code>。</p>
+</li>
+<li><p>显然，一个最基础的特质<code>test_trait</code>由3部分组成：</p>
+<ol>
+<li><p>特质图标：<code>gfx/interface/icons/traits/test_trait.dds</code></p>
+</li>
+<li><p>特质内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">test_trait &#x3D; &#123;</span><br><span class="line">	index &#x3D; 278</span><br><span class="line">	desc &#x3D; &#123;</span><br><span class="line">		first_valid &#x3D; &#123;</span><br><span class="line">			triggered_desc &#x3D; &#123;</span><br><span class="line">				trigger &#x3D; &#123;</span><br><span class="line">					NOT &#x3D; &#123; exists &#x3D; this &#125;</span><br><span class="line">				&#125;</span><br><span class="line">				desc &#x3D; trait_test_trait_desc</span><br><span class="line">			&#125;</span><br><span class="line">			desc &#x3D; trait_test_trait_character_desc</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特质文本描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> # test traits</span><br><span class="line"> trait_test_trait:0 &quot;XXX&quot;</span><br><span class="line"> trait_test_trait_desc:0 &quot;XXX&quot;</span><br><span class="line"> trait_test_trait_character_desc:0 &quot;XXX&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要注意的是，在特质内容中，为了保证触发特效时该角色是存在的，我们需要进行<code>first_valid</code>来验证<code>Root</code>存在。</p>
+</li>
+<li><p>文本描述中，如果需要出现角色的名字，可以通过<code>[ROOT.GetCharacter.GetFirstNameNoTooltip]</code>来获取角色名。</p>
+</li>
+</ol>
+</li>
+<li><p>当我们按照上一条中，准备好对应的图标，并在mod文件夹中建立了<code>traits</code>文件夹和相应的特质文件，以及本地化内容也新建了文件，就会得到如下文件结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- test</span><br><span class="line">	- common</span><br><span class="line">		- traits</span><br><span class="line">			01_traits.txt</span><br><span class="line">	- gfx</span><br><span class="line">		- interface</span><br><span class="line">			- icons</span><br><span class="line">				- traits</span><br><span class="line">					test_trait.dds</span><br><span class="line">	- localization</span><br><span class="line">		- simp_chinese</span><br><span class="line">			- traits_test_l_simp_chinese.yml</span><br><span class="line">	descriptor.mod</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，特质文件和本地化文件的文件名本身并不是很重要，但是如果和CK3官方的那俩文件重名，则需要把那两个文件中的内容也原封不动复制过来，否则本身自带的特质就会都没法用。</p>
+</li>
+<li><p>准备好一系列文件以后，打开游戏通过<code>add_traits</code>指令增加特质，就可以看到对应的特质了。</p>
+</li>
+</ol>
+<h2 id="一些具体设置"><a href="#一些具体设置" class="headerlink" title="一些具体设置"></a>一些具体设置</h2><ol>
+<li>除了上述的文本描述以外，特质还可以增加很多具体设置，例如对角色的影响、获取的触发条件等等。以下内容是对<code>_traits.info</code>文件的翻译。</li>
+<li><code>health</code>：表示该特质对健康的修正，例如在特质身心俱悉（<code>whole_of_body</code>）中，有一条<code>health = 0.5</code>，表示有该特质的角色健康+0.5。</li>
+<li><code>fertility</code>：表示该特质对生育力的修正百分比，例如还是身心俱悉中，有一条<code>fertility = 0.2</code>表示该角色的生育力+25%。</li>
+<li><code>inherit_chance</code>：表示该特质遗传给孩子的概率，例如特质梅毒<code>great_pox</code>中有一条<code>inherit_chance = 10</code>，表示遗传概率是10%。</li>
+<li><code>birth</code>：表示有百分之多少的人会带着这个特质出生。</li>
+<li><code>random_creation</code>：表示有百分之多少的人会带着这个特质被创造出来。和出生不一样的是，创造是指通过命令行生成和修改人物。不过根据检索，<code>00_traits</code>文件里的<code>birth</code>和<code>random_creation</code>都是一起出现的，且值相等。</li>
+<li><code>triggered_opinion</code>：这一条应该是针对角色好感度修正特质的触发器，它包括以下内容：<ol>
+<li><code>opinion_modifier</code>：修正的好感度类型</li>
+<li><code>parameter</code>：要检查的布尔值参数</li>
+<li><code>check_missing</code>：检查参数是否没设置（或设置为 false），而不是设置为 true</li>
+<li><code>same_faith</code>：相同信仰</li>
+<li><code>same_dynasty</code>：相同宗族</li>
+<li><code>ignore_opinion_value_if_same_trait</code>：设置为<code>yes</code>的时候，会对有相同特质的角色不进行好感度修正，但是惩罚理由还在</li>
+<li><code>male_only</code>和<code>female_only</code>很显然分别是仅限男性和仅限女性</li>
+</ol>
+</li>
+<li><code>compatibility</code>：这是用于<code>compatibility_modifier</code>和<code>trait_compatibility</code>这两个触发器的，是检查特质持有者与列出的特质的兼容性。感觉是指获取某一特质后，再获取其他特质的概率会受这个列表值的修正。具体怎么用还不太明白，之后补充。</li>
+<li><code>parent_inheritance_sex</code>：可以是<code>male/female/all</code>，表示该特质可以从父亲/母亲/双亲继承。</li>
+<li><code>child_inheritance_sex</code>：值同上，表示该特质可以遗传给男孩/女孩/所有孩子。</li>
+<li><code>genetic</code>：默认是<code>no</code>，如果被设置为<code>yes</code>，则表示特征可以是非活动状态。子级可以从活动和非活动父特征中继承该特征。活动特征继承为 100% 的机会，非活动特征为 50% 的机会。如果从父母两个成功继承该特征，则该特征将变为活动状态。如果仅从一个父级继承，则它是非活动状态。（可以理解成生物学基因的隐性显性）。</li>
+<li><code>inherit_from_real_father</code>：是否可以从亲生父亲那里继承，其实不太懂这个和前面<code>parent_inheritance_sex</code>有什么不一样的。</li>
+<li><code>enables_inbred</code>：概括来说这个标志为<code>yes</code>时意味着这个特质是近亲繁殖的。</li>
+<li><code>good</code>：特质标识为好的（默认值是<code>no</code>，表示坏的）。</li>
+<li><code>genetic_constraint_all</code>：这种遗传约束将在获得特征时应用。</li>
+<li><code>forced_portrait_age_index</code>：年龄索引，可以设置多个，但是我还不知道年龄索引是什么东西，以后补充。</li>
+<li><code>portrait_extremity_shift</code>：这个值是一个表示百分比的小数，角色获得对应特质时，每个变形基因都会按这个百分比向 0 或 1 移动，具体是0还是1看基因本身接近哪个，比如该值为0.25， 基因值为0.4，则0.4将向0偏移0.25，从而变成0.3。</li>
+<li><code>ugliness_portrait_extremity_shift</code>：和上一条一样，但是获得此特质时，与角色最极端的单一特征（在公共/基因中定义）相关的每个变形基因都会按此百分比向 0 或 1 移动。关于这里的特征、基因等词还不太了解，以后再补充。</li>
+<li><code>immortal</code>：设置为<code>yes</code>后，获得该特质的角色会停止视觉老化，使角色对自然死亡免疫。仍然可以被脚本杀死。生育能力将匹配视觉年龄。可以使用<code>set_immortal_age</code>更改视觉年龄。</li>
+<li><code>physical, health_trait, fame</code>：这三个设置为<code>yes</code>则分别表示该特质是和物理、健康、名誉相关。</li>
+<li><code>trait_exclusive_if_realm_contains</code>：这个值是<code>{}</code>，大括号里可以填东西，表示随机分配给指挥官时考虑的地形类型列表。只有当指挥官的文化包含具有列表中指定的地形类型之一的省时，才分配/考虑这些特征。</li>
+<li><code>blocks_from_claim_inheritance</code>：设置为<code>yes</code>时，有该特质的角色无法继承头衔宣称。</li>
+<li><code>blocks_from_claim_inheritance_from_dynasty</code>：同上，设置为<code>yes</code>时，有该特质的角色无法从宗族成员那里继承头衔宣称。</li>
+<li><code>shown_in_ruler_designer</code>：默认是<code>yes</code>，设置为<code>yes</code>时，可以在自定义角色的那个地方的特质列表中看到该特质。</li>
+<li><code>ruler_designer_cost</code>：默认是0，同上，是指自定义角色时该特质消耗的点数。</li>
+<li><code>valid_sex</code>：可以是<code>all/male/female</code>，默认是<code>all</code>，表示该特质可以由什么性别的角色获得。</li>
+</ol>
+<h2 id="如何使角色得到特质"><a href="#如何使角色得到特质" class="headerlink" title="如何使角色得到特质"></a>如何使角色得到特质</h2><p>和命令行一样，在<code>mod</code>里需要角色获取特质的时候，<code>add_trait = trait_ID</code>即可。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/12/16/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ck3/" rel="tag">ck3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F%E7%9B%B8%E5%85%B3/" rel="tag">游戏相关</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/12/21/Leetcode%E8%AE%B0%E5%BD%95-1/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Leetcode记录-1
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ck3mod制作笔记-5</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

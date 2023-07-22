@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-分片相关 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-分片相关"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-分片相关
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/04/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E5%88%86%E7%89%87%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2020-04-13T01:01:06.000Z" itemprop="datePublished">2020-04-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>关于区块链分片的几篇论文。</p>
+<a id="more"></a>
+<h2 id="1-RapidChain-Scaling-Blockchain-via-Full-Sharding"><a href="#1-RapidChain-Scaling-Blockchain-via-Full-Sharding" class="headerlink" title="1. RapidChain: Scaling Blockchain via Full Sharding"></a>1. RapidChain: Scaling Blockchain via Full Sharding</h2><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+<li>分片目的：解除区块链性能和扩展性的限制</li>
+<li>分片定义：将处理事务的开销分配给多个更小的节点组，这些组并行工作以最大限度地提高性能，同时显著地减少每个节点的通信、计算和存储，从而允许系统扩展到大型网络。</li>
+<li>现有分片协议的问题：扩展性受限制、安全性</li>
+<li>本文RapidChain：公链分片</li>
+</ol>
+<h4 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h4><ol>
+<li><p>节点分到不同的committees，区块和账本并行</p>
+</li>
+<li><p>系统中一共<code>n</code>个节点，则每个committee的大小为$m=c logn$，一共有$k=n/m$个committees，<code>c</code>是一个和安全有关的常数</p>
+</li>
+<li><p>优点：</p>
+<ol>
+<li>次线性通信：每个事务线性复杂度</li>
+<li>高弹性：可以接受<code>1/3</code>的恶意节点</li>
+<li>减少每个committee的开销和延迟</li>
+<li>安全性：拜占庭容错</li>
+<li>跨分片验证：committees通过路由机制发现其他committees</li>
+<li>去中心化引导：新加入节点的设计</li>
+</ol>
+</li>
+<li><p>RapidChain按固定时间周期推进，称为epoch，每个epoch结束时由被选中的reference committee（$C_R$)生成下一轮的随机数，该随机数让每个节点在下一轮开始时有新身份，并避免恶意节点的集中和节点共谋</p>
+</li>
+<li><p>对等发现和committee间的路由，存交易事务$t_x$的committee记作$C_{out}$</p>
+</li>
+<li><p>跨分片验证：$C_{out}$在生成区块记账之前会和input committee验证交易合法性</p>
+</li>
+<li><p>分片内共识：</p>
+<ol>
+<li>分片内成员用当前epoch的随机数选一个临时leader</li>
+<li>leader用流言协议把区块发布给分片内所有节点</li>
+<li>使用拜占庭协议（基于某论文的同步协议）确保所有节点同意同一个区块</li>
+</ol>
+</li>
+<li><p>重新配置区块：每个epoch结束时由$C_R$产生，包含内容：</p>
+<ol>
+<li>下一轮的随机数</li>
+<li>参与者列表和committee成员</li>
+</ol>
+<p>想参加下一轮的节点要在一定时间内解题PoW</p>
+</li>
+<li><p>这篇的related work部分之后可以参考</p>
+</li>
+</ol>
+<h2 id="2-A-Secure-Sharding-Protocol-For-Open-Blockchains"><a href="#2-A-Secure-Sharding-Protocol-For-Open-Blockchains" class="headerlink" title="2. A Secure Sharding Protocol For Open Blockchains"></a>2. A Secure Sharding Protocol For Open Blockchains</h2><h4 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h4><ol>
+<li>区块链有安全性，但规模很小，每秒处理3-7笔交易</li>
+<li>ELASTICO：1/4拜占庭攻击，分为多个committees，每个处理自己的事务集合（称作分片）</li>
+</ol>
+<h4 id="Mehtod"><a href="#Mehtod" class="headerlink" title="Mehtod"></a>Mehtod</h4><ol>
+<li>按算力分片</li>
+<li>每个epoch流程：<ol>
+<li>建立自己的公钥、IP并进行PoW，按公钥ID分为不同Committees</li>
+<li>节点互相确认身份，记录自己committee有谁</li>
+<li>committee内的共识：PBFT，带多数成员签名广播</li>
+<li>最终共识广播：有一个final committee来进行合并（PBFT然后把接收的分片区块在committee内实现共识，然后全网广播）</li>
+<li>产生下一轮的随机数，大家开始PoW，开始新的一轮</li>
+</ol>
+</li>
+</ol>
+<h2 id="3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains"><a href="#3-A-Proof-of-Stake-Sharding-Protocol-for-Scalable-Blockchains" class="headerlink" title="3. A Proof of Stake Sharding Protocol for  Scalable Blockchains"></a>3. A Proof of Stake Sharding Protocol for  Scalable Blockchains</h2><ol>
+<li><code>c</code>组，每组<code>n</code>个，一共<code>nc</code>个节点</li>
+<li>普通节点组产生中间区块，发送给最终验证节点组</li>
+<li>最终验证节点组产生最终区块，全网广播</li>
+<li>每个epoch分为4步：<ol>
+<li>分组，组内随机选leader，组内节点把身份信息发给leader，leader向其他组的leader广播</li>
+<li>组内共识：一个交易随机分到某组，组内节点PoS，产生新的中间区块</li>
+<li>最终验证组合并区块，组内PoS，产生最终区块并广播</li>
+<li>t轮之后，刷新重组</li>
+</ol>
+</li>
+</ol>
+<h2 id="4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding"><a href="#4-Ostraka-Secure-Blockchain-Scaling-by-Node-Sharding" class="headerlink" title="4. Ostraka: Secure Blockchain Scaling by Node Sharding"></a>4. Ostraka: Secure Blockchain Scaling by Node Sharding</h2><ol>
+<li>采用UTXO、PoS</li>
+<li>矿池、UTXO、区块链存储在被称为分片（shard）的几个机器上，机器可以扩展，每个分片的节点数量不一定一样</li>
+<li>有一个机器称为 coordinator跟踪区块链并协调节点间的通信，可以要求某分片回滚到某区块链状态或开始新的链</li>
+<li>分片有一个ID，由coordinator分配，决定该分片处理哪些事务</li>
+<li>女巫分片：节点相同的分片</li>
+<li>事务切分存储在对应分片上</li>
+<li>总的来说就是有个类似路由器一样的机器来协调处理跨片事务，这篇基本上没看懂，以后有需要再看看</li>
+</ol>
+<h2 id="5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding"><a href="#5-OptChain-Optimal-Transactions-Placement-for-Scalable-Blockchain-Sharding" class="headerlink" title="5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding"></a>5. OptChain: Optimal Transactions Placement for Scalable Blockchain Sharding</h2><ol>
+<li>新分片方式，最小化跨分片事务，动态事务分配，把相关和即将相关的事务分组到同一分片</li>
+<li>对事务分片的依据：<ol>
+<li>这样分是否减少了跨片事务</li>
+<li>分片间的负载平衡</li>
+</ol>
+</li>
+<li>TaN结构：UTXO模型的事务网络图结构</li>
+<li>跨分片事务处理流程：<ol>
+<li>用户创建跨分片事务，流言广播</li>
+<li>几个UTXO所在的分片锁定UTXO并流言广播许可（或不许可）</li>
+<li>接收事务的分片解锁UTXO并记账</li>
+</ol>
+</li>
+<li>对事务分片的算法：<ol>
+<li>TaN：把UTXO事务看做图里的节点，然后按图的拓扑结构分析出度和入度</li>
+<li>T2S：用PageRank评分，判断节点加入哪个分片——&gt;尽可能减少跨分片事务</li>
+<li>L2S：确认延迟，网络结构决定事务得到确认所需的时间——&gt;尽可能加快事务确认速度</li>
+<li>T2S和L2S结合选择事务分片</li>
+</ol>
+</li>
+</ol>
+<h2 id="6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management"><a href="#6-Poster-A-Proof-of-Stake-PoS-Blockchain-Protocol-using-Fair-and-Dynamic-Sharding-Management" class="headerlink" title="6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management"></a>6. Poster: A Proof-of-Stake(PoS) Blockchain Protocol using Fair and Dynamic Sharding Management</h2><ol>
+<li>每个epoch会重新分片并选择每个分片的block producers</li>
+<li>在上一个epoch中，users用自己的信息和一部分资产注册成为validator（验证器），这个epoch开始以后，validator和事务被分成k个分片，分片规则为：<ol>
+<li>验证器的地址和上一个区块的哈希值一起哈希然后对分片个数取余，即可得到验证器的分片</li>
+<li>事务地址和…，即可得到事务的分片</li>
+</ol>
+</li>
+<li>使用BFT-DPoS算法，在每个分片内选block producers：<ol>
+<li>股权最大的成为该分片的producer</li>
+<li>所有producers按顺序循环选总的producer</li>
+<li>矿工可以投出与他们所持股份的平方根成比例的选票，而不是与所持股份成线性比例的选票。</li>
+<li>根据BFT算法，分片的producer产生自己分片的区块，并由总producer合并广播</li>
+</ol>
+</li>
+</ol>
+<h2 id="7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead"><a href="#7-SSChain-A-full-sharding-protocol-for-public-blockchain-without-data-migration-overhead" class="headerlink" title="7. SSChain: A full sharding protocol for public blockchain  without data migration overhead"></a>7. SSChain: A full sharding protocol for public blockchain  without data migration overhead</h2><ol>
+<li><p>公链，拜占庭弹性，对事务分片和对状态分片，节点无需定期切换分片（避免数据冗余），使用UTXO</p>
+</li>
+<li><p>节点可以自由加入分片而无需刷新，为避免随之而来的51%攻击问题，本文提出了一个双层结构：</p>
+<ol>
+<li>根链验证分片的区块，避免恶意节点攻击，激励机制保证矿工愿意加入</li>
+<li>分片维护不相交的分类帐并独立处理不相交的交易子集。</li>
+<li>SSChain背后的关键思想是根链维护系统的安全性，而切分提高了吞吐量并减少了存储需求。</li>
+</ol>
+</li>
+<li><p>同一分片内的交易有更低的确认延迟和更少的交易费用，进而鼓励用户片内交易</p>
+</li>
+<li><p>解耦事务验证和状态更新，拆分跨分片事务</p>
+</li>
+<li><p>激励机制：动态调节根链和分片的算力分配，根据参数可得到不同的吞吐量和安全性</p>
+</li>
+<li><p>跨分片事务：切分成分片内事务，或者由根链处理</p>
+</li>
+<li><p>根链：PoW，分类帐修剪机制</p>
+</li>
+<li><p>事务分片：</p>
+<ol>
+<li>事务地址包含比特币地址和分片ID</li>
+<li>交易分类：<ol>
+<li>inputs和outputs在一个分片内</li>
+<li>inputs在一个分片内，outputs在不同分片</li>
+<li>都在不同分片</li>
+</ol>
+</li>
+<li>跨分片事务：<ol>
+<li>交给根链——&gt;随分片增长会很难处理</li>
+<li>鼓励用户在同一分片内创建新地址——&gt;跨分片变成同一分片</li>
+<li>A+B——&gt;C的事务拆分成A——&gt;C和B——&gt;C（个人感觉这没用啊）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>状态分片：一些节点储存整个区块链的状态而不是只存分片状态</p>
+</li>
+<li><p>市场激励机制：动态地调整切分和根链之间的哈希功率分配。在激励机制下，矿商可以自由选择最赚钱的碎片，从而避免了周期性的网络重组。有两个目的：</p>
+<ol>
+<li>为了维护系统安全，根链占用了整个网络的很大一部分算力。由于切分块是由根链网络验证的，恶意对手至少需要根链哈希能力的一半才能进行双倍开销攻击。</li>
+<li>算力被鼓励平均分配到碎片中，这样每个碎片都可以正常工作。</li>
+</ol>
+</li>
+</ol>
+<h2 id="8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks"><a href="#8-Trust-Based-Shard-Distribution-Scheme-for-Fault-Tolerant-Shard-Blockchain-Networks" class="headerlink" title="8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks"></a>8. Trust-Based Shard Distribution Scheme for Fault-Tolerant Shard Blockchain Networks</h2><ol>
+<li>TBSD：把恶意节点放到不同的分片，使用信任管理系统和遗传算法</li>
+<li>定量衡量节点的信任度，对恶意节点进行信用惩罚</li>
+<li>遗传算法找到最优分片方法，使得每个分片的信用度都差不多</li>
+<li>总的来说信用系统分为5步：<ol>
+<li>每一轮开始时，PoS选一个leader出块</li>
+<li>全网广播验证区块，少数服从多数</li>
+<li>SCO：节点信用表，由验证节点产生，上一步的验证结果作为信用评分的依据</li>
+<li>LCR：根据SCO计算得到的相对信用分布矩阵</li>
+<li>最终信用评估</li>
+</ol>
+</li>
+<li>攻击模型：<ol>
+<li>恶意节点成为leader</li>
+<li>节点共谋</li>
+<li>恶意节点行为不一致，一会儿诚实一会儿恶意</li>
+</ol>
+</li>
+<li>分片过程：用GA</li>
+</ol>
+<h2 id="9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme"><a href="#9-Two-Phase-Cooperative-Bargaining-Game-Approach-for-Shard-Based-Blockchain-Consensus-Scheme" class="headerlink" title="9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme"></a>9. Two-Phase Cooperative Bargaining Game Approach for Shard-Based Blockchain Consensus Scheme</h2><ol>
+<li>分片后，进行议价博弈，事务总的来说平分给每个分片处理</li>
+<li>有一个adjust shard负责确认，其他分片进行普通的挖矿</li>
+<li>随机数分片，分片内共识：标准拜占庭一致协议，看起来是对节点分片</li>
+<li>节点验证事务和参与共识的过程可看做两阶段博弈：<ol>
+<li>事务分配问题</li>
+<li>基于分片的共识机制</li>
+</ol>
+</li>
+<li>讨价还价博弈这里没完全看懂，感觉就是分片和节点根据奖励和支出决定是否处理事务，上面的4.1里博弈方是分片，4.2的博弈方是区块链节点</li>
+</ol>
+<h2 id="A-Node-Rating-Based-Sharding-Scheme-for-Blockchain"><a href="#A-Node-Rating-Based-Sharding-Scheme-for-Blockchain" class="headerlink" title="A Node Rating Based Sharding Scheme for Blockchain"></a>A Node Rating Based Sharding Scheme for Blockchain</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/04/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E5%88%86%E7%89%87%E7%9B%B8%E5%85%B3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/04/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-Privacy Policy in Online Social Network with Targeted Advertising Business
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/04/07/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Monoxide%20Scale%20Out%20Blockchain%20with%20Asynchronous%20Consensus%20Zones/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-Monoxide: Scale Out Blockchain with Asynchronous Consensus Zones</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    python+sklearn+keras+lstm回归预测问题 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-python-sklearn-keras-lstm回归预测问题"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  python+sklearn+keras+lstm回归预测问题
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/24/python-sklearn-keras-lstm%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-07-23T23:38:36.000Z" itemprop="datePublished">2020-07-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A0%E5%88%86%E7%B1%BB%E9%A1%B9/">无分类项</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>因为接到了股票价格预测的任务，所以开始研究怎么写代码。实际上代码是网上现成的，并不需要自己研究算法和网络结构，复制粘贴再重新组合一下就好，所以难度不大。之前做过sklearn的分类问题，现在做回归，思路是差不多的。</p>
+<a id="more"></a>
+<p>具体场景是：给定某时间段内的股票价格数据，预测接下来的走势；用同样的算法预测其他股票，看准确率是否有变化；老师的想法是对比国内外市场的差异，看是否在机器学习算法中也有体现。</p>
+<h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>这里先列一下所有导入的包，可能有一些实际没用上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> style</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing, svm</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime <span class="keyword">as</span> date</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> ensemble</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> BaggingRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> ExtraTreeRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">import</span> quandl</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="comment">#from pandas_datareader import data</span></span><br><span class="line"><span class="keyword">import</span> yfinance <span class="keyword">as</span> yf</span><br><span class="line"><span class="comment"># 下面这几个是lstm用的</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dense, Dropout, LSTM</span><br></pre></td></tr></table></figure>
+<h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><ol>
+<li><p>使用quandl获取数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> quandl</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">start = date(<span class="number">2000</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">end = date.today()</span><br><span class="line">quandl.ApiConfig.api_key = <span class="string">"gEyzpvmpXReFE8Z8TEps"</span></span><br><span class="line">stock_df = pd.DataFrame(quandl.get(<span class="string">"WIKI/GOOGL"</span>, start_date=start, end_date=end))</span><br></pre></td></tr></table></figure>
+<p>第一行导入包；</p>
+<p>第二行第三行设置要获取的数据时间范围</p>
+<p>第四行设置api_key，这里是需要到quandl官网注册账户，注册好以后会得到这个key，可以用免费数据。注册的时候分为3步，填名字邮箱密码啥的，第三步的时候会需要点一个人机验证的东西才能注册成功，如果没出现人机验证且无法点注册的按钮，说明需要翻墙。</p>
+<p>第五行通过<code>quandl.get()</code>函数可以得到所需数据，转成<code>pandas</code>格式方便后续分析。这里的<code>WIKI/GOOGL</code>是谷歌的股票数据在quandl网站上的代码，不过我看不懂那个网站，不清楚要怎么找其他公司和时间的数据，所以暂时就先只用这个了。</p>
+</li>
+<li><p>通过tushare和pandas_datareader这两个模块也可以获取数据，此外还有其他相关网站。</p>
+</li>
+<li><p>发现pandas_datareader实际上不太行，查了一下找到了新的数据，数据来源是雅虎财经：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yfinance <span class="keyword">as</span> yf</span><br><span class="line">start_date = <span class="string">"2000-01-01"</span></span><br><span class="line">end_date = <span class="string">"2018-12-01"</span></span><br><span class="line">stock_df = yf.download(tickers = <span class="string">"MCD"</span>, start = start_date, end = end_date)</span><br></pre></td></tr></table></figure>
+<p>这里<code>start_date</code>和<code>end_date</code>也可以写成前面<code>date(2000,1,1)</code>的样子，<code>tickers</code>的参数是可以百度到的股票代码，如果是上海的就是<code>600673.SS</code>这种代码后面加<code>.SS</code>，深圳是<code>.SZ</code>，香港是<code>.HK</code>，美国就是那串字母本身，此外，香港的代码查到的都是五位数，但是在这里要把最高位的0去掉，只用四位数。</p>
+<p><code>yf.download</code>会直接返回<code>pandas</code>的<code>dataframe</code>结构，方便后续处理。</p>
+<p>和前面那个<code>quandl</code>的比起来，简单了很多，但是有时候会运行很慢，等十几分钟也不出结果。</p>
+</li>
+</ol>
+<h2 id="sklearn的普通方法"><a href="#sklearn的普通方法" class="headerlink" title="sklearn的普通方法"></a>sklearn的普通方法</h2><ol>
+<li><p>把预测要用的数据列提取出来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stock_df = stock_df[[<span class="string">'Open'</span>, <span class="string">'High'</span>, <span class="string">'Low'</span>, <span class="string">'Close'</span>, <span class="string">'Volume'</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里使用过去一天的数据来预测当天的收盘价，因此要新建一列来存下一天的收盘价作为机器学习的目标值<code>y</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stock_df[<span class="string">'object'</span>] = stock_df[<span class="string">'Close'</span>].shift(<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把除了目标列以外的其他数据单独提出来作为<code>X</code>，并做标准化处理，然后去掉最后一行（因为最后一行没有下一天的目标值，所以没法用）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X = np.array(stock_df.drop([<span class="string">'object'</span>], <span class="number">1</span>))</span><br><span class="line">X = preprocessing.scale(X)</span><br><span class="line">X = X[:<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把目标列提出来作为<code>y</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stock_df.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line">y = np.array(stock_df[<span class="string">'object'</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>划分训练集和测试集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把要用的模型都准备好</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">models = []</span><br><span class="line">models.append((<span class="string">'DecisionTree'</span>, tree.DecisionTreeRegressor()))</span><br><span class="line">models.append((<span class="string">'LR'</span>, linear_model.LinearRegression()))</span><br><span class="line">models.append((<span class="string">'KNN'</span>, neighbors.KNeighborsRegressor()))</span><br><span class="line">models.append((<span class="string">'RF'</span>, ensemble.RandomForestRegressor(n_estimators=<span class="number">20</span>)))</span><br><span class="line">models.append((<span class="string">'ABR'</span>, ensemble.AdaBoostRegressor(n_estimators=<span class="number">50</span>)))</span><br><span class="line">models.append((<span class="string">'SVM'</span>, svm.SVR(gamma=<span class="string">'auto'</span>)))</span><br><span class="line">models.append((<span class="string">'GBRT'</span>, ensemble.GradientBoostingRegressor(n_estimators=<span class="number">100</span>)))</span><br><span class="line">models.append((<span class="string">'Bagging'</span>, BaggingRegressor()))</span><br><span class="line">models.append((<span class="string">'ExtraTree'</span>, ExtraTreeRegressor()))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历所有模型，在训练集上10折交叉验证并输出模型评价，在测试集上计算均方根误差</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, model <span class="keyword">in</span> models:</span><br><span class="line">    scores = cross_val_score(model, x_train, y_train, cv=<span class="number">10</span>, scoring=<span class="literal">None</span>)</span><br><span class="line">    print(<span class="string">'%s: %f (%f)'</span> % (name, scores.mean(), scores.std()))</span><br><span class="line">    model.fit(x_train, y_train)</span><br><span class="line">    <span class="comment">#print(model.score(x_test, y_test))</span></span><br><span class="line">    y_predict = model.predict(x_test)</span><br><span class="line">    print(<span class="string">'RMSE: '</span>, np.sqrt(metrics.mean_squared_error(y_test,y_predict)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来要随便选个模型画图看看</p>
+<ol>
+<li><p>选模型并用训练集训练模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clf = ensemble.GradientBoostingRegressor(n_estimators=<span class="number">100</span>)</span><br><span class="line">clf.fit(x_train, y_train)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从所有的X中，选取后30%，用模型预测结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">index = len(X)*<span class="number">7</span>//<span class="number">10</span></span><br><span class="line">predict_x = X[index:]</span><br><span class="line">predict_y = clf.predict(predict_x)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在原本的<code>dataframe</code>中新建一列来存这个预测结果，这样后面画图能直接用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stock_df[<span class="string">'Predict'</span>] = np.nan			<span class="comment">#新建一列并初始化为空值</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> predict_y:						<span class="comment">#遍历预测结果</span></span><br><span class="line">    stock_df[<span class="string">'Predict'</span>][index] = i		<span class="comment">#从预测的第一个数开始填值</span></span><br><span class="line">    index += <span class="number">1</span>							<span class="comment">#移动到下一个值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>画图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(stock_df[<span class="string">'Close'</span>], label=<span class="string">'Close'</span>, color=<span class="string">'deepskyblue'</span>)	<span class="comment">#实际值</span></span><br><span class="line">stock_df[<span class="string">'Predict'</span>].plot()										<span class="comment">#预测值</span></span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Date'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lstm"><a href="#lstm" class="headerlink" title="lstm"></a>lstm</h2><ol>
+<li><p>预处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stock_df[<span class="string">'Date'</span>] = stock_df.index</span><br><span class="line">data = stock_df.sort_index(ascending=<span class="literal">True</span>, axis=<span class="number">0</span>)</span><br><span class="line">new_data = pd.DataFrame(index=range(<span class="number">0</span>, len(stock_df)), columns=[<span class="string">'Date'</span>, <span class="string">'Close'</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(data)):</span><br><span class="line">    new_data[<span class="string">'Date'</span>][i] = data[<span class="string">'Date'</span>][i]</span><br><span class="line">    new_data[<span class="string">'Close'</span>][i] = data[<span class="string">'Close'</span>][i]</span><br><span class="line"><span class="comment"># setting index</span></span><br><span class="line">new_data.index = new_data.Date</span><br><span class="line">new_data.drop(<span class="string">'Date'</span>, axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>这样的结果就是把日期和收盘价单独提出来了</p>
+</li>
+<li><p>划分训练集和测试集，是7:3划分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataset = new_data.values</span><br><span class="line">t_len = len(dataset)*<span class="number">7</span>//<span class="number">10</span></span><br><span class="line">train = dataset[<span class="number">0</span>:t_len, :]</span><br><span class="line">valid = dataset[t_len:, :]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理训练集数据，lstm会利用过去一段时间的数据，这里设置为过去60天</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#标准化处理</span></span><br><span class="line">scaler = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">scaled_data = scaler.fit_transform(dataset)</span><br><span class="line"><span class="comment">#定义列表存放数据</span></span><br><span class="line">x_train, y_train = [], []</span><br><span class="line"><span class="comment">#对于每一天的y，x的值都是过去60天的收盘价</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, len(train)):</span><br><span class="line">    x_train.append(scaled_data[i - <span class="number">60</span>:i, <span class="number">0</span>])</span><br><span class="line">    y_train.append(scaled_data[i, <span class="number">0</span>])</span><br><span class="line"><span class="comment">#把x的格式改成训练需要的格式</span></span><br><span class="line">x_train, y_train = np.array(x_train), np.array(y_train)</span><br><span class="line">x_train = np.reshape(x_train, (x_train.shape[<span class="number">0</span>], x_train.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立和训练lstm模型，这里训练50轮，实际上感觉100轮和50轮没什么差别；这里用了4层lstm，但实际上感觉一层就够了。在训练时用均方根误差作为指标。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create and fit the LSTM network</span></span><br><span class="line">model = Sequential()</span><br><span class="line">model.add(LSTM(units=<span class="number">50</span>, return_sequences=<span class="literal">True</span>, input_shape=(x_train.shape[<span class="number">1</span>], <span class="number">1</span>)))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="literal">True</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="literal">True</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(LSTM(units=<span class="number">50</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">model.add(Dense(<span class="number">1</span>))</span><br><span class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, optimizer=<span class="string">'adam'</span>)</span><br><span class="line">model.fit(x_train, y_train, epochs=<span class="number">50</span>, batch_size=<span class="number">32</span>, verbose=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，这些lstm模型用的激活函数是默认的<code>tanh</code>，然后训练时会有错误信息，据一些人说是可以忽略的，参见<a href="https://github.com/tensorflow/tensorflow/issues/30263" target="_blank" rel="noopener">链接</a>。如果把激活函数改成<code>sigmoid</code>，就没报错了，但是发现训练结果格外不好，不清楚是我操作问题还是这个激活函数就不合适。总之暂且先用<code>tanh</code>。</p>
+</li>
+<li><p>准备测试集，这里和训练集一样，往前倒60个数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">inputs = new_data[len(new_data) - len(valid) - <span class="number">60</span>:].values</span><br><span class="line">inputs = inputs.reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">inputs = scaler.transform(inputs)</span><br><span class="line">X_test, Y_test = [], []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, inputs.shape[<span class="number">0</span>]):</span><br><span class="line">    X_test.append(inputs[i - <span class="number">60</span>:i, <span class="number">0</span>])</span><br><span class="line">X_test = np.array(X_test)</span><br><span class="line">X_test = np.reshape(X_test, (X_test.shape[<span class="number">0</span>], X_test.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用训练好的lstm模型对测试集进行测试并把值改回标准化前的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">closing_price = model.predict(X_test)</span><br><span class="line">closing_price = scaler.inverse_transform(closing_price)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出均方根误差</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rms &#x3D; np.sqrt(np.mean(np.power((valid - closing_price), 2)))</span><br><span class="line">print(rms)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>和sklearn一样的画图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">train = new_data[:t_len]</span><br><span class="line">valid = new_data[t_len:]</span><br><span class="line">valid[<span class="string">'Predictions'</span>] = closing_price</span><br><span class="line">plt.plot(train[<span class="string">'Adj. Close'</span>], color=<span class="string">'deepskyblue'</span>, label = <span class="string">'Adj. Close'</span>)</span><br><span class="line">plt.plot(valid[<span class="string">'Adj. Close'</span>], color=<span class="string">'deepskyblue'</span>)</span><br><span class="line">plt.plot(valid[<span class="string">'Predictions'</span>], label = <span class="string">'Predict'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Date'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h2><ol>
+<li>之后有空的时候再增加这些算法的理论介绍</li>
+<li>回归和分类的代码结构差不多，只是函数名称和模型评价指标不太一样，关于评价指标可以参考<a href="https://scikit-learn.org/stable/modules/model_evaluation.html#the-scoring-parameter-defining-model-evaluation-rules" target="_blank" rel="noopener">这个</a>。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/07/24/python-sklearn-keras-lstm%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/keras/" rel="tag">keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lstm/" rel="tag">lstm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E5%BD%92/" rel="tag">回归</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/08/11/blender%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            blender学习记录-3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-N-in-One-A-Novel-Location-Based-Service/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-N-in-One: A Novel Location-Based-Service</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

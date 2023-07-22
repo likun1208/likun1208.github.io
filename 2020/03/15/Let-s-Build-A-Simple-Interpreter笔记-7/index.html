@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Let-s-Build-A-Simple-Interpreter笔记-7 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Let-s-Build-A-Simple-Interpreter笔记-7"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Let-s-Build-A-Simple-Interpreter笔记-7
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/03/15/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-7/" class="article-date">
+  <time datetime="2020-03-15T00:38:20.000Z" itemprop="datePublished">2020-03-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Let-s-Build-A-Simple-Interpreter/">Let's Build A Simple Interpreter</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part7/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/02/02/lets-build-a-simple-interpreter-part-07/" target="_blank" rel="noopener">翻译</a></p>
+<p>（这次翻译又出现了一些不影响理解的小问题。课程代码越来越长，我决定改一下文档结构，不在一开始放整块代码了。）</p>
+<a id="more"></a>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这一课的知识点格外多。</p>
+<h4 id="抽象语法树和解析树"><a href="#抽象语法树和解析树" class="headerlink" title="抽象语法树和解析树"></a>抽象语法树和解析树</h4><ol>
+<li><p>在之前的代码中，词法分析结束后进行语法分析的同时就完成了运算，这种 interpreter 被称为语法导向解释器 (syntax-directed interpreter)，对于更复杂的语法结构，我们需要建立一个中间表示（intermediate representation, IR），我们的 parser 会 负责构建 IR 而 interpreter 会用来解释由 IR 所代表的输入。一般来说会用树来构建IR。</p>
+</li>
+<li><p>解析树（有时叫做具体语法树）是一个根据我们的语法定义来表示一门语言的句法结构的树形结构。它基本上展示了你的 <code>parser</code> 如何识别语言结构或者， 换句话说，它展示了你语法的开始符号怎么派生出该编程语言中一个特定的字符串的。</p>
+</li>
+<li><p>抽象语法树（AST）是我们的解释器和未来编译器项目的中心数据结构。</p>
+</li>
+<li><p>如下图，分别是的AST和解析树。</p>
+<p><img src="https://github.com/kun-bin/image/blob/master/lsbasi_part7_ast_01.png?raw=true" alt="AST和解析树对比"></p>
+</li>
+<li><p>简单来说，AST就是把操作数放到叶节点，操作符放到中间节点和根节点，操作符节点在树中的高度可以体现运算优先级，括号改变优先级也是通过改变操作符的高度。</p>
+</li>
+<li><p>具体到代码，首先要构建一个AST类，目前这个类里什么也没有，就只是用来让别的类继承。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AST</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>接下来要定义这个树的节点类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二元操作符类，继承AST</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinOp</span><span class="params">(AST)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, left, op, right)</span>:</span></span><br><span class="line">		self.left = left</span><br><span class="line">		self.token = self.op = op</span><br><span class="line">		self.right = right</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 整数类，继承AST</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Num</span><span class="params">(AST)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, token)</span>:</span></span><br><span class="line">		self.token = token</span><br><span class="line">		self.value = token.value</span><br></pre></td></tr></table></figure>
+<p><code>Token</code>这个类和前几课里的完全一致。</p>
+<p>到此为止，我们就创建好AST的基本结构了，接下来可以通过赋值的方式一点点创建一个解析式的AST，例如<code>2*7+3</code>的AST：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立加号和乘号的Token</span></span><br><span class="line">mul_token = Token(MUL, <span class="string">'*'</span>)</span><br><span class="line">plus_token = Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line"><span class="comment"># 先建立乘法操作符的节点</span></span><br><span class="line">mul_node = BinOp(</span><br><span class="line">    <span class="comment"># 左边是第一个乘数</span></span><br><span class="line">    left=Num(Token(INTEGER, <span class="number">2</span>)),</span><br><span class="line">    <span class="comment"># 是乘法</span></span><br><span class="line">    op=mul_token,</span><br><span class="line">    <span class="comment"># 右边是第二个乘数</span></span><br><span class="line">    right=Num(Token(INTEGER, <span class="number">7</span>))</span><br><span class="line">)</span><br><span class="line"><span class="comment">#建立加法操作符的节点</span></span><br><span class="line">add_node = BinOp(</span><br><span class="line">    <span class="comment"># 左边是刚才进行的乘法节点</span></span><br><span class="line">    left=mul_node,</span><br><span class="line">    <span class="comment"># 中间是加号</span></span><br><span class="line">    op=plus_token,</span><br><span class="line">    <span class="comment"># 右边是加数</span></span><br><span class="line">    right=Num(Token(INTEGER, <span class="number">3</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把上述内容合并到之前的代码中，在<code>Lexer</code>得到词法单元后，不是直接进行运算，而是建立AST，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parse</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        和之前一样</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></span><br><span class="line">        token = self.current_token</span><br><span class="line">		<span class="keyword">if</span> token.type == INTEGER:</span><br><span class="line">            self.eat(INTEGER)</span><br><span class="line">            <span class="comment"># 之前是return token.value</span></span><br><span class="line">	    	<span class="keyword">return</span> Num(token)</span><br><span class="line">		<span class="keyword">elif</span> token.type == LPAREN:</span><br><span class="line">            self.eat(LPAREN)</span><br><span class="line">            <span class="comment"># 之前是value = self.expr()</span></span><br><span class="line">            node = self.expr()</span><br><span class="line">            self.eat(RPAREN)</span><br><span class="line">            <span class="comment"># 之前是return value</span></span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 之前是value = self.factor()</span></span><br><span class="line">		node = self.factor()</span><br><span class="line">		<span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</span><br><span class="line">            token = self.current_token</span><br><span class="line">            <span class="keyword">if</span> token.type == MUL:</span><br><span class="line">            	self.eat(MUL)</span><br><span class="line">                <span class="comment"># 之前有value *= self.factor()求值</span></span><br><span class="line">            <span class="keyword">elif</span> token.type == DIV:</span><br><span class="line">            	self.eat(DIV)</span><br><span class="line">                <span class="comment"># 之前有value /= self.factor()求值</span></span><br><span class="line">	    	node = BinOp(left=node, op=token, right=self.factor())</span><br><span class="line">        <span class="comment"># 之前是return value</span></span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 之前是value = self.term()</span></span><br><span class="line">        node = self.term()</span><br><span class="line">		<span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</span><br><span class="line">		    token = self.current_token</span><br><span class="line">	    	<span class="keyword">if</span> token.type == PLUS:</span><br><span class="line">				self.eat(PLUS)</span><br><span class="line">                <span class="comment"># 之前有value += self.factor()求值</span></span><br><span class="line">	    	<span class="keyword">elif</span> token.type == MINUS:</span><br><span class="line">				self.eat(MINUS)</span><br><span class="line">                <span class="comment"># 之前有value -= self.factor()求值</span></span><br><span class="line">	    	node = BinOp(left=node, op=token, right=self.term())</span><br><span class="line">        <span class="comment"># 之前是return value</span></span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self.expr()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结一下就是，原本求值的地方，现在改为不断给<code>node</code>赋值，而<code>node</code>则层层嵌套，最终可以表达出AST。</p>
+</li>
+<li><p>以<code>7 + 3 * (10 - 1)</code>为例，看这份代码：</p>
+<ol>
+<li><code>parse</code>调用<code>expr()</code>，进入<code>expr</code>；</li>
+<li><code>expr</code>调用<code>term</code>，<code>term</code>调用<code>factor</code>，发现是<code>INTEGER</code>，于是返回<code>Num(token(INTEGER,7))</code>作为<code>node</code>，<code>term</code>发现接下来不是乘除法，于是直接返回<code>node</code>，回到<code>expr</code>，该节点类型以下简写为<code>Num(7)</code>；</li>
+<li><code>expr</code>发现接下来是加法，于是<code>node</code>变为<code>BinOp(left=Num(7), op=Token(PLUS, &#39;+&#39;), right=self.term())</code>，再次调用<code>term</code>；</li>
+<li><code>term</code>调用<code>factor</code>得到<code>Num(3)</code>，接下来是乘法，于是这里要返回给第三步中<code>expr</code>的<code>right</code>的东西变成了<code>BinOp(left=Num(3), op=Token(MUL, &#39;*&#39;), right=self.factor())</code>，显然又要调用<code>factor</code>；</li>
+<li><code>factor</code>判断接下来的左括号，于是调用<code>expr</code>处理，内容和上面的类似，会返回<code>BinOp(left=Num(10), op=Token(MINUS, &#39;-&#39;), right=Num(1))</code>给第四步的<code>right</code>；</li>
+<li>以此类推，最终<code>parse</code>中得到的是<code>node=BinOp(left=Num(7), op=Token(PLUS, &#39;+&#39;), right=BinOp(left=Num(3), op=Token(MUL, &#39;*&#39;), BinOp(left=Num(10), op=Token(MINUS, &#39;-&#39;), right=Num(1))))</code>。</li>
+</ol>
+</li>
+</ol>
+<h4 id="遍历树求值"><a href="#遍历树求值" class="headerlink" title="遍历树求值"></a>遍历树求值</h4><ol>
+<li><p>在得到AST之后，就要开始求值了，我们采用后序遍历的方法来遍历AST进行运算。</p>
+<ol>
+<li><p>前序遍历：<strong>根</strong>左右</p>
+</li>
+<li><p>中序遍历：左<strong>根</strong>右</p>
+</li>
+<li><p>后序遍历：左右<strong>根</strong></p>
+</li>
+<li><p>显然前中后是指根节点的遍历输出顺序，如下图的树，前序遍历的输出结果是：1-&gt;2-&gt;4-&gt;6-&gt;7-&gt;3-&gt;5，中序遍历是4-&gt;6-&gt;7-&gt;2-&gt;1-&gt;5-&gt;3，后序遍历是7-&gt;6-&gt;4-&gt;2-&gt;5-&gt;3-&gt;1</p>
+<p><img src="https://github.com/kun-bin/image/blob/master/visit.png?raw=true" alt="一棵树"></p>
+</li>
+<li><p>对应到AST中，就是先访问<code>node</code>的<code>left</code>，得到一个结果，再访问<code>right</code>，得到另一个结果，最后访问中间的<code>op</code>，进行运算，伪代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    <span class="comment"># for every child node from left to right</span></span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children:</span><br><span class="line">		visit(child)</span><br><span class="line">    <span class="comment"># 指加减乘除等运算操作</span></span><br><span class="line">    &lt;&lt;postorder actions&gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>有时可能三种遍历都需要进行一些操作，因此伪代码改为：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(node)</span>:</span></span><br><span class="line">    &lt;&lt; preorder actions &gt;&gt;</span><br><span class="line">    left_val = visit(node.left)</span><br><span class="line">    &lt;&lt; inorder actions &gt;&gt;</span><br><span class="line">    right_action = visit(node.right)</span><br><span class="line">    &lt;&lt; postorder actions &gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>具体来实现的时候首先要有<code>NodeVisitor</code>类：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NodeVisitor</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        method_name = <span class="string">'visit_'</span> + type(node).__name__</span><br><span class="line">        visitor = getattr(self, method_name, self.generic_visit)</span><br><span class="line">        <span class="keyword">return</span> visitor(node)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generic_visit</span><span class="params">(self, node)</span>:</span></span><br><span class="line">		<span class="keyword">raise</span> Exception(<span class="string">'No visit_&#123;&#125; method'</span>.format(type(node).__name__))</span><br></pre></td></tr></table></figure>
+<p>   <code>getattr(object, name, default)</code>函数的作用是，返回<code>object</code>这个变量的<code>name</code>属性，如果没有<code>name</code>则返回<code>default</code>，如果用这个函数的时候没有指明<code>default</code>，那么当<code>name</code>属性不存在时会报错。</p>
+<p>   <code>f.__name__</code>的作用是返回<code>f</code>的函数名。</p>
+<p>   在这段代码中，首先<code>method_name</code>是当前节点<code>node</code>对应<code>Token</code>的<code>type</code>，接下来返回该<code>NodeVisitor</code>对象的<code>method_name</code>属性，如果不存在则报错。具体来说，当<code>node</code>类型是<code>BinOp</code>时，会返回<code>visit_BinOp(node)</code>，而<code>node</code>类型是<code>Num</code>时，则返回<code>visit_Num(node)</code>。</p>
+</li>
+<li><p>接下来看我们的解释器<code>Interpreter</code>类，它继承了<code>NodeVisitor</code>：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(NodeVisitor)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parser)</span>:</span></span><br><span class="line">		self.parser = parser</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit_BinOp</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> node.op.type == PLUS:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) + self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == MINUS:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) - self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == MUL:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) * self.visit(node.right)</span><br><span class="line">        <span class="keyword">elif</span> node.op.type == DIV:</span><br><span class="line">            <span class="keyword">return</span> self.visit(node.left) / self.visit(node.right)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visit_Num</span><span class="params">(self, node)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> node.value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">interpret</span><span class="params">(self)</span>:</span></span><br><span class="line">        tree = self.parser.parse()</span><br><span class="line">        <span class="keyword">return</span> self.visit(tree)</span><br></pre></td></tr></table></figure>
+<p>   首先是解释器的初始化，我们将<code>parser</code>得到的AST传入<code>Interpreter</code>。</p>
+<p>   接下来访问二元运算符节点的函数，该函数逻辑很简单，就是判定传入的<code>node</code>对应的<code>op</code>类型是什么，然后访问其左右节点，最后进行运算。</p>
+<p>   最后是访问整数节点的函数，该函数负责将节点的<code>value</code>返回。</p>
+<p>   这里要总结一下<code>node</code>这个变量，因为<code>python</code>里不需要指定变量类型，会动态决定，实际上这里的<code>node</code>有两个可能，当它是叶节点的时候，它是整数，也就是<code>Num(Token)</code>类型，在<code>visit</code>函数后会返回并执行<code>visit_Num</code>函数；而当它是中间节点和根节点时，就变成操作符，也就是<code>BinOp(left, op, right)</code>类型，在<code>visit</code>函数后会返回并执行<code>visit_BinOp</code>函数。</p>
+</li>
+<li><p>当调用解释器的<code>interpret</code>函数时，首先进入<code>visit</code>函数，判定是操作符，转入<code>visit_BinOp</code>函数，再判断运算类型，并访问左右节点直到得到一个返回值，最后进行运算得到结果。</p>
+</li>
+<li><p>总结一下，整个流程是：parser 从 lexer 中 得到 token 然后返回生成的 AST 给 interpreter 进行遍历并解释执行所给输入。</p>
+</li>
+</ol>
+<h4 id="递归下降"><a href="#递归下降" class="headerlink" title="递归下降"></a>递归下降</h4><p>一个 <strong>递归下降parser</strong> 就 是一个自顶向下的 parser，它使用一组递归过程来处理输入。自顶向下反映了 parser 从 构建解析树的顶部结点开始逐渐构建更低的结点这一事实。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>写一个翻译器（提示：node visitor），它接收一个算术表达式作为输入并打印出它的后缀形式，即逆波兰式(Reverse Polish Notation, RPN)。例如，如果翻译器接收的输入是 表达式 <code>(5 + 3) * 12 / 3</code> 则输入应该是 <code>5 3 + 12 * 3 /</code> 。答案在<a href="https://github.com/rspivak/lsbasi/blob/master/part7/python/ex1.py" target="_blank" rel="noopener">这儿</a>，不过要先自己解决再看啊。</p>
+<p>我的想法是：逆波兰式输出顺序实际上就是这一课遍历的顺序，因此只需要在现有的<code>visit_BinOp</code>和<code>visit_Num</code>加上<code>print</code>就行，注意这里因为是后序输出，<code>BinOP</code>需要先<code>visit(left)</code>和<code>visit(right)</code>，再<code>print(op.value)</code>，代码修改如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit_BinOp</span><span class="params">(self, node)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> node.op.type == PLUS:</span><br><span class="line">        tmp = self.visit(node.left) + self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == MINUS:</span><br><span class="line">        tmp = self.visit(node.left) - self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == MUL:</span><br><span class="line">        tmp = self.visit(node.left) * self.visit(node.right)</span><br><span class="line">    <span class="keyword">elif</span> node.op.type == DIV:</span><br><span class="line">        tmp = self.visit(node.left) // self.visit(node.right)</span><br><span class="line">    print(node.op.value, end=<span class="string">' '</span>)</span><br><span class="line">    <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visit_Num</span><span class="params">(self, node)</span>:</span></span><br><span class="line">    print(node.value, end=<span class="string">' '</span>)</span><br><span class="line">    <span class="keyword">return</span> node.value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个翻译器（node visitor），它接收一个算术表达式作为输入并将它打印为 LISP 风 格的记法，即 <code>2 + 3</code> 变成 <code>(+ 2 3)</code> 及 <code>(2 + 3 * 5)</code> 变成 <code>(+ 2 (* 3 5))</code> 。你 可以在<a href="https://github.com/rspivak/lsbasi/blob/master/part7/python/ex2.py" target="_blank" rel="noopener">这儿</a>打到答案，但在查看之前还是要先尝试自己解决。</p>
+<p>这是要前序遍历输出，也就是先输出<code>op.value</code>，再进行<code>visit(left)</code>和<code>visit(right)</code>，和练习1相比，就是把<code>visit_BinOp</code>中的<code>print(node.op.value, end=&#39; &#39;)</code>放到最前面。</p>
+</li>
+</ol>
+<p>（这俩练习的答案和我想的还有点不太一样……不过问题不大……）</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/03/15/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-7/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/03/23/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Let-s-Build-A-Simple-Interpreter笔记-8
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-6/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Let-s-Build-A-Simple-Interpreter笔记-6</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

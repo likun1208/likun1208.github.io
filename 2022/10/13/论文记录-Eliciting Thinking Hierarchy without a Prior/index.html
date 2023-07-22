@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="没有先验知识的情况下从众多答案中选择正确的那个" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-Eliciting Thinking Hierarchy without a Prior |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-Eliciting Thinking Hierarchy without a Prior"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-Eliciting Thinking Hierarchy without a Prior
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/10/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Thinking%20Hierarchy%20without%20a%20Prior/" class="article-date">
+  <time datetime="2022-10-13T01:58:32.000Z" itemprop="datePublished">2022-10-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">8.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">32 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Eliciting-Thinking-Hierarchy-without-a-Prior"><a href="#Eliciting-Thinking-Hierarchy-without-a-Prior" class="headerlink" title="Eliciting Thinking Hierarchy without a Prior"></a>Eliciting Thinking Hierarchy without a Prior</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>针对无法验证答案的众包任务，传统思路：选择大多数人支持的答案</p>
+<p>存在问题：大多数人犯系统性错误，会导致最终结果出错</p>
+<p>本文希望：在没有任何先验的情况下，在所有答案中建立一个等级制度，使得根据该制度得到的排名较高的答案（可能不被大多数人支持）来自更可靠的人</p>
+<p>本文提出：</p>
+<ol>
+<li><p>一个新的模型来描述人们的思维层次</p>
+</li>
+<li><p>两种算法来学习没有任何先验的思维层次</p>
+</li>
+<li><p>一种基于上述理论框架的新的公开回答的众包方法</p>
+</li>
+</ol>
+<p>本文实验：</p>
+<ol>
+<li><p>本文方法所学习到的排名靠前的答案的准确度远远高于全体投票（在一个问题中，全体投票的答案得到了74名受访者的支持，但正确答案只得到了3名受访者的支持。我们的方法在没有任何先验的情况下将正确答案排在最高位置）</p>
+</li>
+<li><p>本文模型有很高的拟合度，特别是对于我们排名第一的答案是正确的问题</p>
+</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>群体智慧在面对系统性错误的时候往往会得出错误结果</p>
+<p>一个例子：圆A的半径是圆B半径的1/3，圆A绕着圆B转了一圈后回到起点。圆A总共会旋转多少次？</p>
+<p><img src="https://github.com/likun1208/image/blob/master/2109.jpg?raw=true" alt="圆圈问题"></p>
+<p>根据实验，有11个人认为是1次，8个人选2次，134个人选3次，16个人选4次，27个人选6次，21个人选9次。显然在多数一致的众包任务中，这个题的答案会被认为是3次，但其实正确答案是4次，只有16个人选。</p>
+<p>如果事先了解所有受访者的先验水平，我们也许能根据大家的专业水平来确定正确答案，但是在大多数众包场景中，往往没这样的先验知识。</p>
+<p>为了解决上述问题，Prelc等人[15]提出了一种创新的方法，他们准备了多个选择，要求受访者挑选一个选项，并预测其他人的选择分布。他们使用预测结果来构建一个关于选择的先验分布，然后选择比先验分布更受欢迎的选择，这样就纠正了偏见（是2017年的nature）。许多其他工作[10, 5, 16]发展了使用先验或预测来纠正偏差的想法。</p>
+<p>然而，首先，将以前的方法应用于运行中的例子，即圆圈问题，是不适用的，因为它们需要先验知识来设计选择。让受访者报告所有选择的整体分布也很费力。第二，以前的工作主要是利用预测来纠正偏见，而利用他们的预测来建立一个思维层次是内在的问题。这也导致了答案之间的层次性。著名的认知分层理论（CHT）[21, 22, 3]在人们玩游戏的场景中建立了一个思维理论，这样我们就可以学习不同复杂程度的玩家的行动。然而，CHT只是为游戏理论环境设计的。我们对在一般的问题解决场景中建立一个思维理论感到好奇。该问题的关键在于，水平较高的人知道水平较低的人的想法，但反之则不然[3, 9]。我们想应用这个见解来学习不同复杂程度的人的答案，称为思维层次，而不需要任何先验。</p>
+<p><strong>关键问题</strong>：我们的目标是建立一个实用的方法，在没有任何先验的情况下学习思维层次。基于思维层次，我们可以对答案进行排序，这样，排名较高的答案，可能不被大多数人支持，但是来自更可靠的人。</p>
+<p>层次性思维方式的优势除了在于选出正确答案以外，还有以下几点：</p>
+<ol>
+<li><p>一些主观性问题可能有多个高质量答案，完整的层次结构能提供更丰富的结果。</p>
+</li>
+<li><p>答案的层次性有助于更好地理解人们的思维方式，尤其当我们试图征求人们对某项政策的意见时这一点更重要。</p>
+</li>
+</ol>
+<p><strong>本文方法</strong>：和以往研究一样，让受访者同时写出自己的回答和对其他人答案的预测，并将其扩展到一个更实用的基于开放回答的范式。该范式提出了一个单一的开放回答问题，并要求每个回答者的答案和对其他人的答案的预测。例如，在圆圈问题中，一个回答者可以提供：答案。”4”，预测。”3”。然后我们构建一个答案-预测矩阵A，记录报告特定答案-预测对的人数。（例如，图2（a）显示有28人回答 “3”，预测其他人回答 “6”）。</p>
+<p><img src="https://github.com/likun1208/image/blob/master/fig2.png?raw=true" alt="圆圈问题的答案-预测矩阵"></p>
+<p>为了学习思维层次，本文提出了一个新颖的模型，它描述了不同复杂程度的人如何回答问题，和预测其他人的答案。回答者的答案和预测的联合分布取决于描述人们思维层次的潜在参数。本文表明，鉴于回答者的答案和预测的联合分布，可以通过解决非负矩阵分解问题的一个新变体来推断潜在的思维层次，该问题被称为非负全等三角化（NCT）。基于对NCT的分析，本文提供了两个简单的答案排序算法，并表明在适当的假设下，给定应答者的答案和预测的联合分布，这些算法将学习潜在的思维层次。</p>
+<blockquote>
+<p>直接一些来说，就是专业人士不仅能答对，还能知道业余者会犯什么错。</p>
+</blockquote>
+<p>最后，本文将答案和预测的联合分布表示为答案-预测矩阵，并在该矩阵上实现了基于NCT的答案排序算法。默认的排序算法是使矩阵上三角区域内的元素的平方和最大化，在变体的排序算法中，为了让不同的答案具有相同的复杂程度，答案被分割以压缩矩阵，该算法使压缩后的矩阵的上三角区域的平方和最大化。</p>
+<p>在实验方面，进行了包括数学、围棋、常识和字符发音的实证研究。</p>
+<p>需要说明的是：在前面那个矩阵图中，因为默认算法不需要用对角线的元素，所以这里对角线上的元素不再是答案-预测的人数，而是选择了这个答案的人数，这样方便和普通的多数一致众包方法做对比，例如那个矩阵里<code>(3,3)</code>对应的134表示有134个人回答了3，而不是说这么多人自己回答3也预测别人回答3。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>先略，以下是从他们公众号的介绍里复制来的内容：</p>
+<p>正如前文所言，在没有先验的情况下，很难对这些答案采取支持度以外的排序方式。Prelec [1], Prelec et al. [2] 通过在单选题中额外询问回答者对各个选项分布的预测，进而构造先验信息，并汇总答案为支持度“令人意外地高”的选项，并实验证明该方法比多数决有效。Rothschild and Wolfers [3] 在民调时除了询问“你会选谁”，还额外询问选民“你觉得谁会得到更多的支持”，并实验证明额外信息具有更高的信息量。</p>
+<p>类似地，我们采用了一套基于填空题的问卷调查方式：  </p>
+<p><strong>“你的答案是？”</strong></p>
+<p><strong>“你觉得别人会答什么？”</strong>  </p>
+<p>与之前工作不同，在以上框架下，询问者无需任何先验设计选项，回答者无需提供分布信息。针对答案的汇总，Kong and Schoenebeck [4] 提出一个猜想：“专业度高的人可以预测专业度低的答案，反之不然。”  </p>
+<p>这个猜想和行为经济学有限理性理论中的等级 k（Level-k）[5] 以及认知等级（Cognitive Hierarchy）[6] 理论相似，都认为人在逻辑思考推理中存在不同的等级。等级 k 和认知等级理论认为高等级知道低等级的存在并采取针对低等级的最优策略。</p>
+<h2 id="Learning-Thinking-Hierarchy"><a href="#Learning-Thinking-Hierarchy" class="headerlink" title="Learning Thinking Hierarchy"></a>Learning Thinking Hierarchy</h2><h3 id="Thinking-hierarchy"><a href="#Thinking-hierarchy" class="headerlink" title="Thinking hierarchy"></a>Thinking hierarchy</h3><p>给定一个问题<code>q</code>（例如圆圈问题），<code>T</code>表示思维类型的集合，<code>A</code>表示可能出现的回答的集合，这两个都是有限集，$\Delta_A$表示<code>A</code>的所有可能分布。</p>
+<p><strong>Generating answers</strong>：说明不同思维类型的人是如何得出答案的。</p>
+<p><strong>定义2.1</strong>：思维类型的预言机<code>W</code>：一个生成答案的预言机（an anwser generating oracle，不太理解这是指生成预言机的答案还是指生成答案的预言机，感觉是后者）将问题映射到集合<code>A</code>中的（随机）答案。每一个类型<code>t</code>都对应了一个预言机$O_t$，$O_t(q)$的输出是一个随机变量，其分布是$w_t\in \Delta_A$。$W$是一个$|T|\times|A|$矩阵，其中每一行是$w_t$。</p>
+<p>每一个受访者都有概率$p_t$是类型$t$，且$\sum_t p_t=1$，类型<code>t</code>的受访者通过运行预言机$O_t$得到自己的答案。对于所有$a\in A$，一个受访者回答$a$的概率是$\sum_t p_tw_t(a)$，假设对于所有$a\in A$，概率都是正的。</p>
+<p><strong>例2.2（运行示例）</strong>：有两种思维类型$T=\{0,1\}$，回答空间是$A=\{3,4,6\}$，预言机$O_0$有0.8的概率输出3，0.2的概率输出6；$O_1$会直接输出4。在这个例子中，$W=[\begin{matrix}0.8&amp;0&amp;0.2\\0&amp;1&amp;0 \end{matrix}]$，其中第一行是$O_0$的输出，第二行是$O_1$的输出。</p>
+<p><strong>Generating predictions</strong>：说明不同思维类型的人会如何预测其他人的回答。这里的预测不是一个分布，而是一个其他人可能会报告的答案。当类型<code>t</code>的受访者预测时，她会运行一个预言机来得到预测结果$g\in A$，该预言机有概率$p_{t\rightarrow t’}$等于$O_{t’}$，其中$\sum_{t’}p_{t\rightarrow t’}=1$。</p>
+<p><strong>Combination: answer-prediction joint distribution M</strong>：<code>M</code>表示一个$|A|\times |A|$的矩阵，其中$M_{a,g}$是受访者回答<code>a</code>且预测他人回答<code>g</code>的概率，$\Lambda$表示一个$|T|\times |T|$的矩阵，其中$\Lambda_{t,t’}$是受访者为类型<code>t</code>且预测他人类型<code>t&#39;</code>的概率。</p>
+<p><strong>例2.3</strong>：在本例中，当类型<code>0</code>的受访者进行预测时，她会以概率<code>1</code>再次运行预言机$O_0$。当类型<code>1</code>的受访者进行预测时，她会以<code>0.5</code>的概率运行预言机$O_0$，<code>0.5</code>的概率运行预言机$O_1$。且受访者有<code>0.7</code>的概率是类型<code>0</code>，<code>0.3</code>的概率是类型<code>1</code>。则$\Lambda=[\begin{matrix}p_0p_{0\rightarrow 0}&amp;p_0p_{0\rightarrow 1}\\p_1p_{1\rightarrow 0}&amp;p_1p_{1\rightarrow 1}\end{matrix}]=[\begin{matrix}0.7&amp;0\\0.15&amp;0.15\end{matrix}]$</p>
+<p><strong>观点2.4</strong>：基于以上生成过程，$M=W^{\top}\Lambda W$。<br><strong>证明</strong>：对于每一个受访者，她回答<code>a</code>且预测<code>g</code>的概率为</p>
+<script type="math/tex; mode=display">M_{a, g}=\sum_t p_t \mathbf{w}_t(a) \sum_{t^{\prime}} p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)</script><p>我们对所有受访者可能的类型进行求和，假定她的类型为<code>t</code>，则她会运行预言机$O_t$来得到答案，且有概率$w_t(a)$得到答案<code>a</code>。我们对她所有可能为了预测而运行的预言机进行求和，假定她运行$O_{t’}$，则预测为<code>g</code>的概率是$w_{t’}(g)$。</p>
+<p>一些补充说明：这里从证明到2.4的过程我其实没完全搞明白，姑且写一下理解：</p>
+<p>首先$w_t(a)$就是矩阵<code>W</code>的第<code>t</code>行第<code>a</code>列的元素，中间的$p_tp_{t\rightarrow t’}$是矩阵$\Lambda$的第<code>t</code>行第<code>t&#39;</code>列的元素，最后的$w_{t’}(g)$是第<code>t&#39;</code>行第<code>g</code>列的元素。</p>
+<p>接下来回顾一下矩阵相乘的公式：<br>矩阵<code>A</code>和矩阵<code>B</code>相乘得到矩阵<code>C</code>，其计算方法是：</p>
+<script type="math/tex; mode=display">
+C_{i,j} = \sum_{k=0}A_{i,k}B_{k,j}</script><p>由此可以推导出，三个矩阵连乘法的计算方式：</p>
+<script type="math/tex; mode=display">
+D_{i,m}=\sum_{j=0}(\sum_{k=0}A_{i,k}B_{k,j})C_{j,m}=\sum_{j=0,k=0}A_{i,k}B_{k,j}C_{j,m}</script><p>回到前面2.4的公式来看，</p>
+<script type="math/tex; mode=display">
+M_{a, g}=\sum_{t, t^{\prime}} \mathbf{w}_t(a) p_t p_{t \rightarrow t^{\prime}} \mathbf{w}_{t^{\prime}}(g)=\sum_{t, t^{\prime}}W_{t,a}\Lambda_{t,t'}W_{t',g}</script><p>显然，如果能把第一个$W_{t,a}$的行列交换一下，这个公式就可以改写为三个矩阵连乘了，而这恰好就是矩阵转置，即$W_{t,a}=W_{a,t}^\top$。由此，就可以得出$M=W^{\top}\Lambda W$。</p>
+<p><strong>关键假设</strong>：上三角(<code>upper-triangular</code>)$\Lambda$. 我们假设，水平较低的人永远无法运行水平较高的预言机。类型$\pi:\lbrace 1,2,3,…,|T| \rbrace \mapsto T$的线性排序将排名位置映射到类型。例如，$\pi(1)\in T$是排序最高的类型。</p>
+<p><strong>假设2.5</strong>：我们假设，在类型的适当排序$\pi$下，$\Lambda$是一个上三角矩阵。形式上而言，存在$\pi$使得$\forall i &gt; j, \Lambda_{\pi(i),\pi(j)}=0$。任意能使$\Lambda$为上三角形式的$\pi$都是这些类型的一种有效的思维层次。</p>
+<p>在运行示例（例2.2）中，有效的思维层次是$\pi(1)$为类型1，$\pi(2)$为类型0。需要注意的是，在上面的假设中，并不要求$\forall i \leq j, \Lambda_{\pi(i),\pi(j)}&gt;0$，当$\Lambda$为对角矩阵时，类型之间不能相互预测，而且同样复杂，因此任何排序都是有效的思维层次。</p>
+<p>给定由未知的<code>w</code>和$\Lambda$生成的<code>M</code>，算法可以寻找其思维层次，并输出矩阵$W^\ast$，它等价于行顺序是有效思维层次的行置换后的<code>W</code>。形式上而言，存在一种有效的思维层次$\pi$使得$W^\ast$的第<code>i</code>行是$W$的第$\pi(i)$行，即$w_i^\ast=w_{\pi(i)}$。</p>
+<h3 id="Non-negative-Congruence-Triangularization-NCT"><a href="#Non-negative-Congruence-Triangularization-NCT" class="headerlink" title="Non-negative Congruence Triangularization (NCT)"></a>Non-negative Congruence Triangularization (NCT)</h3><p>在上述模型中，推断思维层次引出了一个新的矩阵分解问题，这个问题类似于对称非负矩阵分解问题(NMF)。</p>
+<p><strong>定义2.6</strong>：非负同余三角化(NCT)。给定非负矩阵<code>M</code>，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，使得$M=W^\top\Lambda W$。在一个基于 Frobenius 范数的近似版本中，给定矩阵<code>W</code>的集合，<code>NCT</code>旨在寻找非负矩阵<code>W</code>（是不止一个非负矩阵）和非负上三角矩阵$\Lambda$，从而最小化：</p>
+<script type="math/tex; mode=display">\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2</script><p>得到的最小值被定义为：<code>M</code>关于$\mathcal{W}$的不适度(lack-of-fit)。</p>
+<p>类似NMF，要求结果的严格唯一性是不可能的。令$P_{\Lambda}$表示能使得$\Pi^\top\Lambda\Pi$仍然是上三角的置换矩阵的集合。如果$(W,\Lambda)$是一个解，则当<code>D</code>是所有元素为正数的对角矩阵且$\Pi\in P_\Lambda$时，$(\Pi^{-1}DW, \Pi^\top D^{-1}\Lambda D^{-1}\Pi)$也是一个解。我们将唯一性结果陈述如下，并在附录C中证明。</p>
+<p><strong>定理2.7</strong>：唯一性。如果$|T|\leq |A|$，且<code>W</code>的<code>T</code>列包含一个置换正对角矩阵，则$M=W^\top\Lambda W$的<code>NCT</code>是唯一的，因为对于所有的$W’^\top\Lambda’ W’=W^\top\Lambda W$，都存在一个正对角矩阵<code>D</code>和一个$|T|\times |T|$置换矩阵$\Pi\in P_\Lambda$，使得$W’=\Pi^{-1}DW$。</p>
+<p>当我们将<code>W</code>限制为半正交时，就可以在不需要寻找最优$\Lambda$的情况下得到<code>NCT</code>的简洁格式。$\mathcal{I}$是所有半正交矩阵<code>W</code>的集合，其中<code>W</code>的每一列有且仅有一个非零元素，且$WW^\top=I$。例如，例2.2中的矩阵<code>W</code>可以被标准化为半正交矩阵，下面的引理来自于 Frobenius 范数的扩展，我们在附录C中进行证明。</p>
+<p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<p>这里总的来说就是：让回答排名靠前且预测排名靠后的受访者尽量多</p>
+<h3 id="Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M"><a href="#Inferring-the-thinking-hierarchy-with-answer-prediction-joint-distribution-M" class="headerlink" title="Inferring the thinking hierarchy with answer-prediction joint distribution M"></a>Inferring the thinking hierarchy with answer-prediction joint distribution M</h3><p>给定<code>M</code>，推断其思维层次，等价于求解<code>NCT</code>问题。虽然我们并没有<code>M</code>，但我们可以获取其代理。为了简化实际应用，我们基于引理2.8引入了两个简单的排序算法。排序算法以<code>M</code>为输入，输出所有回答的线性排序结果$\pi:\lbrace 1,2,…,|A| \rbrace \mapsto A$，它表示了排序位置到回答的映射。</p>
+<p><strong>回答排序算法（默认）</strong>：记作AR(M)，该算法计算</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Pi}^* \leftarrow \arg \max _{\Pi \in \mathcal{P}} \sum_{i \leq j}\left(\boldsymbol{\Pi} \mathbf{M} \boldsymbol{\Pi}^{\top}\right)_{i, j}^2</script><p>其中，$\mathcal{P}$是所有$|A|\times |A|$的置换矩阵的集合。对于所有<code>i</code>，在每一个置换矩阵$\Pi$和一个线性顺序$\pi:\Pi_{i,\pi(i)}=1$ 之间都存在一个一对一的映射。因此，最优$\Pi^\ast$会引出所有回答的最优排序，而默认算法也可以表示为：</p>
+<script type="math/tex; mode=display">
+\pi^* \leftarrow \arg \max _\pi \sum_{i \leq j} M_{\pi(i), \pi(j)}^2</script><p>默认算法隐含假设$|T|=|A|$，且所有预言机都是确定的。为了允许$|T|\leq|A|$和不确定的预言机，我们引入了一个变体，将$\mathcal{P}$推广到半正交矩阵$\mathcal{I}$的一个子集。每一个$|T|\times |A|$的半正交矩阵<code>W</code>表示一个硬聚类，每一类$t\in T$包含了所有使得$W_{t,a}&gt;0$成立的回答。例如，例2.2中的矩阵<code>W</code>可以被标准化为半正交矩阵，并表示一个硬聚类<code>{4},{6,3}</code>。因此，变体算法将把回答划分为多个聚类，并为之分配一个层次结构。</p>
+<p><strong>回答排序算法（变体）</strong>：记作$AR^{+}(M,\mathcal{W})$，该算法计算</p>
+<script type="math/tex; mode=display">
+\mathbf{W}^{*} \leftarrow \arg \max _{\mathbf{W} \in \mathcal{I}} \sum_{i \leq j}\left(\mathbf{W M W}^{\top}\right)_{i, j}^{2}</script><p>其中，$\mathcal{W}\subset \mathcal{I}$。$\mathbf{W}^{\ast}$被标准化为每行之和是1。</p>
+<p>$\mathbf{W}^{\ast} \Rightarrow$ Answer rank  输出$\mathbf{W}^{\ast}$表示了所有回答的硬聚类。我们按照如下方式对所有回答进行排序：对于任意$i&lt;j$，聚类<code>i</code>中的回答比聚类<code>j</code>中的回答有着更高的排序。对于所有<code>i</code>，任意两个聚类<code>i</code>中的回答<code>a</code>和<code>a&#39;</code>，如果$W_{i,a}^\ast &gt;W_{i,a’}^\ast$，则<code>a</code>排序高于<code>a&#39;</code>。</p>
+<p><strong>理论论证</strong>：当<code>M</code>完全符合模型约束条件，即隐含的<code>W</code>为置换矩阵或硬聚类时，我们的算法就找到了思维层次。否则，我们的算法会找到由 Frobenius 范数度量的“最接近”的解。</p>
+<p><strong>定理2.9</strong>：当存在$\Pi_0 \in \mathcal{P}$和非负上三角矩阵$\Lambda_0$使得$\mathbf{M}=\boldsymbol{\Pi}_{0}^{\top} \boldsymbol{\Lambda}_{0} \boldsymbol{\Pi}_{0}$，算法AR(M)可以找到思维层次。一般来说，AR(M)会输出$\boldsymbol{\Pi}^\ast$，其中$\boldsymbol{\Pi}^\ast,\Lambda^\ast = Up(\boldsymbol{\Pi}^\ast M {\boldsymbol{\Pi}^\ast}^\top)$是$\arg \min _{\Pi \in \mathcal{P}, \Lambda}\left|\mathbf{M}-\boldsymbol{\Pi}^{\top} \Lambda \Pi\right|_{F}^{2}$的一个解。把$\mathcal{P}$换成$\mathcal{W}\subset \mathcal{I}$，把AR(M)换成$AR^{+}(M,\mathcal{W})$，上述语句仍然成立。</p>
+<p>证明仍然在附录C。</p>
+<h3 id="A-proxy-for-answer-prediction-joint-distribution-M"><a href="#A-proxy-for-answer-prediction-joint-distribution-M" class="headerlink" title="A proxy for answer-prediction joint distribution M"></a>A proxy for answer-prediction joint distribution M</h3><p>在实践中，我们没有完美的<code>M</code>。我们使用下面的开放式反应范式来获得<code>M</code>的代理。</p>
+<p><strong>回答-预测范式</strong>：受访者会被问两个问题：</p>
+<ol>
+<li>你的回答是什么？</li>
+<li>你认为其他人会回答什么？</li>
+</ol>
+<p>在圆圈问题中，可能的反馈是：“回答4，预测3”、“回答3，预测6，9，1”等。我们用<code>A</code>表示所有回答的集合。在圆圈问题的例子中，$A=\lbrace 1,2,3,4,6,9 \rbrace$。我们同样允许受访者不进行预测或者预测多个值。</p>
+<p><strong>回答-预测矩阵</strong>：我们聚合反馈并通过回答-预测矩阵将其可视化。回答-预测矩阵<code>A</code>是一个$|A|\times |A|$的方阵，其中$|A|$是受访者提供的不同答案的数量。每一项$A_{a,g}, a,g\in A$是回答<code>a</code>且预测<code>g</code>的受访者的数量。</p>
+<p>我们将证明，在适当的假设下，回答-预测矩阵<code>A</code>的期望与<code>M</code>成正比。首先，为了便于分析，我们假设每个受访者的预测都是独立样本。其次，由于我们允许人们有选择地提供预测，因此我们还需要假设每个受访者愿意提供的预测数量与她的类型和答案无关。我们将形式化的结果陈述如下，并在附录 C中进行证明。</p>
+<p><strong>定理2.10</strong>：当每一个受访者的预测都是独立样本，并且她给出的预测数量与她的类型和答案无关时，回答-预测矩阵<code>A</code> 的期望与<code>M</code>成正比。</p>
+<h2 id="Studies"><a href="#Studies" class="headerlink" title="Studies"></a>Studies</h2><p>我们进行了四组研究，分别是：研究1(35道数学题) ，研究2(30道围棋题) ，研究3(44道常识题)和研究4(43道汉字发音题)。</p>
+<p><strong>数据收集</strong>：通过在线众包平台发送调查问卷来收集数据，所有受访者被要求不能上网搜索或者与其他人交流，受访者可以填写“我不知道”这样的答案。除围棋问题以外，所有问卷采用定额支付的方式，具体过程在附录A。允许受访者参加多个研究，因为算法分别独立计算每一个问题。</p>
+<p><strong>数据处理</strong>：合并等价的答案，例如0.5和50%。忽略那些选择人数小于等于3%或者只有一个人选择的答案。剩下的答案包括“我不知道”共同组成了大小为$|A|$的回答集合。接下来构建回答-预测矩阵并执行算法，伪代码在附录B。本文算法不要求任何先验知识或受访者的专业水平。</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>基线算法：投票，即多数一致方案</p>
+<p>对比结果：本文的两种算法都比基线算法好</p>
+<p>152个问题中，有138个问题变体算法和默认算法得出了相同的思维层次。其他问题中，变体算法得到的排名靠前的答案可能有不止一个。有一个问题，变体算法得到的答案是错的，而默认算法得到的是正确的。</p>
+<p>我们同样计算了算法的不适度指标，发现那些算法能输出正确答案的问题都有着低不适度，进而更符合思维层次模型。因此我们可以用不适度作为算法可靠性的指标。</p>
+<p>我们还从每个研究中都选取了几个代表性的例子，其矩阵采用默认算法进行排列，对角线区域修改为例1.1所示。所有例子中，多数一致方案得到的答案是错的，而本文算法得到的答案是对的。其他问题的答案在<a href="https://elicitation.info/classroom/1/" target="_blank" rel="noopener">这个网站</a>上有展示。</p>
+<p>选出来的题和对应的矩阵如下：</p>
+<ol>
+<li>Monty Hall 问题（三门问题）：在三个关闭的门中任选一个打开，三个中有一个门后面是车，两个门后面是山羊。当你选好一个以后，Monty Hall会把剩下两个门中的一个打开，并展示说明这个门后面是山羊，然后问你是否要改选另一个门。那么如果你改选了，则你得到车的概率是多少？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-1.png?raw=true" alt="三门问题"></li>
+<li>出租车问题：这个城市85% 的出租车是绿色的，其他的都是蓝色的。一个目击者看到一辆蓝色的出租车。她通常正确的概率是80% 。目击者看到的出租车确实是蓝色的概率是多少？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-2.png?raw=true" alt="出租车问题"><br> 说明：这里论文插入的矩阵可能有错，我在数据网站上找到了它的正确矩阵，如下图：<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-9.png?raw=true" alt="出租车问题矩阵"></li>
+<li>为黑棋选择一步能使其活下来的走法<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-3.png?raw=true" alt="围棋死活题1"></li>
+<li>为黑棋选择一步能使其活下来的走法（原文最后的ko不清楚是指活下来并取胜，还是打错了）<br><img src="https://github.com/likun1208/image/blob/master/ETHP-4.png?raw=true" alt="围棋死活题2"></li>
+<li>边界问题：中国和朝鲜交界处的河流是什么？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-5.png?raw=true" alt="常识题1"></li>
+<li>中世纪新年问题：中世纪时期新年是哪天？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-6.png?raw=true" alt="常识题2"></li>
+<li>“睢”这个字的读音是什么？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-7.png?raw=true" alt="汉字读音题1"></li>
+<li>“滂”这个字的读音是什么？<br> <img src="https://github.com/likun1208/image/blob/master/ETHP-8.png?raw=true" alt="汉字读音题2"></li>
+</ol>
+<p>根据这些实验，有以下发现：</p>
+<ol>
+<li>本文方法能够得到丰富的思维层次，例如在出租车问题中，过往研究认为人们通常会忽略基本比例而报告 “80%”，设想中的层次可以是<code>41%, 80%</code>，而本文则发现了更丰富的思维层次：<code>41%, 50%, 80%, 12%, 15%, 20%</code>。（这里都是按思维水平从专业到普通再到离谱排序的）</li>
+<li>最专业的思维水平可能没法预测最离谱的思维水平。例如在出租车问题中，回答了<code>41%</code>的专业人士能预测到常见的错误回答<code>80%</code>，却没法预测到<code>12%, 15%</code>这样比较离谱的回答。反之，回答了<code>80%</code>的普通人却预测到了这种离谱答案。</li>
+<li>对于没有明显错误的问题（例如围棋），本文方法仍然有效。</li>
+<li>在边界问题中，只有3个人回答了正确答案，但我们的算法仍然在没有任何先验的情况下选出了这个正确答案。</li>
+</ol>
+<p>上述例子是多数一致方案出错的。在一些多数一致方案正确的问题中，本文算法也能得出更丰富的思维层次。例如，一个题目问：唐太宗李世民什么时候登基？出于启发效应，还补充了一句是大于50岁还是小于50岁？这个题目要求回答年龄，多数一致方案和本文算法都能得出正确答案（28岁）。本文算法得出的思维层次是<code>28,27,30,35,40,50</code>，可以看出来，使用了锚定与调整性法则的回答被本文算法排到了后面，因为其思维层次较简单。</p>
+<p>在我们的研究中，人们犯了一些系统性的错误，比如做了一个错误的统计假设(三门问题的“1/2”) ，忽略了基准率(出租车的“80%”) ，使用了可得性启发法，即依赖于易于搜索的记忆(“鸭绿江”，“ Songhua River”，“ju1”，“12月25日，1月1日”) ，回答了一个更容易的替代问题(使用贪婪的动作或看起来优雅的动作，发音成分) ，以及使用锚定与调整性法则(“40,50”李世民问题)[24]。重要的是，我们的实验结果表明，在没有任何先验的情况下，我们的算法将这些错误标记为不那么复杂的思维类型。</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p><strong>本文算法什么情况下出错</strong>：</p>
+<ol>
+<li>一些复杂问题，我们没法从任何人那里得到正确答案。</li>
+<li>一些回答空间很少的问题，例如只能回答<code>yes</code>或<code>no</code>，每个人都不需要专业知识就能很容易猜到其他人的回答。</li>
+<li>不适用于人们同意不同意的情况，因为人们能预测出其他人的回答，但仍然坚持己见。例如在问题“中国古代从哪个朝代开始把最高统治者称为<code>王</code>？”这个问题得出的矩阵如下：<br><img src="https://github.com/likun1208/image/blob/master/ETHP-10.png?raw=true" alt="不合适的问题"><br>正确答案是商，但本文算法排序把周放到了第一位，这可能是因为我们平常总把“夏商周”放到一起提，所以每个人都能猜出来别人的回答，而无需专业知识。如前文所说，可以用不适度来衡量算法是否能找出正确答案。</li>
+</ol>
+<p><strong>部分顺序与DAG</strong>：我们观察到，在我们的研究中，最专业的人可能不知道最离谱的人的思想。一个潜在的原因是，最专业的人数量很少。另一个潜在的原因是人们有认知限制，他们可能需要大量的努力来推理那些专业程度与他们相去甚远的人。未来的发展方向是通过多种实验来探究其原因。</p>
+<p><strong>激励与对手</strong>：本文没考虑激励和奖励设计。同时如果模型中存在对手，对手能比多数一致方案更容易地操控本文的算法。因此未来研究方向一方面是引入激励，另一方面是考虑对手的存在，增加模型稳定性。</p>
+<p><strong>开放性问题</strong>：前文所述实验都是已经有确切答案的问题，或虽然是开放性问题，但答案空间由潜在的文字片段或数字组成，我们进一步针对没有确切答案的开放性问题进行了实验，将本文方法扩展到从人群中获取主观意见的场景，例如“为什么酒吧的椅子很高”。这里的关键挑战是自动对人们的意见进行分类，一个可能的方向是与学习算法相结合，另一个挑战是验证得出的层次结构。我们在北大的一个班级里问了酒吧椅子这个问题，并手动统计。回答人数最多的是“因为酒吧柜台很高”，而本文算法排名第一的是“与站着的人有更好的目光接触”。看起来，后者会导致前者进而导致提问中的“椅子很高”，所以本文算法能得到一个更为根本性的回答。</p>
+<p><strong>总结</strong>：</p>
+<ol>
+<li>本文提出了思维层次模型和无先验情况下寻找思维层次的方法</li>
+<li>实验说明本文方法的优越性</li>
+<li>方法可用于众包的语音识别，图像描述，植物物种识别等</li>
+</ol>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><h4 id="默认算法"><a href="#默认算法" class="headerlink" title="默认算法"></a>默认算法</h4><ol>
+<li>总体思路是挨个看哪种顺序得到的上三角平方和最大</li>
+<li>利用了动态规划的思想，先把矩阵拆成2维的，看2维情况下怎么排列最合适，然后在每一个2维的左上增加三维，看3维怎么排列最合适。</li>
+</ol>
+<p>这个过程如下图所示：<br><img src="https://github.com/likun1208/image/blob/master/ETHP-11.png?raw=true" alt="默认算法示意图"></p>
+<h4 id="变体算法"><a href="#变体算法" class="headerlink" title="变体算法"></a>变体算法</h4><h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="引理2-8的证明"><a href="#引理2-8的证明" class="headerlink" title="引理2.8的证明"></a>引理2.8的证明</h4><p><strong>引理2.8</strong>：半正交：最小F范数=最大化平方的上三角和。对于所有矩阵$\mathcal{W}\subset \mathcal{I}$的集合，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$，且设置$\Lambda$为$Up(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})$，即$\mathbf{W}\mathbf{M}\mathbf{W}^{\top}$的上三角区域。</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 &= Tr((\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W})(\mathbf{M}^\top-\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W}))\\
+& = ||\mathbf{M}||_F^2-Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})-Tr(\mathbf{M}\mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W} \mathbf{W}^{\top} \boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda}\boldsymbol{\Lambda}^\top \mathbf{W})\\
+& = ||\mathbf{M}||_F^2-2Tr(\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\mathbf{M})+||\boldsymbol{\Lambda}||_F^2
+\end{array}</script><p>接下来，</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 &=Tr((\boldsymbol{\Lambda}-\mathbf{WMW^\top})(\boldsymbol{\Lambda}^\top-\mathbf{WM^\top W^\top}))\\
+&= ||\boldsymbol{\Lambda}||_F^2-2Tr(\mathbf{\Lambda WM^\top W^\top})+||\mathbf{WMW^\top}||_F^2
+\end{array}</script><p>需要注意的是：$Tr(\mathbf{\Lambda WM^\top W^\top})=Tr(\mathbf{W^\top \Lambda WM^\top })$，由此可得：</p>
+<script type="math/tex; mode=display">
+||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2 = ||\boldsymbol{\Lambda}-\mathbf{WMW^\top}||_F^2 -||\mathbf{WMW^\top}||_F^2+||\mathbf{M}||_F^2</script><p>因此，</p>
+<script type="math/tex; mode=display">
+\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}\right\|_{F}^{2}=\underset{\mathbf{W}, \boldsymbol{\Lambda}}{\arg \min }\left\|\boldsymbol{\Lambda}-\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}-\left\|\mathbf{W} \mathbf{M} \mathbf{W}^{\top}\right\|_{F}^{2}</script><p>最优上三角矩阵$\boldsymbol\Lambda^\ast$ 应该是$\mathbf{W} \mathbf{M} \mathbf{W}^{\top}$的上三角部分，即，对于所有$i\leq j$，$\Lambda_{i,j}^\ast=\mathbf{W} \mathbf{M} \mathbf{W}^{\top}_{i,j}$。当$\Lambda$取最优时，$||\boldsymbol{\Lambda}^{*}-\mathbf{W M W}^{\top}||_{F}^{2}-||\mathbf{W M W}^{\top}||_{F}^{2}$就等于$-\sum_{i\leq j}(\mathbf{W M W}^{\top})_{i,j}^2$。因此，$\min _{\mathbf{W} \in \mathcal{W}, \boldsymbol{\Lambda}}||\mathbf{M}-\mathbf{W}^{\top} \boldsymbol{\Lambda} \mathbf{W}||_F^2$等价于求解$max_{\mathbf{W} \in \mathcal{W}}\sum_{i\leq j}(\mathbf{W}\mathbf{M}\mathbf{W}^{\top})^2_{i,j}$。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2022/10/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Thinking%20Hierarchy%20without%20a%20Prior/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crowdsourcing/" rel="tag">crowdsourcing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/10/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Bayesian%20Truth%20Serum%20for%20Subjective%20Data/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-A Bayesian Truth Serum for Subjective Data
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-Using game theory to thwart multistage privacy intrusions when sharing data</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

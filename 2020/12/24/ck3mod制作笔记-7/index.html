@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="这部分学习on_action的使用。" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ck3mod制作笔记-7 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-ck3mod制作笔记-7"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ck3mod制作笔记-7
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/24/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-7/" class="article-date">
+  <time datetime="2020-12-24T11:08:27.000Z" itemprop="datePublished">2020-12-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CK3/">CK3</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">22 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="On-Action"><a href="#On-Action" class="headerlink" title="On_Action"></a>On_Action</h1><p>在前面学习到的事件是由玩家在游戏中通过决议而触发的，但有时候我们会希望实现一些自动触发的事件，比如一年触发一次、五年触发一次等，这个时候就需要使用<code>on_action</code>了。</p>
+<p>在<a href="https://likun1208.github.io/2020/11/08/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-4/">ck3mod制作笔记-4</a>中，我们提到过这个东西。它可以理解成一种编码，当游戏中有对应编码的事件发生时，就会执行<code>on_action</code>代码块中的内容，比如当角色结婚时，<code>on_marriage</code>部分的内容就会被触发。游戏本体的相关代码存放在<code>Crusader Kings III\game\common\on_action</code>文件夹中，可以看到有很多很多选项。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><code>_on_actions.info</code>文件中说明了一个<code>on_action</code>代码块的写法，这里简要翻译和介绍一下。</p>
+<p>首先，一个<code>on_action</code>的基础结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">on_action_name &#x3D; &#123;</span><br><span class="line">	trigger &#x3D; &#123;</span><br><span class="line">		trigger_conditions &#x3D; yes</span><br><span class="line">	&#125;</span><br><span class="line">	weight_multiplier &#x3D; &#123;</span><br><span class="line">		base &#x3D; 1</span><br><span class="line">		modifier &#x3D; &#123;</span><br><span class="line">			add &#x3D; 1</span><br><span class="line">			trigger_conditions &#x3D; yes</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	events &#x3D; &#123;</span><br><span class="line">		event_id_1</span><br><span class="line">		delay &#x3D; &#123; days &#x3D; 365 &#125;</span><br><span class="line">		event_id_2</span><br><span class="line">		delay &#x3D; &#123; months &#x3D; &#123; 6 12 &#125; &#125;</span><br><span class="line">		event_id_3</span><br><span class="line">	&#125;</span><br><span class="line">	random_events &#x3D; &#123;</span><br><span class="line">		chance_to_happen &#x3D; 25</span><br><span class="line">		chance_of_no_event &#x3D; &#123;</span><br><span class="line">			value &#x3D; 0</span><br><span class="line">			if &#x3D; &#123;</span><br><span class="line">				limit &#x3D; &#123; trigger_conditions &#x3D; yes &#125;</span><br><span class="line">				add &#x3D; 10</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		100 &#x3D; event_id_1</span><br><span class="line">		200 &#x3D; event_id_2</span><br><span class="line">		100 &#x3D; 0</span><br><span class="line">	&#125;</span><br><span class="line">	first_valid &#x3D; &#123;</span><br><span class="line">		event_id_1</span><br><span class="line">		event_id_2</span><br><span class="line">		fallback_event_without_trigger</span><br><span class="line">	&#125;</span><br><span class="line">	on_actions &#x3D; &#123;</span><br><span class="line">		on_action_1</span><br><span class="line">		on_action_2</span><br><span class="line">		on_action_3</span><br><span class="line">	&#125;</span><br><span class="line">	random_on_actions &#x3D; &#123;</span><br><span class="line">		100 &#x3D; on_action_1</span><br><span class="line">		200 &#x3D; on_action_2</span><br><span class="line">		100 &#x3D; 0</span><br><span class="line">	&#125;</span><br><span class="line">	first_valid_on_action &#x3D; &#123;</span><br><span class="line">		on_action_1</span><br><span class="line">		on_action_2</span><br><span class="line">	&#125;</span><br><span class="line">	effect &#x3D; &#123;</span><br><span class="line">		effects &#x3D; yes</span><br><span class="line">	&#125;</span><br><span class="line">	fallback &#x3D; another_on_action</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>第一部分<code>trigger</code>是这个<code>on_action</code>的触发条件，如果一个<code>on_action</code>被游戏中的事件触发，而该<code>on_action</code>的<code>trigger</code>条件不满足，则无事发生。例如我们写一个<code>on_action</code>设定角色结婚后立刻获得1000金币，但是在<code>trigger</code>中限制该角色需要年龄低于30，则一个60岁角色的结婚事件触发该<code>on_action</code>后，不会获得金币。</li>
+<li>第二部分是对该<code>on_action</code>权重的修正，这个权重是用于其他<code>on_action</code>的随机<code>on_action</code>列表（这个列表会在下面介绍），比如我们有3个<code>on_action</code>，分别是<code>on_action_1, on_action_2, on_action_3</code>，其中后两个在第一个的随机<code>on_action</code>列表中，这意味着当<code>on_action_1</code>触发时，<code>on_action_2</code>和<code>on_action_3</code>会以一定概率触发，概率由它们在列表中的权重决定，权重的计算方式在前面介绍过，而这里的<code>weight_multiplier</code>就是对该权重值的修正。</li>
+<li>第三部分表示该<code>on_action</code>触发时会发生的事件列表，事件们在满足自身触发条件（<code>trigger</code>）的情况下，会从上到下按顺序逐一发生。这一部分中可以使用<code>delay</code>来控制事件之间的间隔，表示上一个事件发生多久后再继续进行下一个事件。<code>delay</code>可以是<code>days</code>，也可以是<code>months</code>和<code>years</code>，且这3者的值可以是形如<code>{6 12}</code>这样的随机列表，具体到游戏中会从大括号的值里挑一个，注意这两个数字之间没有逗号。上述代码中的这段例子就是当<code>on_action</code>触发时，先立刻发生<code>event_id_1</code>，等365天后会发生<code>event_id_2</code>，接着等6个月或12个月会发生<code>event_id_3</code>。</li>
+<li>第四部分<code>random_events</code>是随机事件列表，<code>on_action</code>发生时，会从该列表中根据权值随机挑选事件发生，会且只会挑一个。其中的<code>chance_to_happen</code>是基础权值，比如这里是25。<code>chance_of_no_event</code>是可以格式化为脚本值的条目，出于性能原因独立于<code>chance_to_happen</code>，只有当<code>chance_to_happen</code>为真时，该值会被考虑。接下来的列表就是会被挑选的事件列表，其中形如<code>100 = 0</code>这样的条目，是指有一定概率没有任何事件发生，这个设置是为了避免玩家通过让随即列表中的其他事件都不满足触发条件，从而触发稀有事件。</li>
+<li>第五部分<code>first_valid</code>选取触发器返回 true 的第一个事件。</li>
+<li><code>on_action</code>除了规定发生什么事件以外，也可以规定触发哪些<code>on_action</code>，接下来的第六、第七和第八部分和前面的<code>events, random_events, first_valid</code>很像，它们分别是该<code>on_action</code>会触发的其他<code>on_action</code>列表、随机<code>on_action</code>列表和<code>first_valid on_action</code>列表，前面第二部分的权重就是在这里用的。</li>
+<li>接着的<code>effect</code>这里先不说明，因为我还没学。</li>
+<li>最后<code>fallback</code>有点类似于编程语言中的函数返回值，它表示该<code>on_action</code>定义的返回<code>on_action</code>。如果没有事件/on_actions由该<code>on_action</code>触发，则该返回<code>on_action</code>会被调用。注意，要避免创建无限的返回循环，否则游戏可能会被阻止推进时间。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>在这一部分中，我们写一个很基础朴素的<code>on_action</code>，来略微了解一下。</p>
+<ol>
+<li><p>首先我们要完成一个如下<code>on_action</code>：当角色结婚时，弹出第一个事件，1天后弹出第2个事件，10天或15天后弹出第3个事件，3个事件就很随意了。</p>
+</li>
+<li><p>那么首先，我们先写3个事件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">namespace &#x3D; test_action</span><br><span class="line">test_action.1001 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; test_action.1001.t</span><br><span class="line">	desc &#x3D; test_action.1001.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; test_action.1001.option.a</span><br><span class="line">	&#125;</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; test_action.1001.option.b</span><br><span class="line">		trigger_event &#x3D; give_money.1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test_action.1002 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; test_action.1002.t</span><br><span class="line">	desc &#x3D; test_action.1002.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; test_action.1002.option.a</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test_action.1003 &#x3D; &#123;</span><br><span class="line">	type &#x3D; character_event</span><br><span class="line">	title &#x3D; test_action.1003.t</span><br><span class="line">	desc &#x3D; test_action.1003.desc</span><br><span class="line">	theme &#x3D; stewardship</span><br><span class="line">	left_portrait &#x3D; root</span><br><span class="line">	option &#x3D; &#123;</span><br><span class="line">		name &#x3D; test_action.1003.option.a</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里要注意，<code>namespace</code>一定要写对（也就是数字id前面的字符串），不能写成别的，不然就找不到这些事件了。</p>
+<p>一个反例就是一开始我没注意，namespace写成了test，于是无论怎么搞都只会触发这个文件中的最后一个事件（test_action.1003）。</p>
+<p>事件对应的文本文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">l_simp_chinese:</span><br><span class="line"> test_action.1001.t:0 &quot;测试&quot;</span><br><span class="line"> test_action.1001.desc:0 &quot;测试一下action。&quot;</span><br><span class="line"> test_action.1001.option.a:0 &quot;好耶！&quot;</span><br><span class="line"> test_action.1001.option.b:0 &quot;来点钱呗！&quot;</span><br><span class="line"></span><br><span class="line"> test_action.1002.t:0 &quot;测试2&quot;</span><br><span class="line"> test_action.1002.desc:0 &quot;测试一下多个事件。&quot;</span><br><span class="line"> test_action.1002.option.a:0 &quot;嗯嗯！&quot;</span><br><span class="line"></span><br><span class="line">  test_action.1003.t:0 &quot;测试3&quot;</span><br><span class="line">  test_action.1003.desc:0 &quot;测试一下delay。&quot;</span><br><span class="line">  test_action.1003.option.a:0 &quot;加油！&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>准备好事件以后，就可以开始写<code>on_action</code>文件了。根据需求，我们的<code>on_action</code>应该是<code>on_marriage</code>，其中只包含<code>events</code>块。内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">on_marriage &#x3D; &#123;</span><br><span class="line">	events &#x3D; &#123;</span><br><span class="line">		test_action.1001</span><br><span class="line">		delay &#x3D; &#123; days &#x3D; 1 &#125;</span><br><span class="line">		test_action.1002</span><br><span class="line">		delay &#x3D; &#123; days &#x3D; &#123; 10 15 &#125; &#125;</span><br><span class="line">		test_action.1003</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来检查一下代码结构，看每个文件是否都在其对应的地方，我的代码结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- common</span><br><span class="line">	- on_action</span><br><span class="line">		test_on_action.txt</span><br><span class="line">- events</span><br><span class="line">	test_action_events.txt</span><br><span class="line">- localization</span><br><span class="line">	-simp_chinese</span><br><span class="line">		-event_localization</span><br><span class="line">			test_action_l_simp_chinses.yml</span><br></pre></td></tr></table></figure>
+<p>实际上文件名并不严格要求按这个来，文件层级也不是特别严格，比如events里再套一层文件夹也没关系。</p>
+<p>此外，<code>test_action_events</code>事件中某个选项会触发之前写过的<code>give_money_events</code>，这个事件和其相关文件在此就不列出了。</p>
+</li>
+<li><p>接下来进游戏加载mod，可以看到如下效果：</p>
+<p>结婚当天（9月23日）触发第一个事件</p>
+<p><img src="https://i.loli.net/2020/12/25/24QNcT3LekhHtpA.png" alt="image-20201225205736201"></p>
+</li>
+</ol>
+<p>一天后（9月24日）触发第二个事件</p>
+<p><img src="https://i.loli.net/2020/12/25/yA7d2Hzn9tMolkp.png" alt="image-20201225205913496"></p>
+<p>15天后（10月8日）触发第3个事件</p>
+<p><img src="https://i.loli.net/2020/12/25/PeXHlhZViFoK5zM.png" alt="image-20201225210107079"></p>
+<h2 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h2><p>除了一些游戏本身已经写好的<code>on_action</code>以外，我们也可以自己写<code>on_action</code>，并在决议、事件或其他会触发<code>on_action</code>的时候调用，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trigger_event &#x3D; &#123;</span><br><span class="line">	on_action &#x3D; on_action_name</span><br><span class="line">	days&#x2F;months&#x2F;years &#x3D; X  	# 可选项，可以没有</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="现有的on-action"><a href="#现有的on-action" class="headerlink" title="现有的on_action"></a>现有的<code>on_action</code></h2><p>在这一部分中我整理列出了游戏本体中的一系列<code>on_action</code>的名称和触发条件（其实是根据名称猜的，所以可能有错），具体效果就不说明了。（实在是太多了……）</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别（文件名）</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">触发条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">结盟（alliance_on_actions）</td>
+<td style="text-align:center">on_alliance_added</td>
+<td style="text-align:center">结成同盟</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_alliance_removed</td>
+<td style="text-align:center">同盟到期移除</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_alliance_broken</td>
+<td style="text-align:center">同盟破裂</td>
+</tr>
+<tr>
+<td style="text-align:center">军队（army_on_actions）</td>
+<td style="text-align:center">on_army_monthly</td>
+<td style="text-align:center">玩家拥有的军队每30天自动触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_county_occupied</td>
+<td style="text-align:center">当一个county完全被占领时触发，如果是被province owner重新占领则不触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_siege_completion</td>
+<td style="text-align:center">当围攻完成时触发，如果是被province owner重新占领则不触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_siege_looting</td>
+<td style="text-align:center">当围攻掠夺某一土地时触发（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_army_enter_province</td>
+<td style="text-align:center">军队进入一个province时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_raid_action_start</td>
+<td style="text-align:center">突袭发生时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_raid_action_completion</td>
+<td style="text-align:center">突袭结束时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_raid_action_weekly</td>
+<td style="text-align:center">突袭过程中每7天触发一次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_raid_loot_delivered</td>
+<td style="text-align:center">当袭击者返回自己的领土并存入战利品时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_defeat_raid_army</td>
+<td style="text-align:center">当突袭失败且战利品被盗时触发（？）</td>
+</tr>
+<tr>
+<td style="text-align:center">战争（battle_on_actions）</td>
+<td style="text-align:center">on_battle_owner_battle_end</td>
+<td style="text-align:center">战争结束时，对战争双方触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_commander_battle_end</td>
+<td style="text-align:center">战争结束时，对战争双方指挥官触发</td>
+</tr>
+<tr>
+<td style="text-align:center">生日（birthday）</td>
+<td style="text-align:center">on_birthday</td>
+<td style="text-align:center">每个生日触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_specific_birthday</td>
+<td style="text-align:center">几个特殊年龄的生日触发（3、6、10、15、16）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_birthday_childhood</td>
+<td style="text-align:center">未成年且可以受教育的年龄触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_graceful_aging_birthday</td>
+<td style="text-align:center">这个没注释，我也没看懂</td>
+</tr>
+<tr>
+<td style="text-align:center">人物等级（character_levels）</td>
+<td style="text-align:center">on_piety_level_gain</td>
+<td style="text-align:center">信仰等级提升时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_piety_level_loss</td>
+<td style="text-align:center">信仰等级降低时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_prestige_level_gain</td>
+<td style="text-align:center">声望等级提升时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_prestige_level_loss</td>
+<td style="text-align:center">声望等级降低时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">孩子出生（child_birth_on_actions）</td>
+<td style="text-align:center">on_birth_mother</td>
+<td style="text-align:center">生娃时对孩他妈触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_birth_father</td>
+<td style="text-align:center">生娃时对孩他爸触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_birth_real_father</td>
+<td style="text-align:center">生娃时对亲生父亲触发（只在亲生父亲和法理父亲不一样时触发）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_birth_child</td>
+<td style="text-align:center">对新生儿触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_pregnancy_mother</td>
+<td style="text-align:center">对怀孕状态的母亲触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_pregnancy_father</td>
+<td style="text-align:center">对怀孕状态的父亲触发（<strong>这不是指男性怀孕</strong>）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_pregnancy_ended_mother</td>
+<td style="text-align:center">怀孕结束时对母亲触发</td>
+</tr>
+<tr>
+<td style="text-align:center">儿童时期（childhood_on_actions）</td>
+<td style="text-align:center">child_personality_gain</td>
+<td style="text-align:center">儿童性格特质等的获得</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">childhood_ongoing</td>
+<td style="text-align:center">儿童时期触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_3rd_birthday</td>
+<td style="text-align:center">3岁触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_6th_birthday</td>
+<td style="text-align:center">6岁触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_10th_birthday</td>
+<td style="text-align:center">10岁触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_15th_birthday</td>
+<td style="text-align:center">15岁触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_16th_birthday</td>
+<td style="text-align:center">16岁触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_action_add_sexuality</td>
+<td style="text-align:center">获得性取向后触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_birthday_education_events</td>
+<td style="text-align:center">教育事件触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">childhood_education_boost</td>
+<td style="text-align:center">检查儿童是否需要教育</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">childhood_education</td>
+<td style="text-align:center">教育事件的触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">childhood_education_patronage</td>
+<td style="text-align:center">patronage-forcused或者scholarly 配偶会给儿童教育加分，这个赞助我没理解是什么意思，scholarly应该是指学识属性高</td>
+</tr>
+<tr>
+<td style="text-align:center">战斗（combat_on_actions）</td>
+<td style="text-align:center">on_combat_end_winner</td>
+<td style="text-align:center">对打赢了的一方触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_combat_end_loser</td>
+<td style="text-align:center">对打输了的一方触发</td>
+</tr>
+<tr>
+<td style="text-align:center">内阁（councillor_on_actions）</td>
+<td style="text-align:center">on_leave_council</td>
+<td style="text-align:center">内阁成员辞职时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_fired_from_council</td>
+<td style="text-align:center">领主从内阁解雇该角色时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">organize_the_levies_marshal_task_side_effects</td>
+<td style="text-align:center">军事统帅任务事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">train_commanders_success_effect</td>
+<td style="text-align:center">训练指挥官成功事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">train_commanders_marshal_task_side_effects</td>
+<td style="text-align:center">训练指挥官军事统帅事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_increase_control_side_effects</td>
+<td style="text-align:center">增强控制力任务事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_foreign_affairs_side_effects</td>
+<td style="text-align:center">外交事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_domestic_affairs_side_effects</td>
+<td style="text-align:center">国内事务列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_integrate_title_side_effects</td>
+<td style="text-align:center">合并头衔事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_fabricate_claim_success_effect</td>
+<td style="text-align:center">伪造宣称成功事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_collect_taxes_side_effects</td>
+<td style="text-align:center">收税事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_develop_county_side_effects</td>
+<td style="text-align:center">发展事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_promote_culture_side_effects</td>
+<td style="text-align:center">文化事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_religious_relations_side_effects</td>
+<td style="text-align:center">宗教关系事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_convert_side_effects</td>
+<td style="text-align:center">转变文化事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_fabricate_claim_side_effects</td>
+<td style="text-align:center">伪造宣称事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_support_schemes_side_effects</td>
+<td style="text-align:center">支持密谋事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_disrupt_schemes_side_effects</td>
+<td style="text-align:center">打断密谋事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_find_secrets_outcome</td>
+<td style="text-align:center">寻找秘密的结果</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_find_secrets_reveal_selection</td>
+<td style="text-align:center">揭示秘密选择列表</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">task_find_secrets_side_effects</td>
+<td style="text-align:center">寻找秘密事件列表</td>
+</tr>
+<tr>
+<td style="text-align:center">伯爵领（county_on_actions）</td>
+<td style="text-align:center">on_county_faith_change</td>
+<td style="text-align:center">伯爵领改信时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_county_culture_change</td>
+<td style="text-align:center">伯爵领改文化时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">宫廷（court_maintenance_on_actions）</td>
+<td style="text-align:center">on_join_court</td>
+<td style="text-align:center">角色加入宫廷时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_leave_court</td>
+<td style="text-align:center">角色离开宫廷时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">廷臣宾客（courtier_guest_management_on_actions）</td>
+<td style="text-align:center">on_courtier_decided_to_move_to_pool</td>
+<td style="text-align:center">廷臣打算离开时针对该廷臣触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_courtier_ready_to_move_to_pool</td>
+<td style="text-align:center">廷臣准备好离开时针对该廷臣触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_guest_arrived_from_pool</td>
+<td style="text-align:center">宾客到达时针对该宾客触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_guest_ready_to_move_to_pool</td>
+<td style="text-align:center">宾客准备好离开时针对宾客触发</td>
+</tr>
+<tr>
+<td style="text-align:center">文化（culture_on_actions）</td>
+<td style="text-align:center">on_culture_era_changed</td>
+<td style="text-align:center">文化区域改变时对该文化触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_character_culture_change</td>
+<td style="text-align:center">角色改文化时对该角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center">死亡（death）</td>
+<td style="text-align:center">on_death</td>
+<td style="text-align:center">死亡时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_natural_death_second_chance</td>
+<td style="text-align:center">角色即将自然死亡，但通过脚本获得第二次生命时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">宗族（dynasty_on_actions）</td>
+<td style="text-align:center">on_dynasty_created</td>
+<td style="text-align:center">建立宗族时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">游戏开始（game_start）</td>
+<td style="text-align:center">on_game_start</td>
+<td style="text-align:center">游戏开局一系列历史信息生成后触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_game_start_after_lobby</td>
+<td style="text-align:center">进入游戏后触发，主要是和游戏规则相关的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">健康（health_on_actions）</td>
+<td style="text-align:center">yearly_health_pulse</td>
+<td style="text-align:center">每年的健康事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">disease_outbreak_pulse</td>
+<td style="text-align:center">随机生病触发事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">wounded_recovery_pulse</td>
+<td style="text-align:center">伤口恢复触发事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commit_suicide</td>
+<td style="text-align:center">决议自杀触发</td>
+</tr>
+<tr>
+<td style="text-align:center">骑士团（holy_order_on_actions）</td>
+<td style="text-align:center">on_holy_order_new_lease</td>
+<td style="text-align:center">骑士团获得领地（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_holy_order_hired</td>
+<td style="text-align:center">骑士团被雇佣</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_holy_order_destroyed</td>
+<td style="text-align:center">骑士团被解散</td>
+</tr>
+<tr>
+<td style="text-align:center">骑士（knight_on_actions）</td>
+<td style="text-align:center">on_knight_combat_pulse</td>
+<td style="text-align:center">战争中每天针对骑士触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_commander_combat_pulse</td>
+<td style="text-align:center">战争中每天对指挥官触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_commander_combat_finished</td>
+<td style="text-align:center">战争后对指挥官触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_army_combat_finished</td>
+<td style="text-align:center">战争后对每个参战军队触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">varangian_ongoing</td>
+<td style="text-align:center">针对Varangian guard触发</td>
+</tr>
+<tr>
+<td style="text-align:center">婚姻（marriage_concubinage）</td>
+<td style="text-align:center">on_marriage</td>
+<td style="text-align:center">结婚时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_divorce</td>
+<td style="text-align:center">离婚时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_concubinage</td>
+<td style="text-align:center">角色成为他人侧室时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_concubinage_end</td>
+<td style="text-align:center">角色不当侧室时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_betrothal_broken</td>
+<td style="text-align:center">婚约破裂时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">监狱（prison_on_actions）</td>
+<td style="text-align:center">on_imprison</td>
+<td style="text-align:center">被抓时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_release_from_prison</td>
+<td style="text-align:center">被放时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">quarterly_prison_maintenance_pulse</td>
+<td style="text-align:center">住监狱过程中触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">dungeon_ongoing</td>
+<td style="text-align:center">关地牢过程中触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">house_arrest_ongoing</td>
+<td style="text-align:center">软禁时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">escape_from_prison</td>
+<td style="text-align:center">试图逃出监狱时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">escape_from_prison_success</td>
+<td style="text-align:center">成功逃出监狱时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">escape_from_prison_failure</td>
+<td style="text-align:center">逃跑失败触发</td>
+</tr>
+<tr>
+<td style="text-align:center">领地（realm_maintenance_on_actions）</td>
+<td style="text-align:center">realm_maintenance_quarterly_pulse</td>
+<td style="text-align:center">当领主的过程中随机触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">in_debt_county_corruption_pulse</td>
+<td style="text-align:center">负债时增加腐败</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">low_control_pulse</td>
+<td style="text-align:center">控制力较低时触发（会增加腐败）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">high_countrol_pulse</td>
+<td style="text-align:center">高控制力时触发（移除腐败）（这里的countrol真的没问题吗…）</td>
+</tr>
+<tr>
+<td style="text-align:center">宗教（religion_on_actions）</td>
+<td style="text-align:center">on_faith_created</td>
+<td style="text-align:center">创建信仰时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_faith_conversion</td>
+<td style="text-align:center">转变信仰时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_character_faith_change</td>
+<td style="text-align:center">人物改信时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_faith_monthly</td>
+<td style="text-align:center">每种信仰每个月触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">faith_holy_order_land_acquisition_pulse</td>
+<td style="text-align:center">骑士团信仰</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">faith_heresy_events_pulse</td>
+<td style="text-align:center">异端事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">faith_fervor_events_pulse</td>
+<td style="text-align:center">宗教热情事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pagan_conversion_pulse</td>
+<td style="text-align:center">异教徒转变事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_potential_great_holy_war_invalidation</td>
+<td style="text-align:center">圣战目标无效时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_great_holy_war_invalidation</td>
+<td style="text-align:center">上一个没找到新目标时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_great_holy_war_countdown_end</td>
+<td style="text-align:center">圣战开始的倒计时为0时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_great_holy_war_participant_replaced</td>
+<td style="text-align:center">圣战中角色被替换时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">规则（ruler_designer）</td>
+<td style="text-align:center">on_ruler_designer_finished</td>
+<td style="text-align:center">新人物设计好后触发（应该是指那个自定义统治者属性的玩法）</td>
+</tr>
+<tr>
+<td style="text-align:center">秘密（secret_on_actions）</td>
+<td style="text-align:center">secrets_ongoing</td>
+<td style="text-align:center">处理秘密事件时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">压力应对决策（主要是不同特质会有特殊事件）（stress_coping_decisions_on_actions）</td>
+<td style="text-align:center">stress_loss_drunkard</td>
+<td style="text-align:center">酒鬼减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_hashishiyah</td>
+<td style="text-align:center">瘾君子减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_rakish</td>
+<td style="text-align:center">放荡者减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_reclusive</td>
+<td style="text-align:center">隐居减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_irritable</td>
+<td style="text-align:center">烦躁减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_flagellant</td>
+<td style="text-align:center">自鞭笞者减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_profligate</td>
+<td style="text-align:center">挥霍减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_improvident</td>
+<td style="text-align:center">缺乏远见者减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_contrite</td>
+<td style="text-align:center">懊悔减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_comfort_eater</td>
+<td style="text-align:center">食以慰藉减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_inappetetic</td>
+<td style="text-align:center">没有食欲减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_journaller</td>
+<td style="text-align:center">写日记者减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_confider</td>
+<td style="text-align:center">倾诉者减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_loss_athletic</td>
+<td style="text-align:center">健身减压时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">压力（stress_on_actions）</td>
+<td style="text-align:center">stress_pulse</td>
+<td style="text-align:center">暂时忽略，注释说这个块可能会被删</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_stress_level_reduced</td>
+<td style="text-align:center">压力等级降低时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_stress_level_1</td>
+<td style="text-align:center">压力等级变为1时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_stress_level_2</td>
+<td style="text-align:center">压力等级变为2时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_stress_level_3</td>
+<td style="text-align:center">压力等级变为3时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_stress_level_4</td>
+<td style="text-align:center">压力等级变为4时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_1_event</td>
+<td style="text-align:center">压力达到1级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_2_event</td>
+<td style="text-align:center">压力达到2级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_3_event</td>
+<td style="text-align:center">压力达到3级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_1_event_prison</td>
+<td style="text-align:center">角色在监狱中，压力达到1级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_2_event_prison</td>
+<td style="text-align:center">角色在监狱中，压力达到2级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stress_threshold_level_3_event_prison</td>
+<td style="text-align:center">角色在监狱中，压力达到3级阈值时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">头衔（title_on_actions）</td>
+<td style="text-align:center">on_title_destroyed</td>
+<td style="text-align:center">头衔被销毁时对头衔持有者触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_title_gain</td>
+<td style="text-align:center">头衔获得时对该头衔的新持有者触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_title_gain_inheritance</td>
+<td style="text-align:center">继承头衔时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_title_gain_usurpation</td>
+<td style="text-align:center">篡夺头衔时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_title_lost</td>
+<td style="text-align:center">失去头衔时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_explicit_claim_gain</td>
+<td style="text-align:center">获得宣称时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_explicit_claim_lost</td>
+<td style="text-align:center">失去宣称时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_rank_up</td>
+<td style="text-align:center">头衔改变使角色升级时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_rank_down</td>
+<td style="text-align:center">头衔改变使角色降级时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_vassal_gained</td>
+<td style="text-align:center">得到封臣时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">特质（traits_on_actions）</td>
+<td style="text-align:center">assign_trait_events</td>
+<td style="text-align:center">到新压力等级时获取特质</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">assign_trait_ai_on_action</td>
+<td style="text-align:center">AI随机获取特质的触发系统</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">assign_trait_on_action</td>
+<td style="text-align:center">获取特殊特质</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">ongoing_trait_events</td>
+<td style="text-align:center">持有特殊特质时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">教程（tutorial）</td>
+<td style="text-align:center">on_game_start_with_tutorial</td>
+<td style="text-align:center">用教程开局时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">战争（war_on_actions）</td>
+<td style="text-align:center">on_war_transferred</td>
+<td style="text-align:center">战争中防御者改变时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_join_war_as_secondary</td>
+<td style="text-align:center">角色作为战争的次要攻击者/次要防御者时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_war_started</td>
+<td style="text-align:center">战争开始时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_war_won_attacker</td>
+<td style="text-align:center">攻方赢得战争时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_war_won_defender</td>
+<td style="text-align:center">守方赢得战争时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_war_white_peace</td>
+<td style="text-align:center">战争无条件和平时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_war_invalidated</td>
+<td style="text-align:center">战争无效时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">体重（weight_on_actions）</td>
+<td style="text-align:center">on_weight_changed</td>
+<td style="text-align:center">体重改变时触发（会触发一系列前面健康中的on_action）</td>
+</tr>
+<tr>
+<td style="text-align:center">巫师（witch_on_actions）</td>
+<td style="text-align:center">convert_to_witchcraft_failure_outcome</td>
+<td style="text-align:center">转巫师失败时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">年度（yearly_on_actions）</td>
+<td style="text-align:center">yearly_global_pulse</td>
+<td style="text-align:center">每年1月1日触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">yearly_playable_pulse</td>
+<td style="text-align:center">每年固定时间对可玩角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">three_year_playable_pulse</td>
+<td style="text-align:center">每3年对可玩角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">five_year_playable_pulse</td>
+<td style="text-align:center">每5年对可玩角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">quarterly_playable_pulse</td>
+<td style="text-align:center">每季度对可玩角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">random_yearly_playable_pulse</td>
+<td style="text-align:center">每年随机日期对可玩角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">random_yearly_everyone_pulse</td>
+<td style="text-align:center">每年随机日期对所有角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">five_year_everyone_pulse</td>
+<td style="text-align:center">每5年对所有角色触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">three_year_pool_pulse</td>
+<td style="text-align:center">每3年对穷人触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">prison_maintenance_pulse</td>
+<td style="text-align:center">角色监狱里关着人时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">ai_character_pulse</td>
+<td style="text-align:center">对AI触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_yearly_events</td>
+<td style="text-align:center">每年随机日期触发</td>
+</tr>
+<tr>
+<td style="text-align:center">活动-宴会（activities/feast_on_actions）</td>
+<td style="text-align:center">feast_main_event_selection</td>
+<td style="text-align:center">选择宴会主事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">feast_start_events</td>
+<td style="text-align:center">宴会开始触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">feast_default_event_selection</td>
+<td style="text-align:center">默认宴会主事件中对参与者触发的事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">feast_default_host_event_selection</td>
+<td style="text-align:center">默认宴会主事件中对举办者触发的事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">feast_default_fallback</td>
+<td style="text-align:center">宴会默认的返回事件</td>
+</tr>
+<tr>
+<td style="text-align:center">活动-打猎（activities/hunt_on_actions）</td>
+<td style="text-align:center">hunt_start_events</td>
+<td style="text-align:center">打猎开始时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">hunt_random_pulse</td>
+<td style="text-align:center">打猎过程中随机触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">hunt_end_pulse</td>
+<td style="text-align:center">打猎结束触发</td>
+</tr>
+<tr>
+<td style="text-align:center">活动-朝圣（activities/pilgrimage_on_actions）</td>
+<td style="text-align:center">pilgrimage_setup</td>
+<td style="text-align:center">朝圣开始</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pilgrimage_journey_events</td>
+<td style="text-align:center">朝圣过程中触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">hajj_journey_events</td>
+<td style="text-align:center">伊斯兰朝圣过程中触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pilgrimage_journey_event_fallback</td>
+<td style="text-align:center">朝圣默认的返回事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pilgrimage_destination_events</td>
+<td style="text-align:center">朝圣目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">hajj_destination_events</td>
+<td style="text-align:center">伊斯兰目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">christian_destination_events</td>
+<td style="text-align:center">基督徒目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">jewish_destination_events</td>
+<td style="text-align:center">犹太人目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">muslim_destination_events</td>
+<td style="text-align:center">穆斯林目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">hindu_destination_events</td>
+<td style="text-align:center">印度教目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">buddhist_destination_events</td>
+<td style="text-align:center">佛教徒目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">jain_destination_events</td>
+<td style="text-align:center">耆那教目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">zoroastrian_destination_events</td>
+<td style="text-align:center">拜火教目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">norse_destination_events</td>
+<td style="text-align:center">挪威人目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">tengri_destination_events</td>
+<td style="text-align:center">腾格里目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pagan_destination_events</td>
+<td style="text-align:center">无信仰者目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pilgrimage_generic_destination_events</td>
+<td style="text-align:center">普通目的地事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">pilgrimage_return_events</td>
+<td style="text-align:center">朝圣后返回事件</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-外交（lifestyles/diplomacy_lifestyle_on_actions）</td>
+<td style="text-align:center">diplomacy_lifestyle_progress_pulse</td>
+<td style="text-align:center">外交生活事件，一年触发4次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_lifestyle_ongoing_events</td>
+<td style="text-align:center">外交生活中的事件（包括了下面几个）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_lifestyle_common_events</td>
+<td style="text-align:center">外交生活中的普通事件（2年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_lifestyle_uncommon_events</td>
+<td style="text-align:center">外交生活中的不普通事件（10年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_lifestyle_rare_events</td>
+<td style="text-align:center">外交生活中的稀有事件（30年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_lifestyle_unavailable_events</td>
+<td style="text-align:center">外交生活中的不可能事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_foreign_special_1010_court_visit_events</td>
+<td style="text-align:center">外交事件链1</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">diplomacy_foreign_special_1010_court_visit_interesting_relation_spy_outcome_events</td>
+<td style="text-align:center">外交事件链2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commission_epic_ongoing</td>
+<td style="text-align:center">制作家族史诗事件</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-普通（lifestyles/general_lifestyle_on_actions）</td>
+<td style="text-align:center">on_perks_refunded</td>
+<td style="text-align:center">玩家改生活方式时退还技能触发</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-谋略（lifestyles/intrigue_lifestyle_on_actions）</td>
+<td style="text-align:center">intrigue_lifestyle_progress_pulse</td>
+<td style="text-align:center">谋略生活事件，一年触发4次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">intrigue_lifestyle_ongoing_events</td>
+<td style="text-align:center">谋略生活中的事件（包括了下面几个）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">intrigue_lifestyle_common_events</td>
+<td style="text-align:center">谋略生活中的普通事件（2年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">intrigue_lifestyle_uncommon_events</td>
+<td style="text-align:center">谋略生活中的不普通事件（10年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">intrigue_lifestyle_rare_events</td>
+<td style="text-align:center">谋略生活中的稀有事件（30年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">intrigue_lifestyle_unavailable_events</td>
+<td style="text-align:center">谋略生活中的不可能事件</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-学识（lifestyles/learning_lifestyle_on_actions）</td>
+<td style="text-align:center">learning_lifestyle_progress_pulse</td>
+<td style="text-align:center">学识生活事件，一年触发4次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learning_lifestyle_ongoing_events</td>
+<td style="text-align:center">学识生活中的事件（包括了下面几个）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learning_lifestyle_common_events</td>
+<td style="text-align:center">学识生活中的普通事件（2年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learning_lifestyle_uncommon_events</td>
+<td style="text-align:center">学识生活中的不普通事件（10年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learning_lifestyle_rare_events</td>
+<td style="text-align:center">学识生活中的稀有事件（30年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learning_lifestyle_unavailable_events</td>
+<td style="text-align:center">学识生活中的不可能事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">book_translation_story_events</td>
+<td style="text-align:center">翻译书事件（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">mystic_communion_side_effect_events</td>
+<td style="text-align:center">神秘圣餐事件（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-军事（lifestyles/martial_lifestyle_on_actions）</td>
+<td style="text-align:center">martial_lifestyle_progress_pulse</td>
+<td style="text-align:center">军事生活事件，一年触发4次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">martial_lifestyle_ongoing_events</td>
+<td style="text-align:center">军事生活中的事件（包括了下面几个）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">martial_lifestyle_common_events</td>
+<td style="text-align:center">军事生活中的普通事件（2年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">martial_lifestyle_uncommon_events</td>
+<td style="text-align:center">军事生活中的不普通事件（10年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">martial_lifestyle_rare_events</td>
+<td style="text-align:center">军事生活中的稀有事件（30年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">martial_lifestyle_unavailable_events</td>
+<td style="text-align:center">军事生活中的不可能事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">horse_riding_accident_outcome</td>
+<td style="text-align:center">骑马意外事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">search_for_troops_event_selection</td>
+<td style="text-align:center">搜索部队事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learn_commander_trait_offer</td>
+<td style="text-align:center">获得指挥官特质的机会</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learn_commander_trait_test</td>
+<td style="text-align:center">获得指挥官特质的测试</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learn_commander_trait_success</td>
+<td style="text-align:center">成功获得指挥官特质</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">learn_commander_trait_failure</td>
+<td style="text-align:center">未能获得指挥官特质</td>
+</tr>
+<tr>
+<td style="text-align:center">生活方式-管理（lifestyles/stewardship_lifestyle_on_actions）</td>
+<td style="text-align:center">stewardship_lifestyle_progress_pulse</td>
+<td style="text-align:center">管理生活事件，一年触发4次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_ongoing_events</td>
+<td style="text-align:center">管理生活中的事件（包括了下面几个）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_common_events</td>
+<td style="text-align:center">管理生活中的普通事件（2年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_uncommon_events</td>
+<td style="text-align:center">管理生活中的不普通事件（10年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_rare_events</td>
+<td style="text-align:center">管理生活中的稀有事件（30年1次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_unavailable_events</td>
+<td style="text-align:center">管理生活中的不可能事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">map_painting_event_selection</td>
+<td style="text-align:center">绘制地图选项</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">map_painting_outcome</td>
+<td style="text-align:center">绘制地图结果</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_road_building_chain</td>
+<td style="text-align:center">修路事件链</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_road_building_events</td>
+<td style="text-align:center">修路事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_domesday</td>
+<td style="text-align:center">末日审判事件（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_lifestyle_domesday_end</td>
+<td style="text-align:center">默认审判结束事件（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_duty_special_2000_mediation_stage_1</td>
+<td style="text-align:center">调解事件阶段1（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_duty_special_2000_mediation_stage_2</td>
+<td style="text-align:center">调解事件阶段2（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">stewardship_duty_special_2000_mediation_background_events</td>
+<td style="text-align:center">调解背景事件（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">sell_titles_side_effect_events</td>
+<td style="text-align:center">买卖头衔副作用事件</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-主教（relations/bishop_on_actions）</td>
+<td style="text-align:center">bishop_ongoing</td>
+<td style="text-align:center">有主教时随机触发</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-父母（relations/parent_on_actions）</td>
+<td style="text-align:center">parent_ongoing</td>
+<td style="text-align:center">有父母时随机触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">parent_meddling_outcome</td>
+<td style="text-align:center">父母干涉的结果</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-关系（relations/relation_on_actions）</td>
+<td style="text-align:center">relation_upgrade_quarterly_pulse</td>
+<td style="text-align:center">关系升级事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_quarterly_pulse</td>
+<td style="text-align:center">恋人事件（一季度一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_ongoing</td>
+<td style="text-align:center">恋人事件（一年一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_ongoing_fallback</td>
+<td style="text-align:center">恋人事件的返回</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_ongoing_distance</td>
+<td style="text-align:center">异地恋事件（一年一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_ongoing_distance_fallback</td>
+<td style="text-align:center">异地恋事件返回</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">lover_status_changes</td>
+<td style="text-align:center">恋爱状态改变</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_set_relation_lover</td>
+<td style="text-align:center">有恋人时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_remove_relation_lover</td>
+<td style="text-align:center">失去恋人时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">friendship_quarterly_pulse</td>
+<td style="text-align:center">朋友事件（一季度一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">friendship_status_changes</td>
+<td style="text-align:center">朋友状态改变</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">friendship_ongoing</td>
+<td style="text-align:center">朋友事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_set_relation_friend</td>
+<td style="text-align:center">得到朋友</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_remove_relation_friend</td>
+<td style="text-align:center">失去朋友（只和关系破裂有关，不会因为朋友凉了而触发）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_death_relation_friend</td>
+<td style="text-align:center">朋友去世</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">rival_quarterly_pulse</td>
+<td style="text-align:center">仇敌事件（一季度一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">rival_relation_changes</td>
+<td style="text-align:center">仇敌改变事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">rivalry_ongoing</td>
+<td style="text-align:center">仇敌事件（一年一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">rivalry_ongoing_fallback</td>
+<td style="text-align:center">仇敌事件返回</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_set_relation_rival</td>
+<td style="text-align:center">得到仇敌</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_remove_relation_rival</td>
+<td style="text-align:center">失去仇敌</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">mentor_student_quarterly_pulse</td>
+<td style="text-align:center">师生事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">mentor_student_relation_changes</td>
+<td style="text-align:center">师生关系改变</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_remove_relation_guardian</td>
+<td style="text-align:center">解除监护人时对被监护人触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_death_relation_guardian</td>
+<td style="text-align:center">有监护人的被监护人死亡时，对被监护人触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_remove_relation_ward</td>
+<td style="text-align:center">解除监护人时对监护人触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_death_relation_ward</td>
+<td style="text-align:center">有被监护人的监护人死亡时，对监护人触发</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-兄弟（relations/sibling_on_actions）</td>
+<td style="text-align:center">sibling_quarterly_pulse</td>
+<td style="text-align:center">兄弟事件（一季度一次）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">sibling_statuses</td>
+<td style="text-align:center">兄弟状态</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">ongoing_sibling</td>
+<td style="text-align:center">兄弟事件</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-配偶（relations/spouse_on_actions）</td>
+<td style="text-align:center">spouse_ongoing</td>
+<td style="text-align:center">配偶事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">spouse_councillor_default_on_action</td>
+<td style="text-align:center">配偶内阁事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">court_politics_setup</td>
+<td style="text-align:center">接下来的几个应该都是指配偶和内阁其他人的互动事件，不太确定，因此不写了。</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">court_politics_task_on_action</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">chivalry_setup</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">chivalry_task_on_action</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">court_intrigue_setup</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">court_intrigue_task_on_action</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">manage_domain_setup</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">manage_domain_task_on_action</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">patronage_setup</td>
+<td style="text-align:center">配偶赞助开始</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">patronage_task_on_action</td>
+<td style="text-align:center">配偶赞助任务</td>
+</tr>
+<tr>
+<td style="text-align:center">关系-封臣（relations/vassal_on_actions）</td>
+<td style="text-align:center">on_vassal_become_powerful</td>
+<td style="text-align:center">封臣变强力时触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">vassal_ongoing</td>
+<td style="text-align:center">有封臣时触发</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-绑架（schemes/abduct_on_actions）</td>
+<td style="text-align:center">abduct_setup</td>
+<td style="text-align:center">绑架开始</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">standard_abduct_method_setup</td>
+<td style="text-align:center">绑架方式（？没绑架过，不清楚流程）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">abduct_succeeded</td>
+<td style="text-align:center">绑架成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">abduct_failed</td>
+<td style="text-align:center">绑架失败</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">abduct_ongoing</td>
+<td style="text-align:center">绑架进行中</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-拉拢（schemes/befriend_on_actions）</td>
+<td style="text-align:center">befriend_ongoing</td>
+<td style="text-align:center">交友进行中</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_dislike_ongoing</td>
+<td style="text-align:center">和不喜欢的人交友</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_rival_ongoing</td>
+<td style="text-align:center">和仇敌交友</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_critical_success</td>
+<td style="text-align:center">交友成功关键点（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_success</td>
+<td style="text-align:center">交友成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_failure</td>
+<td style="text-align:center">交友失败</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">befriend_critical_failure</td>
+<td style="text-align:center">交友失败关键点（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-宣称权位（schemes/claim_throne_on_actions）</td>
+<td style="text-align:center">claim_throne_setup</td>
+<td style="text-align:center">宣称开始</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">standard_claim_throne_method_setup</td>
+<td style="text-align:center">宣称方法</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">claim_throne_succeeded</td>
+<td style="text-align:center">宣称成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">claim_throne_failed</td>
+<td style="text-align:center">宣称失败</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">claim_throne_ongoing</td>
+<td style="text-align:center">宣称进行中</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-廷臣（schemes/court_on_actions）</td>
+<td style="text-align:center">court_ongoing</td>
+<td style="text-align:center">廷臣事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">court_outcome</td>
+<td style="text-align:center">廷臣事件结果</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-私奔（schemes/elope_on_actions）</td>
+<td style="text-align:center">elope_ongoing</td>
+<td style="text-align:center">私奔进行时</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-牵制（schemes/fabricate_hook_on_actions）</td>
+<td style="text-align:center">abricate_hook_method_success_outcome</td>
+<td style="text-align:center">伪造牵制成功结果</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">fabricate_hook_ongoing</td>
+<td style="text-align:center">伪造牵制进行中</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-谋杀（schemes/murder_on_actions）</td>
+<td style="text-align:center">murder_method_selection</td>
+<td style="text-align:center">（dbq这部分我懒得写了…）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">infant_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">child_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">incapable_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">dungeon_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">house_arrest_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">standard_murder_method_selection</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_setup</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_save_roll</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_save_response</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_succeeded</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_failed</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murder_ongoing</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-勾引（schemes/seduce_on_actions）</td>
+<td style="text-align:center">seduce_ongoing_milestone_1</td>
+<td style="text-align:center">勾引阶段1</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">seduce_ongoing_milestone_2</td>
+<td style="text-align:center">勾引阶段2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">seduce_success</td>
+<td style="text-align:center">勾引成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">seduce_generic_success</td>
+<td style="text-align:center">勾引成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">seduce_failure</td>
+<td style="text-align:center">勾引失败</td>
+</tr>
+<tr>
+<td style="text-align:center">计谋-拉拢（schemes/sway_on_actions）</td>
+<td style="text-align:center">sway_success</td>
+<td style="text-align:center">拉拢成功</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">sway_failure</td>
+<td style="text-align:center">拉拢失败</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">sway_ongoing</td>
+<td style="text-align:center">拉拢进行时</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-猫（story_cycles/story_cycle_cat_on_actions）</td>
+<td style="text-align:center">ongoing_cat_events</td>
+<td style="text-align:center">有猫时触发的事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">story_cycle_cat_pet_decision_on_actions</td>
+<td style="text-align:center">决议养猫</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-狗（story_cycles/story_cycle_dog_on_actions）</td>
+<td style="text-align:center">ongoing_dog_events</td>
+<td style="text-align:center">有狗时触发事件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">story_cycle_dog_pet_decision_on_actions</td>
+<td style="text-align:center">决议养狗</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-打猎神秘动物（story_cycle_hunt_mystical_animal_on_actions）</td>
+<td style="text-align:center">ongoing_hunt_mystical_animal_events</td>
+<td style="text-align:center">打猎时的神秘动物</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-谋杀系列（story_cycles/story_cycle_murders_at_court_on_actions）</td>
+<td style="text-align:center">murders_at_court_events</td>
+<td style="text-align:center">谋杀系列事件（就是那个很奇怪可怕的发现尸体等等一系列事件）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">murders_at_court_confrontation</td>
+<td style="text-align:center">最终结果</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-宴会？（story_cycles/story_cycle_party_baron_on_actions）</td>
+<td style="text-align:center">party_baron_events</td>
+<td style="text-align:center">看本地化文件是宴会上的事情，不知道这个要怎么解释</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-农民（story_cycles/story_cycle_peasant_affair_on_actions）</td>
+<td style="text-align:center">peasant_affair_shows_up_at_court</td>
+<td style="text-align:center">农民来时触发（？不确定）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">peasant_affair_looking_for_peasant</td>
+<td style="text-align:center">寻找农民</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">peasant_affair_peasant_at_court</td>
+<td style="text-align:center">农民来找你时触发（比如想让你认个儿子）</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-重建罗马（story_cycles/story_cycle_roman_restoration_on_actions）</td>
+<td style="text-align:center">on_action_roman_restoration_pulse</td>
+<td style="text-align:center">重建罗马触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">on_action_orthodox_pentarchy_pulse</td>
+<td style="text-align:center">拜占庭恢复五大牧首区</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-受尊敬的领主（story_cycles/story_cycle_statecraft_lifestyle_respected_liege_on_actions）</td>
+<td style="text-align:center">ongoing_respected_liege_events</td>
+<td style="text-align:center">受尊敬的领主（这块代码还没写，是空的）</td>
+</tr>
+<tr>
+<td style="text-align:center">周期故事-战马（story_cycles/story_cycle_warhorse_on_actions）</td>
+<td style="text-align:center">ongoing_warhorse_events</td>
+<td style="text-align:center">有战马时随机触发</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">breed_warhorse</td>
+<td style="text-align:center">战马繁殖事件</td>
+</tr>
+</tbody>
+</table>
+</div>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/12/24/ck3mod%E5%88%B6%E4%BD%9C%E7%AC%94%E8%AE%B0-7/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ck3/" rel="tag">ck3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F%E7%9B%B8%E5%85%B3/" rel="tag">游戏相关</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/12/25/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Strategic%20Information%20Revelation%20in%20Crowdsourcing%20Systems%20Without%20Verification/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/12/21/Leetcode%E8%AE%B0%E5%BD%95-1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Leetcode记录-1</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

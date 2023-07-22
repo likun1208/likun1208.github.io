@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="三月樱，六月雪，也望尘莫及" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Let&#39;s Build A Simple Interpreter笔记[2] |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Let-s-Build-A-Simple-Interpreter笔记-2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Let&#39;s Build A Simple Interpreter笔记[2]
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/" class="article-date">
+  <time datetime="2020-01-31T02:54:53.000Z" itemprop="datePublished">2020-01-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Let-s-Build-A-Simple-Interpreter/">Let's Build A Simple Interpreter</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">11 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="课程文档"><a href="#课程文档" class="headerlink" title="课程文档"></a>课程文档</h2><p><a href="https://ruslanspivak.com/lsbasi-part2/" target="_blank" rel="noopener">原文</a></p>
+<p><a href="https://feng-qi.github.io/2018/01/25/lets-build-a-simple-interpreter-part-02/" target="_blank" rel="noopener">翻译</a></p>
+<p><a href="https://www.oschina.net/translate/build-a-simple-interpreter-part-2" target="_blank" rel="noopener">新的翻译</a></p>
+<a id="more"></a>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Token types</span></span><br><span class="line"><span class="comment"># EOF (end-of-file) token is used to indicate that</span></span><br><span class="line"><span class="comment"># there is no more input left for lexical analysis</span></span><br><span class="line">INTEGER, PLUS, MINUS, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'EOF'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Token</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, type, value)</span>:</span></span><br><span class="line">        <span class="comment"># token type: 'INTEGER', 'PLUS', 'MINUS', or 'EOF'</span></span><br><span class="line">        self.type = type</span><br><span class="line">        <span class="comment"># token value: non-negative integer value, '+', '-', or None</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""String representation of class instance</span></span><br><span class="line"><span class="string">        Examples:</span></span><br><span class="line"><span class="string">            Token(INTEGER, 3)</span></span><br><span class="line"><span class="string">            Token(PLUS, '+')</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f'Token(<span class="subst">&#123;self.type&#125;</span>, <span class="subst">&#123;self.value&#125;</span>)'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__str__()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># client string input, e.g. "3 + 5", "12 - 5", etc</span></span><br><span class="line">        self.text = text</span><br><span class="line">        <span class="comment"># self.pos is an index into self.text</span></span><br><span class="line">        self.pos = <span class="number">0</span></span><br><span class="line">        <span class="comment"># current token instance</span></span><br><span class="line">        self.current_token = <span class="literal">None</span></span><br><span class="line">        self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Error parsing input'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Advance the 'pos' pointer and set the 'current_char' variable."""</span></span><br><span class="line">        self.pos += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.pos &gt;= len(self.text):</span><br><span class="line">            self.current_char = <span class="literal">None</span>  <span class="comment"># Indicates end of input</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.current_char = self.text[self.pos]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isspace():</span><br><span class="line">            self.advance()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Return a (multidigit) integer consumed from the input."""</span></span><br><span class="line">        result = <span class="string">''</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.current_char.isdigit():</span><br><span class="line">            result += self.current_char</span><br><span class="line">            self.advance()</span><br><span class="line">        <span class="keyword">return</span> int(result)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Lexical analyzer (also known as scanner or tokenizer)</span></span><br><span class="line"><span class="string">        This method is responsible for breaking a sentence</span></span><br><span class="line"><span class="string">        apart into tokens.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> self.current_char.isspace():</span><br><span class="line">                self.skip_whitespace()</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> self.current_char.isdigit():</span><br><span class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'+'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(PLUS, <span class="string">'+'</span>)</span><br><span class="line">            <span class="keyword">if</span> self.current_char == <span class="string">'-'</span>:</span><br><span class="line">                self.advance()</span><br><span class="line">                <span class="keyword">return</span> Token(MINUS, <span class="string">'-'</span>)</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="keyword">return</span> Token(EOF, <span class="literal">None</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></span><br><span class="line">        <span class="comment"># compare the current token type with the passed token</span></span><br><span class="line">        <span class="comment"># type and if they match then "eat" the current token</span></span><br><span class="line">        <span class="comment"># and assign the next token to the self.current_token,</span></span><br><span class="line">        <span class="comment"># otherwise raise an exception.</span></span><br><span class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</span><br><span class="line">            self.current_token = self.get_next_token()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""Parser / Interpreter</span></span><br><span class="line"><span class="string">        expr -&gt; INTEGER PLUS INTEGER</span></span><br><span class="line"><span class="string">        expr -&gt; INTEGER MINUS INTEGER</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># set current token to the first token from the input</span></span><br><span class="line">        self.current_token = self.get_next_token()</span><br><span class="line">        <span class="comment"># we expect the current token to be an integer</span></span><br><span class="line">        left = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># we expect the current token to be either a '+' or '-'</span></span><br><span class="line">        op = self.current_token</span><br><span class="line">        <span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">            self.eat(PLUS)</span><br><span class="line">        <span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">            self.eat(MINUS)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="comment"># we expect the current token to be an integer</span></span><br><span class="line">        right = self.current_token</span><br><span class="line">        self.eat(INTEGER)</span><br><span class="line">        <span class="comment"># after the above call the self.current_token is set to</span></span><br><span class="line">        <span class="comment"># EOF token</span></span><br><span class="line">        <span class="comment"># at this point either the INTEGER PLUS INTEGER or</span></span><br><span class="line">        <span class="comment"># the INTEGER MINUS INTEGER sequence of tokens</span></span><br><span class="line">        <span class="comment"># has been successfully found and the method can just</span></span><br><span class="line">        <span class="comment"># return the result of adding or subtracting two integers,</span></span><br><span class="line">        <span class="comment"># thus effectively interpreting client input</span></span><br><span class="line">        <span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">            result = left.value + right.value</span><br><span class="line">        <span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">            result = left.value - right.value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.error()</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># To run under Python3 replace 'raw_input' call with 'input'</span></span><br><span class="line">            text = input(<span class="string">'calc&gt; '</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        interpreter = Interpreter(text)</span><br><span class="line">        result = interpreter.expr()</span><br><span class="line">        print(result)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>这个处理方式和我想的不太一样…</p>
+<p>整体逻辑是：</p>
+<ol>
+<li><code>get_next_token</code>是词法分析器，输入一个字符串，逐一输出词法单元，比如输入<code>32 + 5</code>，输出的流应该是<code>Token(INTEGER, 32) -&gt; Token(PLUS, +) -&gt; Token(INTEGER, 5)</code>。<br>这个词法分析器用到的辅助函数为<code>advance()</code>，<code>skip_whitespace()</code>和<code>interger()</code>，其中<code>advance()</code>让索引后移一位，<code>skip_whitespace()</code>跳过空格，<code>interger()</code>把连续的数字变成一个完整的数字。注意这里如果是多位数中间有空格，多位数会被拆成两个数字，比如<code>32 3</code>会被判断为<code>32</code>和<code>3</code>，而不是<code>323</code>。<br>词法分析过程中会遇到以下几种情况：(1)空格，要跳过空格，循环继续运行，分析下一个字符；(2)结束符，直接返回<code>EOF</code>对应的<code>token</code>；(3)数字，循环终止，连后面的几位数字字符一起变成一个数字，返回对应的<code>token</code>；(4)是<code>+</code>或者<code>-</code>，索引移到下一位，循环终止，返回运算符对应的<code>token</code>。<br>分析几个辅助函数：<ol>
+<li><code>advance()</code>，索引<code>pos</code>后移一位，当前字符<code>current.char</code>的值变为新索引对应的字符。</li>
+<li><code>skip_whitespace()</code>，循环调用<code>advance()</code>直到当前字符不是空格。</li>
+<li><code>integer()</code>，先声明一个初始为空字符串的<code>result</code>，然后循环把<code>current.char</code>加到<code>result</code>这个字符串里，接着<code>advance()</code>移动到下一位，直到当前字符不是数字。</li>
+</ol>
+</li>
+<li><code>expr()</code>是用来计算表达式的，判断词法分析后的词法单元是否符合规则，然后根据规则来计算结果。辅助函数为<code>eat()</code>，用来判断当前词法单元是否符合规则。</li>
+</ol>
+<p>以输入<code>32 + 5</code>为例分析整个流程：</p>
+<ol>
+<li><p>首先运行的是<code>main()</code>，获取输入字符串，存到<code>text</code>中（<code>line116</code>)，并用<code>text</code>初始化<code>interpreter</code>这个解释器类(<code>line121</code>)，此时，<code>interpreter.text</code>就是我们输入的字符串，<code>interpreter.pos</code>是初始值<code>0</code>，<code>self.current_token</code>是初始值<code>None</code>，<code>self.current_char</code>是<code>interpreter.text</code>这个字符串数组下标为<code>pos=0</code>对应的字符，也就是<code>3</code>。</p>
+</li>
+<li><p>接下来<code>line122</code>调用了表达式计算器<code>expr()</code>，而<code>expr()</code>的第一行调用了词法分析器<code>get_next_token()</code>，因为字符3是数字，所以要去调用<code>integer()</code>函数，并返回一个类型为<code>INTEGER</code>、值为函数结果的<code>TOKEN</code>。<br>在执行完<code>integer()</code>并返回之前，<code>pos=0</code>，<code>current_token=None</code>，<code>current_char=3</code>。</p>
+</li>
+<li><p>进入<code>integer()</code>函数，最初<code>result</code>是空字符串，<code>current_char=3</code>符合循环条件，进入<code>while</code>循环，<code>result</code>变成<code>3</code>（是字符串格式）,调用<code>advance()</code>，接下来先让索引后移，即<code>pos=1</code>，此时还没移到最后一位，更新<code>current_char=text[pos]=text[1]=2</code>。此时还符合循环条件，<code>result</code>把新的<code>current_char</code>加上，变成<code>32</code>（字符串格式），再次<code>advance()</code>，调用完后，<code>pos=2</code>，依旧没移到最后一位，<code>current_char=text[2]=空格</code>。这时不满足循环条件了，循环结束，返回字符串<code>result</code>对应的数字也就是32。</p>
+</li>
+<li><p>然后回到<code>get_next_token()</code>，它已经有返回值了，返回给之前的<code>expr()</code>中的<code>self.current_token</code>，这是我们得到的第一个词法单元，是我们要计算的表达式的左值，将它存到<code>left</code>中，之后可以使用<code>left.value</code>来访问它的值，这之后就调用<code>eat()</code>看该值是不是一个<code>INTEGER</code>，如果是，就再次调用<code>get_next_token()</code>继续分析下一个单元，反之则报错。很显然此时<code>current_token</code>是<code>(INTEGER,32)</code>，符合要求，进入<code>get_next_token()</code>。</p>
+</li>
+<li><p><code>get_next_token()</code>判断此时<code>current_char</code>是空格，因此执行<code>skip_whitespace()</code>。</p>
+</li>
+<li><p>在<code>skip_whitespace()</code>中，<code>current_char</code>满足循环条件，进入循环体，调用<code>advance()</code>，<code>pos=3</code>，<code>current_char=text[3]=+</code>，循环结束，回到<code>get_next_token()</code>，执行<code>continue</code>，也就是继续进行词法判断。</p>
+</li>
+<li><p>由于<code>current_char</code>是<code>+</code>，在对应的<code>if</code>分支中，执行<code>advance()</code>，<code>pos=4</code>,<code>current_char=text[4]=空格</code>，然后把<code>+</code>对应的<code>token</code>返回到<code>expr()</code>中。</p>
+</li>
+<li><p><code>expr()</code>把新得到的<code>token</code>存入<code>op</code>，并通过<code>eat()</code>判断该<code>token</code>是否是一个加号或者减号。此时是加号，又开始了<code>get_next_token()</code>。</p>
+</li>
+<li><p>这次<code>get_next_token()</code>首先进入空格分支，跳过空格后，<code>pos=5</code>，<code>current_char=5</code>，进入数字分支，执行<code>integer()</code>。<code>integer()</code>中和第三步一样，最终返回数字5，再回到<code>get_next_token()</code>，返回5对应的<code>token</code>给<code>expr()</code>，存在<code>right</code>中。</p>
+</li>
+<li><p>此时，我们已经完成了词法分析，得到了<code>(INTEGER, 32) -&gt; (PLUS, &#39;+&#39;) -&gt; (INTEGER, 5)</code>的词法结构。由于<code>OP</code>对应的类型是<code>PLUS</code>，对<code>left.value</code>和<code>right.value</code>执行加法，存入<code>result</code>并返回。</p>
+</li>
+<li><p>再回到<code>line122</code>，<code>result</code>已经得到了结果，<code>line123</code>输出该结果，程序运行结束。</p>
+</li>
+</ol>
+<p>也就是说，在计算表达式结果的函数中调用词法分析器，判断词法分析的结果是否符合规则，如果符合规则，就按规则继续运行。在计算器函数中，只会出现<code>token</code>类型的变量，而词法分析函数会负责把词法单元打包成<code>token</code>交给计算器。</p>
+<blockquote>
+<p>在解释一个表达式之前，你需要知道它是哪种组合，比如相加或相减。这是 <code>expr</code> 方法本质上做的事： 它从 <code>get_next_token</code> 方法得到的 token 流中找到结构，然后解释它识别出的组合，产 生算术表达式的结果。<br>从 token 流中查找结构，或者说从 token 流中识别组合，的过程叫做 <strong>parsing</strong>. 解释器 或编译器中执行这部分任务的叫 <strong>parser</strong>.<br>现在你知道解释器的 <strong>parsing</strong> 和 <strong>解释</strong> 都在 <code>expr</code> 方法中了── <code>expr</code> 方法首先尝 试从 token 流中识别（即parse） INTEGER -&gt; PLUS -&gt; INTEGER 或 the INTEGER -&gt; MINUS -&gt; INTEGER 组合，在成功识别到（即parsed）其中一个组合时，该方法就解释执行 它并返回给调用者两个整数相加或相减的结果。</p>
+</blockquote>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>扩展计算器以处理两个整数相乘</p>
+</li>
+<li><p>扩展计算器以处理两个整数相除</p>
+<p>前两个都很简单，仿照加法减法的代码复制改写就行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运算符声明</span></span><br><span class="line">INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = <span class="string">'INTEGER'</span>, <span class="string">'PLUS'</span>, <span class="string">'MINUS'</span>, <span class="string">'MULTIPLY'</span>, <span class="string">'DIVIDE'</span>, <span class="string">'EOF'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get_next_token()</span></span><br><span class="line"><span class="keyword">if</span> self.current_char == <span class="string">'*'</span>:</span><br><span class="line">	self.advance()</span><br><span class="line">	<span class="keyword">return</span> Token(MULTIPLY, <span class="string">'*'</span>)</span><br><span class="line"><span class="keyword">if</span> self.current_char == <span class="string">'/'</span>:</span><br><span class="line">	self.advance()</span><br><span class="line">	<span class="keyword">return</span> Token(DIVIDE, <span class="string">'/'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># expr()</span></span><br><span class="line"><span class="comment"># 修改读取运算符</span></span><br><span class="line">op = self.current_token</span><br><span class="line"><span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">	self.eat(PLUS)</span><br><span class="line"><span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">	self.eat(MINUS)</span><br><span class="line"><span class="keyword">elif</span> op.type == MULTIPLY:</span><br><span class="line">	self.eat(MULTIPLY)</span><br><span class="line"><span class="keyword">elif</span> op.type == DIVIDE:</span><br><span class="line">	self.eat(DIVIDE)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	self.error()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改计算结果那里</span></span><br><span class="line"><span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">	result = left.value + right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">	result = left.value - right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == MULTIPLY:</span><br><span class="line">	result = left.value * right.value</span><br><span class="line"><span class="keyword">elif</span> op.type == DIVIDE:</span><br><span class="line">	result = left.value / right.value</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	self.error()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改代码以使它可以解释包含任意个数字的加减操作，如“9 - 5 + 3 + 11”</p>
+<p>这个也不难。此时的词法结构是<code>INTEGER -&gt; 循环[OP -&gt;INTEGER]</code>，在<code>expr()</code>里首先读取并<code>eat()</code>第一个词法单元，<code>result</code>先等于这个单元的值，接下来用<code>while</code>进行两个词法单元为一组的循环，直到读取到<code>EOF</code>，每个循环里，<code>result</code>与新的<code>INTEGER</code>进行加减运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改expr()</span></span><br><span class="line">result = left.value</span><br><span class="line"><span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	op = self.current_token</span><br><span class="line">	<span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">		self.eat(PLUS)</span><br><span class="line">	<span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">		self.eat(MINUS)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		self.error()</span><br><span class="line">	right = self.current_token</span><br><span class="line">	self.eat(INTEGER)</span><br><span class="line">	<span class="keyword">if</span> op.type == PLUS:</span><br><span class="line">		result += right.value</span><br><span class="line">	<span class="keyword">elif</span> op.type == MINUS:</span><br><span class="line">		result -= right.value</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		self.error()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检查理解"><a href="#检查理解" class="headerlink" title="检查理解"></a>检查理解</h2><ol>
+<li><p>什么是 lexeme？<br>lexeme 是组成 token 的一个字符序列。（这个词翻译过来是<strong>词位</strong>或<strong>词素</strong>）<br><code>token</code>和<code>lexeme</code>的关系类似于类和实例（或者对象）之间的关系。举例来说，变量<code>a</code>和<code>b</code>，它们属于同一种<code>token</code>：<code>identifier</code>，而<code>a</code>的<code>lexeme</code>是<code>a</code>，<code>b</code>的<code>lexeme</code>是<code>b</code>。每个关键字是一种<code>token</code>。<code>token</code>可以附带一个值属性，例如变量<code>a</code>，调用<code>gettoken()</code>时，会返回一个<code>identifier</code>类型的<code>token</code>，其值属性是<code>a</code>。</p>
+</li>
+<li><p>在 token 流中找到结构的过程叫什么？或者这么问，在 token 流中识别出特定组合的过程叫什么？<br>parsing（翻译是语法分析或句法分析）</p>
+</li>
+<li><p>解释器（编译器）做 parsing 工作的部分叫什么？<br>parser（也就是语法分析器）</p>
+</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/01/31/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/01/31/%E5%90%84%E7%A7%8D%E5%B9%B3%E5%8F%B0%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84error%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            各种平台遇到过的error处理方式
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/01/30/Let-s-Build-A-Simple-Interpreter%E7%AC%94%E8%AE%B0-1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Let&#39;s Build A Simple Interpreter笔记[1]</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

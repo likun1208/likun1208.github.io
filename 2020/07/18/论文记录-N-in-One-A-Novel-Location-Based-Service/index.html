@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="针对LBS中的POI问题的研究" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-N-in-One: A Novel Location-Based-Service |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-N-in-One-A-Novel-Location-Based-Service"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-N-in-One: A Novel Location-Based-Service
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-N-in-One-A-Novel-Location-Based-Service/" class="article-date">
+  <time datetime="2020-07-18T07:51:56.000Z" itemprop="datePublished">2020-07-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="新的LBS系统"><a href="#新的LBS系统" class="headerlink" title="新的LBS系统"></a>新的LBS系统</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ol>
+<li>现有LBS基于单一POI，而现实里用户需要多POI的LBS</li>
+<li>本文将单一POI的LBS扩展为使用单个查询请求多个POI的LBS</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
+<li>场景：用户希望同时查询某地点附近的多个兴趣点（例如饭店和KTV都需要）</li>
+<li>和单兴趣点推荐的差别：要综合考虑多个兴趣点的评价和距离以及用户需求，例如吃完饭去KTV这种场景就需要推荐的饭店和KTV近一些</li>
+<li>本文实现的功能：<ol>
+<li>Ranking mode（排序模式）：根据每个兴趣点的评价和兴趣点之间的距离，提供一个按评分排序的列表中的前K个兴趣点组合</li>
+<li>Service area mode（服务区模式）：找出一个包含了最多兴趣点的矩形区域</li>
+</ol>
+</li>
+<li>挑战性：<ol>
+<li>受限于兴趣点之间的距离，实现”N-in-One”与单纯找N个相互独立的兴趣点并不同；</li>
+<li>服务区模式可能会有木桶效应问题：返回的聚类结果可能因为有一个或多个热门兴趣点被排除。</li>
+</ol>
+</li>
+<li>本文提出：<ol>
+<li>排序模式：基于平面扫描算法，垂直线从右往左扫描兴趣点区域，遇到兴趣点时回溯和已经记录的兴趣点匹配，以查找最优K聚类；为实现回溯过程中的POI匹配，引入“可查看网络”；</li>
+<li>服务区模式：引入“瓶颈值”来描述 POI 的重复使用数，使用计算几何来识别给定大小的矩形，该矩形可以覆盖尽可能多的最佳Q群集，同时减少木桶效应。</li>
+</ol>
+</li>
+<li>本文组织结构：<ol>
+<li>第二部分、第三部分分别介绍排序模式和服务区模式</li>
+<li>第四部分仿真实验</li>
+<li>第五部分相关研究</li>
+<li>第六部分总结</li>
+</ol>
+</li>
+</ol>
+<h2 id="“N-IN-ONE”-LBS-IN-THE-RANKING-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-RANKING-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE RANKING MODE"></a>“N-IN-ONE” LBS IN THE RANKING MODE</h2><h3 id="Metric-to-Evaluate-a-POI-Cluster"><a href="#Metric-to-Evaluate-a-POI-Cluster" class="headerlink" title="Metric to Evaluate a POI Cluster"></a>Metric to Evaluate a POI Cluster</h3><p>POI聚类$\Pi=\{p_1,…,p_N\}$，其中$p_j$是第$j$个兴趣点位置</p>
+<p><strong>定义1</strong>  POI聚类的直径：覆盖该聚类所有兴趣点的最小圆直径</p>
+<p><strong>定义2</strong>  POI聚类的中心：覆盖该聚类所有兴趣点的最小圆圆心</p>
+<p>最小圆问题：直径取决于聚类中距离最远的两点之间的距离上限</p>
+<p><strong>评估函数</strong>：</p>
+<script type="math/tex; mode=display">
+R(\Pi)=\sum_{j=1}^{N}\alpha_je_j-\beta D(\Pi)-\gamma d(\Pi,c)</script><p>其中，$e_j$是对该聚类内第$j$个兴趣点的评估值，$\alpha_j$是对应的权重；$D(\Pi)$是聚类的直径，体现了聚类的离散程度，$\beta$是对应的权重；$d(\Pi,c)$是当前位置$c$到聚类中心的距离，$\gamma$是对应权重。所有权重由用户自己决定。</p>
+<h3 id="Overview-of-Our-Algorithm-for-the-Ranking-Mode"><a href="#Overview-of-Our-Algorithm-for-the-Ranking-Mode" class="headerlink" title="Overview of Our Algorithm for the Ranking Mode"></a>Overview of Our Algorithm for the Ranking Mode</h3><p>用户兴趣区域内有$n$个POI，集合表示为$\Omega$，$||\Omega||=n$</p>
+<p><strong>算法流程</strong>：</p>
+<ol>
+<li>所有POI根据x坐标升序排列（即标号大的POI出现在右边）</li>
+<li>垂直线从右向左扫描兴趣区域</li>
+<li>当垂直线扫到了某个POI，算法会检查之前找到的POI聚类，并将该POI加到之前的聚类中形成新聚类，聚类中所有元素的POI类型在任何时刻都不同</li>
+<li>基于新聚类，更新最优K结果</li>
+<li>当兴趣区域内的POI都被扫描过时，上述过程结束，最终的最优K结果被推送给用户</li>
+</ol>
+<p><strong>关键问题</strong>：扫描到一个POI时，如何从之前的POI集合中高效识别那些需要被回溯的</p>
+<p><strong>解决方法</strong>：引入可视网络的概念，$N=(\Omega,E)$，$\Omega$是兴趣点集合，E是可视线集合</p>
+<p>可视线：由扫描到的POI及其可视点之一决定。当扫描到某个POI $P_i$时，算法根据其可视线回溯L层邻近POI</p>
+<p>L层邻近POI：可视网络中，比$P_i$扫描得早、且从$P_i$出发可通过最多L个可视线到达的POI</p>
+<p>采用递归方法，整体分为两步：</p>
+<ol>
+<li>构建可视网络</li>
+<li>移动和回溯</li>
+</ol>
+<h3 id="Constructing-the-Viewable-Network"><a href="#Constructing-the-Viewable-Network" class="headerlink" title="Constructing the Viewable Network"></a>Constructing the Viewable Network</h3><p>构建可视网络的思路大致是：从右向左扫描点（也就是从最后一个点开始），每扫描到一个点就看它右边是否有没被挡住可以直接相连的点，如果有就连起来，这样一直扫到最左边的点（也就是第一个点），网络就构建好了。</p>
+<p>实际上这个网络扫描的方向并不一定要这样，也可以从左往右。</p>
+<p>时间复杂度的分析和证明省略。</p>
+<p>该算法的具体流程如下：</p>
+<p>​    输入：POI集合根据x坐标升序排列</p>
+<ol>
+<li>扫描线自右向左扫描</li>
+<li>当扫描到$P_n$、$P_{n-1}$、$P_{n-2}$的时候：<ol>
+<li>$P_n$、$P_{n-1}$、$P_{n-2}$加到集合V里，集合V用来存放已经扫描过的点；</li>
+<li>如果$P_i$是集合V的凸包的顶点，就把$P_i$加到集合$C^P(V)$里；</li>
+<li>如果$L_i$是集合V的凸包的边，就把$L_i$加到集合$C^E(V)$里；</li>
+<li>把集合$C^E(V)$加到集合E里，集合E用来存放可视线；</li>
+</ol>
+</li>
+<li>令$i=n-2$</li>
+<li>重复循环一下流程：<ol>
+<li>令$i=i-1$</li>
+<li>遍历集合$C^P(V)$中的点记作$P_k$，如果点$P_i$、$P_k$之间的连线与集合$C^E(V)$的交集是点$P_k$，则把$P_k$加入集合$A_i$，集合$A_i$用来存放点$P_i$的可视点</li>
+<li>遍历集合$A_i$中的所有$P_k$，把点$P_i$、$P_k$之间的连线加入到之前的边集合E中</li>
+<li>把$P_i$加入集合V中</li>
+<li>按之前的规则更新集合$C^P(V)$和$C^E(V)$</li>
+</ol>
+</li>
+<li>$i=0$时结束循环，集合E就是所有可视边</li>
+</ol>
+<h3 id="Searching-Heterogeneous-POIs"><a href="#Searching-Heterogeneous-POIs" class="headerlink" title="Searching Heterogeneous POIs"></a>Searching Heterogeneous POIs</h3><ol>
+<li>总共有$n$个兴趣点</li>
+<li>兴趣点异构，总共有$j$个类型</li>
+<li>有$j$个异构兴趣点的聚类的集合记作$G_j$，而$G_1$是有$n$个聚类的集合，其中每个聚类都包含一个兴趣点</li>
+<li>垂直线从第$n-j+1$个点开始扫描，L层邻接POI集合最多有$j$个POI，这也是构建包含j-1个异构兴趣点的聚类的最小兴趣点编号</li>
+<li>整个算法递归地根据$G_{j-1}$计算$G_j$，具体过程如下：<ol>
+<li>每当扫描到一个兴趣点$P_i$时，遍历$G_{j-1}$中的聚类，如果某个聚类属于$P_i$的L层邻接POI集合，则把该聚类加到一个新集合$S_{i,j-1}$中</li>
+<li>第一步中的聚类遍历结束后，遍历得到的集合$S_{i,j-1}$中的聚类，如果$P_i$和这个聚类异构，则把$P_i$和这个聚类组成的集合加到集合$G_j$中</li>
+<li>继续用同样的思路扫描兴趣点$P_{i-1}$，这样循环直到$P_1$被扫描完</li>
+<li>最终得到$G_j$作为异构兴趣点聚类</li>
+</ol>
+</li>
+</ol>
+<p>复杂度分析省略。</p>
+<h3 id="Searching-the-Best-K-Results-in-the-Ranking-Mode"><a href="#Searching-the-Best-K-Results-in-the-Ranking-Mode" class="headerlink" title="Searching the Best K Results in the Ranking Mode"></a>Searching the Best K Results in the Ranking Mode</h3><p>算法1构建可视网络得到的可视线记作$E$；算法2寻找异构兴趣点聚类的集合记作$G_{N-1}$（它包括所有具有N-1个异构兴趣点的聚类）；兴趣点$P_i$的L层邻接兴趣点记作$L_i$。</p>
+<ol>
+<li>从第$i=n-N+1$个兴趣点开始，从右向左扫描所有兴趣点</li>
+<li>遍历$G_{N-1}$中的聚类，如果聚类属于$L_i$，则把聚类加到一个新集合$S_{i,N-1}$中</li>
+<li>遍历新集合$S_{i,N-1}$中的聚类，如果$P_i$和聚类异构，则把$P_i$和这个聚类组成的集合插入到列表B中，插入顺序按聚类的评价降序</li>
+<li>如果列表B中的元素个数大于K，则删去最后一个元素</li>
+<li>继续扫描第$i-1$个兴趣点，执行相同的操作，直到扫描到$P_1$</li>
+</ol>
+<p>复杂度分析省略。</p>
+<h2 id="“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE"><a href="#“N-IN-ONE”-LBS-IN-THE-SERVICE-AREA-MODE" class="headerlink" title="“N-IN-ONE” LBS IN THE SERVICE AREA MODE"></a>“N-IN-ONE” LBS IN THE SERVICE AREA MODE</h2><p>服务区：给定长宽的矩形区域，该区域内的兴趣点密度最大，且所有兴趣点都属于最优Q聚类</p>
+<p>矩形区域的权重受三个因素影响：</p>
+<ol>
+<li>矩形覆盖的最优兴趣点聚类个数</li>
+<li>矩形内的兴趣点聚类评分</li>
+<li>兴趣点聚类的分布</li>
+</ol>
+<p><strong>定义3.1</strong>  如果一个兴趣点聚类$\Pi$的中心在某区域$\Gamma$内，则称该聚类在该区域内。</p>
+<p>就此将聚类视作其中心点，将该问题转变为<code>maximizing range sum</code>（最大子序列？）</p>
+<p>当一个兴趣点属于多个聚类时，我们称它被多个聚类复用了。这种情况如果该兴趣点不可用，则会导致区域内大量聚类都不可用，这不好。</p>
+<p><strong>定义3.2</strong>  一个矩形区域内聚类集合的瓶颈值$B$是指，该区域内被复用次数最多的兴趣点所对应的复用次数。</p>
+<p><strong>定义3.3</strong> 矩形的权重由该区域内聚类的评分和该区域的瓶颈值决定，计算公式如下：</p>
+<script type="math/tex; mode=display">
+W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$和$\eta$都是常数系数。</p>
+<p>找服务区的算法流程：</p>
+<p>复杂度分析省略。</p>
+<h2 id="PERFORMANCE-EVALUATION"><a href="#PERFORMANCE-EVALUATION" class="headerlink" title="PERFORMANCE EVALUATION"></a>PERFORMANCE EVALUATION</h2><h3 id="Performance-Evaluation-Based-on-Synthetic-Data"><a href="#Performance-Evaluation-Based-on-Synthetic-Data" class="headerlink" title="Performance Evaluation Based on Synthetic Data"></a>Performance Evaluation Based on Synthetic Data</h3><h3 id="Performance-Evaluation-Based-on-Real-World-Data"><a href="#Performance-Evaluation-Based-on-Real-World-Data" class="headerlink" title="Performance Evaluation Based on Real-World Data"></a>Performance Evaluation Based on Real-World Data</h3><p>实验部分不看了，省略。</p>
+<h2 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h2><p>当前LBS领域的热点研究：基于位置信息的推荐系统，尤其是兴趣点推荐</p>
+<ol>
+<li>潜在Dirichlet分配（LDA）</li>
+<li>朴素贝叶斯</li>
+<li>地理概率分析框架，策略性地考虑多个因素</li>
+<li>动态聚类算法识别运动轨迹</li>
+</ol>
+<p>路线推荐同样热门</p>
+<ol>
+<li>分析用户交通路线来得到两地之间最受欢迎的路线</li>
+<li>基于集体知识的路线推荐框架</li>
+<li>候选-生成-验证策略得到K近邻轨迹</li>
+<li>KNN+更多因素的分析</li>
+<li>LIT前缀挖掘算法</li>
+<li>网络优化问题</li>
+<li>轨迹大数据</li>
+</ol>
+<p>本文和上述内容的共同点：给用户返回多个POI</p>
+<p>不同点：本文侧重查询，是LBS的基础服务；上述侧重推荐，是LBS的衍生服务</p>
+<p>本文的创新性：现有LBS的基础服务不涉及多POI查询，本文针对基础服务进行了改进</p>
+<h2 id="CONCLUSION-AND-FUTURE-WORK"><a href="#CONCLUSION-AND-FUTURE-WORK" class="headerlink" title="CONCLUSION AND FUTURE WORK"></a>CONCLUSION AND FUTURE WORK</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2020/07/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-N-in-One-A-Novel-Location-Based-Service/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LBS/" rel="tag">LBS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/POI/" rel="tag">POI</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/24/python-sklearn-keras-lstm%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%97%AE%E9%A2%98/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            python+sklearn+keras+lstm回归预测问题
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/07/blender%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">blender学习记录-2</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>

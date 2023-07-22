@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="共享数据时使用博弈论进行隐私保护" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-Using game theory to thwart multistage privacy intrusions when sharing data |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-Using game theory to thwart multistage privacy intrusions when sharing data"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-Using game theory to thwart multistage privacy intrusions when sharing data
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/" class="article-date">
+  <time datetime="2022-09-23T11:02:32.000Z" itemprop="datePublished">2022-09-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">14 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data"><a href="#Using-game-theory-to-thwart-multistage-privacy-intrusions-when-sharing-data" class="headerlink" title="Using game theory to thwart multistage privacy intrusions when sharing data"></a>Using game theory to thwart multistage privacy intrusions when sharing data</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>问题：针对个人的生物医学数据共享引起的隐私问题，尤其是匿名记录的再识别</p>
+<p>思路：再识别风险评估框架</p>
+<p>常规方法：数据接收者只使用一种资源</p>
+<p>存在问题：攻击者可以访问多种资源来增加攻击成功率</p>
+<p>本文方法：构建完全信息双人Stackelberg博弈模型来表示再识别博弈，提出基于隐私-效用权衡的最优数据共享策略</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>背景：生物医学数据共享有很大好处，但带来隐私问题</p>
+<p>面临的问题：针对匿名生物医学数据的再识别攻击</p>
+<ol>
+<li><p>简化的攻击模型会导致隐私风险被高估或低估；</p>
+</li>
+<li><p>攻击逐渐从过去的单阶段（将去除标识符的数据库与没有去除标识符的数据库通过一些共有属性链接起来）转变为现在的多阶段（每阶段披露目标个体的一部分信息）</p>
+</li>
+</ol>
+<p>本文：通过明确建模和量化数据主体在面对多阶段攻击时的隐私-效用权衡来评估和战略性地减轻风险，弥补了更复杂的攻击模型和数据共享决策之间的差距。</p>
+<p>攻击模型：Gymrek提出的两阶段攻击——针对基因组计划数据库的姓氏推断与进一步的其他数据库链接推断</p>
+<p>现有方法：</p>
+<ol>
+<li><p>从监管和技术两个角度出发</p>
+</li>
+<li><p>关注最坏的情况——影响不明确</p>
+<ol>
+<li><p>不考虑攻击成本——高估隐私风险</p>
+</li>
+<li><p>没有测量参数影响就设置参数——牺牲数据效用</p>
+</li>
+</ol>
+</li>
+<li><p>由此出现了引入博弈论的风险评估</p>
+</li>
+</ol>
+<p>本文：</p>
+<ol>
+<li><p>博弈论模型可以向数据主体揭示最佳的共享策略</p>
+</li>
+<li><p>使用真实世界的数据集或大规模模拟数据集进行反多阶段攻击的实验</p>
+</li>
+<li><p>博弈论模型可以有效地评估和有效地减轻隐私风险</p>
+</li>
+<li><p>模型所推荐的细粒度共享策略可以最大限度地减少数据主体被成功再识别的可能性，同时最大限度地提高数据效用，并保持发布的数据集的有效性和数据共享过程的公平性</p>
+</li>
+</ol>
+<h2 id="Materials-and-Methods"><a href="#Materials-and-Methods" class="headerlink" title="Materials and Methods"></a>Materials and Methods</h2><p>研究场景：数据主体选择在公共库中分享多少主体的基因数据</p>
+<p>研究目标：决定主体的最优共享策略，平衡数据共享带来的经济效益与再识别风险</p>
+<p>再识别风险来源：</p>
+<ol>
+<li><p>有动机和手段试图确定匿名共享数据集中的主体身份的人</p>
+</li>
+<li><p>已经向公众提供的关于主体的其他数据</p>
+</li>
+</ol>
+<p>攻击模型：Gymrek攻击</p>
+<ol>
+<li><p>第一阶段：根据目标基因库和遗传族谱数据库进行姓氏推断</p>
+</li>
+<li><p>第二阶段：将姓氏推断结果和公共数据库进行链接，从而确定数据主体的身份</p>
+</li>
+</ol>
+<p>博弈模型：Stackelberg 博弈 或 leader-follower 博弈</p>
+<ol>
+<li><p>假设数据主体和攻击者对攻击成功的概率有相同的信念</p>
+</li>
+<li><p>数据主体作为leader，选择共享多少数据</p>
+</li>
+<li><p>攻击者作为follower，选择是否进行再识别攻击</p>
+</li>
+<li><p>攻击者不知道被隐藏的信息，只能估计成功的概率，而数据主体则掌握更多信息</p>
+</li>
+</ol>
+<p>主体决策：$s=\langle s_1,…,s_j,…,s_m \rangle \in B^m$ 表示要共享的数据，其中<code>m</code>是记录中的属性数量，如果第<code>j</code>个属性被隐藏，则$s_j=0$，反之如果第<code>j</code>个属性被共享，则$s_j=1$</p>
+<p>攻击者决策：$a\in \{0,1\}$表示是否进行再识别攻击，<code>a=1</code>表示攻击，<code>a=0</code>表示不攻击</p>
+<p>对手攻击方式：两阶段Gymrek攻击，可以有更多个阶段，每阶段推断出一些新的信息</p>
+<p>博弈过程：主体（leader）先决定自己的策略<code>s</code>，攻击者（follower）观察数据并基于此决定是否攻击，即攻击者的策略是主体策略的函数</p>
+<p>引入新的符号和假设：</p>
+<ol>
+<li><p>$b(s)$表示策略<code>s</code>为主体带来的经济效益，公开信息，假设该函数非递减</p>
+</li>
+<li><p>如果一个记录成功被再识别，假设该主体损失<code>L</code>，攻击者获得<code>L</code></p>
+</li>
+</ol>
+<p>攻击成功的概率取决于数据主体采取的策略，数据主体对这个概率以及再识别风险比攻击者更清楚，攻击者只能大致估计。</p>
+<p>首先，假设数据主体和攻击者对每个策略分配的成功率都相同，记作$p(s)$。在已知$p(s)$的情况下，数据主体和攻击者可以最大化各自的期望收益。</p>
+<p>然后，将期望收益视作真实收益，可得完美信息下的Stackbelberg博弈，并研究均衡。</p>
+<p>数据主体的期望收益函数：$v_d(s,a)=b(s)-Lp(s)a$</p>
+<p>攻击者的收益函数：$v_a(s,a)=(Lp(s)-C)a$</p>
+<p>其中，<code>C</code>是攻击者的攻击成本</p>
+<ol>
+<li><p>如果攻击者不攻击则其收益为0</p>
+</li>
+<li><p>可以通过重定义$b(s)$和重识别$p(s)$将该模型推广到其他数据共享的场景中</p>
+</li>
+</ol>
+<p>令$\phi(s)=\{a|(Lp(s)-C)a\geq(Lp(s)-C)(1-a)\}$，函数$\phi(s)$表示攻击者针对主体策略<code>s</code>的最优策略</p>
+<p>均衡解对应的主体优化问题：$max_{s,a\in\phi(s)}b(s)-Lp(s)a$</p>
+<p>主体求解方法：逆向归纳法——先计算攻击者对所有可能策略<code>s</code>的最优对策$\phi(s)$，然后选择自己的最优策略。</p>
+<p>该方法问题：数据主体掌握了完整的数据，因此他们可以计算再识别概率$p(s)$，而攻击者则不能。</p>
+<p>解决方法：攻击者使用再识别概率的估计值，记作$\hat{p}(s)$，并以此计算自己的收益和最优对策函数。数据主体同样可以用估计值来计算攻击者的策略，但他们会随后用真实的再识别风险概率计算自己的最优选择。</p>
+<p>总结一下：攻击者和数据主体都可以用$\hat{p}(s)$来估计计算$\phi(s)$，记作$\hat\phi(s)=\{a|(L\hat{p}(s)-C)a\ge(L\hat{p}(s)-C)(1-a)\}$，在得到攻击者最优策略后，数据主体使用真实概率计算自己的最优策略$max_{s,a\in\hat\phi(s)}b(s)-Lp(s)a$。</p>
+<blockquote>
+<p>说明：利用了Stackelberg博弈中leader只能做一次决策这一特点，使得该方法可以在计算过程中使用不同的再识别风险概率函数。</p>
+</blockquote>
+<p>在两阶段攻击中，给定主体策略<code>s</code>，第一阶段攻击成功概率$p_1(s)$、在一阶段攻击成功基础上的第二阶段攻击成功概率$p_2(s)$、攻击者估计的一阶段成功概率$\hat{p}_1(s)$、攻击者估计的忽略一阶段情况下二阶段成功概率$p’(s)$的计算方式如下：</p>
+<script type="math/tex; mode=display">
+p(s)=p_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))    \\
+\hat{p}(s)=\hat{p}_1(s)p_2(s)a'(s)+p'(s)(1-a'(s))\\
+a'(s)=\left\{
+\begin{aligned}
+1,\hat{p}_1(s)p_2(s) > p'(s)\\
+0, \hat{p}_1(s)p_2(s)\le p'(s)
+\end{aligned}
+\right.</script><p>如果一阶段攻击更好，则$a’(s)$为1，反之则为0. 上面几个参数的具体值取决于攻击模型和攻击中用的数据集。</p>
+<p>由此，如果$a’(s)$为1，优化问题可以表达为：</p>
+<script type="math/tex; mode=display">
+max_{s,a\in\hat{\phi}(s)}b(s)-Lp_1(s)p_2(s)a</script><p>其中，$\hat\phi(s)=\{a|(L\hat{p}_1(s)p_2(s)-C)a\ge(L\hat{p}_1(s)p_2(s)-C)(1-a)\}$</p>
+<p>详细推公式过程在附录，稍后再看。</p>
+<blockquote>
+<p>所有的参数都可以根据用例进行合理的设置。具体来说，它们可以根据特定的数据集、攻击模型或受试者提供的估价进行调整。此外，正如结果所示，广泛的敏感性和稳健性分析（即压力测试）可以帮助验证参数设置对环境或主体知识的不确定性的敏感性和稳健性。</p>
+</blockquote>
+<p>选择进入博弈：在一些情况，数据主体只有两种选择：加入并完全共享信息 或者 退出不共享任何信息。这样的场景可以由前文定义的博弈来刻画，其数据主体的策略被限制为两个选项：完全共享$s=<1,...1>$和完全不共享$s=<0,...0>$。</p>
+<p>遍历求解博弈耗时多，附录中介绍了可以用于加速求解的算法，稍后再看。</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h3><p>分别在真实数据集和仿真数据集上进行实验，后者更大一些</p>
+<p>在基因数据集<code>D</code>中共享数据的<code>n</code>个数据主体的平均收益：$\overline{V}=\sum_{i=1}^{n}V_i$，其中$V_i$表示第<code>i</code>个数据主体的最优收益</p>
+<p>平均数据效用：$\overline{U}=\sum_{i=1}^{n}U_i$</p>
+<p>主体平均隐私：$\overline{P}=\sum_{i=1}^{n}P_i$</p>
+<p>第<code>i</code>个数据主体的数据效用：$U_i=b(s_i^\ast)/B$，即部分共享带来的收益除以完全共享带来的收益</p>
+<p>第<code>i</code>个数据主体的隐私：$P_i=1-p(s_i^\ast)a_i^\ast$，即1减去隐私风险（被成功攻击的概率）</p>
+<p>第<code>i</code>个数据主体的最优收益：$V_i=v_d(s_i^\ast, a_i^\ast)=BU_i-L(1-P_i)=BU_i+LP_i-L$，即数据效用和隐私的线性组合，其中，<code>L</code>是再识别成功带来的损失。</p>
+<blockquote>
+<p>作为有效性的主要衡量标准，这些主体的平均报酬与效用和隐私的衡量标准呈正相关。</p>
+</blockquote>
+<p>实验设置：20个模拟数据属性，4个博弈场景，4个baseline场景，8种数据保护情况</p>
+<p>攻击者目标：在理性权衡攻击收益的基础上，尽可能再识别数据集<code>D</code>中的所有数据。</p>
+<p>8种情况的简要说明：</p>
+<ol>
+<li><p>no protection：无保护，数据集<code>D</code>中的每个主体都共享其数据记录中的所有属性</p>
+</li>
+<li><p>demographics only：数据集<code>D</code>中的每个主体仅共享人口统计学属性</p>
+</li>
+<li><p>random opt-in：数据集<code>D</code>中的每个主体根据实际设置，以一定的概率随机决定共享整个数据记录</p>
+</li>
+<li><p>random masking：数据集<code>D</code>中的每个主体随机决定以固定的概率分享其数据记录中的每个属性</p>
+</li>
+<li><p>opt-in game：主体只能决定选择加入共享整个数据记录或选择退出</p>
+</li>
+<li><p>masking game：主体可以在共享前隐藏一部分数据</p>
+</li>
+<li><p>no-attack masking game：假设主体不选择任何会使对手攻击的策略</p>
+</li>
+<li><p>one-stage masking game：假设攻击只有一阶段，二阶段的那个数据集不可用</p>
+</li>
+</ol>
+<p>评估在每种情况下采用的数据保护/共享策略的效果：有用性和公平性</p>
+<ol>
+<li><p>数据共享方案的有用性是基于共享数据和未受保护数据的分布之间的距离（详见附录S7）。</p>
+</li>
+<li><p>数据共享方案的公平性（例如，有用性方面的公平性或隐私方面的公平性）是基于每个人口群体对应的具体措施的基尼系数（详见附录S8）。</p>
+</li>
+</ol>
+<h3 id="Experiments-based-on-a-large-scale-simulated-population"><a href="#Experiments-based-on-a-large-scale-simulated-population" class="headerlink" title="Experiments based on a large-scale simulated population"></a>Experiments based on a large-scale simulated population</h3><p>这部分是针对大规模仿真数据的实验</p>
+<p>从平均收益来看有以下结论：</p>
+<ol>
+<li><p>受试者的平均收益在没有保护的情况下是最低的，在有掩膜的博弈中是最高的。</p>
+</li>
+<li><p>与选择进入博弈相比，受试者的平均收益在掩膜博弈中得到了很大的改善。说明在数据共享过程中提供某种程度的细化选择的基本优势之一。</p>
+</li>
+<li><p>当攻击者使用较少的数据资源，从而在攻击中保持较少的阶段时，掩膜博弈效果更好。</p>
+</li>
+<li><p>无论是共享所有的数据还是只分享人口统计资料，或者是一个随机的策略，都会给受试者带来负的或可忽略的平均回报。</p>
+</li>
+</ol>
+<p>从效用与隐私的结合看有以下结论：</p>
+<ol>
+<li><p>与其他情况相比，掩膜博弈能同时实现高效用和高隐私</p>
+</li>
+<li><p>受试者在无攻击掩膜博弈中的策略在大量共享数据的情况下保证了完全的隐私保护</p>
+</li>
+<li><p>当攻击只有一个阶段时，还能实现稍高的数据效用水平</p>
+</li>
+<li><p>与掩膜博弈相比，随机选择加入场景和随机掩膜场景给受试者带来了类似的隐私水平，但数据效用的水平却低得多</p>
+</li>
+<li><p>相比之下，与选择加入游戏相比，纯人口统计学方案给受试者带来类似的效用水平，但隐私水平较低</p>
+</li>
+<li><p>与无保护方案的结果相比，纯人口统计学方案总是为主体提供高得多的隐私水平，这突出了Gymrek攻击中姓氏推理阶段的力量</p>
+</li>
+<li><p>在博弈论的保护下，姓氏推断阶段的力量可以减少到最低限度，这一点从掩膜博弈和它的单阶段变化之间的差异可以看出</p>
+</li>
+</ol>
+<p>其他实验现象就不细看了，总结下来都是说掩膜博弈在效用、公平性、有用性这几方面更好。</p>
+<p>还分析了后向归纳和剪枝贪婪在不同场景的计算效率。</p>
+<h3 id="Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets"><a href="#Sensitivity-and-robustness-analyses-on-parameters-and-settings-based-on-simulated-datasets" class="headerlink" title="Sensitivity and robustness analyses on parameters and settings based on simulated datasets"></a>Sensitivity and robustness analyses on parameters and settings based on simulated datasets</h3><p>这部分仍然是大规模仿真数据，分析了在攻击成本、数据集记录数和再识别成功数这三方面的敏感性和稳定性。</p>
+<p>实验设置：8个场景，11组实验，针对不同的参数使用不同的测试集进行了20次实验</p>
+<p>实验结论：掩膜博弈更好</p>
+<p>一些其他与各参数相关的实验不记录了，与博弈无关，更偏向生物医学</p>
+<p>此外，分析了少数人支持系数，说明了掩膜博弈在公平性方面同样优秀</p>
+<h3 id="Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset"><a href="#Experiments-based-on-Craig-Venter’s-data-and-the-Ysearch-dataset" class="headerlink" title="Experiments based on Craig Venter’s data and the Ysearch dataset"></a>Experiments based on Craig Venter’s data and the Ysearch dataset</h3><p>这部分是真实数据集的实验，同样说明了掩膜博弈更好。</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>本文：针对再识别攻击，为数据主体提供共享策略</p>
+<p>发现：</p>
+<ol>
+<li><p>额外阶段会增加再识别的准确率，但同样更有利于我们通过博弈的方式反攻击，因为可以误导攻击者从而使其推断出错误的中间信息，从而减轻隐私风险。</p>
+</li>
+<li><p>如果数据库不允许进行部分数据共享（即：只能加入并完全共享或者退出），大多数理性的数据主体会选择退出；反之，如果允许部分共享，则大多数主体愿意共享大部分数据，这表明向主体提供选择可以鼓励更大程度的数据共享，同时避免再识别。</p>
+</li>
+<li><p>本文方案使得主体可以选择共享大量数据，获取高收益，同时不会面临再识别风险。</p>
+</li>
+<li><p>敏感性分析说明了参数对主体策略的影响，由此能进一步研究：政策制定者如何增加对隐私泄露的惩罚、数据持有者如何增加对数据共享的奖励等。</p>
+</li>
+</ol>
+<p>不足之处和后续研究：</p>
+<ol>
+<li><p>仅考虑了一个攻击者和两阶段攻击实验</p>
+</li>
+<li><p>使用的决策模型较为简单，假设数据主体之间的决策相互独立，或所有主体选择相同的策略</p>
+</li>
+<li><p>目前的博弈模型所模拟的博弈双方并没有完全推理出所有的不确定性。双方都可能有不完全和/或不完善的信息。为了更加现实，可以使用更复杂的博弈论模型，如贝叶斯博弈，来模拟不完全和/或不完善的信息</p>
+</li>
+<li><p>没有研究数据持有者的最优策略，它们有动机控制付给数据主体的报酬</p>
+</li>
+<li><p>博弈模型可能会在发布的数据集中引起非随机缺失（MNAR）的值，这对数据集的使用可能会有不可忽略的影响</p>
+</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2022/09/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Using%20game%20theory%20to%20thwart%20multistage%20privacy%20intrusions%20when%20sharing%20data/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game-theory/" rel="tag">game theory</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stackelberg-game/" rel="tag">stackelberg game</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/10/13/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Eliciting%20Thinking%20Hierarchy%20without%20a%20Prior/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-Eliciting Thinking Hierarchy without a Prior
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/09/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Budgeted%20Unknown%20Worker%20Recruitment%20for%20Heterogeneous%20Crowdsensing%20Using%20CMAB/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-Budgeted Unknown Worker Recruitment for Heterogeneous Crowdsensing Using CMAB</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>
