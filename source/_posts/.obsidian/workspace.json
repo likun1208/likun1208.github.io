@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Evolution of cooperation in stochastic games.md",
+                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Evolution of cooperation in stochastic games.md",
+                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Evolution of cooperation in stochastic games.md",
+                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Evolution of cooperation in stochastic games.md"
+                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md"
               }
             }
           }
@@ -156,8 +156,9 @@
   },
   "active": "b9fb34424300446d",
   "lastOpenFiles": [
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
     "论文记录-Evolution of cooperation in stochastic games.md",
+    "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
@@ -181,7 +182,6 @@
     "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
     "论文记录-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium.md",
     "论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing.md",
-    "论文记录-BEYOND FINITE LAYER NEURAL NETWORKS BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
