@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="infocom 2024的5篇审稿" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-INFOCOM 2024审稿 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-INFOCOM 2024审稿"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-INFOCOM 2024审稿
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/08/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-INFOCOM%202024%E5%AE%A1%E7%A8%BF/" class="article-date">
+  <time datetime="2023-08-15T01:45:36.000Z" itemprop="datePublished">2023-08-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">10.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">35 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1570927008——CORE：-通过区块链发布受交易承诺控制的私有数据"><a href="#1570927008——CORE：-通过区块链发布受交易承诺控制的私有数据" class="headerlink" title="1570927008——CORE： 通过区块链发布受交易承诺控制的私有数据"></a>1570927008——CORE： 通过区块链发布受交易承诺控制的私有数据</h1><ol>
+<li>针对问题：区块链上交易失败后本该被撤回的私有数据却被接收方收到了</li>
+<li>本文方法：设计了CORE协议（transaction commit-controlled release，交易提交控制释放）</li>
+<li>常用的私有数据交易方法：<ol>
+<li>公链：HTLC（哈希时间锁合约）</li>
+<li>许可链：点对点的私有交易</li>
+</ol>
+</li>
+<li>什么情况下会出现事务失败导致私有数据泄露：现有协议假设底层区块链系统是安全可靠的，但实际上交易很可能因为网络延迟和执行故障而失败<ol>
+<li>公链中：提款的一方因为各种原因没提成，然后款退回了，但他已经输入了密钥，并被公开，使得另一方既收回了钱，也拿到了密钥</li>
+<li>许可链：同样是因为各种原因，背书交易没上链，但私有数据已经发过去了</li>
+</ol>
+</li>
+<li>本文：提出了事务提交控制释放（CORE）协议，确保交易提交后隐私数据才会被拿到<ol>
+<li>通信模型：异步通信</li>
+<li>安全模型：UC模型</li>
+</ol>
+</li>
+<li>CORE的基本思路：私有数据的释放由事务提交事件控制<ol>
+<li>采用一组n个区块链见证人来证明交易提交事件</li>
+<li>采用双线性配对密码学来控制仅向预期接收者发布私有数据的时间，同时对所有见证人保密私有数据</li>
+<li>利用阈值密码学来容忍t−1恶意证人</li>
+</ol>
+</li>
+<li>CORE协议的六个算法：<ol>
+<li>WitnessKeyGen：见证人用的门限加密，要t个签名才能解密</li>
+<li>UserKeyGen：对应见证人加密的用t个签名去解密</li>
+<li>ReferGen：持有私有数据的节点生成交易编号</li>
+<li>Enc：持有私有数据的节点对私有数据进行加密</li>
+<li>CmtConfirm：见证人看到交易提交后发出确认</li>
+<li>Dec：收到私有数据的节点在t个见证人签名后进行解密</li>
+</ol>
+</li>
+<li>见证人选择和激励：<br> CORE的几个属性允许区块链社区通过半诚实方构建见证服务，类似于现有的RPC服务[33]，以确保具有盈利动机的特殊类型的私有数据传输交易的数据安全。<ol>
+<li>私人数据对所有证人都是保密的，并且 CORE 可以容忍一小部分恶意证人。</li>
+<li>见证人的提交确认密钥可以通过见证人的公钥和已提交交易的参考进行公开验证，从而可以轻松审计见证人的行为。</li>
+<li>见证人的作用仅限于签署已承诺交易的参考文件，其工作量很小。现有的 RPC 服务提供商（例如 Infura [33]）可以进一步集成见证服务来扩展业务并吸引更多用户。</li>
+</ol>
+</li>
+<li>实验：在以太坊和fabric上做了实验，见证人节点是7个</li>
+<li>存在问题：<ol>
+<li>文中提到了对见证人节点的激励，认为其工作量很小，可以集成到RPC服务中，但是RPC服务目前也存在较大的中心化问题和风险，另一方面如果不设计激励机制，很容易导致见证人节点不确认，最终使得大量交易失败，因此一个合理的激励设计是不可或缺的；</li>
+<li>创新性弱，只有增加见证人确认交易上链是新的。</li>
+<li>实验中的7个见证人数量很容易受到攻击，如果出于安全性考虑增加见证人节点，是否会严重影响协议性能？</li>
+</ol>
+</li>
+</ol>
+<h1 id="1570935843——LightCross：智能合约的轻量级跨分片执行分片"><a href="#1570935843——LightCross：智能合约的轻量级跨分片执行分片" class="headerlink" title="1570935843——LightCross：智能合约的轻量级跨分片执行分片"></a>1570935843——LightCross：智能合约的轻量级跨分片执行分片</h1><ol>
+<li>针对问题：<ol>
+<li>跨分片交易导致性能降低</li>
+<li>大多数解决方案只关注转账交易，不关注智能合约</li>
+</ol>
+</li>
+<li>本文方法：LightCross<ol>
+<li>将跨分片交易的执行卸载到配备 TEE 硬件的链下执行器中，该执行器可以适应任意复杂合约的执行</li>
+<li>设计了一个轻量级的跨分片提交协议来提交跨分片交易，而无需分片之间的多轮分片到分片通信</li>
+<li>通过根据历史交易动态改变合约分布，降低跨分片交易率</li>
+</ol>
+</li>
+<li>实验：基于 FISCO-BCOS 项目实现了 LightCross 原型 </li>
+<li>创新的方法：根据从历史交易中学到的知识，定期迁移智能合约，以收集经常同时调用到同一分片的合约。 LightCross将合约之间的关系建模为交易调用图，然后将合约迁移转化为图划分问题。分区后，LightCross采用协议在所有分片之间迁移与合约相关的代码和存储，以降低CSTx比率。</li>
+<li>系统设计：<ol>
+<li>用户：普通客户端，调用合约</li>
+<li>S分片：部署了智能合约的分片，称为合约入口（？这句目前没理解）</li>
+<li>执行器：配备TEE的节点，执行跨片交易</li>
+<li>R分片：调度跨片交易并广播执行结果的分片</li>
+</ol>
+</li>
+<li>区块链系统向用户隐藏分片信息，例如合约在哪一片等，用户向任意节点提交交易后，交易自动路由到入口分片，然后找到合约所在的S分片，如果合约没调用其他合约，则不涉及跨片，在分片内找个可信任节点执行即可；如果合约调用了其他合约，则属于跨片合约。</li>
+<li>信任模型：<ol>
+<li>不考虑会影响区块链本身安全性的攻击，每个分片用拜占庭容错协议，恶意节点不超过三分之一，不会分叉。</li>
+<li>不考虑会影响TEE安全的问题。</li>
+</ol>
+</li>
+<li>跨片交易执行过程：<ol>
+<li>通过 TEE 支持将 CSTx 的执行卸载到链下执行器。然后，其他S-shards可以验证并接受执行结果，而无需重新执行每个CSTx。</li>
+<li>不同的执行器可以并行处理不同的CSTx，从而增加系统的并行性。</li>
+</ol>
+</li>
+<li>智能合约迁移：<ol>
+<li>定期动态在所有S分片上重新分配智能合约来降低 CSTx 比率</li>
+<li>同时调用的合约会聚集在同一个 S 分片中，从而降低 CSTx 比率</li>
+</ol>
+</li>
+<li>跨片协议：<ol>
+<li>原始交易创建：发送者账户创建原始交易，表示调用某个地址的合约，然后交易被路由到对应的分片入口。</li>
+<li>跨片交易识别：交易如果调用了另一个分片上的合约就会被标记为跨片交易。</li>
+<li>跨片交易执行：分片先找TEE执行，执行过程中调用其他分片的合约时，找对应入口发送请求，新分片也是找TEE执行，然后把结果返回给刚才的分片，完成调用。执行之后要生成证书，连同执行结果等一起发给R分片。总的来说就是不管合约代码在哪个分片上，实际执行的都是TEE，每次执行的时候TEE请求合约代码和交易数据等。</li>
+<li>跨片交易调度：总的来说就是R分片定期接收消息并调度和验证，然后打包验证结果进行共识，再发给所有S分片（那么R分片很容易被攻击吧）</li>
+<li>跨片交易承诺： S分片收到R分片打包的区块后，与R分片协同验证是否有违反串行的，然后把通过验证的交易打包插入下一个块提交</li>
+<li>通信基元：通信机制应该安全可靠，以抵御敌对攻击。例如，当一个正确的执行者向S-shard请求状态数据时，通信机制应保证即使存在恶意节点，正确的执行者最终也能收到正确的状态数据。LightCross 利用区块链内置的 Merkle 树来验证从 S-shard 向执行者传输的状态数据，这是一种点对点的可验证发送（见 [31] 中的附录 D）。采用这种方法，执行者只需访问 S-shard 中的几个节点（大多数情况下为 &lt;3），就能获得所需的值。</li>
+<li>协议优势：<ol>
+<li>跨片交易只在单个节点执行器，无需拆分；</li>
+<li>通过批处理来分摊一组 CSTx 的成本。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>交易验证：R分片要验证状态更新并及时丢弃已处理的交易<ol>
+<li>R分片的交易共识后，打包广播到所有S分片，每个S分片检查所有交易输入的数值是否和当前最新的一致，如果不一致则交易无效；</li>
+<li>S分片把验证结果发给R分片，同时锁定交易涉及的写状态，此时如果有其他交易也需要改变状态，则在解锁之前不会被处理；</li>
+<li>R分片收到所有分片的验证结果，然后合并得到每个交易的最终验证结果，并广播；</li>
+<li>S分片收到R的确认以后，提取通过验证的交易并提交上链，然后释放状态锁。</li>
+</ol>
+</li>
+<li>其他：除了验证单一的跨片交易，也还需要验证互相有联系或冲突的跨片交易，例如同一个状态，一个交易在读，一个交易在写，肯定不行。<ol>
+<li>根据时间戳排序</li>
+<li>运用其他已有的调度算法</li>
+</ol>
+</li>
+<li>锁定的影响：锁定机制足够轻量，不会产生明显的延迟</li>
+<li>R分片调度：只是命令和验证 CSTx 而不是执行它们，因此不会成为瓶颈</li>
+<li>智能合约迁移：定期动态将频繁被同一个交易调用的合约们迁移到一个S分片上<ol>
+<li>用交易图TCG模拟智能合约之间的关系，将智能合约迁移问题转化为具有时间平衡的离线图分割问题。</li>
+<li>TCG的顶点表示合约，顶点权重表示触发合约的事务数；边表示两个合约同时被触发了，边权重表示同时触发的次数</li>
+<li>根据历史交易构建此 TCG，有两个目标：<ol>
+<li>平衡工作量：将G中的顶点近似划分为相等的不相交子集，直观来说就是不同分片上的合约数量差不多；</li>
+<li>(2)低CSTx比率：最小化交叉边的权重之和，即顶点属于两个不同子集的边，直观上来说就是尽量让同一个交易触发的合约在同一个分片上。</li>
+</ol>
+</li>
+<li>由此，合约迁移问题转化为子图分割问题，分割约束：<ol>
+<li>每个子图权重尽可能接近总体均值，也就是说每个分片上的合约调用次数差不多</li>
+<li>跨子图的边权重尽可能小</li>
+</ol>
+</li>
+<li>这个多目标约束子图分割问题已经有人求解了，每次要迁移的时候，先确定合约的最优分区，然后观察现在的合约分布情况，最小化要移动的状态数据，从而完成迁移，这里认为分片不会太多，所以直接枚举找最小的移动方式。</li>
+<li>降低合约迁移开销的措施：<ol>
+<li>引入连续的epoch，只在每一轮开始的时候迁移，每一轮的时间要足够长，来分摊迁移开销</li>
+<li>尽量减少合约迁移，避免迁移大尺寸合约</li>
+<li>跨片合约数量达到一定阈值的时候才开始迁移</li>
+</ol>
+</li>
+<li>合约迁移的过程：新的一轮开始时，R分片协调合约迁移<ol>
+<li>准备：每一轮快结束时，R分片停止调度跨片交易，告诉所有S分片这件事，所有S分片处理好内部的跨片交易之后，给R分片发消息</li>
+<li>构造TCG：每个S分片收集上一轮的交易，构建部分图，发给R分片，R分片收齐后合并成完整的TCG</li>
+<li>图的划分：R分片用已有的方法把TCG划分成分片数量的分区，然后排列枚举确定需要迁移的合约，并创建迁移合约的交易以及广播交易</li>
+<li>状态数据迁移：S分片收到广播以后开始迁移合约的状态数据</li>
+<li>恢复服务：完成迁移后的S分片会给R分片发送确认消息，然后R分片会在已经确认了的S分片上调度跨片交易</li>
+<li>这里并不是移动整个Merkle 子树，而是按照某个参考文献延迟状态数据同步，使得每个 S 分片能够在传输合约时处理交易。</li>
+<li>LightCross 维护一个动态路由表来分布式记录这些信息，导航节点将交易路由到其入口 S 分片。这部分内容详见某个参考文献。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>存在问题：<ol>
+<li>迁移合约的部分认为分片最多20，但实际应用中分片可能不止这么少，比如以太坊就很多，迁移合约带来的时间开销需要再考虑；</li>
+<li>定期迁移合约和定期改变节点分片哪种更合适？</li>
+<li>合约迁移过程的开始和结束都依赖于R分片与S分片的通信，如果攻击者伪造并发送确认消息，很容易导致某个S分片的交易还没处理完，R分片就开始合并TCG，又或者很长时间某个S分片都无法处理跨片交易，针对这样的问题，在合约迁移中是否有时间限制？或者有其他方式来避免？</li>
+<li>构建交易图并根据权重划分分区，然后修改分片的做法创新性较弱，本文也没提出新的图算法；把合约放到TEE执行的做法也不少见，本文总的来说就是TEE+TCG，关注跨片合约这一点是现有研究比较少的，从实验来看性能也有提升。</li>
+</ol>
+</li>
+<li>补充：查资料的时候看到infocom2022有篇论文<strong>BrokerChain: A Cross-Shard Blockchain Protocol for Account/Balance based State Sharding</strong>也是根据历史数据做一个交易状态图并划分，然后动态调整。<h1 id="1570936952——Lipper：在时变对抗群体下利用分片区块链的安全性和活跃性"><a href="#1570936952——Lipper：在时变对抗群体下利用分片区块链的安全性和活跃性" class="headerlink" title="1570936952——Lipper：在时变对抗群体下利用分片区块链的安全性和活跃性"></a>1570936952——Lipper：在时变对抗群体下利用分片区块链的安全性和活跃性</h1></li>
+<li>针对问题：现有协议采用悲观方法，总是试图承受固定上限数量的对抗节点。当运行时实际存在的对手较少时，这种方法无法利用最大化事务吞吐量的机会。</li>
+<li>本文方法： Lipper，一种新颖的分片协议，可以在最大化交易吞吐量和防御对手的运行时数量之间实现权衡。更具体地说，只要对手的数量低于安全阈值，Lipper的共识推导始终保证网络的安全，而不牺牲交易吞吐量。Lipper 可以根据攻击网络活跃度的对手数量来优雅地调整交易吞吐量。当对手较多（或较少）时，Lipper 将花费更多（或更少）的努力来实现活跃性，从而降低（或增加）交易吞吐量。</li>
+<li>大量的实验结果表明，与最先进的方法相比，Lipper 在存在随时间变化的对手群体的情况下实现了卓越的交易吞吐量和鲁棒性。</li>
+<li>区块链的安全性有两个关键属性：活跃性和安全性。活跃度是指分片最终向所有参与节点传递新消息的能力。安全性涉及就输出消息的顺序达成共识。安全阈值（S）和活跃阈值（L）分别表示分片内为确保安全性和活跃性而允许的最大允许的敌对参与者比例。</li>
+<li>分片在并行和安全之间有权衡</li>
+<li>实际场景中，攻击者是动态变化的，有时多有时少，有时正常有时恶意，现有的实时调整分片的方法会增加开销</li>
+<li>本文：根据时变的对抗群体调整其行为，同时最大限度地减少开销<ol>
+<li>允许具有高 S 和低 L 的小分片来实现高并行性</li>
+<li>两层投票机制，该机制使用额外的投票过程来恢复停滞的分片。由于额外投票的开销与停滞分片的数量成正比，因此系统的交易吞吐量会根据运行时的对抗性群体进行适度调整。</li>
+</ol>
+</li>
+<li>实验：与Gearbox 和 Rapidchain比较，说明了本文方法的好处</li>
+<li>Lipper：两层多阶段分片协议，动态调整活跃度和安全阈值，并在运行时适应随时间变化的对抗群体<ol>
+<li>支持双向扩展，可根据随时间变化的对抗群体自动调整事务吞吐量。</li>
+<li>它能有效避免调整分片大小或分片数量，</li>
+<li>还能防止分片成员重叠。</li>
+</ol>
+</li>
+<li>概述：两层结构，工作分片和委员会分片<ol>
+<li>S &lt; 100% 且 L = 0% 的工作分片包含少量节点并管理一系列交易（钱包账户）。 </li>
+<li>S = L &lt; 50% 的委员会分片管理多个工作分片。</li>
+<li>同一层的分片不共享重叠的成员。</li>
+<li>每个节点都被随机分配给一个工作分片和管理它的委员会分片。</li>
+</ol>
+</li>
+<li>五阶段协议：每个分片至少经过一阶段，至多经过五阶段<ol>
+<li>每阶段分片内超过安全阈值数量的节点达成共识，这个阈值与阶段有关，越往后越容易达到，例如第一阶段要87.5%的节点共识，第二阶段就只需要75%，而最多到第五阶段是37.5%，每阶段会引入一些新的节点（helper）。</li>
+<li>这一段我理解起来有点混乱，前面说是5阶段（phase），后面又说如果第一阶段（也是phase）没共识，则进入第二阶段，并把安全阈值调到83.3%， 这和前面5阶段的公式不一样，但是按描述是一样的，此外这里出现的V=1也不明白是表示什么，</li>
+<li>总体来说就是当分片内节点中的不同声音很少时，意味着大部分都是诚实节点，系统是安全的，于是飞快达成共识；当不同声音较多，没法达成共识的时候，就引入更多外部节点，扩大分片，同时适当降低安全阈值，来试图达成共识。由此实现分片大小、安全性设置随对抗群体规模动态变化。</li>
+</ol>
+</li>
+<li>与其他分片方法不同，lipper并不会破坏旧的分片把它们合并成新的大分片，每阶段会引入的helper是一开始就固定的，并且helper只同步最新的确认状态和最新的区块，而分片本身会更新状态。在最坏的情况下，当L、S &lt; 50%时，可以在最后阶段做出决策，表明分片中的大多数节点是诚实的。</li>
+<li>系统模型：网络有N个节点，其中Nc是委员会分片，Nw是工作分片，每个节点都在一个工作分片和管理该工作分片的委员会分片上。</li>
+<li>攻击模型：<ol>
+<li>容忍三分之一的恶意节点</li>
+<li>对抗节点和诚实节点的集合在每个 epoch 期间保持固定，并且只能在 epoch 之间更改。</li>
+</ol>
+</li>
+<li>Lipper协议：<ol>
+<li>随机性生成：节点在哪个分片是随机的</li>
+<li>节点分配：首先节点公开共享所有节点的预定义列表，然后每个节点根据列表可以计算自己和其他节点在工作分片和委员会分片上的id，从而确定所属分片和helper</li>
+<li>区块链结构：<ol>
+<li>每个工作/委员会分片都有各自的链，每个节点同时维护主链和所属分片的链</li>
+<li>工作分片：采用State-block-State 结构，每个 WS Block 后面都会链接一个 State，State 不存储详细的交易信息，仅捕获当前 WS Block 执行后的账户余额。当验证一个WS块的正确性时，检查对应的先前状态的账户余额列表就足够了</li>
+<li>委员会分片：委员会不记录分片交易数据，存储在特定时间段内其管辖下的所有 WS 达成共识的 WS 区块的哈希值。主要目标是确保 CS 内的所有节点都知道所有共识 WS 块，从而减轻跨分片交易中恶意攻击的可能性。</li>
+</ol>
+</li>
+<li>共识阶段：<ol>
+<li>符号定义：每阶段有num_i个节点需要参与投票，阶段时长T_i，安全阈值S_i，由此可以计算活跃阈值L&lt;1-S_i，这里的问题是为什么L是这么算的，以及L是不是应该改成L_i呢？</li>
+<li>流程：通过引导将节点随机分配到工作分片和委员会分片后，Lipper 进入共识阶段。在此阶段，Lipper 并行执行每个委员会分片。在每个委员会分片内，工作分片也同时运行<ol>
+<li>选leader：索引最低的节点成为leader，索引随机生成，因此leader也随机。如果leader生成的区块被共识拒绝，则在剩余的非对手节点中选索引最低的成为新leader。</li>
+<li>工作分片：leader收集交易生成区块，并在工作分片内进行投票共识，值得注意的是，在第一阶段，当 (S1 × N um1) 个节点的阈值投出相同的票时，就会达成共识，其中 S1 = 100%，Num1 = Nw。这里和前面的安全阈值公式也不一样。第一阶段的共识协议会产生两种可能的结果：<ol>
+<li>达成共识，开始下一轮</li>
+<li>没达成共识，进入下一阶段，引入新节点作为helper参与投票，此前的投票也会累积加进来，同时从第二阶段开始如果区块被共识拒绝，则会换leader</li>
+</ol>
+</li>
+<li>助手（helper）：助手不需要同步所有数据，只访问上一轮的状态。每当节点对WS块进行投票时，都需要将该投票发送给同一CS内的所有其他节点。这样，在任何给定时刻，节点都可以获取同一CS下所有WS的状态信息，包括是否达成共识以及每个WS当前处于哪个阶段。通过这些信息，节点可以确定它应该参与哪个阶段并充当 CS 内任何 WS 的帮助者。</li>
+<li>委员会分片：leader统计CS内所有达成共识的WS分片的哈希并建立CS块，并广播到所有CS节点，然后投票共识，其安全阈值固定是50%。WS 和 CS 分片在尝试达成共识时都是独立运行的。他们既不互相依赖，也不互相等待。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>跨分片交易：委员会分片允许直接集成传统分片区块链中常用的跨分片交易协议</li>
+<li>参数确定：S_i的公式感觉不对劲，应该是i-1</li>
+</ol>
+</li>
+<li>实验部分比较了吞吐量等指标，说明了lipper比gearchain和rapidchain在吞吐量和存储效率方面更好</li>
+<li>存在问题：<ol>
+<li>在跨片交易中，跨WS和跨CS是否有区别？</li>
+<li>公式存在问题，一个是V=1，一个是计算S的公式</li>
+<li>针对S和针对L的攻击是分开考虑吗？为什么可以根据1-S来计算L</li>
+<li>这种先在小分片内进行100%共识，没成功再逐渐扩大的方式是有创新的，但是小分片带来的跨片交易延迟与开销也应该考虑进来</li>
+</ol>
+</li>
+</ol>
+<h1 id="1570906233——FISFU：联邦遗忘的公平意识激励计划"><a href="#1570906233——FISFU：联邦遗忘的公平意识激励计划" class="headerlink" title="1570906233——FISFU：联邦遗忘的公平意识激励计划"></a>1570906233——FISFU：联邦遗忘的公平意识激励计划</h1><ol>
+<li>针对问题：联邦遗忘没有考虑对用户的激励</li>
+<li>本文：联邦遗忘公平意识激励方案FISFU<ol>
+<li>遗忘阶段加入惩罚机制</li>
+<li>恢复阶段把一部分惩罚作为奖励分配</li>
+</ol>
+</li>
+<li>进行了广泛的评估，以证明FISFU在恢复训练阶段惩罚遗忘客户端并降低服务器成本的能力，证实了我们的方案在联邦遗忘期间实现公平奖励分配的能力</li>
+<li>现有联邦学习激励机制存在的问题：<ol>
+<li>这些机制未能认识到客户端可能发起联合取消学习的可能性</li>
+<li>他们忽视了在遗忘过程后进行恢复训练以提高模型准确性的必要性，导致这一阶段的训练缺乏激励</li>
+</ol>
+</li>
+<li>设计激励机制面临的挑战：<ol>
+<li>建立精准的惩罚机制：很难同时根据遗忘模型的准确性确定遗忘客户端的惩罚，并平衡失学客户端的隐私收益和模型价值的下降。</li>
+<li>激励恢复训练：根据恢复后模型的准确率，很难确定分配多少惩罚作为奖励来鼓励客户端进行恢复训练，并确保该奖励在服务器的性能之间取得平衡支出和模型价值的增加。</li>
+</ol>
+</li>
+<li>本文贡献：提出了FISFU<ol>
+<li>第一阶段：某个客户端发起取消学习请求时，我们对该客户端实施惩罚机制。我们使用遗忘后模型的准确性来量化遗忘客户端的隐私收益和模型价值的下降。通过根据这些因素以及惩罚水平仔细构建效用函数，我们从理论上证实了最优惩罚率可以在隐私收益和模型价值的下降之间取得平衡。</li>
+<li>第二阶段：根据恢复模型的准确率计算模型值的增加量，设计一个随模型值增加量、每个客户端的恢复训练成本、恢复训练奖励的效用函数，使得服务器能够确定收到的惩罚的最佳数量，以分配为恢复训练的奖励，从而实现服务器支出和模型价值增加之间的平衡。</li>
+<li>总而言之贡献如下：<ol>
+<li>第一个关注联邦遗忘的奖惩问题</li>
+<li>设计并从理论上验证了最优惩罚机制，该机制平衡了隐私优势和模型价值的降低。</li>
+<li>设计了独特的恢复训练激励机制，将收到的惩罚最优分配为奖励，以激励客户端参与恢复训练，有效维持服务器支出与模型价值增长之间的平衡。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基础内容：联邦学习和联邦遗忘的方法采用已有论文的内容，联邦激励设计也是已有论文的内容</li>
+<li>系统模型：<ol>
+<li>整体流程：最初所有客户端在本地训练一定精度的模型，服务器则给客户端对应的奖励，当某客户端要求撤回数据时，模型的准确性会受到影响，其他客户端需要再做恢复训练，服务器给的补偿决定了每个客户端恢复的准确性。系统图中的recover似乎打错成了rocover</li>
+<li>惩罚函数：由没收和惩罚组成$\phi(\theta_k, \theta_u,\eta)=P_i+\eta[ln(\theta_k+1)-ln(\theta_u+1)]$<ol>
+<li>没收之前训练给的奖励，记作P_i</li>
+<li>额外罚款，是$\eta[ln(\theta_k+1)-ln(\theta_u+1)]$，这里$ln(\theta+1)$是参照联邦遗忘那个论文中的模型准确率价值，两个相减表示遗忘带来的准确率损失，而系数就是惩罚率。</li>
+</ol>
+</li>
+<li>客户端在成功撤回的时候，会收到数据提供者给的奖励，具体来说是数据提供者奖励率$\delta$与模型准确率下降差异的乘积，这个奖励率因人而异。</li>
+<li>在执行遗忘算法之前，将遗忘后的准确度确定为算法执行的阈值。获得的遗忘奖励是根据这个遗忘后的准确率来计算的：$R(\theta_k, \theta_u,\delta) = \delta(\theta_k − \theta_u)$，这里和上一条一个意思。</li>
+<li>遗忘客户端的效用：遗忘奖励减去服务器的惩罚$R()-\phi()$</li>
+<li>服务器效用：收到的惩罚减去模型准确度下降的损失$\phi()-\beta[ln(\theta_k+1)-ln(\theta_u+1)]$，其中$\beta$是模型的价值率</li>
+<li>总体思想：该服务器效用函数通过控制未学习客户端的惩罚率来最大化服务器的效用，从而平衡模型退化的程度和收到的总惩罚。</li>
+<li>客户端策略：遗忘后的准确率$\theta_u$；服务器策略：惩罚率。惩罚过程是算法1，这里算法1的标题打错字了，应该是punishment，打成了publishment。这个算法大致思路是首先对客户端的收益函数求导取0，找使客户端收益最大的$\theta_u$，再对服务端的收益函数求导取0，找使服务器收益最大的惩罚率$\eta$。定了两个目标参数之后，就是根据参考文献的方法逆向梯度来遗忘。</li>
+<li>奖励机制：奖励那些没撤回数据的客户端<ol>
+<li>计算每个客户端学习前后的准确率之差，所有客户端根据对最终模型准确率的贡献比例分配奖励</li>
+<li>客户端i的效用由两部分组成，是服务器给的奖励减去客户端自己学习的消耗，这里公式有问题，下面介绍了的字母R没出现在公式中，反而是$\xi_i$没有给解释（在前面很远的地方有解释，但是R也一样在前面有解释）</li>
+<li>对效用函数求导取0，可以得到使得客户端i效用最大化的训练后精度</li>
+</ol>
+</li>
+<li>服务器策略：效用函数修改为“模型值的增量加上对未学习客户端施加的惩罚，减去用于激励剩余客户端的总奖励”，效用函数求导取0可以得到服务器拿出来激励客户端训练的最优总奖励。如果对发起遗忘客户端的惩罚小于这个最优总奖励，那服务器就得赔钱进去来激励客户端训练，反之就是挣钱了</li>
+</ol>
+</li>
+<li>实验评估：<ol>
+<li>数据集：MNIST的60000张图</li>
+<li>客户端：10个独立同分布，每个接收6000张图</li>
+<li>测试集：1000张图</li>
+<li>模型：CNN</li>
+<li>参数设置：价值率、准确率、奖励以及CNN训练涉及的参数等都进行了设置</li>
+<li>评估过程：<ol>
+<li>数值验证算法选择的策略的有效性</li>
+<li>进行了模拟，并将准确性与无激励的不学习算法进行了比较</li>
+<li>分析了整个过程中各方收益变化曲线和原因，还算合理</li>
+<li>设置了对客户端的不同奖励来观察策略变化，不过没分析原因，最好能加上</li>
+<li>总的来说实验部分就是分析各种参数变化对前文算法中的各方策略的影响</li>
+<li>也对比了不进行激励的情况，显然不激励的时候恢复训练会不太行，不过我觉着别的算法也会激励，毕竟撤回以后的恢复可以看作是新的训练过程了</li>
+<li>遗忘后的准确率越低，服务器给的惩罚越大（这不是显然吗，前面的函数就这么设计的呀</li>
+<li>和其他恢复训练的激励算法的对比：<ol>
+<li>IMEF：遗忘后服务器出钱让客户端恢复</li>
+<li>IMOF：服务器激励客户端来弥补隐私成本，客户端的策略是目标准确率和迭代轮数</li>
+<li>LBIM：客户端的策略是确定用来训练的数据量</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>这里的问题是 ，胡萝卜加大棒这个概括在实验部分才第一次出现，前面的摘要、引言和理论描述都没出现，在写作上不太妙</li>
+</ol>
+</li>
+<li>存在问题：<ol>
+<li>已经有一部分针对联邦遗忘的激励机制，intro中说“现有联邦学习激励机制存在的问题”是不准确的，同时related work中也建议补充完善这部分内容</li>
+<li>贡献部分说是第一个做联邦遗忘激励的，这也不准确，建议充分调研</li>
+<li>实验部分图2应该补充服务器效用随遗忘后全局模型的准确性的变化，以及遗忘客户端效用随惩罚率的变化</li>
+<li>如果惩罚比奖励小，是什么使得服务器贴钱也要进行恢复呢？如果服务器有准确率提升带来的额外收益，那应该也在计算中体现出来</li>
+<li>实验中提到了数据提供者给的撤回奖励越高，惩罚率和服务器效用也会有所变化，但是没有解释原因</li>
+<li>有没有考虑过收益函数为负的情况？论文中没有这方面的讨论，但是如果收益函数为负，客户端还会撤回吗？</li>
+<li>前面提到的一系列写错了的词、少了的字母解释等</li>
+</ol>
+</li>
+</ol>
+<h1 id="1570937888——基于区块链的纵向联邦学习支持多方参与"><a href="#1570937888——基于区块链的纵向联邦学习支持多方参与" class="headerlink" title="1570937888——基于区块链的纵向联邦学习支持多方参与"></a>1570937888——基于区块链的纵向联邦学习支持多方参与</h1><ol>
+<li>针对问题：纵向联邦学习VFL普遍采用PSI协议，但是现有方案：<ol>
+<li>仅支持两个参与者之间的加密ID对齐，并且需要以全连接的方式为多个参与者执行【这一点应该不算问题，查了一下做多方PSI的有很多，各有各的方法】</li>
+<li>此外，VFL中使用集中式参数服务器来分发加密密钥并更新加密的训练参数，成为单点攻击的目标</li>
+</ol>
+</li>
+<li>本文：基于区块链的纵向联邦学习（BVFL）<ol>
+<li>一种基于区块链的多方 PSI 协议，具有快速的两阶段加密 ID 对齐策略</li>
+<li>设计了一种基于PoW的随机密钥分配方法</li>
+<li>提出了一种基于随机掩码和训练梯度上同态加密聚合的真实的基于区块链的模型训练方案</li>
+</ol>
+</li>
+<li>实验表明：<ol>
+<li>BVFL 中的 PSI 协议的执行速度是现有 PSI 协议的两倍以上</li>
+<li>BVFL 中基于块的模型训练在准确性上接近集中式训练</li>
+</ol>
+</li>
+<li>纵向联邦学习VFL：多个数据提供者持有相同样本的不同特征</li>
+<li>现有相关研究集中在隐私保护和适用性方面，存在前述的两个问题</li>
+<li>本文贡献：<ol>
+<li>基于区块链的VFL方案</li>
+<li>快速多方PSI协议</li>
+<li>基于区块链的安全密钥分发和模型训练</li>
+<li>实验表明结果好（感觉贡献里单独写一条实验不太合适吧）</li>
+</ol>
+</li>
+<li>系统结构：<ol>
+<li>联邦学习层：训练模型，不同参与者之间通过PSI协议对齐样本空间ID</li>
+<li>区块链层：<ol>
+<li>矿工节点：验证交易托管账本，假设诚实可信</li>
+<li>排序节点：对交易排序并生成区块</li>
+</ol>
+</li>
+<li>应用层：参与联邦学习的边缘节点设施，有API接口</li>
+<li>联邦学习层到区块链层的数据加密，区块链的作用主要是取代传统VFL的第三方，为参与者生成密钥</li>
+</ol>
+</li>
+<li>关键步骤：<ol>
+<li>基于区块链的PSI：介绍了样本对齐的概念，说明本文提出了基于区块链的支持多参与者的PSI</li>
+<li>基于区块链的模型训练：传统方法是中心化协作者用同态加密传输模型参数，易受攻击，本文提出了基于区块链的训练，去中心化，具体案例方面实现了安全逻辑回归的训练</li>
+</ol>
+</li>
+<li>PSI协议：<ol>
+<li>N+1个参与者，其ID集合记作P，包含p_label和p_i，前者表示有label的参与者。</li>
+<li>参与者拥有的数据集的样本空间记作D，包含d_label和d_i</li>
+<li>矿工集合是M，一共有N_M个，每个m_j持有公钥k_j^m，用作通信密钥和信息认证码</li>
+<li>两方PSI协议：这段主要是介绍PSI的作用</li>
+<li>本文PSI的设计目标：<ol>
+<li>支持多参与者</li>
+<li>基于密码学和区块链，实现快速、安全的ID交换和比对验证</li>
+</ol>
+</li>
+<li>PSI流程：<ol>
+<li>基于可交换加密算法实现</li>
+<li>包括以下步骤：<ol>
+<li>连接建立：参与者通过矿工的公共地址随机与多个矿工简历连接</li>
+<li>私有 ID 集上传：矿工m_j和参与者p_n连接，则p_n用公钥k_j^m对自己的ID集的哈希值进行加密，然后发给m_j</li>
+<li>第一 ID 对齐：m_j连接的参与者集合是P_j，m_j会收到都是用k_j^m加密的不同参与者的ID集哈希。然后矿工执行第一次ID对齐，把自己收到的这些都对齐了，具体操作过程如下：<ol>
+<li>首先，矿工 mj 初始化轮数 num = 0 和第一 ID 对齐集 Sj = ∅</li>
+<li>当num = 1时，mj直接合并ExEnc(H(di1d), kmj )和Sj（第4行到第6行）。</li>
+<li>然后，矿工 mj 在他/她收到的所有私有样本 ID 中挑选出相同的加密 ExEncvalues 来形成 Sj（第 8 行到第 10 行）。</li>
+</ol>
+</li>
+<li>第二 ID 对齐：所有矿工用自己的公钥和对齐后的ID生成消息认证码，并打包发给排序节点。排序节点之间相互共享交易，并验证真实性，然后执行第二次对齐，过程如下：<ol>
+<li>首先，排序节点初始化一些参数（私有交集集 U = ∅，已验证参与者集 P = 0，回合数 num = 1）（第 1 行至第 4 行）。</li>
+<li>在每一轮中，排序节点都需要验证已验证的参与者集 P 是否等于总参与者集 P，如果是，则该算法终止。同样，如果私有交集 U = ∅，排序节点直接将 S1 插入 U 中（第 8 行至第 11 行）。</li>
+<li>接下来，图 3 举例说明了下一个过程。如图 3（a）所示，每个 u∈U 中的元素之间存在一种特殊关系。例如，在图 3 (a)中，序号为 “1 “的所有元素表示它们拥有相同的明文（样本 ID=3）。我们使用这些序列号来建立上述特殊关系。</li>
+<li>如图 3(b) 所示，排序节点通过可交换加密更新 u1 和 $u_{num}(u1:[4, k_1^m], [5, k_1^m]; u_{num}:[4, k_{num}^m], [5, k_{num}^m])$的交集（第 13 行到第 18 行）。计算交集后，排序节点选择当前的序列号，并将其保留在新一轮中（第 19 行）。排序节点删除每个 u 中没有当前序列号的元素（第 20 行）。在图 3(b) 的步骤 2 中，将通过插入 u_num 来更新私有交集 U，并且将重新排列序列号（第 21 行）。</li>
+</ol>
+</li>
+<li>区块链更新：<ol>
+<li>排序节点生成新区块并广播</li>
+<li>矿工验证区块并进行PoW，然后广播</li>
+<li>所有矿工接收并验证区块后，和自己连接了的参与者共享第二次对齐的结果</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基于区块链的模型训练：<ol>
+<li>问题分析：联邦学习使用对齐后的样本进行<ol>
+<li>传统安全逻辑回归：介绍了一下公式模型</li>
+<li>设计目标：基于区块链的安全逻辑回归多方模型训练框架</li>
+</ol>
+</li>
+<li>训练流程：<ol>
+<li>准备：PoW胜利的矿工广播区块</li>
+<li>训练与更新：<ol>
+<li>分发密钥：矿工给自己连接的参与者发公钥</li>
+<li>训练模型：和传统的联邦学习一样</li>
+<li>同态加密：参与者使用第一阶段的公钥对模型训练的中间输出加密</li>
+<li>上传隐私梯度：生成随机掩码与前一步的加密梯度相加并发给矿工</li>
+<li>返回梯度：矿工解密并返回给参与者</li>
+<li>上传测试结果：参与者用矿工返回的结果更新模型，并将测试集结果发给矿工，矿工将测试结果打包成交易发送给排序节点</li>
+<li>生成区块并准备：排序节点把有效交易放到新区块中，矿工PoW竞争，获胜者为下一轮选择第一步中的密钥</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>安全性分析<ol>
+<li>PSI 的正确性</li>
+<li>BVFL 的安全分析</li>
+<li>这部分没细看，大致意思就是密码学保证是安全的，感觉安全性问题得结合实验看了</li>
+</ol>
+</li>
+<li>实验：<ol>
+<li>实验中出现的矿工数量很少，这会带来安全性问题</li>
+<li>实验中的参与者数量同样少，实验中体现的性能可能并不现实</li>
+<li>好像没和其他联邦学习做对比实验</li>
+<li>很多联邦学习会关注通信轮数的指标，而本文引入了区块链技术，其效率也很依赖于通信轮数，建议实验中增加该指标，或者说明为什么没用这个指标</li>
+</ol>
+</li>
+<li>存在问题<ol>
+<li>写作方面前面有很多比较冗长且含义重复的介绍，一些已经介绍过的理论不必重复</li>
+<li>现阶段已经有很多多方PSI，这与本文intro不符，建议进一步调研文献</li>
+<li>对矿工和排序节点的选择依据和激励方式不明确</li>
+<li>实验部分的4个问题</li>
+</ol>
+</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2023/08/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-INFOCOM%202024%E5%AE%A1%E7%A8%BF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mechanism-design/" rel="tag">mechanism design</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/08/31/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Truthful%20Mobile%20Crowd%20Sensing%20with%20Interdependent%20Valuations/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/07/20/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Evolution%20of%20cooperation%20in%20stochastic%20games/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-Evolution of cooperation in stochastic games</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>
