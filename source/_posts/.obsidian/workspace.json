@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#略读",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -73,7 +73,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -93,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +134,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md"
+                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md"
+              }
+            }
+          },
+          {
+            "id": "d200b9ed2f664ec4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
               }
             }
           }
@@ -154,34 +165,34 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b9fb34424300446d",
+  "active": "3f9fc3167e0e31ad",
   "lastOpenFiles": [
+    "论文记录-INFOCOM 2024审稿.md",
+    "论文记录-ARTHUR GERVAIS论文略读记录.md",
+    "论文记录-DeFi论文略读记录.md",
+    "论文记录-INFOCOM 2024审稿 - 副本.md",
+    "论文记录-Fast randomized consensus using shared memory.md",
     "论文记录-Evolution of cooperation in stochastic games.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
+    "论文记录-Theories of Bargaining Delays.md",
+    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
+    "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
+    "论文记录-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium.md",
+    "论文记录-Budgeted Unknown Worker Recruitment for Heterogeneous Crowdsensing Using CMAB.md",
+    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
     "hexo-next-github配置blog.md",
     "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
     "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-A Survey of Deep Causal Model.md",
     "未命名.md",
     "论文记录-Causal Intervention for Leveraging Popularity Bias in.md",
-    "论文记录-Caus.md",
-    "论文记录-A Bayesian Truth Serum for Subjective Data - 副本.md",
-    "论文记录-Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
-    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
-    "论文记录-Theories of Bargaining Delays.md",
-    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
-    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
-    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
-    "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
-    "论文记录-Fast randomized consensus using shared memory.md",
-    "论文记录-Eliciting Thinking Hierarchy without a Prior.md",
-    "论文记录-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium.md",
-    "论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
