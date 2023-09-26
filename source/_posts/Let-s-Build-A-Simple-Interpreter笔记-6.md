@@ -1,10 +1,10 @@
 ---
 title: Let-s-Build-A-Simple-Interpreter笔记-6
 date: 2020-03-12 16:26:15
-tags: 
-	- python
-	- 编译原理
-	- 学习笔记
+tags:
+  - python
+  - 编译原理
+  - 学习笔记
 categories: Let's Build A Simple Interpreter
 ---
 

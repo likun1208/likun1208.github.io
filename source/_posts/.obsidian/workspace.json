@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
+                "file": "论文记录-CeFi vs DeFi Comparing Centralized to Decentralized Finance.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#略读",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -73,8 +73,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
+                "file": "论文记录-CeFi vs DeFi Comparing Centralized to Decentralized Finance.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md",
+                "file": "论文记录-CeFi vs DeFi Comparing Centralized to Decentralized Finance.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-ARTHUR GERVAIS论文略读记录.md"
+                "file": "论文记录-CeFi vs DeFi Comparing Centralized to Decentralized Finance.md"
               }
             }
           },
@@ -165,34 +164,34 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3f9fc3167e0e31ad",
+  "active": "b9fb34424300446d",
   "lastOpenFiles": [
-    "论文记录-INFOCOM 2024审稿.md",
     "论文记录-ARTHUR GERVAIS论文略读记录.md",
-    "论文记录-DeFi论文略读记录.md",
-    "论文记录-INFOCOM 2024审稿 - 副本.md",
-    "论文记录-Fast randomized consensus using shared memory.md",
-    "论文记录-Evolution of cooperation in stochastic games.md",
-    "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
-    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
-    "论文记录-Theories of Bargaining Delays.md",
-    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
-    "论文记录-The universal visitation law of human mobility.md",
-    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
-    "论文记录-A Novel Paradigm for Disaster-Response Networks Framework, Strategy and Solution.md",
-    "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
-    "论文记录-Dynamic-Task-Pricing-in-Multi-Requester-Mobile-Crowd-Sensing-with-Markov-Correlated-Equilibrium.md",
-    "论文记录-Budgeted Unknown Worker Recruitment for Heterogeneous Crowdsensing Using CMAB.md",
-    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+    "论文记录-CeFi vs DeFi Comparing Centralized to Decentralized Finance.md",
+    "Web3行业总结.md",
+    "论文记录-ARTHUR GERVAIS论文略读记录 - 副本.md",
+    "vscode的一系列配置.md",
+    "typora图床功能设置.md",
+    "Ren-py引擎的使用.md",
+    "python课程期末作业.md",
+    "python课程记录-13.md",
+    "python课程记录-12.md",
+    "python课程记录-8.md",
+    "python课程记录-7.md",
+    "python课程记录-3.md",
+    "python课程记录-2.md",
+    "python课程记录-1.md",
+    "python-sklearn-keras-lstm回归预测问题.md",
+    "Let-s-Build-A-Simple-Interpreter笔记-8.md",
+    "Let-s-Build-A-Simple-Interpreter笔记-4.md",
+    "Let-s-Build-A-Simple-Interpreter笔记-1.md",
+    "Leetcode记录-2 - 副本.md",
+    "Leetcode记录-2.md",
+    "Leetcode记录-1.md",
+    "hexo+reveal实现slide.md",
     "hexo-next-github配置blog.md",
-    "论文记录-Causal Intervention for Leveraging Popularity Bias in Recommendation.md",
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
-    "论文记录-A Survey of Deep Causal Model.md",
-    "未命名.md",
-    "论文记录-Causal Intervention for Leveraging Popularity Bias in.md",
+    "Github项目数据统计.md",
+    "Echarts的配置.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }

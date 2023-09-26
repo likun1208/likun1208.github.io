@@ -2,9 +2,9 @@
 title: ck3mod制作笔记-6
 date: 2020-12-16 14:35:13
 tags:
-	- 游戏相关
-	- ck3
-	- mod
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 description: 这部分学习特质相关的内容。
 ---

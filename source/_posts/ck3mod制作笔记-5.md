@@ -2,9 +2,9 @@
 title: ck3mod制作笔记-5
 date: 2020-11-08 12:49:13
 tags:
-	- 游戏相关
-	- ck3
-	- mod
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 description: 这部分学习条件式写法。
 ---

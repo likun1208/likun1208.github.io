@@ -2,8 +2,8 @@
 title: Ren'py引擎的使用
 date: 2021-02-11 17:12:12
 tags:
-	- 游戏相关
-	- Renpy
+  - 游戏相关
+  - Renpy
 categories: Renpy
 description: 简单学习Renpy引擎的使用。
 ---

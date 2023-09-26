@@ -2,9 +2,9 @@
 title: ck3mod制作笔记-4
 date: 2020-11-08 11:48:18
 tags:
-	- 游戏相关
-	- ck3
-	- mod
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 description: 这是对CK3的wiki中的事件模组的简要翻译。
 ---

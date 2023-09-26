@@ -1,12 +1,12 @@
 ---
 title: python+sklearn+keras+lstm回归预测问题
 date: 2020-07-24 07:38:36
-tags: 
-	- python
-	- sklearn
-	- keras
-	- lstm
-	- 回归
+tags:
+  - python
+  - sklearn
+  - keras
+  - lstm
+  - 回归
 categories: 无分类项
 ---
 

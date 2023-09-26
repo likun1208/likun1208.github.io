@@ -1,10 +1,10 @@
 ---
 title: ck3mod制作笔记-8
 date: 2021-01-06 19:08:27
-tags:	
-	- 游戏相关
-	- ck3
-	- mod
+tags:
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 description: 这部分学习flag、modifier、customizable_localization和message。
 ---

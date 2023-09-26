@@ -1,10 +1,10 @@
 ---
 title: ck3mod制作笔记-7
 date: 2020-12-24 19:08:27
-tags:	
-	- 游戏相关
-	- ck3
-	- mod
+tags:
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 description: 这部分学习on_action的使用。
 ---

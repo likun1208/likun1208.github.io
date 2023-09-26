@@ -2,9 +2,9 @@
 title: ck3mod制作笔记-2
 date: 2020-10-04 10:42:04
 tags:
-	- 游戏相关
-	- ck3
-	- mod
+  - 游戏相关
+  - ck3
+  - mod
 categories: CK3
 ---
 
