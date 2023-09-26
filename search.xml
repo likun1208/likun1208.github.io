@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-CeFi vs. DeFi — Comparing Centralized to Decentralized Finance</title>
+    <url>/2023/09/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-CeFi%20vs%20DeFi%20Comparing%20Centralized%20to%20Decentralized%20Finance/</url>
+    <content><![CDATA[<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
+<li>与传统的中心化金融相比，DeFi的特征：<ol>
+<li>透明。在 DeFi 中，用户可以查看金融资产和产品运行的精确规则。 DeFi 试图避免私人协议、反向交易和中心化，这些都是 CeFi 透明度的重要限制因素。 </li>
+<li>控制。 DeFi 通过让用户仍然是其资产的托管人来为用户提供控制权，即未经用户同意，任何人都不得审查、转移或销毁用户的资产。 </li>
+<li>可达性。任何拥有适度计算机、互联网连接和专业知识的人都可以创建和部署 DeFi 产品，而区块链及其分布式矿工网络则可以继续有效地运行 DeFi 应用程序。</li>
+</ol>
+</li>
+<li>本文：<ol>
+<li>比较两个领域的技术差异</li>
+<li>深入研究它们的经济差异</li>
+<li>对比了法律的特殊性</li>
+</ol>
+</li>
+<li>本文贡献：<ol>
+<li>CeFi和DeFi分类的决策树<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A&#123;金融资产是否由用户控制&#125;--No--&gt;B(CeFi)</span><br><span class="line">A--Yes--&gt;C&#123;有人能单独审查交易执行吗&#125;</span><br><span class="line">C--Yes--&gt;D(CeFi做中间人DeFi做决算)</span><br><span class="line">C--No--&gt;E&#123;有人能单独审查协议执行吗&#125;</span><br><span class="line">E--Yes--&gt;F(中心化管理的DeFi)</span><br><span class="line">E--No--&gt;G(DeFi)</span><br></pre></td></tr></table></figure></li>
+<li>DeFi系统化</li>
+<li>案例研究<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><h2 id="Finance"><a href="#Finance" class="headerlink" title="Finance"></a>Finance</h2></li>
+</ol>
+</li>
+<li>金融机构：提供金融服务的金融中介机构</li>
+<li>金融工具：货币资产，金融工具可以是代表涉及货币价值的法律协议的纸质文件或虚拟合同</li>
+<li>金融市场：发生金融工具交易的任何市场<h2 id="Blockchain和DeFi"><a href="#Blockchain和DeFi" class="headerlink" title="Blockchain和DeFi"></a>Blockchain和DeFi</h2>这部分主要介绍DeFi能做什么，DeFi与区块链的关系。不细看了。<h2 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h2></li>
+<li>公开验证：任意用户可查看状态转换、验证交易执行</li>
+<li>托管：用户可在任意时间管理资产，没有营业时间限制，但是风险自担，由此出现了中心化的交易所来帮用户管理资产，这与CeFi是类似的</li>
+<li>隐私：DeFi是匿名的，但不完全匿名，有很多方法可以从匿名地址中追溯身份，而中心化的交易所也使得匿名并不安全</li>
+<li>原子性：区块链交易支持顺序操作，可以组合多种金融操作。这种组合可以被强制为原子的——这意味着事务要么完整执行其所有操作，要么集体失败。CeFi中并没有这么直接的原子性，但是个别场景下法律协议也可以在 CeFi 中强制执行原子性</li>
+<li>执行顺序可变性：区块链中矿工和用户可以开展交易费用竞标竞赛来引导交易执行顺序，这种顺序可变性被证明会导致各种市场操纵策略。在 CeFi 中，监管机构对中心化的金融机构和服务实施严格的规则，规定必须如何执行交易排序。</li>
+<li>交易成本：一般而言，DeFi 和区块链中的交易费用对于防止垃圾邮件至关重要。然而，在 CeFi 中，金融机构可以选择免费提供交易服务。</li>
+<li>不间断的市场运行时间：CeFi有各自设定的营业时间，交易会有开盘收盘的情况，DeFi则没有。</li>
+<li>匿名开发和部署：许多 DeFi 项目都是由匿名团队开发和维护的<h1 id="案例分析：法律"><a href="#案例分析：法律" class="headerlink" title="案例分析：法律"></a>案例分析：法律</h1></li>
+</ol>
+<h1 id="案例分析：服务"><a href="#案例分析：服务" class="headerlink" title="案例分析：服务"></a>案例分析：服务</h1><h1 id="案例分析：经济操纵"><a href="#案例分析：经济操纵" class="headerlink" title="案例分析：经济操纵"></a>案例分析：经济操纵</h1><h1 id="CeFi和DeFi的协同"><a href="#CeFi和DeFi的协同" class="headerlink" title="CeFi和DeFi的协同"></a>CeFi和DeFi的协同</h1>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+        <tag>defi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-ARTHUR GERVAIS论文略读记录</title>
     <url>/2023/09/25/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-ARTHUR%20GERVAIS%E8%AE%BA%E6%96%87%E7%95%A5%E8%AF%BB%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="1-A-Study-of-Inline-Assembly-in-Solidity-Smart-Contracts"><a href="#1-A-Study-of-Inline-Assembly-in-Solidity-Smart-Contracts" class="headerlink" title="1. A Study of Inline Assembly in Solidity Smart Contracts"></a>1. A Study of Inline Assembly in Solidity Smart Contracts</h1><p>这篇内容是关于Solidity内联汇编带来的安全性问题，对内联汇编的使用情况做了定量和定性分析。和DeFi没什么关系，先不看了。</p>
@@ -38,6 +81,7 @@
 <li>Quantifying Blockchain Extractable Value: How dark is the forest?</li>
 <li>Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)</li>
 <li>Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys</li>
+<li>SoK: Decentralized Finance (DeFi) Attacks</li>
 </ol>
 <p>精读候选</p>
 <ol>
@@ -3759,11 +3803,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts4870" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7708" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4870'));
+        var myChart = echarts.init(document.getElementById('echarts7708'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -3819,11 +3863,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3959" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3927" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3959'));
+        var myChart = echarts.init(document.getElementById('echarts3927'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -3873,11 +3917,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts262" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1747" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts262'));
+        var myChart = echarts.init(document.getElementById('echarts1747'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -9552,11 +9596,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts6035" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1468" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6035'));
+        var myChart = echarts.init(document.getElementById('echarts1468'));
         // 指定图表的配置项和数据
         var option = {
     title: {
