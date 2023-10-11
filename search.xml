@@ -1,6 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-SoK: Decentralized Finance (DeFi) Attacks</title>
+    <url>/2023/10/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SoK%20Decentralized%20Finance%20(DeFi)%20Attacks/</url>
+    <content><![CDATA[<h1 id="SoK-Decentralized-Finance-DeFi-Attacks"><a href="#SoK-Decentralized-Finance-DeFi-Attacks" class="headerlink" title="SoK: Decentralized Finance (DeFi) Attacks"></a>SoK: Decentralized Finance (DeFi) Attacks</h1><ol>
+<li></li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+        <tag>defi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-A Survey on Applications of Game Theory in Blockchain</title>
+    <url>/2023/10/03/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20on%20Applications%20of%20Game%20Theory%20in%20Blockchain/</url>
+    <content><![CDATA[<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
+<li>区块链引入博弈论的背景：<ol>
+<li>区块链需要大量共识节点参与网络</li>
+<li>理性节点会执行旨在最大化自身效用的行动或策略，恶意节点可能会攻击破坏区块链网络。</li>
+<li>拜占庭容错（BFT）协议等共识协议可解决安全挑战，但需要集中的权限控制器，适用范围有限，不适用于去中心化的大规模系统的区块链网络。</li>
+<li>马尔可夫决策过程（MDP）等优化方法用于分析和优化节点策略，但未考虑节点间相互作用。</li>
+<li>由此引入博弈论作为区块链网络中的替代解决方案，解决节点间策略和相互作用问题。</li>
+</ol>
+</li>
+<li>博弈论的运用：<ol>
+<li>博弈论可以用来分析共识节点的策略以及它们之间的相互作用。通过博弈论分析，节点可以学习和预测彼此的挖矿行为，然后基于均衡分析制定最优的反应策略。</li>
+<li>博弈论可用于开发激励机制，阻止节点执行不当行为或发起攻击。因此，博弈论自然适用于区块链网络中所有共识节点的决策。<h1 id="区块链基础"><a href="#区块链基础" class="headerlink" title="区块链基础"></a>区块链基础</h1></li>
+</ol>
+</li>
+<li>区块链的优势：去中心、防篡改、交易透明、无需信任担保</li>
+<li>区块链的数据组织：交易、区块、散列指针、Merkle Tree</li>
+<li>区块链的分类：<ol>
+<li>无许可，公链——PoW和PoS</li>
+<li>许可链，联盟链和私链——BFT</li>
+</ol>
+</li>
+<li>区块链中的激励相容<ol>
+<li>共识协议的属性：正确性、一致性、可追溯性</li>
+<li>各大共识都存在激励相容问题，节点可能会偏离协议以增加自己的效用。<h1 id="博弈论基础"><a href="#博弈论基础" class="headerlink" title="博弈论基础"></a>博弈论基础</h1></li>
+</ol>
+</li>
+<li>博弈中的术语：玩家、效用、策略、理性<h2 id="非合作博弈"><a href="#非合作博弈" class="headerlink" title="非合作博弈"></a>非合作博弈</h2></li>
+<li>玩家之间没有策略交流，自发采取策略，理性</li>
+<li>区块链的场景：理性矿工作为玩家对计算能力进行战略性投资，以争夺成功采矿的奖励<ol>
+<li>N个矿工，$P_i$是第$i$个矿工的策略集，$P=P_1\times … \times P_N$是各策略集的笛卡尔积</li>
+<li>$p_i\in P_i$是第$i$个矿工的策略，N个矿工的策略向量$P=(p_1,…,p_n)$，对应的收益向量是$\pi=(\pi_1(p),…,\pi_N(p))\in R^n$，其中$\pi_i(p)$是第$i$个矿工的收益</li>
+<li>综合考虑各矿工的策略和挖矿奖励，存在一组策略$\mathbf{p}^<em>=\left(p_1^</em>, \ldots, p_N^<em>\right) \in P$是纳什均衡，在这组策略下，任何矿工无法通过改变自己的策略来提高收益，即：$\forall i, p_i \in P_i: \pi_i\left(p_i^</em>, \overline{\mathbf{p}}_{\mathbf{i}}^<em>\right) \geq \pi_i\left(p_i, \overline{\mathbf{p}}_{\mathbf{i}}^</em>\right)$，其中$\overline{\mathbf{p}}_{\mathbf{i}}=\left(p_1, \ldots, p_{i-1}, p_{i+1}, \ldots, p_N\right)$是除了第$i$个矿工以外的其他矿工的策略</li>
+<li>唯一性证明了严格凹博弈可以渐进地达到唯一的均衡。这里，凹博弈意味着玩家的效用函数是凹的，这可以通过计算效用函数的二阶导数来证明。（concave，指二阶导小于0）</li>
+<li>应用案例：<ol>
+<li>算力分配</li>
+<li>分叉选择</li>
+<li>矿池选择</li>
+<li>用户和矿工的互动</li>
+<li>区块扣留攻击<h2 id="扩展式博弈"><a href="#扩展式博弈" class="headerlink" title="扩展式博弈"></a>扩展式博弈</h2></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对静态博弈的扩展：动态博弈，即博弈者的策略是按照一定的预定顺序制定的博弈。</li>
+<li>博弈树：博弈者在不同点上做出的决定，并在每个分支的末端表示了他们的回报。可应用例子是描述分叉选择</li>
+<li>分析过程：拆分成若干静态非合作子博弈，所有子博弈的均衡解表示了整个博弈的均衡，通常用逆向归纳法，从结尾倒推前一步的策略<h2 id="Stackelberg-Game"><a href="#Stackelberg-Game" class="headerlink" title="Stackelberg Game"></a>Stackelberg Game</h2></li>
+<li>也是涉及玩家采取的某种预先定义的有序策略的博弈</li>
+<li>参与者包括leader和follower。follower在观察leader的策略后决定自己的策略。leader和follower通常都是理性的，旨在最大化自己的效用</li>
+<li>区块链分析案例：边缘计算网络<ol>
+<li>参与者：<ol>
+<li>服务商：提供算力设定价格出售</li>
+<li>矿工：优化算力需求，买算力服务</li>
+</ol>
+</li>
+<li>博弈过程：服务商设定价格，矿工决定需求</li>
+</ol>
+</li>
+<li>分析过程：也是逆向归纳</li>
+<li>应用：<ol>
+<li>设置交易费用和选择矿工进行验证</li>
+<li>确定网络保险价格</li>
+<li>分析基于区块链的边缘计算平台中的供需关系<h2 id="Stochastic-Game"><a href="#Stochastic-Game" class="headerlink" title="Stochastic Game"></a>Stochastic Game</h2></li>
+</ol>
+</li>
+<li>可以看作几个随时间重复的静态非合作博弈，每个静态非合作博弈称为博弈状态。</li>
+<li>随机博弈在博弈状态之间执行随机转换，玩家可以根据其他玩家过去的行动和转变行为来改变策略</li>
+<li>区块链分析案例：分析矿工对区块链结构转变的挖矿链选择<ol>
+<li>博弈组成：<ol>
+<li>有限玩家集I：矿工</li>
+<li>状态空间M：区块链结构</li>
+<li>策略集S</li>
+<li>转移概率P</li>
+</ol>
+</li>
+<li>矿工收益函数$g_n$，通常被视为阶段收益的贴现总和</li>
+<li>博弈过程：<ol>
+<li>从初始状态$m_1$开始</li>
+<li>阶段$t$矿工观察区块结构$m_t$，选择策略$s_t^i$，即挑个链挖矿</li>
+<li>每个矿工会立刻收到对应的收益$g_n^i$</li>
+<li>博弈进入新状态$m+1$</li>
+<li>如此循环直到进入MPE（马尔可夫完美均衡）</li>
+</ol>
+</li>
+<li>矿工在最长链上挖矿就是这个场景的MPE<h1 id="博弈论在安全的应用"><a href="#博弈论在安全的应用" class="headerlink" title="博弈论在安全的应用"></a>博弈论在安全的应用</h1><h2 id="自私挖矿攻击"><a href="#自私挖矿攻击" class="headerlink" title="自私挖矿攻击"></a>自私挖矿攻击</h2></li>
+</ol>
+</li>
+<li>攻击形式：攻击者（即恶意矿工或矿池）可能不会广播新开采的区块，而是选择 (i) 保留该区块或 (ii) 持有，然后在适当的时候释放该块。在这种情况下，诚实的矿工会浪费计算能力来寻找已经发现的区块，而恶意矿工则可以增加找到下一个区块的概率。矿池区块扣留（PBWH）攻击是一种常见的自私挖矿攻击。</li>
+<li>分析方法：<ol>
+<li>分析矿工和矿池的策略以及它们之间的相互作用</li>
+<li>马尔可夫决策过程（MDP）可用于分析个体参与者（即矿工或矿池）的策略和效用</li>
+<li>然而，MDP没有考虑多个参与者之间的交互，因此引入博弈论</li>
+</ol>
+</li>
+<li>博弈论分析：<ol>
+<li>对两个矿池之间的建模类似囚徒困境，解决方法如下：<ol>
+<li>加入不发动PBWH攻击的矿池</li>
+<li>运用零行列式策略，解决方案在[50]中提出，作者将两个矿工的挖矿案例建模为随机迭代博弈。我觉着这里也许可以看看矩阵最优回复结构那篇论文。</li>
+<li>一些场景下，矿工可以在两个矿池之间迁移，使得场景更复杂</li>
+</ol>
+</li>
+<li>多矿池的场景，可以引入计算功率分割（CPS）博弈模拟PBWH攻击，该场景没纯策略均衡，只有混合策略均衡</li>
+</ol>
+</li>
+<li>上述研究仅考虑挖矿奖励，在考虑交易费用后，矿工可能不会立即向其他人广播交易以增加他们的预期利润，这称为自私传播攻击，需要针对性地设计激励机制，例如迭代去除主导策略。</li>
+<li>在一些场景下，矿工为了最大化收益，会主动分叉，或者只挖矿不打包交易等。这个研究的场景大致应该是有传播费，然后逐层传递，矿工可以找最长链继承，并从剩下的费用里claim自己要收走的，也可以主动分叉，相当于是从再往前的一级那里继承，这样能claim的费用就多了。一个例子是：最长链的上一级给自己留了500，给当前矿工留了20，那么选项A是继承它，收20，不给后人留；选项B是直接分叉，自己从520中拿270，给后人留250。显然选项B更好。</li>
+<li>其他类似形式的攻击就不细看了，大体思路都是矿工延迟可以提高自己的收益，针对性的方法是设计激励相容的奖励方式。<h2 id="多数攻击"><a href="#多数攻击" class="headerlink" title="多数攻击"></a>多数攻击</h2></li>
+<li>概念：某个矿工持有51%及以上算力</li>
+<li>存在问题：通常来说所有矿工在最长链上挖矿是最优的，但是当某矿工持有51%算力并强行分叉，则最长链不再是最优的</li>
+<li>一些研究提出了新颖的攻击方式，使得多数攻击所需要的算力比51%还少。例如，攻击者利用其全部计算能力在其私有链上挖矿，同时发布智能合约交易。该合约交易包括一个散列谜题，即其私有链的 PoW 解法。任何解开谜题的矿工都可以从谜题的给出者（即攻击者）那里获得奖励，以换取谜题的解答。因此，当攻击者的私有链比公开链长时，攻击者可能会获得更多收益。每次攻击者通过智能合约发布散列谜题时，其他矿工有两种策略：(i) 处理合约中的谜题；(ii) 在公有链上挖矿。考虑到其他矿工的策略集，每个矿工都试图最大化自己的预期效用。因此，除了攻击者之外，其他矿工之间的互动可以建模为非合作博弈。当攻击者控制的计算能力超过网络总计算能力的 38.2% 时，矿工处理谜题的效用（概率 α）大于挖掘最长链的效用，因此攻击成功发起。这意味着每个矿工都会以概率 α 在谜题上工作，并以概率 1 - α 在公有链上挖矿。</li>
+<li>也有提供贿赂来搞分叉的攻击方式</li>
+<li>可以将诚实节点和恶意节点的攻防场景建模为随机博弈，然后分析双方策略及均衡</li>
+<li>除了上述动力来自系统内的攻击，也还存在动力来自系统外的攻击：<ol>
+<li>攻击者，即矿工，可以通过形成卡特尔来损害矿工之间的共识，即发起多数攻击，从而通过使加密货币贬值来获得一些效用</li>
+<li>捍卫者，即其他矿工，打算保持货币的价值</li>
+<li>为了防止货币贬值，防御者向攻击者提出出价，即类似于税收以保持货币的活力</li>
+<li>与此同时，防御者会权衡出价成本和保留货币的利润</li>
+<li>因此，可以使用非合作博弈来模拟攻击者和防御者之间的交互</li>
+</ol>
+</li>
+<li>除了PoW以外，PoS也有多数攻击，该场景下代理可以通过持有加密货币来获得利息，为了提高利息代理会收购加密货币，当某代理持有加密货币超过50%，就可以进行多数攻击。建模成序贯博弈后，在博弈中，参与者包括一名攻击者和其他代理。攻击者将 CC 贬值的收益与出价成本和利益损失进行权衡。在 CC 贬值的收益大于持有 CC 的利息的情况下，利用反向归纳法证明博弈存在唯一的纳什均衡。在均衡状态下，攻击者有动机购买超过 50%的 CC 单位，而其他代理人也愿意将 CC 卖给攻击者，因为他们知道 CC 没有价值。然而，攻击者可以在出价之前向其他代理人宣布发动多数攻击，从而不付出任何代价就能攻击成功。原因在于，如果代理人认为攻击成功，那么无论攻击者出价多少，他们都会把 CC 卖给攻击者。在这种情况下，纳什均衡可能并不存在。</li>
+<li>联盟链中也有多数攻击，可建模为stackelberg博弈<h2 id="阻断服务攻击（DoS攻击）"><a href="#阻断服务攻击（DoS攻击）" class="headerlink" title="阻断服务攻击（DoS攻击）"></a>阻断服务攻击（DoS攻击）</h2></li>
+<li>概念：P2P网络受到某些攻击者的干扰或破坏，被攻击矿工可用于交易传播和验证的资源可能会被耗尽。因此，受攻击的矿工将无法完成挖矿过程来获得挖矿奖励和预期利润。</li>
+<li>为了最大化挖矿奖励，矿池可以选择<ol>
+<li>触发分布式 DoS (DDoS) 攻击，从而降低其他矿池的预期收益</li>
+<li>投资额外的计算能力</li>
+</ol>
+</li>
+<li>采用非合作博弈来分析不同规模池之间的相互作用</li>
+<li>设计合适的奖励，使得矿池更愿意选择投资算力，而非发动dos攻击</li>
+<li>DoS攻击也会造成其他影响，例如矿工迁移到其他矿池，影响下一阶段的算力分布。建模为序贯博弈，寻找存在均衡解的收益函数设计</li>
+<li>一个研究增加了声誉系统的设计，只有收到邀请的才能在池里挖矿，从而保证矿工不发起DoS攻击</li>
+<li>类似的，另一个研究做了基于区块链行为记录的惩罚方案<h2 id="其他安全问题"><a href="#其他安全问题" class="headerlink" title="其他安全问题"></a>其他安全问题</h2></li>
+<li>基于区块链的数据共享：组织可以组成一个群组，共享信息并共同获得奖励，就像比特币系统中的矿池一样[75]。然而，一些组织成员可以组建一个子群，并加入另一个群组，通过不发布被加入群组的信息来获得更多收益。和PBWH是一样的。</li>
+<li>用智能合约解决云计算的验证问题，避免共谋，实现交叉验证</li>
+<li>商品交易过程的信任问题：智能合约+押金自动返还</li>
+<li>网络保险：区块链公司购买网络保险，保险公司在区块链有安全问题后提供补偿，建模为stackelberg博弈<h1 id="博弈论在挖矿管理的应用"><a href="#博弈论在挖矿管理的应用" class="headerlink" title="博弈论在挖矿管理的应用"></a>博弈论在挖矿管理的应用</h1>这部分讨论的是矿工和矿池的管理，这种场景很适合运用博弈论。<h2 id="个人挖矿"><a href="#个人挖矿" class="headerlink" title="个人挖矿"></a>个人挖矿</h2><h3 id="算力分配"><a href="#算力分配" class="headerlink" title="算力分配"></a>算力分配</h3></li>
+<li>矿工根据其他矿工的决策来决定自己是否投资算力——非合作博弈来分析矿工之间的交互</li>
+<li>矿工可以随时选择加入某矿池，和离开某矿池，其策略也依赖于其他矿工的状态——建模为随机博弈，引入排队论</li>
+<li>除了选择是否投资算力外，还可以选择投资多少算力——引入古诺博弈</li>
+<li>上述情况是挖矿奖励为主，交易费用较少，当反过来交易费用更重要时，矿工的算力分配是时变的——建模为随机博弈，应该也有点排队论</li>
+<li>也有和边缘计算结合，然后服务商提供挖矿算力，矿工选择买多少算力，这和区块链反而没啥关系，就是一个传统的移动计算场景，用的stackelberg博弈</li>
+<li>还是边缘计算的场景，有研究结合了深度学习和拍卖理论</li>
+<li>依旧是边缘计算，前面两个关注个体收益最大化，这篇关注社会福利最大化，将问题转化为背包约束<h3 id="分叉链选择"><a href="#分叉链选择" class="headerlink" title="分叉链选择"></a>分叉链选择</h3></li>
+<li>矿工的效用是计算能力分布、获胜解决 PoW 的概率以及其他矿工对即将公开的谜题的信念的函数。建模成序贯博弈，后向归纳法寻找均衡解。</li>
+<li>一些研究证明了最长链是均衡解。</li>
+<li>另一些研究分析了矿工是否承认硬分叉的博弈。</li>
+<li>除了矿工要选择，用户也要选，因此博弈更复杂。</li>
+<li>也有研究分析这种场景下的矿工合作共谋问题。</li>
+<li>上述分析是在PoW进行，有研究迁移到PoS进行。<h3 id="区块大小的设计"><a href="#区块大小的设计" class="headerlink" title="区块大小的设计"></a>区块大小的设计</h3></li>
+<li>矿工打包的交易多，区块就会变大，交易费用固然挣得多，但共识速度也慢了，很可能没法成为主链，因此区块大小的设计也需要控制好。</li>
+<li>过大的区块会影响吞吐量，反而降低比特币系统的性能。<h2 id="矿池挖矿"><a href="#矿池挖矿" class="headerlink" title="矿池挖矿"></a>矿池挖矿</h2><h3 id="矿池选择"><a href="#矿池选择" class="headerlink" title="矿池选择"></a>矿池选择</h3></li>
+<li>矿工和矿池之间的交互用联盟博弈分析</li>
+<li>矿工选矿池的过程类似多臂赌博机，由于矿工改变矿池会改变全网算力分布，因此使用进化博弈分析这个动态过程<h3 id="奖励分配"><a href="#奖励分配" class="headerlink" title="奖励分配"></a>奖励分配</h3></li>
+<li>非合作博弈分析矿工和矿池管理者之间的交互，寻找能使得矿工挖出块就立刻报告的均衡解。</li>
+<li>要避免矿工集中在一个矿池导致的中心化问题。<h1 id="博弈论在区块链平台的应用"><a href="#博弈论在区块链平台的应用" class="headerlink" title="博弈论在区块链平台的应用"></a>博弈论在区块链平台的应用</h1><h2 id="加密货币经济"><a href="#加密货币经济" class="headerlink" title="加密货币经济"></a>加密货币经济</h2></li>
+<li>交易透明导致一些历史不太清白的大额交易被孤立，因此用户选择混合支付，拆分大额交易，用不同质量的小额交易支付，这样不清白交易对矿工损失也较小，矿工会愿意打包</li>
+<li>但是混合交易支付使得资金流向更难查，对区块链系统不利（为什么会这样？系统透明按理说是一样的查找难度），一些研究设计了交易系统，寻找交易透明度的最佳水平</li>
+<li>也有引入声誉系统的</li>
+<li>总的来说就是权衡系统透明度和用户隐私保护度</li>
+<li>不同加密货币价值不一样，矿工要决定挖哪个币，用势博弈分析</li>
+<li>加密货币的价值与区块链系统内的算力和用户数量相关<h2 id="能源交易"><a href="#能源交易" class="headerlink" title="能源交易"></a>能源交易</h2>是关于分布式能源交易的方案设计，和区块链本身关系不大，本质上就是用户和服务商的博弈<h1 id="挑战与未来方向"><a href="#挑战与未来方向" class="headerlink" title="挑战与未来方向"></a>挑战与未来方向</h1><h2 id="博弈论方面的挑战"><a href="#博弈论方面的挑战" class="headerlink" title="博弈论方面的挑战"></a>博弈论方面的挑战</h2></li>
+<li>纳什均衡的存在性，多种均衡之间的选择</li>
+<li>博弈模型在区块链中的实现——平均场博弈、进化博弈、随机博弈<h2 id="博弈论在区块链方面的应用展望"><a href="#博弈论在区块链方面的应用展望" class="headerlink" title="博弈论在区块链方面的应用展望"></a>博弈论在区块链方面的应用展望</h2></li>
+<li>提升吞吐量</li>
+<li>设计更好的共识</li>
+<li>联盟链中的节点选择</li>
+<li>区块链在边缘计算、信息共享、能源交易等方面的应用</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+        <tag>game</tag>
+        <tag>theory</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-CeFi vs. DeFi — Comparing Centralized to Decentralized Finance</title>
     <url>/2023/09/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-CeFi%20vs%20DeFi%20Comparing%20Centralized%20to%20Decentralized%20Finance/</url>
     <content><![CDATA[<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
@@ -32,7 +228,13 @@
 <li>执行顺序可变性：区块链中矿工和用户可以开展交易费用竞标竞赛来引导交易执行顺序，这种顺序可变性被证明会导致各种市场操纵策略。在 CeFi 中，监管机构对中心化的金融机构和服务实施严格的规则，规定必须如何执行交易排序。</li>
 <li>交易成本：一般而言，DeFi 和区块链中的交易费用对于防止垃圾邮件至关重要。然而，在 CeFi 中，金融机构可以选择免费提供交易服务。</li>
 <li>不间断的市场运行时间：CeFi有各自设定的营业时间，交易会有开盘收盘的情况，DeFi则没有。</li>
-<li>匿名开发和部署：许多 DeFi 项目都是由匿名团队开发和维护的<h1 id="案例分析：法律"><a href="#案例分析：法律" class="headerlink" title="案例分析：法律"></a>案例分析：法律</h1></li>
+<li>匿名开发和部署：许多 DeFi 项目都是由匿名团队开发和维护的<h1 id="案例分析：法律"><a href="#案例分析：法律" class="headerlink" title="案例分析：法律"></a>案例分析：法律</h1><h3 id="合规性检查"><a href="#合规性检查" class="headerlink" title="合规性检查"></a>合规性检查</h3></li>
+<li>CeFi依赖于KYC验证，也会需要AML验证</li>
+<li>DeFi在资金追溯方面比CeFi要简单</li>
+<li>如果用户只在DeFi操作，完全不进入CeFi，则从技术上来说能避开KYC；但是从合规角度来看，很难将没有KYC的资金从DeFi转移到CeFi<h3 id="资产可替代性"><a href="#资产可替代性" class="headerlink" title="资产可替代性"></a>资产可替代性</h3></li>
+<li>这里提到了DeFi中矿工可能拒绝执行审查交易，例如在闪电网络[156]中，节点可能只是拒绝为特定交易提供服务，迫使用户要么选择另一个链下支付路径，要么通过常规比特币交易返回链上层。</li>
+<li>现实法规中的一些约束要求某实体具有冻结和没收金融资产的能力，而这与DeFi从根本上是冲突的。</li>
+<li></li>
 </ol>
 <h1 id="案例分析：服务"><a href="#案例分析：服务" class="headerlink" title="案例分析：服务"></a>案例分析：服务</h1><h1 id="案例分析：经济操纵"><a href="#案例分析：经济操纵" class="headerlink" title="案例分析：经济操纵"></a>案例分析：经济操纵</h1><h1 id="CeFi和DeFi的协同"><a href="#CeFi和DeFi的协同" class="headerlink" title="CeFi和DeFi的协同"></a>CeFi和DeFi的协同</h1>]]></content>
       <categories>
@@ -80,7 +282,6 @@
 <li>High-Frequency Trading on Decentralized On-Chain Exchanges</li>
 <li>Quantifying Blockchain Extractable Value: How dark is the forest?</li>
 <li>Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)</li>
-<li>Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys</li>
 <li>SoK: Decentralized Finance (DeFi) Attacks</li>
 </ol>
 <p>精读候选</p>
@@ -3510,7 +3711,7 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
   </entry>
   <entry>
     <title>Leetcode记录-3</title>
-    <url>/2021/08/25/Leetcode%E8%AE%B0%E5%BD%95-2%20-%20%E5%89%AF%E6%9C%AC/</url>
+    <url>/2021/08/25/Leetcode%E8%AE%B0%E5%BD%95-3/</url>
     <content><![CDATA[<h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><p>从今天起，先跟着<a href="https://github.com/changgyhub/leetcode_101" target="_blank" rel="noopener">LeetCode 101</a>做题，首先是贪心算法。</p>
 ]]></content>
       <categories>
@@ -3803,11 +4004,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts7708" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts89" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7708'));
+        var myChart = echarts.init(document.getElementById('echarts89'));
+
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -3860,14 +4061,15 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3927" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts2210" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3927'));
+        var myChart = echarts.init(document.getElementById('echarts2210'));
+
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -3914,14 +4116,15 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1747" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts1710" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1747'));
+        var myChart = echarts.init(document.getElementById('echarts1710'));
+
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -3967,6 +4170,7 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
@@ -9596,11 +9800,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1468" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts200" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1468'));
+        var myChart = echarts.init(document.getElementById('echarts200'));
+
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -9667,6 +9871,7 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         }
     ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>]]></content>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="博弈论在区块链中的应用" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-A Survey on Applications of Game Theory in Blockchain |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-A Survey on Applications of Game Theory in Blockchain"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-A Survey on Applications of Game Theory in Blockchain
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/03/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20on%20Applications%20of%20Game%20Theory%20in%20Blockchain/" class="article-date">
+  <time datetime="2023-10-03T08:40:10.000Z" itemprop="datePublished">2023-10-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">15 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
+<li>区块链引入博弈论的背景：<ol>
+<li>区块链需要大量共识节点参与网络</li>
+<li>理性节点会执行旨在最大化自身效用的行动或策略，恶意节点可能会攻击破坏区块链网络。</li>
+<li>拜占庭容错（BFT）协议等共识协议可解决安全挑战，但需要集中的权限控制器，适用范围有限，不适用于去中心化的大规模系统的区块链网络。</li>
+<li>马尔可夫决策过程（MDP）等优化方法用于分析和优化节点策略，但未考虑节点间相互作用。</li>
+<li>由此引入博弈论作为区块链网络中的替代解决方案，解决节点间策略和相互作用问题。</li>
+</ol>
+</li>
+<li>博弈论的运用：<ol>
+<li>博弈论可以用来分析共识节点的策略以及它们之间的相互作用。通过博弈论分析，节点可以学习和预测彼此的挖矿行为，然后基于均衡分析制定最优的反应策略。</li>
+<li>博弈论可用于开发激励机制，阻止节点执行不当行为或发起攻击。因此，博弈论自然适用于区块链网络中所有共识节点的决策。<h1 id="区块链基础"><a href="#区块链基础" class="headerlink" title="区块链基础"></a>区块链基础</h1></li>
+</ol>
+</li>
+<li>区块链的优势：去中心、防篡改、交易透明、无需信任担保</li>
+<li>区块链的数据组织：交易、区块、散列指针、Merkle Tree</li>
+<li>区块链的分类：<ol>
+<li>无许可，公链——PoW和PoS</li>
+<li>许可链，联盟链和私链——BFT</li>
+</ol>
+</li>
+<li>区块链中的激励相容<ol>
+<li>共识协议的属性：正确性、一致性、可追溯性</li>
+<li>各大共识都存在激励相容问题，节点可能会偏离协议以增加自己的效用。<h1 id="博弈论基础"><a href="#博弈论基础" class="headerlink" title="博弈论基础"></a>博弈论基础</h1></li>
+</ol>
+</li>
+<li>博弈中的术语：玩家、效用、策略、理性<h2 id="非合作博弈"><a href="#非合作博弈" class="headerlink" title="非合作博弈"></a>非合作博弈</h2></li>
+<li>玩家之间没有策略交流，自发采取策略，理性</li>
+<li>区块链的场景：理性矿工作为玩家对计算能力进行战略性投资，以争夺成功采矿的奖励<ol>
+<li>N个矿工，$P_i$是第$i$个矿工的策略集，$P=P_1\times … \times P_N$是各策略集的笛卡尔积</li>
+<li>$p_i\in P_i$是第$i$个矿工的策略，N个矿工的策略向量$P=(p_1,…,p_n)$，对应的收益向量是$\pi=(\pi_1(p),…,\pi_N(p))\in R^n$，其中$\pi_i(p)$是第$i$个矿工的收益</li>
+<li>综合考虑各矿工的策略和挖矿奖励，存在一组策略$\mathbf{p}^<em>=\left(p_1^</em>, \ldots, p_N^<em>\right) \in P$是纳什均衡，在这组策略下，任何矿工无法通过改变自己的策略来提高收益，即：$\forall i, p_i \in P_i: \pi_i\left(p_i^</em>, \overline{\mathbf{p}}_{\mathbf{i}}^<em>\right) \geq \pi_i\left(p_i, \overline{\mathbf{p}}_{\mathbf{i}}^</em>\right)$，其中$\overline{\mathbf{p}}_{\mathbf{i}}=\left(p_1, \ldots, p_{i-1}, p_{i+1}, \ldots, p_N\right)$是除了第$i$个矿工以外的其他矿工的策略</li>
+<li>唯一性证明了严格凹博弈可以渐进地达到唯一的均衡。这里，凹博弈意味着玩家的效用函数是凹的，这可以通过计算效用函数的二阶导数来证明。（concave，指二阶导小于0）</li>
+<li>应用案例：<ol>
+<li>算力分配</li>
+<li>分叉选择</li>
+<li>矿池选择</li>
+<li>用户和矿工的互动</li>
+<li>区块扣留攻击<h2 id="扩展式博弈"><a href="#扩展式博弈" class="headerlink" title="扩展式博弈"></a>扩展式博弈</h2></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对静态博弈的扩展：动态博弈，即博弈者的策略是按照一定的预定顺序制定的博弈。</li>
+<li>博弈树：博弈者在不同点上做出的决定，并在每个分支的末端表示了他们的回报。可应用例子是描述分叉选择</li>
+<li>分析过程：拆分成若干静态非合作子博弈，所有子博弈的均衡解表示了整个博弈的均衡，通常用逆向归纳法，从结尾倒推前一步的策略<h2 id="Stackelberg-Game"><a href="#Stackelberg-Game" class="headerlink" title="Stackelberg Game"></a>Stackelberg Game</h2></li>
+<li>也是涉及玩家采取的某种预先定义的有序策略的博弈</li>
+<li>参与者包括leader和follower。follower在观察leader的策略后决定自己的策略。leader和follower通常都是理性的，旨在最大化自己的效用</li>
+<li>区块链分析案例：边缘计算网络<ol>
+<li>参与者：<ol>
+<li>服务商：提供算力设定价格出售</li>
+<li>矿工：优化算力需求，买算力服务</li>
+</ol>
+</li>
+<li>博弈过程：服务商设定价格，矿工决定需求</li>
+</ol>
+</li>
+<li>分析过程：也是逆向归纳</li>
+<li>应用：<ol>
+<li>设置交易费用和选择矿工进行验证</li>
+<li>确定网络保险价格</li>
+<li>分析基于区块链的边缘计算平台中的供需关系<h2 id="Stochastic-Game"><a href="#Stochastic-Game" class="headerlink" title="Stochastic Game"></a>Stochastic Game</h2></li>
+</ol>
+</li>
+<li>可以看作几个随时间重复的静态非合作博弈，每个静态非合作博弈称为博弈状态。</li>
+<li>随机博弈在博弈状态之间执行随机转换，玩家可以根据其他玩家过去的行动和转变行为来改变策略</li>
+<li>区块链分析案例：分析矿工对区块链结构转变的挖矿链选择<ol>
+<li>博弈组成：<ol>
+<li>有限玩家集I：矿工</li>
+<li>状态空间M：区块链结构</li>
+<li>策略集S</li>
+<li>转移概率P</li>
+</ol>
+</li>
+<li>矿工收益函数$g_n$，通常被视为阶段收益的贴现总和</li>
+<li>博弈过程：<ol>
+<li>从初始状态$m_1$开始</li>
+<li>阶段$t$矿工观察区块结构$m_t$，选择策略$s_t^i$，即挑个链挖矿</li>
+<li>每个矿工会立刻收到对应的收益$g_n^i$</li>
+<li>博弈进入新状态$m+1$</li>
+<li>如此循环直到进入MPE（马尔可夫完美均衡）</li>
+</ol>
+</li>
+<li>矿工在最长链上挖矿就是这个场景的MPE<h1 id="博弈论在安全的应用"><a href="#博弈论在安全的应用" class="headerlink" title="博弈论在安全的应用"></a>博弈论在安全的应用</h1><h2 id="自私挖矿攻击"><a href="#自私挖矿攻击" class="headerlink" title="自私挖矿攻击"></a>自私挖矿攻击</h2></li>
+</ol>
+</li>
+<li>攻击形式：攻击者（即恶意矿工或矿池）可能不会广播新开采的区块，而是选择 (i) 保留该区块或 (ii) 持有，然后在适当的时候释放该块。在这种情况下，诚实的矿工会浪费计算能力来寻找已经发现的区块，而恶意矿工则可以增加找到下一个区块的概率。矿池区块扣留（PBWH）攻击是一种常见的自私挖矿攻击。</li>
+<li>分析方法：<ol>
+<li>分析矿工和矿池的策略以及它们之间的相互作用</li>
+<li>马尔可夫决策过程（MDP）可用于分析个体参与者（即矿工或矿池）的策略和效用</li>
+<li>然而，MDP没有考虑多个参与者之间的交互，因此引入博弈论</li>
+</ol>
+</li>
+<li>博弈论分析：<ol>
+<li>对两个矿池之间的建模类似囚徒困境，解决方法如下：<ol>
+<li>加入不发动PBWH攻击的矿池</li>
+<li>运用零行列式策略，解决方案在[50]中提出，作者将两个矿工的挖矿案例建模为随机迭代博弈。我觉着这里也许可以看看矩阵最优回复结构那篇论文。</li>
+<li>一些场景下，矿工可以在两个矿池之间迁移，使得场景更复杂</li>
+</ol>
+</li>
+<li>多矿池的场景，可以引入计算功率分割（CPS）博弈模拟PBWH攻击，该场景没纯策略均衡，只有混合策略均衡</li>
+</ol>
+</li>
+<li>上述研究仅考虑挖矿奖励，在考虑交易费用后，矿工可能不会立即向其他人广播交易以增加他们的预期利润，这称为自私传播攻击，需要针对性地设计激励机制，例如迭代去除主导策略。</li>
+<li>在一些场景下，矿工为了最大化收益，会主动分叉，或者只挖矿不打包交易等。这个研究的场景大致应该是有传播费，然后逐层传递，矿工可以找最长链继承，并从剩下的费用里claim自己要收走的，也可以主动分叉，相当于是从再往前的一级那里继承，这样能claim的费用就多了。一个例子是：最长链的上一级给自己留了500，给当前矿工留了20，那么选项A是继承它，收20，不给后人留；选项B是直接分叉，自己从520中拿270，给后人留250。显然选项B更好。</li>
+<li>其他类似形式的攻击就不细看了，大体思路都是矿工延迟可以提高自己的收益，针对性的方法是设计激励相容的奖励方式。<h2 id="多数攻击"><a href="#多数攻击" class="headerlink" title="多数攻击"></a>多数攻击</h2></li>
+<li>概念：某个矿工持有51%及以上算力</li>
+<li>存在问题：通常来说所有矿工在最长链上挖矿是最优的，但是当某矿工持有51%算力并强行分叉，则最长链不再是最优的</li>
+<li>一些研究提出了新颖的攻击方式，使得多数攻击所需要的算力比51%还少。例如，攻击者利用其全部计算能力在其私有链上挖矿，同时发布智能合约交易。该合约交易包括一个散列谜题，即其私有链的 PoW 解法。任何解开谜题的矿工都可以从谜题的给出者（即攻击者）那里获得奖励，以换取谜题的解答。因此，当攻击者的私有链比公开链长时，攻击者可能会获得更多收益。每次攻击者通过智能合约发布散列谜题时，其他矿工有两种策略：(i) 处理合约中的谜题；(ii) 在公有链上挖矿。考虑到其他矿工的策略集，每个矿工都试图最大化自己的预期效用。因此，除了攻击者之外，其他矿工之间的互动可以建模为非合作博弈。当攻击者控制的计算能力超过网络总计算能力的 38.2% 时，矿工处理谜题的效用（概率 α）大于挖掘最长链的效用，因此攻击成功发起。这意味着每个矿工都会以概率 α 在谜题上工作，并以概率 1 - α 在公有链上挖矿。</li>
+<li>也有提供贿赂来搞分叉的攻击方式</li>
+<li>可以将诚实节点和恶意节点的攻防场景建模为随机博弈，然后分析双方策略及均衡</li>
+<li>除了上述动力来自系统内的攻击，也还存在动力来自系统外的攻击：<ol>
+<li>攻击者，即矿工，可以通过形成卡特尔来损害矿工之间的共识，即发起多数攻击，从而通过使加密货币贬值来获得一些效用</li>
+<li>捍卫者，即其他矿工，打算保持货币的价值</li>
+<li>为了防止货币贬值，防御者向攻击者提出出价，即类似于税收以保持货币的活力</li>
+<li>与此同时，防御者会权衡出价成本和保留货币的利润</li>
+<li>因此，可以使用非合作博弈来模拟攻击者和防御者之间的交互</li>
+</ol>
+</li>
+<li>除了PoW以外，PoS也有多数攻击，该场景下代理可以通过持有加密货币来获得利息，为了提高利息代理会收购加密货币，当某代理持有加密货币超过50%，就可以进行多数攻击。建模成序贯博弈后，在博弈中，参与者包括一名攻击者和其他代理。攻击者将 CC 贬值的收益与出价成本和利益损失进行权衡。在 CC 贬值的收益大于持有 CC 的利息的情况下，利用反向归纳法证明博弈存在唯一的纳什均衡。在均衡状态下，攻击者有动机购买超过 50%的 CC 单位，而其他代理人也愿意将 CC 卖给攻击者，因为他们知道 CC 没有价值。然而，攻击者可以在出价之前向其他代理人宣布发动多数攻击，从而不付出任何代价就能攻击成功。原因在于，如果代理人认为攻击成功，那么无论攻击者出价多少，他们都会把 CC 卖给攻击者。在这种情况下，纳什均衡可能并不存在。</li>
+<li>联盟链中也有多数攻击，可建模为stackelberg博弈<h2 id="阻断服务攻击（DoS攻击）"><a href="#阻断服务攻击（DoS攻击）" class="headerlink" title="阻断服务攻击（DoS攻击）"></a>阻断服务攻击（DoS攻击）</h2></li>
+<li>概念：P2P网络受到某些攻击者的干扰或破坏，被攻击矿工可用于交易传播和验证的资源可能会被耗尽。因此，受攻击的矿工将无法完成挖矿过程来获得挖矿奖励和预期利润。</li>
+<li>为了最大化挖矿奖励，矿池可以选择<ol>
+<li>触发分布式 DoS (DDoS) 攻击，从而降低其他矿池的预期收益</li>
+<li>投资额外的计算能力</li>
+</ol>
+</li>
+<li>采用非合作博弈来分析不同规模池之间的相互作用</li>
+<li>设计合适的奖励，使得矿池更愿意选择投资算力，而非发动dos攻击</li>
+<li>DoS攻击也会造成其他影响，例如矿工迁移到其他矿池，影响下一阶段的算力分布。建模为序贯博弈，寻找存在均衡解的收益函数设计</li>
+<li>一个研究增加了声誉系统的设计，只有收到邀请的才能在池里挖矿，从而保证矿工不发起DoS攻击</li>
+<li>类似的，另一个研究做了基于区块链行为记录的惩罚方案<h2 id="其他安全问题"><a href="#其他安全问题" class="headerlink" title="其他安全问题"></a>其他安全问题</h2></li>
+<li>基于区块链的数据共享：组织可以组成一个群组，共享信息并共同获得奖励，就像比特币系统中的矿池一样[75]。然而，一些组织成员可以组建一个子群，并加入另一个群组，通过不发布被加入群组的信息来获得更多收益。和PBWH是一样的。</li>
+<li>用智能合约解决云计算的验证问题，避免共谋，实现交叉验证</li>
+<li>商品交易过程的信任问题：智能合约+押金自动返还</li>
+<li>网络保险：区块链公司购买网络保险，保险公司在区块链有安全问题后提供补偿，建模为stackelberg博弈<h1 id="博弈论在挖矿管理的应用"><a href="#博弈论在挖矿管理的应用" class="headerlink" title="博弈论在挖矿管理的应用"></a>博弈论在挖矿管理的应用</h1>这部分讨论的是矿工和矿池的管理，这种场景很适合运用博弈论。<h2 id="个人挖矿"><a href="#个人挖矿" class="headerlink" title="个人挖矿"></a>个人挖矿</h2><h3 id="算力分配"><a href="#算力分配" class="headerlink" title="算力分配"></a>算力分配</h3></li>
+<li>矿工根据其他矿工的决策来决定自己是否投资算力——非合作博弈来分析矿工之间的交互</li>
+<li>矿工可以随时选择加入某矿池，和离开某矿池，其策略也依赖于其他矿工的状态——建模为随机博弈，引入排队论</li>
+<li>除了选择是否投资算力外，还可以选择投资多少算力——引入古诺博弈</li>
+<li>上述情况是挖矿奖励为主，交易费用较少，当反过来交易费用更重要时，矿工的算力分配是时变的——建模为随机博弈，应该也有点排队论</li>
+<li>也有和边缘计算结合，然后服务商提供挖矿算力，矿工选择买多少算力，这和区块链反而没啥关系，就是一个传统的移动计算场景，用的stackelberg博弈</li>
+<li>还是边缘计算的场景，有研究结合了深度学习和拍卖理论</li>
+<li>依旧是边缘计算，前面两个关注个体收益最大化，这篇关注社会福利最大化，将问题转化为背包约束<h3 id="分叉链选择"><a href="#分叉链选择" class="headerlink" title="分叉链选择"></a>分叉链选择</h3></li>
+<li>矿工的效用是计算能力分布、获胜解决 PoW 的概率以及其他矿工对即将公开的谜题的信念的函数。建模成序贯博弈，后向归纳法寻找均衡解。</li>
+<li>一些研究证明了最长链是均衡解。</li>
+<li>另一些研究分析了矿工是否承认硬分叉的博弈。</li>
+<li>除了矿工要选择，用户也要选，因此博弈更复杂。</li>
+<li>也有研究分析这种场景下的矿工合作共谋问题。</li>
+<li>上述分析是在PoW进行，有研究迁移到PoS进行。<h3 id="区块大小的设计"><a href="#区块大小的设计" class="headerlink" title="区块大小的设计"></a>区块大小的设计</h3></li>
+<li>矿工打包的交易多，区块就会变大，交易费用固然挣得多，但共识速度也慢了，很可能没法成为主链，因此区块大小的设计也需要控制好。</li>
+<li>过大的区块会影响吞吐量，反而降低比特币系统的性能。<h2 id="矿池挖矿"><a href="#矿池挖矿" class="headerlink" title="矿池挖矿"></a>矿池挖矿</h2><h3 id="矿池选择"><a href="#矿池选择" class="headerlink" title="矿池选择"></a>矿池选择</h3></li>
+<li>矿工和矿池之间的交互用联盟博弈分析</li>
+<li>矿工选矿池的过程类似多臂赌博机，由于矿工改变矿池会改变全网算力分布，因此使用进化博弈分析这个动态过程<h3 id="奖励分配"><a href="#奖励分配" class="headerlink" title="奖励分配"></a>奖励分配</h3></li>
+<li>非合作博弈分析矿工和矿池管理者之间的交互，寻找能使得矿工挖出块就立刻报告的均衡解。</li>
+<li>要避免矿工集中在一个矿池导致的中心化问题。<h1 id="博弈论在区块链平台的应用"><a href="#博弈论在区块链平台的应用" class="headerlink" title="博弈论在区块链平台的应用"></a>博弈论在区块链平台的应用</h1><h2 id="加密货币经济"><a href="#加密货币经济" class="headerlink" title="加密货币经济"></a>加密货币经济</h2></li>
+<li>交易透明导致一些历史不太清白的大额交易被孤立，因此用户选择混合支付，拆分大额交易，用不同质量的小额交易支付，这样不清白交易对矿工损失也较小，矿工会愿意打包</li>
+<li>但是混合交易支付使得资金流向更难查，对区块链系统不利（为什么会这样？系统透明按理说是一样的查找难度），一些研究设计了交易系统，寻找交易透明度的最佳水平</li>
+<li>也有引入声誉系统的</li>
+<li>总的来说就是权衡系统透明度和用户隐私保护度</li>
+<li>不同加密货币价值不一样，矿工要决定挖哪个币，用势博弈分析</li>
+<li>加密货币的价值与区块链系统内的算力和用户数量相关<h2 id="能源交易"><a href="#能源交易" class="headerlink" title="能源交易"></a>能源交易</h2>是关于分布式能源交易的方案设计，和区块链本身关系不大，本质上就是用户和服务商的博弈<h1 id="挑战与未来方向"><a href="#挑战与未来方向" class="headerlink" title="挑战与未来方向"></a>挑战与未来方向</h1><h2 id="博弈论方面的挑战"><a href="#博弈论方面的挑战" class="headerlink" title="博弈论方面的挑战"></a>博弈论方面的挑战</h2></li>
+<li>纳什均衡的存在性，多种均衡之间的选择</li>
+<li>博弈模型在区块链中的实现——平均场博弈、进化博弈、随机博弈<h2 id="博弈论在区块链方面的应用展望"><a href="#博弈论在区块链方面的应用展望" class="headerlink" title="博弈论在区块链方面的应用展望"></a>博弈论在区块链方面的应用展望</h2></li>
+<li>提升吞吐量</li>
+<li>设计更好的共识</li>
+<li>联盟链中的节点选择</li>
+<li>区块链在边缘计算、信息共享、能源交易等方面的应用</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2023/10/03/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20on%20Applications%20of%20Game%20Theory%20in%20Blockchain/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/theory/" rel="tag">theory</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/10/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SoK%20Decentralized%20Finance%20(DeFi)%20Attacks/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-SoK: Decentralized Finance (DeFi) Attacks
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/26/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-CeFi%20vs%20DeFi%20Comparing%20Centralized%20to%20Decentralized%20Finance/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-CeFi vs. DeFi — Comparing Centralized to Decentralized Finance</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>
