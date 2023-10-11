@@ -7,7 +7,6 @@ tags:
 category: 论文
 description: 无验证的众包系统中的策略性信息披露
 ---
-
 # Strategic Information Revelation in Crowdsourcing Systems Without Verification
 
 ## Abstract

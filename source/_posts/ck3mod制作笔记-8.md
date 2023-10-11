@@ -8,7 +8,6 @@ tags:
 categories: CK3
 description: 这部分学习flag、modifier、customizable_localization和message。
 ---
-
 # flag
 
 1. `flag`的作用是对人物或者事件进行标记，可以用在`if`或`trigger`或其他类似的地方，而其中人物对应的`flag`就是`character_flag`。

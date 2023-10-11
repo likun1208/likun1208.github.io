@@ -5,7 +5,6 @@ tags: game theory
 category: 论文
 description: 讨价还价延迟理论
 ---
-
 # Theories of Bargaining Delays
 
 ## Abstract

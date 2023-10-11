@@ -8,7 +8,6 @@ tags:
 categories: CK3
 description: 这部分学习on_action的使用。
 ---
-
 # On_Action
 
 在前面学习到的事件是由玩家在游戏中通过决议而触发的，但有时候我们会希望实现一些自动触发的事件，比如一年触发一次、五年触发一次等，这个时候就需要使用`on_action`了。

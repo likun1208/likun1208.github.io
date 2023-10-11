@@ -4,7 +4,6 @@ date: 2020-04-29 10:32:48
 tags: python
 category: 课程笔记
 ---
-
 这一课是numpy库。
 
 `import numpy as py`

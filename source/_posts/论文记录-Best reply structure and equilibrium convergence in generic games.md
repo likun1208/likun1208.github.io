@@ -5,7 +5,6 @@ tags: game theory
 categories: 论文
 description: 博弈论-矩阵震荡
 ---
-
 # 最优回复结构和泛型博弈中的均衡收敛
 
 ## 摘要

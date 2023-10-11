@@ -8,7 +8,6 @@ tags:
 categories: CK3
 description: 这部分学习条件式写法。
 ---
-
 # 条件式
 
 ## 基本结构

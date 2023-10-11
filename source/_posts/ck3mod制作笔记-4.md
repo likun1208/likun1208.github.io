@@ -8,7 +8,6 @@ tags:
 categories: CK3
 description: 这是对CK3的wiki中的事件模组的简要翻译。
 ---
-
 # 事件模组
 
 [链接](https://ck3.paradoxwikis.com/Event_modding)

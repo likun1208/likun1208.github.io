@@ -8,7 +8,6 @@ tags:
 categories: 论文
 description: 众包中的多数投票--探索众包工人异构性对激励机制设计的影响
 ---
-
 # Eliciting Information from Heterogeneous Mobile Crowdsourced Workers Without Verification
 
 这篇和Strategic Information Revelation in Crowdsourcing Systems Without Verification是同一批作者的，针对的问题一样，内容方法看着也差不多，希望别一模一样......

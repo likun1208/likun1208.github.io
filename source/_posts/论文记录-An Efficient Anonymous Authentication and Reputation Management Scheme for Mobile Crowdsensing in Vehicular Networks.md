@@ -8,7 +8,6 @@ tags:
 categories: 论文
 description: 是导师安排的审稿任务
 ---
-
 # 车联网中的高效匿名认证与信誉管理框架
 
 这篇是投稿到[IEEE Transactions on Vehicular Technology](mailto:onbehalfof@manuscriptcentral.com)的论文，现在要写审稿意见。

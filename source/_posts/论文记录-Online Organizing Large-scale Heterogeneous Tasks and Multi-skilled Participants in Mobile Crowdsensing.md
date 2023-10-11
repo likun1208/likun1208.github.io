@@ -7,7 +7,6 @@ tags:
 categories: 论文
 description: 是TMC的审稿意见
 ---
-
 # Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing
 
 是TMC的审稿。

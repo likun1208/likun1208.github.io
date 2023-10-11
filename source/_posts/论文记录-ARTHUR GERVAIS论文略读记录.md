@@ -91,8 +91,7 @@ DeFi的安全性讨论，细看一下
 5. High-Frequency Trading on Decentralized On-Chain Exchanges
 6. Quantifying Blockchain Extractable Value: How dark is the forest?
 7. Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)
-8. Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys
-9. SoK: Decentralized Finance (DeFi) Attacks
+8. SoK: Decentralized Finance (DeFi) Attacks
 
 精读候选
 1. Towards Automated Security Analysis of Smart Contracts based on Execution Property Graph

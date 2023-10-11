@@ -4,7 +4,6 @@ date: 2020-10-31 20:11:23
 tags: 教程
 categories: 博客配置
 ---
-
 今天发现了一个可以用在markdown的前端画图js，[ECharts](https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts)。在hexo的next主题中使用它需要进行一些配置。
 
 <!--more-->

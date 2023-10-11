@@ -5,7 +5,6 @@ tags: blockchain
 categories: 论文
 description: 区块链支付网络
 ---
-
 # Secure Balance Planning of Off-blockchain Payment Channel Networks
 
 ## Abstract

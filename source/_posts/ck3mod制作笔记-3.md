@@ -7,7 +7,6 @@ tags:
   - mod
 categories: CK3
 ---
-
 接下来是事件和决议的简单写法。
 
 <!--more-->

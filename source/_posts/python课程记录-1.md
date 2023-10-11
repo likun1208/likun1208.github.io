@@ -4,7 +4,6 @@ date: 2020-02-26 08:56:54
 tags: python
 categories: 课程笔记
 ---
-
 1. 为了给变量x, y, z 赋初值5，下面正确的赋值语句是（）
    A. xyz=5					B. x=5 y=5 z=5
    C. x=5, y=5, z=5        D. x=5;y=5;z=5

@@ -4,7 +4,6 @@ date: 2020-05-26 15:43:07
 tags: python
 category: 课程笔记
 ---
-
 这一课讲scipy库。
 
 `from scipy import some_module `

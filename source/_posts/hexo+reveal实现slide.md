@@ -6,7 +6,6 @@ categories: slides
 tags: 博客配置
 slidehtml: true
 ---
-
 # hexo+reveal
 
 ## 安装和配置

@@ -6,7 +6,6 @@ categories: 论文
 description: 区块链项目结题相关论文，Journal of Algorithms,Volume 11Issue 3Sep. 1990 
 
 ---
-
 # 使用共享内存的快速随机共识
 
 ## 摘要

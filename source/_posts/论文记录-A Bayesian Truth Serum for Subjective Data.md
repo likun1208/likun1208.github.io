@@ -8,7 +8,6 @@ tags:
 categories: 论文
 description: 贝叶斯实话血清
 ---
-
 # A Bayesian Truth Serum for Subjective Data
 
 ## Abstract

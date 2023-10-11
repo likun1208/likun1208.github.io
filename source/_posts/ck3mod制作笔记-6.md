@@ -8,7 +8,6 @@ tags:
 categories: CK3
 description: 这部分学习特质相关的内容。
 ---
-
 # 特质
 
 ## 基础格式

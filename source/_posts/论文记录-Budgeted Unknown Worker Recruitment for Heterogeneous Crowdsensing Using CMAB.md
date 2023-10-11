@@ -6,7 +6,6 @@ tags:
     - Combinatorial Multi Armed Bandit
 category: 论文
 ---
-
 <!--more-->
 
 这篇论文是在[之前看过的论文](https://likun1208.github.io/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/https://likun1208.github.io/2020/07/05/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Combinatorial%20Multi-Armed%20Bandit%20Based%20Unknown%20Worker%20Recruitment%20in%20Heterogeneous%20Crowdsensing/)的基础上扩展的，因此前面的内容暂时先不看，直接看多出来的部分，这部分针对的问题是一些workers总被分配任务而另一些则没有任务。

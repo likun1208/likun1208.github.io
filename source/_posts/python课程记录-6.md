@@ -4,7 +4,6 @@ date: 2020-04-01 09:34:22
 tags: python
 category: 课程笔记
 ---
-
 这一课讲第三方库的安装和使用，然后用`wordcloud`和`jieba`生成词云图和中文分词。没有课堂练习，只有一个在上次作业基础上的作业。
 
 我是直接`pip`安装的，在安装`wordcloud`时，`pip install wordcloud`很快就装好了，但是`jieba`反复出错，最后指定清华镜像，`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jieba`，这样就飞快地安装好了。

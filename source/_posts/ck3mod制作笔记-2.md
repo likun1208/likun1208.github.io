@@ -7,7 +7,6 @@ tags:
   - mod
 categories: CK3
 ---
-
 这次了解一下决议和事件的图标相关的事情。
 
 <!--more-->

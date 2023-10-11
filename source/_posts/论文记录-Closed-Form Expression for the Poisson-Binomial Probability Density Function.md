@@ -5,7 +5,6 @@ tags: 泊松分布
 categories: 论文
 description: 泊松-二项分布概率密度函数的近似表达
 ---
-
 # Closed-Form Expression for the Poisson-Binomial Probability Density Function
 
 ## Introduction

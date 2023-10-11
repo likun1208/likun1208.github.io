@@ -6,7 +6,6 @@ tags:
     - crowd sensing
 category: 论文
 ---
-
 # 基于马尔可夫相关均衡的多发包方移动群体感知中的动态任务定价
 
 <!--more-->

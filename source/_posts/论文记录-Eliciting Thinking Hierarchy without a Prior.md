@@ -7,7 +7,6 @@ tags:
 categories: 论文
 description: 没有先验知识的情况下从众多答案中选择正确的那个
 ---
-
 # Eliciting Thinking Hierarchy without a Prior
 
 ## Abstract

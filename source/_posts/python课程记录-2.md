@@ -4,7 +4,6 @@ date: 2020-03-04 11:12:25
 tags: python
 categories: 课程笔记
 ---
-
 1. 下面程序的运行结果是（    ）
 
    ```python

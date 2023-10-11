@@ -7,7 +7,6 @@ tags:
 category: 论文
 description: 针对LBS中的POI问题的研究
 ---
-
 # 新的LBS系统
 
 ## Abstract

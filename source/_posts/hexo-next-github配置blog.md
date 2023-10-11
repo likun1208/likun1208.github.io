@@ -4,7 +4,6 @@ date: 2020-01-30 09:20:38
 tags: 教程
 categories: 博客配置
 ---
-
 ## 安装各种东西
 
 1. node.js：[Node.js官网链接](https://nodejs.org/zh-cn/) 点击下载安装即可。

@@ -8,7 +8,6 @@ tags:
 categories: 论文
 description: 贝叶斯实话血清的扩展
 ---
-
 # A Robust Bayesian Truth Serum for Small Populations
 
 ## Abstract

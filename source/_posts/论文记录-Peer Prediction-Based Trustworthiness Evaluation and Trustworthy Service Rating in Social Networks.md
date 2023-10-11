@@ -7,7 +7,6 @@ tags:
 categories: 论文
 description: 对等预测，判断有没有说真话
 ---
-
 # Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks
 
 ## Abstract
