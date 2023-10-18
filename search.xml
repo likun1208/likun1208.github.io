@@ -1,10 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning</title>
+    <url>/2023/10/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Cooperative%20Multi-Agent%20Game%20Based%20on%20Reinforcement%20Learning/</url>
+    <content><![CDATA[<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
+<li>多主体控制研究普遍用计算机游戏来测试</li>
+<li>现有多智能体强化学习算法面临问题;<ol>
+<li>需要大量资源和时间</li>
+<li>没有重视智能体之间的通信</li>
+<li>难以应对奖励少的挑战</li>
+</ol>
+</li>
+<li>本文：关注智能体协作，分为三阶段策略：<ol>
+<li>具有反事实基线的中央评估网络，评估每个智能体的独立动作，同时大大降低了计算复杂度</li>
+<li>图双层注意力网络：管理智能体之间的通信信号，通过促进有效的沟通，该网络提高了决策的准确性和效率</li>
+<li>基于势函数的奖励塑造方法，旨在提高算法的收敛速度和稳定性，同时适应奖励稀疏的环境<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1></li>
+</ol>
+</li>
+<li>评委网络：<ol>
+<li>输入其他智能体的动作、环境的状态、智能体的观察、正在计算的智能体的数量以及当前智能体在前一次的动作</li>
+<li>输出当前智能体的每个动作的一组动作值函数</li>
+</ol>
+</li>
+<li>演员网络：输入来自环境的观察向量并输出每个动作的概率分布。计算出向量后，可以使用贪婪策略或探索策略来选择动作</li>
+<li>通信单元：使用循环神经网络对每个智能体的观察进行编码，并将其作为通信信号在智能体之间传输信息<h2 id="具有反事实基线的评委网络"><a href="#具有反事实基线的评委网络" class="headerlink" title="具有反事实基线的评委网络"></a>具有反事实基线的评委网络</h2>这部分直接用了文献23的算法，目前来看没创新<h2 id="具有图注意力网络的演员网络"><a href="#具有图注意力网络的演员网络" class="headerlink" title="具有图注意力网络的演员网络"></a>具有图注意力网络的演员网络</h2>基于图形注意力网络设计了一种带有通信模块的Actor网络结构，在保持Agent独立性的同时增加了处理通信信号的能力。<h1 id="具有反事实基线的多主体演员-评委"><a href="#具有反事实基线的多主体演员-评委" class="headerlink" title="具有反事实基线的多主体演员-评委"></a>具有反事实基线的多主体演员-评委</h1></li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>game theory</tag>
+        <tag>审稿意见</tag>
+        <tag>reinforcement learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-SoK: Decentralized Finance (DeFi) Attacks</title>
     <url>/2023/10/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SoK%20Decentralized%20Finance%20(DeFi)%20Attacks/</url>
-    <content><![CDATA[<h1 id="SoK-Decentralized-Finance-DeFi-Attacks"><a href="#SoK-Decentralized-Finance-DeFi-Attacks" class="headerlink" title="SoK: Decentralized Finance (DeFi) Attacks"></a>SoK: Decentralized Finance (DeFi) Attacks</h1><ol>
-<li></li>
+    <content><![CDATA[<h1 id="SoK-Decentralized-Finance-DeFi-Attacks"><a href="#SoK-Decentralized-Finance-DeFi-Attacks" class="headerlink" title="SoK: Decentralized Finance (DeFi) Attacks"></a>SoK: Decentralized Finance (DeFi) Attacks</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文：</p>
+<ol>
+<li>建立通用的参考框架来系统地评估和比较 DeFi 事件，包括攻击和事故</li>
+<li>很少有学术论文讨论“价格预言机攻击”和“未经许可的交互”，而我们的数据表明它们是两种最常见的事件类型</li>
+<li>调查了潜在的防御，并发现：<ol>
+<li>103 (56%) 的攻击不是自动执行的，为防御者提供了救援时间； </li>
+<li>字节码相似性分析至少可以检测 31 个易受攻击的合约/23 个对抗性合约；</li>
+<li>33 (15.3%) 的对手通过与中心化交易所交互而泄露了潜在的可识别信息。<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2></li>
+</ol>
+</li>
+<li>提出了DeFi框架</li>
+<li>区分攻击者和防御者</li>
+<li>防御意外</li>
+<li>追踪资金来源<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2></li>
+</ol>
+<h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><h4 id="网络层：传输数据"><a href="#网络层：传输数据" class="headerlink" title="网络层：传输数据"></a>网络层：传输数据</h4><ol>
+<li>通信基础：TCP/IP、DNS等</li>
+<li>区块链和P2P网络：节点如何加入、退出、发现其他节点</li>
+<li>FaaS：让交易者不通过P2P广播的方式就能直接将交易提交给矿工，提供捆绑级原子状态转换<h4 id="共识层："><a href="#共识层：" class="headerlink" title="共识层："></a>共识层：</h4></li>
+<li>共识机制：帮助区块链网络中的节点达成一致性<ol>
+<li>一个抗 Sybil 攻击的Leader选举协议，例如PoW和PoS</li>
+<li>最新链同步协议，例如最长链</li>
+<li>CON激励机制：包括挖矿奖励和交易费在内的对良性共识的鼓励，</li>
+</ol>
+</li>
+<li>节点及其操作协议：节点负责交易排序、区块生成、数据验证、数据传播，可分为以下两类<ol>
+<li>排序器节点，即PoW中的矿工或PoS中的验证器，承担上述所有四个功能。排序器可以在协议允许的范围内插入、省略和重新排序其生成的区块中的交易； </li>
+<li>普通节点，仅执行区块链数据传播，并且可以执行数据验证。<h4 id="合约层："><a href="#合约层：" class="headerlink" title="合约层："></a>合约层：</h4></li>
+</ol>
+</li>
+<li>交易：用户在交易中指定财务操作以请求区块链状态转换。 SC层通常支持交易级原子状态转换，其中同一交易中的所有财务操作要么全部执行，要么集体失败。</li>
+<li>状态：DeFi 系统状态 S 指明 (i) 用户的加密货币资产余额，(ii) 区块链信息，如时间戳、coinbase 地址、区块编号、区块气体限制（每个区块的最大计算单位），以及 (iii) DeFi 应用程序状态。</li>
+<li>状态转换：$\mathcal{T}(S\in S,tx\in TX)\rightarrow S$是状态转换函数，表示执行交易tx后返回了新状态，其中TX表示所有有效DeFi交易集合。</li>
+<li>智能合约：智能合约是将代码转换成一个或多个状态转换函数，然后由交易触发。智能合约还可以触发其他合约的功能。在部署时，构造函数可以初始化合约的状态。</li>
+<li>区块状态转换（非通用）：以太坊和 BNB 智能链都用有序的区块列表记录交易。我们用 B 表示区块集合，用 $b_i\in B$ 表示高度为$i$的区块。每个区块$b_i$可能包括$n$个交易列表，用$\{tx^0_{b_i},…,tx^n_{b_i}\}$ 表示，$n\geq0$。区块状态$S(b_{i+1})$ 源自区块$b_{i+1}$ 中所有事务在$S(b_i)$上的顺序执行：$S(b_{i+1})=\mathcal{T}(…\mathcal{T}(\mathcal{T}(S(b_i),tx^0_{b_{i+1}}),tx^1_{b_{i+1}})…)$。</li>
+<li>智能合约和L2激励机制（非通用）：DeFi 协议可以L2系统上运行，例如侧链、提交链或其灵感继承者optimistic-rollups和zk-rollups。由于 L2 系统是在第 1 层区块链（也称为 L1，如以太坊和 BNB 智能链）之上创建的，因此 L2 系统通常会在 L1 区块链的 SC 层上实施共识激励机制，以鼓励良性活动。<h4 id="协议层：部署在合约层的DeFi协议集合"><a href="#协议层：部署在合约层的DeFi协议集合" class="headerlink" title="协议层：部署在合约层的DeFi协议集合"></a>协议层：部署在合约层的DeFi协议集合</h4></li>
+<li>加密货币协议：数字资产标准，如ERC-20</li>
+<li>金融协议：区块链的独特功能（如透明度、原子性和离散批量交易执行）使得与CeFi不同的新颖设计成为可能</li>
+<li>协议层激励机制：DeFi协议可能会引入PRO激励机制，以鼓励所需的用户行为。其中一个例子是空投治理代币，以换取在去中心化交易所中提供流动性<h4 id="辅助层：提供服务以提升系统效率"><a href="#辅助层：提供服务以提升系统效率" class="headerlink" title="辅助层：提供服务以提升系统效率"></a>辅助层：提供服务以提升系统效率</h4>辅助服务指任何需要或有助于提高 DeFi 效率，但不属于上述四个系统层（即 NET、CON、SC 和 PRO）的实体。例如，运行中的 DeFi 协议实施可能由以下部分组成： (i) 前端代码；(ii) 实现协议设计的项目开发人员；(iii) 具有管理权限的 “操作员”，例如部署代码、升级协议、冻结或停止运行中的 DeFi 协议活动的权限；(iv) 从中心化交易所同步价格数据到链上智能合约的链下 Oracle 服务等。<h3 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h3></li>
+<li>DeFi事件：事件是指导致以下一个或多个实体遭受意外经济损失的一系列行为： (i) 用户； (ii) 流动性提供者； (iii) 投机者；或 (iv) 运营商。我们将事件分为以下两类：<ol>
+<li>攻击：对手 A 可能会利用漏洞，试图禁用、延迟或改变 DeFi 协议的预期状态转换。尽管所有五个系统层都存在漏洞，但 DeFi 漏洞最常见于以下三个层：<ol>
+<li>合约层：编码错误造成的，例如算术错误、转换错误、访问控制不一致、函数重入等</li>
+<li>协议层：类似于金融市场操纵，而不是传统的系统漏洞（即协议设计缺陷，例如不安全的外部协议依赖性或交互）</li>
+<li>辅助层：包括操作漏洞（例如链下预言机操纵、私钥泄露等）和“信息不对称”攻击（例如后门、蜜罐、网络钓鱼等）。一般来说，我们观察到用户在提供金融资产之前可能并不总是（或可能无法）检查和理解 DeFi 协议智能合约，更不用说评估其安全性和风险了。因此，用户对合约操作的理解可能主要基于营销传播，而不是实际的合约源代码，从而导致用户遇到不可预见或意外的情况。</li>
+</ol>
+</li>
+<li>事故：任何未明确涉及主动对手的事件都被归类为 DeFi 事故。例如，由于无意的编码错误，用户的资金可能会被永久锁定在合约中。</li>
+</ol>
+</li>
+<li>对抗效用目标：假设对抗者理性<ol>
+<li>货币：货币效用函数定义为 A 的加密货币资产组合的市场价值总增量，对抗者旨在最大化该投资组合。</li>
+<li>非货币：对抗者可能会最大化非货币效用，例如成就感或声誉。 DeFi 白帽黑客（也称为道德黑客）是非货币对抗的一个例子，他们发起对抗，试图将 DeFi 事件的损失降到最低</li>
+</ol>
+</li>
+<li>对抗知识：对抗者具有的信息<ol>
+<li>公开信息：<ol>
+<li>原始链上数据，如区块、大区块、交易、账户、余额和已部署的智能合约代码；</li>
+<li>原始网络数据，如 P2P 网络转发行为、待处理区块、已丢弃的过期区块、区块链节点 IP 地址、端口号、客户端版本字符串等； </li>
+<li>公共侧渠道，如开源智能合约代码、社交媒体/聊天信息；</li>
+<li>公开数据分析，如推断的网络拓扑结构、估计的序列器位置和反编译的智能合约字节码。</li>
+</ol>
+</li>
+<li>排序器： 如果对抗者是/与排序器有联系，则对抗者会获得以下信息：<ol>
+<li>来自私人通信渠道的待处理交易；</li>
+<li>相应排序器的交易排序逻辑，包括贿赂偏好；</li>
+<li>如果相应排序器生成下一个区块，则在广播前提前访问区块状态。</li>
+</ol>
+</li>
+<li>内幕信息：例如，如果对抗者能提前获得外部市场价格、预言机更新或操作员的钱包密码，就可能出现特权信息不对称。</li>
+</ol>
+</li>
+<li>对抗能力：具有不同知识水平的 A 可能能够实现相同的能力。例如，排序器可以控制其生成的块的交易顺序（K2），而没有排序器知识的对抗者也可以通过在公共区块链 P2P 网络上竞争来执行前/后运行（K1）。<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2>本文数据集来源于大量学术论文、审计报告、以太坊和BSC的区块链事件，就不记录具体细节了。<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2></li>
+<li>事件频率随时间推移增加</li>
+<li>分析了不同协议类型发生事件的比例，与稳定币和借贷相关的协议问题明显更多</li>
+<li>用SEM分析了变量之间的因果关系，包括一个内生/因变量（即伤害）和三个外生/自变量（即资产、预防性防御和反应性防御）</li>
+<li>探讨了紧急暂停机制的有效性（看起来没什么用）</li>
+<li>分析了安全审计的有效性：有点用，但样本太少，不确定到底多有用。<h2 id="事件防御"><a href="#事件防御" class="headerlink" title="事件防御"></a>事件防御</h2></li>
+<li>执行时间范围：过半的攻击不是自动执行的，因此有时间救援，最短一小时，最多25天</li>
+<li>字节码相似度分析：用于识别对抗性合约</li>
+<li>FaaS的使用：套利、私人对抗</li>
+<li>资金追踪：追踪从地址X到Y的交易，目前没有基于账户的资金追踪。资金来源如下：<ol>
+<li>中心化交易所：满足一定条件，反洗钱服务等会直接要求交易所泄露个人信息</li>
+<li>混币器</li>
+<li>跨链桥<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2></li>
+</ol>
+</li>
+<li>DeFi事件：防御者试图最小化安全风险面，而攻击者则突破防御。</li>
 </ol>
 ]]></content>
       <categories>
@@ -274,14 +394,14 @@
 <h1 id="25-Towards-Private-On-Chain-Algorithmic-Trading"><a href="#25-Towards-Private-On-Chain-Algorithmic-Trading" class="headerlink" title="25. Towards Private On-Chain Algorithmic Trading"></a>25. Towards Private On-Chain Algorithmic Trading</h1><p>自动化交易的机器人，大致看看。</p>
 <h1 id="阅读规划"><a href="#阅读规划" class="headerlink" title="阅读规划"></a>阅读规划</h1><p>精读</p>
 <ol>
-<li>CeFi vs. DeFi Comparing Centralized to Decentralized Finance</li>
-<li>Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys</li>
-<li>An Empirical Study of DeFi Liquidations: Incentives, Risks, and Instabilities</li>
-<li>AMR: Autonomous Coin Mixer with Privacy Preserving Reward Distribution</li>
-<li>High-Frequency Trading on Decentralized On-Chain Exchanges</li>
-<li>Quantifying Blockchain Extractable Value: How dark is the forest?</li>
-<li>Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)</li>
-<li>SoK: Decentralized Finance (DeFi) Attacks</li>
+<li>[ ] CeFi vs. DeFi Comparing Centralized to Decentralized Finance</li>
+<li>[ ] Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys</li>
+<li>[x] An Empirical Study of DeFi Liquidations: Incentives, Risks, and Instabilities</li>
+<li>[ ] AMR: Autonomous Coin Mixer with Privacy Preserving Reward Distribution</li>
+<li>[ ] High-Frequency Trading on Decentralized On-Chain Exchanges</li>
+<li>[ ] Quantifying Blockchain Extractable Value: How dark is the forest?</li>
+<li>[ ] Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)</li>
+<li>[x] SoK: Decentralized Finance (DeFi) Attacks</li>
 </ol>
 <p>精读候选</p>
 <ol>
@@ -997,6 +1117,7 @@ J_i^{\beta_i^*}\left(\lambda^*(\theta) \mid \theta\right) \geq 0, \forall i \in 
       </categories>
       <tags>
         <tag>blockchain</tag>
+        <tag>审稿意见</tag>
         <tag>mechanism design</tag>
       </tags>
   </entry>
@@ -3703,8 +3824,8 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>审稿意见</tag>
+        <tag>crowdsourcing</tag>
         <tag>车联网</tag>
       </tags>
   </entry>
@@ -3950,8 +4071,8 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
         <category>论文</category>
       </categories>
       <tags>
-        <tag>crowdsourcing</tag>
         <tag>审稿意见</tag>
+        <tag>crowdsourcing</tag>
       </tags>
   </entry>
   <entry>
@@ -4003,11 +4124,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3585" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts2247" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3585'));
+        var myChart = echarts.init(document.getElementById('echarts2247'));
+
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -4060,14 +4181,15 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6590" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts3629" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6590'));
+        var myChart = echarts.init(document.getElementById('echarts3629'));
+
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -4114,14 +4236,15 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts1016" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts9332" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1016'));
+        var myChart = echarts.init(document.getElementById('echarts9332'));
+
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -4167,6 +4290,7 @@ title: {
             }
         ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
@@ -4564,6 +4688,7 @@ p_i,\ &if\ s_i=(1,1), \\
       </categories>
       <tags>
         <tag>灾害应对网络</tag>
+        <tag>审稿意见</tag>
       </tags>
   </entry>
   <entry>
@@ -9796,11 +9921,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1430" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<div id="echarts3550" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1430'));
+        var myChart = echarts.init(document.getElementById('echarts3550'));
+
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -9867,6 +9992,7 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         }
     ]
 }
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>]]></content>

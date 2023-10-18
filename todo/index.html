@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <style>
+        body{
+            margin:0;background-color:#fafafa;font:14px 'Helvetica Neue',Helvetica,Arial,sans-serif}
+        h2{margin:0;font-size:12px}
+        a{color:#000;text-decoration:none}
+        input{outline:0}
+        button{margin:0;padding:0;border:0;background:0;font-size:100%;vertical-align:baseline;font-family:inherit;font-weight:inherit;color:inherit;outline:0}
+        ul{padding:0;margin:0;list-style:none}
+        .page-top{width:100%;height:40px;background-color:#db4c3f}
+        .page-content{width:50%;margin:0 auto}
+        .page-content h2{line-height:40px;font-size:18px;color:#fff}
+        .main{width:50%;margin:0 auto;box-sizing:border-box}
+        .task-input{width:99%;height:30px;outline:0;border:1px solid #ccc}
+        .task-count{display:flex;margin:10px 0}
+        .task-count li{padding-left:10px;flex:1;color:#dd4b39}
+        .task-count li:nth-child(1){padding:5px 0 0 10px}
+        .action{text-align:center;display:flex}
+        .action a{margin:0 10px;flex:1;padding:5px 0;color:#777}
+        .action a:nth-child(3){margin-right:0}
+        .active{border-bottom: 2px solid #629A9C}
+        .tasks{background-color:#fff}.no-task-tip{padding:10px 0 10px 10px;display:block;border-bottom:1px solid #ededed;color:#777}.big-title{color:#222}.todo-list{margin:0;padding:0;list-style:none}
+        .todo-list li{
+            position:relative;
+            font-size:16px;
+            border-left: 5px solid #629A9C;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+            margin-bottom: 16px;
+        }
+        .todo-list li:hover{background-color:#fafafa}
+        .todo-list li.editing{border-bottom:0;padding:0;}
+        .todo-list li.editing .edit{display:block;padding:13px 17px 12px 17px;margin:0 0 0 43px}
+        .todo-list li.editing .view{display:none}
+        .toggle{
+            text-align:center;
+            width:16px;
+            height:16px;
+            position:absolute;
+            top:2px;
+            left: 15px;
+            bottom:0;
+            margin:auto 0;
+            cursor: pointer;
+        }
+        .todo-list li label{
+            white-space:pre-line;
+            word-break:break-all;
+            padding:15px 60px 15px 15px;
+            margin-left:45px;
+            display:block;
+            line-height:1.2;
+            transition:color .4s
+        }
+        .todo-list li.completed label{
+            color:#d9d9d9;
+            text-decoration:line-through
+        }
+        .todo-list li .destroy{
+            display:none;
+            text-align:center;
+            width:16px;
+            height:16px;
+            position:absolute;
+            top:0;
+            right:15px;
+            bottom:10px;
+            margin:auto 0;
+            cursor: pointer;
+            font-size:28px;
+            color:#cc9a9a;
+            transition:color .2s ease-out
+        }
+        .todo-list li .destroy:hover{color:#af5b5e}
+        .todo-list li .destroy:after{content:'×'}
+        .todo-list li:hover .destroy{display:block}
+        .todo-list li .edit{display:none}
+        .todo-list li.editing:last-child{margin-bottom:-1px}
+    </style>
+</head>
+<body>
+<div class="page-top">
+    <div class="page-content">
+        <h2>任务计划列表</h2>
+    </div>
+</div>
+<div class="main">
+    <h3 class="big-title">添加任务：</h3>
+    <input
+            placeholder="例如：吃饭睡觉打豆豆；  提示：+回车即可添加任务，双击列表标题即可编辑"
+            class="task-input"
+            type="text"
+          v-on:keyup.enter="enterFn"
+            v-model="todo"
+    />
+    <ul class="task-count">
+        <li>{{unComplete}}个任务未完成</li>
+        <li class="action">
+            <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" href="#all">所有任务</a>
+            <a :class="{active:visibility==='unCompleted'}" href="#unCompleted">未完成的任务</a>
+            <a :class="{active:visibility==='completed'}" href="#completed">完成的任务</a>
+        </li>
+    </ul>
+    <h3 class="big-title">任务列表：</h3>
+    <div class="tasks">
+
+        <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
+        <ul class="todo-list" v-show="list.length">
+            <li class="todo"
+                v-for="item in filterData"
+                v-bind:class="{completed:item.isComplete,editing:item===edtorTodos}"
+            >
+                <div class="view">
+                    <input class="toggle"
+                          type="checkbox"
+                          v-model="item.isComplete"
+                    />
+                    <label @dblclick="edtorTodo(item)">{{item.title}}</label>
+                    <button
+                            class="destroy"
+                            @click="delFn(item)"
+                    ></button>
+                </div>
+                <input
+                        class="edit"
+                        type="text"
+                        v-focus="edtorTodos===item"
+                        v-model="item.title"
+                        @blur="edtoEnd(item)"
+                        @keyup.enter="edtoEnd(item)"
+                        @keyup.esc="cancelEdit(item)"
+                />
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    //存取localStorage中的数据
+var store = {
+    save(key,value){
+        window.localStorage.setItem(key,JSON.stringify(value));
+    },
+    fetch(key){
+    return JSON.parse(window.localStorage.getItem(key))||[];
+    }
+}
+//list取出所有的值
+var list = store.fetch("storeData");
+
+var vm = new Vue({
+    el:".main",
+    data:{
+        list,
+        todo:'',
+        edtorTodos:'',//记录正在编辑的数据,
+        beforeTitle:"",//记录正在编辑的数据的title
+        visibility:"all"//通过这个属性值的变化对数据进行筛选
+    },
+    watch:{
+        //下面的这种方法是浅监控
+      /*list:function(){//监控list这个属性，当这个属性对应的值发生变化就会执行函数
+          store.save("storeData",this.list);
+      }*/
+      //下面的是深度监控
+        list:{
+            handler:function(){
+                store.save("storeData",this.list);
+            },
+            deep:true
+        }
+
+    },
+    methods:{
+        enterFn(ev){//添加任务
+            //向list中添加一项任务
+            //事件处理函数中的this指向的是当前这个根实例
+            if(this.todo==""){return;}
+                this.list.push({
+                    title:this.todo,
+                    isComplete:false
+                });
+                this.todo = "";
+        },
+        delFn(item){//删除任务
+            var index = this.list.indexOf(item);
+            this.list.splice(index,1)
+        },
+        edtorTodo(item){//编辑任务
+            //编辑任务的时候记录编辑之前的值
+            this.beforeTitle = item.title;
+            this.edtorTodos = item;
+        },
+        edtoEnd(item){//编辑完成
+            this.edtorTodos="";
+            // this.cancelEdit = this.edtorTodos;
+        },
+        cancelEdit(item){//取消编辑
+            item.title = this.beforeTitle;
+            this.beforeTitle = '';
+            this.edtorTodos='';
+        }
+    },
+    directives:{
+        "focus":{
+            update(el,binding){
+                if(binding.value){
+                    el.focus();
+                }
+            }
+        }
+    },
+    computed:{
+        unComplete(){
+        return  this.list.filter(item=>{
+                return !item.isComplete
+            }).length
+        },
+        filterData(){
+            //过滤的时候有三种情况 all completed unCompleted
+            var filter = {
+                all:function(list){
+                    return list;
+                },
+                completed:function(list){
+                    return list.filter(item=>{
+                        return item.isComplete;
+                    })
+                },
+                unCompleted:function(list){
+                    return list.filter(item=>{
+                        return !item.isComplete;
+                    })
+                }
+            }
+            //如果找到了过滤函数，就返回过滤后的数据，如果没有找到就返回所有的数据
+            return filter[this.visibility]?filter[this.visibility](list):list;
+        }
+
+    }
+});
+function hashFn(){
+    var hash = window.location.hash.slice(1);
+    vm.visibility = hash;
+}
+hashFn();
+window.addEventListener('hashchange',hashFn);
+</script>
+<div class="page-top">
+    <div class="page-content">
+        <h2><a href = "http://likun1208.github.io">回到博客页面</a></h2>
+    </div>
+</div>
+</body>
+</html>

@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5</span>
+            <span class="post-count">2.5k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
@@ -96,8 +96,93 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="SoK-Decentralized-Finance-DeFi-Attacks"><a href="#SoK-Decentralized-Finance-DeFi-Attacks" class="headerlink" title="SoK: Decentralized Finance (DeFi) Attacks"></a>SoK: Decentralized Finance (DeFi) Attacks</h1><ol>
-<li></li>
+  <h1 id="SoK-Decentralized-Finance-DeFi-Attacks"><a href="#SoK-Decentralized-Finance-DeFi-Attacks" class="headerlink" title="SoK: Decentralized Finance (DeFi) Attacks"></a>SoK: Decentralized Finance (DeFi) Attacks</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文：</p>
+<ol>
+<li>建立通用的参考框架来系统地评估和比较 DeFi 事件，包括攻击和事故</li>
+<li>很少有学术论文讨论“价格预言机攻击”和“未经许可的交互”，而我们的数据表明它们是两种最常见的事件类型</li>
+<li>调查了潜在的防御，并发现：<ol>
+<li>103 (56%) 的攻击不是自动执行的，为防御者提供了救援时间； </li>
+<li>字节码相似性分析至少可以检测 31 个易受攻击的合约/23 个对抗性合约；</li>
+<li>33 (15.3%) 的对手通过与中心化交易所交互而泄露了潜在的可识别信息。<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2></li>
+</ol>
+</li>
+<li>提出了DeFi框架</li>
+<li>区分攻击者和防御者</li>
+<li>防御意外</li>
+<li>追踪资金来源<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2></li>
+</ol>
+<h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><h4 id="网络层：传输数据"><a href="#网络层：传输数据" class="headerlink" title="网络层：传输数据"></a>网络层：传输数据</h4><ol>
+<li>通信基础：TCP/IP、DNS等</li>
+<li>区块链和P2P网络：节点如何加入、退出、发现其他节点</li>
+<li>FaaS：让交易者不通过P2P广播的方式就能直接将交易提交给矿工，提供捆绑级原子状态转换<h4 id="共识层："><a href="#共识层：" class="headerlink" title="共识层："></a>共识层：</h4></li>
+<li>共识机制：帮助区块链网络中的节点达成一致性<ol>
+<li>一个抗 Sybil 攻击的Leader选举协议，例如PoW和PoS</li>
+<li>最新链同步协议，例如最长链</li>
+<li>CON激励机制：包括挖矿奖励和交易费在内的对良性共识的鼓励，</li>
+</ol>
+</li>
+<li>节点及其操作协议：节点负责交易排序、区块生成、数据验证、数据传播，可分为以下两类<ol>
+<li>排序器节点，即PoW中的矿工或PoS中的验证器，承担上述所有四个功能。排序器可以在协议允许的范围内插入、省略和重新排序其生成的区块中的交易； </li>
+<li>普通节点，仅执行区块链数据传播，并且可以执行数据验证。<h4 id="合约层："><a href="#合约层：" class="headerlink" title="合约层："></a>合约层：</h4></li>
+</ol>
+</li>
+<li>交易：用户在交易中指定财务操作以请求区块链状态转换。 SC层通常支持交易级原子状态转换，其中同一交易中的所有财务操作要么全部执行，要么集体失败。</li>
+<li>状态：DeFi 系统状态 S 指明 (i) 用户的加密货币资产余额，(ii) 区块链信息，如时间戳、coinbase 地址、区块编号、区块气体限制（每个区块的最大计算单位），以及 (iii) DeFi 应用程序状态。</li>
+<li>状态转换：$\mathcal{T}(S\in S,tx\in TX)\rightarrow S$是状态转换函数，表示执行交易tx后返回了新状态，其中TX表示所有有效DeFi交易集合。</li>
+<li>智能合约：智能合约是将代码转换成一个或多个状态转换函数，然后由交易触发。智能合约还可以触发其他合约的功能。在部署时，构造函数可以初始化合约的状态。</li>
+<li>区块状态转换（非通用）：以太坊和 BNB 智能链都用有序的区块列表记录交易。我们用 B 表示区块集合，用 $b_i\in B$ 表示高度为$i$的区块。每个区块$b_i$可能包括$n$个交易列表，用$\{tx^0_{b_i},…,tx^n_{b_i}\}$ 表示，$n\geq0$。区块状态$S(b_{i+1})$ 源自区块$b_{i+1}$ 中所有事务在$S(b_i)$上的顺序执行：$S(b_{i+1})=\mathcal{T}(…\mathcal{T}(\mathcal{T}(S(b_i),tx^0_{b_{i+1}}),tx^1_{b_{i+1}})…)$。</li>
+<li>智能合约和L2激励机制（非通用）：DeFi 协议可以L2系统上运行，例如侧链、提交链或其灵感继承者optimistic-rollups和zk-rollups。由于 L2 系统是在第 1 层区块链（也称为 L1，如以太坊和 BNB 智能链）之上创建的，因此 L2 系统通常会在 L1 区块链的 SC 层上实施共识激励机制，以鼓励良性活动。<h4 id="协议层：部署在合约层的DeFi协议集合"><a href="#协议层：部署在合约层的DeFi协议集合" class="headerlink" title="协议层：部署在合约层的DeFi协议集合"></a>协议层：部署在合约层的DeFi协议集合</h4></li>
+<li>加密货币协议：数字资产标准，如ERC-20</li>
+<li>金融协议：区块链的独特功能（如透明度、原子性和离散批量交易执行）使得与CeFi不同的新颖设计成为可能</li>
+<li>协议层激励机制：DeFi协议可能会引入PRO激励机制，以鼓励所需的用户行为。其中一个例子是空投治理代币，以换取在去中心化交易所中提供流动性<h4 id="辅助层：提供服务以提升系统效率"><a href="#辅助层：提供服务以提升系统效率" class="headerlink" title="辅助层：提供服务以提升系统效率"></a>辅助层：提供服务以提升系统效率</h4>辅助服务指任何需要或有助于提高 DeFi 效率，但不属于上述四个系统层（即 NET、CON、SC 和 PRO）的实体。例如，运行中的 DeFi 协议实施可能由以下部分组成： (i) 前端代码；(ii) 实现协议设计的项目开发人员；(iii) 具有管理权限的 “操作员”，例如部署代码、升级协议、冻结或停止运行中的 DeFi 协议活动的权限；(iv) 从中心化交易所同步价格数据到链上智能合约的链下 Oracle 服务等。<h3 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h3></li>
+<li>DeFi事件：事件是指导致以下一个或多个实体遭受意外经济损失的一系列行为： (i) 用户； (ii) 流动性提供者； (iii) 投机者；或 (iv) 运营商。我们将事件分为以下两类：<ol>
+<li>攻击：对手 A 可能会利用漏洞，试图禁用、延迟或改变 DeFi 协议的预期状态转换。尽管所有五个系统层都存在漏洞，但 DeFi 漏洞最常见于以下三个层：<ol>
+<li>合约层：编码错误造成的，例如算术错误、转换错误、访问控制不一致、函数重入等</li>
+<li>协议层：类似于金融市场操纵，而不是传统的系统漏洞（即协议设计缺陷，例如不安全的外部协议依赖性或交互）</li>
+<li>辅助层：包括操作漏洞（例如链下预言机操纵、私钥泄露等）和“信息不对称”攻击（例如后门、蜜罐、网络钓鱼等）。一般来说，我们观察到用户在提供金融资产之前可能并不总是（或可能无法）检查和理解 DeFi 协议智能合约，更不用说评估其安全性和风险了。因此，用户对合约操作的理解可能主要基于营销传播，而不是实际的合约源代码，从而导致用户遇到不可预见或意外的情况。</li>
+</ol>
+</li>
+<li>事故：任何未明确涉及主动对手的事件都被归类为 DeFi 事故。例如，由于无意的编码错误，用户的资金可能会被永久锁定在合约中。</li>
+</ol>
+</li>
+<li>对抗效用目标：假设对抗者理性<ol>
+<li>货币：货币效用函数定义为 A 的加密货币资产组合的市场价值总增量，对抗者旨在最大化该投资组合。</li>
+<li>非货币：对抗者可能会最大化非货币效用，例如成就感或声誉。 DeFi 白帽黑客（也称为道德黑客）是非货币对抗的一个例子，他们发起对抗，试图将 DeFi 事件的损失降到最低</li>
+</ol>
+</li>
+<li>对抗知识：对抗者具有的信息<ol>
+<li>公开信息：<ol>
+<li>原始链上数据，如区块、大区块、交易、账户、余额和已部署的智能合约代码；</li>
+<li>原始网络数据，如 P2P 网络转发行为、待处理区块、已丢弃的过期区块、区块链节点 IP 地址、端口号、客户端版本字符串等； </li>
+<li>公共侧渠道，如开源智能合约代码、社交媒体/聊天信息；</li>
+<li>公开数据分析，如推断的网络拓扑结构、估计的序列器位置和反编译的智能合约字节码。</li>
+</ol>
+</li>
+<li>排序器： 如果对抗者是/与排序器有联系，则对抗者会获得以下信息：<ol>
+<li>来自私人通信渠道的待处理交易；</li>
+<li>相应排序器的交易排序逻辑，包括贿赂偏好；</li>
+<li>如果相应排序器生成下一个区块，则在广播前提前访问区块状态。</li>
+</ol>
+</li>
+<li>内幕信息：例如，如果对抗者能提前获得外部市场价格、预言机更新或操作员的钱包密码，就可能出现特权信息不对称。</li>
+</ol>
+</li>
+<li>对抗能力：具有不同知识水平的 A 可能能够实现相同的能力。例如，排序器可以控制其生成的块的交易顺序（K2），而没有排序器知识的对抗者也可以通过在公共区块链 P2P 网络上竞争来执行前/后运行（K1）。<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2>本文数据集来源于大量学术论文、审计报告、以太坊和BSC的区块链事件，就不记录具体细节了。<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2></li>
+<li>事件频率随时间推移增加</li>
+<li>分析了不同协议类型发生事件的比例，与稳定币和借贷相关的协议问题明显更多</li>
+<li>用SEM分析了变量之间的因果关系，包括一个内生/因变量（即伤害）和三个外生/自变量（即资产、预防性防御和反应性防御）</li>
+<li>探讨了紧急暂停机制的有效性（看起来没什么用）</li>
+<li>分析了安全审计的有效性：有点用，但样本太少，不确定到底多有用。<h2 id="事件防御"><a href="#事件防御" class="headerlink" title="事件防御"></a>事件防御</h2></li>
+<li>执行时间范围：过半的攻击不是自动执行的，因此有时间救援，最短一小时，最多25天</li>
+<li>字节码相似度分析：用于识别对抗性合约</li>
+<li>FaaS的使用：套利、私人对抗</li>
+<li>资金追踪：追踪从地址X到Y的交易，目前没有基于账户的资金追踪。资金来源如下：<ol>
+<li>中心化交易所：满足一定条件，反洗钱服务等会直接要求交易所泄露个人信息</li>
+<li>混币器</li>
+<li>跨链桥<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2></li>
+</ol>
+</li>
+<li>DeFi事件：防御者试图最小化安全风险面，而攻击者则突破防御。</li>
 </ol>
  
       <!-- reward -->
@@ -163,6 +248,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/10/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Cooperative%20Multi-Agent%20Game%20Based%20on%20Reinforcement%20Learning/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning
+          
+        </div>
+      </a>
     
     
       <a href="/2023/10/03/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-A%20Survey%20on%20Applications%20of%20Game%20Theory%20in%20Blockchain/" class="article-nav-link">
@@ -252,6 +346,10 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/todo">ToDo</a>
     </li>
     
     <li class="nav-item">
