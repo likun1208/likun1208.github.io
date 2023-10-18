@@ -4124,11 +4124,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts2001" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5566" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2001'));
+        var myChart = echarts.init(document.getElementById('echarts5566'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -4184,11 +4184,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts4975" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6027" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4975'));
+        var myChart = echarts.init(document.getElementById('echarts6027'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -4238,11 +4238,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2465" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7676" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2465'));
+        var myChart = echarts.init(document.getElementById('echarts7676'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -9918,11 +9918,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts7331" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5545" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7331'));
+        var myChart = echarts.init(document.getElementById('echarts5545'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -13921,6 +13921,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </li>
 <li><p>按上面这个操作改完以后发现网页的显示并没有变化，接着打开<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，然后直接搜索<code>-28rem</code>或者<code>tocbot</code>等关键词，找到以后把<code>-28</code>和<code>6</code>改成合适的数值（<code>-25</code>和<code>0</code>），重新部署网站就会发现目录栏变合适了。</p>
 </li>
+<li>经过漫长的使用，忽然发现右边那个目录，在白天模式下，背景是半透明的那种效果，会挡住正文的一些内容，而黑夜模式下背景就透明了，什么也挡不住。经过一番研究，发现想要白天模式也透明背景，就需要修改<code>\themes\ayer\source-src\css\_partial</code>文件夹中的<code>tocbot.styl</code>文件，找<code>.is-position-fixed</code>字段中的<code>background-color</code>，把它的值修改为<code>transparent</code>，接着同样是进<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，先定位到刚才<code>tocbot</code>那里，然后往后很近的位置能看到<code>is-position-fixed</code>字段，修改其中的<code>background</code>的值为<code>transparent</code>，这里不能直接全文检索<code>is-position-fixed</code>，因为有好多这个属性，必须精确修改<code>tocbot</code>的这个属性。保存后重新部署就可以看到效果了。</li>
 </ol>
 <h2 id="GitHub风格日历、标签云、分类雷达图的配置"><a href="#GitHub风格日历、标签云、分类雷达图的配置" class="headerlink" title="GitHub风格日历、标签云、分类雷达图的配置"></a>GitHub风格日历、标签云、分类雷达图的配置</h2><p>由于next主题的css文件是swig格式，而网上查到的GitHub日历等都是ejs格式的，因此在用next主题时没能成功配置好日历等；改用Ayer主题后，该主题就是ejs格式的，因此现在添加了日历等内容。这一部分所有涉及到的下载链接都是在别人网站里复制的，如果链接失效可以直接在网上搜文件名来下载，也可以在我的GitHub项目中的主题文件里找已经修改和配置好的相关内容。</p>
 <h3 id="需要下载配置的文件"><a href="#需要下载配置的文件" class="headerlink" title="需要下载配置的文件"></a>需要下载配置的文件</h3><ol>

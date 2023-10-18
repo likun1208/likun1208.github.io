@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">10.1k</span>
+            <span class="post-count">10.3k</span>
         </span>
     </span>
 
@@ -192,6 +192,7 @@
 </li>
 <li><p>按上面这个操作改完以后发现网页的显示并没有变化，接着打开<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，然后直接搜索<code>-28rem</code>或者<code>tocbot</code>等关键词，找到以后把<code>-28</code>和<code>6</code>改成合适的数值（<code>-25</code>和<code>0</code>），重新部署网站就会发现目录栏变合适了。</p>
 </li>
+<li>经过漫长的使用，忽然发现右边那个目录，在白天模式下，背景是半透明的那种效果，会挡住正文的一些内容，而黑夜模式下背景就透明了，什么也挡不住。经过一番研究，发现想要白天模式也透明背景，就需要修改<code>\themes\ayer\source-src\css\_partial</code>文件夹中的<code>tocbot.styl</code>文件，找<code>.is-position-fixed</code>字段中的<code>background-color</code>，把它的值修改为<code>transparent</code>，接着同样是进<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，先定位到刚才<code>tocbot</code>那里，然后往后很近的位置能看到<code>is-position-fixed</code>字段，修改其中的<code>background</code>的值为<code>transparent</code>，这里不能直接全文检索<code>is-position-fixed</code>，因为有好多这个属性，必须精确修改<code>tocbot</code>的这个属性。保存后重新部署就可以看到效果了。</li>
 </ol>
 <h2 id="GitHub风格日历、标签云、分类雷达图的配置"><a href="#GitHub风格日历、标签云、分类雷达图的配置" class="headerlink" title="GitHub风格日历、标签云、分类雷达图的配置"></a>GitHub风格日历、标签云、分类雷达图的配置</h2><p>由于next主题的css文件是swig格式，而网上查到的GitHub日历等都是ejs格式的，因此在用next主题时没能成功配置好日历等；改用Ayer主题后，该主题就是ejs格式的，因此现在添加了日历等内容。这一部分所有涉及到的下载链接都是在别人网站里复制的，如果链接失效可以直接在网上搜文件名来下载，也可以在我的GitHub项目中的主题文件里找已经修改和配置好的相关内容。</p>
 <h3 id="需要下载配置的文件"><a href="#需要下载配置的文件" class="headerlink" title="需要下载配置的文件"></a>需要下载配置的文件</h3><ol>
