@@ -23,15 +23,72 @@
 </ol>
 </li>
 <li>演员网络：输入来自环境的观察向量并输出每个动作的概率分布。计算出向量后，可以使用贪婪策略或探索策略来选择动作</li>
-<li>通信单元：使用循环神经网络对每个智能体的观察进行编码，并将其作为通信信号在智能体之间传输信息<h2 id="具有反事实基线的评委网络"><a href="#具有反事实基线的评委网络" class="headerlink" title="具有反事实基线的评委网络"></a>具有反事实基线的评委网络</h2>这部分直接用了文献23的算法，目前来看没创新<h2 id="具有图注意力网络的演员网络"><a href="#具有图注意力网络的演员网络" class="headerlink" title="具有图注意力网络的演员网络"></a>具有图注意力网络的演员网络</h2>基于图形注意力网络设计了一种带有通信模块的Actor网络结构，在保持Agent独立性的同时增加了处理通信信号的能力。<h1 id="具有反事实基线的多主体演员-评委"><a href="#具有反事实基线的多主体演员-评委" class="headerlink" title="具有反事实基线的多主体演员-评委"></a>具有反事实基线的多主体演员-评委</h1></li>
+<li>通信单元：使用循环神经网络对每个智能体的观察进行编码，并将其作为通信信号在智能体之间传输信息<h2 id="具有反事实基线的评委网络"><a href="#具有反事实基线的评委网络" class="headerlink" title="具有反事实基线的评委网络"></a>具有反事实基线的评委网络</h2>这部分直接用了文献23的算法，目前来看没创新，简单记录一下：</li>
+<li>传统MAAC算法在智能体变多时，网络规模指数增长；</li>
+<li>文献23的算法解决了这个问题。</li>
+</ol>
+<p>不过根据我查到的资料，似乎MAAC是在文献23的基础上做的，感觉不太对劲。</p>
+<h2 id="具有图注意力网络的演员网络"><a href="#具有图注意力网络的演员网络" class="headerlink" title="具有图注意力网络的演员网络"></a>具有图注意力网络的演员网络</h2><p>基于图形注意力网络设计了一种带有通信模块的Actor网络结构，在保持Agent独立性的同时增加了处理通信信号的能力。</p>
+<h1 id="具有反事实基线的多主体演员-评委"><a href="#具有反事实基线的多主体演员-评委" class="headerlink" title="具有反事实基线的多主体演员-评委"></a>具有反事实基线的多主体演员-评委</h1><h2 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h2><ol>
+<li>MADDPG引入策略梯度算法，但是有局限性，不能解决去中心化问题，且网络很大，训练成本高</li>
+<li>为了解决这个问题，文献27设计了参数共享</li>
+<li>基于一些原因，本文目标：设计一种AC算法<ol>
+<li>Actor网络以agent的观察历史序列和动作历史序列作为输入，输出动作的概率分布； </li>
+<li>Critic网络以所有智能体的全局状态、观察历史序列、联合动作历史序列和Actor网络的策略作为输入，输出智能体所采取的动作的状态值函数。</li>
+</ol>
+</li>
+<li>Critic网络可以使用𝑇𝐷(𝜆)[28]进行训练。它根据当前状态的奖励和接下来𝑛步骤获得的奖励计算加权累积收益，并可以根据从当前状态到终止状态的所有状态更新当前状态的状态值函数。</li>
+<li>Actor网络直接使用策略梯度方法来更新网络，但是这样集中式的训练使得大家共享同一个网络，没考虑信用值，有误差</li>
+<li>文献29引入了差异奖励的思想，用了不同的奖励函数。</li>
+<li>由此需要计算默认行为带来的奖励，然后和实际行为作比较。但是一般来说是没法获取默认行为的结果，因此文献23设计了反事实奖励函数</li>
+<li>结合上述内容，本文设计了CMAC算法，算法主体采用MAAC结构。<ol>
+<li>Critic网络获取当前时刻其他智能体的动作、状态、观察值、正在计算的智能体的数量以及当前智能体在上一时刻的动作，并为每个动作输出一组动作值现任代理人。 </li>
+<li>Actor网络获取环境的观察向量并输出每个动作的概率分布。可以使用贪婪策略或探索策略来选择操作。<h1 id="基于图注意力网络的通信模块"><a href="#基于图注意力网络的通信模块" class="headerlink" title="基于图注意力网络的通信模块"></a>基于图注意力网络的通信模块</h1></li>
+</ol>
+</li>
+<li>总体而言：<ol>
+<li>首先，我们使用硬注意力网络来过滤需要通信的代理</li>
+<li>然后使用自注意力[30]网络对通信信号进行加权</li>
+<li>通过两阶段注意力，我们通过降低计算成本和提高信息的信噪比来整合复杂的通信信号，从而在不影响Actor网络的情况下实现Agent之间的通信</li>
+</ol>
+</li>
+<li>多智能体模型下，每个智能体存在局限性，会影响整个系统。因此通信是必要的。</li>
+<li>本文提出图注意力通信单元：<ol>
+<li>使用 BiGRU 的编码层，对观测信息编码</li>
+<li>硬注意力层。该层通过编码层的编码输出$h_{i,j}$来决定$agent_i$和$agent_j$之间通信的必要性，用了文献31的方法</li>
+<li>自注意力层。该层的输入是代理观察$e=[e_1,e_2, ⋯ ,e_n]$的编码，输入向量的注意力权重由自注意力网络计算。通过这个网络，来自不同代理的通信信号被加权。自注意力机制对过滤后的通信信号的重要性进行判断，使得重要信号在隐藏状态具有较高的权重。</li>
+<li>输出层。它将隐藏状态$e$与前一层的$W_h$和$W_{sj}$ 输出聚合，并生成扩展的隐藏状态向量。然后它使用MLP对向量进行解码，并输出策略𝜋，它是代理每个可能动作的动作概率.<h1 id="基于势函数的奖励塑造"><a href="#基于势函数的奖励塑造" class="headerlink" title="基于势函数的奖励塑造"></a>基于势函数的奖励塑造</h1>本节设计了基于静态和动态势能的奖励塑造函数，以解决策略学习速度慢、效果差的问题。在引入先验知识和对环境的认知后，设计了一种人为增加势能差的奖励函数来辅助学习算法，将先验知识转化为额外的奖励，从而指导所提出的学习算法学习得更快更好。<h2 id="静态势函数"><a href="#静态势函数" class="headerlink" title="静态势函数"></a>静态势函数</h2>结构很简单，我方当前血量+我方存活单元-敌方当前血量-敌方存活单元。与仅从一种奖励函数中学习相比，智能体通过拉开智能体健康状况的距离来积累优势来学习如何玩游戏，而不是采取随机行动。<h2 id="动态势函数"><a href="#动态势函数" class="headerlink" title="动态势函数"></a>动态势函数</h2>动态势能函数则考虑到同一状态的势能可能随时间的推移而变化，同一状态转换可能具有不同的奖励，在静态函数的基础上增加了能量损失速度的控制变量和随时间变的权重函数（描述时间流所带来的敌人状态重要性的变化）。势函数的设计围绕一系列游戏规则展开。<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1></li>
+</ol>
+</li>
+<li>在基于星际争霸2的游戏平台进行实验，和游戏内置AI对打</li>
+<li>对比结果说明这个方法胜率高</li>
+</ol>
+<h1 id="总体意见"><a href="#总体意见" class="headerlink" title="总体意见"></a>总体意见</h1><ol>
+<li><p>内容概述：<br>With the advancement of technology, multi-agent reinforcement learning (MARL) has been extensively applied across various domains. To effectively address challenges in MARL, this paper investigates a multi-agent Actor-Critic framework based on graph attention networks. By refining the reward allocation mechanism, communication and collaboration modality, as well as reward function design, this algorithm enhances performance. Experiments in the StarCraft multi-agent environment demonstrate over 95% winning rate.</p>
+</li>
+<li><p>strength：</p>
+<ol>
+<li>The paper proposes a novel algorithm GACMAC using graph attention networks to enhance collaboration among multiple agents in reinforcement learning.</li>
+<li>The innovations of the paper lie in utilizing counterfactual baseline and graph attention networks to strengthen cooperation among agents, and incorporating potential-based reward shaping to accelerate algorithm convergence.</li>
+<li>Experiments on the StarCraft multi-agent platform demonstrate the validity of the methods. The algorithm shows certain novelty and practical values.</li>
+<li>The figures in the paper vividly illustrate the framework and architecture of the proposed algorithm, which helps explain the algorithm flow and components effectively.</li>
+</ol>
+</li>
+<li><p>weakness：</p>
+<ol>
+<li>The paper does not sufficiently explain the main differences between the proposed GACMAC algorithm and existing algorithms such as MAAC and COMA in terms of theory, network structure, etc. It is recommended that the author adds more comparisons and discussions in this aspect.（去掉）</li>
+<li>The references are not new enough, with most dated before 2021, failing to reflect the latest progress in the field over the past two years. It is recommended that the authors add some references from the last two years.</li>
+<li>It is suggested that the notational representation used in this paper be introduced first in the System framework section, thus making it easier for the reader to understand the algorithmic framework illustrated in Figure 1.</li>
+</ol>
+</li>
 </ol>
 ]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>审稿意见</tag>
+        <tag>game theory</tag>
         <tag>reinforcement learning</tag>
       </tags>
   </entry>
@@ -1707,8 +1764,8 @@ B_{\mathcal{H}, \alpha, \gamma}(\Phi, h)=\frac{1}{n} \sum_{i=1}^n\left|h\left(\P
         <category>论文</category>
       </categories>
       <tags>
-        <tag>因果推断</tag>
         <tag>deep learning</tag>
+        <tag>因果推断</tag>
       </tags>
   </entry>
   <entry>
@@ -3596,20 +3653,84 @@ p_b-c=[p_s-c]\delta_s</script><p>这个公式粗浅的理解如下：左边是�
   <entry>
     <title>论文记录-Best reply structure and equilibrium convergence in generic games</title>
     <url>/2021/11/11/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Best%20reply%20structure%20and%20equilibrium%20convergence%20in%20generic%20games/</url>
-    <content><![CDATA[<h1 id="最优回复结构和泛型博弈中的均衡收敛"><a href="#最优回复结构和泛型博弈中的均衡收敛" class="headerlink" title="最优回复结构和泛型博弈中的均衡收敛"></a>最优回复结构和泛型博弈中的均衡收敛</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>博弈论是决策者之间战略互动的一组数学模型，应用于各种问题，如合作的出现、语言形成、道路和互联网的拥堵。同样的数学工具也被用来模拟生态学和种群生物学中的进化。一个长期存在的问题是，当玩家通过重复进行博弈来学习时，他们是否会收敛到一个均衡点。对于一般情况，人们知之甚少，因为答案取决于博弈的性质和学习算法。在这里，我们引入了一个形式主义，我们称之为最佳回复结构，它给出了一个对于一个广泛类型的学习算法在任意两个正则形式的博弈中的收敛概率的粗略估计。类似于我们的方法在其他领域中应用的例子是生态学中的定性稳定性理论和使用雷诺数来理解流体动力学中的湍流。</p>
-<p>解决博弈论均衡收敛问题的标准方法是关注具有特殊数学性质的博弈类，选择它们作为现实世界情景的程式化模型。例如，在位势博弈（potential games，也翻译成潜在博弈）中，单方面改变策略的所有收益差异都可以用一个全局势函数来表示;  拥塞博弈<sup><a href="#fn_1" id="reffn_1">1</a></sup>属于这一类，所以位势博弈可以作为交通的程式化模型。位势博弈中大多数学习算法收敛到一个纳什或相关的均衡在潜在的对策，在优势可解博弈（dominance-solvable game）、协调博弈（coordination game）、超模博弈（supermodular game）和弱环博弈（weakly acyclic game）中也是如此。研究具有特殊属性的博弈在机制设计等某一方玩家可以选择博弈形式的情况下是非常有用的。在这些情况下，也可以设计玩家将要使用的学习算法，并选择最有可能收敛到均衡的算法，例如在线拍卖和网络路由。</p>
-<p>然而，仍然有一些问题，其博弈和学习算法不是由某一方设计的，而是由博弈本身的属性特点决定的。例如，一个金融市场可以被看作是一种博弈，其中有许多与交易者买卖资产相关联的可能行为。结果可能会收敛到一个均衡，或者它可能内生波动。如果这个系统不是为了鼓励收敛而设计的，那么我们应该期待这两种行为中的哪一种？</p>
-<p>为了解决这个问题，我们采用了一种在20世纪90年代理论生态学和90年代发育生物学非常有效的方法，这种方法在物理学中非常普遍。这种方法的一个例子是May发表在理论生态学的一篇开创性论文。他研究了一个随机产生的捕食者-被捕食者相互作用的集合，他把这个集合作为一般生态系统的零模型。他的主要结论是随机的生态系统会随着它们的变大而变得更加不稳定。当然，梅很清楚，真正的生态系统不是随机的;  相反，它们是由进化选择和其他力量塑造的。许多大型生态系统已经存在了很长一段时间，这表明它们实际上是稳定的。因此，这一矛盾表明，真正的生态系统并不是梅模型中使用的随机整体的典型成员，这就提出了一个重要问题:  这些生态系统究竟是如何非典型化的，以及它们是如何以及为什么进化到稳定。四十五年后，正确回答这个问题仍然是一个活跃的研究课题。例如，约翰逊等人最近发现，真正的生态系统具有一种他们称之为营养连贯性的特性，并表明，将这种特性作为随机生成的生态系统集合的约束条件，可以确保稳定性。</p>
-<p>在本文中，我们将类似的方法应用到博弈论中，将随机生成的两人博弈集合作为一个零模型。为了方便处理，我们研究标准形式的博弈，因为它可以系统地列举所有可能的博弈。通过增加可变的约束以理解它们对收敛到均衡的影响，零模型得到了改进。在这里，我们详细研究了一个参数$G$，它调节了两个参与者的收益之间的相关性。这调节了博弈中的竞争强度，包括零和博弈作为$G=-1$的一个特例。我们也勾勒出一个玩家如何构造其他的约束，例如，研究潜在博弈的偏差。通过这种方法，我们可以看到在特定类别的博弈中的偏差是如何影响学习动态的稳定性的。</p>
-<p>随机生成的博弈和一般的学习算法没有可以得到精确解的数学性质。为了克服这个局限性，我们发展了一个形式主义，以获得近似收敛概率，这个近似概率是一个简单指标的函数。与流体动力学的类比阐释了这些近似解是如何发挥作用的。当流体离开平衡时，它通常会从稳定(或层流)流动过渡到不稳定(或紊流)流动。虽然描述流体动力学的纳维－斯托克斯方程没有解析解，但是这种转变仍然可以用一个叫做雷诺数的无量纲参数来粗略地描述。雷诺数越大，湍流发生的可能性越大。尽管这个预测并不准确ーー它只是一个经验法则ーー但它仍然非常有用。我们对博弈的类似估计并没有一个简单的封闭形式，但它具有类似的预测能力。我们的方法的另一个类比是理论生态学的定性稳定性理论。生态学中的许多模型都考虑食物网中不同物种之间相互作用的程度。例如，这些模型考虑了兔子吃多少草和狐狸吃多少兔子。质量稳定性方法只考虑了捕食者-被捕食者关系的特征，即兔子吃草，狐狸吃兔子。这使得仅仅从生态系统食物网的拓扑特性就可以获得生态系统稳定性的近似评估成为可能。与定性稳定性理论一样，我们的方法只依赖于对策的拓扑性质，而不依赖于收益的细节。</p>
-<p>我们的形式主义是基于最优回复动态，在这种动态下，每个玩家都以最优回复对手的最后一次行动。最优回复动力学在博弈论中是众所周知的，它被广泛用于发展学习的直觉，但是我们以一种新的方式使用它，以获得一般博弈中收敛的近似概率。在最优回复动态下，系统要么渐近收敛到一个对应于纯策略纳什均衡的固定点，要么陷入一个循环。我们考虑在基于最优回复循环与博弈固定点相对大小的博弈中的一个非常简单的非收敛指标。请注意，我们并没有假设玩家遵循最优回复动态。相反，我们假设收益矩阵的最优回复结构构成了一阶骨架，构成了玩家们试图学习的博弈骨干，这对于理解许多学习算法的收敛性是有用的。</p>
-<p>为了验证这一假设，我们选择了一组从真人博弈实验中得到的学习算法，包括强化学习、虚拟博弈<sup><a href="#fn_2" id="reffn_2">2</a></sup>、有噪声和无噪声的经验加权、k-level学习。我们也引入了（二种群）复制因子动力学在生态学和种群生物学中的重要性。基于最优回复动力学的方法预测了这些算法在R2≥0.78时的不收敛频率。</p>
-<p>在这里，我们想强调的是，我们的目标是描述性的，而不是规范性的。在机制设计中，人或机器使用具有良好收敛性能的算法。例如，一些算法收敛到相关均衡——一种纳什均衡的概括，允许玩家在所有博弈中对一个共同的信号进行协调。其中一种算法是遗憾匹配算法，在这种算法中，玩家考虑所有过去的比赛历史，并计算如果他们采取任何其他行动，他们的回报会是什么。虽然这些算法可能由机器或具有足够记录能力的人执行，但除非经过专门训练，否则它们似乎不太可能被真人使用。据我们所知，这些算法只有间接的经验支持。我们关注的是经过实验测试的算法。当它们到达一个固定点时，这些算法会收敛到一个纳什均衡点，或者一个接近一个的点，而不是一个更一般的相关平衡。</p>
-<p>在展示了最优回复结构形式主义的工作原理之后，我们分析了最优回复循环或不动点如何随着博弈中两个属性的变化而变化。我们根据玩家可用的动作数$N$来定义一个游戏的复杂程度。一个简单的游戏只有几个动作，而一个复杂的游戏有许多动作。博弈的竞争力由两个参与者的收益之间的相关性$G$来定义。负相关越多，竞争就越激烈。最优回复循环与固定点相比之下的相对占有率跟踪了我们所考虑的六种算法的收敛频率，因为我们改变了这些博弈的两个性质，除了竞争性博弈中的虚拟博弈。</p>
-<p>我们发现，上述观点的一个极端——简单且非竞争性的博弈——不太可能具有循环，而另一个极端——复杂且竞争性的博弈——则很可能有循环。前文提到的几种博弈（位势博弈、优势可解博弈、协调博弈、超模博弈、弱环博弈）在构造上都是非循环的。这几类中的任何一个都可能是简单且非竞争性博弈的典型案例，但它们肯定不是复杂且竞争性博弈中的典型例子。这与人们的直觉相吻合，即复杂的博弈更难学，当一个玩家的收益意味着另一个玩家的损失时，玩家之间更难合作。我们的形式化方法使这一直觉定量化。例如，如果每个玩家有两个动作，且两个玩家的收益没有相关性，则非循环博弈占据了其中的85%，反之，如果有10个动作，收益相关性为-0.7，则非循环博弈只占有2.7%。</p>
-<p>我们还展示了如何使用最优回复形式来研究某一类博弈的稳定性，例如位势博弈，以了解它们在偏离给定情景下的稳定性。我们证明了这种稳定性的变化可以是非线性的，例如，位势博弈的小扰动会导致不收敛的概率大幅度增加。</p>
-<p>在收益不相关的情况下，我们使用受统计力学启发的组合方法来分析计算不同长度的最佳回复循环的频率。受统计力学启发而产生的方法在博弈论中并不新鲜。先前的研究已经量化了纯策略纳什均衡点(22-25)、混合策略均衡(26,27)和帕帕累托均衡(28)的性质，但是我们是第一个量化最佳回复循环的频率和长度并显示它们与博弈论策略学习的相关性的研究。</p>
-<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><h3 id="Best-reply-structure"><a href="#Best-reply-structure" class="headerlink" title="Best reply structure"></a>Best reply structure</h3>]]></content>
+    <content><![CDATA[<h1 id="通用博弈中的最优回复结构和均衡收敛"><a href="#通用博弈中的最优回复结构和均衡收敛" class="headerlink" title="通用博弈中的最优回复结构和均衡收敛"></a>通用博弈中的最优回复结构和均衡收敛</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>博弈论被广泛用于模拟相互作用的生物和社会系统。在某些情况下，博弈者可能会趋同于一个均衡，例如纳什均衡，但在另一些情况下，他们的战略动态会内生振荡。如果系统的设计不是为了鼓励趋同，那么我们可以先验地预期这两种行为中的哪一种呢？为了解决这个问题，我们采用了理论生态学中流行的一种方法来研究生态系统的稳定性： 我们根据可能代表现实世界博弈属性的约束条件随机生成回报矩阵。我们的研究表明，最优回复循环是博弈中的基本拓扑结构，它预示着六种著名的学习算法不会收敛，这些算法在生物学中得到了应用，或在人类玩家的实验中得到了支持。最优回复循环在复杂的竞争性博弈中占主导地位，这表明在这种情况下，均衡通常是一个不切实际的假设，我们必须明确地建立学习动态模型。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>博弈论是一套针对决策者之间战略互动的数学模型，可应用于各种问题，如合作的出现、语言的形成以及道路和互联网的拥堵。同样的数学工具也被用于生态学和种群生物学中的进化建模。一个长期存在的问题是，当玩家通过反复玩游戏进行学习时，他们是否会趋同于一个均衡点。人们对一般情况知之甚少，因为答案取决于博弈的属性和学习算法。在这里，我们引入了一种我们称之为最优回复结构的形式主义，它可以粗略度量各种学习算法在任何双人正态博弈中的收敛概率。生态学中的定性稳定性理论和使用雷诺数来理解流体动力学中的湍流都可以类比说明我们的方法在其他领域的实用性。</p>
+<p>解决博弈论均衡收敛问题的标准方法是关注具有特殊数学性质的博弈类，选择它们作为现实世界情景的程式化模型。例如，在<a href="https://www.zhihu.com/question/26666055" target="_blank" rel="noopener">势博弈</a>（potential games，也翻译成潜在博弈）中，单方面改变策略的所有收益差异都可以用一个全局势函数来表示;  <a href="https://www.zhihu.com/question/481180778" target="_blank" rel="noopener">拥塞博弈</a>属于这一类，所以势博弈可以作为交通的程式化模型。势博弈中大多数学习算法收敛到一个纳什或相关的均衡在潜在的对策，在优势可解博弈（dominance-solvable game）、协调博弈（coordination game）、超模博弈（supermodular game）和弱非循环博弈（weakly acyclic game）中也是如此。研究具有特殊属性的博弈在机制设计等某一方玩家可以选择博弈形式的情况下是非常有用的。在这些情况下，也可以设计玩家将要使用的学习算法，并选择最有可能收敛到均衡的算法，例如在线拍卖和网络路由。</p>
+<p>然而，在其他一些问题中，博弈和学习算法并不是设计出来的，而是由设置的内在性质决定的。例如，金融市场可以被看作是一场博弈，其中有许多可能的行动与交易者可以买卖的资产相对应。结果可能趋于均衡，也可能内生波动。如果系统的设计不是为了鼓励趋同，我们应该期待这两种行为中的哪一种？</p>
+<p>为了解决这个问题，我们采用了一种在理论生态学和发育生物学中卓有成效、在物理学中也很普遍的方法。梅（May）的理论生态学开创性论文就是这种方法的一个例子。他研究了一组随机产生的捕食者-猎物相互作用，并将其作为一般生态系统的空模型。他的主要结果是，随机生态系统往往会随着规模的扩大而变得更加不稳定。当然，梅很清楚，真实的生态系统并不是随机的；相反，它们是由进化选择和其他力量塑造而成的。许多大型生态系统已经存在了很长时间，这表明它们实际上是稳定的。因此，这一矛盾表明，真实的生态系统并不是梅模型中使用的随机集合的典型成员，这就提出了一个重要的问题：这些生态系统究竟是如何变得不典型的，它们又是如何以及为什么进化成稳定的？45 年后的今天，对这一问题的正确回答仍然是一个活跃的研究课题。例如，约翰逊等人最近发现，真实的生态系统具有一种他们称之为营养相干性的特性，并证明将这种特性作为随机生成的生态系统集合的约束条件可以确保稳定性。</p>
+<p>在这里，我们将类似的方法应用于博弈论，将随机生成的双人博弈集合作为一个空模型。出于可操作性的考虑，我们利用可以系统地枚举所有可能博弈的事实，研究正态博弈。在这里，我们详细研究了一个参数$G$，它可以调整两位博弈者收益的相关性。这可以调节博弈中的竞争强度，并将零和博弈作为 $G = -1$ 的一个特例。我们还简要介绍了如何构建其他约束条件，例如，研究潜在博弈的偏差。通过这种方法，我们可以看到偏离特定类别博弈会如何影响学习动态的稳定性。</p>
+<p>随机生成的博弈和一般学习算法不具备允许精确求解的数学特性。为了克服这一局限性，我们开发了一种形式主义，以简单指标的函数形式获得收敛的近似概率。通过与流体力学的类比，我们可以清楚地了解这些近似解是如何发挥作用的。当流体被驱离平衡状态时，通常会从稳定流（或层流）过渡到不稳定流（或湍流）。描述流体动力学的纳维-斯托克斯方程没有解析解，但这种过渡可以用一个称为雷诺数 (7) 的非一维参数来粗略描述。雷诺数越大，发生湍流的可能性就越大。尽管这一预测并不精确—它只是一条经验法则—但却非常有用。我们对博弈的类似估计没有简单的封闭形式，但却具有类似的预测能力。与我们的方法类似的另一种方法是理论生态学中的定性稳定性理论 (6)。生态学中的许多模型都会考虑食物网中不同物种之间相互作用的程度。例如，这些模型会考虑兔子吃了多少草，狐狸吃了多少兔子。而定性稳定性方法只考虑捕食者与被捕食者之间关系的符号—兔子吃草，狐狸吃兔子。这样，仅从食物网的拓扑特性就可以对生态系统的稳定性进行近似评估。与定性稳定性理论一样，我们的方法只依赖于博弈的拓扑特性，而不依赖于收益的细节。</p>
+<p>我们的形式主义基于最优回复动力学，在此动力学下，每个玩家都会对对手的最后一个行动做出近视的最优回复。最优回复动力学在博弈论中是众所周知的，并被广泛用于发展学习的直觉，但我们以一种新的方式使用它，以获得一般博弈中收敛的近似概率。在最优回复动力学条件下，系统要么会渐进地收敛到一个与纯策略纳什均衡相对应的固定点，要么会陷入一个循环。我们根据最优回复循环与博弈固定点的相对大小，考虑了一个非常简单的博弈不收敛指标。请注意，我们并没有假设玩家遵循最优回复动态。相反，我们假设回报矩阵的最优回复结构构成了一阶骨架，形成了玩家试图学习的博弈的主干，这对于理解许多学习算法的收敛性非常有用。</p>
+<p>为了验证这一假设，我们选择了一组从真人博弈实验中得到的学习算法，包括强化学习、<a href="https://blog.csdn.net/weixin_40814740/article/details/109734014" target="_blank" rel="noopener">虚拟博弈</a>、有噪声和无噪声的经验加权、k-level学习。我们也引入了（二种群）复制因子动力学在生态学和种群生物学中的重要性。基于最优回复动力学的方法预测了这些算法在$R^2≥0.78$时的不收敛频率。</p>
+<p>在此，我们要强调的是，我们的目标是描述性的，而不是规范性的。在机制设计中，人们或机器使用的算法被设计为具有良好的收敛特性。例如，有些算法会收敛到相关均衡，这是纳什均衡的一种概括，允许博弈者在所有博弈中根据共同的信号进行协调。遗憾匹配就是这样一种算法，在这种算法中，玩家会考虑过去所有的博弈历史，并计算如果他们采取任何其他行动，他们的回报会是多少。虽然这些算法可以由机器或有足够记录能力的人来执行，但除非经过专门训练，否则不太可能被真人使用。据我们所知，这些算法只有间接的经验支持。我们将重点放在经过实验测试的算法上。当达到一个固定点时，这些算法会收敛到纳什均衡或接近纳什均衡的点，而不是更一般的相关均衡。</p>
+<p>在证明最优回复结构形式主义可行之后，我们分析了最优回复周期或固定点是如何随着博弈的两个属性的变化而变化的。我们根据玩家可用的行动数$N$来定义一个博弈的复杂程度。简单的博弈只有几个行动，而复杂的博弈则有很多行动。博弈的竞争性由两名玩家的收益之间的相关性$G$来定义。相关性越负，博弈的竞争性越强。当我们改变博弈的这两个属性时，最优回复循环与固定点的相对比例会跟踪我们所考虑的六种算法的收敛频率，竞争性博弈中的虚构游戏除外。</p>
+<p>我们的研究表明，在一端，简单且无竞争性的博弈不太可能有循环，而在另一端，复杂且有竞争性的博弈很可能有循环。我们之前提到的几类博弈，即潜在博弈、优势可解博弈、协调博弈、超模态博弈和弱非循环博弈，在构造上都是非循环的。这些类别中的任何一类都可能是简单非竞争博弈集合的典型成员，在这些博弈中，非循环行为很常见，但对于复杂竞争博弈来说，它们肯定不是典型的非循环行为。这些结果与我们的直觉相吻合，即复杂博弈更难学习，当一个博弈者的收益就是另一个博弈者的损失时，博弈者就更难协调均衡。我们的形式主义可以量化这一点。例如，在每个玩家有两个行动、两个玩家的收益之间没有相关性（$G=0$）的情况下，非循环博弈约占总数的 85%。然而，在$N=10$和$G=-0.7$的情况下，非循环博弈只占总数的 2.7%。</p>
+<p>我们还展示了如何利用最优回复形式主义来研究给定博弈类别（如势博弈）的稳定性，以了解它们在偏离给定类别情况下的稳定性。我们展示了这种行为可能是非线性的，例如，势博弈的微小扰动会导致不收敛性不成比例地大幅增加。</p>
+<p>在收益不相关（$G=0$）的情况下，我们使用受统计力学启发的组合方法来分析计算不同长度的最优回复周期的频率。使用受统计力学启发的方法并不是博弈论中的新想法。以前的研究已经量化了纯策略纳什均衡、混合策略均衡和帕累托均衡的属性，但我们是第一个量化最优回复周期的频率和长度并展示其与学习相关性的研究。加拉和法默以前用不同的方法研究了随机博弈中经验加权吸引力在$N\rightarrow \infty$时的收敛频率；在这里，我们将其扩展到任意$N$，研究了一系列不同的学习算法，并对不稳定性的起源有了更深入的了解。我们引入的形式主义可以向多个方向扩展，并应用于不同领域。例如，我们的研究结果也与通过复制器动力学的食物网稳定性有关，并可映射到布尔网络中。</p>
+<p>当收敛到均衡状态失败时，我们经常会观察到混乱的学习动态。当这种情况发生时，博弈者并没有收敛到任何形式的时际“混沌均衡”，即他们的预期与博弈结果不匹配，甚至在统计意义上也是如此。在许多情况下，由此产生的吸引子维度很高，这使得“理性”的玩家很难通过统计方法预测其他玩家的行动，从而获得优于其他玩家的结果。一旦至少有一名玩家系统性地偏离均衡状态，学习和启发式方法就能超越均衡思维，并能更好地描述玩家的行为。</p>
+<p>我们首先开发了最优回复框架。接下来，我们将展示如何利用它来预测我们在此研究的六种学习算法的非收敛频率，首先提出一些论点，给出一些直观的解释，说明为什么这样做可行，然后提供更多量化证据。然后，我们研究了最优回复循环是否会随着博弈的某些属性的变化而变得普遍，并说明了两个不同的约束条件的影响，这两个约束条件代表了与众所周知的博弈类别的偏差。最后，我们开发了一种分析性组合方法，用于计算在收益不相关的情况下最优回复循环的频率。</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Best-reply-structure"><a href="#Best-reply-structure" class="headerlink" title="Best reply structure"></a>Best reply structure</h3><p>首先，我们将介绍一个框架，该框架将证明，我们所分析的学习算法系列将收敛到一个固定点的可能性可以得到一个有用的估计。正如我们将演示的，这提供了一种框架，可以通过分析给出算法在玩家尝试学习游戏时将遇到的稳定性问题的一阶近似值。表 1 总结了我们将要介绍的术语。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Table 1. Terminology.</th>
+<th>NE, Nash equlibrium.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best reply</td>
+<td>Action that gives the best payoff in response to a given action by an opponent</td>
+</tr>
+<tr>
+<td>Best reply structure</td>
+<td>Arrangement of the best replies in the payoff matrix</td>
+</tr>
+<tr>
+<td>Best reply matrix</td>
+<td>Derived payoff matrix, with one for the best reply to each possible move of the opponent and zero everywhere else</td>
+</tr>
+<tr>
+<td>Best reply dynamics</td>
+<td>Simple learning algorithm in which the players myopically choose the best reply to the last action of their opponent</td>
+</tr>
+<tr>
+<td>Best reply k-cycle</td>
+<td>Closed loop of best replies of length k (each player moves k times)</td>
+</tr>
+<tr>
+<td>Best reply fixed point</td>
+<td>Pure NE, i.e., the action for each player that is a best reply to the move of the other player</td>
+</tr>
+<tr>
+<td>Best reply vector u</td>
+<td>List of the number of distinct attractors of the best reply dynamics, ordered from longest cycles to fixed points</td>
+</tr>
+<tr>
+<td>Free action/free best reply</td>
+<td>Best reply to an action that is neither part of a cycle nor a fixed point</td>
+</tr>
+<tr>
+<td>Best reply configuration</td>
+<td>Unique set of best replies by both players to all actions of their opponent</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假设在一个双人正则表达式博弈中，玩家分别是行玩家和列玩家，各自的行动（或移动，或纯策略）记作$i, j = 1, …, N$。最佳回应是指在回应对手给定行动时给出最佳回报的行动。最佳回应结构是最佳回应在收益双矩阵（即描述双方收益的两个矩阵）中的排列。(本文中，我们将使用 “收益矩阵 “一词来指双矩阵）在最佳回复动态下，每个玩家都会对对手的最后一个行动做出最佳回复。我们考虑的是最佳回应动态的一个特殊版本，即两位玩家交替下棋，各自选择对对手最后一个行动的最佳回应。</p>
+<p>为了理解基本思想，我们考虑如下图所示的$N=4$的博弈。在图中，$S^R=\{1,2,3,4\}$和$S^C=\{1,2,3,4\}$分别是行玩家和列玩家的可能行动，矩阵中的每个格子反映了他们各自的收益，行玩家在左边。最优回复箭头指向了这个格子对应的最优回复格，垂直箭头对应行玩家，水平箭头对应列玩家。红色箭头表示该箭头是循环的一部分，橘黄色表示该箭头不在循环里，但会导向循环，蓝色表示直接指向固定点，天蓝色表示通过不止一步导向固定点。图B中的最优回复矩阵是布尔约简，其构造为具有与图A中的收益矩阵相同的最佳回复结构，但只有1和0作为其条目。假设我们选择了$(1,1)$作为初始条件，假设列玩家先行动，作为对$S^R=1$的最优回应，他选择了$S^C=2$。接下来行玩家行动，最优回应是$S^R=2$，由此列玩家又会再移动到$S^C=1$，等等。这样两个玩家将陷入循环$(1,1)\rightarrow(1,2)\rightarrow(2,2)\rightarrow(2,1)\rightarrow(1,1)$。我们将这样的循环称为最优回复双循环，因为每个玩家都移动两次。这个循环是一个吸引子，如果从$(3,2)$开始博弈，且行玩家先行，则博弈还是会进入到这个循环。先行玩家可以随机抽选，如果玩家的行动已经在循环了，那先行者的抽选对结果没有任何影响，因为至多有一个玩家有动机偏离当前的情况。然而如果当前不在循环，则玩家行动顺序就重要起来了。例如在这个例子中，存在两个吸引子，还是从$(3,2)$开始，列玩家先行，则博弈会一步到达最优回复固定点$(3,3)$，它是一个纯策略纳什均衡（NE）。<br><img src="https://github.com/likun1208/image/blob/master/bestreply-1.png?raw=true" alt="图1"><br>给定$N\times N$的收益矩阵$\Pi$，我们通过最优回复向量$v(\Pi)=(n_N,…,n_2,n_1)$来表征一组最优回复动力学的吸引子，其中$n_1$是固定点的数量，$n_2$是双循环的数量，以此类推。例如，图1中的向量是$v=(0,0,1,1)$，表示有1个固定点和1个双循环。</p>
+<p>如上图B所示，将收益矩阵还原为最优回复矩阵是非常有用的。具体做法是将每位玩家的所有最佳回复替换为 1，所有其他条目替换为 0。最佳回复矩阵的最佳回复结构与其衍生的收益矩阵相同，但它忽略了收益的其他方面。最佳回复矩阵具有与原始博弈相同的循环和纯策略近似值，但一般来说，混合策略近似值有所不同。一旦知道了最佳回复动态的吸引子，就可以列出所有的混合策略近似值。每个最佳回复循环都有一个混合 NE，循环和固定点的所有可能组合都有一个混合 NE。与给定循环相关的混合策略近似值对应于随机走每一步，其频率与循环中出现的频率相同。例如，图 1B 中与最佳回复周期相关的混合策略均衡为$x,y=(0.5, 0.5, 0, 0), (0.5, 0.5, 0, 0)$。与每种可能的循环和固定点组合相关的混合策略 NE 对应于组合行动集的平均值。例如，在图 1B 中，与循环和固定点组合相关的混合 NE 为 $x, y = (0.33, 0.33, 0.33, 0),(0.33, 0.33, 0.33, 0)$。对于最佳回复矩阵，不存在其他混合策略近似点。</p>
+<p>在从最佳回复矩阵到原始博弈的过程中，一些混合近似解可能会存活下来，而另一些则可能不会，并且可能会引入新的混合近似解。例如，在图 1A 中，它们都没有存活下来，而且在 $x, y = (0.32, 0, 0, 0.68), (0.36, 0.64, 0, 0)$ 和 $x, y = (0.26, 0.15, 0, 0.59), (0.32, 0.24, 0.44, 0)$处有两个混合均衡，它们与相关的最佳回复动态没有关系。我们在第 S2 节中对随机生成的 1000 个 $N = 10$ 的博弈进行了量化说明。</p>
+<h3 id="Learning-dynamics"><a href="#Learning-dynamics" class="headerlink" title="Learning dynamics"></a>Learning dynamics</h3><p>为了解决学习何时收敛的问题，我们研究了六种不同的学习算法。这些算法的选择跨越了不同的信息条件和理性水平。我们的重点是有经验支持的算法。这包括在生物学中用于动物学习或种群遗传学等目的的算法，以及用于在实验室环境中进行人类游戏行为实验的算法。我们在 “材料与方法 “中对六种算法逐一进行了简短总结，并在第 S1 节中介绍了详细内容。在此，我们仅讨论每种算法背后的基本思想，并说明将其纳入本研究的原因。</p>
+<p>强化学习基于这样一种理念，即玩家更有可能采取过去收益更好的行动。它是标准的学习算法，用于信息有限和/或没有复杂推理的情况下，例如动物学习。我们研究的是布什-莫斯泰勒（Bush-Mosteller）算法，该算法已在实验中进行了广泛测试。</p>
+<p>虚拟博弈需要更多的复杂性，因为它假定玩家构建了一个对手的心理模型。每个玩家都假定对手过去行动的经验分布就是她的混合策略，并根据这一信念下出最佳对策。一种常用的变体——加权虚拟博弈——假定过去的行动会打折扣。关于标准虚拟博弈和加权虚拟博弈的经验证据不一。从理论的角度来看，标准虚拟博弈在许多情况下会趋同于混合策略 NE，而加权虚拟博弈则不会。正如我们将看到的，如果学习算法经常达到混合均衡，我们的最佳回复形式主义就不能很好地发挥作用。我们选择标准版本的虚拟博弈来说明这一点，因为它提供了更有力的检验。</p>
+<p>复制动力学常用于生态学和种群生物学。它表示种群中某些性状随世代的演变，每个性状的适合度取决于种群中所有其他性状的份额。复制动力学也可以看作是一种学习算法，其中每个性状都对应着一种行动。在这里，我们考虑的是双种群复制动力学，而不是更标准的单种群版本，因为在单种群版本中，两个参与者的收益矩阵顾名思义是对称的，而我们要研究的是收益的相关性。</p>
+<p>经验加权吸引力（EWA）已被提出，用于归纳强化学习和虚拟博弈，并已被证明能很好地适应实验数据。其成功的关键在于一个权衡已实现报酬和已放弃报酬的参数。EWA 还包括其他参数，如记忆和报酬敏感性。与上述三种学习算法不同，其参数是决定收敛性的关键： 对于某些参数值，它总是收敛到固定点，而这些固定点可能离纳什均衡或相关均衡任意遥远。正如我们在 “补充材料 “中详细讨论的那样，由于缺乏对一般博弈中参数的实验指导，我们选择的参数值有可能使收敛接近近邻均衡。EWA 不会收敛到更一般的相关均衡，除非它们对应于NE。</p>
+<p>上述算法都基于批量学习的概念，这很方便，因为这意味着它们都是确定性的。在批量学习中，棋手在更新自己的策略之前会大量观察对手的行动，因此会根据对手在每个时间点的实际混合策略进行学习。确定性假设有助于从数字上识别静止状态。在许多实验情况下，更现实的假设是，棋手在观察对手的单次行动后更新策略，而对手的行动是从其混合策略中随机取样的。这就是所谓的在线学习。作为在线学习的一个例子，我们研究了 EWA 的随机版本。</p>
+<p>上述五种算法都是向后看的。为了与具有前瞻性行为的例子进行比较，我们使用了水平-k 学习或预期学习，其中棋手试图通过提前 k 步思考来战胜对手。level-k思维的观点得到了相当多的经验支持，一些研究还特别支持预期学习。在这里，我们通过使用第 2 层 EWA 学习来实现 k 级推理。两位棋手都假设对手是一级学习者，并使用 EWA 更新策略。因此，棋手会尝试根据对手的预测行动先发制人，而不是仅仅根据对手的历史行动频率采取行动。这为前瞻性行为提供了一个衡量标准。</p>
+<p>总之，我们之所以选择这六种算法，是因为它们本身就很重要，而且能说明不同的特性。我们感兴趣的是生态学和生物学中使用的算法，或者在实验室人类实验中观察到的有界理性算法。我们特别不研究那些与计算机科学或机制设计相关，但与行为学观点无关的复杂算法。这些算法的收敛特性可能与本文研究的算法截然不同。遗憾匹配就是我们不研究的这类算法的一个例子，它被认为是一种 “自适应启发式”，是有界理性和近视的。然而，它仍然要求博弈者计算如果他们在之前的所有时间步骤中采取任何其他行动，他们会得到什么回报，而且没有经验证据表明人类实验中的博弈者会使用它。其他能达到相关均衡的算法，如校准学习法，则更为复杂。</p>
+<h3 id="How-does-the-best-reply-structure-shape-learning-dynamics"><a href="#How-does-the-best-reply-structure-shape-learning-dynamics" class="headerlink" title="How does the best reply structure shape learning dynamics?"></a>How does the best reply structure shape learning dynamics?</h3><h3 id="Quantitative-evidence"><a href="#Quantitative-evidence" class="headerlink" title="Quantitative evidence"></a>Quantitative evidence</h3><h3 id="Variation-of-the-best-reply-structure"><a href="#Variation-of-the-best-reply-structure" class="headerlink" title="Variation of the best reply structure"></a>Variation of the best reply structure</h3><h3 id="Analytical-approach"><a href="#Analytical-approach" class="headerlink" title="Analytical approach"></a>Analytical approach</h3><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><h2 id="Materials-and-methods"><a href="#Materials-and-methods" class="headerlink" title="Materials and methods"></a>Materials and methods</h2><h3 id="Reinforcement-learning"><a href="#Reinforcement-learning" class="headerlink" title="Reinforcement learning"></a>Reinforcement learning</h3><h3 id="Fictitious-play"><a href="#Fictitious-play" class="headerlink" title="Fictitious play"></a>Fictitious play</h3><h3 id="Replicator-dynamics"><a href="#Replicator-dynamics" class="headerlink" title="Replicator dynamics"></a>Replicator dynamics</h3><h3 id="Experience-weighted-attraction"><a href="#Experience-weighted-attraction" class="headerlink" title="Experience-weighted attraction"></a>Experience-weighted attraction</h3><h3 id="EWA-with-noise"><a href="#EWA-with-noise" class="headerlink" title="EWA with noise"></a>EWA with noise</h3><h3 id="Level-k-learning"><a href="#Level-k-learning" class="headerlink" title="Level-k learning"></a>Level-k learning</h3><h3 id="Payoff-matrices"><a href="#Payoff-matrices" class="headerlink" title="Payoff matrices"></a>Payoff matrices</h3>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -4088,7 +4209,7 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>但是总共有19930个项目，却只获取到30个，这显然是不够的，想获取更多项目就需要修改api的内容，改成<code>https://api.github.com/search/repositories?q=dapp&amp;page=1&amp;per_page=100</code>，修改后就可以获取到100条项目信息了，这是每页项目数的上限，将api中的<code>page=1</code>改成<code>page=2</code>即可得到新的100条信息，然而由于api限制，通过这样的方法最多可以获取1000条（即<code>page=10</code>），超过1000条后会有报错信息。为了能获取到更多项目，我们需要对访问查询作出限制，使得每次查询结果都不超过1000条，然后将多次查询结果合并起来得到完整结果，例如仅查找创建于2021年1月至2月的项目数，这样就可以得到1000条以内的结果，再逐页访问即可。限制时间的api为：<code>https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=1&amp;per_page=100</code>，这个api可以获取创建时间在2021年4月1日至5月1日的所有项目数据，如果要获取其他时间范围，对api中的时间进行修改即可，可以精确到秒；如果时间限制是早于或晚于某个时间点，则写成<code>created:&gt;=2021-04-01T00:00:00</code>，大于等于符号可以改成小于等于或者大于或者小于。如果想限制其他字段，比如更新时间，则把created修改为updated即可。</p>
 <p>具体到写python代码时，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> github3 <span class="keyword">import</span> login, GitHub</span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    result = requests.get(<span class="string">"https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=6&amp;per_page=100"</span>)</span><br><span class="line">    response_dict = result.json()</span><br><span class="line">    repo_dicts = response_dict[<span class="string">'items'</span>]</span><br><span class="line">    print(<span class="string">"Toal repositories:"</span>, response_dict[<span class="string">'total_count'</span>])</span><br><span class="line">    print(<span class="string">"Repositories returned:"</span>, len(repo_dicts))</span><br><span class="line">    keys = &#123;<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>&#125;</span><br><span class="line">    save_dicts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> repo_dicts:</span><br><span class="line">        j = &#123;key: value <span class="keyword">for</span> key, value <span class="keyword">in</span> i.items() <span class="keyword">if</span> key <span class="keyword">in</span> keys&#125;</span><br><span class="line">        save_dicts.append(j)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'test.csv'</span>, <span class="string">'a+'</span>, newline=<span class="string">''</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f: </span><br><span class="line">        fieldnames = [<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>]</span><br><span class="line">        writer = csv.DictWriter(f,fieldnames=fieldnames)</span><br><span class="line">        <span class="comment">#writer.writeheader()</span></span><br><span class="line">        writer.writerows(save_dicts)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<!--这段代码`import`的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。-->
+<p>这段代码<code>import</code>的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。</p>
 <p>代码第9行使用<code>requests.get()</code>获取api的数据，接着使用<code>.json()</code>将它转为字典。这个字典的<code>total_count</code>项就是前面图中显示的项目总数，这里我们没有用到；字典的<code>items</code>项则是我们需要的项目列表，将它单独存到<code>repo_dicts</code>，显然获取的项目列表数并不等于项目总数。</p>
 <p>接下来把这次数据处理所需要的字段写到<code>keys</code>中，从<code>repo_dicts</code>中提取这些列的内容存到新列表<code>save_dicts</code>中，再将这些数据保存到csv文件里。这个提取数据并保存的过程应该有更简练的代码写法，我懒得改了就这样吧。</p>
 <p>最终得到的csv文件如下图所示：</p>
@@ -4124,11 +4245,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts5566" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4019" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5566'));
+        var myChart = echarts.init(document.getElementById('echarts4019'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -4184,11 +4305,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6027" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1435" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6027'));
+        var myChart = echarts.init(document.getElementById('echarts1435'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -4238,11 +4359,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7676" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7574" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7676'));
+        var myChart = echarts.init(document.getElementById('echarts7574'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -9918,11 +10039,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts5545" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9487" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5545'));
+        var myChart = echarts.init(document.getElementById('echarts9487'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -10251,7 +10372,8 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
   <entry>
     <title>使用算法和数据结构解决问题-1</title>
     <url>/2020/09/28/%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98-1/</url>
-    <content><![CDATA[<h1 id="第一章-前言"><a href="#第一章-前言" class="headerlink" title="第一章 前言"></a>第一章 前言</h1><h2 id="1-1-目标"><a href="#1-1-目标" class="headerlink" title="1.1 目标"></a>1.1 目标</h2><ol>
+    <content><![CDATA[<p>说明：后来发现了已经有不少对这本书的翻译，例如<a href="http://gis4g.pku.edu.cn/course/pythonds/#%E8%AF%BE%E7%A8%8B%E6%95%99%E6%9D%90" target="_blank" rel="noopener">北大课程</a>，因此就不再继续翻译了。</p>
+<h1 id="第一章-前言"><a href="#第一章-前言" class="headerlink" title="第一章 前言"></a>第一章 前言</h1><h2 id="1-1-目标"><a href="#1-1-目标" class="headerlink" title="1.1 目标"></a>1.1 目标</h2><ol>
 <li><p>回顾计算机科学、编程和解决问题的想法。</p>
 </li>
 <li><p>理解“抽象”及其在解决问题的过程中发挥的作用。</p>

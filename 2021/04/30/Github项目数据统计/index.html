@@ -106,7 +106,7 @@
 <p>但是总共有19930个项目，却只获取到30个，这显然是不够的，想获取更多项目就需要修改api的内容，改成<code>https://api.github.com/search/repositories?q=dapp&amp;page=1&amp;per_page=100</code>，修改后就可以获取到100条项目信息了，这是每页项目数的上限，将api中的<code>page=1</code>改成<code>page=2</code>即可得到新的100条信息，然而由于api限制，通过这样的方法最多可以获取1000条（即<code>page=10</code>），超过1000条后会有报错信息。为了能获取到更多项目，我们需要对访问查询作出限制，使得每次查询结果都不超过1000条，然后将多次查询结果合并起来得到完整结果，例如仅查找创建于2021年1月至2月的项目数，这样就可以得到1000条以内的结果，再逐页访问即可。限制时间的api为：<code>https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=1&amp;per_page=100</code>，这个api可以获取创建时间在2021年4月1日至5月1日的所有项目数据，如果要获取其他时间范围，对api中的时间进行修改即可，可以精确到秒；如果时间限制是早于或晚于某个时间点，则写成<code>created:&gt;=2021-04-01T00:00:00</code>，大于等于符号可以改成小于等于或者大于或者小于。如果想限制其他字段，比如更新时间，则把created修改为updated即可。</p>
 <p>具体到写python代码时，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> github3 <span class="keyword">import</span> login, GitHub</span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    result = requests.get(<span class="string">"https://api.github.com/search/repositories?q=dapp+created:2021-04-01T00:00:00..2021-05-01&amp;page=6&amp;per_page=100"</span>)</span><br><span class="line">    response_dict = result.json()</span><br><span class="line">    repo_dicts = response_dict[<span class="string">'items'</span>]</span><br><span class="line">    print(<span class="string">"Toal repositories:"</span>, response_dict[<span class="string">'total_count'</span>])</span><br><span class="line">    print(<span class="string">"Repositories returned:"</span>, len(repo_dicts))</span><br><span class="line">    keys = &#123;<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>&#125;</span><br><span class="line">    save_dicts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> repo_dicts:</span><br><span class="line">        j = &#123;key: value <span class="keyword">for</span> key, value <span class="keyword">in</span> i.items() <span class="keyword">if</span> key <span class="keyword">in</span> keys&#125;</span><br><span class="line">        save_dicts.append(j)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'test.csv'</span>, <span class="string">'a+'</span>, newline=<span class="string">''</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f: </span><br><span class="line">        fieldnames = [<span class="string">'id'</span>,<span class="string">'full_name'</span>,<span class="string">'html_url'</span>,<span class="string">'commits_url'</span>,<span class="string">'language'</span>,<span class="string">'description'</span>,<span class="string">'forks_count'</span>,<span class="string">'stargazers_count'</span>,<span class="string">'watchers_count'</span>,<span class="string">'created_at'</span>,<span class="string">'pushed_at'</span>,<span class="string">'updated_at'</span>]</span><br><span class="line">        writer = csv.DictWriter(f,fieldnames=fieldnames)</span><br><span class="line">        <span class="comment">#writer.writeheader()</span></span><br><span class="line">        writer.writerows(save_dicts)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<!--这段代码`import`的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。-->
+<p>这段代码<code>import</code>的一些包其实没有用到，是最初学着写的时候都引入了，之后没删。</p>
 <p>代码第9行使用<code>requests.get()</code>获取api的数据，接着使用<code>.json()</code>将它转为字典。这个字典的<code>total_count</code>项就是前面图中显示的项目总数，这里我们没有用到；字典的<code>items</code>项则是我们需要的项目列表，将它单独存到<code>repo_dicts</code>，显然获取的项目列表数并不等于项目总数。</p>
 <p>接下来把这次数据处理所需要的字段写到<code>keys</code>中，从<code>repo_dicts</code>中提取这些列的内容存到新列表<code>save_dicts</code>中，再将这些数据保存到csv文件里。这个提取数据并保存的过程应该有更简练的代码写法，我懒得改了就这样吧。</p>
 <p>最终得到的csv文件如下图所示：</p>
@@ -142,11 +142,11 @@
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts5566" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4019" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5566'));
+        var myChart = echarts.init(document.getElementById('echarts4019'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -202,11 +202,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts6027" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1435" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6027'));
+        var myChart = echarts.init(document.getElementById('echarts1435'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -256,11 +256,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7676" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7574" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7676'));
+        var myChart = echarts.init(document.getElementById('echarts7574'));
         // 指定图表的配置项和数据
         var option = {
         title : {
