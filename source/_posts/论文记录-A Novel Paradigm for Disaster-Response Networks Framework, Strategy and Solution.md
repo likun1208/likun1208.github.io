@@ -1,7 +1,9 @@
 ---
-title: '论文记录-A Novel Paradigm for Disaster-Response Networks: Framework, Strategy and Solution'
+title: "论文记录-A Novel Paradigm for Disaster-Response Networks: Framework, Strategy and Solution"
 date: 2021-03-06 08:53:36
-tags: 灾害应对网络
+tags:
+  - 灾害应对网络
+  - 审稿意见
 categories: 论文
 description: 是导师安排的审稿任务
 ---

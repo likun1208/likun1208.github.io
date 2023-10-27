@@ -84,14 +84,14 @@ DeFi的安全性讨论，细看一下
 
 # 阅读规划
 精读
-1. CeFi vs. DeFi Comparing Centralized to Decentralized Finance
-2. Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys
-3. An Empirical Study of DeFi Liquidations: Incentives, Risks, and Instabilities
-4. AMR: Autonomous Coin Mixer with Privacy Preserving Reward Distribution
-5. High-Frequency Trading on Decentralized On-Chain Exchanges
-6. Quantifying Blockchain Extractable Value: How dark is the forest?
-7. Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)
-8. SoK: Decentralized Finance (DeFi) Attacks
+1. [ ] CeFi vs. DeFi Comparing Centralized to Decentralized Finance
+2. [ ] Smart Contract and DeFi Security Insights from Tool Evaluations and Practitioner Surveys
+3. [x] An Empirical Study of DeFi Liquidations: Incentives, Risks, and Instabilities
+4. [ ] AMR: Autonomous Coin Mixer with Privacy Preserving Reward Distribution
+5. [ ] High-Frequency Trading on Decentralized On-Chain Exchanges
+6. [ ] Quantifying Blockchain Extractable Value: How dark is the forest?
+7. [ ] Security of Decentralized Financial Technologies (Dagstuhl Seminar 22421)
+8. [x] SoK: Decentralized Finance (DeFi) Attacks
 
 精读候选
 1. Towards Automated Security Analysis of Smart Contracts based on Execution Property Graph

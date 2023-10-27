@@ -3,8 +3,7 @@ title: 论文记录-A Survey on Applications of Game Theory in Blockchain
 date: 2023-10-03 16:40:10
 tags:
   - blockchain
-  - game
-  - theory
+  - game theory
 categories: 论文
 description: 博弈论在区块链中的应用
 ---
