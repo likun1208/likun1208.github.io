@@ -131,11 +131,11 @@ $T-SAB$机制的计算包含公式4中的一个优化问题以及公式5中的$I
 #### 信念系统和均衡概念
 尽管阶段1上报的传感数据$\tilde\theta_i$并没有出现在阶段2公式4的收益函数中，但报告的传感数据会影响每个用户的评价（由于评价相互依赖的特点），从而影响用户在阶段2的决策。为了描述这样的特点，我们引入了针对每个用户$i$的信念系统$\beta_i(\cdot|\cdot)$。具体来说，在阶段1中给定报告值$\tilde\theta_{-i}=\left\{\tilde\theta_j\right\}_{j\neq i}$的情况下，每个用户$i$选择一个关于真值$\theta_{-i}=\left\{\theta_j\right\}_{j\neq i}$的信念$\beta_i(\theta_{-i}|\tilde\theta_{-i})$，因此，阶段2中每个用户在其传感数据$\theta_i$和其他用户传感数据$\tilde\theta_{-i}$条件下的后验期望收益是：
 $$
-J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{*}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}
+J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{\ast}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}
 $$
 因为我们关注所有用户都说真话的均衡，我们考虑下述真实均衡概念：
 
-定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{*},\lambda^{*}(\widetilde{\theta}^{*}),\{\beta_{i}^{*}\}_{i\in I})$，使得：
+定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{\ast},\lambda^{\ast}(\widetilde{\theta}^{\ast}),\{\beta_{i}^{\ast}\}_{i\in I})$，使得：
 $$
 \lambda_i^*(\widetilde{\theta}^*)\in\arg\max_{\lambda_i\in\mathbb{R}^N},J_i^{\beta_i^*}(\lambda_i,\lambda_{-i}^*(\widetilde{\theta}^*)|\theta_i,\widetilde{\theta}_{-i}^*), \tag{7a}
 $$
@@ -165,7 +165,7 @@ $$
 $$
 J_i^{\boldsymbol{\beta}_i^*}\left(\boldsymbol{\lambda}\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)=\bar{U}_i\left(\boldsymbol{x}_i^*(\boldsymbol{\lambda})\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)-\boldsymbol{h}_i\left(\boldsymbol{\lambda},\widetilde{\boldsymbol{\theta}}\right) \tag{10}
 $$
-其中，$x^{*}(\lambda)=\{x_{i}^{*}(\lambda)\}_{i\in I}$由公式4决定。
+其中，$x^{\ast}(\lambda)=\{x_{i}^{\ast}(\lambda)\}_{i\in I}$由公式4决定。
 
 上述竞价子博弈包含以下均衡概念$\lambda^\ast$：
 

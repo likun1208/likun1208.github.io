@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Best reply structure and equilibrium convergence in generic games.md",
+                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Best reply structure and equilibrium convergence in generic games.md",
+                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Best reply structure and equilibrium convergence in generic games.md",
+                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Best reply structure and equilibrium convergence in generic games.md"
+                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md"
               }
             }
           },
@@ -166,6 +166,10 @@
   },
   "active": "08f16e20fb3c2cd0",
   "lastOpenFiles": [
+    "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
+    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
+    "论文略读记录.md",
+    "论文记录-分片相关.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
     "论文记录-Best reply structure and equilibrium convergence in generic games.md",
     "论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning.md",
@@ -188,10 +192,6 @@
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
     "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
-    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
-    "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
-    "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
-    "论文记录-INFOCOM 2024审稿.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
