@@ -65,12 +65,16 @@ description: 交易费分级机制
 ### 分层定价机制
 1. 将区块内可用空间划分为最多$k$层，每层有各自的延迟$d_i,i\in[k]$和价格$p_i,i\in[k]$，随延迟增加价格下降。第一层的延迟固定为1，是最小延迟，意味着下一块就上链，其他层的延迟和所有层的价格由一组参数控制动态变化。
 2. 机制设计目标：该尽量选择最小的满足约束的延迟和价格，同时尽量增加层级数量和使用率。
-3. 延迟和价格的计算方式：$d_{j+1}\geq \lambda_jd_j,\lambda_j>1,p_{j+1}\leq \mu_jd_j,\mu_j>1$，其中$\lambda_j,\mu_j,j\in[k-1]$是机制的参数。当约束不满足时，机制回改变至少一个层参数（延迟，价格，层数）从而满足约束。
-4. 初始状态下，机制只有大小为B的一层。
-5. 每次生成新区块时，会根据上一个块的负载调整不同层级的价格。
-6. 不同层的延迟变化频率较低（每过dFreq个块，改变一次延迟），以便价格调整能跟得上负载变化。延迟的变化基于连续层价格的关系，如果$p_{i+1}>\mu_i-p_i$，则第$i+1$层的延迟就增加，从而使得$p_{i+1}$减小，来满足约束。否则，$d_{i+1}\geq \lambda_i-d_i$，第$i+1$层的延迟会以一定概率减少1，来避免不必要的延迟，提高系统效率。
-7. 层的数量变化的斌率更低（每tFreq个块改一次），如果最后一层的价值大于$addTierPrice$，且当前层数$m$小于$k$，就会新增一个尺寸为$a_{m+1}B$的层，价格是$newTierPrice$，延迟是$\lambda_md_m$。第$m+1$层的空间是从第1层挪出来的。类似的，如果最后一层的价格小于$removeTierPrice$，且当前层数大于1，则删去最后一层并把空间还给第一层。
-8. 延迟惩罚：为了避免用户加入最便宜的层级然后谎报偏好，机制通过延迟处理包含在层级中的交易来实现惩罚，延迟量为层级的延迟量，也就是说，就所有分类账而言，在产生的区块的时间戳超过包含区块的延迟量之前，交易将被忽略。因此，添加到层级中的交易需要支付与层级价格相等的费用。
+3. 延迟和价格的计算方式：
+	$$ 
+	d_{j+1}\geq \lambda_jd_j,\lambda_j>1,p_{j+1}\leq \mu_jd_j,\mu_j>1\tag{1}
+	$$
+	其中$\lambda_j,\mu_j,j\in[k-1]$是机制的参数。当约束不满足时，机制回改变至少一个层参数（延迟，价格，层数）从而满足约束。
+1. 初始状态下，机制只有大小为B的一层。
+2. 每次生成新区块时，会根据上一个块的负载调整不同层级的价格。
+3. 不同层的延迟变化频率较低（每过dFreq个块，改变一次延迟），以便价格调整能跟得上负载变化。延迟的变化基于连续层价格的关系，如果$p_{i+1}>\mu_i-p_i$，则第$i+1$层的延迟就增加，从而使得$p_{i+1}$减小，来满足约束。否则，$d_{i+1}\geq \lambda_i-d_i$，第$i+1$层的延迟会以一定概率减少1，来避免不必要的延迟，提高系统效率。
+4. 层的数量变化的斌率更低（每tFreq个块改一次），如果最后一层的价值大于$addTierPrice$，且当前层数$m$小于$k$，就会新增一个尺寸为$a_{m+1}B$的层，价格是$newTierPrice$，延迟是$\lambda_md_m$。第$m+1$层的空间是从第1层挪出来的。类似的，如果最后一层的价格小于$removeTierPrice$，且当前层数大于1，则删去最后一层并把空间还给第一层。
+5. 延迟惩罚：为了避免用户加入最便宜的层级然后谎报偏好，机制通过延迟处理包含在层级中的交易来实现惩罚，延迟量为层级的延迟量，也就是说，就所有分类账而言，在产生的区块的时间戳超过包含区块的延迟量之前，交易将被忽略。因此，添加到层级中的交易需要支付与层级价格相等的费用。
 ## Tiered Pricing is Diverse
 ### Tiered Transaction Mechanisms
 1. 区块分为$\{0,1,2,...,k\}$个层，除了第0层，每层的尺寸是$B=(B_1,B_2,...,B_k)$，延迟是$d=(d_1,d_2,...,d_k)$，所有层的尺寸加起来是B，B表示区块吞吐量。
@@ -84,9 +88,17 @@ $$
 	X_{i j}=\left\{\begin{array}{ll}
 1 \text { with probability } \frac{B_j}{\sum_{j \in D_i} B_j} & \text { if } j \in D_i \\
 0 & \text { otherwise }
-\end{array} .\right.
+\end{array} .\right.\tag{5}
 $$
-8. 在确定了交易如何选择层级之后，我们将每个层级的需求量（或已用空间）定义为$T_j=\sum_{i \in[n]} X_{i j}$。除了第0层外，每层预期需求量最多应与所分配的层级规模相当，$\mathbb{E}\left[T_j\right] \leq B_j$，而第0层的需求量是$\mathbb{E}\left[T_0\right]=n-\sum_{j \in[k]} \mathbb{E}\left[T_j\right]$
+8. 在确定了交易如何选择层级之后，我们将每个层级的需求量（或已用空间）定义为
+	$$T_j=\sum_{i \in[n]} X_{i j}\tag{6}$$
+	除了第0层外，每层预期需求量最多应与所分配的层级规模相当
+	$$
+	\mathbb{E}\left[T_j\right] \leq B_j\tag{7}
+	$$而第0层的需求量是
+	$$
+	\mathbb{E}\left[T_0\right]=n-\sum_{j \in[k]} \mathbb{E}\left[T_j\right]\tag{8}
+	$$
 ### Distributional Assumptions
 1. 定义5：需求正则：如果生成的价值可以参数化为元组$(v_0,h)$，则价值函数分布F是需求正则的，其中$v_0\in[0,1]$是无延迟时的价值，$h:R_{\geq 1}\rightarrow [0,1]$是折扣因子函数，形式为$v(d|v_0,h)=v_0h(d)$。同时需要以下条件成立：
 	1. $h(d)$连续且单调减
@@ -96,8 +108,12 @@ $$
 2. 引理1：对于任意区块链$(B,d,p)$和正则需求$n,F$，$E[T_i]$在p和d中是连续的，即便去掉最后一个假设这个引理也是成立的。
 ### Compatible Blockchains
 1. 定义6：兼容：如果公式7（期望需求小于层尺寸）对于所有层都成立，则称区块链$(B,d,p)$在负载n和F下是兼容的。
-2. 定义7：EIP-1559稳定区块链：如果一个区块链$(B,d,p)$在负载$n,F$下是兼容的，且每一层都满足$\frac{\mathbb{E}\left[T_j\right]}{B_j}<1 \Rightarrow p_j=0$，则称其是稳定的。
-3. 观察1：假设$B_1=B_2=1,d_1=0,d_2=1,n=3$，F是：
+2. 定义7：EIP-1559稳定区块链：如果一个区块链$(B,d,p)$在负载$n,F$下是兼容的，且每一层都满足
+	$$
+	\frac{\mathbb{E}\left[T_j\right]}{B_j}<1 \Rightarrow p_j=0\tag{9}
+	$$
+	则称其是稳定的。
+1. 观察1：假设$B_1=B_2=1,d_1=0,d_2=1,n=3$，F是：
 	- 概率$\frac{1}{3}$，延迟小于1时，$v_0$服从$[0,1]$的均匀分布，否则$v_0=0$。
 	- 概率$\frac{2}{3}$，$v_0$服从$[0,1]$的均匀分布。
 	如果$p_1\neq p_2$，则$p_1>p_2$。否则所有交易都会去选择$B_1$，这样$B_2$就是空的，而根据定义7，$p_2=0$，那么$p_1<p_2=0$就与$p_1$非负矛盾了。由此得出两个选项：
@@ -134,10 +150,63 @@ $$
 10. 定理2：对于有着固定B和d以及任意$n,F$的区块链，如果存在$p$使得$(B,d,p)$是兼容且EIP-1559稳定，则$p$是独一无二的。
 	证明：假设存在两个不同的价格向量$p\neq p'$使得$(B,d,p)$和$(B,d,p')$都是在需求$n,F$下兼容且EIP-1559稳定。因为$p\neq p'$，我们可以把价格集合划分为两部分：$P^{+}=\{j\in[k]|p'_j>p_j\}$和$P^{-}=\{j\in[k]|p'_j\leq p_j\}$。
 	我们用$T_j$和$T'_j$表示$(B,d,p)$和$(B,d,p')$的层级划分。
-	假设$P^{-}=\emptyset$，我们只需要说明对于$(B,d,p')$和需求$n,F$可得$\sum_{j\in[k]}E[T'_j]<\sum_{j\in[k]}B_j$，就可以确定价格$p'$并非EIP-1559稳定，因为它们都是正数且一些层没满。
-	为了得到这一矛盾，我们假设等式10成立。令
-
- 
-
-
+	假设$P^{-}=\emptyset$，我们只需要说明对于$(B,d,p')$和需求$n,F$可得
+	$$
+	sum_{j\in[k]}E[T'_j]<\sum_{j\in[k]}B_j\tag{10}
+	$$，就可以确定价格$p'$并非EIP-1559稳定，因为它们都是正数且一些层没满。
+	为了得到这一矛盾，我们假设等式10成立。令$\delta=min_j\{p'_j-p_j|j\in[k]\}$并定义一个新的价格向量$\hat{p}=p+\delta$。通过价格兼容性和引理6，可得：
+	$$
+	\sum_{j \in[k]} B_j=\sum_{j \in[k]} \mathbb{E}\left[T_j^{\prime}\right] \geq \sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right] \geq \sum_{j \in[k]} \mathbb{E}\left[T_j\right]=\sum_{j \in[k]} B_j\tag{11}
+	$$
+	因此，如果所有价格恰好增加$\delta$，则总需求保持不变。事实上，因为效用是拟线性的，并且所有价格变化量相同，所以每一层的需求保持和$(B,d,p)$一样。此外，任何价值$v$的首选层在$(B,d,p)$和$(B,d,\hat{p})$中都是一样的。我们将证明这违反了分布假设。
+	令$S_j$表示F的支持子集，其中包含在价格$p$下倾向于$T_j$层的交易。
+	$$
+S_j=\left\{\left(v_0, h\right) \in F \mid v_0 \cdot h\left(d_j\right)-p_1 \geq v_0 \cdot h\left(d_j^{\prime}\right)-p_j \text { for all } j^{\prime} \neq j\right\}
+$$
+	我们可得
+	$$
+\mathbb{E}\left[T_j\right]=n \cdot \operatorname{Pr}\left[S_j\right] \Rightarrow \operatorname{Pr}\left[S_j\right]=\frac{B_j}{n}
+$$
+	令 S 为F的支持子集，其中包含将加入$p$下某个层的有着相似$\hat{S}$的交易：
+	$$
+S=\left\{\left(v_0, h\right) \in F \mid v_0 \cdot h\left(d_j\right)-p_j \geq 0 \text { for some } j \in[k]\right\}
+$$
+	当然，$S=\cup_{j\in[k]}S_j$且每个$S_j$都不相交，从公式11可以推出：
+	$$
+\sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right]=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] \Rightarrow \sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right] / n=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] / n \Rightarrow \sum_{j \in[k]} \operatorname{Pr}\left[\widehat{S_j}\right]=\sum_{j \in[k]} \operatorname{Pr}\left[S_j\right]\tag{12}
+$$
+	令$\mathbb{1}_{t\in S}$表示交易t加入S的指示变量。因为所有$S_j$都不相交：
+	$$
+\sum_{j \in[k]} \operatorname{Pr}\left[\widehat{S_j}\right]=\sum_{j \in[k]} \operatorname{Pr}\left[S_j\right] \Rightarrow \operatorname{Pr}\left[\cup_{j \in[k]} \widehat{S_j}\right]=\operatorname{Pr}\left[\cup_{j \in[k]} S_j\right] \Rightarrow \mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}}\right]=\mathbb{E}\left[\mathbb{1}_{t \in S}\right]
+$$
+	为了简化计算，我们可以在价值的贴现函数$h$条件下使用全期望定律。把所有内容合起来可得：
+	$$
+\sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right]=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] \Rightarrow \mathbb{E}\left[\mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}} \mid h\right]\right]=\mathbb{E}\left[\mathbb{E}\left[\mathbb{1}_{t \in S} \mid h\right]\right]\tag{13}
+$$
+	然后得到：
+$$
+\mathbb{E}\left[\mathbb{1}_{t \in S} \mid h\right]=\operatorname{Pr}\left[v_0 \geq V_h \mid h\right] \quad \text { and } \quad \mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}} \mid h\right]=\operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right]
+$$
+	这是因为以$h$为条件，价值随$v_0$增加，因此存在一个最小的$V_h$，高于该值的每个$v_0$都会加入某个层。可以看出，对于$v_0=\hat{V_h}$（被包含在$\hat{p}$下的某层$j$），可得：
+	$$
+\widehat{V_h} \cdot h\left(d_j\right)-\left(p_j+\delta\right) \Rightarrow \widehat{V_h} \cdot h\left(d_j\right)-p_j \geq \delta>0
+$$
+	因此，存在某价值$v_h-\varepsilon$使得$\left.\widehat{V_h}-\varepsilon\right) \cdot h\left(d_j\right)-p_j>0$
+	由此在价格$p$下，对于贴现函数$h$，任何$\hat{V_h}\geq v_0 \geq \hat{V_h}-\varepsilon$都会被包含进某层：
+	$$
+\begin{aligned}
+\operatorname{Pr}\left[v_0 \geq V_h \mid h\right] & \geq \operatorname{Pr}\left[v_0 \geq \widehat{V_h}-\varepsilon \mid h\right] \\
+& \geq \operatorname{Pr}\left[\widehat{V_h}>v_0 \geq \widehat{V_h}-\varepsilon \mid h\right]+\operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right] \\
+& >\operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right] .
+\end{aligned}
+$$
+	这意味着$E[\mathbb{1}_{t\in S}|h]>E[\mathbb{1}_{t\in \hat{S}}|h]$，无论采用哪边的期望价值都与公式13矛盾。
+	对于$P^{-}\neq \emptyset$的情况，显然，$(B,d,p')$对应的任意层$j\in P^+$的需求只会严格小于$(B,d,p)$对应的需求，随着这些层的价格上涨，而其余层价格保持不变或下降。在证明过程中，我们对之前的分析稍作修改，增加了一种情况，即 P + 的价格并不稳定，而是有可能有一些需求溢出到 P 层，使得新的价格与需求不符。
 ### Steady-state of the Tiered Pricing Mechanism
+1. 在负载$n,F$和固定的$B$下，分层定价机制旨在找到$(B,d,p)$，使得：
+	$$
+d_{j+1} \geq \lambda_j \cdot d_j \text { for } \lambda_j>1 \text {, and } p_{j+1} \leq \mu_j \cdot p_j \text { for } \mu_j<1\tag{14}
+$$
+2. 定理3：对于任意B，因子$\lambda_j,\mu_j$和正则需求$n,F$，都存在一个区块链$B,d,p$既兼容和EIP-1559稳定，也满足不等式14。
+	证明：
+3. 
