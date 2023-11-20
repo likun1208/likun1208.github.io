@@ -168,12 +168,12 @@ categories: 博客配置
 4. 需要注意的是，这个主题的分类（categories）、标签（tags）等文件和next主题稍微不一样，需要改一下，以分类为例，进入`...\source\categories`文件夹，可以看到一个`index.md`文件，打开以后无论里面有什么内容，都彻底改成以下的：
    
    ```markdown
-   ---
+   "---"(这里的双引号是为了正确显示，实际用的时候没有，最后一行的双引号同理)
    title: categories
    date: 2020-01-30 08:54:26
    type: "categories"
-   layout: "categories"
-   ---
+   layout: "categories"   
+   "---"
    ```
    
    相应地，其他用到的文件夹里的`index.md`也这样改。
@@ -182,6 +182,7 @@ categories: 博客配置
 
 6. 按上面这个操作改完以后发现网页的显示并没有变化，接着打开`\themes\ayer\source\dist`文件夹中的`main.css`文件，然后直接搜索`-28rem`或者`tocbot`等关键词，找到以后把`-28`和`6`改成合适的数值（`-25`和`0`），重新部署网站就会发现目录栏变合适了。
 7. 经过漫长的使用，忽然发现右边那个目录，在白天模式下，背景是半透明的那种效果，会挡住正文的一些内容，而黑夜模式下背景就透明了，什么也挡不住。经过一番研究，发现想要白天模式也透明背景，就需要修改`\themes\ayer\source-src\css\_partial`文件夹中的`tocbot.styl`文件，找`.is-position-fixed`字段中的`background-color`，把它的值修改为`transparent`，接着同样是进`\themes\ayer\source\dist`文件夹中的`main.css`文件，先定位到刚才`tocbot`那里，然后往后很近的位置能看到`is-position-fixed`字段，修改其中的`background`的值为`transparent`，这里不能直接全文检索`is-position-fixed`，因为有好多这个属性，必须精确修改`tocbot`的这个属性。保存后重新部署就可以看到效果了。
+8. 又是漫长的使用，发现hexo在渲染公式的时候，会把一些符号识别成html标记，然后就没法正确渲染，网上查到的方法都是针对下划线、斜体等，解决方法是安装mathjax并修改转义符配置，但我出问题的是大于号和小于号，查到的方法都没啥用，最终找到一个方法，是在写公式的时候，不直接用尖括号来表示大于小于，而是用tex符号，即`\lt`表示小于，`\gt`表示大于，这样就不会出问题了，也不影响本地markdown的渲染。
 
 ## GitHub风格日历、标签云、分类雷达图的配置
 
