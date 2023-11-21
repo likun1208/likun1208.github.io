@@ -10,13 +10,15 @@
           {
             "id": "961667a81bf1ed26",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
                 "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "pinned": true
             }
           }
         ]
@@ -164,7 +166,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "76ee4ba298bef021",
+  "active": "961667a81bf1ed26",
   "lastOpenFiles": [
     "hexo-next-github配置blog.md",
     "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
