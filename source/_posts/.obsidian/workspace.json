@@ -8,20 +8,33 @@
         "type": "tabs",
         "children": [
           {
-            "id": "961667a81bf1ed26",
+            "id": "7ceb50d1a871ff5b",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
+                "file": "论文略读记录.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true
             }
+          },
+          {
+            "id": "aed9d63b685d0953",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "论文略读记录.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -95,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
+                "file": "论文略读记录.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +125,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
+                "file": "论文略读记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md"
+                "file": "论文略读记录.md"
               }
             }
           },
@@ -166,15 +179,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "961667a81bf1ed26",
+  "active": "aed9d63b685d0953",
   "lastOpenFiles": [
-    "hexo-next-github配置blog.md",
-    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
-    "论文记录-INFOCOM 2024审稿.md",
-    "论文略读记录.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
-    "论文记录-分片相关.md",
+    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
+    "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
+    "论文略读记录.md",
+    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
+    "hexo-next-github配置blog.md",
+    "论文记录-INFOCOM 2024审稿.md",
+    "论文记录-分片相关.md",
     "论文记录-Best reply structure and equilibrium convergence in generic games.md",
     "论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning.md",
     "Github项目数据统计.md",
@@ -183,15 +201,10 @@
     "使用算法和数据结构解决问题-1.md",
     "如何进行文献和项目调研.md",
     "hexo+reveal实现slide.md",
-    "论文记录-The universal visitation law of human mobility.md",
     "区块链行业总结.md",
     "Web3行业总结.md",
     "论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing.md",
-    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
     "论文记录-Theories of Bargaining Delays.md",
-    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
