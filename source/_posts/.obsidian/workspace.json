@@ -4,21 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "31a2c5506917892b",
+        "id": "6086357164ce0bed",
         "type": "tabs",
         "children": [
           {
-            "id": "7ceb50d1a871ff5b",
+            "id": "07d28e9c6d93e6f2",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文略读记录.md",
+                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
                 "mode": "source",
                 "source": false
-              },
-              "pinned": true
+              }
             }
           }
         ]
@@ -95,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文略读记录.md",
+                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文略读记录.md",
+                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文略读记录.md"
+                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md"
               }
             }
           },
@@ -166,10 +164,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "7ceb50d1a871ff5b",
+  "active": "07d28e9c6d93e6f2",
   "lastOpenFiles": [
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文略读记录.md",
+    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
