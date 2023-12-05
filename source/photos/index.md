@@ -1,6 +1,4 @@
 ---
 title: gallery
-date: 2023-12-05 12:00:00
-type: "gallery"
-layout: "gallery"
+albums: [["photos/ff14-Costa del Sol.png", "太阳海岸"], ["photos/ff14-Ishgard.png", "伊修加德"]]
 ---
