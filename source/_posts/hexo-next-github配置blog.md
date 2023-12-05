@@ -874,6 +874,19 @@ window.addEventListener('hashchange',hashFn);
 
 鉴于这个网页外观和操作方式我都不太满意，也没找到更合适的方法，而且日常大多数时候会用跨平台软件来记录待办事项，最终决定去掉这个功能了。
 
+## 添加相册
+1. 输入`hexo new page photos`新建相册的页面，并注意在主题配置文件里添加对应的侧边栏；
+2. 进入`photos`文件夹，修改其中的`index.md`如下：
+```html
+---
+title: Gallery
+
+albums: [["imgurl", "imgcaption"], ["imgurl", "imgcaption"]]
+---
+```
+3.  然后把要添加的图片放到`photos`文件夹中，并把`index.md`文件夹中的`imgurl`和`imgcaption`修改成图像的路径和标题，路径要注意带上级文件夹，和后缀名，例如我的路径就是`photos/ff14-伊修加德.png`。
+4. 部署后就能看到照片了，之后再加新的照片就也是复制进来，然后打开`index.md`文件，在`albums`的方括号里添加新的链接和标题。
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324

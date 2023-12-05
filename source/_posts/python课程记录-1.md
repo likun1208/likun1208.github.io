@@ -63,7 +63,7 @@ print("角度值：", math.degrees(A), math.degrees(B), math.degrees(C))
 
 这个看起来复杂，但就是条件说的不清楚而已，总的来说要求是用户输入数字的时候玩猜数字，反之结束游戏，然后输出一下统计结果。
 
-```pyhon
+```Python
 import random
 count = 0
 number = []

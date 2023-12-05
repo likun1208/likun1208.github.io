@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "2dcecb589c04fd74",
+        "id": "d5b812eaec5c4108",
         "type": "tabs",
         "children": [
           {
-            "id": "0e7133e729501708",
+            "id": "d39f3c117d8c5bff",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "论文略读记录.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -89,6 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "论文略读记录.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "论文略读记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "论文略读记录.md"
+              }
             }
           },
           {
@@ -156,8 +164,15 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0e7133e729501708",
+  "active": "d39f3c117d8c5bff",
   "lastOpenFiles": [
+    "hexo-next-github配置blog.md",
+    "Cryptography课程记录-1.md",
+    "python课程记录-5.md",
+    "python课程记录-4.md",
+    "python课程记录-3.md",
+    "python课程记录-2.md",
+    "python课程记录-1.md",
     "论文略读记录.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
@@ -170,7 +185,6 @@
     "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
     "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
-    "hexo-next-github配置blog.md",
     "论文记录-INFOCOM 2024审稿.md",
     "论文记录-分片相关.md",
     "论文记录-Best reply structure and equilibrium convergence in generic games.md",
@@ -178,12 +192,6 @@
     "Github项目数据统计.md",
     "Echarts的配置.md",
     "仙境之夜攻略记录.md",
-    "使用算法和数据结构解决问题-1.md",
-    "如何进行文献和项目调研.md",
-    "hexo+reveal实现slide.md",
-    "区块链行业总结.md",
-    "Web3行业总结.md",
-    "论文记录-Combinatorial Multi-Armed Bandit Based Unknown Worker Recruitment in Heterogeneous Crowdsensing.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
