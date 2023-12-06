@@ -4,11 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "d5b812eaec5c4108",
+        "id": "6cf51fa6c86cb628",
         "type": "tabs",
         "children": [
           {
-            "id": "d39f3c117d8c5bff",
+            "id": "5b878f8c64dee175",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LMM+隐私保护总结.md",
+                "mode": "source",
+                "source": true
+              },
+              "pinned": true
+            }
+          },
+          {
+            "id": "11f60b94ccaa2fbe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "hexo+reveal实现slide.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "925a6bf27db21087",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -93,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文略读记录.md",
+                "file": "LMM+隐私保护总结.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +136,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文略读记录.md",
+                "file": "LMM+隐私保护总结.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +159,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文略读记录.md"
+                "file": "LMM+隐私保护总结.md"
               }
             }
           },
@@ -164,8 +190,18 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "d39f3c117d8c5bff",
+  "active": "5b878f8c64dee175",
   "lastOpenFiles": [
+    "论文略读记录.md",
+    "LMM+隐私保护总结.md",
+    "hexo+reveal实现slide.md",
+    "未命名.canvas",
+    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
+    "区块链行业总结.md",
+    "论文记录-因果框架对比.md",
+    "论文记录-众包相关论文调研.md",
+    "论文记录-教育学中的因果推断.md",
+    "论文记录-分片相关.md",
     "hexo-next-github配置blog.md",
     "Cryptography课程记录-1.md",
     "python课程记录-5.md",
@@ -173,9 +209,7 @@
     "python课程记录-3.md",
     "python课程记录-2.md",
     "python课程记录-1.md",
-    "论文略读记录.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
@@ -184,14 +218,6 @@
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
-    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
-    "论文记录-INFOCOM 2024审稿.md",
-    "论文记录-分片相关.md",
-    "论文记录-Best reply structure and equilibrium convergence in generic games.md",
-    "论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning.md",
-    "Github项目数据统计.md",
-    "Echarts的配置.md",
-    "仙境之夜攻略记录.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
