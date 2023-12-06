@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "ebf0d32b7c8418bb",
+        "id": "900aad3fecd54e0d",
         "type": "tabs",
         "children": [
           {
-            "id": "b6669cb31bfd24ce",
+            "id": "329b5ebf224e6e66",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -93,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,9 +126,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md"
-              }
+              "state": {}
             }
           },
           {
@@ -164,7 +156,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b6669cb31bfd24ce",
+  "active": "329b5ebf224e6e66",
   "lastOpenFiles": [
     "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "LMM+隐私保护总结.md",
