@@ -11,8 +11,12 @@
             "id": "329b5ebf224e6e66",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -89,6 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "论文记录-CipherGPT Secure Two-Party GPT Inference.md"
+              }
             }
           },
           {
@@ -158,8 +166,13 @@
   },
   "active": "329b5ebf224e6e66",
   "lastOpenFiles": [
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
+    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+    "论文记录-SECURE TRANSFORMER INFERENCE.md",
+    "论文记录-PUMA SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES.md",
+    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
+    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "LMM+隐私保护总结.md",
+    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "hexo+reveal实现slide.md",
     "论文略读记录.md",
     "区块链行业总结.md",
@@ -176,14 +189,10 @@
     "python课程记录-2.md",
     "python课程记录-1.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
-    "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
-    "论文记录-The universal visitation law of human mobility.md",
-    "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
