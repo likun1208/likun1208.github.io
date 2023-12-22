@@ -1,14 +1,14 @@
 ---
-title: LMM+隐私保护总结
+title: LLM+隐私保护总结
 date: 2023-12-6 10:21:00
 tags:
-  - LMM
+  - LLM
   - Privacy
   - Security
 categories: slides
 slidehtml: true
 ---
-# LMM+隐私保护总结
+# LLM+隐私保护总结
 
 <!-- Slide Start --> 
 
