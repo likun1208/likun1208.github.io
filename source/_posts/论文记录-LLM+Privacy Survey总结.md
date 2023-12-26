@@ -92,7 +92,7 @@ Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Cha
 #### 额外信息攻击
 是针对向量表示和梯度的攻击。
 
-1. 属性推理攻击
+1. 属性推理攻击：
 2. 嵌入反转攻击
 3. 梯度泄露
 #### 其他攻击
