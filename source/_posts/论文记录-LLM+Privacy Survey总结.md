@@ -9,7 +9,7 @@ categories: 论文
 description: LLM+Privacy的几篇survey
 ---
 # LLM+Privacy Survey总结
-## A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly
+## 1 - A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly
 Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang
 
 1. 这篇survey探讨的是LLM对安全与隐私的影响，分别从以下三方面讨论：
@@ -18,6 +18,7 @@ Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang
 	3. Ugly：探讨LLM的漏洞和防御，这部分和我们要关注的隐私推断相关，因此接下来只看这部分。
 2. 对几个LLM模型的对比方面，这篇论文列了`Date Provider`、`Open-Source`、`Params`和`Tunability`这四方面，对比了`gpt-4,gpt-3.5-turbo,gpt-3,cohere-medium,cohere-large,cohere-xlarge,BERT,T5,PaLM,LLaMA,CTRL,Dolly 2.0`这几个模型，没有很详细介绍。我觉得我们可以加上谷歌的`claude,bard,gemini`和一些国产模型。
 3. 论文的图表都挺好，有参考价值
+
 ### LLM的漏洞和威胁
 #### AI模型固有漏洞
 1. 对抗性攻击：用于故意操纵或欺骗机器学习模型的技术和策略
@@ -32,6 +33,7 @@ Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang
 	1. 越狱：绕过安全功能，以响应其他受限或不安全的问题，解锁通常受安全协议限制的功能
 	2. 提示词注入：操纵 LLM 行为以引发意外且可能有害的响应的方法。该技术涉及以绕过模型的保护措施或触发不需要的输出的方式制作输入提示。
 	3. 这两个的区别是什么？我查了一些资料显示这俩是一回事。
+
 #### 非AI模型固有漏洞
 包括LLM可能遇到的外部威胁和新漏洞（在传统人工智能模型中尚未观察到或调查过），可能与人工智能模型的内部机制没有复杂的联系，但它们可能会带来重大风险，涉及系统级漏洞（例如远程代码执行）。
 
@@ -65,7 +67,7 @@ Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang
 	8. Smith 等人[237]也讨论了大语言模型的隐私风险。
 3. 我们的研究全面考察了大语言模型的安全性和隐私性，从三个方面对大语言模型的文献进行了广泛的回顾：有益的安全应用（如漏洞检测、安全代码生成）、不利的影响（如网络钓鱼攻击、社会工程学）和漏洞（如越狱攻击、提示攻击），以及相应的防御措施。
 
-## Privacy in Large Language Models: Attacks, Defenses and Future Directions
+## 2 - Privacy in Large Language Models: Attacks, Defenses and Future Directions
 Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Chan, Yangqiu Song
 
 1. 从互联网上提取的自由格式文本存在数据质量差和无意中泄露个人信息的问题。例如，与模型的简单交互可能会导致个人身份信息 (PII) 的意外传播（有参考文献）。
@@ -80,6 +82,7 @@ Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Cha
 	1. 训练数据隐私：如果训练数据包含个人或敏感信息，则存在通过模型响应无意中暴露该信息的风险。
 	2. 推断数据隐私：在为下游任务部署经过训练的语言模型后，用户输入和查询通常会被记录并存储一段时间。对于敏感域，这些数据可以包括个人信息、私人对话和潜在的敏感详细信息。
 	3. 再识别：即使用户信息被匿名化，仍然存在被重新识别的风险。通过结合来自多次交互的看似无害的信息，有可能识别个人或提取本应隐藏的个人详细信息。
+
 ### 隐私攻击
 #### 后门攻击
 数据中毒是指仅操纵一部分训练数据的较弱攻击。这种操纵的目的是在模型的训练过程中引入偏见或误导性信息。相反，后门攻击涉及插入或修改特定的输入模式，从而触发模型行为不当或产生目标输出。此外，如果对手可以操纵LLM的部分训练语料库，它可能会通过数据中毒向受害者模型注入后门。
@@ -95,6 +98,7 @@ Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Cha
 1. 属性推理攻击：从嵌入推测数据集的敏感属性
 2. 嵌入反转攻击：从给定的嵌入恢复原始数据
 3. 梯度泄露：在可以访问其相应模型梯度的情况下恢复输入文本
+
 #### 其他攻击
 以下几类攻击的研究尚不充分。
 
@@ -102,6 +106,7 @@ Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Cha
 2. 对抗性攻击：利用模型对原始输入的小扰动的不稳定性。
 3. 侧信道攻击：只有一篇论文，和前面那个survey一样，没人研究这个。
 4. 解码算法窃取：窃取超参数解码。
+
 ### 隐私防御
 #### 差分
 1. 基于DP的预训练：基于DP的预训练可以进一步增强LM对随机噪声扰动的鲁棒性
@@ -116,6 +121,7 @@ Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Cha
 3. prompt-tuning是一种更近期的精调预训练语言模型的方法，重点是调整输入提示（input prompt）而非修改模型参数。这意味着预训练模型保持不变，只有输入提示被修改以适应下游的任务。通过设计和优化一组提示，可以使预训练模型执行特定任务。
 4. prompt-tuning和传统的fine-tuning的主要区别在于预训练模型被修改的程度。fine-tuning修改模型的权重，而提示调整只修改模型的输入。因此，prompt-tuning调整比精调的计算成本低，需要的资源和训练时间也更少。此外，prompt-tuning比精调更灵活，因为它允许创建特定任务的提示，可以适应各种任务。
 5. 我们在后续的研究中是否重点放在prompt tuning而非fine tuning也还需要再斟酌。
+
 #### 安全多方
 SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然而，保护 LLM 隐私的一个主要挑战在于非线性操作所带来的限制，例如 Softmax、GeLU、LayerNorm 等，这些操作与 SMPC 不兼容。为了解决这个问题，出现了两种技术方法：模型结构优化和SMPC协议优化。
 
@@ -126,6 +132,7 @@ SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然�
 使多方能够协作训练或微调其LLM，而无需共享参与方拥有的私有数据。和推理阶段没什么关系。
 
 采用任何隐私保护的 FL 算法在半诚实的数据推理攻击下存在泄露数据隐私的风险，半诚实对手遵循联邦学习协议，但可以根据观察到的信息推断参与方的隐私数据，而恶意对手可能在联邦学习过程中恶意更新中间训练结果或模型架构，以提取参与方的隐私信息。所以大部分FL会结合DP等隐私方案。
+
 #### 其他
 前面几节都是通用的防御方式，本节介绍针对某一具体攻击的防御手段，包括针对后门攻击和数据提取攻击的。
 
@@ -135,6 +142,7 @@ SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然�
 2. DP在LLM的局限性：DP是现阶段的主流隐私方案，但是有以下问题：
 	1. 理论上的最坏情况边界。根据定义，基于差异隐私的法学硕士假设有一个强大的对手可以操纵整个训练数据。隐私参数 (ϵ, δ) 提供最坏情况下的隐私泄露边界。然而，在实际场景中，并不能保证对手完全控制法学硕士的训练数据。因此，实际攻击与根据差分隐私进行隐私泄露的最坏情况概率分析之间仍然存在巨大差距。
 	2. 实用性下降。 DP 调整通常用于相对较小规模的 LM，用于特别简单的下游数据集。尽管一些作品声称，通过仔细的超参数调整，基于 DP 的 LM 可以在某些下游分类任务上实现与不使用 DP 的正常调整类似的性能。然而，当下游任务变得复杂时，大多数工作仍然表现出明显的效用恶化。效用的降低削弱了基于DP的微调的动机。
+
 #### 未来方向
 1. 针对提示词注入
 2. SMPC的提升：模型结构优化（MSO）和SMPC协议优化（SPO）。 MSO 和 SPO 各自具有独特的优势。 MSO 通常在效率方面表现出色，但可能面临隐私保护推理和模型多功能性方面的限制。另一方面，SPO专注于优化SMPC协议，可以提高效率。不幸的是，SPO 可能需要修改模型结构，并且现有的预训练权重无法重复使用。挑战在于找到一种方法来整合 MSO 和 SPO 的优势，旨在为LLM设计一种高效、高性能、高度通用的隐私保护推理算法。克服这一挑战仍然是一项持续的研究工作。
@@ -145,7 +153,7 @@ SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然�
 
 和第一个相比，这篇文章的分类感觉有点混乱，有些分类是应该合并的，也没啥自己的见解，就汇总起来概括了一下内容。这篇没有related work。
 
-## Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond
+## 3 - Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond
 CHUAN CHEN, ZHENPENG WU, YANYI LAI, and WENLIN OU, TIANCHI LIAO and ZIBIN ZHENG, 中山大学
 
 这篇不局限于LLM，而是扩展到了AIGC（人工智能生成内容），代表模型分文本和图像：
@@ -181,7 +189,7 @@ AIGC面临的问题：用户输入数据泄露、模型攻击、数据爬取以�
 
 总的来说这篇没怎么提推断的事情，无参考意义。
 
-## Security and Privacy on Generative Data in AIGC: A Survey
+## 4 - Security and Privacy on Generative Data in AIGC: A Survey
 Tao Wang, Yushu Zhang, Shuren Qi, Ruoyu Zhao, Zhihua Xia, and Jian Weng
 
 这篇也是AIGC的，分图像和语言
