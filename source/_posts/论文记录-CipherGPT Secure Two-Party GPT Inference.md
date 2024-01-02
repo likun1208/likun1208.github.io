@@ -65,14 +65,14 @@ description: LLM和MPC结合的论文之一
 |$T$|温度|
 
 ### 密码学原语
-1. 秘密共享：我们在不同的2次幂环上使用2-2附加秘密共享方案。对于$x\in\mathbb{Z}_{2^t}$，我们用$\lt x \gt^l=(\lt x \gt^l_S,\lt x \gt^l_C)s.t.x=\lt x \gt^l_S+\lt x \gt^l_C mod 2^l$表示其shares。为了简化表达，当上下文无关时我们省略上标的$l$。
-2. 非均匀位宽乘法：理想功能$F_{Mult}$以$\lt x \gt^g$和$\lt y \gt^h$为输入，返回$\lt z \gt^l$，其中$z=xy$且$l=g+h$。一个实现该功能的简单方法是首先将输入都扩展到$l$位，然后使用标准协议进行统一位宽的秘密共享乘法。SIRNN提供了一个协议，其性能比这个简单的解决方啊高1.5倍。该协议的通信复杂度是$\mu(\lambda+\mu/2+1/2)+mn$，其中$\mu=min(m,n)$。
-3. 安全比较：理想功能$F_{CMP}$以$\lt x \gt^l$和$\lt y \gt^l$为输入，返回$\lt b \gt^l$，其中若$x\geq y$则$b=1$，否则$b=0$。$CrypTFlow2$为$F_{CMP}$提供了一个有效的协议，其通信成本小于$\lambda l+14l$位和$\log l$轮。
-4. 安全多路复用器：理想功能$F_{MUX}$以$\lt x \gt^l$和$\lt b \gt^l$为输入，返回$\lt y \gt^l$，其中如果$b=1$则$y=x$，如果$b=0$则$y=0$。本文采用的安全多路复用器是SIRNN提出的，通信要求$2(\lambda+l)$位。
-5. 安全截断：理想功能$F_{Trunc}$以$\lt x \gt^l$和$s$为输入，返回$\lt y \gt^l$，其中$y=x\gg s$。SIRNN提供了安全截断的协议，通信要求小于$\lambda(l+3)+15l+s+20$位和$\log l+3$轮。
-6. 截断后减小：理想功能$F_{TR}$以$\lt x \gt^l$和$s$为输入，返回$\lt y \gt^{l-s}$，其中$y=x\gg s$。需要注意，这个和前一个的区别在于这个会通过右移操作将输出减少到一个更小的环上，而前一个则将输出保留在原始环上。SIRNN提供了协议，通信成本小于$\lambda(s+1)+l+13s$位。
-7. 查表：理想功能$F_{LUT}$以$\lt i \gt$为输入，返回$\lt T[i] \gt$，其中$T$是有M个条目的表。该函数通过对$\tbinom{M}{1}-OT$的单次调用来实现。更有效的解决方案是先将LUT描述转换为布尔表达式，然后使用多扇入内积对其进行评估。该协议在预处理阶段需要$(mt+4)(2^M-M-1)$位通信，在在线阶段需要$2\sigma$位。
-8. 秘密共享洗牌：理想功能$F_{Shuffle}$以$\lt \mathbf{x} \gt$和$\lt\pi\gt$为输入，返回$\lt\pi(\mathbf{x})\gt$，其中$\pi$是排列函数。Chase等提出了使用OT和PRG等轻量级原语来实现该功能的高效构造。该方法涉及使用PRF来构建排列共享协议，该协议允许两方使用一方选择的排列来排列输入向量。这个排列和共享协议运行两次，每方各选一次。为了混洗$n$个$l$位元素，该协议的通信成本与$\lambda n\log n+nl\log n/\log T$成正比，计算成本位$(nT\log n/\log T)(l/\lambda)$对称密钥操作，其中$T$在16和256之间。
+1. 秘密共享：我们在不同的2次幂环上使用2-2附加秘密共享方案。对于$x\in\mathbb{Z}_{2^t}$，我们用$\langle x \rangle^l=(\langle x \rangle^l_S,\langle x \rangle^l_C)s.t.x=\langle x \rangle^l_S+\langle x \rangle^l_C mod 2^l$表示其shares。为了简化表达，当上下文无关时我们省略上标的$l$。
+2. 非均匀位宽乘法：理想功能$F_{Mult}$以$\langle x \rangle^g$和$\langle y \rangle^h$为输入，返回$\langle z \rangle^l$，其中$z=xy$且$l=g+h$。一个实现该功能的简单方法是首先将输入都扩展到$l$位，然后使用标准协议进行统一位宽的秘密共享乘法。SIRNN提供了一个协议，其性能比这个简单的解决方啊高1.5倍。该协议的通信复杂度是$\mu(\lambda+\mu/2+1/2)+mn$，其中$\mu=min(m,n)$。
+3. 安全比较：理想功能$F_{CMP}$以$\langle x \rangle^l$和$\langle y \rangle^l$为输入，返回$\langle b \rangle^l$，其中若$x\geq y$则$b=1$，否则$b=0$。$CrypTFlow2$为$F_{CMP}$提供了一个有效的协议，其通信成本小于$\lambda l+14l$位和$\log l$轮。
+4. 安全多路复用器：理想功能$F_{MUX}$以$\langle x \rangle^l$和$\langle b \rangle^l$为输入，返回$\langle y \rangle^l$，其中如果$b=1$则$y=x$，如果$b=0$则$y=0$。本文采用的安全多路复用器是SIRNN提出的，通信要求$2(\lambda+l)$位。
+5. 安全截断：理想功能$F_{Trunc}$以$\langle x \rangle^l$和$s$为输入，返回$\langle y \rangle^l$，其中$y=x\gg s$。SIRNN提供了安全截断的协议，通信要求小于$\lambda(l+3)+15l+s+20$位和$\log l+3$轮。
+6. 截断后减小：理想功能$F_{TR}$以$\langle x \rangle^l$和$s$为输入，返回$\langle y \rangle^{l-s}$，其中$y=x\gg s$。需要注意，这个和前一个的区别在于这个会通过右移操作将输出减少到一个更小的环上，而前一个则将输出保留在原始环上。SIRNN提供了协议，通信成本小于$\lambda(s+1)+l+13s$位。
+7. 查表：理想功能$F_{LUT}$以$\langle i \rangle$为输入，返回$\langle T[i] \rangle$，其中$T$是有M个条目的表。该函数通过对$\tbinom{M}{1}-OT$的单次调用来实现。更有效的解决方案是先将LUT描述转换为布尔表达式，然后使用多扇入内积对其进行评估。该协议在预处理阶段需要$(mt+4)(2^M-M-1)$位通信，在在线阶段需要$2\sigma$位。
+8. 秘密共享洗牌：理想功能$F_{Shuffle}$以$\langle \mathbf{x} \rangle$和$\langle\pi\rangle$为输入，返回$\langle\pi(\mathbf{x})\rangle$，其中$\pi$是排列函数。Chase等提出了使用OT和PRG等轻量级原语来实现该功能的高效构造。该方法涉及使用PRF来构建排列共享协议，该协议允许两方使用一方选择的排列来排列输入向量。这个排列和共享协议运行两次，每方各选一次。为了混洗$n$个$l$位元素，该协议的通信成本与$\lambda n\log n+nl\log n/\log T$成正比，计算成本位$(nT\log n/\log T)(l/\lambda)$对称密钥操作，其中$T$在16和256之间。
 9. 子域向量遗忘线性评估：VOLE是一个两方功能，它从发送方获取标量$x\in\mathbb{F}_p$并生成 VOLE 相关性：
 $$
 w = ux + v \tag{1}
@@ -81,6 +81,11 @@ $$
 10. 同态加密：全同态加密（FHE）是一种允许对加密数据进行任意操作的加密方案 。在实践中，它通常以分级的方式使用：操作只能在有限的时间内进行，否则密文无法解密。在大多数 FHE 密码系统中，明文被编码为来自商环$\mathbb{Z}_p[x]/(x^N +1)$的多项式，其中$N$是 2 的幂次，$p$是明文的模数。然后将明文多项式加密为密文多项式$\mathbb{Z}_q[x]/(x^N+1)$，其中$q$是密文模数，它决定了密文的安全级别以及可执行操作的次数。
 
 ## 安全矩阵乘法
+MatrixMul运算分别从C和S获取两个矩阵$\mathbf{X}\in\mathbb{Z}_{2^l}^{n\times m}$和$\mathbf{Y}\in\mathbb{Z}_{2^l}^{m\times k}$作为输入，输出$\langle \mathbf{Z}\rangle$，其中$\mathbf{Z}=\mathbf{XY}\in\mathbb{Z}_{2^l}^{n\times k}$。大多数已有方案用同态乘法和加法来实现上述共识的隐私计算。SIMD 技术通常用于通过将 N 个元素批处理为单个 RLWE 密文来摊销成本，但它需要昂贵的同态旋转来求和。Cheetah用系数填充代替 SIMD，以消除昂贵的旋转。尽管如此，仍然需要传输$\geq \frac{2n\sqrt{mk}}{\sqrt{N}}$ RLWE密文，并执行$\geq \frac{nmk}{N}$密文-明文同态乘法。
+
+回想一下，GPT 需要自回归生成响应词。因此，单个 GPT 推理需要对具有相同 Y 的不同 X 运行 MatrixMul。我们的目标是通过利用 GPT 的这一特性来降低 MatrixMul 的摊销成本。
+
+
 
 ## 安全GELU
 
