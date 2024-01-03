@@ -83,11 +83,65 @@ $$
 ## 安全矩阵乘法
 MatrixMul运算分别从C和S获取两个矩阵$\mathbf{X}\in\mathbb{Z}_{2^l}^{n\times m}$和$\mathbf{Y}\in\mathbb{Z}_{2^l}^{m\times k}$作为输入，输出$\langle \mathbf{Z}\rangle$，其中$\mathbf{Z}=\mathbf{XY}\in\mathbb{Z}_{2^l}^{n\times k}$。大多数已有方案用同态乘法和加法来实现上述共识的隐私计算。SIMD 技术通常用于通过将 N 个元素批处理为单个 RLWE 密文来摊销成本，但它需要昂贵的同态旋转来求和。Cheetah用系数填充代替 SIMD，以消除昂贵的旋转。尽管如此，仍然需要传输$\geq \frac{2n\sqrt{mk}}{\sqrt{N}}$ RLWE密文，并执行$\geq \frac{nmk}{N}$密文-明文同态乘法。
 
-回想一下，GPT 需要自回归生成响应词。因此，单个 GPT 推理需要对具有相同 Y 的不同 X 运行 MatrixMul。我们的目标是通过利用 GPT 的这一特性来降低 MatrixMul 的摊销成本。
+回想一下，GPT 需要自回归生成响应词。因此，单个 GPT 推理需要对具有相同Y的不同X运行 MatrixMul。我们的目标是通过利用 GPT 的这一特性来降低 MatrixMul 的摊销成本。
 
+$\mathbf{X}=\[\mathbf{x}_1,\mathbf{x}_2,...,\mathbf{x}_m\](\mathbf{x}_i\in\mathbb{Z}_{2^l}^n$ 是 $\mathbf{X}$ 的每一列)，$\mathbf{Y}^T=\[\mathbf{y}'_1,\mathbf{y}'_2,...,\mathbf{y}'_m\](\mathbf{y}'_i\in\mathbb{Z}_{2^l}^k$是$\mathbf{Y}$的每一行)，则$\mathbf{Z}=\sum_{i=1}^m(\mathbf{x}_i\otimes\mathbf{y}'_i)$。假设S和C需要生成t个响应词，即有t个输入矩阵：
+$$
+\begin{align}
+\mathbf{X}_1=&[\mathbf{x}_{1,1},\mathbf{x}_{1,2},...,\mathbf{x}_{1,m}],\\
+\mathbf{X}_2=&[\mathbf{x}_{2,1},\mathbf{x}_{2,2},...,\mathbf{x}_{2,m}],\\
+&... ... \\
+\mathbf{X}_t=&[\mathbf{x}_{t,1},\mathbf{x}_{t,2},...,\mathbf{x}_{t,m}].
+\end{align}
+$$
+令$\mathbf{x}'_i=\mathbf{x}_{1,i}\|\mathbf{x}_{2,i}\|...\|\mathbf{x}_{t,i},\forall i\in[1,m]$，则
+$\mathbf{x}'_i\otimes\mathbf{y}'_i=(\mathbf{x}_{1,i}\otimes\mathbf{y}'_i)\|(\mathbf{x}_{2,i}\otimes\mathbf{y}'_i)\|...\|(\mathbf{x}_{t,i}\otimes\mathbf{y}'_i)$.
 
+可得
+$$
+\sum_{i=1}^m(\mathbf{x}'_{i}\otimes\mathbf{y}'_i)=\mathbf{Z}_1\|\mathbf{Z}_2\|...\|\mathbf{Z}_t.
+$$
+
+因此，我们可以通过m个外积来计算t次矩阵乘法。
+
+给定已经提前知道的$\mathbf{Y}$，我们可以引入一个预处理阶段，让S和C生成m个sVOLE相关性：
+$$
+\mathbf{W_i}=\mathbf{u_i}\otimes\mathbf{y}'_i+V_i,\forall i\in[1,m].
+$$
+
+其中C持有$\mathbf{u}_i\in\mathbb{Z}_{2^l}^{t\cdot n}$，是一个长为$t\cdot n$的向量，和$\mathbf{V}_i\in\mathbb{Z}_{2^l}^{t\cdot n}\times k$。S持有$\mathbf{y}'_i\in\mathbb{Z}_{2^l}^{k}$，且$\mathbf{W}_i\in\mathbb{Z}_{2^l}^(t\cdot n)\times k$。
+
+在在现阶段，对于一个输入矩阵$\mathbf{X}_j=\[\mathbf{x}_{j,1},\mathbf{x}_{j,2},...,\mathbf{x}_{j,m}\]$，C将$\langle\mathbf{x_{j,i}}_S:=\mathbf{x}_{j,i}-\mathbf{u}_i[(j-1)n+1,...,j\cdot n]\forall i\in[1,m]\rangle$发送给S，然后计算：
+$$
+\begin{align}
+\langle\mathbf{x}_{j,i}\rangle_S\otimes \mathbf{y}'_i&=(\mathbf{x}_{j,i}-\mathbf{u}_i[(j-1)n+1,...,j\cdot n])\otimes \mathbf{y}'_i\\
+&=\mathbf{x}_{j,i}\otimes\mathbf{y}'_i-\mathbf{u}_i[(j-1)n+1,...,j\cdot n]\otimes \mathbf{y}'_i
+\end{align}
+$$
+
+然后可得：
+$$
+\begin{aligned}
+\mathbf{x}_{j, i} \otimes \mathbf{y}_i^{\prime}= & \left\langle\mathbf{x}_{j, i}\right\rangle_{\mathrm{S}} \otimes \mathbf{y}_i^{\prime}+\mathbf{u}_i[(j-1) n+1, \cdots, j \cdot n] \otimes \mathbf{y}_i^{\prime} \\
+= & \left\langle\mathbf{x}_{j, i}\right\rangle_{\mathrm{S}} \otimes \mathbf{y}_i^{\prime}+\mathbf{W}_i[(j-1) k n+1, \cdots, j \cdot k \cdot n] \\
+& -\mathbf{V}_i[(j-1) k n+1, \cdots, j \cdot k \cdot n]
+\end{aligned}
+$$
+注意S持有：
+$$
+\left\langle\mathbf{x}_{j, i}\right\rangle_{\mathrm{S}} \otimes \mathbf{y}_i^{\prime}+\mathbf{W}_i[(j-1) k n+1, \cdots, j \cdot k \cdot n]
+$$
+C持有：
+$$
+\mathbf{V}_i[(j-1) k n+1, \cdots, j \cdot k \cdot n]
+$$
+这意味着S和C秘密共享$\mathbf{x}_{j,i}\otimes\mathbf{y}'_i$，因此它们可以本地计算$\mathbf{Z}_{j}=\sum_{i=1}^m\left(\mathbf{x}_{j, i} \otimes \mathbf{y}_i^{\prime}\right)$的秘密共享。它们可以由此计算所有Z。
+
+对比了本文矩阵乘法和已有的两个矩阵乘法的成本，说明本文方法的成本与n无关，因此n较大时本方法更能节省成本。
 
 ## 安全GELU
+### 直觉
+
 
 ## 安全前K项选取
 
