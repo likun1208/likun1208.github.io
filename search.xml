@@ -1,6 +1,1183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-LLM+Privacy Survey总结</title>
+    <url>/2023/12/22/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-LLM+Privacy%20Survey%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="LLM-Privacy-Survey总结"><a href="#LLM-Privacy-Survey总结" class="headerlink" title="LLM+Privacy Survey总结"></a>LLM+Privacy Survey总结</h1><h2 id="1-A-Survey-on-Large-Language-Model-LLM-Security-and-Privacy-The-Good-the-Bad-and-the-Ugly"><a href="#1-A-Survey-on-Large-Language-Model-LLM-Security-and-Privacy-The-Good-the-Bad-and-the-Ugly" class="headerlink" title="1 - A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly"></a>1 - A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly</h2><p>Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang</p>
+<ol>
+<li>这篇survey探讨的是LLM对安全与隐私的影响，分别从以下三方面讨论：<ol>
+<li>Good：利用LLM来解决一些安全隐私问题，例如用LLM查代码漏洞；</li>
+<li>Bad：利用LLM来完成攻击，例如社工；</li>
+<li>Ugly：探讨LLM的漏洞和防御，这部分和我们要关注的隐私推断相关，因此接下来只看这部分。</li>
+</ol>
+</li>
+<li>对几个LLM模型的对比方面，这篇论文列了<code>Date Provider</code>、<code>Open-Source</code>、<code>Params</code>和<code>Tunability</code>这四方面，对比了<code>gpt-4,gpt-3.5-turbo,gpt-3,cohere-medium,cohere-large,cohere-xlarge,BERT,T5,PaLM,LLaMA,CTRL,Dolly 2.0</code>这几个模型，没有很详细介绍。我觉得我们可以加上谷歌的<code>claude,bard,gemini</code>和一些国产模型。</li>
+<li>论文的图表都挺好，有参考价值</li>
+</ol>
+<h3 id="LLM的漏洞和威胁"><a href="#LLM的漏洞和威胁" class="headerlink" title="LLM的漏洞和威胁"></a>LLM的漏洞和威胁</h3><h4 id="AI模型固有漏洞"><a href="#AI模型固有漏洞" class="headerlink" title="AI模型固有漏洞"></a>AI模型固有漏洞</h4><ol>
+<li>对抗性攻击：用于故意操纵或欺骗机器学习模型的技术和策略<ol>
+<li>文本下毒：向训练数据集中注入恶意数据来影响训练过程</li>
+<li>后门攻击：恶意操纵训练数据和模型处理，从而创建一个漏洞，攻击者可以将隐藏的后门嵌入到模型中</li>
+</ol>
+</li>
+<li>推理攻击：攻击者试图通过对模型进行特定查询或观察来获取有关机器学习模型或其训练数据的敏感信息或见解<ol>
+<li>属性推理：攻击者试图通过分析机器学习模型的行为或响应来推断个人或实体的敏感或个人信息</li>
+<li>成员推理：在给定对模型和特定数据记录的白/黑盒访问的情况下，确定数据记录是否是模型训练数据集的一部分</li>
+</ol>
+</li>
+<li>提取攻击：攻击者试图从机器学习模型或其相关数据中提取敏感信息或见解。提取攻击和推理攻击有相似之处，但具体重点和目标不同。提取攻击旨在直接获取特定资源（例如模型梯度、训练数据）或机密信息。推理攻击通常通过观察模型的响应或行为来获取有关模型或数据特征的知识或见解。</li>
+<li>偏见与不公平：模型表现出偏见结果或歧视行为的现象</li>
+<li>指令调整攻击：指令调优，也称为基于指令的微调，是一种机器学习技术，用于通过在微调过程中提供显式指令或示例来训练和调整特定任务的语言模型。在 LLM 中，指令调优攻击是指针对指令调优 LLM 的一类攻击或操纵。这些攻击旨在利用 LLM 中的漏洞或限制，这些漏洞或限制已通过特定任务的特定指令或示例进行了微调。<ol>
+<li>越狱：绕过安全功能，以响应其他受限或不安全的问题，解锁通常受安全协议限制的功能</li>
+<li>提示词注入：操纵 LLM 行为以引发意外且可能有害的响应的方法。该技术涉及以绕过模型的保护措施或触发不需要的输出的方式制作输入提示。</li>
+<li>这两个的区别是什么？我查了一些资料显示这俩是一回事。</li>
+</ol>
+</li>
+</ol>
+<h4 id="非AI模型固有漏洞"><a href="#非AI模型固有漏洞" class="headerlink" title="非AI模型固有漏洞"></a>非AI模型固有漏洞</h4><p>包括LLM可能遇到的外部威胁和新漏洞（在传统人工智能模型中尚未观察到或调查过），可能与人工智能模型的内部机制没有复杂的联系，但它们可能会带来重大风险，涉及系统级漏洞（例如远程代码执行）。</p>
+<ol>
+<li>远程代码执行（RCE）：针对软件应用程序、Web 服务或服务器中的漏洞来远程执行任意代码。虽然 RCE 攻击通常不适用于 LLM，但如果 LLM 集成到 Web 服务中并且该服务的底层基础设施或代码中存在 RCE 漏洞，它可能会导致LLM环境受到损害。</li>
+<li>边信道攻击（SCA）：虽然 LLM 本身通常不会通过传统的侧信道（例如功耗或电磁辐射）泄漏信息，但在实际部署场景中，它们可能容易受到某些侧信道攻击。</li>
+<li>Insure Plugins：用于LLM的第三方插件本身的安全问题。</li>
+</ol>
+<h3 id="LLM的防御"><a href="#LLM的防御" class="headerlink" title="LLM的防御"></a>LLM的防御</h3><p>本节重点关注训练阶段实施的方法，例如优化和训练语料库，以及推理阶段使用的方法，包括提示的预处理和生成的输出的后处理。</p>
+<ol>
+<li>训练阶段的防御策略：暂略</li>
+<li>推断阶段的防御策略：测试时防御包括一系列策略，包括预处理提示和指令以过滤或修改输入，检测可能表示滥用或有问题的查询的异常事件，以及后处理生成的响应以确保它们遵守安全和伦理指南。<ol>
+<li>指令处理（预处理）：指令预处理对用户发送的指令进行转换，以破坏潜在的对抗性上下文或恶意意图。它发挥着至关重要的作用，因为它能阻止大多数恶意使用，并防止大语言模型接收可疑指令。一般来说，指令预处理方法可分为指令操作 [228、212、130、109、297]、净化 [152] 和防御演示 [158、177、282]。Jain 等人[109] 和 Kirchenbauer 等人[130] 评估了多种针对越狱攻击的基线预处理方法，包括重授权和解析。Li 等人[152]提出通过先屏蔽输入令牌，然后用其他大语言模型预测被屏蔽的令牌来净化指令。预测出的标记将作为纯化后的指令。Wei 等人[282]和 Mo 等人[177]证明，在指令中插入预定义的防御演示可有效防御大语言模型的越狱攻击。</li>
+<li>恶意检测（处理中）：恶意检测提供了关于给定指令的大语言模型中间结果（如神经元激活）的深入检查，对恶意使用更敏感、更准确、更具体。Sun 等人[247]提出利用后向概率检测后向指令。Xi 等人[291]从掩码敏感性的角度区分了正常指令和中毒指令。Shao 等人[228]根据文本相关性识别可疑词语。Wang 等人[279]根据多代之间的语义一致性来检测对抗性实例，Duan 等人[65]在大语言模型的不确定性量化方面对此进行了探索。除了大语言模型的内在属性外，也有研究利用语言统计属性的工作，如检测离群词[202]。</li>
+<li>生成处理（处理后）：生成后处理指的是检查生成答案的属性（如有害性）并在必要时进行修改，这是向用户提供回复前的最后一步。Chen 等人[33]建议通过与多个候选模型进行比较来减轻生成的毒性。Helbling 等人[96]结合了单个大语言模型来识别生成答案的有害性，这与 Xiong 等人[296]和 Kadavath 等人[121]的想法相似，他们揭示了可以提示大语言模型回答有关生成回复的保密性。</li>
+</ol>
+</li>
+</ol>
+<p>对于 LLM 训练的防御，目前很少有研究来检验模型架构对 LLM 安全性的影响，这可能是由于与训练或微调大型语言模型相关的计算成本很高。我们观察到，安全指令调整是一个相对较新的发展，值得进一步研究和关注。</p>
+<p>说明：这里关注的并非推断过程中的隐私泄露，而是推断过程对大模型的攻击，与我们要讨论的没有关系。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><ol>
+<li>已有大模型的survey侧重点各有不同（例如，大语言模型的演变和分类[30, 326, 288, 89, 290, 23]、软件工程[75, 101]和医学[255, 43]）。</li>
+<li>本文的主要重点是大语言模型的安全和隐私方面。<ol>
+<li>Peter J. Caven [29]专门探讨了大语言模型（尤其是 ChatGPT）如何通过融合技术和社会方面来改变当前的网络安全格局。他们的重点更倾向于社会方面。</li>
+<li>Muna 等人[5]和 Marshall 等人[171]讨论了 ChatGPT 对网络安全的影响，强调了它的实际应用（如代码安全、恶意软件检测）。</li>
+<li>Dhoni 等人[61]展示了大语言模型如何协助安全分析师针对网络威胁制定安全解决方案。不过，他们的工作并未广泛涉及大语言模型可能带来的潜在网络安全威胁。</li>
+<li>一些调查（如 [88, 58, 229, 49, 59, 210, 222, 223, 7]）强调了针对大语言模型的威胁和攻击。与我们的工作相比，它们没有用那么多的篇幅讨论大语言模型可能存在的漏洞。相反，他们的主要关注点在于安全应用领域，因为他们深入研究了利用大语言模型发动网络攻击的问题。</li>
+<li>Attia Qammar 等人[201]和 Maximilian 等人[180]讨论了网络犯罪分子利用的漏洞，特别关注与大语言模型相关的风险。他们的著作强调需要制定战略和措施来减少这些威胁和漏洞。</li>
+<li>李浩然等人[154]分析了当前大语言模型上的隐私问题，根据对手的能力对其进行了分类，并探讨了现有的防御策略。</li>
+<li>Glorin Sebastian[224]探讨了如何应用已有的隐私增强技术（如差分隐私[68]、联合学习[317]和数据最小化[199]）来保护大语言模型的隐私。</li>
+<li>Smith 等人[237]也讨论了大语言模型的隐私风险。</li>
+</ol>
+</li>
+<li>我们的研究全面考察了大语言模型的安全性和隐私性，从三个方面对大语言模型的文献进行了广泛的回顾：有益的安全应用（如漏洞检测、安全代码生成）、不利的影响（如网络钓鱼攻击、社会工程学）和漏洞（如越狱攻击、提示攻击），以及相应的防御措施。</li>
+</ol>
+<h2 id="2-Privacy-in-Large-Language-Models-Attacks-Defenses-and-Future-Directions"><a href="#2-Privacy-in-Large-Language-Models-Attacks-Defenses-and-Future-Directions" class="headerlink" title="2 - Privacy in Large Language Models: Attacks, Defenses and Future Directions"></a>2 - Privacy in Large Language Models: Attacks, Defenses and Future Directions</h2><p>Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Chan, Yangqiu Song</p>
+<ol>
+<li>从互联网上提取的自由格式文本存在数据质量差和无意中泄露个人信息的问题。例如，与模型的简单交互可能会导致个人身份信息 (PII) 的意外传播（有参考文献）。</li>
+<li>将不同的应用程序整合到LLM中是一种日益增长的趋势，旨在增强其知识基础能力。这些集成使LLM能够有效地解决数学问题（例如 ChatGPT Wolfram Alpha）、读取格式化文件（例如 ChatPDF）以及使用搜索引擎（例如 New Bing）对查询提供响应。当LLM与搜索引擎等外部工具结合使用时，会出现额外的特定领域隐私和安全漏洞。</li>
+<li>本文：<ol>
+<li>与已有survey相比，提供了更全面、更系统的分析。我们超越了以往的研究，纳入了大语言模型的最新进展。</li>
+<li>研究了保护用户隐私的新技术和策略，例如差分隐私、安全多方计算和联邦学习，目的是深入了解它们的有效性和局限性。</li>
+<li>讨论了未来未研究的隐私漏洞以及解决该问题的潜在补救措施。</li>
+</ol>
+</li>
+<li>对LLM的介绍：从transformer说起，没具体介绍和对比已有的模型。</li>
+<li>对Privacy的介绍：介绍了隐私的概念和保护隐私的重要性，介绍了DP和SMPC</li>
+<li>LLM中的隐私问题：<ol>
+<li>训练数据隐私：如果训练数据包含个人或敏感信息，则存在通过模型响应无意中暴露该信息的风险。</li>
+<li>推断数据隐私：在为下游任务部署经过训练的语言模型后，用户输入和查询通常会被记录并存储一段时间。对于敏感域，这些数据可以包括个人信息、私人对话和潜在的敏感详细信息。</li>
+<li>再识别：即使用户信息被匿名化，仍然存在被重新识别的风险。通过结合来自多次交互的看似无害的信息，有可能识别个人或提取本应隐藏的个人详细信息。</li>
+</ol>
+</li>
+</ol>
+<h3 id="隐私攻击"><a href="#隐私攻击" class="headerlink" title="隐私攻击"></a>隐私攻击</h3><h4 id="后门攻击"><a href="#后门攻击" class="headerlink" title="后门攻击"></a>后门攻击</h4><p>数据中毒是指仅操纵一部分训练数据的较弱攻击。这种操纵的目的是在模型的训练过程中引入偏见或误导性信息。相反，后门攻击涉及插入或修改特定的输入模式，从而触发模型行为不当或产生目标输出。此外，如果对手可以操纵LLM的部分训练语料库，它可能会通过数据中毒向受害者模型注入后门。</p>
+<h4 id="提示词注入"><a href="#提示词注入" class="headerlink" title="提示词注入"></a>提示词注入</h4><p>概括起来就是恶意提示词，包括越狱等，和前一节与后一节都有共通性。</p>
+<h4 id="训练数据提取"><a href="#训练数据提取" class="headerlink" title="训练数据提取"></a>训练数据提取</h4><p>包括PII提取、越狱、对抗性提示词等。</p>
+<h4 id="成员推理"><a href="#成员推理" class="headerlink" title="成员推理"></a>成员推理</h4><p>判断给定样本是否在训练数据中。列举了一些涉及成员推理的论文。</p>
+<h4 id="额外信息攻击"><a href="#额外信息攻击" class="headerlink" title="额外信息攻击"></a>额外信息攻击</h4><p>是针对向量表示和梯度的攻击，主要是在联邦学习的场景出现，包括：</p>
+<ol>
+<li>属性推理攻击：从嵌入推测数据集的敏感属性</li>
+<li>嵌入反转攻击：从给定的嵌入恢复原始数据</li>
+<li>梯度泄露：在可以访问其相应模型梯度的情况下恢复输入文本</li>
+</ol>
+<h4 id="其他攻击"><a href="#其他攻击" class="headerlink" title="其他攻击"></a>其他攻击</h4><p>以下几类攻击的研究尚不充分。</p>
+<ol>
+<li>提示词提取攻击：看内容就是提示词注入，不过提到了一个论文是prompt extraction attacks，可能和我们要总结的有关系。</li>
+<li>对抗性攻击：利用模型对原始输入的小扰动的不稳定性。</li>
+<li>侧信道攻击：只有一篇论文，和前面那个survey一样，没人研究这个。</li>
+<li>解码算法窃取：窃取超参数解码。</li>
+</ol>
+<h3 id="隐私防御"><a href="#隐私防御" class="headerlink" title="隐私防御"></a>隐私防御</h3><h4 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h4><ol>
+<li>基于DP的预训练：基于DP的预训练可以进一步增强LM对随机噪声扰动的鲁棒性</li>
+<li>基于DP的微调：用公开数据预训练，再用敏感数据结合DP来微调</li>
+<li>基于DP的Prompt调优：由于模型规模庞大，参数高效的调优方法（例如提示调优）被广泛采用来调优各种下游任务的模型</li>
+<li>基于DP的合成文本生成：生成式 LLM 自然可以通过基于采样的解码算法生成多个响应。对于 DP 调整的 LLM，从 LLM 中采样文本满足后处理定理并保留相同的隐私预算</li>
+<li>这里3和4应该算我们的总结范畴，不过也还需要再探讨推断的范围。</li>
+</ol>
+<p>需要补充一下，Prompt调优其实也算微调fine tune，查到<a href="https://zhuanlan.zhihu.com/p/620618701" target="_blank" rel="noopener">一篇文章</a>介绍三种调整方式的区别，简要概括如下：</p>
+<ol>
+<li>Fine-tuning是一种在自然语言处理（NLP）中使用的技术，用于将预训练的语言模型适应于特定任务或领域。Fine-tuning的基本思想是采用已经在大量文本上进行训练的预训练语言模型，然后在小规模的任务特定文本上继续训练它。</li>
+<li>参数高效的fine-tuning，简称PEFT，旨在在尽可能减少所需的参数和计算资源的情况下，实现对预训练语言模型的有效微调。它是自然语言处理（NLP）中一组用于将预训练语言模型适应特定任务的方法，其所需参数和计算资源比传统的fine-tuning方法更少。例如知识蒸馏。</li>
+<li>prompt-tuning是一种更近期的精调预训练语言模型的方法，重点是调整输入提示（input prompt）而非修改模型参数。这意味着预训练模型保持不变，只有输入提示被修改以适应下游的任务。通过设计和优化一组提示，可以使预训练模型执行特定任务。</li>
+<li>prompt-tuning和传统的fine-tuning的主要区别在于预训练模型被修改的程度。fine-tuning修改模型的权重，而提示调整只修改模型的输入。因此，prompt-tuning调整比精调的计算成本低，需要的资源和训练时间也更少。此外，prompt-tuning比精调更灵活，因为它允许创建特定任务的提示，可以适应各种任务。</li>
+<li>我们在后续的研究中是否重点放在prompt tuning而非fine tuning也还需要再斟酌。</li>
+</ol>
+<h4 id="安全多方"><a href="#安全多方" class="headerlink" title="安全多方"></a>安全多方</h4><p>SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然而，保护 LLM 隐私的一个主要挑战在于非线性操作所带来的限制，例如 Softmax、GeLU、LayerNorm 等，这些操作与 SMPC 不兼容。为了解决这个问题，出现了两种技术方法：模型结构优化和SMPC协议优化。</p>
+<ol>
+<li>模型结构优化：旨在通过利用LLM的鲁棒性并修改其结构来提高推理效率，直接点说就是替换掉那几个非线性运算。</li>
+<li>SMPC协议优化：指利用先进的SMPC协议来提高LLM隐私保护推理的效率，同时保持原有的模型结构，也就是针对非线性运算设计SMPC协议，提到的方法有混淆电路、FSS、分段多项式拟合等。</li>
+</ol>
+<h4 id="联邦学习"><a href="#联邦学习" class="headerlink" title="联邦学习"></a>联邦学习</h4><p>使多方能够协作训练或微调其LLM，而无需共享参与方拥有的私有数据。和推理阶段没什么关系。</p>
+<p>采用任何隐私保护的 FL 算法在半诚实的数据推理攻击下存在泄露数据隐私的风险，半诚实对手遵循联邦学习协议，但可以根据观察到的信息推断参与方的隐私数据，而恶意对手可能在联邦学习过程中恶意更新中间训练结果或模型架构，以提取参与方的隐私信息。所以大部分FL会结合DP等隐私方案。</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>前面几节都是通用的防御方式，本节介绍针对某一具体攻击的防御手段，包括针对后门攻击和数据提取攻击的。</p>
+<h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><h4 id="当前局限"><a href="#当前局限" class="headerlink" title="当前局限"></a>当前局限</h4><ol>
+<li>隐私攻击不切实际：很多攻击在现实里没动机，例如不会有访问权限、只在有限的用例中能有作用等，一些数据集的分布假设也不现实。</li>
+<li>DP在LLM的局限性：DP是现阶段的主流隐私方案，但是有以下问题：<ol>
+<li>理论上的最坏情况边界。根据定义，基于差异隐私的法学硕士假设有一个强大的对手可以操纵整个训练数据。隐私参数 (ϵ, δ) 提供最坏情况下的隐私泄露边界。然而，在实际场景中，并不能保证对手完全控制法学硕士的训练数据。因此，实际攻击与根据差分隐私进行隐私泄露的最坏情况概率分析之间仍然存在巨大差距。</li>
+<li>实用性下降。 DP 调整通常用于相对较小规模的 LM，用于特别简单的下游数据集。尽管一些作品声称，通过仔细的超参数调整，基于 DP 的 LM 可以在某些下游分类任务上实现与不使用 DP 的正常调整类似的性能。然而，当下游任务变得复杂时，大多数工作仍然表现出明显的效用恶化。效用的降低削弱了基于DP的微调的动机。</li>
+</ol>
+</li>
+</ol>
+<h4 id="未来方向-1"><a href="#未来方向-1" class="headerlink" title="未来方向"></a>未来方向</h4><ol>
+<li>针对提示词注入</li>
+<li>SMPC的提升：模型结构优化（MSO）和SMPC协议优化（SPO）。 MSO 和 SPO 各自具有独特的优势。 MSO 通常在效率方面表现出色，但可能面临隐私保护推理和模型多功能性方面的限制。另一方面，SPO专注于优化SMPC协议，可以提高效率。不幸的是，SPO 可能需要修改模型结构，并且现有的预训练权重无法重复使用。挑战在于找到一种方法来整合 MSO 和 SPO 的优势，旨在为LLM设计一种高效、高性能、高度通用的隐私保护推理算法。克服这一挑战仍然是一项持续的研究工作。</li>
+<li>隐私与人类感知的一致性：多数隐私研究工作都集中在具有预定义隐私表述的简单情况，这些简单的表述利用现有工具将所有提取的预定义命名实体视为敏感信息，然后模糊或替换。这样的做法一方面会导致涉及这些信息的推断精确性下降，另一方面并不满足广义的隐私。</li>
+<li>实证隐私评估：简而言之除了DP的最差边界，没其他隐私衡量指标，一些工作开始使用经验隐私攻击作为隐私评估指标。</li>
+<li>走向情境化的隐私判断：和前面第3条有些类似，是指即便模糊掉隐私信息，仍然可能通过上下文推测出来。</li>
+</ol>
+<p>和第一个相比，这篇文章的分类感觉有点混乱，有些分类是应该合并的，也没啥自己的见解，就汇总起来概括了一下内容。这篇没有related work。</p>
+<h2 id="3-Challenges-and-Remedies-to-Privacy-and-Security-in-AIGC-Exploring-the-Potential-of-Privacy-Computing-Blockchain-and-Beyond"><a href="#3-Challenges-and-Remedies-to-Privacy-and-Security-in-AIGC-Exploring-the-Potential-of-Privacy-Computing-Blockchain-and-Beyond" class="headerlink" title="3 - Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond"></a>3 - Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond</h2><p>CHUAN CHEN, ZHENPENG WU, YANYI LAI, and WENLIN OU, TIANCHI LIAO and ZIBIN ZHENG, 中山大学</p>
+<p>这篇不局限于LLM，而是扩展到了AIGC（人工智能生成内容），代表模型分文本和图像：</p>
+<ol>
+<li>LLM：ChatGPT等</li>
+<li>图像：stable diffusion和midjourney</li>
+</ol>
+<p>AIGC基本步骤：</p>
+<ol>
+<li>收集数据并完成数据预处理步骤。</li>
+<li>借助训练数据集完成模型的训练，根据不同的需求对模型进行微调，然后推断模型的效果。</li>
+<li>完成模型的发布阶段，发布预训练的模型。</li>
+</ol>
+<p>数据安全和隐私问题最容易出现在数据收集的第一步，模型开发者可能会使用一些未经授权的数据来完成模型的训练，从而导致数据泄露问题。</p>
+<p>AIGC面临的问题：用户输入数据泄露、模型攻击、数据爬取以及生成内容的不安全等。这篇列举了相关政策法规，可供参考，提到了国内外数据安全法规，对浪潮项目或许也有用，不过看名字都是之前调研到的。此外，信通院有针对AIGC的白皮书，LLM或许也有这方面的市场调研报告，可以找找。</p>
+<p>这篇论文的组织结构和第一篇很像，只是每部分名字不同，第一部分介绍用AIGC造假，第二部分呢介绍AIGC本身产出的内容不够好，第三部分介绍受限于模型漏洞而遭遇的攻击。针对第三部分：介绍了区块链和隐私计算在提高 AIGC 安全性方面的重要作用，并提供了使用区块链、联邦学习和数字水印等技术的说明性案例与 AIGC 的结合，展现了它们在解决 AIGC 数据隐私、内容安全和知识产权问题方面的巨大潜力。</p>
+<p>拉了一个大表格和其他survey对比，但是对比的范围和维度感觉有点奇怪。</p>
+<p>背景介绍中对AIGC的介绍过于充分了，对Privacy的介绍提到了FL、SMPC、TEE和区块链，不知道为啥没DP。</p>
+<p>第3章基本是介绍AI带来的负面问题，例如生成内容失真等。</p>
+<h3 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h3><ol>
+<li>去重：不仅文本有用，图像的去重也有用。</li>
+<li>FL：包括了DP和安全聚合，这个分类不太合适。</li>
+<li>区块链：结合了移动计算、边缘计算等，提供框架来保护流通中的数据的隐私。提供框架，记录资源和服务交易，鼓励节点之间的数据共享，形成值得信赖的AIGC生态系统。有结合Web3.0的，不过说真的我想不到这东西有什么技术点。也有和FL结合的。还有做NFT的，AIGC 的多模式输出可以被铸造为 NFT，然后记录在区块链上。</li>
+</ol>
+<h3 id="针对攻击的防御"><a href="#针对攻击的防御" class="headerlink" title="针对攻击的防御"></a>针对攻击的防御</h3><ol>
+<li>针对成员推理攻击：权重标准化、Dropout、DPSGD、改模型架构、扩展训练集</li>
+<li>针对模型提取攻击：数字水印（嵌入网络参数中，只能提供产权证明，没法防止模型被盗）、输出扰动、输入扰动</li>
+<li>针对逃逸攻击(Evasion Attacks)：攻击者在不改变目标机器学习系统的情况下，通过构造特定输入样本以完成欺骗目标系统的攻击。一般发生在模型已经完成训练，在预测时。平滑VAE（主要针对的是图像）、修改模型结构</li>
+</ol>
+<p>总的来说这篇没怎么提推断的事情，无参考意义。</p>
+<h2 id="4-Security-and-Privacy-on-Generative-Data-in-AIGC-A-Survey"><a href="#4-Security-and-Privacy-on-Generative-Data-in-AIGC-A-Survey" class="headerlink" title="4 - Security and Privacy on Generative Data in AIGC: A Survey"></a>4 - Security and Privacy on Generative Data in AIGC: A Survey</h2><p>Tao Wang, Yushu Zhang, Shuren Qi, Ruoyu Zhao, Zhihua Xia, and Jian Weng</p>
+<p>这篇也是AIGC的，分图像和语言</p>
+<p>和其他survey的对比：</p>
+<ol>
+<li>我们的工作针对的是生成数据而不是AIGC。之前的工作还探讨了数据收集中的隐私和模型的安全性问题。然而，这些问题对于人工智能安全来说是普遍存在的，这已经在一些作品中进行了讨论 [16, 17]。 </li>
+<li>以往的工作针对具体问题提出了相应的技术，但忽略了同一种技术可以解决多个问题的事实。例如，水印可用于保护版权，同时检测虚假数据。相反，我们从信息安全的基本属性来讨论安全和隐私，信息安全的存在是通过特定的技术来保证的。 </li>
+<li>我们补充了以前的工作中没有讨论的安全问题，包括访问控制和生成检测。此外，我们探索使用生成数据来支持真实数据的隐私保护。</li>
+<li>表一显示了我们的工作与现有调查的比较。对比了隐私（AIGC中的隐私和为AIGC设计的隐私）、控制（访问控制和可追溯）、真实性（生成检测和生成归因）、合规（无毒和真实）。</li>
+</ol>
+<p>AIGC的阶段划分：</p>
+<ol>
+<li>准备训练数据</li>
+<li>训练模型</li>
+<li>用模型生成数据，这个阶段应该就是推断阶段</li>
+<li>生成数据分析，主要是检查质量、真实性等</li>
+</ol>
+<p>生成数据的安全与隐私问题：和前面对比那里的4个维度划分一致</p>
+<ol>
+<li>隐私：生成数据可能泄露训练数据的隐私；生成数据包含虚拟内容，可以用来替换真实数据中的敏感内容，从而在保持数据实用性的同时降低隐私泄露的风险。</li>
+<li>控制：控制对生成数据的访问；实现对生成过程和后续使用的追踪。</li>
+<li>真实性：判断数据是否由AI生成；数据到模型的归因，从而实现问责制。</li>
+<li>合规：生成数据不包含法律法规禁止的东西；生成数据是真实的，不会被群众误解。</li>
+</ol>
+<p>总的来说这个总结有点混乱，和我们相关的应该只有第一部分。</p>
+<h3 id="生成数据的隐私"><a href="#生成数据的隐私" class="headerlink" title="生成数据的隐私"></a>生成数据的隐私</h3><p>生成数据对隐私的负面影响：模型会记住训练数据造成隐私泄露<br>正面影响：AIGC用虚拟数据替换敏感数据避免隐私泄露</p>
+<p>第二部分概括来说就是AI在隐私保护的应用，和我们的研究不怎么相关，先不看了。</p>
+<h4 id="Privacy-for-AIGC"><a href="#Privacy-for-AIGC" class="headerlink" title="Privacy for AIGC"></a>Privacy for AIGC</h4><ol>
+<li>隐私威胁：就是模型记忆训练数据的详细说明，包括文本和图像</li>
+<li>对策：<ol>
+<li>记忆拒绝：放弃与训练数据接近重复的生成数据</li>
+<li>数据去重</li>
+<li>DP</li>
+<li>检测重复内容：检测生成数据是否在训练集中出现——感觉这方法不合适</li>
+<li>知识遗忘</li>
+</ol>
+</li>
+</ol>
+<p>总结下来这几篇都没具体到推断这个环节，很多方法是针对训练数据的，也有一些不区分是不是inference</p>
+<p>待确认：</p>
+<ul>
+<li>[x] 调优（Fine-tuning）属于推断吗？</li>
+<li>[x] 推断的范畴：<ul>
+<li>[x] 发生在推断过程中，针对prompt的应该算，例如DP和MPC</li>
+<li>[x] 隐私攻击是在推断中进行的，但针对的是泄露训练数据，例如成员推断、属性推断等。针对这类攻击的是否符合要求？</li>
+<li>[x] 发生在推断前，和AI以及隐私计算其实都没什么关系，例如本地计算、边缘计算等，但确实保护了推断数据的隐私，不过没保护模型和训练数据的隐私，是否符合要求？</li>
+<li>[x] 发生在推断中，针对训练数据的隐私保护是否符合要求？例如通过输入来实现的知识遗忘【In-Context Unlearning: Language Models as Few Shot Unlearners】。p.s. 没找到关于遗忘prompt的论文，只有个别帖子提到了有这方面需求，论文【 <a href="https://arxiv.org/abs/2310.12523" target="_blank" rel="noopener">Privacy Preserving Large Language Models: ChatGPT Case Study Based Vision and Framework</a>】中提到了让GPT忘掉之前的prompt等，但不涉及什么技术。</li>
+</ul>
+</li>
+<li>[ ] 调研范围或许应该加上generate，它和inference的区别是什么？——待确定</li>
+<li>[ ] 针对隐私对象的分类（训练数据、prompt、模型数据）应该不太可行了——待确定</li>
+<li>[ ] 按阶段分要看范畴的定义，再筛选论文。</li>
+</ul>
+<p>预训练：大数据输入给深度学习算法，输出大模型例如gpt——和推断无关<br>调优数据：小领域的小规模数据集或者prompt，输入给大模型（如gpt），得到其响应结果——推断前<br>模型数据：大模型本身的向量、梯度、服务器参数等等——推断中<br>推断后：对响应结果做处理</p>
+<p>问题：调优数据算推断吗？不算，只考虑promt调整</p>
+<p>大模型阶段：训练、调优、推断or生成，本文针对第三阶段的隐私安全展开研究</p>
+<p>分类方法：</p>
+<ol>
+<li>按时间阶段：推断前、中、后</li>
+<li>按隐私保护的对象：预训练数据、调优数据（prompt）、模型数据（向量、梯度等）</li>
+<li>按隐私方案优化的对象：调优数据（prompt）、模型数据（向量、梯度、函数等）、生成数据（推断后的检测、知识遗忘）、其他（硬件设备、本地计算等，考虑放到调优数据中）——首选</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-SIGMA: Secure GPT Inference with Function Secret Sharing</title>
+    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SIGMA%20Secure%20GPT%20Inference%20with%20Function%20Secret%20Sharing/</url>
+    <content><![CDATA[<h1 id="SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing"><a href="#SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing" class="headerlink" title="SIGMA: Secure GPT Inference with Function Secret Sharing"></a>SIGMA: Secure GPT Inference with Function Secret Sharing</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-SECURE TRANSFORMER INFERENCE</title>
+    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SECURE%20TRANSFORMER%20INFERENCE/</url>
+    <content><![CDATA[<h1 id="SECURE-TRANSFORMER-INFERENCE"><a href="#SECURE-TRANSFORMER-INFERENCE" class="headerlink" title="SECURE TRANSFORMER INFERENCE"></a>SECURE TRANSFORMER INFERENCE</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES</title>
+    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-PUMA%20SECURE%20INFERENCE%20OF%20LLAMA-7B%20IN%20FIVE%20MINUTES/</url>
+    <content><![CDATA[<h1 id="PUMA-SECURE-INFERENCE-OF-LLAMA-7B-IN-FIVE-MINUTES"><a href="#PUMA-SECURE-INFERENCE-OF-LLAMA-7B-IN-FIVE-MINUTES" class="headerlink" title="PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES"></a>PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-CipherGPT: Secure Two-Party GPT Inference</title>
+    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-CipherGPT%20Secure%20Two-Party%20GPT%20Inference/</url>
+    <content><![CDATA[<h1 id="CipherGPT-Secure-Two-Party-GPT-Inference"><a href="#CipherGPT-Secure-Two-Party-GPT-Inference" class="headerlink" title="CipherGPT: Secure Two-Party GPT Inference"></a>CipherGPT: Secure Two-Party GPT Inference</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ol>
+<li>GPT面临隐私问题；</li>
+<li>由于数据量大、激活函数复杂，现有的安全方案不支持GPT；</li>
+<li>本文：CipherGPT——第一个安全两方GPT框架<ol>
+<li>提出了一种专为 GPT 推理定制的安全矩阵乘法，与 SOTA 相比，速度提高了 2.5 倍，带宽减少了 11.2 倍</li>
+<li>提出了一种用于安全计算 GELU 的新协议，在运行时间、通信量和精度方面分别比 SOTA 提高了 4.2 倍、3.4 倍和 10.9 倍</li>
+<li>提出了首个 top-k 采样协议</li>
+</ol>
+</li>
+</ol>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><ol>
+<li>介绍ChatGPT及其面临的隐私问题</li>
+<li>安全推理：一种两方加密协议，运行推理阶段的方式如下：<ol>
+<li>服务器 (S) 对客户端的输入一无所知，而客户端 (C) 除了推理结果之外对模型一无所知。</li>
+<li>协议通过让 S 和 C 运用同态加密和秘密共享等定制加密技术在加密输入上运行加密模型来进行。</li>
+<li>通常引入预处理阶段来准备一些昂贵且与输入无关的工作，以便在线阶段可以高效地完成。</li>
+</ol>
+</li>
+<li>现有安全推理应用到GPT的问题：<ol>
+<li>一些技术只针对某种网络结构，而不支持GPT；</li>
+<li>LLM需要大量高维矩阵乘法和复杂的数学函数（例如 GELU）。</li>
+</ol>
+</li>
+<li>本文贡献：CipherGPT<ol>
+<li>基于 VOLE 的矩阵乘法</li>
+<li>基于样条的GELU</li>
+<li>基于洗牌的前K项选择</li>
+<li>安全采样</li>
+</ol>
+</li>
+</ol>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="安全推理和威胁模型"><a href="#安全推理和威胁模型" class="headerlink" title="安全推理和威胁模型"></a>安全推理和威胁模型</h3><p>安全推理是一种两方加密协议，有助于客户端 C 和服务器 S 之间的模型推理。该协议确保 C 只获得有关模型架构和推理结果的知识，同时隐藏 S 模型的所有其他细节。类似地，S 仍然不知道 C 的输入以及推理的输出。在 GPT 推理的上下文中，C 的输入是提示，S 的模型包含 Transformer 解码器的多次迭代以及 vec2word 层。</p>
+<p>我们假设 C 或 S 可以是半诚实对手，它遵循协议规范，但尝试在协议执行期间收集尽可能多的信息。我们假设对手在计算上是有限的，并且使用$\lambda$来表示计算安全参数。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$C$</td>
+<td style="text-align:left">客户端</td>
+</tr>
+<tr>
+<td style="text-align:center">$S$</td>
+<td style="text-align:left">服务器</td>
+</tr>
+<tr>
+<td style="text-align:center">$n$</td>
+<td style="text-align:left">每层输入向量的长度</td>
+</tr>
+<tr>
+<td style="text-align:center">$L$</td>
+<td style="text-align:left">初始输入左移位</td>
+</tr>
+<tr>
+<td style="text-align:center">$l$</td>
+<td style="text-align:left">输入左移后的位长</td>
+</tr>
+<tr>
+<td style="text-align:center">${\langle x\rangle}^l$</td>
+<td style="text-align:left">$(\langle x \rangle_S^l,\langle x \rangle_C^l)$使得$x=\langle x \rangle_S^l+\langle x \rangle_C^l$ mod $2^l$</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{Mult}$</td>
+<td style="text-align:left">密钥共享乘法的理想功能：将$g$位整数与$h$位整数相乘得到$l=(g+h)$位输出，且无溢出</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{CMP}$</td>
+<td style="text-align:left">比较$b\leftarrow CMP(x,y)$的理想功能：如果$x\geq y$，则$b=1$，反之则$b=0$</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{MUX}$</td>
+<td style="text-align:left">多路复用器$y\leftarrow MUX(x,b)$的理想功能：如果$b=1$，则$y=x$，如果$b=0$，则$y=0$</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{Trunc}$</td>
+<td style="text-align:left">截断$y\leftarrow Trunc(x,s)$的理想功能：对于$x,y\in\mathbb{Z}_{2^l}$，$y=x\gg s$</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{TR}$</td>
+<td style="text-align:left">截断后减少$y\leftarrow TR(x,s)$的理想功能：对于$x\in\mathbb{Z}_{2^l}$和$y\in \mathbb{Z}_{2^{l-s}}$，$y=x\gg s$</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{LUT}$</td>
+<td style="text-align:left">查找表$T[i]\leftarrow LUT(T,i)$的理想功能</td>
+</tr>
+<tr>
+<td style="text-align:center">$F_{Shuffle}$</td>
+<td style="text-align:left">洗牌的理想功能</td>
+</tr>
+<tr>
+<td style="text-align:center">$\alpha$</td>
+<td style="text-align:left">$y:=GELU(x)$的分割：当$x&lt;-\alpha$时$y:=0$；当$-\alpha\leq x \leq \alpha$时$y:=GELU(x)$；当$x&gt;\alpha$时$y:=x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$s$</td>
+<td style="text-align:left">$2^s$是在$[\\alpha,\alpha]$内的间隔数的数量</td>
+</tr>
+<tr>
+<td style="text-align:center">$(a_i,d_i)$</td>
+<td style="text-align:left">$y=a_ix+d_i$是每个间隔内逼近$GELU(x)$的线性函数</td>
+</tr>
+<tr>
+<td style="text-align:center">$g$</td>
+<td style="text-align:left">$a_i$的位长度</td>
+</tr>
+<tr>
+<td style="text-align:center">$t$</td>
+<td style="text-align:left">响应词（输入矩阵）</td>
+</tr>
+<tr>
+<td style="text-align:center">$N$</td>
+<td style="text-align:left">FHE中的多项式模度</td>
+</tr>
+<tr>
+<td style="text-align:center">$M$</td>
+<td style="text-align:left">注意力头</td>
+</tr>
+<tr>
+<td style="text-align:center">$T$</td>
+<td style="text-align:left">温度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="密码学原语"><a href="#密码学原语" class="headerlink" title="密码学原语"></a>密码学原语</h3><ol>
+<li>秘密共享：我们在不同的2次幂环上使用2-2附加秘密共享方案。对于$x\in\mathbb{Z}_{2^t}$，我们用$\lt x \gt^l=(\lt x \gt^l_S,\lt x \gt^l_C)s.t.x=\lt x \gt^l_S+\lt x \gt^l_C mod 2^l$表示其shares。为了简化表达，当上下文无关时我们省略上标的$l$。</li>
+<li>非均匀位宽乘法：理想功能$F_{Mult}$以$\lt x \gt^g$和$\lt y \gt^h$为输入，返回$\lt z \gt^l$，其中$z=xy$且$l=g+h$。一个实现该功能的简单方法是首先将输入都扩展到$l$位，然后使用标准协议进行统一位宽的秘密共享乘法。SIRNN提供了一个协议，其性能比这个简单的解决方啊高1.5倍。该协议的通信复杂度是$\mu(\lambda+\mu/2+1/2)+mn$，其中$\mu=min(m,n)$。</li>
+<li>安全比较：理想功能$F_{CMP}$以$\lt x \gt^l$和$\lt y \gt^l$为输入，返回$\lt b \gt^l$，其中若$x\geq y$则$b=1$，否则$b=0$。$CrypTFlow2$为$F_{CMP}$提供了一个有效的协议，其通信成本小于$\lambda l+14l$位和$\log l$轮。</li>
+<li>安全多路复用器：理想功能$F_{MUX}$以$\lt x \gt^l$和$\lt b \gt^l$为输入，返回$\lt y \gt^l$，其中如果$b=1$则$y=x$，如果$b=0$则$y=0$。本文采用的安全多路复用器是SIRNN提出的，通信要求$2(\lambda+l)$位。</li>
+<li>安全截断：理想功能$F_{Trunc}$以$\lt x \gt^l$和$s$为输入，返回$\lt y \gt^l$，其中$y=x\gg s$。SIRNN提供了安全截断的协议，通信要求小于$\lambda(l+3)+15l+s+20$位和$\log l+3$轮。</li>
+<li>截断后减小：理想功能$F_{TR}$以$\lt x \gt^l$和$s$为输入，返回$\lt y \gt^{l-s}$，其中$y=x\gg s$。需要注意，这个和前一个的区别在于这个会通过右移操作将输出减少到一个更小的环上，而前一个则将输出保留在原始环上。SIRNN提供了协议，通信成本小于$\lambda(s+1)+l+13s$位。</li>
+<li>查表：理想功能$F_{LUT}$以$\lt i \gt$为输入，返回$\lt T[i] \gt$，其中$T$是有M个条目的表。该函数通过对$\tbinom{M}{1}-OT$的单次调用来实现。更有效的解决方案是先将LUT描述转换为布尔表达式，然后使用多扇入内积对其进行评估。该协议在预处理阶段需要$(mt+4)(2^M-M-1)$位通信，在在线阶段需要$2\sigma$位。</li>
+<li>秘密共享洗牌：理想功能$F_{Shuffle}$以$\lt \mathbf{x} \gt$和$\lt\pi\gt$为输入，返回$\lt\pi(\mathbf{x})\gt$，其中$\pi$是排列函数。Chase等提出了使用OT和PRG等轻量级原语来实现该功能的高效构造。该方法涉及使用PRF来构建排列共享协议，该协议允许两方使用一方选择的排列来排列输入向量。这个排列和共享协议运行两次，每方各选一次。为了混洗$n$个$l$位元素，该协议的通信成本与$\lambda n\log n+nl\log n/\log T$成正比，计算成本位$(nT\log n/\log T)(l/\lambda)$对称密钥操作，其中$T$在16和256之间。</li>
+<li>子域向量遗忘线性评估：VOLE是一个两方功能，它从发送方获取标量$x\in\mathbb{F}_p$并生成 VOLE 相关性：<script type="math/tex; mode=display">
+w = ux + v \tag{1}</script>接收方学习$(\mathbf{u},\mathbf{v})\in_R \mathbb{F}_p^n\times\mathbb{F}_p^n$，发送方学习$w\in_R\mathbb{F}_p^n$。VOLE 通常基于带噪声奇偶校验（LPN）和可标点 PRFs 来构建，因此其复杂性几乎与$n$无关。子域VOLE(sVOLE)是VOLE的广义化，其中$\mathbf{u}\in_R\mathbb{F}_p^n,x\in\mathbb{F}_q,\mathbf{w,v}\in_R\mathbb{F}_q^n,q=p^m$。sVOLE 实现的任务与运行 m 个普通 VOLE 实例相同，但成本更低。VOLE 和 sVOLE 最初是针对有限域提出的。Baum 等人提出了在有限环（如$\mathbb{Z}_{2^l}$）上运行的方法。</li>
+<li>同态加密：全同态加密（FHE）是一种允许对加密数据进行任意操作的加密方案 。在实践中，它通常以分级的方式使用：操作只能在有限的时间内进行，否则密文无法解密。在大多数 FHE 密码系统中，明文被编码为来自商环$\mathbb{Z}_p[x]/(x^N +1)$的多项式，其中$N$是 2 的幂次，$p$是明文的模数。然后将明文多项式加密为密文多项式$\mathbb{Z}_q[x]/(x^N+1)$，其中$q$是密文模数，它决定了密文的安全级别以及可执行操作的次数。</li>
+</ol>
+<h2 id="安全矩阵乘法"><a href="#安全矩阵乘法" class="headerlink" title="安全矩阵乘法"></a>安全矩阵乘法</h2><h2 id="安全GELU"><a href="#安全GELU" class="headerlink" title="安全GELU"></a>安全GELU</h2><h2 id="安全前K项选取"><a href="#安全前K项选取" class="headerlink" title="安全前K项选取"></a>安全前K项选取</h2><h2 id="安全采样"><a href="#安全采样" class="headerlink" title="安全采样"></a>安全采样</h2><h2 id="CipherGPT框架"><a href="#CipherGPT框架" class="headerlink" title="CipherGPT框架"></a>CipherGPT框架</h2><h2 id="实验评估"><a href="#实验评估" class="headerlink" title="实验评估"></a>实验评估</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LLM+隐私保护总结</title>
+    <url>/2023/12/06/LLM+%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="LLM-隐私保护总结"><a href="#LLM-隐私保护总结" class="headerlink" title="LLM+隐私保护总结"></a>LLM+隐私保护总结</h1>]]></content>
+      <categories>
+        <category>slides</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cryptography课程记录-Week 1: Course overview and stream ciphers</title>
+    <url>/2023/12/04/Cryptography%E8%AF%BE%E7%A8%8B%E8%AE%B0%E5%BD%95-Week%201_Course%20overview%20and%20stream%20ciphers/</url>
+    <content><![CDATA[<h1 id="Section-1-what-is-cryptography-about"><a href="#Section-1-what-is-cryptography-about" class="headerlink" title="Section 1: what is cryptography about?"></a>Section 1: what is cryptography about?</h1><h2 id="Course-Overview"><a href="#Course-Overview" class="headerlink" title="Course Overview"></a>Course Overview</h2><p>课程目标：</p>
+<ul>
+<li>密码学原理</li>
+<li>如何正确使用密码学原语和安全性证明</li>
+</ul>
+<p>密码学的应用案例：</p>
+<ul>
+<li>安全通信：Alice和Bob试图使用HTTPS通信，起到安全作用的是SSL，也称为TLS，确保网络中传输的数据既不会被窃听也不会被篡改。<ul>
+<li>网络通信：HTTPS</li>
+<li>无线通信：802.11i WPA2, GSM, Bluetooth</li>
+<li>SSL(Secure Sockets Layer)/TLS由两部分组成：<ol>
+<li>握手协议：构造共享密钥，采用公钥技术</li>
+<li>记录层：如何使用密钥传输数据</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>磁盘加密文件：EFS, TrueCrypt<ul>
+<li>对磁盘上的文件加密，保证既不会被窃取也不会被篡改【保密性和完整性】</li>
+</ul>
+</li>
+<li>内容保护（例如DVD, Blu-ray）：CSS, AACS</li>
+<li>用户认证 等等</li>
+</ul>
+<p>安全通信的基石：对称加密系统（sym.encryption）</p>
+<ul>
+<li>Alice和Bob使用共享密钥<code>k</code>通信，攻击者不知道<code>k</code></li>
+<li>使用公开的加密算法<code>E</code>和解密算法<code>D</code>，<code>E</code>的输入是明文消息<code>m</code>和密钥<code>k</code>，输出密文消息<code>c</code>；<code>D</code>的输入是密文消息<code>c</code>和密钥<code>k</code>，输出明文消息<code>m</code>。</li>
+</ul>
+<p>对称加密系统的两种情况：</p>
+<ul>
+<li>一次性密钥：只用来加密单条消息，例如加密邮件的时候，每个邮件都生成一个新密钥</li>
+<li>重复使用密钥：用来加密多条消息，例如加密文件的时候，一个密钥用于若干个文件，需要一些额外工作确保这样的加密系统是安全的</li>
+</ul>
+<p>密码学的局限性：</p>
+<ul>
+<li>并不能完全保证安全，对软件漏洞和社工无效</li>
+<li>需要正确使用，一个例子是加密WiFi通信的WEP</li>
+<li>使用密码学原语，而非创造</li>
+</ul>
+<h2 id="What-is-Cryptography"><a href="#What-is-Cryptography" class="headerlink" title="What is Cryptography?"></a>What is Cryptography?</h2><p>密码学核心：安全通信</p>
+<ul>
+<li>安全密钥构造</li>
+<li>安全通信</li>
+</ul>
+<p>密码学的其他应用：</p>
+<ul>
+<li>数字签名</li>
+<li>匿名通信</li>
+<li>匿名数字货币<ul>
+<li>支付数字货币而保持匿名</li>
+<li>实现该功能的同时避免双花</li>
+</ul>
+</li>
+<li>结合抽象协议<ul>
+<li>选举：既知道被选中的是谁，又不知道每个人投了谁——引入选举中心计票</li>
+<li>私有拍卖：采用Victory拍卖（价高者得，二价支付），需要公开出价最高的身份和出价第二高的价格，其余信息保密——引入拍卖中心统计</li>
+<li>安全多方计算：输出函数计算的值，而对函数输入信息保密，例如前两个涉及的选票计算和拍卖计算——在密码学中可信第三方是不可靠的，系统也不应当引入这样的第三方，而是通过一些协议完成计算。</li>
+</ul>
+</li>
+<li>其他不太相关的应用<ul>
+<li>私有外包计算：Alice将一串关键词加密后发送给Google，Google无需知道原文即可根据加密关键词检索到加密结果并返回给Alice，Alice自行解密得到查询结果。</li>
+<li>零知识证明：Alice知道一个大数字N，也知道该数字可由两个素数P和Q相乘得到；Bob也知道N，但不知道P和Q，Alice可通过某方法向Bob证明自己确实知道P和Q，而无需让Bob也知道P和Q。</li>
+</ul>
+</li>
+</ul>
+<p>密码学的三个步骤：</p>
+<ul>
+<li>精确说明威胁模型，例如数字签名中的威胁模型是：攻击者如何对数字签名发起攻击，攻击者发动攻击的动机</li>
+<li>提出构造方案</li>
+<li>证明在特定威胁模型条件下，任何攻击者对该构造发起攻击都相当于求解一个很复杂的难题。</li>
+</ul>
+<h2 id="History-of-Cryptography"><a href="#History-of-Cryptography" class="headerlink" title="History of Cryptography"></a>History of Cryptography</h2><h2 id="Section-2-crash-course-in-discrete-probability"><a href="#Section-2-crash-course-in-discrete-probability" class="headerlink" title="Section 2: crash course in discrete probability"></a>Section 2: crash course in discrete probability</h2><h3 id="Discrete-Probability"><a href="#Discrete-Probability" class="headerlink" title="Discrete Probability"></a>Discrete Probability</h3><h2 id="Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers"><a href="#Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers" class="headerlink" title="Stream Ciphers 1: the one-time pad and stream ciphers"></a>Stream Ciphers 1: the one-time pad and stream ciphers</h2><h3 id="Information-Theoretic-Security-and-The-One-Time-Pad"><a href="#Information-Theoretic-Security-and-The-One-Time-Pad" class="headerlink" title="Information Theoretic Security and The One Time Pad"></a>Information Theoretic Security and The One Time Pad</h3><h3 id="Stream-Ciphers-and-Pseudo-Random-Generators"><a href="#Stream-Ciphers-and-Pseudo-Random-Generators" class="headerlink" title="Stream Ciphers and Pseudo Random Generators"></a>Stream Ciphers and Pseudo Random Generators</h3>]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>Cryptography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services</title>
+    <url>/2023/11/24/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Preserving%20Prompt%20Tuning%20for%20Large%20Language%20Model%20Services/</url>
+    <content><![CDATA[<h1 id="Privacy-Preserving-Prompt-Tuning-for-Large-Language-Model-Services"><a href="#Privacy-Preserving-Prompt-Tuning-for-Large-Language-Model-Services" class="headerlink" title="Privacy-Preserving Prompt Tuning for Large Language Model Services"></a>Privacy-Preserving Prompt Tuning for Large Language Model Services</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ol>
+<li>LLM的Prompt会泄露隐私</li>
+<li>现有方法基本分为两类：<ol>
+<li>中心化隐私保护：找个服务商解决问题，但是服务商也可能会泄露</li>
+<li>本地隐私保护：本地处理文本使其尽可能不泄露信息，但是会降低模型效果</li>
+</ol>
+</li>
+<li>本文：<ol>
+<li>基于即时调优，我们提出了隐私保护即时调优（RAPT），这是一个为LLM服务提供隐私保证的框架。 </li>
+<li>RAPT采用本地隐私设置，允许用户通过本地差分隐私在本地对其数据进行私有化。</li>
+<li>由于直接在私有化数据上训练时提示调整表现不佳，因此我们引入了一种新颖的私有化token重建任务，该任务与下游任务联合训练，使LLM能够学习更好的依赖于任务的表示。</li>
+</ol>
+</li>
+</ol>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>首先引入文本到文本私有化，它用于用户在本地私有化他们的数据。</p>
+<p>然后，我们描述如何使用我们的提示方法定制和利用带有私有化数据的LLM服务。</p>
+<h3 id="Text-to-Text-Privatization"><a href="#Text-to-Text-Privatization" class="headerlink" title="Text-to-Text Privatization"></a>Text-to-Text Privatization</h3><ol>
+<li>本地加密可以避免窃听攻击等。</li>
+<li>大多数LLM采用文本到文本的推断，因此本文采用文本到文本的隐私保护。</li>
+<li>文本到文本的隐私保护基于$d_{\mathcal{X}}$隐私，是局部差分隐私的基于距离的松弛形式，广泛用于保护文本内容的隐私。</li>
+<li>对于给定输入集$\mathcal{X}$和输出集$\mathcal{Y}$，$d_{\mathcal{X}}$是一个定义在$\mathcal{X}$上的距离函数。</li>
+<li><p>随机机制$M:\mathcal{X}\rightarrow\mathcal{Y}$满足$d_{\mathcal{X}}$隐私，当且仅当，对于任意$x\in\mathcal{X}$且$x’\in\mathcal{X}$，输出$M(x)$和$M(x’)$的分布受限于：</p>
+<script type="math/tex; mode=display">
+\frac{P(M(x)=y)}{P\left(M\left(x^{\prime}\right)=y\right)} \leq e^{\eta d_{\mathcal{X}}\left(x, x^{\prime}\right)}, \quad \forall \boldsymbol{y} \in \mathcal{Y}\tag{1}</script><p>其中，$\eta\geq 0$是隐私参数，控制了隐私保护程度。</p>
+</li>
+<li><p>为了应用文本到文本的隐私化，需要一个嵌入模型把单词映射到向量。给定序列$x=[x_1,…,x_n]$和嵌入模型$E\in \mathbb{R}^{|V|d}$，其中$|V|$和$d$是词汇大小和嵌入维度。嵌入模型将$x$映射到向量$[x_1,…,x_n]$的序列。</p>
+</li>
+<li>假设使用$L_2$距离作为距离函数，将隐私参数为$\eta$的$d_{\mathcal{X}}$应用于一个词嵌入$x_t\in\mathbb{R}^d$可以通过给$x_t$添加随机噪声$z\sim exp(-\eta |z|)$来实现。令$z=lv$，采样$z$就等价于先采样标量$l\sim \Gamma(d,\frac{1}{\eta})$再从单位球空间$\mathbb{B}^d$中均匀地采样向量$v$。因此，$x_t$的隐私化表达$M(x_t)$可以形式化地表达为<script type="math/tex; mode=display">
+M(x_t)=x_t+z\tag{2}</script></li>
+<li>接下来我们将$x_t$替换为嵌入空间中最接近$x_t$的单词$x’_t$：<script type="math/tex; mode=display">
+x'_t=argmin_k\|w_k-M(w_t)\|\tag{3}</script>通过重复替换序列$x$中的单词，我们获得$x$的隐私化文本$M(x)$。</li>
+</ol>
+<h3 id="LLM-Customization"><a href="#LLM-Customization" class="headerlink" title="LLM Customization"></a>LLM Customization</h3><p>整体场景：假设用户通过及时调整API来定制LLM服务，将其私有化培训数据上传给服务提供商。</p>
+<h4 id="Prompt-Tuning"><a href="#Prompt-Tuning" class="headerlink" title="Prompt Tuning"></a>Prompt Tuning</h4><p>$f$表示LLM模型的主干网络。一个长度为N的提示词$P\in\mathbb{R}^{N\times h}$是连续向量$[p_1,…,p_N]$中的序列，其中$p_i\in\mathbb{R}^h$是可调整的虚拟token嵌入，$h$是主干网络的隐藏层维度。给定输入序列$\mathrm{x}=[x_i,…,x_n]$，提示词被添加到$X\in\mathbb{R}^{n\times h}$之前，其中$X=[x_1,…,x_n]$是词嵌入的序列，$x\in\mathbb{R}^h$。由此可以通过使用LLM得到激活序列：</p>
+<script type="math/tex; mode=display">
+H=f([\![P;X]\!])\tag{4}</script><p>其中$[![P;X]!]$表示两个序列P和X的串联，$H\in\mathbb{R}^{n\times h}$是激活序列。H用于预测任务依赖的标签，通常通过语言模型的head。</p>
+<h4 id="Privatized-Token-Reconstruction"><a href="#Privatized-Token-Reconstruction" class="headerlink" title="Privatized Token Reconstruction"></a>Privatized Token Reconstruction</h4><ol>
+<li>直接在隐私化的数据上进行提示词调优会显著降低LLM在下游任务上的性能，说明提示词调优对这种文本到文本的隐私化带来的随机扰动很敏感。</li>
+<li>一些研究发现掩码语言模型目标有助于学习可分离的深度表示。</li>
+<li>受此启发本文提出了隐私化token重建任务，与下游任务联合训练，提高LLM在隐私保护的下游任务上的性能。</li>
+<li>token重建类似于掩码语言模型，为了保护隐私不能直接重建单词，但是可以在训练数据中的每个输入前添加一系列token（称为普通token），它由任意选择的token组成，可以安全发送而不会引起隐私泄露。</li>
+<li>普通token记作$k=[k_1,…,k_m]$</li>
+<li>训练例子记作$\mathcal{D}=\{\left \langle x_i,y_i \right \rangle|i=1,…,|\mathcal{D}|\}$，其中$|\mathcal{D}|$表示训练数据的尺寸</li>
+<li>用户首先在每个输入$x_i$的前面加入$k$，然后进行加密得到隐私化的版本$z=M([![k;x_i]!])=[k’_1,…,k’_m,x’_1,…,x’_n]$</li>
+<li>LLM使用提示P和输入z生成激活序列G：<script type="math/tex; mode=display">
+G=f([\![P;Z]\!])\tag{5}</script>其中Z是z的词嵌入序列，$G\in\mathbb{R}^{(m+n)\times h}$</li>
+<li>得到G后，我们使用其中的前m个向量$G_{1:m}=[g_1,…,g_m]$重建普通token，为了实现这一过程，我们引入了一个附加的重建head，由两个线性层组成。预测第$i$个token在普通token里的概率分布是：<script type="math/tex; mode=display">
+p_i=softmax(W_1W_2g_i)\tag{6}</script>其中$W_1\in \mathbb{R}^{|T|\times c},W_2\in\mathbb{R}^{c\times h}$，都是重建head的参数，c是重建head的隐藏层的尺寸，$|T|$表示重建head的词汇量。隐私化token重建任务的损失函数是<script type="math/tex; mode=display">
+\mathcal{L}_{rec}=-\sum_{i=1}^m log p_i[j_i]\tag{7}</script>其中，$j_i$是$k_i$在重建head词汇表中的索引，$p_i[j_i]$是向量$p_i$中的第$j_i$个标量。重建head的词汇表和LLM的词汇表不需要一致。</li>
+<li>剩下的n个激活函数$G_{n:m+n}$被用于预测任务相关的标签。假设下游任务使用交叉熵损失，$y_i\in\{0,1\}^{|C|}$是关联标签，$y_j$表示第j类标签，$|C|$是类别数量。</li>
+<li>下游任务的目标函数是：<script type="math/tex; mode=display">
+p=g(G_{m:m+n})\tag{8}</script><script type="math/tex; mode=display">
+\mathcal{L}_{task}=-\sum_{i=1}^{|C|}y_ilogp[i]\tag{9}</script>其中g是语言模型head的函数。</li>
+<li>由此，训练RAPT的损失函数是：<script type="math/tex; mode=display">
+\mathcal{L}=\mathcal{L}_{task}+\mathcal{L}_{rec}\tag{10}</script></li>
+<li>在推理阶段，用户端也会应用文本到文本私有化来保护隐私信息，并从 LLM 服务中获取预测结果。我们注意到，推理阶段不使用重建head，因此$\{W_1, W_2\}$可以在训练后丢弃。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>这篇文章主要的贡献是做了token重建，帮助LLM学习可分离的深度表示，提升了LLM在加密文本数据上的性能，而加密过程则是直接用了已有的本地差分隐私算法。</li>
+<li>加了一个普通token为什么能提升性能这一点我还没理解。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Tiered Mechanisms for Blockchain Transaction Fees</title>
+    <url>/2023/11/07/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Tiered%20Mechanisms%20for%20Blockchain%20Transaction%20Fees/</url>
+    <content><![CDATA[<h1 id="Tiered-Mechanisms-for-Blockchain-Transaction-Fees"><a href="#Tiered-Mechanisms-for-Blockchain-Transaction-Fees" class="headerlink" title="Tiered Mechanisms for Blockchain Transaction Fees"></a>Tiered Mechanisms for Blockchain Transaction Fees</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><ol>
+<li>证明了以太坊目前使用的交易费机制 EIP-1559 并不具有包容性，并通过实验证明其价格在拥堵期间会横向飙升</li>
+<li>引入了一个能够捕捉区块链系统流量多样性的模型，以及一个能够实施更具包容性的交易政策的分级定价机制</li>
+<li>从形式上证明了我们的机制可以实现稳定的预期价格，我们还提供了实验结果，证明对于低紧迫性交易来说，交易价格可以保持在较低水平，从而使进入区块链的交易类型多样化</li>
+<li>并不一定会牺牲收益，因为由于机制的价格歧视能力，低紧急交易价格的降低可以从高紧急交易中得到补偿</li>
+</ol>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><ol>
+<li>背景：用户的收益与交易上链时间相关，不同类型应用的交易有不同的紧迫性要求，例如在一个Layer 2支付系统中，DeFi交易更紧急，而结算交易紧迫性较低。理想的交易收费机制自然应该能满足各种应用对不同紧迫性的要求。</li>
+<li>现状：主流交易费方法以价格拍卖为主，这导致网络拥塞时，紧急交易加价，连带非紧急交易也需要加价，这样的系统有失公平。</li>
+<li>问题：让用户指定交易的紧迫度不现实，还需要考虑沟通成本、激励设计等</li>
+<li>本文：分层交易方案<ol>
+<li>动态确定层的数量、每一层的延迟和价格，用户自行选择去哪一层</li>
+<li>提出了一种新型模型，用于捕捉客户对区块链处理的需求，该模型利用单调递减函数将延迟映射为价值，概括一下就是关注了交易延迟导致的用户收益下降</li>
+</ol>
+</li>
+<li>目标：当系统遇到拥堵时，有一种政策可以在多种类型的用户之间平衡服务，由此考虑符合公开共享和商定的多样性政策的交易费机制，例如规定平均将一个区块中 20% 的交易空间用于低急迫性交易</li>
+<li>优势：从流量多样性的角度对分层机制进行了分析，并证明在 “无点质量 “分布的标准假设和预期需求连续的合理假设下，分层机制可以实施丰富多样的政策</li>
+<li>实验：研究分层机制如何收敛到一组价格，以及在需求波动时的表现<ol>
+<li>研究了需求激增超过网络容量一段时间的重要情况</li>
+<li>与 EIP-1559 协议进行了比较</li>
+<li>实验结论：<ol>
+<li>价值不会随时间显著下降的交易（也就是低紧迫度的交易）价格可以保持在较低水平，从而使进入区块链的交易类型多样化，并根据紧急程度进行适当的价格区分。</li>
+<li>EIP-1559 中的价格在整个网络拥堵期间横向飙升。</li>
+<li>研究了系统对收入的影响，证明分层定价没牺牲收益。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="区块链稳态"><a href="#区块链稳态" class="headerlink" title="区块链稳态"></a>区块链稳态</h3><ol>
+<li>用户所提交交易的特点：具有随延迟而变化的价值，每个交易都与一个从延迟到价值的映射的函数$v_i: R_{\geq 1}\rightarrow R_{\geq 0}$有关，延迟最小是1，表示交易在下一个块就上链。如果$d\lt d’$，则$v(d)\gt v(d’)$，意味着延迟越小价值越高。</li>
+<li>区块链吞吐量：B，衡量一个块里有多少交易</li>
+<li>进入区块链系统的交易价值函数独立同分布，服从分布F，单位区块的交易到达率是$n$，为了模拟高持续需求，这里假设$n\gt B$</li>
+<li>区块链交易机制$M(v_i|n,F)=(d,p)$是从交易到价格和延迟的映射，机制与用户身份无关</li>
+<li>给定价值是$v$的交易，其收益是$u(v|M,n,F)=v(d)-p$，也就是延迟之后的交易价值减去为了让交易上链而需要付的价格</li>
+<li>需求约束：$D=\{v\in supp(F)|v(d)−p\geq 0 for (d,p)=M(v|n,F)\}$</li>
+<li>收益非负的交易会以略低于吞吐量的速率到达，$n\cdot Pr[D]\leq B$</li>
+<li>例1：机制1：以太坊的机制例子（EIP-1559）：将前一个区块$p$的价格及其满载率$f$作为输入，并输出新的价格，计算公式：$p(1+\frac{1}{8}\frac{f-targetLoad}{targetLoad})$</li>
+<li>为了满足需求约束，机制所提供的价格$p_0$必须使得：$B=n\cdot Pr[D]=n\cdot Pr[v(0)\geq p_0]$，由此，机制转变为：$M(v|F)=(0,p_0)$</li>
+<li>定义1：稳态近似真实性：对于所有的$n,F,v,v’\neq v$，都有$v(d)−p\geq v(d’)−p’$，其中$(d,p)=M(v|F)$且$(d’,p’)=M(v’|F)$，则称机制M满足真实性。</li>
+<li>命题1：稳态近似真实性特征：当且仅当对于所有的$n,F,v_1,v_2$，$d_1\geq d_2\Rightarrow p_1\leq p_2$时机制M是真实的，$M(v_1|F)=(d_1,p_1)$且$M(v_2|F)=(d_2,p_2)$。此外，如果$d_1=d_2$则$p_1=p_2$。</li>
+<li>我的问题：交易价值函数服从的分布F，和负载F是一回事吗？分布为什么会变成负载？<ol>
+<li>$n$表示每个区块新生成的交易数量。它反映了进入区块链的交易流量和需求。</li>
+<li>$F$表示交易价值函数$v$的分布。它描述了不同交易的价值函数$v$以何种概率分布出现。</li>
+<li>$(n,F)$表示每隔一个区块有n个新交易生成，这些交易的价值函数v按照分布F进行独立同分布抽样。即n控制交易流量，F控制交易类型组成比例。它们一起描述了区块链面对的总体交易负载情况。</li>
+</ol>
+</li>
+</ol>
+<h2 id="Traffic-Diversity"><a href="#Traffic-Diversity" class="headerlink" title="Traffic Diversity"></a>Traffic Diversity</h2><ol>
+<li>现有机制倾向于满足具有特定紧迫性要求的交易，而没能让不同紧急程度的交易有效利用平台。</li>
+<li>本文引入机制应实施的多样性策略概念来抽象定义什么是多样性的机制，不涉及策略的具体选择。</li>
+<li>通过检查交易价值在适当延迟后是否仍高于阈值来区分紧迫度，直观来说，延迟增加时，高紧迫度的交易价值会迅速下降，而低紧迫度则不会。</li>
+<li>多样性策略由一组条款组成，这些条款描述了区块链中包含的交易$a_i$的百分比，这些交易在特定延迟$d_i$下的价值超过了某个阈值$p_i$。</li>
+<li>定义2：多样化策略：一个多样化策略P是一个集合$\{(a_i,d_i,p_i)\}_{i\in N}$，其中$a_i,d_i,p_i$分别属于$(0,1],R_{\geq 1},(0,1]$。P中的三元组$(a_i,d_i,p_i)$被称为策略条款。</li>
+<li>定义3：执行：一个机制M在负载F执行了一个多样性策略$P:=\{(a_i,d_i,p_i)\}_{i\in N}$当且仅当对于所有$i\in N$，$E[|\{j|u(v_j|M,F)\geq v_j(d_i)-p_i\gt 0,(v_1,…,v_n)\leftarrow F\}|]\geq a_i\cdot B$都成立。</li>
+<li>例2：给定F，EIP-1559 机制会找到一个值$p$，即当延迟等于 1 时，在期望值上正好有B个交易的价值至少为$p$。因此，它在负载F下执行策略$P:=\{(1, 1, p)\}$（假设 p 存在）。</li>
+</ol>
+<h2 id="A-Diverse-Mechanism"><a href="#A-Diverse-Mechanism" class="headerlink" title="A Diverse Mechanism"></a>A Diverse Mechanism</h2><h3 id="EIP-1559不满足多样性"><a href="#EIP-1559不满足多样性" class="headerlink" title="EIP-1559不满足多样性"></a>EIP-1559不满足多样性</h3><ol>
+<li>机制设计者希望机制能够满足包含某些策略条款$(a,d,p)$的策略P，其中$a\gt 0,d\gt 1$</li>
+<li>在给定$(a, d, p)$的情况下，存在一个具有两个紧迫度的价值分布F（如下图），EIP-1559 在$(a, d, p)\in P$的情况下不执行任何策略 P。主要原因是会优先选择小费更高的交易，因而忽略了小费较低的不那么紧迫的交易。<br> <img src="https://github.com/likun1208/image/blob/master/tiered-1.png?raw=true" alt="image"></li>
+<li>定义4：图里的负载分布定义：给定参数$a,d,p$，使得$d\gt 1,a,p\gt 0$<ol>
+<li>0.5的概率，F输出价值函数$v(1):=2p$和$v(d):=0.2p$</li>
+<li>0.5的概率，F输出价值函数$v(1):=\frac{3p}{2}$和$v(d):=p$</li>
+<li>两个函数都是单调的</li>
+</ol>
+</li>
+<li>命题2：令$(a,d,p)$作为一个策略条款，其中$d\gt 1,a,p\gt 0$，在前述负载F下，EIP-1559不会实现任何包含$(a,d,p)$的策略P。<br> 证明：按我的理解，这里意思是说，网络拥塞的时候，交易很多，EIP-1559就会把交易费上限设置为接近2p的价格，尽可能打包更多交易，通过提高交易费来试图降低交易量，这样价格较低的第二类交易就不可能被选中。而第一类交易在延迟为d时的价值是0.2p，并不满足策略条款。</li>
+</ol>
+<h3 id="分层定价机制"><a href="#分层定价机制" class="headerlink" title="分层定价机制"></a>分层定价机制</h3><ol>
+<li>将区块内可用空间划分为最多$k$层，每层有各自的延迟$d_i,i\in[k]$和价格$p_i,i\in[k]$，随延迟增加价格下降。第一层的延迟固定为1，是最小延迟，意味着下一块就上链，其他层的延迟和所有层的价格由一组参数控制动态变化。</li>
+<li>机制设计目标：该尽量选择最小的满足约束的延迟和价格，同时尽量增加层级数量和使用率。</li>
+<li>延迟和价格的计算方式：<script type="math/tex; mode=display">
+ d_{j+1}\geq \lambda_jd_j,\lambda_j\gt 1,p_{j+1}\leq \mu_jd_j,\mu_j\gt 1\tag{1}</script> 其中$\lambda_j,\mu_j,j\in[k-1]$是机制的参数。当约束不满足时，机制回改变至少一个层参数（延迟，价格，层数）从而满足约束。</li>
+<li>初始状态下，机制只有大小为B的一层。</li>
+<li>每次生成新区块时，会根据上一个块的负载调整不同层级的价格。</li>
+<li>不同层的延迟变化频率较低（每过dFreq个块，改变一次延迟），以便价格调整能跟得上负载变化。延迟的变化基于连续层价格的关系，如果$p_{i+1}\gt \mu_i-p_i$，则第$i+1$层的延迟就增加，从而使得$p_{i+1}$减小，来满足约束。否则，$d_{i+1}\geq \lambda_i-d_i$，第$i+1$层的延迟会以一定概率减少1，来避免不必要的延迟，提高系统效率。</li>
+<li>层的数量变化的频率更低（每tFreq个块改一次），如果最后一层的价值大于$addTierPrice$，且当前层数$m$小于$k$，就会新增一个尺寸为$a_{m+1}B$的层，价格是$newTierPrice$，延迟是$\lambda_md_m$。第$m+1$层的空间是从第1层挪出来的。类似的，如果最后一层的价格小于$removeTierPrice$，且当前层数大于1，则删去最后一层并把空间还给第一层。</li>
+<li>延迟惩罚：为了避免用户加入最便宜的层级然后谎报偏好，机制通过延迟处理包含在层级中的交易来实现惩罚，延迟量为层级的延迟量，也就是说，就所有分类账而言，在产生的区块的时间戳超过包含区块的延迟量之前，交易将被忽略。因此，添加到层级中的交易需要支付与层级价格相等的费用。</li>
+</ol>
+<h2 id="Tiered-Pricing-is-Diverse"><a href="#Tiered-Pricing-is-Diverse" class="headerlink" title="Tiered Pricing is Diverse"></a>Tiered Pricing is Diverse</h2><h3 id="Tiered-Transaction-Mechanisms"><a href="#Tiered-Transaction-Mechanisms" class="headerlink" title="Tiered Transaction Mechanisms"></a>Tiered Transaction Mechanisms</h3><ol>
+<li>区块分为$\{0,1,2,…,k\}$个层，除了第0层，每层的尺寸是$B=(B_1,B_2,…,B_k)$，延迟是$d=(d_1,d_2,…,d_k)$，所有层的尺寸加起来是B，B表示区块吞吐量。</li>
+<li>第0层是特殊的，用来存放没上链的交易，尺寸$B_0=\infty$。</li>
+<li>索引越大，延迟越高，服务越差。</li>
+<li>$n\geq B$是新交易的数量，新交易为$\{t_1,t_2,…,t_n\}$，对于交易$t_i$，如果它被放到第$j$层且$j\neq 0$，则效用为：$u(i,j)=v_i(d_j)-p_j,0\lt j\leq k$，如果$j=0$则$u(i,j)=0$。收益反映出每个交易仅在ddl之前上链才能产生价值。</li>
+<li>给定延迟d和价格p，交易$i$的效用记作$u_i(d,p)$。</li>
+<li>元组$(B,d,p)$表示某特定区块链。</li>
+<li><p>分层交易机制M将交易分配到不同层使得总效用最大。可能存在两层效用相同的情况，这时交易随机挑一层分。$X_{ij}$表示交易$i$被分到第$j$层，给定交易$i$的期望效用最大化层级随机集合$D_i=\{j\in\{0\}\cup[k]|u(t_i,j)\geq u(t_i,j’) \forall j’\}$，我们可以定义$X_{ij}$的分布：</p>
+<script type="math/tex; mode=display">
+ X_{i j}=\left\{\begin{array}{ll}
+1 \text { with probability } \frac{B_j}{\sum_{j \in D_i} B_j} & \text { if } j \in D_i \\
+0 & \text { otherwise }
+\end{array} .\right.\tag{5}</script></li>
+<li><p>在确定了交易如何选择层级之后，我们将每个层级的需求量（或已用空间）定义为</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+    T_j=\sum_{i \in[n]} X_{i j}\tag{6}</script><p>除了第0层外，每层预期需求量最多应与所分配的层级规模相当</p>
+<script type="math/tex; mode=display">
+    \mathbb{E}\left[T_j\right] \leq B_j\tag{7}</script><p>而第0层的需求量是    </p>
+<pre><code>$$
+\mathbb{E}\left[T_0\right]=n-\sum_{j \in[k]} \mathbb{E}\left[T_j\right]\tag{8}
+$$
+</code></pre><h3 id="Distributional-Assumptions"><a href="#Distributional-Assumptions" class="headerlink" title="Distributional Assumptions"></a>Distributional Assumptions</h3><ol>
+<li>定义5：需求正则：如果生成的价值可以参数化为元组$(v_0,h)$，则价值函数分布F是需求正则的，其中$v_0\in[0,1]$是无延迟时的价值，$h:R_{\geq 1}\rightarrow [0,1]$是折扣因子函数，形式为$v(d|v_0,h)=v_0h(d)$。同时需要以下条件成立：<ol>
+<li>$h(d)$连续且单调减</li>
+<li>$lim_{d\rightarrow\infty}h(d)=0$</li>
+<li>$v_0$的边缘分布的概率密度函数始终存在，其定义为$f\left(v_0 \mid h\right)=\frac{d \operatorname{Pr}\left[v \leq v_0 \mid h\right]}{d v_0}$</li>
+<li>对于$v_0\in[0,1]$，$f(v_0|h)\gt 0$</li>
+</ol>
+</li>
+<li>引理1：对于任意区块链$(B,d,p)$和正则需求$n,F$，$E[T_i]$在p和d中是连续的，即便去掉最后一个假设这个引理也是成立的。</li>
+</ol>
+<h3 id="Compatible-Blockchains"><a href="#Compatible-Blockchains" class="headerlink" title="Compatible Blockchains"></a>Compatible Blockchains</h3><ol>
+<li>定义6：兼容：如果公式7（期望需求小于层尺寸）对于所有层都成立，则称区块链$(B,d,p)$在负载n和F下是兼容的。</li>
+<li>定义7：EIP-1559稳定区块链：如果一个区块链$(B,d,p)$在负载$n,F$下是兼容的，且每一层都满足<script type="math/tex; mode=display">
+ \frac{\mathbb{E}\left[T_j\right]}{B_j}\lt 1 \Rightarrow p_j=0\tag{9}</script> 则称其是稳定的。</li>
+<li><p>观察1：假设$B_1=B_2=1,d_1=0,d_2=1,n=3$，F是：</p>
+<ul>
+<li>概率$\frac{1}{3}$，延迟小于1时，$v_0$服从$[0,1]$的均匀分布，否则$v_0=0$。</li>
+<li><p>概率$\frac{2}{3}$，$v_0$服从$[0,1]$的均匀分布。</p>
+<p>如果$p_1\neq p_2$，则$p_1\gt p_2$。否则所有交易都会去选择$B_1$，这样$B_2$就是空的，而根据定义7，$p_2=0$，那么$p_1\lt p_2=0$就与$p_1$非负矛盾了。由此得出两个选项：</p>
+</li>
+<li>$p_1\gt p_2$。这种情况下，所有d=2的交易都会选择支付$p_2$，为了实现稳定，就需要$p_2\gt 0.5$。但是$p_1\gt p_2\gt 0.5$对于填充$B_1$有些大了。</li>
+<li>$p_1=p_2$。这种情况，$B_1$的需求比$B_2$高，因为它会被所有d=1的交易和一半d=2的交易选择。因为$B_1=B_2$，那么在$p_1=p_2$的情况下不可能让交易均匀填充两个区块。因为未填满的区块价格需要设置为0，所以$p_1=p_2\gt 0$是不可能出现的。</li>
+</ul>
+</li>
+<li>总结：<ol>
+<li>兼容意思是区块链的交易处理能力可以满足交易的需求量，具体就是每个区块$j$的交易需求量$E[T_j]$小于等于该区块的处理上限$B_j$。这保证了区块链可以流畅运行,不会积压交易造成拥堵。</li>
+<li>在兼容的基础上，又满足如果某个区块j的需求量比上限低,则价格$p_j=0$。这反映了EIP-1559的目标——在降低费用的同时,也要最大化区块空间的利用率，不浪费区块资源。</li>
+<li>观察1中的分布函数F不连续和大于0，不满足前面分布假设中的要求，所以不稳定。</li>
+</ol>
+</li>
+</ol>
+<h3 id="Properties-of-Compatible-and-EIP-1559-Stable-blockchains"><a href="#Properties-of-Compatible-and-EIP-1559-Stable-blockchains" class="headerlink" title="Properties of Compatible and EIP-1559 Stable blockchains"></a>Properties of Compatible and EIP-1559 Stable blockchains</h3><ol>
+<li>命题3：有着EIP-1559的以太坊在任何负载下都是兼容的。特别的，对于任意$B,n,F$，都存在价格p使得$(B,d,p)$在负载$n,F$下是兼容的。<br> 证明：在以太坊中，$B=B_1,d_1=0$，显然根据定义5，$p_1=0$可得$E[T_1]=n$。因为$p_1\gt 1$可得$E[T_1]=0$（因为每个交易的最大效用是1），且$E[T_1]$在$p_1$是连续的，所以存在$p_1\gt 0$使得$E [Tj]=B\lt n$，以满足定义6。</li>
+<li>兼容性和 EIP-1559 稳定性的结合意味着更直观的属性。</li>
+<li>命题4：对于在需求$n,F$下兼容且EIP-1559稳定的任意区块链$(B,d,p)$，对于所有$j\in[k]$，$E[T_j]=B_j$都成立。<br> 证明：如果对于某些层$j$而言， $E[T_j]\lt B_j$ （这是可能兼容的），EIP-1559稳定的性质会使得该层的价格为0。然而，在这种情况下，任何交易都会因加入该层而产生正效用。因为 $n\gt \sum_{j\in[k]}B_j$，这一层会至少有 $n-(\sum_{l\in[k]}B_l-B_j)\gt B_j$ 的需求，因此并不兼容。</li>
+<li>引理2：对于任意区块链$(B,d,p)$，和正则需求$n,F$，如果$p_j=1$，则$E[T_j]=0$。</li>
+</ol>
+<p>证明：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}\left[T_j\right]=n \cdot \operatorname{Pr}\left[t \in T_j\right] & \leq n \cdot \operatorname{Pr}\left[v_0 \cdot h\left(d_j\right)-p_j \geq 0\right] \\
+& \leq n \cdot \operatorname{Pr}\left[v_0 \geq p_j\right] \\
+& =0
+\end{aligned}</script><p>其中第一个不等式：进入第$j$层的交易效用必须非负。最后一个等式：两个分布假设决定（即，$v_0$分布在$[0,1]$中，并且等于1的概率为零）。</p>
+<ol>
+<li>引理3：对于任意区块链$(B,d,p)$，和正则需求$n,F$，如果 $p_j=0$，则 $\sum_{j\in[k]}E[T_j]\lt B$。</li>
+</ol>
+<p>证明：如果$p_j=0$，几乎可以肯定，每笔交易都会在$j$层产生正效用，因此将包含在某个层中（应该是说所有交易都加入这一层）。只要到达率高于吞吐量$n \gt  B$，就能证明这一点。</p>
+<ol>
+<li>引理4：对于任意区块链$(B,d,p)$，和正则需求$n,F$，其中$p$是EIP-1559稳定的，可得：对于所有$1\leq j\lt k$ 都有$p_j\geq p_{j+1}$。</li>
+</ol>
+<p>证明：假设对于$1\leq j\lt k$都有$p_j\lt p_{j+1}$，在这种情况下，第$j$层会有比第$j+1$层更低的价格和更低的延迟。因此，根据公式3，我们可得对于任意交易$i$而言，$u(i,j)\gt u(i,j+1)$，这使得$T_{j+1}=\emptyset$。但是，$p_{j+1}\gt p_j\geq 0$会导致矛盾，因为空层的价格一定是0。</p>
+<ol>
+<li>引理5：令$f:[0,1]^k\rightarrow R^k_{\geq 0}$是一个具有以下属性的函数：<ol>
+<li>$f(x_1,x_2,…,x_k)$是在$x$上均匀连续的，且随$x_j,j\in[k]$递减。</li>
+<li>如果$x_j=1$，则$f_j(x)=0$，其中$f_j$是$f(x)$的第j个坐标。</li>
+<li>如果$x_j=0$，则$\sum_{j\in[k]}f_j(x)\gt B$</li>
+<li>对于$y=x+\delta e_j$使得$x,y\lt 1$，可得当$l\neq j$时$f_j(y)\lt  f_j(x)$且$f_l(y)\geq f_l(x)$。</li>
+<li>因此，对于任意满足$\sum_{j\in[k]}B_j=B$的$B_1,B_2,…,B_k\gt 0$，对于任意$j\in[k]$，都存在一些$x\in[0,1]^n$使得$f_j(x)=B_j\gt 0$。</li>
+</ol>
+</li>
+<li>定理1：对于任意有着固定$B,d$和任意$n,F$的区块链，都存在$p$使得$(B,d,p)$是兼容且EIP-1559稳定的。</li>
+<li>引理6：给定$B,d,n,F$，和两个不同的价格向量$p\geq p’$（即每个$p$中的价格都大于等于$p’$中对应的价格），我们可得对于所有$j\in[k]$都有$\sum_{j\in[k]}T_j\leq\sum_{j\in[k]}T’_j$。</li>
+</ol>
+<p>证明：令S表示一组估值，如果这些估值被包含在它们最喜欢的区块链层级$(B,d,p’)$中，将会带来正效用。显然如果将它们纳入$(B,d,p)$而不是同一层级，它们的效用都会增加。类似地定义$S’$，可得$S’\subseteq S\Rightarrow Pr[S’]\leq Pr[S]$。因为$S$和$S’$能根据每个交易的首选层被划分为不相交的集合$S_j$，这样$Pr[S_j]=T_j$乘以$n$就得到了所要求的结果。</p>
+<ol>
+<li>定理2：对于有着固定B和d以及任意$n,F$的区块链，如果存在$p$使得$(B,d,p)$是兼容且EIP-1559稳定，则$p$是独一无二的。</li>
+</ol>
+<p>证明：假设存在两个不同的价格向量$p\neq p’$使得$(B,d,p)$和$(B,d,p’)$都是在需求$n,F$下兼容且EIP-1559稳定。因为$p\neq p’$，我们可以把价格集合划分为两部分：$P^{+}=\{j\in[k]|p’_j\gt p_j\}$和$P^{-}=\{j\in[k]|p’_j\leq p_j\}$。</p>
+<p>我们用$T_j$和$T’_j$表示$(B,d,p)$和$(B,d,p’)$的层级划分。</p>
+<p>假设$P^{-}=\emptyset$，我们只需要说明对于$(B,d,p’)$和需求$n,F$可得</p>
+<script type="math/tex; mode=display">
+    \sum_{j\in[k]}E[T'_j]\lt \sum_{j\in[k]}B_j\tag{10}</script><p>就可以确定价格$p’$并非EIP-1559稳定，因为它们都是正数且一些层没满。</p>
+<p>为了得到这一矛盾，我们假设等式10成立。令$\delta=min_j\{p’_j-p_j|j\in[k]\}$并定义一个新的价格向量$\hat{p}=p+\delta$。通过价格兼容性和引理6，可得：</p>
+<script type="math/tex; mode=display">
+    \sum_{j \in[k]} B_j=\sum_{j \in[k]} \mathbb{E}\left[T_j^{\prime}\right] \geq \sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right] \geq \sum_{j \in[k]} \mathbb{E}\left[T_j\right]=\sum_{j \in[k]} B_j\tag{11}</script><p>因此，如果所有价格恰好增加$\delta$，则总需求保持不变。事实上，因为效用是拟线性的，并且所有价格变化量相同，所以每一层的需求保持和$(B,d,p)$一样。此外，任何价值$v$的首选层在$(B,d,p)$和$(B,d,\hat{p})$中都是一样的。我们将证明这违反了分布假设。</p>
+<p>令$S_j$表示F的支持子集，其中包含在价格$p$下倾向于$T_j$层的交易。</p>
+<script type="math/tex; mode=display">
+S_j=\left\{\left(v_0, h\right) \in F \mid v_0 \cdot h\left(d_j\right)-p_1 \geq v_0 \cdot h\left(d_j^{\prime}\right)-p_j \text { for all } j^{\prime} \neq j\right\}</script><p>我们可得</p>
+<script type="math/tex; mode=display">
+\mathbb{E}\left[T_j\right]=n \cdot \operatorname{Pr}\left[S_j\right] \Rightarrow \operatorname{Pr}\left[S_j\right]=\frac{B_j}{n}</script><p>令 S 为F的支持子集，其中包含将加入$p$下某个层的有着相似$\hat{S}$的交易：</p>
+<script type="math/tex; mode=display">
+S=\left\{\left(v_0, h\right) \in F \mid v_0 \cdot h\left(d_j\right)-p_j \geq 0 \text { for some } j \in[k]\right\}</script><p>当然，$S=\cup_{j\in[k]}S_j$且每个$S_j$都不相交，从公式11可以推出：</p>
+<script type="math/tex; mode=display">
+\sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right]=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] \Rightarrow \sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right] / n=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] / n \Rightarrow \sum_{j \in[k]} \operatorname{Pr}\left[\widehat{S_j}\right]=\sum_{j \in[k]} \operatorname{Pr}\left[S_j\right]\tag{12}</script><p>令$\mathbb{1}_{t\in S}$表示交易t加入S的指示变量。因为所有$S_j$都不相交：</p>
+<script type="math/tex; mode=display">
+\sum_{j \in[k]} \operatorname{Pr}\left[\widehat{S_j}\right]=\sum_{j \in[k]} \operatorname{Pr}\left[S_j\right] \Rightarrow \operatorname{Pr}\left[\cup_{j \in[k]} \widehat{S_j}\right]=\operatorname{Pr}\left[\cup_{j \in[k]} S_j\right] \Rightarrow \mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}}\right]=\mathbb{E}\left[\mathbb{1}_{t \in S}\right]</script><p>为了简化计算，我们可以在价值的折扣函数$h$条件下使用全期望定律。把所有内容合起来可得：</p>
+<script type="math/tex; mode=display">
+\sum_{j \in[k]} \mathbb{E}\left[\widehat{T}_j\right]=\sum_{j \in[k]} \mathbb{E}\left[T_j\right] \Rightarrow \mathbb{E}\left[\mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}} \mid h\right]\right]=\mathbb{E}\left[\mathbb{E}\left[\mathbb{1}_{t \in S} \mid h\right]\right]\tag{13}</script><p>然后得到：</p>
+<script type="math/tex; mode=display">
+\mathbb{E}\left[\mathbb{1}_{t \in S} \mid h\right]=\operatorname{Pr}\left[v_0 \geq V_h \mid h\right] \quad \text { and } \quad \mathbb{E}\left[\mathbb{1}_{t \in \widehat{S}} \mid h\right]=\operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right]</script><p>这是因为以$h$为条件，价值随$v_0$增加，因此存在一个最小的$V_h$，高于该值的每个$v_0$都会加入某个层。可以看出，对于$v_0=\hat{V_h}$（被包含在$\hat{p}$下的某层$j$），可得：</p>
+<script type="math/tex; mode=display">
+\widehat{V_h} \cdot h\left(d_j\right)-\left(p_j+\delta\right) \Rightarrow \widehat{V_h} \cdot h\left(d_j\right)-p_j \geq \delta\gt 0</script><p>因此，存在某价值$v_h-\varepsilon$使得$\left.\widehat{V_h}-\varepsilon\right) \cdot h\left(d_j\right)-p_j\gt 0$。由此在价格$p$下，对于折扣函数$h$，任何$\hat{V_h}\geq v_0 \geq \hat{V_h}-\varepsilon$都会被包含进某层：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\operatorname{Pr}\left[v_0 \geq V_h \mid h\right] & \geq \operatorname{Pr}\left[v_0 \geq \widehat{V_h}-\varepsilon \mid h\right] \\
+& \geq \operatorname{Pr}\left[\widehat{V_h}\gt v_0 \geq \widehat{V_h}-\varepsilon \mid h\right]+\operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right] \\
+& \gt \operatorname{Pr}\left[v_0 \geq \widehat{V_h} \mid h\right] .
+\end{aligned}</script><p>这意味着$E[\mathbb{1}_{t\in S}|h]\gt E[\mathbb{1}_{t\in \hat{S}}|h]$，无论采用哪边的期望价值都与公式13矛盾。</p>
+<p>对于$P^{-}\neq \emptyset$的情况，显然，$(B,d,p’)$对应的任意层$j\in P^+$的需求只会严格小于$(B,d,p)$对应的需求，随着这些层的价格上涨，而其余层价格保持不变或下降。在证明过程中，我们对之前的分析稍作修改，增加了一种情况，即$P^+$的价格并不稳定，而是有可能有一些需求溢出到 P 层，使得新的价格与需求不符。</p>
+<ol>
+<li>总结：这一部分说的是兼容且稳定的区块链具有的性质。<ol>
+<li>命题3很好理解，直观来说就是在其他因素不变的情况下，价格变化会引起期望需求改变，而最小和最大分别是n和0，B恰好在这个区间上，这个变化是连续的，显然中间肯定存在一个值，对应了期望效用是B的情况。</li>
+<li>命题4也好理解，如果一个区块链是兼容且稳定的，这意味着每一层的期望需求应该恰好等于这一层的容量。如果是大于的情况，则不满足兼容的定义；如果是小于的情况，则按照稳定的性质，这一层价格应该为0，这使得还没加入的交易都会争相加入，而在本文的场景下交易数量大于区块链所有层的总容量，去掉放到其他层的交易以后，剩下的交易都想加入这一层，而这个需求必然大于这一层的容量，因此与兼容冲突了。</li>
+<li>引理2这里，这篇论文应该是用1表示最高价，从公式可以看出如果某一层价格很高，那它的期望需求就是0。</li>
+<li>引理3和EIP-1559稳定感觉说的是一个意思，价格为0就意味着这一层还有空，期望需求小于它的容量。</li>
+<li>引理4也很显然，兼容且稳定时，延迟低的层价格会高。</li>
+<li>引理5有点抽象，通俗来说，函数f()可以看作是从层级的价格p到这一层的预期需求$E(T_k)$的映射，引理5表明可以通过调整价格使得预期需求量等于这层的容量$B_k$，从而满足兼容且稳定的需求。</li>
+<li>定理1可以从引理5引申出来。</li>
+<li>引理6直观来看，价格上涨就会导致需求下降，很容易理解。它是为后面证明价格唯一性做支撑的。</li>
+<li>定理2的证明比较多，这个定理本身的含义可以概括为：对于确定的区块大小和延迟，如果存在可以使区块链平稳运行的价格，那么这组价格就是唯一的。用的反证法：<ol>
+<li>假设存在两个不同的价格$p$和$p’$都能让同一个区块链兼容且稳定；</li>
+<li>把价格可能取值的集合划分为p’高于p的$P^+$集合，以及p’低于or等于p的$P^-$集合；</li>
+<li>如果$P^-$是空的，意味着只存在p’大于p的情况，根据引理6，如果p是兼容且稳定的，则意味着p’对应的期望需求会更小，如果p’也兼容且稳定，那价格一定是0，这使得p要小于0，而这又违背了定义，所以这种情况不存在（证明部分的公式比这个复杂）；</li>
+<li>如果$P^-$非空，在$P^+$集合，价格从p涨到p’，会导致期望需求下降，感觉和前面一样，都是要么不兼容要么不稳定。</li>
+<li>总的来说这个定理的意思就是，在区块大小和延迟不怎么改变的情况下，需求波动后会带来价格的波动，从而使得不改变大小和延迟的情况下还能兼容稳定。<h3 id="Steady-state-of-the-Tiered-Pricing-Mechanism"><a href="#Steady-state-of-the-Tiered-Pricing-Mechanism" class="headerlink" title="Steady-state of the Tiered Pricing Mechanism"></a>Steady-state of the Tiered Pricing Mechanism</h3></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在负载$n,F$和固定的$B$下，分层定价机制旨在找到$(B,d,p)$，使得：<script type="math/tex; mode=display">
+d_{j+1} \geq \lambda_j \cdot d_j \text { for } \lambda_j\gt 1 \text {, and } p_{j+1} \leq \mu_j \cdot p_j \text { for } \mu_j\lt 1\tag{14}</script></li>
+<li>定理3：对于任意B，因子$\lambda_j,\mu_j$和正则需求$n,F$，都存在一个区块链$B,d,p$既兼容和EIP-1559稳定，也满足不等式14。</li>
+</ol>
+<p>证明：将$d_1$设置为0，由此定义：</p>
+<script type="math/tex; mode=display">
+    d_{j+1}=\max \{\lambda_{j} \cdot d_{j}, \underset{d}{\operatorname{argmin}}\{\operatorname{Pr}\left[h(d)\lt \mu_{j} \cdot h\left(d_{j}\right) / 2\right]\gt 1-\delta \cdot \frac{1}{k-1} \cdot \frac{1}{n}\}\}</script><p>本质上，$d_{j+1}$远大于$d_j$，因此几乎所有交易产生的折扣因子至少比$d_j$小$\lambda_j/2$。我们可以用以下 的集合来描述这个“几乎所有”属性：</p>
+<pre><code>$$
+H_{j+1}=\{(v_{0}, h) \in \operatorname{supp}(F) \mid h(d_{j+1})\lt \mu_{j} \cdot h(d_{j})\}
+$$
+</code></pre><p>且$H=\cap_{j\geq 1}^kH_j$。在$n$个交易的样本中，我们观察到没有一个交易的折扣函数位于集合H之外的概率是：    </p>
+<script type="math/tex; mode=display">
+    \begin{aligned}
+\operatorname{Pr}\left[\forall i \in[n] t_{i} \in H\right] & =1-\operatorname{Pr}\left[\exists i \in[n] \text { s.t. } t_{i} \in H^{C}\right] \\
+& \geq 1-n \cdot \operatorname{Pr}\left[\cup_{j \geq 1}^{k} H_{j}^{C}\right] \\
+& \geq 1-n \cdot \sum_{j \geq 1}^{k} \delta /(k-1) / n=1-\delta .
+\end{aligned}</script><p>因此，可以将延迟$d_{j+1}$设置得足够高，这样在概率至少为$1-\delta$的情况下，样本中所有交易的折扣函数都会使连续层级的价值至少降低$\mu_j$倍。</p>
+<p>对于我们刚才描述的延迟$d_1, d2, …,d_k$，让$p$成为保证存在的兼容和 EIP-1559 稳定的价格。根据命题 4，我们知道，对于这些价格，每个层级都必须完全满员。因此，对于任何层级$j$，都必须存在一个$h\in H$ 且使得层级$j+1$优于$j$的$v_0$的交易，且其效用为正。用公式来表述：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v_{0} \cdot h\left(d_{j}\right)-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+1} \\
+\Rightarrow v_{0} \cdot h\left(d_{j+1}\right) / \mu_{j}-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+1} \\
+\Rightarrow v_{0} \cdot h\left(d_{j+1}\right) & <\frac{p_{j}-p_{j+1}}{1 / \mu_{j}-1} .
+\end{aligned}</script><p>因为效用为正（即$v_0\cdot h(d_{j+1})-p_{j+1}\gt 0$），可以进一步得到：</p>
+<pre><code>$$
+\begin{aligned}
+</code></pre><p>p_{j+1} &amp; &lt;\frac{p_{j}-p_{j+1}}{1 / \mu_{j}-1} \\<br>\Rightarrow p_{j+1} &amp; &lt;p_{j} \cdot \mu_{j} .<br>\end{aligned}</p>
+<pre><code>$$
+</code></pre><p>因此，对于适当选择的延迟，可以保证价格也将遵循我们的约束条件。</p>
+<p>上述定理可以转换为分层定价机制执行不等式 14 所定义的政策的能力。</p>
+<ol>
+<li>推论1：对于任意正则需求$n,F$以及任意$k\geq B$，和任意参数集$\{(a_j,\lambda_j,\mu_j)\}_{j\in[k-1]}$，其中$a_j\in(0,1],\lambda_j\in R_{&gt;1},\mu_j\in(0,1)$，对于$j\in[k-1]$且$\sum_j a_i=1$，有着相同参数和$tFreq:=\infty$的分层定价机制执行策略$P:=\{(a_i,d_i,p_i)\}_{i\in[k]}$，其子句满足不等式14.</li>
+<li>遗憾的是，有很多 p 和 d 对都能满足这些特性。例如，最后一级的延迟总是可以增加（降低相应的价格），同时保持我们的保证。然而，我们的分层定价机制能找到局部最小解，不会不必要地增加延迟。</li>
+<li>定理4：对于任何$B$、因子$\lambda_j,\mu_j$和需求$n,F$，都存在一个兼容、EIP-1559 稳定且满足不等式 14 的区块链$(B,d,p)$。此外，在不牺牲任何保证的情况下，任何延迟都可以被独立降低。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+        <tag>defi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文略读记录</title>
+    <url>/2023/11/07/%E8%AE%BA%E6%96%87%E7%95%A5%E8%AF%BB%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>从今天开始，找到的论文先略读做个记录，再决定是否细看</p>
+<a id="more"></a>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><ol>
+<li>作者、期刊、发表时间：</li>
+<li>关键词：</li>
+<li>研究背景和问题：</li>
+<li>研究方法：</li>
+<li>论文结论：</li>
+<li>创新与贡献：</li>
+<li>我的问题：</li>
+<li>是否详细阅读：</li>
+</ol>
+<h1 id="Cooperative-game-for-coordination-of-a-green-closed-loop-supply-chain"><a href="#Cooperative-game-for-coordination-of-a-green-closed-loop-supply-chain" class="headerlink" title="Cooperative game for coordination of a green closed-loop supply chain"></a>Cooperative game for coordination of a green closed-loop supply chain</h1><ol>
+<li>作者、期刊、发表时间：Tooba Asghari, Ata Allah Taleizadeh, Fariborz Jolai, Mohammad Sadegh Moshtagh, Journal of Cleaner Production, Volume 363, 2022.</li>
+<li>关键词：Environmental responsibility; Inventory; Pricing; Cooperative game theory; Green design.</li>
+<li>研究背景和问题：在绿色闭环供应链中，制造商、零售商和回收商要决定三方在整个供应链过程中的贡献和利润分配。</li>
+<li>研究方法：合作博弈，包括核解机制（NSM）和沙普利值机制（SVM），以及不同的契约结构，包括成本分摊（CS）、收入分摊（RS）和两部分关税（TPT）契约</li>
+<li>论文结论：<ol>
+<li>合作博弈和契约机制都为所有主体提供了双赢的条件</li>
+<li>从供应链的角度看，不同机制有不同的经济效益，零售商更倾向于合作机制，回收商更喜欢契约机制</li>
+<li>消费者的认识对三方也有激励</li>
+<li>回收商二手交易能降低环保产品售价，提高其需求</li>
+</ol>
+</li>
+<li>创新与贡献：<ol>
+<li>考察了 GCLSC 的两种协调策略，并在经济和环境绩效方面比较了这两类策略，对每个成员的场景进行优先级排序，并确定每个机制下的受益人。</li>
+<li>所有三个成员的环境责任被分开考虑</li>
+<li>分别考虑了消费者对绿色制造商、绿色零售商和回收商所做努力的敏感度，并比较了它们对供应链决策的影响。</li>
+<li>除了考虑CLSC文献中常见的废旧绿色产品的收集和回收用于再制造外，还假设收集的一部分产品将作为二手绿色产品在二级市场上供应并在不同场景下考察二手产品交易对会员决策的影响。此外，还考虑了给予退回旧产品的消费者的优惠券对需求函数的影响。</li>
+<li>总的来说就是场景更细致了</li>
+</ol>
+</li>
+<li>我的问题：<ol>
+<li>收益函数的设计</li>
+<li>几个契约具体是怎么做的</li>
+</ol>
+</li>
+<li>是否详细阅读：让学生看一下，也许能用到数据交易方面</li>
+</ol>
+<h1 id="Blockchain-and-Zero-Sum-Game-based-Dynamic-Pricing-Scheme-for-Electric-Vehicle-Charging"><a href="#Blockchain-and-Zero-Sum-Game-based-Dynamic-Pricing-Scheme-for-Electric-Vehicle-Charging" class="headerlink" title="Blockchain and Zero-Sum Game-based Dynamic Pricing Scheme for Electric Vehicle Charging"></a>Blockchain and Zero-Sum Game-based Dynamic Pricing Scheme for Electric Vehicle Charging</h1><ol>
+<li>作者、期刊、发表时间：R. Kakkar, S. Agrawal, R. Gupta and S. Tanwar, IEEE INFOCOM 2022 - IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS)</li>
+<li>关键词：Blockchain, Electric vehicle, Zero-sum gametheory, Profit, Payoff, Latency</li>
+<li>研究背景和问题：<ol>
+<li>为了避免电价波动，需要一种合理的充电方案。</li>
+<li>集中式的电动车充电方案面临各类安全问题，如修改攻击、完整性攻击、中间人攻击。因此很多研究提出了基于区块链的充电方案。</li>
+<li>但是现有研究普遍面临延迟、成本效率、系统的最佳回报以及电动汽车和电动汽车的利润等问题，且缺乏对动态收费以获得最佳回报的讨论。</li>
+<li>需要提出一种基于区块链的6G网络动态定价方案，以提高系统的延迟和效率。</li>
+</ol>
+</li>
+<li>研究方法：构建了零和博弈模型，分别列出电动车和充电站的收益函数，然后找均衡。</li>
+<li>论文结论：本文方法在成本效率、盈利能力、低延迟和高可靠性方面优于传统系统。</li>
+<li>创新与贡献：<ol>
+<li>提出了一种安全高效的区块链，与基于 IPFS 的动态定价方案相结合，用于通过 6G 通信网络充电的电动汽车。</li>
+<li>制定零和博弈方法来优化电动车和CS的利润，使系统盈利。</li>
+<li>考虑延迟、系统的最佳回报以及电动汽车和CS 的利润等参数来评估所提议系统的性能。</li>
+</ol>
+</li>
+<li>我的问题：<ol>
+<li>实验是模拟的还是真实环境？</li>
+<li>场景模型还不太清楚。</li>
+</ol>
+</li>
+<li>是否详细阅读：让学生大致看看。</li>
+</ol>
+<h1 id="Game-Theoretic-Rating-in-N-player-general-sum-games-with-Equilibria"><a href="#Game-Theoretic-Rating-in-N-player-general-sum-games-with-Equilibria" class="headerlink" title="Game Theoretic Rating in N-player general-sum games with Equilibria"></a>Game Theoretic Rating in N-player general-sum games with Equilibria</h1><ol>
+<li>作者、期刊、发表时间：Marris, L.; Lanctot, M.; Gemp, I.; Omidshafiei, S.; Mcaleer, S.; Connor, J.; Tuyls, K.; Graepel, T. 是arxiv的论文，2022年的，目前应该还没发。</li>
+<li>关键词：无</li>
+<li>研究背景和问题：传统的策略评级方法局限于二人零和博弈。需要拓展到N人广义和博弈设置。</li>
+<li>研究方法：<ol>
+<li>提出了博弈论支付评级(payoff rating)的定义,它利用联合策略分布条件化的期望支付来评价策略。</li>
+<li>证明在二人零和游戏中,当使用最大熵纳什均衡时,支付评级等价于纳什均值(Nash Average)。</li>
+<li>提出了使用关联均衡和粗略关联均衡进行支付评级。这更适合N人广义和博弈。</li>
+<li>通过最大熵选择准则,支付评级具有策略分组、重复策略一致性等好的性质。</li>
+</ol>
+</li>
+<li>论文结论：评级模型是有用的</li>
+<li>创新与贡献：最大熵评级模型</li>
+<li>我的问题：其实看了半天没看明白这个是游戏中的评级，还是博弈的评级，还是用博弈论做通用评级的场景</li>
+<li>是否详细阅读：否</li>
+</ol>
+<h1 id="Supply-chain-equilibrium-on-a-game-theory-incentivized-blockchainnetwork"><a href="#Supply-chain-equilibrium-on-a-game-theory-incentivized-blockchainnetwork" class="headerlink" title="Supply chain equilibrium on a game theory-incentivized blockchainnetwork"></a>Supply chain equilibrium on a game theory-incentivized blockchainnetwork</h1><ol>
+<li>作者、期刊、发表时间：Jianbin Gao, Bonsu Adjei-Arthur, Emmanuel Boateng Sifah, Hu Xia, Qi Xia*. Journal of Industrial Information Integration（一区，不是CCF）. 2022</li>
+<li>关键词：Supply chain; Game-theory; Blockchain; Smart contract; IoT.</li>
+<li>研究背景和问题：传统供应链依赖第三方在零售商和供应商之间构建契约来实现合作，但是面临一些问题：<ol>
+<li>基于第三方的契约机制由于缺乏自我强制的信任而导致交易双方之间难以建立关系。</li>
+<li>由于交易方的复杂性和自私程度，建立平衡也极具挑战性。在很多情况下，参与者必须对既定的投标协议做出妥协，以确保和维持合同双方之间的可信度，从而导致交易参与者不满意。</li>
+<li>契约机制也存在恶意篡改、谈判过程不透明等问题。</li>
+<li>同时预测和监控交易方的活动具有挑战性。决策的改变会严重影响整个供应链并造成巨大损失，需要有自动化的契约建立机制和透明的谈判媒介。</li>
+</ol>
+</li>
+<li>研究方法：<ol>
+<li>提出了一个结合区块链特征的新颖框架，以确保透明度并确保供应链的平衡。</li>
+<li>我们激励供应链环境中的交易各方共同行动并做出最佳决策，以确保各方有效建立均衡。</li>
+<li>我们提出的解决方案中的交易信息流提供了做出有效决策所需的能力，有助于确保多个缔约方之间的平衡。</li>
+<li>为了更好地理解网络上各方的行为及其行为的后果，我们结合了博弈论模型来表明使用区块链网络可以更好地实现供应链平衡。</li>
+<li>用了stackelberg博弈</li>
+</ol>
+</li>
+<li>论文结论：方法是可行的</li>
+<li>创新与贡献：<ol>
+<li>通过在基于区块链的供应链系统上设计一种新颖的方法来扩展[6]和[1]的工作，通过基于博弈论的方法促进供应商和零售商之间的交易，并在供应链网络上的各方之间建立平衡。</li>
+<li>设计了一个投标系统，将供应链网络中的多方聚集在一起。招标系统利用区块链功能规范供应链上的所有行为，通过请求和谈判为供应链上的多方提供透明度。</li>
+<li>开发了一种预测机制，确保对供应商和零售商进行有效的选择过程，从而避免供应链上的中断和供应不确定性问题，确保为交易过程选择最好的实体，从而提高供应商的供应水平。可以建立平衡。</li>
+<li>利用与区块链兼容的签约机制，这些机制可以有效地协同工作，并利用区块链功能在供应链各方之间建立重要的关系。</li>
+<li>对每个玩家在博弈论激励的区块链网络上的行为进行了详细分析。通过分析每个策略的执行情况以及每个时间点发生的变化对系统的影响，我们证明我们提出的想法可以满足连续、重复和无限博弈等复杂情况，同时保持各方之间的透明度。</li>
+<li>实现供应链上主要重要流程的自动化，并利用区块链功能提供良好的激励方案，使多方能够观察供应链上的正确行为。</li>
+<li>从数学上证明，区块链更擅长在各方和物联网设备之间建立纳什均衡，并为供应链上的各方提供信任机制。</li>
+<li>利用标准区块链网络提供概念证明，以证明我们提出的想法的可行性。</li>
+</ol>
+</li>
+<li>我的问题：<ol>
+<li>很好奇这个数学证明和概念证明是什么样的</li>
+<li>博弈方是哪些，收益函数是怎么设计的</li>
+</ol>
+</li>
+<li>是否详细阅读：让学生看，结合前面绿色供应链的。</li>
+</ol>
+<h1 id="Experimental-relativistic-zero-knowledge-proofs"><a href="#Experimental-relativistic-zero-knowledge-proofs" class="headerlink" title="Experimental relativistic zero-knowledge proofs"></a>Experimental relativistic zero-knowledge proofs</h1><ol>
+<li>作者、期刊、发表时间：Alikhani, P., Brunner, N., Crépeau, C. et al. nature 2021</li>
+<li>关键词：无</li>
+<li>研究背景和问题：泄漏秘密对于证明身份or证明陈述正确性是否是必要的？</li>
+<li>研究方法：零知识证明的实验实现，是针对三色图问题做的实验</li>
+<li>论文结论：零知识证明协议在实验上是可靠的</li>
+<li>创新与贡献：从实验角度证明了零知识证明？</li>
+<li>我的问题：完全没理解零知识证明是怎么和量子计算产生的联系，感觉这篇论文更偏向物理学</li>
+<li>是否详细阅读：否</li>
+</ol>
+<h1 id="Privacy-Preserving-Prompt-Tuning-for-Large-Language-Model-Services"><a href="#Privacy-Preserving-Prompt-Tuning-for-Large-Language-Model-Services" class="headerlink" title="Privacy-Preserving Prompt Tuning for Large Language Model Services"></a>Privacy-Preserving Prompt Tuning for Large Language Model Services</h1><ol>
+<li>作者、期刊、发表时间：Yansong Li, Zhixing Tan, and Yang Liu. arxiv. 2023</li>
+<li>关键词：</li>
+<li>研究背景和问题：LLM的prompt可能会泄露隐私，现有的隐私保护一方面依赖于服务提供商，另一方面不可避免地导致模型性能下降。</li>
+<li>研究方法：<ol>
+<li>基于即时调优，我们提出了隐私保护即时调优（RAPT），这是一个为LLM服务提供隐私保证的框架。 </li>
+<li>RAPT采用本地隐私设置，允许用户通过本地差分隐私在本地对其数据进行私有化。</li>
+<li>由于直接在私有化数据上训练时提示调整表现不佳，因此我们引入了一种新颖的私有化令牌重建任务，该任务与下游任务联合训练，使LLM能够学习更好的依赖于任务的表示。</li>
+</ol>
+</li>
+<li>论文结论：实验表明 RAPT 在跨任务中实现了有竞争力的性能，同时提供了针对对手的隐私保证。</li>
+<li>创新与贡献：设计了隐私保护框架</li>
+<li>我的问题：对这个领域了解太少，还要再多看看</li>
+<li>是否详细阅读：是</li>
+</ol>
+<h1 id="Privacy-Preserving-Large-Language-Models-ChatGPT-Case-Study-Based-Vision-and-Framework"><a href="#Privacy-Preserving-Large-Language-Models-ChatGPT-Case-Study-Based-Vision-and-Framework" class="headerlink" title="Privacy   Preserving Large Language Models: ChatGPT Case Study Based Vision and Framework"></a>Privacy   Preserving Large Language Models: ChatGPT Case Study Based Vision and Framework</h1><ol>
+<li>作者、期刊、发表时间：Imdad Ullah, Najm Hassan, Sukhpal Singh Gill, Basem Suleiman, Tariq Ahamed Ahanger, Zawar Shah, Junaid Qadir, and Salil S. Kanhere. arxiv, 2023年10月</li>
+<li>关键词：Artificial Intelligence, Generative AI tools, Privacy, ChatGPT, Large Language Models (LLMs), Machine learning</li>
+<li>研究背景和问题：LLM对用户隐私造成威胁</li>
+<li>研究方法：<ol>
+<li>提出了称为 PrivChatGPT 的概念模型，由两个主要组成部分组成，即在数据管理/预处理期间保护用户隐私，以及保护私有上下文和大规模数据的私有训练过程。</li>
+<li>采用了差分隐私和使用强化学习（RL）的私有训练。一旦应用差分隐私，我们就会测量隐私损失并评估不确定性或随机性的度量。在每次更新期间，当出于训练目的添加新信息时，它进一步递归地评估隐私保护的水平以及公共数据库和资源的不确定性度量。</li>
+<li>为了批判性地评估差分隐私对LLM的使用，我们假设比较了其他机制，例如区块链、私人信息检索、随机化、混淆、匿名化，以及使用 ToR 进行各种性能衡量，例如模型性能和准确性、计算复杂性、隐私与实用性、训练延迟、易受攻击的漏洞以及资源消耗。</li>
+</ol>
+</li>
+<li>论文结论：<ol>
+<li>差分隐私、随机化和混淆会影响训练模型的实用性和性能</li>
+<li>相反，ToR、区块链和 PIR 的使用可能会带来额外的计算复杂性和高训练延迟</li>
+</ol>
+</li>
+<li>创新与贡献：引入 PrivChatGPT<ol>
+<li>数据管理和预处理过程中保护用户隐私，纳入私有上下文</li>
+<li>利用从 PrivChatGPT 第一部分获得的私有数据，使用大规模数据确保整个训练过程中的隐私保护</li>
+</ol>
+</li>
+<li>我的问题：<ol>
+<li>差分隐私的具体应用方式</li>
+<li>和其他机制比较的时候是怎么做的</li>
+</ol>
+</li>
+<li>是否详细阅读：先大致读一遍，不做记录</li>
+</ol>
+<h1 id="EW-Tune-A-Framework-for-Privately-Fine-Tuning-Large-Language-Models-with-Differential-Privacy"><a href="#EW-Tune-A-Framework-for-Privately-Fine-Tuning-Large-Language-Models-with-Differential-Privacy" class="headerlink" title="EW-Tune: A Framework for Privately Fine-Tuning Large Language Models with Differential Privacy"></a>EW-Tune: A Framework for Privately Fine-Tuning Large Language Models with Differential Privacy</h1><ol>
+<li>作者、期刊、发表时间：Rouzbeh Behnia, Mohammadreza (Reza) Ebrahimi, Jason Pacheco. arxiv, 2022年10月</li>
+<li>关键词：Differential privacy, large language models, ﬁnetuning, Edgeworth accountant</li>
+<li>研究背景和问题：大模型容易受到成员推断、模型反演和训练数据提取这三类隐私攻击</li>
+<li>研究方法：提出了基于差分隐私的通用框架EW-Tune，计算需要添加到随机梯度下降中的噪声量，以保证一定的隐私预算</li>
+<li>论文结论：EW-Tune 能够通过引入比现有方法更少的噪声来提供有限样本隐私保证</li>
+<li>创新与贡献：<ol>
+<li>在相同的隐私预算下，EW-Tune 与最先进的方法相比，能减少 SGD 的噪声。这直接提高了模型的学习能力和准确性。</li>
+<li>在文本分类、引申检测和问题解答等几个重要的下游基准任务中，EW-Tune 与最近的多种替代方法相比，在提高 LLM 的私密性的同时，还能保持其实用性/准确性，对提升技术水平做出了显著贡献。</li>
+<li>总体而言，EW-Tune 将 SGD 的噪声系数降低了 5.6%。EW-Tune 还将最先进模型的准确率提高了 1.1%。</li>
+</ol>
+</li>
+<li>我的问题：粗略看了一下方法，似乎核心是一个叫Edgeworth Accountant的算法，查了一下另一篇论文提出的方法，似乎还没发表。之后可能要看看。</li>
+<li>是否详细阅读：否</li>
+</ol>
+<h1 id="Differentially-Private-Decoding-in-Large-Language-Models"><a href="#Differentially-Private-Decoding-in-Large-Language-Models" class="headerlink" title="Differentially Private Decoding in Large Language Models"></a>Differentially Private Decoding in Large Language Models</h1><ol>
+<li>作者、期刊、发表时间：Jimit Majmudar Christophe Dupuy Charith Peris Sami Smaili Rahul Gupta Richard Zemel. arxiv. 2022年9月</li>
+<li>关键词：无</li>
+<li>研究背景和问题：一方面大语言模型面临隐私泄露的问题，另一方面，隐私保护算法往往需要重头开始训练模型，成本过高</li>
+<li>研究方法：一种简单、易于解释且计算量轻的扰动机制，可应用于解码阶段已训练的模型。我们的扰动机制与模型无关，可以与任何LLM结合使用。</li>
+<li>论文结论：所提出的机制具有差分隐私的特性，实验结果显示隐私与效用之间的权衡。</li>
+<li>创新与贡献：<ol>
+<li>我们提出了一种基于输出概率分布扰动的 LLM 中 DP 预测的简单且计算量轻的方法，并表明我们的方法是差分隐私的。</li>
+<li>我们将我们的方法应用于预训练的LLM，并比较对性能和隐私的影响。</li>
+</ol>
+</li>
+<li>我的问题：简单来说是在预测阶段用差分隐私，具体怎么实现的还没细看。</li>
+<li>是否详细阅读：否</li>
+<li>补充解释：具体来说，语言模型预测下一个词时，会输出一个概率分布向量，表示各个词被预测作为下一个词的概率。该机制将这个概率向量与均匀分布向量进行线性插值，得到一个扰动后的概率分布。然后根据这个扰动后的分布随机采样，得到预测词。理论证明了，这种扰动机制满足差分隐私的定义。因为扰动后的概率分布不太依赖于训练数据中的单个数据点，所以对抗性查询的输出也不会泄露单个训练数据点的信息。</li>
+</ol>
+<h1 id="Deduplicating-Training-Data-Mitigates-Privacy-Risks-in-Language-Models"><a href="#Deduplicating-Training-Data-Mitigates-Privacy-Risks-in-Language-Models" class="headerlink" title="Deduplicating Training Data Mitigates Privacy Risks in Language Models"></a>Deduplicating Training Data Mitigates Privacy Risks in Language Models</h1><ol>
+<li>作者、期刊、发表时间：Nikhil Kandpal, Eric Wallace, Colin Raffel. arxiv. 2022年12月</li>
+<li>关键词：无</li>
+<li>研究背景和问题：大规模语言模型容易泄露其训练数据的隐私信息。Carlini等人(2021)提出的模型反转攻击就是利用语言模型生成大量文本,然后利用成员推断方法判断哪些生成序列来自训练数据。本文研究这种攻击的成功与训练数据中序列级重复的关系。</li>
+<li>研究方法：<ol>
+<li>分析重复次数与模型再生训练序列的关系;</li>
+<li>分析重复次数与成员推断方法的检测效果关系;</li>
+<li>直接测试在去重数据上重新训练的模型的隐私风险。</li>
+</ol>
+</li>
+<li>论文结论：<ol>
+<li>模型再生训练序列与序列在训练数据中的重复次数呈超线性关系;</li>
+<li>成员推断方法主要检测出重复多次的序列;</li>
+<li>在去重数据上训练的模型泄露的训练数据更少，成员推断效果较差。</li>
+</ol>
+</li>
+<li>创新与贡献：首次系统研究训练数据重复与语言模型隐私攻击成功率之间的关系,提出训练数据重复是模型反转攻击成功的一个重要原因,训练数据去重可以降低隐私风险。</li>
+<li>我的问题：<ol>
+<li>近似重复的影响如何？本文只研究完全相同序列的重复；</li>
+<li>图像和代码训练数据中重复与隐私攻击的关系需要进一步理解。</li>
+</ol>
+</li>
+<li>是否详细阅读：略读</li>
+</ol>
+<h1 id="ProPILE-Probing-Privacy-Leakage-in-Large-Language-Models"><a href="#ProPILE-Probing-Privacy-Leakage-in-Large-Language-Models" class="headerlink" title="ProPILE: Probing Privacy Leakage in Large Language Models"></a>ProPILE: Probing Privacy Leakage in Large Language Models</h1><ol>
+<li>作者、期刊、发表时间：Siwon Kim, Sangdoo Yun, Hwaran Lee, Martin Gubri, Sungroh Yoon, Seong Joon Oh. arxiv. 2023年7月</li>
+<li>关键词：无</li>
+<li>研究背景和问题：随着大语言模型(LLMs)的快速发展和广泛应用,人们越来越担心这些模型可能会泄露个人身份信息(PII)。这些模型通常使用从网络上大规模抓取的数据进行训练,这些数据可能无意中包含了个人网页、社交媒体、论坛个人信息以及企业内部邮件等中的敏感个人数据。</li>
+<li>研究方法：提出了一个新颖的工具ProPILE,用于探测LLM服务中潜在的PII泄露。ProPILE让数据主体可以根据自己的PII构建提示,来评估LLM泄露PII的可能性。作者演示了在Pile数据集上训练的OPT-1.3B模型上的应用案例。</li>
+<li>论文结论：<ol>
+<li>通过精心设计的提示,可以泄露训练数据中包含的多种类型的PII的很大一部分。</li>
+<li>通过改进提示、获取模型参数以及利用几百个训练数据点,可以显著放大PII泄露程度。</li>
+</ol>
+</li>
+<li>创新与贡献：ProPILE可以让数据主体和LLM服务提供商有效评估自己的PII泄露程度。</li>
+<li>我的问题：是不是应该在训练阶段就去掉涉及身份信息的数据？</li>
+<li>是否详细阅读：之后看一下具体的攻击模型</li>
+</ol>
+<h1 id="Privacy-Preserving-Recommender-Systems-with-Synthetic-Query-Generation-using-Differentially-Private-Large-Language-Models"><a href="#Privacy-Preserving-Recommender-Systems-with-Synthetic-Query-Generation-using-Differentially-Private-Large-Language-Models" class="headerlink" title="Privacy-Preserving Recommender Systems with Synthetic Query Generation using Differentially Private Large Language Models"></a>Privacy-Preserving Recommender Systems with Synthetic Query Generation using Differentially Private Large Language Models</h1><ol>
+<li>作者、期刊、发表时间：ALDO GAEL CARRANZA,  REZSA FARAHANI, NATALIA PONOMAREVA,  ALEX KURAKIN, MATTHEW JAGIELSKI, MILAD NASR. arxiv. 2023年5月</li>
+<li>关键词：large language models, differential privacy, synthetic data generation, recommender systems</li>
+<li>研究背景和问题：推荐系统存在隐私泄露问题</li>
+<li>研究方法：用了基于差分隐私的LLM来做推荐查询。<ol>
+<li>采用基于使用 DP 大语言模型 (LLM) 的合成数据生成框架来开发一种私有文本数据共享方法，用于训练具有查询级隐私的任何下游推荐系统。</li>
+<li>使用 DP 训练方法来微调（或第二阶段预训练）在文档条件查询生成任务上公开预训练的生成 LLM，给定由匹配的查询文档对组成的私人推荐数据集。</li>
+<li>微调时采用差分私有随机梯度下降（DP-SGD）</li>
+</ol>
+</li>
+<li>论文结论：更大的模型可以在相同的隐私级别下提高性能。隐私合成文本生成代表了隐私保护大规模推荐系统发展的重要一步</li>
+<li>创新与贡献：<ol>
+<li>我们提出了一种训练查询级隐私保护推荐系统的新方法。我们的方法涉及使用 DP 微调的 LLM 生成合成查询数据，并使用此私有合成数据来训练下游推荐系统，而无需对标准训练流程进行任何修改。 </li>
+<li>总的来说，我们的方法提出了一种为具有非示例可分解损失的模型获得 DP 保证的新方法，例如大规模多阶段推荐系统中普遍存在的对比损失。 </li>
+<li>通过大量的实验，我们凭经验证实我们的方法生成的合成数据确实是查询级隐私保护的，并且我们证明使用这种私有合成数据训练的下游深度检索模型与标准 DP 训练方法相比具有出色的性能。</li>
+</ol>
+</li>
+<li>我的问题：概括理解一下应该是用LMM做数据生成，然后再用生成的数据训练模型来做推荐。没有什么问题。</li>
+<li>是否详细阅读：否</li>
+</ol>
+<h1 id="The-imperative-for-regulatory-oversight-of-large-language-models-or-generative-AI-in-healthcare"><a href="#The-imperative-for-regulatory-oversight-of-large-language-models-or-generative-AI-in-healthcare" class="headerlink" title="The imperative for regulatory oversight of large language models (or generative AI) in healthcare"></a>The imperative for regulatory oversight of large language models (or generative AI) in healthcare</h1><ol>
+<li>作者、期刊、发表时间：Bertalan Meskó, Eric J. Topol. nature digital medicine. 2023年6月</li>
+<li>关键词：无</li>
+<li>研究背景和问题：近年来LLM如OpenAI的GPT-4和谷歌的Bard等的快速发展,为医疗保健带来了巨大的应用潜力。同时也带来了各种风险,如提供不可靠或错误信息、偏见、数据隐私等。因此亟需建立监管框架,确保LLM的安全和道德使用。</li>
+<li>研究方法：总结了LLM与已监管的其他AI技术的区别,概述了FDA对AI技术的现有监管情况,讨论了LLM在医疗中的应用实例,指出LLM监管面临的挑战,并提出了监管建议。</li>
+<li>论文结论：<ol>
+<li>LLM有别于其他AI技术,需要建立独特的监管类别</li>
+<li>监管应关注可能的未来迭代,不仅包括文本,还包括声音、图像等</li>
+<li>监管应聚焦于开发LLM的公司,而不是每个迭代版本</li>
+</ol>
+</li>
+<li>创新与贡献：深入剖析了LLM的独特特征,系统地讨论了其在医疗保健中的应用与风险,并提出了切实可行的监管建议。</li>
+<li>我的问题：这篇没啥技术内容，没有问题</li>
+<li>是否详细阅读：否</li>
+</ol>
+<h1 id="Just-Fine-tune-Twice-Selective-Differential-Privacy-for-Large-Language-Models"><a href="#Just-Fine-tune-Twice-Selective-Differential-Privacy-for-Large-Language-Models" class="headerlink" title="Just Fine-tune Twice: Selective Differential Privacy for Large Language Models"></a>Just Fine-tune Twice: Selective Differential Privacy for Large Language Models</h1><ol>
+<li>作者、期刊、发表时间：Weiyan Shi, Ryan Shea, Si Chen, Chiyuan Zhang, Ruoxi Jia, Zhou Yu. arxiv. 2022年10月</li>
+<li>关键词：</li>
+<li>研究背景和问题：与隐私保护相关的大语言模型面临泄露隐私信息的风险。然而,应用差分隐私来保护这些模型仍面临模型效用与隐私损失之间的权衡。语言数据中的敏感信息往往比较稀疏,这为选择性地只保护敏感信息提供了可能。</li>
+<li>研究方法：作者提出了“Just Fine-tune Twice”(JFT)方法,它包含两个微调阶段<ol>
+<li>首先用去识别敏感信息的数据微调模型;</li>
+<li>然后用包含敏感信息的原始数据和隐私优化器继续微调模型。</li>
+<li>该方法可以为大型语言模型实现选择性差分隐私。作者还设计了不同级别的隐私检测器,研究它们对结果模型的影响。</li>
+</ol>
+</li>
+<li>论文结论：结果表明,即使在保守的上下文检测器下(30%以上的标记被编辑),JFT仍能取得比简单的差分隐私SGD更好的结果。尽管数据规模小,使用手动筛选的定域数据仍能提高模型效用。加上轻噪声优化器和隐私放大,也能保护未检测到的敏感标记。</li>
+<li>创新与贡献：论文为大型语言模型实现了选择性差分隐私,设计了不同级别的秘密检测器,研究了它们的影响,并解决了未检测到的敏感标记的问题。</li>
+<li>我的问题：其实没看明白两次调优是怎么结合的，看起来是对敏感信息加密，其他信息不加密，然后参与训练调优。</li>
+<li>是否详细阅读：否</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Cooperative Multi-Agent Game Based on Reinforcement Learning</title>
     <url>/2023/10/18/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Cooperative%20Multi-Agent%20Game%20Based%20on%20Reinforcement%20Learning/</url>
     <content><![CDATA[<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><ol>
@@ -87,8 +1264,8 @@
         <category>论文</category>
       </categories>
       <tags>
-        <tag>game theory</tag>
         <tag>审稿意见</tag>
+        <tag>game theory</tag>
         <tag>reinforcement learning</tag>
       </tags>
   </entry>
@@ -592,8 +1769,8 @@ h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\ma
 <p>接下来看通信开销。每个用户需要向平台和所有其他用户发送传感数据$\tilde{\theta_i}$，向平台发送报价$\lambda_i$，由此可得第一阶段的复杂度是$\mathcal{O}(|\Theta_i|\cdot I)$，第二阶段的复杂度是$\mathcal{O}(N)$。与之相反，参考文献12和13中假设用户的效用函数是全局公开的。我们注意到，12和13中考虑的经典 VCG 型机制需要报告携带无穷维信息的整个效用函数，这会产生难以承受的通信开销。</p>
 <h4 id="信念系统和均衡概念"><a href="#信念系统和均衡概念" class="headerlink" title="信念系统和均衡概念"></a>信念系统和均衡概念</h4><p>尽管阶段1上报的传感数据$\tilde\theta_i$并没有出现在阶段2公式4的收益函数中，但报告的传感数据会影响每个用户的评价（由于评价相互依赖的特点），从而影响用户在阶段2的决策。为了描述这样的特点，我们引入了针对每个用户$i$的信念系统$\beta_i(\cdot|\cdot)$。具体来说，在阶段1中给定报告值$\tilde\theta_{-i}=\left\{\tilde\theta_j\right\}_{j\neq i}$的情况下，每个用户$i$选择一个关于真值$\theta_{-i}=\left\{\theta_j\right\}_{j\neq i}$的信念$\beta_i(\theta_{-i}|\tilde\theta_{-i})$，因此，阶段2中每个用户在其传感数据$\theta_i$和其他用户传感数据$\tilde\theta_{-i}$条件下的后验期望收益是：</p>
 <script type="math/tex; mode=display">
-J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{*}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}</script><p>因为我们关注所有用户都说真话的均衡，我们考虑下述真实均衡概念：</p>
-<p>定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{<em>},\lambda^{</em>}(\widetilde{\theta}^{<em>}),\{\beta_{i}^{</em>}\}_{i\in I})$，使得：</p>
+J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{\ast}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}</script><p>因为我们关注所有用户都说真话的均衡，我们考虑下述真实均衡概念：</p>
+<p>定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{\ast},\lambda^{\ast}(\widetilde{\theta}^{\ast}),\{\beta_{i}^{\ast}\}_{i\in I})$，使得：</p>
 <script type="math/tex; mode=display">
 \lambda_i^*(\widetilde{\theta}^*)\in\arg\max_{\lambda_i\in\mathbb{R}^N},J_i^{\beta_i^*}(\lambda_i,\lambda_{-i}^*(\widetilde{\theta}^*)|\theta_i,\widetilde{\theta}_{-i}^*), \tag{7a}</script><script type="math/tex; mode=display">
 \beta_i^*(\theta_{-i}|\tilde{\theta}_{-i})=\mathbb{I}(\theta_{-i}=\tilde{\theta}_{-i}), \tag{7b}</script><p>其中，$\mathbb{I}(X)$是指示函数，当X为真时该函数取值1，当X为假是该函数取值为0。另一方面，$\tilde\theta^\ast$满足：</p>
@@ -609,7 +1786,7 @@ J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\
 <li>玩家：所有用户</li>
 <li>策略空间：对于每个用户$i$都是$\lambda_{i}\in\mathbb{R}_{+}^{N}$</li>
 <li>支付函数：每个用户$i$都是<script type="math/tex; mode=display">
-J_i^{\boldsymbol{\beta}_i^*}\left(\boldsymbol{\lambda}\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)=\bar{U}_i\left(\boldsymbol{x}_i^*(\boldsymbol{\lambda})\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)-\boldsymbol{h}_i\left(\boldsymbol{\lambda},\widetilde{\boldsymbol{\theta}}\right) \tag{10}</script>其中，$x^{<em>}(\lambda)=\{x_{i}^{</em>}(\lambda)\}_{i\in I}$由公式4决定。</li>
+J_i^{\boldsymbol{\beta}_i^*}\left(\boldsymbol{\lambda}\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)=\bar{U}_i\left(\boldsymbol{x}_i^*(\boldsymbol{\lambda})\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)-\boldsymbol{h}_i\left(\boldsymbol{\lambda},\widetilde{\boldsymbol{\theta}}\right) \tag{10}</script>其中，$x^{\ast}(\lambda)=\{x_{i}^{\ast}(\lambda)\}_{i\in I}$由公式4决定。</li>
 </ul>
 <p>上述竞价子博弈包含以下均衡概念$\lambda^\ast$：</p>
 <p>定义3（纳什均衡 NE）：博弈 1 的纳什均衡是满足 (7a) 的策略集$\lambda^\ast$。</p>
@@ -4322,11 +5499,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts8021" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4581" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8021'));
+        var myChart = echarts.init(document.getElementById('echarts4581'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -4382,11 +5559,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts7352" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6722" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7352'));
+        var myChart = echarts.init(document.getElementById('echarts6722'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -4436,11 +5613,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2464" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2945" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2464'));
+        var myChart = echarts.init(document.getElementById('echarts2945'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -10116,11 +11293,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts4230" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4595" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4230'));
+        var myChart = echarts.init(document.getElementById('echarts4595'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -13760,7 +14937,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </li>
 </ol>
 <p>这个看起来复杂，但就是条件说的不清楚而已，总的来说要求是用户输入数字的时候玩猜数字，反之结束游戏，然后输出一下统计结果。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import random</span><br><span class="line">count &#x3D; 0</span><br><span class="line">number &#x3D; []</span><br><span class="line">a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">while a.isdigit():</span><br><span class="line">    b &#x3D; input(&quot;请输入一个整数上限：&quot;)</span><br><span class="line">    secret &#x3D; random.randint(int(a), int(b))</span><br><span class="line">    print(&quot;我有一个&quot;, a, &quot;-&quot;, b, &quot;的秘密数，想要猜出它？请按数字键并回车；如果不想猜了，可按非数字键并回车或直接回车。&quot;)</span><br><span class="line">    inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    number.append(0)</span><br><span class="line">    while inputStr.isdigit():</span><br><span class="line">        guess &#x3D; int(inputStr)</span><br><span class="line">        number[count] +&#x3D; 1</span><br><span class="line">        if guess &lt; secret:</span><br><span class="line">            print(&quot;小了&quot;)</span><br><span class="line">        elif guess &gt; secret:</span><br><span class="line">            print(&quot;大了&quot;)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;Bingo! 你猜对啦！这个数就是&quot;, secret)</span><br><span class="line">            print(&quot;继续玩下一局！&quot;)</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">            break</span><br><span class="line">        inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">print(&quot;再见，下次玩！&quot;)</span><br><span class="line">print(&quot;你一共玩了&quot;, count, &quot;局&quot;)</span><br><span class="line">for i in range(0, count):</span><br><span class="line">    print(&quot;第&quot;, i + 1, &quot;局猜测次数为&quot;, number[i])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">number = []</span><br><span class="line">a = input(<span class="string">"请输入一个整数下限："</span>)</span><br><span class="line"><span class="keyword">while</span> a.isdigit():</span><br><span class="line">    b = input(<span class="string">"请输入一个整数上限："</span>)</span><br><span class="line">    secret = random.randint(int(a), int(b))</span><br><span class="line">    print(<span class="string">"我有一个"</span>, a, <span class="string">"-"</span>, b, <span class="string">"的秘密数，想要猜出它？请按数字键并回车；如果不想猜了，可按非数字键并回车或直接回车。"</span>)</span><br><span class="line">    inputStr = input(<span class="string">"你猜是？"</span>)</span><br><span class="line">    number.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">while</span> inputStr.isdigit():</span><br><span class="line">        guess = int(inputStr)</span><br><span class="line">        number[count] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> guess &lt; secret:</span><br><span class="line">            print(<span class="string">"小了"</span>)</span><br><span class="line">        <span class="keyword">elif</span> guess &gt; secret:</span><br><span class="line">            print(<span class="string">"大了"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Bingo! 你猜对啦！这个数就是"</span>, secret)</span><br><span class="line">            print(<span class="string">"继续玩下一局！"</span>)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        inputStr = input(<span class="string">"你猜是？"</span>)</span><br><span class="line">    a = input(<span class="string">"请输入一个整数下限："</span>)</span><br><span class="line">print(<span class="string">"再见，下次玩！"</span>)</span><br><span class="line">print(<span class="string">"你一共玩了"</span>, count, <span class="string">"局"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count):</span><br><span class="line">    print(<span class="string">"第"</span>, i + <span class="number">1</span>, <span class="string">"局猜测次数为"</span>, number[i])</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>课程笔记</category>
@@ -14113,7 +15290,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <li><p>进主题配置文件进行自己需要的修改，比如调整logo、友情链接、启用公式等等；</p>
 </li>
 <li><p>需要注意的是，这个主题的分类（categories）、标签（tags）等文件和next主题稍微不一样，需要改一下，以分类为例，进入<code>...\source\categories</code>文件夹，可以看到一个<code>index.md</code>文件，打开以后无论里面有什么内容，都彻底改成以下的：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: "categories"</span><br><span class="line">layout: "categories"</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">"---"(这里的双引号是为了正确显示，实际用的时候没有，最后一行的双引号同理)</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-01-30 08:54:26</span><br><span class="line">type: "categories"</span><br><span class="line">layout: "categories"   </span><br><span class="line">"---"</span><br></pre></td></tr></table></figure>
 <p>相应地，其他用到的文件夹里的<code>index.md</code>也这样改。</p>
 </li>
 <li><p>安装好以后进行<code>hexo clean</code>等等操作，就可以看到新主题的博客了，不过可能和我的屏幕尺寸有关，在文章页面中，固定的目录栏有些靠右，以至于目录显示不完整，而浮动的目录栏有些靠左了，会挡住正文，当目录很长时，文章几乎没法看了。这时需要打开主题中对目录栏的配置，<code>\themes\ayer\source-src\css\_partial</code>文件夹中的<code>tocbot.styl</code>文件，第一部分<code>.tocbot</code>的<code>right</code>属性从<code>-28rem</code>改成<code>-25rem</code>，这样固定目录栏就相对偏左一些，能显示完整了；第六部分<code>.is-position-fixed</code>的<code>right</code>属性从<code>6rem</code>改成<code>0</code>，这样浮动目录栏就会贴着右边，从而不挡左边了；</p>
@@ -14121,6 +15298,7 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <li><p>按上面这个操作改完以后发现网页的显示并没有变化，接着打开<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，然后直接搜索<code>-28rem</code>或者<code>tocbot</code>等关键词，找到以后把<code>-28</code>和<code>6</code>改成合适的数值（<code>-25</code>和<code>0</code>），重新部署网站就会发现目录栏变合适了。</p>
 </li>
 <li>经过漫长的使用，忽然发现右边那个目录，在白天模式下，背景是半透明的那种效果，会挡住正文的一些内容，而黑夜模式下背景就透明了，什么也挡不住。经过一番研究，发现想要白天模式也透明背景，就需要修改<code>\themes\ayer\source-src\css\_partial</code>文件夹中的<code>tocbot.styl</code>文件，找<code>.is-position-fixed</code>字段中的<code>background-color</code>，把它的值修改为<code>transparent</code>，接着同样是进<code>\themes\ayer\source\dist</code>文件夹中的<code>main.css</code>文件，先定位到刚才<code>tocbot</code>那里，然后往后很近的位置能看到<code>is-position-fixed</code>字段，修改其中的<code>background</code>的值为<code>transparent</code>，这里不能直接全文检索<code>is-position-fixed</code>，因为有好多这个属性，必须精确修改<code>tocbot</code>的这个属性。保存后重新部署就可以看到效果了。</li>
+<li>又是漫长的使用，发现hexo在渲染公式的时候，会把一些符号识别成html标记，然后就没法正确渲染，网上查到的方法都是针对下划线、斜体等，解决方法是安装mathjax并修改转义符配置，但我出问题的是大于号和小于号，查到的方法都没啥用，最终找到一个方法，是在写公式的时候，不直接用尖括号来表示大于小于，而是用tex符号，即<code>\lt</code>表示小于，<code>\gt</code>表示大于，这样就不会出问题了，也不影响本地markdown的渲染。</li>
 </ol>
 <h2 id="GitHub风格日历、标签云、分类雷达图的配置"><a href="#GitHub风格日历、标签云、分类雷达图的配置" class="headerlink" title="GitHub风格日历、标签云、分类雷达图的配置"></a>GitHub风格日历、标签云、分类雷达图的配置</h2><p>由于next主题的css文件是swig格式，而网上查到的GitHub日历等都是ejs格式的，因此在用next主题时没能成功配置好日历等；改用Ayer主题后，该主题就是ejs格式的，因此现在添加了日历等内容。这一部分所有涉及到的下载链接都是在别人网站里复制的，如果链接失效可以直接在网上搜文件名来下载，也可以在我的GitHub项目中的主题文件里找已经修改和配置好的相关内容。</p>
 <h3 id="需要下载配置的文件"><a href="#需要下载配置的文件" class="headerlink" title="需要下载配置的文件"></a>需要下载配置的文件</h3><ol>
@@ -14313,6 +15491,12 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 </ol>
 <p>这个方法做出来的网页，是把添加的内容浏览器缓存了，也就是说，如果其他人打开我的博客添加了自己的内容，那么也只有添加者能看到，同样我添加的内容别人也看不到，甚至换个浏览器或者清缓存也会丢失内容。而且也没找到方法把它嵌入到我的主题里，这使得它和其他页面相比，非常不统一。此外，如果需要从这个待办页面返回博客，还得在代码里添加跳转博客地址的链接，例如<code>&lt;h2 bref=链接&gt;返回博客&lt;/h2&gt;</code>。</p>
 <p>鉴于这个网页外观和操作方式我都不太满意，也没找到更合适的方法，而且日常大多数时候会用跨平台软件来记录待办事项，最终决定去掉这个功能了。</p>
+<h2 id="添加相册"><a href="#添加相册" class="headerlink" title="添加相册"></a>添加相册</h2><ol>
+<li>输入<code>hexo new page photos</code>新建相册的页面，并注意在主题配置文件里添加对应的侧边栏；</li>
+<li>进入<code>photos</code>文件夹，修改其中的<code>index.md</code>如下：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [["imgurl", "imgcaption"], ["imgurl", "imgcaption"]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>然后把要添加的图片放到<code>photos</code>文件夹中，并把<code>index.md</code>文件夹中的<code>imgurl</code>和<code>imgcaption</code>修改成图像的路径和标题，路径要注意带上级文件夹，和后缀名，例如我的路径就是<code>photos/ff14-伊修加德.png</code>。</li>
+<li>部署后就能看到照片了，之后再加新的照片就也是复制进来，然后打开<code>index.md</code>文件，在<code>albums</code>的方括号里添加新的链接和标题。</li>
+</ol>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
 <p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
 <p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>

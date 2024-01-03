@@ -197,8 +197,8 @@ h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\ma
 <p>接下来看通信开销。每个用户需要向平台和所有其他用户发送传感数据$\tilde{\theta_i}$，向平台发送报价$\lambda_i$，由此可得第一阶段的复杂度是$\mathcal{O}(|\Theta_i|\cdot I)$，第二阶段的复杂度是$\mathcal{O}(N)$。与之相反，参考文献12和13中假设用户的效用函数是全局公开的。我们注意到，12和13中考虑的经典 VCG 型机制需要报告携带无穷维信息的整个效用函数，这会产生难以承受的通信开销。</p>
 <h4 id="信念系统和均衡概念"><a href="#信念系统和均衡概念" class="headerlink" title="信念系统和均衡概念"></a>信念系统和均衡概念</h4><p>尽管阶段1上报的传感数据$\tilde\theta_i$并没有出现在阶段2公式4的收益函数中，但报告的传感数据会影响每个用户的评价（由于评价相互依赖的特点），从而影响用户在阶段2的决策。为了描述这样的特点，我们引入了针对每个用户$i$的信念系统$\beta_i(\cdot|\cdot)$。具体来说，在阶段1中给定报告值$\tilde\theta_{-i}=\left\{\tilde\theta_j\right\}_{j\neq i}$的情况下，每个用户$i$选择一个关于真值$\theta_{-i}=\left\{\theta_j\right\}_{j\neq i}$的信念$\beta_i(\theta_{-i}|\tilde\theta_{-i})$，因此，阶段2中每个用户在其传感数据$\theta_i$和其他用户传感数据$\tilde\theta_{-i}$条件下的后验期望收益是：</p>
 <script type="math/tex; mode=display">
-J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{*}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}</script><p>因为我们关注所有用户都说真话的均衡，我们考虑下述真实均衡概念：</p>
-<p>定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{<em>},\lambda^{</em>}(\widetilde{\theta}^{<em>}),\{\beta_{i}^{</em>}\}_{i\in I})$，使得：</p>
+J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\in\Theta_{-i}}\bar{U}_{i}(x_{i}^{\ast}(\lambda)|\theta)\beta_{i}(\theta_{-i}|\widetilde{\theta}_{-i})-h_{i}(\lambda,\widetilde{\theta}). \tag{6}</script><p>因为我们关注所有用户都说真话的均衡，我们考虑下述真实均衡概念：</p>
+<p>定义2：真实完美贝叶斯均衡（PBE）。一个真实PBE是一个三元组$(\widetilde{\theta}^{\ast},\lambda^{\ast}(\widetilde{\theta}^{\ast}),\{\beta_{i}^{\ast}\}_{i\in I})$，使得：</p>
 <script type="math/tex; mode=display">
 \lambda_i^*(\widetilde{\theta}^*)\in\arg\max_{\lambda_i\in\mathbb{R}^N},J_i^{\beta_i^*}(\lambda_i,\lambda_{-i}^*(\widetilde{\theta}^*)|\theta_i,\widetilde{\theta}_{-i}^*), \tag{7a}</script><script type="math/tex; mode=display">
 \beta_i^*(\theta_{-i}|\tilde{\theta}_{-i})=\mathbb{I}(\theta_{-i}=\tilde{\theta}_{-i}), \tag{7b}</script><p>其中，$\mathbb{I}(X)$是指示函数，当X为真时该函数取值1，当X为假是该函数取值为0。另一方面，$\tilde\theta^\ast$满足：</p>
@@ -214,7 +214,7 @@ J_{i}^{\beta_{i}}(\lambda|\theta_{i},\widetilde{\theta}_{-i})=\sum_{\theta_{-i}\
 <li>玩家：所有用户</li>
 <li>策略空间：对于每个用户$i$都是$\lambda_{i}\in\mathbb{R}_{+}^{N}$</li>
 <li>支付函数：每个用户$i$都是<script type="math/tex; mode=display">
-J_i^{\boldsymbol{\beta}_i^*}\left(\boldsymbol{\lambda}\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)=\bar{U}_i\left(\boldsymbol{x}_i^*(\boldsymbol{\lambda})\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)-\boldsymbol{h}_i\left(\boldsymbol{\lambda},\widetilde{\boldsymbol{\theta}}\right) \tag{10}</script>其中，$x^{<em>}(\lambda)=\{x_{i}^{</em>}(\lambda)\}_{i\in I}$由公式4决定。</li>
+J_i^{\boldsymbol{\beta}_i^*}\left(\boldsymbol{\lambda}\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)=\bar{U}_i\left(\boldsymbol{x}_i^*(\boldsymbol{\lambda})\Big|\boldsymbol{\theta}_i,\widetilde{\boldsymbol{\theta}}_{-\boldsymbol{i}}\right)-\boldsymbol{h}_i\left(\boldsymbol{\lambda},\widetilde{\boldsymbol{\theta}}\right) \tag{10}</script>其中，$x^{\ast}(\lambda)=\{x_{i}^{\ast}(\lambda)\}_{i\in I}$由公式4决定。</li>
 </ul>
 <p>上述竞价子博弈包含以下均衡概念$\lambda^\ast$：</p>
 <p>定义3（纳什均衡 NE）：博弈 1 的纳什均衡是满足 (7a) 的策略集$\lambda^\ast$。</p>
@@ -414,7 +414,7 @@ J_i^{\beta_i^*}\left(\lambda^*(\theta) \mid \theta\right) \geq 0, \forall i \in 
     <ul>
       <li>
         Copyrights &copy;
-        2020-2023
+        2020-2024
         <i class="ri-heart-fill heart_icon"></i> Kun Li
       </li>
     </ul>
@@ -487,6 +487,10 @@ J_i^{\beta_i^*}\left(\lambda^*(\theta) \mid \theta\right) \geq 0, \forall i \in 
     
     <li class="nav-item">
       <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photos">照片</a>
     </li>
     
     <li class="nav-item">

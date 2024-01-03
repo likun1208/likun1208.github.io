@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">819</span>
+            <span class="post-count">774</span>
         </span>
     </span>
 
@@ -124,7 +124,7 @@
 </li>
 </ol>
 <p>这个看起来复杂，但就是条件说的不清楚而已，总的来说要求是用户输入数字的时候玩猜数字，反之结束游戏，然后输出一下统计结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">count &#x3D; 0</span><br><span class="line">number &#x3D; []</span><br><span class="line">a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">while a.isdigit():</span><br><span class="line">    b &#x3D; input(&quot;请输入一个整数上限：&quot;)</span><br><span class="line">    secret &#x3D; random.randint(int(a), int(b))</span><br><span class="line">    print(&quot;我有一个&quot;, a, &quot;-&quot;, b, &quot;的秘密数，想要猜出它？请按数字键并回车；如果不想猜了，可按非数字键并回车或直接回车。&quot;)</span><br><span class="line">    inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    number.append(0)</span><br><span class="line">    while inputStr.isdigit():</span><br><span class="line">        guess &#x3D; int(inputStr)</span><br><span class="line">        number[count] +&#x3D; 1</span><br><span class="line">        if guess &lt; secret:</span><br><span class="line">            print(&quot;小了&quot;)</span><br><span class="line">        elif guess &gt; secret:</span><br><span class="line">            print(&quot;大了&quot;)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;Bingo! 你猜对啦！这个数就是&quot;, secret)</span><br><span class="line">            print(&quot;继续玩下一局！&quot;)</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">            break</span><br><span class="line">        inputStr &#x3D; input(&quot;你猜是？&quot;)</span><br><span class="line">    a &#x3D; input(&quot;请输入一个整数下限：&quot;)</span><br><span class="line">print(&quot;再见，下次玩！&quot;)</span><br><span class="line">print(&quot;你一共玩了&quot;, count, &quot;局&quot;)</span><br><span class="line">for i in range(0, count):</span><br><span class="line">    print(&quot;第&quot;, i + 1, &quot;局猜测次数为&quot;, number[i])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">number = []</span><br><span class="line">a = input(<span class="string">"请输入一个整数下限："</span>)</span><br><span class="line"><span class="keyword">while</span> a.isdigit():</span><br><span class="line">    b = input(<span class="string">"请输入一个整数上限："</span>)</span><br><span class="line">    secret = random.randint(int(a), int(b))</span><br><span class="line">    print(<span class="string">"我有一个"</span>, a, <span class="string">"-"</span>, b, <span class="string">"的秘密数，想要猜出它？请按数字键并回车；如果不想猜了，可按非数字键并回车或直接回车。"</span>)</span><br><span class="line">    inputStr = input(<span class="string">"你猜是？"</span>)</span><br><span class="line">    number.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">while</span> inputStr.isdigit():</span><br><span class="line">        guess = int(inputStr)</span><br><span class="line">        number[count] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> guess &lt; secret:</span><br><span class="line">            print(<span class="string">"小了"</span>)</span><br><span class="line">        <span class="keyword">elif</span> guess &gt; secret:</span><br><span class="line">            print(<span class="string">"大了"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Bingo! 你猜对啦！这个数就是"</span>, secret)</span><br><span class="line">            print(<span class="string">"继续玩下一局！"</span>)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        inputStr = input(<span class="string">"你猜是？"</span>)</span><br><span class="line">    a = input(<span class="string">"请输入一个整数下限："</span>)</span><br><span class="line">print(<span class="string">"再见，下次玩！"</span>)</span><br><span class="line">print(<span class="string">"你一共玩了"</span>, count, <span class="string">"局"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count):</span><br><span class="line">    print(<span class="string">"第"</span>, i + <span class="number">1</span>, <span class="string">"局猜测次数为"</span>, number[i])</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
@@ -218,7 +218,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2020-2023
+        2020-2024
         <i class="ri-heart-fill heart_icon"></i> Kun Li
       </li>
     </ul>
@@ -291,6 +291,10 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photos">照片</a>
     </li>
     
     <li class="nav-item">

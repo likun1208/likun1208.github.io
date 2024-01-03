@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/matery.css">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="LLM+Privacy的几篇survey" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    论文记录-LLM+Privacy Survey总结 |  左边
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文记录-LLM+Privacy Survey总结"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文记录-LLM+Privacy Survey总结
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/22/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-LLM+Privacy%20Survey%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2023-12-22T06:25:00.000Z" itemprop="datePublished">2023-12-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">7.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">27 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="LLM-Privacy-Survey总结"><a href="#LLM-Privacy-Survey总结" class="headerlink" title="LLM+Privacy Survey总结"></a>LLM+Privacy Survey总结</h1><h2 id="1-A-Survey-on-Large-Language-Model-LLM-Security-and-Privacy-The-Good-the-Bad-and-the-Ugly"><a href="#1-A-Survey-on-Large-Language-Model-LLM-Security-and-Privacy-The-Good-the-Bad-and-the-Ugly" class="headerlink" title="1 - A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly"></a>1 - A Survey on Large Language Model (LLM) Security and Privacy: The Good, the Bad, and the Ugly</h2><p>Yifan Yao, Jinhao Duan, Kaidi Xu, Yuanfang Cai, Eric Sun and Yue Zhang</p>
+<ol>
+<li>这篇survey探讨的是LLM对安全与隐私的影响，分别从以下三方面讨论：<ol>
+<li>Good：利用LLM来解决一些安全隐私问题，例如用LLM查代码漏洞；</li>
+<li>Bad：利用LLM来完成攻击，例如社工；</li>
+<li>Ugly：探讨LLM的漏洞和防御，这部分和我们要关注的隐私推断相关，因此接下来只看这部分。</li>
+</ol>
+</li>
+<li>对几个LLM模型的对比方面，这篇论文列了<code>Date Provider</code>、<code>Open-Source</code>、<code>Params</code>和<code>Tunability</code>这四方面，对比了<code>gpt-4,gpt-3.5-turbo,gpt-3,cohere-medium,cohere-large,cohere-xlarge,BERT,T5,PaLM,LLaMA,CTRL,Dolly 2.0</code>这几个模型，没有很详细介绍。我觉得我们可以加上谷歌的<code>claude,bard,gemini</code>和一些国产模型。</li>
+<li>论文的图表都挺好，有参考价值</li>
+</ol>
+<h3 id="LLM的漏洞和威胁"><a href="#LLM的漏洞和威胁" class="headerlink" title="LLM的漏洞和威胁"></a>LLM的漏洞和威胁</h3><h4 id="AI模型固有漏洞"><a href="#AI模型固有漏洞" class="headerlink" title="AI模型固有漏洞"></a>AI模型固有漏洞</h4><ol>
+<li>对抗性攻击：用于故意操纵或欺骗机器学习模型的技术和策略<ol>
+<li>文本下毒：向训练数据集中注入恶意数据来影响训练过程</li>
+<li>后门攻击：恶意操纵训练数据和模型处理，从而创建一个漏洞，攻击者可以将隐藏的后门嵌入到模型中</li>
+</ol>
+</li>
+<li>推理攻击：攻击者试图通过对模型进行特定查询或观察来获取有关机器学习模型或其训练数据的敏感信息或见解<ol>
+<li>属性推理：攻击者试图通过分析机器学习模型的行为或响应来推断个人或实体的敏感或个人信息</li>
+<li>成员推理：在给定对模型和特定数据记录的白/黑盒访问的情况下，确定数据记录是否是模型训练数据集的一部分</li>
+</ol>
+</li>
+<li>提取攻击：攻击者试图从机器学习模型或其相关数据中提取敏感信息或见解。提取攻击和推理攻击有相似之处，但具体重点和目标不同。提取攻击旨在直接获取特定资源（例如模型梯度、训练数据）或机密信息。推理攻击通常通过观察模型的响应或行为来获取有关模型或数据特征的知识或见解。</li>
+<li>偏见与不公平：模型表现出偏见结果或歧视行为的现象</li>
+<li>指令调整攻击：指令调优，也称为基于指令的微调，是一种机器学习技术，用于通过在微调过程中提供显式指令或示例来训练和调整特定任务的语言模型。在 LLM 中，指令调优攻击是指针对指令调优 LLM 的一类攻击或操纵。这些攻击旨在利用 LLM 中的漏洞或限制，这些漏洞或限制已通过特定任务的特定指令或示例进行了微调。<ol>
+<li>越狱：绕过安全功能，以响应其他受限或不安全的问题，解锁通常受安全协议限制的功能</li>
+<li>提示词注入：操纵 LLM 行为以引发意外且可能有害的响应的方法。该技术涉及以绕过模型的保护措施或触发不需要的输出的方式制作输入提示。</li>
+<li>这两个的区别是什么？我查了一些资料显示这俩是一回事。</li>
+</ol>
+</li>
+</ol>
+<h4 id="非AI模型固有漏洞"><a href="#非AI模型固有漏洞" class="headerlink" title="非AI模型固有漏洞"></a>非AI模型固有漏洞</h4><p>包括LLM可能遇到的外部威胁和新漏洞（在传统人工智能模型中尚未观察到或调查过），可能与人工智能模型的内部机制没有复杂的联系，但它们可能会带来重大风险，涉及系统级漏洞（例如远程代码执行）。</p>
+<ol>
+<li>远程代码执行（RCE）：针对软件应用程序、Web 服务或服务器中的漏洞来远程执行任意代码。虽然 RCE 攻击通常不适用于 LLM，但如果 LLM 集成到 Web 服务中并且该服务的底层基础设施或代码中存在 RCE 漏洞，它可能会导致LLM环境受到损害。</li>
+<li>边信道攻击（SCA）：虽然 LLM 本身通常不会通过传统的侧信道（例如功耗或电磁辐射）泄漏信息，但在实际部署场景中，它们可能容易受到某些侧信道攻击。</li>
+<li>Insure Plugins：用于LLM的第三方插件本身的安全问题。</li>
+</ol>
+<h3 id="LLM的防御"><a href="#LLM的防御" class="headerlink" title="LLM的防御"></a>LLM的防御</h3><p>本节重点关注训练阶段实施的方法，例如优化和训练语料库，以及推理阶段使用的方法，包括提示的预处理和生成的输出的后处理。</p>
+<ol>
+<li>训练阶段的防御策略：暂略</li>
+<li>推断阶段的防御策略：测试时防御包括一系列策略，包括预处理提示和指令以过滤或修改输入，检测可能表示滥用或有问题的查询的异常事件，以及后处理生成的响应以确保它们遵守安全和伦理指南。<ol>
+<li>指令处理（预处理）：指令预处理对用户发送的指令进行转换，以破坏潜在的对抗性上下文或恶意意图。它发挥着至关重要的作用，因为它能阻止大多数恶意使用，并防止大语言模型接收可疑指令。一般来说，指令预处理方法可分为指令操作 [228、212、130、109、297]、净化 [152] 和防御演示 [158、177、282]。Jain 等人[109] 和 Kirchenbauer 等人[130] 评估了多种针对越狱攻击的基线预处理方法，包括重授权和解析。Li 等人[152]提出通过先屏蔽输入令牌，然后用其他大语言模型预测被屏蔽的令牌来净化指令。预测出的标记将作为纯化后的指令。Wei 等人[282]和 Mo 等人[177]证明，在指令中插入预定义的防御演示可有效防御大语言模型的越狱攻击。</li>
+<li>恶意检测（处理中）：恶意检测提供了关于给定指令的大语言模型中间结果（如神经元激活）的深入检查，对恶意使用更敏感、更准确、更具体。Sun 等人[247]提出利用后向概率检测后向指令。Xi 等人[291]从掩码敏感性的角度区分了正常指令和中毒指令。Shao 等人[228]根据文本相关性识别可疑词语。Wang 等人[279]根据多代之间的语义一致性来检测对抗性实例，Duan 等人[65]在大语言模型的不确定性量化方面对此进行了探索。除了大语言模型的内在属性外，也有研究利用语言统计属性的工作，如检测离群词[202]。</li>
+<li>生成处理（处理后）：生成后处理指的是检查生成答案的属性（如有害性）并在必要时进行修改，这是向用户提供回复前的最后一步。Chen 等人[33]建议通过与多个候选模型进行比较来减轻生成的毒性。Helbling 等人[96]结合了单个大语言模型来识别生成答案的有害性，这与 Xiong 等人[296]和 Kadavath 等人[121]的想法相似，他们揭示了可以提示大语言模型回答有关生成回复的保密性。</li>
+</ol>
+</li>
+</ol>
+<p>对于 LLM 训练的防御，目前很少有研究来检验模型架构对 LLM 安全性的影响，这可能是由于与训练或微调大型语言模型相关的计算成本很高。我们观察到，安全指令调整是一个相对较新的发展，值得进一步研究和关注。</p>
+<p>说明：这里关注的并非推断过程中的隐私泄露，而是推断过程对大模型的攻击，与我们要讨论的没有关系。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><ol>
+<li>已有大模型的survey侧重点各有不同（例如，大语言模型的演变和分类[30, 326, 288, 89, 290, 23]、软件工程[75, 101]和医学[255, 43]）。</li>
+<li>本文的主要重点是大语言模型的安全和隐私方面。<ol>
+<li>Peter J. Caven [29]专门探讨了大语言模型（尤其是 ChatGPT）如何通过融合技术和社会方面来改变当前的网络安全格局。他们的重点更倾向于社会方面。</li>
+<li>Muna 等人[5]和 Marshall 等人[171]讨论了 ChatGPT 对网络安全的影响，强调了它的实际应用（如代码安全、恶意软件检测）。</li>
+<li>Dhoni 等人[61]展示了大语言模型如何协助安全分析师针对网络威胁制定安全解决方案。不过，他们的工作并未广泛涉及大语言模型可能带来的潜在网络安全威胁。</li>
+<li>一些调查（如 [88, 58, 229, 49, 59, 210, 222, 223, 7]）强调了针对大语言模型的威胁和攻击。与我们的工作相比，它们没有用那么多的篇幅讨论大语言模型可能存在的漏洞。相反，他们的主要关注点在于安全应用领域，因为他们深入研究了利用大语言模型发动网络攻击的问题。</li>
+<li>Attia Qammar 等人[201]和 Maximilian 等人[180]讨论了网络犯罪分子利用的漏洞，特别关注与大语言模型相关的风险。他们的著作强调需要制定战略和措施来减少这些威胁和漏洞。</li>
+<li>李浩然等人[154]分析了当前大语言模型上的隐私问题，根据对手的能力对其进行了分类，并探讨了现有的防御策略。</li>
+<li>Glorin Sebastian[224]探讨了如何应用已有的隐私增强技术（如差分隐私[68]、联合学习[317]和数据最小化[199]）来保护大语言模型的隐私。</li>
+<li>Smith 等人[237]也讨论了大语言模型的隐私风险。</li>
+</ol>
+</li>
+<li>我们的研究全面考察了大语言模型的安全性和隐私性，从三个方面对大语言模型的文献进行了广泛的回顾：有益的安全应用（如漏洞检测、安全代码生成）、不利的影响（如网络钓鱼攻击、社会工程学）和漏洞（如越狱攻击、提示攻击），以及相应的防御措施。</li>
+</ol>
+<h2 id="2-Privacy-in-Large-Language-Models-Attacks-Defenses-and-Future-Directions"><a href="#2-Privacy-in-Large-Language-Models-Attacks-Defenses-and-Future-Directions" class="headerlink" title="2 - Privacy in Large Language Models: Attacks, Defenses and Future Directions"></a>2 - Privacy in Large Language Models: Attacks, Defenses and Future Directions</h2><p>Haoran Li, Yulin Chen, Jinglong Luo, Yan Kang, Xiaojin Zhang, Qi Hu, Chunkit Chan, Yangqiu Song</p>
+<ol>
+<li>从互联网上提取的自由格式文本存在数据质量差和无意中泄露个人信息的问题。例如，与模型的简单交互可能会导致个人身份信息 (PII) 的意外传播（有参考文献）。</li>
+<li>将不同的应用程序整合到LLM中是一种日益增长的趋势，旨在增强其知识基础能力。这些集成使LLM能够有效地解决数学问题（例如 ChatGPT Wolfram Alpha）、读取格式化文件（例如 ChatPDF）以及使用搜索引擎（例如 New Bing）对查询提供响应。当LLM与搜索引擎等外部工具结合使用时，会出现额外的特定领域隐私和安全漏洞。</li>
+<li>本文：<ol>
+<li>与已有survey相比，提供了更全面、更系统的分析。我们超越了以往的研究，纳入了大语言模型的最新进展。</li>
+<li>研究了保护用户隐私的新技术和策略，例如差分隐私、安全多方计算和联邦学习，目的是深入了解它们的有效性和局限性。</li>
+<li>讨论了未来未研究的隐私漏洞以及解决该问题的潜在补救措施。</li>
+</ol>
+</li>
+<li>对LLM的介绍：从transformer说起，没具体介绍和对比已有的模型。</li>
+<li>对Privacy的介绍：介绍了隐私的概念和保护隐私的重要性，介绍了DP和SMPC</li>
+<li>LLM中的隐私问题：<ol>
+<li>训练数据隐私：如果训练数据包含个人或敏感信息，则存在通过模型响应无意中暴露该信息的风险。</li>
+<li>推断数据隐私：在为下游任务部署经过训练的语言模型后，用户输入和查询通常会被记录并存储一段时间。对于敏感域，这些数据可以包括个人信息、私人对话和潜在的敏感详细信息。</li>
+<li>再识别：即使用户信息被匿名化，仍然存在被重新识别的风险。通过结合来自多次交互的看似无害的信息，有可能识别个人或提取本应隐藏的个人详细信息。</li>
+</ol>
+</li>
+</ol>
+<h3 id="隐私攻击"><a href="#隐私攻击" class="headerlink" title="隐私攻击"></a>隐私攻击</h3><h4 id="后门攻击"><a href="#后门攻击" class="headerlink" title="后门攻击"></a>后门攻击</h4><p>数据中毒是指仅操纵一部分训练数据的较弱攻击。这种操纵的目的是在模型的训练过程中引入偏见或误导性信息。相反，后门攻击涉及插入或修改特定的输入模式，从而触发模型行为不当或产生目标输出。此外，如果对手可以操纵LLM的部分训练语料库，它可能会通过数据中毒向受害者模型注入后门。</p>
+<h4 id="提示词注入"><a href="#提示词注入" class="headerlink" title="提示词注入"></a>提示词注入</h4><p>概括起来就是恶意提示词，包括越狱等，和前一节与后一节都有共通性。</p>
+<h4 id="训练数据提取"><a href="#训练数据提取" class="headerlink" title="训练数据提取"></a>训练数据提取</h4><p>包括PII提取、越狱、对抗性提示词等。</p>
+<h4 id="成员推理"><a href="#成员推理" class="headerlink" title="成员推理"></a>成员推理</h4><p>判断给定样本是否在训练数据中。列举了一些涉及成员推理的论文。</p>
+<h4 id="额外信息攻击"><a href="#额外信息攻击" class="headerlink" title="额外信息攻击"></a>额外信息攻击</h4><p>是针对向量表示和梯度的攻击，主要是在联邦学习的场景出现，包括：</p>
+<ol>
+<li>属性推理攻击：从嵌入推测数据集的敏感属性</li>
+<li>嵌入反转攻击：从给定的嵌入恢复原始数据</li>
+<li>梯度泄露：在可以访问其相应模型梯度的情况下恢复输入文本</li>
+</ol>
+<h4 id="其他攻击"><a href="#其他攻击" class="headerlink" title="其他攻击"></a>其他攻击</h4><p>以下几类攻击的研究尚不充分。</p>
+<ol>
+<li>提示词提取攻击：看内容就是提示词注入，不过提到了一个论文是prompt extraction attacks，可能和我们要总结的有关系。</li>
+<li>对抗性攻击：利用模型对原始输入的小扰动的不稳定性。</li>
+<li>侧信道攻击：只有一篇论文，和前面那个survey一样，没人研究这个。</li>
+<li>解码算法窃取：窃取超参数解码。</li>
+</ol>
+<h3 id="隐私防御"><a href="#隐私防御" class="headerlink" title="隐私防御"></a>隐私防御</h3><h4 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h4><ol>
+<li>基于DP的预训练：基于DP的预训练可以进一步增强LM对随机噪声扰动的鲁棒性</li>
+<li>基于DP的微调：用公开数据预训练，再用敏感数据结合DP来微调</li>
+<li>基于DP的Prompt调优：由于模型规模庞大，参数高效的调优方法（例如提示调优）被广泛采用来调优各种下游任务的模型</li>
+<li>基于DP的合成文本生成：生成式 LLM 自然可以通过基于采样的解码算法生成多个响应。对于 DP 调整的 LLM，从 LLM 中采样文本满足后处理定理并保留相同的隐私预算</li>
+<li>这里3和4应该算我们的总结范畴，不过也还需要再探讨推断的范围。</li>
+</ol>
+<p>需要补充一下，Prompt调优其实也算微调fine tune，查到<a href="https://zhuanlan.zhihu.com/p/620618701" target="_blank" rel="noopener">一篇文章</a>介绍三种调整方式的区别，简要概括如下：</p>
+<ol>
+<li>Fine-tuning是一种在自然语言处理（NLP）中使用的技术，用于将预训练的语言模型适应于特定任务或领域。Fine-tuning的基本思想是采用已经在大量文本上进行训练的预训练语言模型，然后在小规模的任务特定文本上继续训练它。</li>
+<li>参数高效的fine-tuning，简称PEFT，旨在在尽可能减少所需的参数和计算资源的情况下，实现对预训练语言模型的有效微调。它是自然语言处理（NLP）中一组用于将预训练语言模型适应特定任务的方法，其所需参数和计算资源比传统的fine-tuning方法更少。例如知识蒸馏。</li>
+<li>prompt-tuning是一种更近期的精调预训练语言模型的方法，重点是调整输入提示（input prompt）而非修改模型参数。这意味着预训练模型保持不变，只有输入提示被修改以适应下游的任务。通过设计和优化一组提示，可以使预训练模型执行特定任务。</li>
+<li>prompt-tuning和传统的fine-tuning的主要区别在于预训练模型被修改的程度。fine-tuning修改模型的权重，而提示调整只修改模型的输入。因此，prompt-tuning调整比精调的计算成本低，需要的资源和训练时间也更少。此外，prompt-tuning比精调更灵活，因为它允许创建特定任务的提示，可以适应各种任务。</li>
+<li>我们在后续的研究中是否重点放在prompt tuning而非fine tuning也还需要再斟酌。</li>
+</ol>
+<h4 id="安全多方"><a href="#安全多方" class="headerlink" title="安全多方"></a>安全多方</h4><p>SMPC主要用于LLM的推理阶段，以保护模型参数和推理数据。然而，保护 LLM 隐私的一个主要挑战在于非线性操作所带来的限制，例如 Softmax、GeLU、LayerNorm 等，这些操作与 SMPC 不兼容。为了解决这个问题，出现了两种技术方法：模型结构优化和SMPC协议优化。</p>
+<ol>
+<li>模型结构优化：旨在通过利用LLM的鲁棒性并修改其结构来提高推理效率，直接点说就是替换掉那几个非线性运算。</li>
+<li>SMPC协议优化：指利用先进的SMPC协议来提高LLM隐私保护推理的效率，同时保持原有的模型结构，也就是针对非线性运算设计SMPC协议，提到的方法有混淆电路、FSS、分段多项式拟合等。</li>
+</ol>
+<h4 id="联邦学习"><a href="#联邦学习" class="headerlink" title="联邦学习"></a>联邦学习</h4><p>使多方能够协作训练或微调其LLM，而无需共享参与方拥有的私有数据。和推理阶段没什么关系。</p>
+<p>采用任何隐私保护的 FL 算法在半诚实的数据推理攻击下存在泄露数据隐私的风险，半诚实对手遵循联邦学习协议，但可以根据观察到的信息推断参与方的隐私数据，而恶意对手可能在联邦学习过程中恶意更新中间训练结果或模型架构，以提取参与方的隐私信息。所以大部分FL会结合DP等隐私方案。</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>前面几节都是通用的防御方式，本节介绍针对某一具体攻击的防御手段，包括针对后门攻击和数据提取攻击的。</p>
+<h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><h4 id="当前局限"><a href="#当前局限" class="headerlink" title="当前局限"></a>当前局限</h4><ol>
+<li>隐私攻击不切实际：很多攻击在现实里没动机，例如不会有访问权限、只在有限的用例中能有作用等，一些数据集的分布假设也不现实。</li>
+<li>DP在LLM的局限性：DP是现阶段的主流隐私方案，但是有以下问题：<ol>
+<li>理论上的最坏情况边界。根据定义，基于差异隐私的法学硕士假设有一个强大的对手可以操纵整个训练数据。隐私参数 (ϵ, δ) 提供最坏情况下的隐私泄露边界。然而，在实际场景中，并不能保证对手完全控制法学硕士的训练数据。因此，实际攻击与根据差分隐私进行隐私泄露的最坏情况概率分析之间仍然存在巨大差距。</li>
+<li>实用性下降。 DP 调整通常用于相对较小规模的 LM，用于特别简单的下游数据集。尽管一些作品声称，通过仔细的超参数调整，基于 DP 的 LM 可以在某些下游分类任务上实现与不使用 DP 的正常调整类似的性能。然而，当下游任务变得复杂时，大多数工作仍然表现出明显的效用恶化。效用的降低削弱了基于DP的微调的动机。</li>
+</ol>
+</li>
+</ol>
+<h4 id="未来方向-1"><a href="#未来方向-1" class="headerlink" title="未来方向"></a>未来方向</h4><ol>
+<li>针对提示词注入</li>
+<li>SMPC的提升：模型结构优化（MSO）和SMPC协议优化（SPO）。 MSO 和 SPO 各自具有独特的优势。 MSO 通常在效率方面表现出色，但可能面临隐私保护推理和模型多功能性方面的限制。另一方面，SPO专注于优化SMPC协议，可以提高效率。不幸的是，SPO 可能需要修改模型结构，并且现有的预训练权重无法重复使用。挑战在于找到一种方法来整合 MSO 和 SPO 的优势，旨在为LLM设计一种高效、高性能、高度通用的隐私保护推理算法。克服这一挑战仍然是一项持续的研究工作。</li>
+<li>隐私与人类感知的一致性：多数隐私研究工作都集中在具有预定义隐私表述的简单情况，这些简单的表述利用现有工具将所有提取的预定义命名实体视为敏感信息，然后模糊或替换。这样的做法一方面会导致涉及这些信息的推断精确性下降，另一方面并不满足广义的隐私。</li>
+<li>实证隐私评估：简而言之除了DP的最差边界，没其他隐私衡量指标，一些工作开始使用经验隐私攻击作为隐私评估指标。</li>
+<li>走向情境化的隐私判断：和前面第3条有些类似，是指即便模糊掉隐私信息，仍然可能通过上下文推测出来。</li>
+</ol>
+<p>和第一个相比，这篇文章的分类感觉有点混乱，有些分类是应该合并的，也没啥自己的见解，就汇总起来概括了一下内容。这篇没有related work。</p>
+<h2 id="3-Challenges-and-Remedies-to-Privacy-and-Security-in-AIGC-Exploring-the-Potential-of-Privacy-Computing-Blockchain-and-Beyond"><a href="#3-Challenges-and-Remedies-to-Privacy-and-Security-in-AIGC-Exploring-the-Potential-of-Privacy-Computing-Blockchain-and-Beyond" class="headerlink" title="3 - Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond"></a>3 - Challenges and Remedies to Privacy and Security in AIGC: Exploring the Potential of Privacy Computing, Blockchain, and Beyond</h2><p>CHUAN CHEN, ZHENPENG WU, YANYI LAI, and WENLIN OU, TIANCHI LIAO and ZIBIN ZHENG, 中山大学</p>
+<p>这篇不局限于LLM，而是扩展到了AIGC（人工智能生成内容），代表模型分文本和图像：</p>
+<ol>
+<li>LLM：ChatGPT等</li>
+<li>图像：stable diffusion和midjourney</li>
+</ol>
+<p>AIGC基本步骤：</p>
+<ol>
+<li>收集数据并完成数据预处理步骤。</li>
+<li>借助训练数据集完成模型的训练，根据不同的需求对模型进行微调，然后推断模型的效果。</li>
+<li>完成模型的发布阶段，发布预训练的模型。</li>
+</ol>
+<p>数据安全和隐私问题最容易出现在数据收集的第一步，模型开发者可能会使用一些未经授权的数据来完成模型的训练，从而导致数据泄露问题。</p>
+<p>AIGC面临的问题：用户输入数据泄露、模型攻击、数据爬取以及生成内容的不安全等。这篇列举了相关政策法规，可供参考，提到了国内外数据安全法规，对浪潮项目或许也有用，不过看名字都是之前调研到的。此外，信通院有针对AIGC的白皮书，LLM或许也有这方面的市场调研报告，可以找找。</p>
+<p>这篇论文的组织结构和第一篇很像，只是每部分名字不同，第一部分介绍用AIGC造假，第二部分呢介绍AIGC本身产出的内容不够好，第三部分介绍受限于模型漏洞而遭遇的攻击。针对第三部分：介绍了区块链和隐私计算在提高 AIGC 安全性方面的重要作用，并提供了使用区块链、联邦学习和数字水印等技术的说明性案例与 AIGC 的结合，展现了它们在解决 AIGC 数据隐私、内容安全和知识产权问题方面的巨大潜力。</p>
+<p>拉了一个大表格和其他survey对比，但是对比的范围和维度感觉有点奇怪。</p>
+<p>背景介绍中对AIGC的介绍过于充分了，对Privacy的介绍提到了FL、SMPC、TEE和区块链，不知道为啥没DP。</p>
+<p>第3章基本是介绍AI带来的负面问题，例如生成内容失真等。</p>
+<h3 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h3><ol>
+<li>去重：不仅文本有用，图像的去重也有用。</li>
+<li>FL：包括了DP和安全聚合，这个分类不太合适。</li>
+<li>区块链：结合了移动计算、边缘计算等，提供框架来保护流通中的数据的隐私。提供框架，记录资源和服务交易，鼓励节点之间的数据共享，形成值得信赖的AIGC生态系统。有结合Web3.0的，不过说真的我想不到这东西有什么技术点。也有和FL结合的。还有做NFT的，AIGC 的多模式输出可以被铸造为 NFT，然后记录在区块链上。</li>
+</ol>
+<h3 id="针对攻击的防御"><a href="#针对攻击的防御" class="headerlink" title="针对攻击的防御"></a>针对攻击的防御</h3><ol>
+<li>针对成员推理攻击：权重标准化、Dropout、DPSGD、改模型架构、扩展训练集</li>
+<li>针对模型提取攻击：数字水印（嵌入网络参数中，只能提供产权证明，没法防止模型被盗）、输出扰动、输入扰动</li>
+<li>针对逃逸攻击(Evasion Attacks)：攻击者在不改变目标机器学习系统的情况下，通过构造特定输入样本以完成欺骗目标系统的攻击。一般发生在模型已经完成训练，在预测时。平滑VAE（主要针对的是图像）、修改模型结构</li>
+</ol>
+<p>总的来说这篇没怎么提推断的事情，无参考意义。</p>
+<h2 id="4-Security-and-Privacy-on-Generative-Data-in-AIGC-A-Survey"><a href="#4-Security-and-Privacy-on-Generative-Data-in-AIGC-A-Survey" class="headerlink" title="4 - Security and Privacy on Generative Data in AIGC: A Survey"></a>4 - Security and Privacy on Generative Data in AIGC: A Survey</h2><p>Tao Wang, Yushu Zhang, Shuren Qi, Ruoyu Zhao, Zhihua Xia, and Jian Weng</p>
+<p>这篇也是AIGC的，分图像和语言</p>
+<p>和其他survey的对比：</p>
+<ol>
+<li>我们的工作针对的是生成数据而不是AIGC。之前的工作还探讨了数据收集中的隐私和模型的安全性问题。然而，这些问题对于人工智能安全来说是普遍存在的，这已经在一些作品中进行了讨论 [16, 17]。 </li>
+<li>以往的工作针对具体问题提出了相应的技术，但忽略了同一种技术可以解决多个问题的事实。例如，水印可用于保护版权，同时检测虚假数据。相反，我们从信息安全的基本属性来讨论安全和隐私，信息安全的存在是通过特定的技术来保证的。 </li>
+<li>我们补充了以前的工作中没有讨论的安全问题，包括访问控制和生成检测。此外，我们探索使用生成数据来支持真实数据的隐私保护。</li>
+<li>表一显示了我们的工作与现有调查的比较。对比了隐私（AIGC中的隐私和为AIGC设计的隐私）、控制（访问控制和可追溯）、真实性（生成检测和生成归因）、合规（无毒和真实）。</li>
+</ol>
+<p>AIGC的阶段划分：</p>
+<ol>
+<li>准备训练数据</li>
+<li>训练模型</li>
+<li>用模型生成数据，这个阶段应该就是推断阶段</li>
+<li>生成数据分析，主要是检查质量、真实性等</li>
+</ol>
+<p>生成数据的安全与隐私问题：和前面对比那里的4个维度划分一致</p>
+<ol>
+<li>隐私：生成数据可能泄露训练数据的隐私；生成数据包含虚拟内容，可以用来替换真实数据中的敏感内容，从而在保持数据实用性的同时降低隐私泄露的风险。</li>
+<li>控制：控制对生成数据的访问；实现对生成过程和后续使用的追踪。</li>
+<li>真实性：判断数据是否由AI生成；数据到模型的归因，从而实现问责制。</li>
+<li>合规：生成数据不包含法律法规禁止的东西；生成数据是真实的，不会被群众误解。</li>
+</ol>
+<p>总的来说这个总结有点混乱，和我们相关的应该只有第一部分。</p>
+<h3 id="生成数据的隐私"><a href="#生成数据的隐私" class="headerlink" title="生成数据的隐私"></a>生成数据的隐私</h3><p>生成数据对隐私的负面影响：模型会记住训练数据造成隐私泄露<br>正面影响：AIGC用虚拟数据替换敏感数据避免隐私泄露</p>
+<p>第二部分概括来说就是AI在隐私保护的应用，和我们的研究不怎么相关，先不看了。</p>
+<h4 id="Privacy-for-AIGC"><a href="#Privacy-for-AIGC" class="headerlink" title="Privacy for AIGC"></a>Privacy for AIGC</h4><ol>
+<li>隐私威胁：就是模型记忆训练数据的详细说明，包括文本和图像</li>
+<li>对策：<ol>
+<li>记忆拒绝：放弃与训练数据接近重复的生成数据</li>
+<li>数据去重</li>
+<li>DP</li>
+<li>检测重复内容：检测生成数据是否在训练集中出现——感觉这方法不合适</li>
+<li>知识遗忘</li>
+</ol>
+</li>
+</ol>
+<p>总结下来这几篇都没具体到推断这个环节，很多方法是针对训练数据的，也有一些不区分是不是inference</p>
+<p>待确认：</p>
+<ul>
+<li>[x] 调优（Fine-tuning）属于推断吗？</li>
+<li>[x] 推断的范畴：<ul>
+<li>[x] 发生在推断过程中，针对prompt的应该算，例如DP和MPC</li>
+<li>[x] 隐私攻击是在推断中进行的，但针对的是泄露训练数据，例如成员推断、属性推断等。针对这类攻击的是否符合要求？</li>
+<li>[x] 发生在推断前，和AI以及隐私计算其实都没什么关系，例如本地计算、边缘计算等，但确实保护了推断数据的隐私，不过没保护模型和训练数据的隐私，是否符合要求？</li>
+<li>[x] 发生在推断中，针对训练数据的隐私保护是否符合要求？例如通过输入来实现的知识遗忘【In-Context Unlearning: Language Models as Few Shot Unlearners】。p.s. 没找到关于遗忘prompt的论文，只有个别帖子提到了有这方面需求，论文【 <a href="https://arxiv.org/abs/2310.12523" target="_blank" rel="noopener">Privacy Preserving Large Language Models: ChatGPT Case Study Based Vision and Framework</a>】中提到了让GPT忘掉之前的prompt等，但不涉及什么技术。</li>
+</ul>
+</li>
+<li>[ ] 调研范围或许应该加上generate，它和inference的区别是什么？——待确定</li>
+<li>[ ] 针对隐私对象的分类（训练数据、prompt、模型数据）应该不太可行了——待确定</li>
+<li>[ ] 按阶段分要看范畴的定义，再筛选论文。</li>
+</ul>
+<p>预训练：大数据输入给深度学习算法，输出大模型例如gpt——和推断无关<br>调优数据：小领域的小规模数据集或者prompt，输入给大模型（如gpt），得到其响应结果——推断前<br>模型数据：大模型本身的向量、梯度、服务器参数等等——推断中<br>推断后：对响应结果做处理</p>
+<p>问题：调优数据算推断吗？不算，只考虑promt调整</p>
+<p>大模型阶段：训练、调优、推断or生成，本文针对第三阶段的隐私安全展开研究</p>
+<p>分类方法：</p>
+<ol>
+<li>按时间阶段：推断前、中、后</li>
+<li>按隐私保护的对象：预训练数据、调优数据（prompt）、模型数据（向量、梯度等）</li>
+<li>按隐私方案优化的对象：调优数据（prompt）、模型数据（向量、梯度、函数等）、生成数据（推断后的检测、知识遗忘）、其他（硬件设备、本地计算等，考虑放到调优数据中）——首选</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://likun1208.github.io/2023/12/22/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-LLM+Privacy%20Survey%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Privacy/" rel="tag">Privacy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Security/" rel="tag">Security</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SIGMA%20Secure%20GPT%20Inference%20with%20Function%20Secret%20Sharing/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文记录-SIGMA: Secure GPT Inference with Function Secret Sharing</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2024
+        <i class="ri-heart-fill heart_icon"></i> Kun Li
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/header.jpg" alt="左边"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photos">照片</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-ch">个人简历</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/cv-en">Resume</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+<div id="waifu">
+    <div id="waifu-message"></div>
+    <div class="waifu-tool">
+        <span class="icon-next"></span>
+        <span class="icon-home"></span>
+        <span class="icon-message"></span>
+        <span class="icon-camera"></span>
+        <span class="icon-volumeup"></span>
+        <span class="icon-volumedown"></span>
+        <span class="icon-about"></span>
+        <span class="icon-cross"></span>
+    </div>
+    <canvas id="live2d2" style="top:150px"></canvas>
+    <canvas id="live2d4" style="top:150px"></canvas>
+</div>
+<!--    src 中改为你存放的路径    -->
+<script src="/dist/live2d_bundle.js"></script>
+<script async type="module" src="/js/waifu-tips.js"></script>
+
+</body>
+
+</html>
