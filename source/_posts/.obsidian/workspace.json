@@ -1,18 +1,22 @@
 {
   "main": {
-    "id": "dcc1dac7711c75eb",
+    "id": "891ca2ed47d1b86a",
     "type": "split",
     "children": [
       {
-        "id": "ea9e2443c3a16c3b",
+        "id": "5c682fc0e97547de",
         "type": "tabs",
         "children": [
           {
-            "id": "c40049626a227236",
+            "id": "853ac984dded0bf9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -21,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "314b1e6d43be6098",
+    "id": "76d2f4e49fc89ff6",
     "type": "split",
     "children": [
       {
-        "id": "4022037fd4d826cb",
+        "id": "ca6bfd5b92cb5f84",
         "type": "tabs",
         "children": [
           {
-            "id": "76ee4ba298bef021",
+            "id": "d14b3db7ead4e634",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -39,12 +43,12 @@
             }
           },
           {
-            "id": "3f9fc3167e0e31ad",
+            "id": "8d6d1a672d7edbc4",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "#预算决算 :预算 ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -54,15 +58,7 @@
             }
           },
           {
-            "id": "52d47ec536d0f17c",
-            "type": "leaf",
-            "state": {
-              "type": "starred",
-              "state": {}
-            }
-          },
-          {
-            "id": "02db6a876e82d3ce",
+            "id": "464439126b7fdba2",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -76,20 +72,21 @@
     "width": 200
   },
   "right": {
-    "id": "7ab3221d9d212407",
+    "id": "e91e74292be9f775",
     "type": "split",
     "children": [
       {
-        "id": "2ae6e36e87353a8d",
+        "id": "3e6189beba6313f0",
         "type": "tabs",
         "children": [
           {
-            "id": "2de6ace73a0217fd",
+            "id": "74bb1fd91942090d",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": true,
+                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+                "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -100,18 +97,19 @@
             }
           },
           {
-            "id": "2a2d0a50398fa7ac",
+            "id": "7e4aec4478827400",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "a711b3702b0f50cb",
+            "id": "000b237e00762403",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -122,15 +120,7 @@
             }
           },
           {
-            "id": "b33de7d16782f4c3",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {}
-            }
-          },
-          {
-            "id": "d200b9ed2f664ec4",
+            "id": "8b52ebe22c22b6df",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -140,9 +130,19 @@
                 "searchQuery": ""
               }
             }
+          },
+          {
+            "id": "0591e1d1faac6d90",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md"
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -150,47 +150,16 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "canvas:新建白板": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false
     }
   },
-  "active": "c40049626a227236",
+  "active": "853ac984dded0bf9",
   "lastOpenFiles": [
-    "2023年10月1日-12月31日决算及2024上半年预算.md",
-    "2023年2月1日-6月30日预算.md",
-    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
-    "论文记录-LLM+Privacy Survey总结.md",
-<<<<<<< HEAD
-    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
-=======
->>>>>>> d177aa1e5a5be84ade2e9550c236f513f25b2616
-    "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
-    "论文记录-SECURE TRANSFORMER INFERENCE.md",
-    "论文记录-PUMA SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES.md",
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
-    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
-    "LLM+隐私保护总结.md",
-    "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
-    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
-    "论文略读记录.md",
-    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "hexo+reveal实现slide.md",
-    "区块链行业总结.md",
-    "未命名.canvas",
-    "论文记录-因果框架对比.md",
-    "论文记录-众包相关论文调研.md",
-    "论文记录-教育学中的因果推断.md",
-    "论文记录-分片相关.md",
-    "hexo-next-github配置blog.md",
-    "python课程记录-5.md",
-    "python课程记录-4.md",
-    "python课程记录-3.md",
-    "python课程记录-2.md",
-    "a1005dd730e2545dd4c655d30916ba8e.png"
+    "论文记录-CipherGPT Secure Two-Party GPT Inference.md"
   ]
 }
