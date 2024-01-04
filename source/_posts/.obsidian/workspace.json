@@ -44,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "#预算决算 :预算 ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -160,8 +160,14 @@
   },
   "active": "c40049626a227236",
   "lastOpenFiles": [
-    "论文记录-LLM+Privacy Survey总结.md",
+    "2023年10月1日-12月31日决算及2024上半年预算.md",
+    "2023年2月1日-6月30日预算.md",
     "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
+    "论文记录-LLM+Privacy Survey总结.md",
+<<<<<<< HEAD
+    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
+=======
+>>>>>>> d177aa1e5a5be84ade2e9550c236f513f25b2616
     "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
     "论文记录-SECURE TRANSFORMER INFERENCE.md",
     "论文记录-PUMA SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES.md",
@@ -185,8 +191,6 @@
     "python课程记录-4.md",
     "python课程记录-3.md",
     "python课程记录-2.md",
-    "python课程记录-1.md",
-    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "a1005dd730e2545dd4c655d30916ba8e.png"
   ]
 }
