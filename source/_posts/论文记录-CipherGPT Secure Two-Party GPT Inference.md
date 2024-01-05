@@ -183,6 +183,8 @@ SIRNN [36]、Iron [25] 和我们的安全 GELU 解决方案之间的加密操作
 ## 安全前K项选取
 在 vec2word 层，GPT 模型生成一个包含所有可能单词概率的向量。需要从该向量中选出概率最大的前$K$个，并根据所选概率对最终响应词进行采样。本节将重点讨论从长度为$n$的向量中选出$K$个最大概率值的过程。
 
+![TopK算法](https://github.com/likun1208/image/blob/master/Cipher-3.png?raw=true)
+
 算法 2 提供了我们的 TopK 协议的详细描述。在高层，输入元素首先被安全地打乱（第 1 行）；然后采用基于比较的选择来从打乱的列表中识别前 K 个元素（第 2 行）。
 
 算法2中的选择函数以递归方式运行。在每次递归中，选择向量的最后一个元素作为主元（第 5 行）；向量被划分为两部分：小于主元的元素，表示为$S_L$，以及大于或等于主元的元素，表示为$S_R$（第 6-15 行）。为了分割向量，将其所有元素与主元进行比较（第 8 行）。可以在不损害原始元素隐私的情况下揭示比较结果（第 9 行）。这是因为原始元素已被打乱，因此比较结果与实际值无关。
@@ -197,6 +199,8 @@ $$
 \operatorname{Pr}(j=i)=x_i / \sum_{k=1}^K x_k
 $$
 我们将在第 7.5 节中解释如何将此索引映射到响应词。
+
+![Sampling算法](https://github.com/likun1208/image/blob/master/Cipher-4.png?raw=true)
 
 算法3提供了安全采样协议的详细描述。其基于的观察是，对于随机$p'\in [0,1]$，所选索引$j$满足：
 $$
@@ -213,9 +217,141 @@ b_i^{\prime}=0 \forall i \neq j \text { and } b_j^{\prime}=1
 $$
 这一步可以通过在$\langle\mathbf{b}\rangle$的每一对相邻位上执行异或操作来实现（第7-10行）。那么，所需的索引为：$\langle j \rangle:=\sum_{i=1}^K F_{MUX}(i,\langle b'_i\rangle)$（第11行）。
 
-我们注意到 v 由 C 单独采样是可以接受的，因为最终输出 j 对 C 来说仍然未知。
-
+我们注意到$v$由$C$单独采样是可以接受的，因为最终输出 j 对 C 来说仍然未知。
 
 ## CipherGPT框架
+CiperGPT架构和流程：它需要一个单词序列，将它们编码成单词嵌入，然后将它们传递给转换器解码器的多次迭代2。每次迭代都涉及一个自注意力层和一个前馈神经网络。 Transformer 解码器的输出被馈送到 vec2word 层，该层生成预测的响应词。
+![框架图](https://github.com/likun1208/image/blob/master/Cipher-5.png?raw=true)
+### 嵌入
+它首先将每个输入单词映射到长度为 m 的数值向量，称为单词嵌入，这是通过在嵌入矩阵中定位相应行来实现的。接下来，每个单词嵌入都会增加一个位置嵌入，该位置嵌入由单词在输入序列中的位置确定。位置嵌入是预定义的，并按元素添加到词嵌入中。我们使用加法同态加密（AHE）来完成词嵌入和位置嵌入：
+
+1. S使用AHE来加密嵌入矩阵的每一行，并将所有得到的密文传输到 C。实际上，我们通过将整行表示为RLWE密文的多项式系数来加密整行。请注意，词嵌入是浮点数；S 通过将它们左移 L 位并删除小数部分来将它们缩放为整数。
+2. C根据输入的单词定位对应的密文，为每个密文添加一个随机数$r_i:E(w_1+r_1),····,E(w_n+r_n);$并将它们返回给S。
+3. S解密密文得到$w_1+r_1,...,w_n+r_n;$添加位置嵌入$w_1+r_1+p_1,...,w_n+r_n+p_n$。
+4. 由此，每个嵌入都是秘密共享的，$\langle x_i\rangle_C=-r_i,\langle x_i\rangle_S=w_i+r_i+p_i$。
+
+我们注意到，步骤 1 只需执行一次，并且可以无限期地使用，除非嵌入矩阵发生变化。
+
+### 层归一
+嵌入编码后，$n$个输入词称为一个秘密共享矩阵$\langle \mathbf{X}\rangle, \mathbf{X}\in\mathbb{Z}_{2^l}^{n\times m}$。然后需要对每行$\mathbf{x}\in\mathbb{Z}_{2^l}^{n\times m}$执行层归一化操作。具体来说$\mathbf{x}$中的每个元素$x_i$如下归一：
+$$
+x_i:=\frac{x_i-\mathrm{E}[\mathbf{x}]}{\sqrt{\operatorname{Var}[\mathrm{x}]+c}} \cdot \gamma+\beta
+$$
+其中$E[\mathbf{x}]=\frac{1}{n}\sum x_i, Var[\mathbf{x}]=\frac{1}{n-1}\sum(x_i-E[\mathbf{x}])^2$，$\gamma,\beta$是学习参数，$\epsilon$是避免除数为0的小值。为了安全计算层归一化，我们让S和C运行如下：
+1. 运行$F_{Mult}$计算每个$var_i:=(x_i-E[\mathbf{x}])^2$
+2. 运行$F_{LUT}$计算$\frac{1}{\sqrt{Var[\mathbf{x}]+\epsilon}}$
+3. 运行$F_{Mult}$计算$\frac{x_i-E[\mathbf{x}]}{\sqrt{Var[\mathbf{x}]+\epsilon}}$
+4. 运行$F_{Mult}$计算$\frac{x_i-E[\mathbf{x}]}{\sqrt{Var[\mathbf{x}]+\epsilon}}\cdot\gamma$
+5. 运行$F_{TR}$将比例减小到L位并将宽度截断为$l$位
+
+原则上，S和C需要使用“均匀位宽乘法”来乘以两个秘密共享值，然后运行安全截断（对于每个乘法）以将规模保持在L位。然而，为了减少精度损失，我们让S和C使用“非均匀位宽乘法”（$F_{Mult}$）进行乘法，并且在LayerNorm计算后仅运行一次“truncatethen-reduce”（$F_{TR}$）。
+
+### 掩码自注意力
+自注意力是一种通过关联序列中不同位置来计算序列表示的机制。计算自注意力的第一步是创建三个矩阵：查询矩阵Q、键矩阵K和值矩阵V，通过将归一化嵌入$X\in\mathbb{Z}_{2^l}^{n\times m}$与三个训练过程中获取的矩阵（$W_Q\in\mathbb{Z}_{2^l}^{m\times m}, W_K\in\mathbb{Z}_{2^l}^{m\times m}, W_V\in\mathbb{Z}_{2^l}^{m\times m}$）相乘而得到：
+$$
+\begin{aligned}
+& \langle\mathbf{Q}\rangle:=\langle\mathbf{X}\rangle\left\langle\mathbf{W}_Q\right\rangle \\
+& \langle\mathbf{K}\rangle:=\langle\mathbf{X}\rangle\left\langle\mathbf{W}_K\right\rangle \\
+& \langle\mathbf{V}\rangle:=\langle\mathbf{X}\rangle\left\langle\mathbf{W}_V\right\rangle
+\end{aligned}
+$$
+
+由于$W_Q,W_K,W_V$事先已知，因此可以通过第 3 节中描述的基于 sVOLE 的解决方案来计算此类 MatrixMul。在 MatrixMul 之后，S 和 C 需要运行$F_Trunc$以确保缩放保持在 L 位。为了简单起见，我们在本节的其余部分中省略了提及的截断。
+
+多头注意力：每个$\langle Q\rangle,\langle K\rangle,\langle V\rangle$都会随后被划分为M段，称为多头注意力，其中M表示注意力头的数量。令$m'=\frac{m}{M}$，可得：
+$$
+\begin{aligned}
+&
+\left\langle\mathbf{q}_1\right\rangle\|\cdots\|\left\langle\mathbf{q}_M\right\rangle=\langle\mathbf{Q}\rangle \text {, with each } \mathbf{q}_i \in \mathbb{Z}_{2^l}^{n \times m^{\prime}} \\
+& \left\langle\mathbf{k}_1\right\rangle\|\cdots\|\left\langle\mathbf{k}_M\right\rangle=\langle\mathbf{K}\rangle, \text { with each } \mathbf{k}_i \in \mathbb{Z}_{2^l}^{n \times m^{\prime}} \\
+& \left\langle\mathbf{v}_1\right\rangle\|\cdots\|\left\langle\mathbf{v}_M\right\rangle=\langle\mathbf{V}\rangle, \text { with each } \mathbf{v}_i \in \mathbb{Z}_{2^l}^{n \times m^{\prime}}
+\end{aligned}
+$$
+通过查询矩阵和关键矩阵的乘积来计算得分矩阵：
+
+$$
+\left\langle\mathbf{s}_i\right\rangle:=\left\langle\mathbf{q}_i\right\rangle\left\langle\mathbf{k}_i^T\right\rangle \forall i \in[M]
+$$
+$s_i\in\mathbb{Z}_{2^l}^{n\times n}$中的每个分数决定了在对当前单词进行编码时对其他单词的关注程度。在这种情况下，如果事先不知道 qi 和 ki，则无法应用我们基于 sVOLE 的 MatrixMul。相反，我们采用[25]中提出的基于 AHE 的 MatrixMul。
+
+自注意力掩码。在多头注意力之后，应用自注意力掩码来将每个$s_i$的上三角形清零。因此，左边的每个单词的注意力分数都比右边的单词高得多，因此模型在实践中只关注前面的单词。此步骤可以由 S 和 C 在本地完成，无需任何交互。
+
+Softmax。将softmax运算逐行应用于每个$\langle s_i\rangle$，确保分数在该行内标准化，所有值均为正数且总和为1。为了安全计算softmax，我们优化了[25]中的方法，如下：
+1. 给定一行$\mathbf{x}\in\mathbb{Z}_{2^l}^n$作为输入，我们首先标准化每个$x_i:x'_i=x_i-max(\mathbf{x})$，然后得到一个负值向量。
+2. 我们通过仅考虑区间$[−16, 0]$来优化负值的指数协议。即，我们使用 $F_{CMP}$ 将$x'_i$与$−16\times 2^l$进行比较，如果$x'_i\lt -16\times 2^l$，使用$F_{MUX}$将$e^{x'_i}$的结果设置为 0。
+
+原始指数协议运行具有$2^l$个条目的$F_{LUT}$，而我们只需要具有$2^{L+4}$个条目的$F_{LUT}$。
+
+输出。在 self-attention 的最后一步中，softmaxed分数用于对值矩阵中的值进行加权：
+$$
+\left\langle\mathbf{z}_i\right\rangle:=\left\langle\mathbf{s}_i\right\rangle\left\langle\mathbf{v}_i\right\rangle \quad \forall i \in[M]
+$$
+
+这再次由基于 AHE 的 MatrixMul 完成[25]。然后，所有z被重新组合在一起：
+$$
+\langle\mathbf{Z}\rangle:=\left\langle\mathbf{z}_1\right\rangle\|\cdots\|\left\langle\mathbf{z}_n\right\rangle .
+$$
+自注意力的输出是：
+$$
+\langle\mathbf{X}\rangle:=\langle\mathbf{X}\rangle+\langle\mathbf{Z}\rangle .
+$$
+
+### 前馈
+自注意力的输出经过LayerNorm操作。然后将所得归一化值输入前馈神经网络，该网络由两个全连接 (FC) 层和一个激活层组成。
+
+第一个FC层计算如下：
+$$
+\left\langle\mathbf{X}_1\right\rangle:=\langle\mathbf{X}\rangle\left\langle\mathbf{W}_1\right\rangle+\mathbf{B}_1
+$$
+其中$\mathbf{X} \in \mathbb{Z}_{2^l}^{n \times m}, \mathbf{W}_1 \in \mathbb{Z}_{2^l}^{m \times k}, \mathbf{B}_1 \in \mathbb{Z}_{2^l}^{n \times k}, \mathbf{X}_1 \in \mathbb{Z}_{2^l}^{n \times k}$。然后对$\mathbf{X}_1$的每个元素应用GELU算法得到$\mathbf{X}'_1$。第二个FC层计算如下：
+$$
+\left\langle\mathbf{X}_2\right\rangle:=\left\langle\mathbf{X}_1^{\prime}\right\rangle\left\langle\mathbf{W}_2\right\rangle+\mathbf{B}_2,
+$$
+其中$\mathbf{X}'_1 \in \mathbb{Z}_{2^l}^{n \times k}, \mathbf{W}_2 \in \mathbb{Z}_{2^l}^{k \times m}, \mathbf{B}_2 \in \mathbb{Z}_{2^l}^{n \times m}, \mathbf{X}_1 \in \mathbb{Z}_{2^l}^{n \times m}$。请注意，$W_1$和$W_2$是预先已知的，因此我们基于 sVOLE 的 MatrixMul（参见第 3 节）可以应用于两个 FC 层。
+
+输出将再次经历自注意力和前馈的多次迭代，每次迭代采用不同的权重，同时保留相同的结构。
+
+### 向量转词
+经过多次自我关注和前馈迭代后，所得输出将通过 vec2word 层以生成预测的响应词。 vec2word 中的初始操作涉及 MatrixMul 来为所有可能的单词生成 one-hot 编码：
+$$
+\langle\mathbf{y}_0\rangle:=\langle\mathbf{x}\rangle\langle\mathbf{W}\rangle
+$$
+其中$\mathbf{W}\in\mathbb{Z}_{2^l}^{m\times k},\mathbf{y}_0\in\mathbb{Z}_{2^l}^{k},\mathbf{x}\in\mathbb{Z}_{2^l}^{m}$是$\mathbf{X}\in\mathbb{Z}_{2^l}^{n\times m}$的最后一行（由于 GPT 采用的推理时间优化）。这次，k代表所有可能的单词的数量，它是相当大的。我们基于 sVOLE 的 MatrixMul 不适合这里，因此我们采用基于 AHE 的 MatrixMul [25]。
+
+TopK。为了保持多样性和准确性之间的平衡，从$y_0$中选择K个最大值：
+$$
+\langle \mathbf{y}_1\rangle\leftarrow\Pi_{TopK}(\langle\mathbf{y}_0\rangle),\mathbf{y}_1\in\mathbb{Z}_{2^l}^K
+$$
+
+这部分由第五章提出的协议来完成。
+
+温度。温度T决定了GPT生成文本的创造性和多样性：较高的温度（例如，$T=1.5$）会产生更加多样化和创造性的文本，而较低的温度（例如，$T=0.5$）会产生更加集中和确定性的文本。它是由 S 持有的超参数，并与$y_1$中的每个值相乘。这可以通过 AHE 轻松实现：
+1. C给S发送其AHE加密后的共享$E(\langle y_{1,1}\rangle_C),...,E(\langle y_{1,K}\rangle_C)$。实际上，我们通过将它们表示为RLWE密文的多项式系数来进行整体加密。
+2. S将其份额添加到密文中：$E(\langle y_{1,1}\rangle_C+\langle y_{1,1}\rangle_S),...,E(\langle y_{1,K}\rangle_C+\langle y_{1,K}\rangle_S)$
+3. S对所有密文乘T：$E(T\cdot y_{1,1}),...,E(T\cdot y_{1,K})$
+4. S给所有密文加上随机数：$E(T\cdot y_{1,1}+r_1),...,E(T\cdot y_{1,K}+r_K)$
+5. S将生成的密文返回C
+6. S 解密密文，现在用 y2 表示的温度值是秘密共享的：
+$$
+\langle y_{2,i}\rangle_C:=T\cdot y_{1,i}+r_i,\langle y_{2,i}\rangle_S:-r_i,\forall i\in[K].
+$$
+
+随机采样。对$y_2$进行softmax运算，得到$y_3$表示的概率向量，然后根据该概率向量对响应词进行随机采样。这种随机采样确保生成的输出既多样化又与上下文相关。
+
+我们采用第 6 节中描述的安全采样协议来获取索引：$\langle j \rangle\leftarrow\Pi_{Sample}(y_3)$
+
+考虑到词向量是公开的，如果C学习了索引，它就可以从词向量中检索出最终的响应词。然而，天真地将 j 透露给 C 有两个问题：
+- 在算法3（第1 行）中，值v 由C 采样。因此，如果 C 学习了 j，它可能会获得有关输入 x 的一些信息。 
+- 索引j 不是正确的索引，因为概率向量已在算法2（第1 行）中被打乱。
+
+回想一下，算法 2 中的洗牌过程大致如下：
+1. C生成随机排列$\pi_C$；S和C共同将$\pi_C$应用于输入向量，获得相应的秘密份额。
+2. S生成随机排列$pi_S$； S和C共同将$pi_S$应用于$pi_C$的输出，获得相应的秘密份额。
+
+一个关键的观察结果是算法3第11行的`i`是公开的。为此，我们让S计算$i':=\pi_{S}^{-1}(i)$并秘密共享$i'$。然后我们将算法3的第11行替换为：
+$$
+\langle j\rangle:=\sum_{i=1}^K F_{MUX}(\langle i'\rangle,\langle b'_i\rangle^l)
+$$
+由此，向C透漏j不会透露有关输入的任何信息，因为C不知道$\pi_{S}^{-1}(i)$。获得j后，C计算$j':=\pi_C^{-1}(j)$，这是词向量中的正确索引。
 
 ## 实验评估

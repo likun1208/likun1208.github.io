@@ -76,13 +76,23 @@ Alice和Bob试图安全对话，攻击者试图窃听，为确保安全，A和B�
 
 一些仍有效的密码：AES、Salsa20 等
 
-
-
-
-
-
 ## Section 2: crash course in discrete probability
 ### Discrete Probability
+$U$：有限集，通常是$n$位二进制字符串集，用$\lbrace0,1\rbrace^n$表示，例如$\lbrace0,1\rbrace^2=\lbrace 00,01,10,11 rbrace$
+
+全集$U$上的概率分布是函数$P:U\rightarrow[0,1]$，该函数为全集中的每个元素分配一个0到1之间的数，该数称为该元素在全集中的权重或概率，$\sum_{x\in U}P(X)=1$
+
+分布的例子：
+- 均匀分布：各元素概率相等，即对于所有$x\in U$，$P(X)=1/|U|$
+- 在$x_0$的点分布：取值为$x_0$时概率为1，其他时候概率为0
+
+所有元素的概率分布都列出来可组成一个分布向量
+
+考虑全集的一个子集$A$，$Pr[A]=\sum_{x\in A}P(X)\in[0,1]$，子集A被称为**事件**。注意：$Pr[U]=1$
+
+例：$U=\lbrace0,1\rbrace^8, A=\lbrace all\ x\ in\ U such\ that\ lsb_2(x)=11\rbrace\subseteq U$，$lsb_2$是最低两位的意思，这里A是最低两位是11的8位二进制数，若$U$是均匀分布，则$Pr[A]=0.25$
+
+联合边界：对于事件$A_1$和$A_2$，$Pr[A_1\cup A_2]\leq Pr[A_1]+Pr[A_2]$，当且仅当$A_1\cap A_2=\emptyset$时取等号。
 
 ## Stream Ciphers 1: the one-time pad and stream ciphers
 ### Information Theoretic Security and The One Time Pad
