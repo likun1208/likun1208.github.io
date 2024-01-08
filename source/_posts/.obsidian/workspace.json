@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cryptography课程记录-Week 1_Course overview and stream ciphers.md"
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md"
               }
             }
           }
@@ -160,7 +160,7 @@
   },
   "active": "853ac984dded0bf9",
   "lastOpenFiles": [
-    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
-    "Cryptography课程记录-Week 1_Course overview and stream ciphers.md"
+    "Cryptography课程记录-Week 1_Course overview and stream ciphers.md",
+    "论文记录-CipherGPT Secure Two-Party GPT Inference.md"
   ]
 }
