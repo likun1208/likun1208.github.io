@@ -78,9 +78,9 @@ Alice和Bob试图安全对话，攻击者试图窃听，为确保安全，A和B�
 
 ## Section 2: crash course in discrete probability
 ### Discrete Probability
-$U$：有限集，通常是$n$位二进制字符串集，用$\lbrace0,1\rbrace^n$表示，例如$\lbrace0,1\rbrace^2=\lbrace 00,01,10,11 rbrace$
+定义：$U$：有限集，通常是$n$位二进制字符串集，用$\lbrace0,1\rbrace^n$表示，例如$\lbrace0,1\rbrace^2=\lbrace 00,01,10,11 \rbrace$
 
-全集$U$上的概率分布是函数$P:U\rightarrow[0,1]$，该函数为全集中的每个元素分配一个0到1之间的数，该数称为该元素在全集中的权重或概率，$\sum_{x\in U}P(X)=1$
+定义：全集$U$上的概率分布是函数$P:U\rightarrow[0,1]$，该函数为全集中的每个元素分配一个0到1之间的数，该数称为该元素在全集中的权重或概率，$\sum_{x\in U}P(X)=1$
 
 分布的例子：
 - 均匀分布：各元素概率相等，即对于所有$x\in U$，$P(X)=1/|U|$
@@ -88,11 +88,52 @@ $U$：有限集，通常是$n$位二进制字符串集，用$\lbrace0,1\rbrace^n
 
 所有元素的概率分布都列出来可组成一个分布向量
 
-考虑全集的一个子集$A$，$Pr[A]=\sum_{x\in A}P(X)\in[0,1]$，子集A被称为**事件**。注意：$Pr[U]=1$
+定义：考虑全集的一个子集$A$，$Pr[A]=\sum_{x\in A}P(X)\in[0,1]$，子集A被称为**事件**。注意：$Pr[U]=1$
 
 例：$U=\lbrace0,1\rbrace^8, A=\lbrace all\ x\ in\ U such\ that\ lsb_2(x)=11\rbrace\subseteq U$，$lsb_2$是最低两位的意思，这里A是最低两位是11的8位二进制数，若$U$是均匀分布，则$Pr[A]=0.25$
 
-联合边界：对于事件$A_1$和$A_2$，$Pr[A_1\cup A_2]\leq Pr[A_1]+Pr[A_2]$，当且仅当$A_1\cap A_2=\emptyset$时取等号。
+定义：联合边界：对于事件$A_1$和$A_2$，$Pr[A_1\cup A_2]\leq Pr[A_1]+Pr[A_2]$，当且仅当$A_1\cap A_2=\emptyset$时取等号。
+
+例：$A_1=\lbrace all\ x\ in\ \lbrace 0,1\rbrace^n \ s.t.\ lsb_2(x)=11\rbrace, A_1=\lbrace all\ x\ in\ \lbrace 0,1\rbrace^n \ s.t.\ msb_2(x)=11\rbrace$
+
+$Pr[lsb_2(x)=11\ or\ msb_2(x)=11]=Pr[A_1\cap A_2]\leq\frac{1}{4}+\frac{1}{4}=\frac{1}{2}$
+
+定义：随机变量：一个随机变量$X$是一个从全集映射到某个集合V的函数$X:U\rightarrow V$，集合V被称为随机变量的值域。
+
+例：$X:\lbrace0,1\rbrace^n\rightarrow\lbrace0,1\rbrace$; $X(y)=lsb(y)\in\lbrace0,1\rbrace$，对于该映射，当U是均匀分布时，可知$Pr[X=0]=Pr[X=1]=\frac{1}{2}$
+
+更一般地，一个随机变量X从集合V中取值，则该随机变量实际上生成了集合V的概率分布：$Pr[X=v]:=Pr[X^{-1}(v)]$，含义：随机变量输出v的概率等同于从全集中随机抽取一个元素，对其施加函数X，然后判断其输出v的概率。换言之，我们X输出v的概率，就等于从全集中抽一个元素，正好落在v在函数X下的原像中。
+
+定义：均匀随机变量：假定U是某有限集，例$\lbrace 0,1 \rbrace^n$，则用$r\stackrel{R}\leftarrow U$表示U上的均匀随机变量，对于所有$a\in U: Pr[r=a]=1/|U|$。这里$\stackrel{R}\leftarrow$表示均匀抽样。正式来说，$r$是恒等函数，对于所有$x\in U$而言，$r(x)=x$。
+
+- 确定性算法：给定输入，总产生固定的输出：$y\leftarrow A(m)$
+- 随机化算法：输入的除了给定的m，还有一个隐形参数r，每次执行算法时会重新抽取，因此每次输出会改变，$y\leftarrow A(m;r)\ where\ r\stackrel{R}\leftarrow \lbrace 0,1 \rbrace^n$，即$y\stackrel{R}\leftarrow A(m)$
+
+例：用随机字符串k来加密输入的消息m，$A(m;k)=F(k,m), y\stackrel{R}\leftarrow A(m)$
+
+定义：独立性：当$Pr[A\ and\ B]=Pr[A]\cdot Pr[B]$时，事件A和B独立。当$\forall a,b\in V:Pr[X=a\ and\ Y=b]=Pr[X=a]\cdot Pr[Y=b]$时，从集合V中取值的随机变量X和Y独立。
+
+例：$U=\lbrace 0,1\rbrace^2=\lbrace 00,01,10,11 \rbrace$且$r\stackrel{R}\leftarrow U$，定义随机变量X和Y为$X=lsb(r),Y=msb(r)$，则$Pr[X=0\ and\ Y=0]=Pr[r=00]=\frac{1}{4}=Pr[X=0]\cdot Pr[Y=0]$
+
+定义：异或XOR：两个$\lbrace 0,1\rbrace^n$上的字符串执行异或操作是指按位加并模2，例如$0110111\oplus 1011010=1101101$。
+
+定理：异或的属性：Y是$\lbrace 0,1\rbrace^n$上的随机变量，X是$\lbrace 0,1\rbrace^n$上的独立均匀分布变量，则$Z:=Y\oplus X$是$\lbrace 0,1\rbrace^n$上的均匀变量。
+
+证明（$n=1$）：$Pr[Y=0]=P_0,Pr[Y=1]=P_1, Pr[X=0]=Pr[X=1]=0.5$，联合分布如下：
+
+| Y | X | Pr |
+| ---- | ---- | ---- |
+| 0 | 0 | $0.5P_0$ |
+| 0 | 1 | $0.5P_0$ |
+| 1 | 0 | $0.5P_1$ |
+| 1 | 1 | $0.5P_1$ |
+$Pr[Z=0]=Pr[(0,0)or(1,1)]=0.5P_0+0.5P_1=0.5$，类似地，$Pr[Z=1]=0.5$。
+
+生日悖论：令$r_1,...,r_n\in U$表示独立同分布的随机变量，则当$n=1.2\times |U|^{\frac{1}{2}}$时$Pr[\exists i\neq j:r_i=r_j]\geq \frac{1}{2}$。
+
+例：$U=\lbrace 0,1 \rbrace^{128}$，采样约$2^{64}$随机消息，则其中两个消息很有可能相同。
+
+现实一些的例子：多少人聚在一起会有至少两个人的生日相同？一年365天，因此是$1.2\sqrt{365}\approx 23$
 
 ## Stream Ciphers 1: the one-time pad and stream ciphers
 ### Information Theoretic Security and The One Time Pad
