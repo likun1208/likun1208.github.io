@@ -38,4 +38,27 @@ description: LLM和MPC结合的论文之一
 
 这里列了几个安全transformer推理模型和缺点，survey中可以对比。
 
-本文贡献：
+本文贡献：和CipherGPT差不多，也是针对各操作设计了安全计算协议，包括矩阵乘法、激活函数等。
+
+## 预备知识
+### 符号
+1. $\lambda$：计算安全参数
+2. $N=2^n,L=2^l$
+3. $\mathbb{R}$：实数集，$\mathbb{U}_{2^n}$：n位无符号整数集
+4. 用2补数表示$\mathbb{U}_{N}$中的有符号数
+5. 对于$x\in\mathbb{U}_N$，$int_n(x),uint_n(x)$分别表示$\mathbb{Z}$中的有符号整数和无符号整数
+6. 粗体表示数字，普通字体带$[i]$表示第i个元素，如$\mathbf{a}=\lbrace a[0],a[1],a[2]... \rbrace$
+7. 定点数表示法：由位宽n和精度f参数化，将实数$r\in\mathbb{R}$编码为一个n位整数$x\in\mathbb{U}_N$使得$x=\lfloor r\cdot 2f \rfloor/\ mod\ N$。反过来，精度为f的n位定点数x解码为一个实数$\frac{int_n(x)}{2^f}$
+8. 操作符：对于谓词$b$，$1\lbrace b\rbrace$
+
+
+### 威胁模型
+
+### FSS
+
+### 2PC
+
+### DPF
+
+## Transformer概要
+
