@@ -96,5 +96,10 @@ $y_b=Eval_n^{\bullet}(b,k_b^{\bullet},x),x\in\mathbb{U}_N$
 
 定理1（DPF的成本）给定PRG $G:\lbrace 0,1\rbrace^\lambda\rightarrow\lbrace0,1\rbrace^{2\lambda+2}$并令$v=\log_2(\lambda+1)$。当$n\gt v$，存在一个$f_{\alpha,1}^{\bullet}$的DPF：$\mathbb{U}_N\rightarrow\lbrace 0,1\rbrace$，其密钥大小是$(n-v)\cdot(\lambda+2)+2\lambda$。在$Gen_n^{\bullet}$中PRG的调用次数是$2(n-v)$，在$Eval_n^{\bullet}$中的用次数是$n-v$。当$n\leq v$时，需要$2^n$的keysize以及$Gen_n^{\bullet},Eval_n^{\bullet}$PRG调用次数为0。
 
+与其他FSS的工作类似，我们设$\lambda=127$，并在计数器模式下使用两次AES-128调用来实现所需的长度加倍 PRG。正如之前所观察到的，单个 AES 调用足以满足$Eval_n^{\bullet}$，因为仅使用了一半的输出。从现在开始，我们将其称为半 PRG 调用。
+
+### 使用DPF密钥比较
+比较函数：
+
 ## Transformer概要
 
