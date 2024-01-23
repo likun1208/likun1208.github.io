@@ -99,7 +99,18 @@ $y_b=Eval_n^{\bullet}(b,k_b^{\bullet},x),x\in\mathbb{U}_N$
 与其他FSS的工作类似，我们设$\lambda=127$，并在计数器模式下使用两次AES-128调用来实现所需的长度加倍 PRG。正如之前所观察到的，单个 AES 调用足以满足$Eval_n^{\bullet}$，因为仅使用了一半的输出。从现在开始，我们将其称为半 PRG 调用。
 
 ### 使用DPF密钥比较
-比较函数：
+比较函数$f_{\alpha,\beta}^{\lt}:\mathbb{U}_N\rightarrow\mathbb{G}^{out}$输入$x\in\mathbb{U}_N$，如果$x\lt\alpha$则返回$\beta\in\mathbb{G}^{out}$，否则返回0。之前的研究都用一个特殊的名为DCF的FSS方案来实现这个功能。最近一个研究展示了当$\mathbb{G}^{out}=\lbrace 0,1\rbrace,\beta=1$时，FSS方案可以通过DPF来构造。
+
+定理2：使用DPF的FSS方案。存在一个算法$Eval_n^\lt$使得$\forall x,\alpha\in\mathbb{U}_N$：
+$$
+\begin{aligned}
+& \left(k_0^{\bullet}, k_1^{\bullet}\right) \leftarrow \operatorname{Gen}_n^{\bullet}\left(1^\lambda, \alpha, 1,\{0,1\}\right) \\
+\Longrightarrow & \operatorname{Eval}_n^{<}\left(0, x, k_0^{\bullet}\right)+\operatorname{Eval}_n^{<}\left(1, x, k_1^{\bullet}\right)=f_{\alpha, 1}^{<}(x)
+\end{aligned}
+$$
+且$Eval_n^\lt$调用了DPF half-PRG $\max(n-v,0)$次。因此，$(Gen_n^\bullet,Eval_n^\lt)$是比较函数的FSS方案。
+
+与[11]中需要长度四倍的 PRG 的 DCF 构造相比，上述构造导致计算成本降低 2 倍以上。
 
 ## Transformer概要
 
