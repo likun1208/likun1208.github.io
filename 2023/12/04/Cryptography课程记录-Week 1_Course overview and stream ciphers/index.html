@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">935</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">9 分钟</span>
         </span>
     </span>
 </div>
@@ -168,7 +168,86 @@
 <li>提出构造方案</li>
 <li>证明在特定威胁模型条件下，任何攻击者对该构造发起攻击都相当于求解一个很复杂的难题。</li>
 </ul>
-<h2 id="History-of-Cryptography"><a href="#History-of-Cryptography" class="headerlink" title="History of Cryptography"></a>History of Cryptography</h2><h2 id="Section-2-crash-course-in-discrete-probability"><a href="#Section-2-crash-course-in-discrete-probability" class="headerlink" title="Section 2: crash course in discrete probability"></a>Section 2: crash course in discrete probability</h2><h3 id="Discrete-Probability"><a href="#Discrete-Probability" class="headerlink" title="Discrete Probability"></a>Discrete Probability</h3><h2 id="Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers"><a href="#Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers" class="headerlink" title="Stream Ciphers 1: the one-time pad and stream ciphers"></a>Stream Ciphers 1: the one-time pad and stream ciphers</h2><h3 id="Information-Theoretic-Security-and-The-One-Time-Pad"><a href="#Information-Theoretic-Security-and-The-One-Time-Pad" class="headerlink" title="Information Theoretic Security and The One Time Pad"></a>Information Theoretic Security and The One Time Pad</h3><h3 id="Stream-Ciphers-and-Pseudo-Random-Generators"><a href="#Stream-Ciphers-and-Pseudo-Random-Generators" class="headerlink" title="Stream Ciphers and Pseudo Random Generators"></a>Stream Ciphers and Pseudo Random Generators</h3> 
+<h2 id="History-of-Cryptography"><a href="#History-of-Cryptography" class="headerlink" title="History of Cryptography"></a>History of Cryptography</h2><p>Alice和Bob试图安全对话，攻击者试图窃听，为确保安全，A和B使用加密器<code>(E,D)</code>，前者是加密算法，后者是解密算法。</p>
+<p>对称加密：加密和解密使用相同的密钥：</p>
+<ul>
+<li>$c=E(k,m)$表示用算法$E$和密钥$k$对消息$m$加密得到密文$c$</li>
+<li>$m:=D(k,c)$表示用算法$D$和密钥$k$对密文$c$解密得到消息$m$</li>
+</ul>
+<p>一些已破解的对称加密：</p>
+<ul>
+<li>替换加密：不同字母之间替换    </li>
+<li>凯撒密码是类似的方式。破解方式：字母频率、字母组合频率</li>
+<li>Vigener密码：密钥复制到明文的长度，明文的每一位和密钥的每一位相加再模26，破解方式也是频率</li>
+<li>转轮机（Rotor machine）</li>
+<li>数据加密标准DES</li>
+</ul>
+<p>一些仍有效的密码：AES、Salsa20 等</p>
+<h2 id="Section-2-crash-course-in-discrete-probability"><a href="#Section-2-crash-course-in-discrete-probability" class="headerlink" title="Section 2: crash course in discrete probability"></a>Section 2: crash course in discrete probability</h2><h3 id="Discrete-Probability"><a href="#Discrete-Probability" class="headerlink" title="Discrete Probability"></a>Discrete Probability</h3><p>定义：$U$：有限集，通常是$n$位二进制字符串集，用$\lbrace0,1\rbrace^n$表示，例如$\lbrace0,1\rbrace^2=\lbrace 00,01,10,11 \rbrace$</p>
+<p>定义：全集$U$上的概率分布是函数$P:U\rightarrow[0,1]$，该函数为全集中的每个元素分配一个0到1之间的数，该数称为该元素在全集中的权重或概率，$\sum_{x\in U}P(X)=1$</p>
+<p>分布的例子：</p>
+<ul>
+<li>均匀分布：各元素概率相等，即对于所有$x\in U$，$P(X)=1/|U|$</li>
+<li>在$x_0$的点分布：取值为$x_0$时概率为1，其他时候概率为0</li>
+</ul>
+<p>所有元素的概率分布都列出来可组成一个分布向量</p>
+<p>定义：考虑全集的一个子集$A$，$Pr[A]=\sum_{x\in A}P(X)\in[0,1]$，子集A被称为<strong>事件</strong>。注意：$Pr[U]=1$</p>
+<p>例：$U=\lbrace0,1\rbrace^8, A=\lbrace all\ x\ in\ U such\ that\ lsb_2(x)=11\rbrace\subseteq U$，$lsb_2$是最低两位的意思，这里A是最低两位是11的8位二进制数，若$U$是均匀分布，则$Pr[A]=0.25$</p>
+<p>定义：联合边界：对于事件$A_1$和$A_2$，$Pr[A_1\cup A_2]\leq Pr[A_1]+Pr[A_2]$，当且仅当$A_1\cap A_2=\emptyset$时取等号。</p>
+<p>例：$A_1=\lbrace all\ x\ in\ \lbrace 0,1\rbrace^n \ s.t.\ lsb_2(x)=11\rbrace, A_1=\lbrace all\ x\ in\ \lbrace 0,1\rbrace^n \ s.t.\ msb_2(x)=11\rbrace$</p>
+<p>$Pr[lsb_2(x)=11\ or\ msb_2(x)=11]=Pr[A_1\cap A_2]\leq\frac{1}{4}+\frac{1}{4}=\frac{1}{2}$</p>
+<p>定义：随机变量：一个随机变量$X$是一个从全集映射到某个集合V的函数$X:U\rightarrow V$，集合V被称为随机变量的值域。</p>
+<p>例：$X:\lbrace0,1\rbrace^n\rightarrow\lbrace0,1\rbrace$; $X(y)=lsb(y)\in\lbrace0,1\rbrace$，对于该映射，当U是均匀分布时，可知$Pr[X=0]=Pr[X=1]=\frac{1}{2}$</p>
+<p>更一般地，一个随机变量X从集合V中取值，则该随机变量实际上生成了集合V的概率分布：$Pr[X=v]:=Pr[X^{-1}(v)]$，含义：随机变量输出v的概率等同于从全集中随机抽取一个元素，对其施加函数X，然后判断其输出v的概率。换言之，我们X输出v的概率，就等于从全集中抽一个元素，正好落在v在函数X下的原像中。</p>
+<p>定义：均匀随机变量：假定U是某有限集，例$\lbrace 0,1 \rbrace^n$，则用$r\stackrel{R}\leftarrow U$表示U上的均匀随机变量，对于所有$a\in U: Pr[r=a]=1/|U|$。这里$\stackrel{R}\leftarrow$表示均匀抽样。正式来说，$r$是恒等函数，对于所有$x\in U$而言，$r(x)=x$。</p>
+<ul>
+<li>确定性算法：给定输入，总产生固定的输出：$y\leftarrow A(m)$</li>
+<li>随机化算法：输入的除了给定的m，还有一个隐形参数r，每次执行算法时会重新抽取，因此每次输出会改变，$y\leftarrow A(m;r)\ where\ r\stackrel{R}\leftarrow \lbrace 0,1 \rbrace^n$，即$y\stackrel{R}\leftarrow A(m)$</li>
+</ul>
+<p>例：用随机字符串k来加密输入的消息m，$A(m;k)=F(k,m), y\stackrel{R}\leftarrow A(m)$</p>
+<p>定义：独立性：当$Pr[A\ and\ B]=Pr[A]\cdot Pr[B]$时，事件A和B独立。当$\forall a,b\in V:Pr[X=a\ and\ Y=b]=Pr[X=a]\cdot Pr[Y=b]$时，从集合V中取值的随机变量X和Y独立。</p>
+<p>例：$U=\lbrace 0,1\rbrace^2=\lbrace 00,01,10,11 \rbrace$且$r\stackrel{R}\leftarrow U$，定义随机变量X和Y为$X=lsb(r),Y=msb(r)$，则$Pr[X=0\ and\ Y=0]=Pr[r=00]=\frac{1}{4}=Pr[X=0]\cdot Pr[Y=0]$</p>
+<p>定义：异或XOR：两个$\lbrace 0,1\rbrace^n$上的字符串执行异或操作是指按位加并模2，例如$0110111\oplus 1011010=1101101$。</p>
+<p>定理：异或的属性：Y是$\lbrace 0,1\rbrace^n$上的随机变量，X是$\lbrace 0,1\rbrace^n$上的独立均匀分布变量，则$Z:=Y\oplus X$是$\lbrace 0,1\rbrace^n$上的均匀变量。</p>
+<p>证明（$n=1$）：$Pr[Y=0]=P_0,Pr[Y=1]=P_1, Pr[X=0]=Pr[X=1]=0.5$，联合分布如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Y</th>
+<th>X</th>
+<th>Pr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>$0.5P_0$</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>$0.5P_0$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>$0.5P_1$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>$0.5P_1$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$Pr[Z=0]=Pr[(0,0)or(1,1)]=0.5P_0+0.5P_1=0.5$，类似地，$Pr[Z=1]=0.5$。</p>
+<p>生日悖论：令$r_1,…,r_n\in U$表示独立同分布的随机变量，则当$n=1.2\times |U|^{\frac{1}{2}}$时$Pr[\exists i\neq j:r_i=r_j]\geq \frac{1}{2}$。</p>
+<p>例：$U=\lbrace 0,1 \rbrace^{128}$，采样约$2^{64}$随机消息，则其中两个消息很有可能相同。</p>
+<p>现实一些的例子：多少人聚在一起会有至少两个人的生日相同？一年365天，因此是$1.2\sqrt{365}\approx 23$</p>
+<h2 id="Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers"><a href="#Stream-Ciphers-1-the-one-time-pad-and-stream-ciphers" class="headerlink" title="Stream Ciphers 1: the one-time pad and stream ciphers"></a>Stream Ciphers 1: the one-time pad and stream ciphers</h2><h3 id="Information-Theoretic-Security-and-The-One-Time-Pad"><a href="#Information-Theoretic-Security-and-The-One-Time-Pad" class="headerlink" title="Information Theoretic Security and The One Time Pad"></a>Information Theoretic Security and The One Time Pad</h3><h3 id="Stream-Ciphers-and-Pseudo-Random-Generators"><a href="#Stream-Ciphers-and-Pseudo-Random-Generators" class="headerlink" title="Stream Ciphers and Pseudo Random Generators"></a>Stream Ciphers and Pseudo Random Generators</h3> 
       <!-- reward -->
       
     </div>
