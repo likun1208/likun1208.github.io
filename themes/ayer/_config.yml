@@ -5,7 +5,6 @@ menu:
   分类: /categories
   标签: /tags
   友链: /friends
-  照片: /photos
   个人简历: /cv-ch
   Resume: /cv-en
 
@@ -24,7 +23,7 @@ subtitle:
 
 # 网站图标和侧边栏logo
 favicon: /favicon.ico
-logo: /images/header.jpg
+logo: /images/ayer.png
 
 # 封面配置
 # enable-是否启用封面；path-封面背景图；logo-封面logo

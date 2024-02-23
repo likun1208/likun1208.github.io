@@ -10,7 +10,7 @@ category: 论文
 description: 具有相互依赖的估值的真实移动群智感知
 ---
 ## 综述
-1. 阅读本文的原因：忘了
+1. 阅读本文的原因：真值挖掘相关
 2. 本文研究目的：为移动众包系统设计激励机制，使得用户能够真实地报告它们的传感数据。
 3. 本文与我研究的相关性：也是防谎报的机制，感觉能迁移到其他场景
 4. 本文的潜在假设：用户的报酬函数会受到其他用户报告的传感数据的影响，即存在互相关联的报酬。
@@ -106,9 +106,11 @@ $$
 		x^*(\lambda)=\arg\max_{x\in\mathcal{X}}\sum_{i\in \mathcal{I}}\sum_{n\in\mathcal{N}}f(x_{i,n},\lambda_{i,n}). \tag{4}
 	$$
 	每个用户$i$会被分配一笔支出
+	
 	$$
 h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\max_{\boldsymbol{j}\neq\boldsymbol{i}}\sum_{\boldsymbol{n}\in\boldsymbol{N}}f(x_{j,\boldsymbol{n}},\lambda_{j,\boldsymbol{n}})-\sum_{j\neq i}\sum_{n\in\mathcal{N}}f(x_{j,n}^*(\boldsymbol{\lambda}),\lambda_{j,n})-\epsilon\frac{P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)\right\|_2}, \tag{5}
   $$
+
 其中，$\epsilon\frac{P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)\right\|_2}$是奖励函数，$\epsilon$是待设计的正近似系数，$x_{-i}=\{x_j\}_{j\neq i}$，且$\mathcal{X}_{-i}=\{x_{-i}:\sum_{j\in\mathcal{I},j\neq i}x_{j,n}\leq C_n,\forall n\in\mathcal{N},x_{j,n}\geq0,\forall n\in\mathcal{N},\forall j\neq i\}$。
 
 #### 直观感受
