@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading</title>
+    <url>/2024/02/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Preserved%20Data%20Disturbance%20and%20Truthfulness%20Verification%20for%20Data%20Trading/</url>
+    <content><![CDATA[<h1 id="Privacy-Preserved-Data-Disturbance-and-Truthfulness-Verification-for-Data-Trading"><a href="#Privacy-Preserved-Data-Disturbance-and-Truthfulness-Verification-for-Data-Trading" class="headerlink" title="Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading"></a>Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>两种数据交易方式：初始交易和转卖交易</li>
+<li>面临问题：交易数据的真实性无法通过隐私保护的方式得到保证<ul>
+<li>数据生成者为了保护隐私而给数据添加的扰动是独立随机的，数据消费者无法在其所要求的扰动参数下验证交易数据是否受到扰动，而不会给数据生成者带来隐私泄露</li>
+<li>由于允许转售交易，DC在保护其购买隐私的同时，在数据转售商（DR）的欺骗下很难验证交易数据的来源真实性</li>
+</ul>
+</li>
+<li>本文提出：数据交易的隐私保护数据干扰和真实性验证<ul>
+<li>引入了一个诚实但好奇的交易服务器（TS）来辅助我们设计的隐私可验证印记嵌入式干扰方法，其中印记是盲目的</li>
+<li>TS 通过构建嵌入印记的个人验证公式，并要求被验证的参与者解密公式结果，来实现自适应真实性验证</li>
+<li>被验证的参与者无法通过盲目的印记值来伪造正确的结果，从而确保了所设计验证方法的准确性</li>
+</ul>
+</li>
+<li>理论分析和实验表明了有效性</li>
+</ul>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><ul>
+<li>几个角色定位：<ul>
+<li>数据消费者DC：广告商、服务提供商等</li>
+<li>数据生成者DG</li>
+<li>数据转卖者DR：DC买到数据以后可以再卖给其他人</li>
+</ul>
+</li>
+<li>允许数据生成者以受干扰的版本发布数据从而保护隐私（我理解的就是差分隐私）</li>
+<li>数据交易面临挑战：无法以隐私保护的方式同时保证交易数据的干扰真实性和来源真实性<ul>
+<li>DG可能不按扰动参数添加噪声，而是添加更多噪声，而这难以被其他人验证，同时也存在干扰验证方法，会导致数据隐私泄露</li>
+<li>DR会谎报数据来源以获取更高收益，一些研究通过添加数字水印的方法来确保数据来源可追溯，但带来了较大开销，而基于区块链的方法则暴露了DC的交易行为，带来新的隐私问题。</li>
+</ul>
+</li>
+<li>本文：数据交易的隐私保护数据干扰和真实性验证<ul>
+<li>引入了一个诚实但好奇的交易服务器（TS）来监督DG的独立数据干扰，这使得DG的干扰真实性可验证，同时保护DG的原始数据不被暴露。 </li>
+<li>TS针对参与者多样化的不真实策略，通过设计的加密验证公式来验证交易数据的扰动性和来源真实性，不会带来任何DG的原始数据隐私成本或DC的购买隐私泄露。</li>
+</ul>
+</li>
+<li>贡献：<ul>
+<li>私人可验证的印记嵌入干扰方法：参考差分隐私，TS生成带验证位的噪声，DG基于隐私检索给数据添加随机噪声</li>
+<li>自适应真实性验证方法：TS参考同态加密，构造嵌入印记的个人验证密文公式，并要求验证参与者解密公式结果，同时保留DG的原始数据和DC的购买隐私</li>
+<li>理论分析和实验</li>
+</ul>
+</li>
+</ul>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><p>略过</p>
+<ul>
+<li>扰动真实性方面的研究：博弈论来确定扰动参数，但是DG可能不按照这个参数来添加，有研究做了可验证的扰动参数设置，但又带来隐私泄露的问题。也有真值挖掘和对等预测的方法，但数据交易中的真实数据可能不唯一。另一些通过博弈论设计约束机制的研究，但是DG和DC往往利益冲突，无解。</li>
+<li>数据源真实性方面的研究：<ul>
+<li>设计执行环境限制原始数据交易：限制交易灵活性</li>
+<li>找第三方做相似性比较：可信第三方不好找</li>
+<li>区块链：几个研究本身的场景有局限，方法倒是没问题</li>
+<li>数字水印：几个研究没设计具体算法</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题形式"><a href="#问题形式" class="headerlink" title="问题形式"></a>问题形式</h2><h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><ul>
+<li>DG生成数据，并按照TS提供的噪声给数据添加扰动</li>
+<li>DC获取指定扰动参数的数据，并借助TS验证扰动和来源的真实性</li>
+<li>DR买了数据再转卖，这一过程中要验证扰动和来源的真实性</li>
+<li>TS负责监管，给TS产生噪声，并自适应地验证其扰动和来源的真实性</li>
+</ul>
+<p>整个流程如下：</p>
+<ol>
+<li>TS生成噪声，DG用加法同态加密结合噪声给数据加密，隐私检索使得噪声对于大家都是未知的</li>
+<li>TS构造加密验证公式，要求交易参与方解密公式结果，只有扰动和来源都真实的情况下才能得到正确结果<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3></li>
+</ol>
+<ul>
+<li>$\varepsilon$表示DC希望的隐私参数</li>
+<li>$d$：DG的原始数据</li>
+<li>$\tilde{d}^{(a)}$：DG加扰动后的数据</li>
+<li>$\eta$：添加的扰动噪声（这里感觉是写错了，原文用的是where，但是前面没出现这个字母，而后文扫了一下也没有）</li>
+<li>$O_{\tilde{d}^{(a)}}^{c}$是数据$\tilde{d}^{(a)}$声称的来源，而 $O_{\tilde{d}^{(a)}}^{t}$和 $O_{\tilde{d}^{(a)}}^{u}$分别是真实来源和假来源</li>
+</ul>
+<p>存在的恶意行为：</p>
+<ol>
+<li>DG添加比隐私参数要求更多的噪声</li>
+<li>DC转卖数据时谎报来源</li>
+</ol>
+<p>定义1：隐私保护的扰动真实性的可验证性：在不暴露原数据和噪声的情况下，DC可以验证扰动后的数据=原数据+噪声，也能验证噪声满足差分隐私的要求。</p>
+<p>定义2：隐私保护的来源真实性的可验证性：DC收到数据后可以在不暴露交易隐私的情况下验证数据来源。</p>
+<h3 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h3><p>TS是诚实但好奇的第三方：TS会遵循协议设计噪声等，但对DG的原数据感兴趣，甚至会和DC串通获取原数据</p>
+<p>TS的攻击方式：泄露原数据、泄露噪声</p>
+<p>DG的攻击方式：加更多噪声</p>
+<p>DR的攻击方式：谎报数据来源和扰动参数</p>
+<h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ol>
+<li>交易数据的扰动真实性和来源真实性</li>
+<li>DG原数据的隐私和DC购买行为的隐私</li>
+</ol>
+<h2 id="本文方案"><a href="#本文方案" class="headerlink" title="本文方案"></a>本文方案</h2><ol>
+<li>TS用DC提供的公钥生成一组噪声，每个噪声都带一个验证位，验证的时候，对噪声和验证位分别用DG的公钥加密，然后对两个加密后的数据进行某种运算，就可以得到由扰动参数决定的相关函数$f(\varepsilon)$，运算方式和函数都由TS决定，且每轮都会改变。</li>
+<li>DG生成$n$维密文向量$\omega$，其中第$k$项$w_k$是对1使用DG公钥加密后的密文，而其他位是对0加密的密文。</li>
+<li>TS对$\omega$和前面第一条中带验证的噪声执行内积，得到的结果就是DG需要的随机噪声（DG公钥加密版），由此，DG可以用自己的私钥解密得到使用DC公钥加密的噪声，接着DG通过同态加密对数据添加扰动，这样DG并不知道DC要加多少噪声，也不知道噪声具体是什么样的，但实现了指定噪声量的添加。</li>
+<li>接下来TS构造一个函数，按照函数的运算结果，第一次卖和转卖算出来的会不一样，从而确保来源可追溯。</li>
+</ol>
+<p>概括来说就是分两部分：</p>
+<ol>
+<li>干扰嵌入：这部分的功能是实现保护数据隐私和噪声量隐私的前提下实现对数据的扰动嵌入。具体流程其实前面已经介绍两次了，DC提出指定的差分隐私扰动参数，TS基于参数生成噪声+验证位，DG生成密文向量并发给TS，TS对密文向量和噪声+验证位做内积，得到最终添加的扰动，发给DG，DG可以用私钥解密得到噪声+验证位，然后DG将原数据与噪声相加（注意验证位并不加进去）。当然DG可以在这里添加不满足参数要求的噪声。</li>
+<li>自适应真实性验证：这部分是实现真实性的验证，如前文所说，包括添加噪声量的真实性和来源的真实性。<ol>
+<li>噪声量真实性：简单来说就是构造一个可以用同态加密计算的公式，公式大致是扰动后数据-扰动噪声-原数据+TS随机选的一个数（保密），公式中的每个部分都先用DC公钥加密再用DG公钥加密，TS将公式计算结果先发给DG，DG用私钥解密，解密结果再发给DC，DC再用私钥解密，如果扰动参数没问题，根据同态加密，这样解密完的结果就是TS随机选的那个数。</li>
+<li>来源真实性：计算步骤和前面是一致的，核心思想就是如果这个DG并不是数据的真实来源，那他不可能算出正确结果。</li>
+</ol>
+</li>
+</ol>
+<p>接下来的内容基本上是各功能的证明，以及实验。实验部分用了真实的传感数据，不过自定义了诚实的概率，实验表明本文的方法比baseline更能发现不诚实的交易。</p>
+<h2 id="最终意见"><a href="#最终意见" class="headerlink" title="最终意见"></a>最终意见</h2><p>小修</p>
+<p>summary:<br>The paper presents a novel approach to enhance privacy and truthfulness in data trading. It introduces a system incorporating privacy-preserved data disturbance and truthfulness verification mechanisms to ensure data integrity and confidentiality in trading scenarios. The methodology involves an honest-but-curious trading server to oversee data disturbance, allowing for the verification of data truthfulness while protecting raw data from exposure. The paper also proposes an encrypted verification formula that verifies traded data’s truthfulness without imposing privacy costs on participants.</p>
+<p>strength:</p>
+<ol>
+<li>Innovative Approach: The paper’s proposal for a privacy-preserved data disturbance mechanism coupled with truthfulness verification is novel and addresses significant concerns in data trading.</li>
+<li>Privacy Protection: The methodology ensures that the privacy of the data is maintained throughout the trading process, which is crucial for sensitive or personal information.</li>
+<li>Verification without Privacy Cost: The verification process designed does not add any privacy cost to trading participants, promoting a secure trading environment.</li>
+</ol>
+<p>weakness:</p>
+<ul>
+<li>Related work中两部分的内容都是一长段话，建议分类总结一下，增强可读性</li>
+<li>一些符号和表示方法没有解释，需要补充</li>
+<li>Section IV.B, “Based on the above two modules including the private-verifiable imprint-embedded disturbance and private-verifiable imprint-embedded disturbance,”重复了</li>
+<li>补充一个问题：$\omega$向量的第k位是用DG公钥加密的1，而其余位是用DG公钥加密的0，那么收到向量的TS只需要对比一下哪一位和其他位不同，就可以判断出哪一位是1了吧，这能起到保密作用吗？还是说没有按位加密而是整个向量一起加密？</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>审稿意见</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2023年10月1日-12月31日决算及2024上半年预算</title>
     <url>/2024/01/02/2023%E5%B9%B410%E6%9C%881%E6%97%A5-12%E6%9C%8831%E6%97%A5%E5%86%B3%E7%AE%97%E5%8F%8A2024%E4%B8%8A%E5%8D%8A%E5%B9%B4%E9%A2%84%E7%AE%97/</url>
     <content><![CDATA[<h2 id="2023年10月1日-12月31日决算"><a href="#2023年10月1日-12月31日决算" class="headerlink" title="2023年10月1日-12月31日决算"></a>2023年10月1日-12月31日决算</h2><h3 id="分科目汇总"><a href="#分科目汇总" class="headerlink" title="分科目汇总"></a>分科目汇总</h3><div class="table-container">
@@ -188,7 +314,7 @@
 </ol>
 ]]></content>
       <categories>
-        <category>账本</category>
+        <category>生活记录</category>
       </categories>
       <tags>
         <tag>预算决算</tag>
@@ -323,7 +449,7 @@
 <h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><h4 id="当前局限"><a href="#当前局限" class="headerlink" title="当前局限"></a>当前局限</h4><ol>
 <li>隐私攻击不切实际：很多攻击在现实里没动机，例如不会有访问权限、只在有限的用例中能有作用等，一些数据集的分布假设也不现实。</li>
 <li>DP在LLM的局限性：DP是现阶段的主流隐私方案，但是有以下问题：<ol>
-<li>理论上的最坏情况边界。根据定义，基于差异隐私的法学硕士假设有一个强大的对手可以操纵整个训练数据。隐私参数 (ϵ, δ) 提供最坏情况下的隐私泄露边界。然而，在实际场景中，并不能保证对手完全控制法学硕士的训练数据。因此，实际攻击与根据差分隐私进行隐私泄露的最坏情况概率分析之间仍然存在巨大差距。</li>
+<li>理论上的最坏情况边界。根据定义，基于差异隐私的LLM假设有一个强大的对手可以操纵整个训练数据。隐私参数 (ϵ, δ) 提供最坏情况下的隐私泄露边界。然而，在实际场景中，并不能保证对手完全控制LLM的训练数据。因此，实际攻击与根据差分隐私进行隐私泄露的最坏情况概率分析之间仍然存在巨大差距。</li>
 <li>实用性下降。 DP 调整通常用于相对较小规模的 LM，用于特别简单的下游数据集。尽管一些作品声称，通过仔细的超参数调整，基于 DP 的 LM 可以在某些下游分类任务上实现与不使用 DP 的正常调整类似的性能。然而，当下游任务变得复杂时，大多数工作仍然表现出明显的效用恶化。效用的降低削弱了基于DP的微调的动机。</li>
 </ol>
 </li>
@@ -2093,7 +2219,7 @@ v_{0} \cdot h\left(d_{j}\right)-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+
     <title>论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations</title>
     <url>/2023/08/31/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Truthful%20Mobile%20Crowd%20Sensing%20with%20Interdependent%20Valuations/</url>
     <content><![CDATA[<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><ol>
-<li>阅读本文的原因：忘了</li>
+<li>阅读本文的原因：真值挖掘相关</li>
 <li>本文研究目的：为移动众包系统设计激励机制，使得用户能够真实地报告它们的传感数据。</li>
 <li>本文与我研究的相关性：也是防谎报的机制，感觉能迁移到其他场景</li>
 <li>本文的潜在假设：用户的报酬函数会受到其他用户报告的传感数据的影响，即存在互相关联的报酬。</li>
@@ -2172,15 +2298,19 @@ v_{0} \cdot h\left(d_{j}\right)-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+
 <li>信息空间：每个用户向平台和所有其他用户提交一份自己传感数据的报告$\tilde{\theta}_i \in \Theta_i$（可能是假的）。</li>
 </ul>
 </li>
-<li>阶段二（分配阶段）：<ul>
+<li><p>阶段二（分配阶段）：</p>
+<ul>
 <li>代理函数：平台向所有用户公开一个代理函数$f(x, \lambda): \mathbb{R}_{+}^2 \rightarrow \mathbb{R}$</li>
 <li>信息空间：每个用户向平台提交一个投标向量$\lambda_i=\left\{\lambda_{i, n}\right\}_{n \in \mathcal{N}} \in \mathbb{R}_{+}^N$，所有用户的投标记作$\lambda \triangleq\left\{\lambda_i\right\}_{i \in I}$</li>
-<li>收益函数：给定报告上来的传感信号$\tilde\theta$和提交的$\lambda$，平台选择一个分配方案$x^*(\lambda)=\left\{x_i^\ast(\lambda)\right\}_{i\in\mathcal{I}}$，使得：<script type="math/tex; mode=display">
-  x^*(\lambda)=\arg\max_{x\in\mathcal{X}}\sum_{i\in \mathcal{I}}\sum_{n\in\mathcal{N}}f(x_{i,n},\lambda_{i,n}). \tag{4}</script>每个用户$i$会被分配一笔支出<script type="math/tex; mode=display">
-h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\max_{\boldsymbol{j}\neq\boldsymbol{i}}\sum_{\boldsymbol{n}\in\boldsymbol{N}}f(x_{j,\boldsymbol{n}},\lambda_{j,\boldsymbol{n}})-\sum_{j\neq i}\sum_{n\in\mathcal{N}}f(x_{j,n}^*(\boldsymbol{\lambda}),\lambda_{j,n})-\epsilon\frac{P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)\right\|_2}, \tag{5}</script>其中，$\epsilon\frac{P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)}{\left|P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)\right|_2}$是奖励函数，$\epsilon$是待设计的正近似系数，$x_{-i}=\{x_j\}_{j\neq i}$，且$\mathcal{X}_{-i}=\{x_{-i}:\sum_{j\in\mathcal{I},j\neq i}x_{j,n}\leq C_n,\forall n\in\mathcal{N},x_{j,n}\geq0,\forall n\in\mathcal{N},\forall j\neq i\}$。</li>
+<li><p>收益函数：给定报告上来的传感信号$\tilde\theta$和提交的$\lambda$，平台选择一个分配方案$x^*(\lambda)=\left\{x_i^\ast(\lambda)\right\}_{i\in\mathcal{I}}$，使得：</p>
+<script type="math/tex; mode=display">
+  x^*(\lambda)=\arg\max_{x\in\mathcal{X}}\sum_{i\in \mathcal{I}}\sum_{n\in\mathcal{N}}f(x_{i,n},\lambda_{i,n}). \tag{4}</script><p>每个用户$i$会被分配一笔支出</p>
+<script type="math/tex; mode=display">
+h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\max_{\boldsymbol{j}\neq\boldsymbol{i}}\sum_{\boldsymbol{n}\in\boldsymbol{N}}f(x_{j,\boldsymbol{n}},\lambda_{j,\boldsymbol{n}})-\sum_{j\neq i}\sum_{n\in\mathcal{N}}f(x_{j,n}^*(\boldsymbol{\lambda}),\lambda_{j,n})-\epsilon\frac{P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)\right\|_2}, \tag{5}</script></li>
 </ul>
 </li>
 </ol>
+<p>其中，$\epsilon\frac{P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)}{\left|P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)\right|_2}$是奖励函数，$\epsilon$是待设计的正近似系数，$x_{-i}=\{x_j\}_{j\neq i}$，且$\mathcal{X}_{-i}=\{x_{-i}:\sum_{j\in\mathcal{I},j\neq i}x_{j,n}\leq C_n,\forall n\in\mathcal{N},x_{j,n}\geq0,\forall n\in\mathcal{N},\forall j\neq i\}$。</p>
 <h4 id="直观感受"><a href="#直观感受" class="headerlink" title="直观感受"></a>直观感受</h4><p>用户提交投标从而基于平台预设的代理函数$f(x,\lambda)$决定他们的分配和收益情况。给定函数$f(x,\lambda)$，用户仅需在第二阶段向平台提交N维信息，通信负担很小。此外，在均衡的情况下，满足一定条件的代理函数能够刺激用户提交其边际效用满足特定条件的出价，从而提高均衡时的分配效率（E1）。另一方面，(5) 中设计的支付结构限制了每个用户通过虚假报告操纵 (4) 和 (5) 中结果的能力（将在第 4.3 节中说明）；(5) 中的奖励函数用于诱导每个用户真实地获取感官数据 (E2)。(5) 中奖励函数的选择依赖于$P_{\Theta_i}(\cdot|\cdot)$的设计，可根据第 5 节中说明的系统模型推导得出。</p>
 <h4 id="代理函数"><a href="#代理函数" class="headerlink" title="代理函数"></a>代理函数</h4><p>为了实现（或近似实现）属性（E1）-（E4），平台选择代理函数来满足以下正则条件：</p>
 <p>定义1：正则。如果一个代理函数满足以下条件，则称它是正则的：</p>
@@ -3367,8 +3497,8 @@ B_{\mathcal{H}, \alpha, \gamma}(\Phi, h)=\frac{1}{n} \sum_{i=1}^n\left|h\left(\P
         <category>论文</category>
       </categories>
       <tags>
-        <tag>deep learning</tag>
         <tag>因果推断</tag>
+        <tag>deep learning</tag>
       </tags>
   </entry>
   <entry>
@@ -3421,7 +3551,7 @@ B_{\mathcal{H}, \alpha, \gamma}(\Phi, h)=\frac{1}{n} \sum_{i=1}^n\left|h\left(\P
 </ol>
 ]]></content>
       <categories>
-        <category>账本</category>
+        <category>生活记录</category>
       </categories>
       <tags>
         <tag>预算决算</tag>
@@ -6016,11 +6146,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts3065" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2998" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3065'));
-
+        var myChart = echarts.init(document.getElementById('echarts2998'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -6073,15 +6203,14 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts3759" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2807" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3759'));
-
+        var myChart = echarts.init(document.getElementById('echarts2807'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6128,15 +6257,14 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2246" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9563" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2246'));
-
+        var myChart = echarts.init(document.getElementById('echarts9563'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6182,7 +6310,6 @@ title: {
             }
         ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
@@ -6650,7 +6777,7 @@ p_i,\ &if\ s_i=(1,1), \\
 <p>不过爱尔兰与众不同，西方学术的复兴从那里受益，尽管波埃修斯的作品并未在爱尔兰产生任何影响。</p>
 <h2 id="第二章-大格里高利和法兰克人的新兴权力"><a href="#第二章-大格里高利和法兰克人的新兴权力" class="headerlink" title="第二章 大格里高利和法兰克人的新兴权力"></a>第二章 大格里高利和法兰克人的新兴权力</h2><h2 id="第三章-查理曼与第一次“罗马帝国的复兴”"><a href="#第三章-查理曼与第一次“罗马帝国的复兴”" class="headerlink" title="第三章 查理曼与第一次“罗马帝国的复兴”"></a>第三章 查理曼与第一次“罗马帝国的复兴”</h2><h2 id="第四章-王国的巩固与罗马帝国的第二次复兴"><a href="#第四章-王国的巩固与罗马帝国的第二次复兴" class="headerlink" title="第四章 王国的巩固与罗马帝国的第二次复兴"></a>第四章 王国的巩固与罗马帝国的第二次复兴</h2><h2 id="第五章-末世危险地临近了"><a href="#第五章-末世危险地临近了" class="headerlink" title="第五章 末世危险地临近了"></a>第五章 末世危险地临近了</h2><h2 id="第六章-“真正的皇帝是教宗”"><a href="#第六章-“真正的皇帝是教宗”" class="headerlink" title="第六章 “真正的皇帝是教宗”"></a>第六章 “真正的皇帝是教宗”</h2><h2 id="第七章-教宗分立的漫长世纪"><a href="#第七章-教宗分立的漫长世纪" class="headerlink" title="第七章 教宗分立的漫长世纪"></a>第七章 教宗分立的漫长世纪</h2><h2 id="第八章-天主的代理人"><a href="#第八章-天主的代理人" class="headerlink" title="第八章 天主的代理人"></a>第八章 天主的代理人</h2><h2 id="第九章-法理高奏凯歌"><a href="#第九章-法理高奏凯歌" class="headerlink" title="第九章 法理高奏凯歌"></a>第九章 法理高奏凯歌</h2><h2 id="第十章-理性之光"><a href="#第十章-理性之光" class="headerlink" title="第十章 理性之光"></a>第十章 理性之光</h2><h2 id="第十一章-君主制"><a href="#第十一章-君主制" class="headerlink" title="第十一章 君主制"></a>第十一章 君主制</h2><h2 id="第十二章-对最后的审判与重生的期待"><a href="#第十二章-对最后的审判与重生的期待" class="headerlink" title="第十二章 对最后的审判与重生的期待"></a>第十二章 对最后的审判与重生的期待</h2>]]></content>
       <categories>
-        <category>读书笔记</category>
+        <category>生活记录</category>
       </categories>
       <tags>
         <tag>读书笔记</tag>
@@ -11813,11 +11940,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts5543" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1120" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5543'));
-
+        var myChart = echarts.init(document.getElementById('echarts1120'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -11884,7 +12011,6 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
         }
     ]
 }
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>]]></content>

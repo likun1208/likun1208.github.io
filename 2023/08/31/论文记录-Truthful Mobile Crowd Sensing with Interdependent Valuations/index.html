@@ -97,7 +97,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><ol>
-<li>阅读本文的原因：忘了</li>
+<li>阅读本文的原因：真值挖掘相关</li>
 <li>本文研究目的：为移动众包系统设计激励机制，使得用户能够真实地报告它们的传感数据。</li>
 <li>本文与我研究的相关性：也是防谎报的机制，感觉能迁移到其他场景</li>
 <li>本文的潜在假设：用户的报酬函数会受到其他用户报告的传感数据的影响，即存在互相关联的报酬。</li>
@@ -176,15 +176,19 @@
 <li>信息空间：每个用户向平台和所有其他用户提交一份自己传感数据的报告$\tilde{\theta}_i \in \Theta_i$（可能是假的）。</li>
 </ul>
 </li>
-<li>阶段二（分配阶段）：<ul>
+<li><p>阶段二（分配阶段）：</p>
+<ul>
 <li>代理函数：平台向所有用户公开一个代理函数$f(x, \lambda): \mathbb{R}_{+}^2 \rightarrow \mathbb{R}$</li>
 <li>信息空间：每个用户向平台提交一个投标向量$\lambda_i=\left\{\lambda_{i, n}\right\}_{n \in \mathcal{N}} \in \mathbb{R}_{+}^N$，所有用户的投标记作$\lambda \triangleq\left\{\lambda_i\right\}_{i \in I}$</li>
-<li>收益函数：给定报告上来的传感信号$\tilde\theta$和提交的$\lambda$，平台选择一个分配方案$x^*(\lambda)=\left\{x_i^\ast(\lambda)\right\}_{i\in\mathcal{I}}$，使得：<script type="math/tex; mode=display">
-  x^*(\lambda)=\arg\max_{x\in\mathcal{X}}\sum_{i\in \mathcal{I}}\sum_{n\in\mathcal{N}}f(x_{i,n},\lambda_{i,n}). \tag{4}</script>每个用户$i$会被分配一笔支出<script type="math/tex; mode=display">
-h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\max_{\boldsymbol{j}\neq\boldsymbol{i}}\sum_{\boldsymbol{n}\in\boldsymbol{N}}f(x_{j,\boldsymbol{n}},\lambda_{j,\boldsymbol{n}})-\sum_{j\neq i}\sum_{n\in\mathcal{N}}f(x_{j,n}^*(\boldsymbol{\lambda}),\lambda_{j,n})-\epsilon\frac{P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)\right\|_2}, \tag{5}</script>其中，$\epsilon\frac{P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)}{\left|P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)\right|_2}$是奖励函数，$\epsilon$是待设计的正近似系数，$x_{-i}=\{x_j\}_{j\neq i}$，且$\mathcal{X}_{-i}=\{x_{-i}:\sum_{j\in\mathcal{I},j\neq i}x_{j,n}\leq C_n,\forall n\in\mathcal{N},x_{j,n}\geq0,\forall n\in\mathcal{N},\forall j\neq i\}$。</li>
+<li><p>收益函数：给定报告上来的传感信号$\tilde\theta$和提交的$\lambda$，平台选择一个分配方案$x^*(\lambda)=\left\{x_i^\ast(\lambda)\right\}_{i\in\mathcal{I}}$，使得：</p>
+<script type="math/tex; mode=display">
+  x^*(\lambda)=\arg\max_{x\in\mathcal{X}}\sum_{i\in \mathcal{I}}\sum_{n\in\mathcal{N}}f(x_{i,n},\lambda_{i,n}). \tag{4}</script><p>每个用户$i$会被分配一笔支出</p>
+<script type="math/tex; mode=display">
+h_i(\boldsymbol{\lambda},\tilde{\boldsymbol{\theta}})=\max_{\boldsymbol{x}-i}\max_{\boldsymbol{j}\neq\boldsymbol{i}}\sum_{\boldsymbol{n}\in\boldsymbol{N}}f(x_{j,\boldsymbol{n}},\lambda_{j,\boldsymbol{n}})-\sum_{j\neq i}\sum_{n\in\mathcal{N}}f(x_{j,n}^*(\boldsymbol{\lambda}),\lambda_{j,n})-\epsilon\frac{P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)}{\left\|P_{\Theta_{-i}}(\tilde{\boldsymbol{\theta}}_{-i}|\tilde{\boldsymbol{\theta}}_i)\right\|_2}, \tag{5}</script></li>
 </ul>
 </li>
 </ol>
+<p>其中，$\epsilon\frac{P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)}{\left|P_{\Theta_{-i}}(\tilde{\theta}_{-i}|\tilde{\theta}_i)\right|_2}$是奖励函数，$\epsilon$是待设计的正近似系数，$x_{-i}=\{x_j\}_{j\neq i}$，且$\mathcal{X}_{-i}=\{x_{-i}:\sum_{j\in\mathcal{I},j\neq i}x_{j,n}\leq C_n,\forall n\in\mathcal{N},x_{j,n}\geq0,\forall n\in\mathcal{N},\forall j\neq i\}$。</p>
 <h4 id="直观感受"><a href="#直观感受" class="headerlink" title="直观感受"></a>直观感受</h4><p>用户提交投标从而基于平台预设的代理函数$f(x,\lambda)$决定他们的分配和收益情况。给定函数$f(x,\lambda)$，用户仅需在第二阶段向平台提交N维信息，通信负担很小。此外，在均衡的情况下，满足一定条件的代理函数能够刺激用户提交其边际效用满足特定条件的出价，从而提高均衡时的分配效率（E1）。另一方面，(5) 中设计的支付结构限制了每个用户通过虚假报告操纵 (4) 和 (5) 中结果的能力（将在第 4.3 节中说明）；(5) 中的奖励函数用于诱导每个用户真实地获取感官数据 (E2)。(5) 中奖励函数的选择依赖于$P_{\Theta_i}(\cdot|\cdot)$的设计，可根据第 5 节中说明的系统模型推导得出。</p>
 <h4 id="代理函数"><a href="#代理函数" class="headerlink" title="代理函数"></a>代理函数</h4><p>为了实现（或近似实现）属性（E1）-（E4），平台选择代理函数来满足以下正则条件：</p>
 <p>定义1：正则。如果一个代理函数满足以下条件，则称它是正则的：</p>
@@ -464,7 +468,7 @@ J_i^{\beta_i^*}\left(\lambda^*(\theta) \mid \theta\right) \geq 0, \forall i \in 
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/header.jpg" alt="左边"></a>
+    <a href="/"><img src="/images/ayer.png" alt="左边"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -487,10 +491,6 @@ J_i^{\beta_i^*}\left(\lambda^*(\theta) \mid \theta\right) \geq 0, \forall i \in 
     
     <li class="nav-item">
       <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/photos">照片</a>
     </li>
     
     <li class="nav-item">
