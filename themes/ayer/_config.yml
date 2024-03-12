@@ -12,7 +12,7 @@ menu:
 # https://github.com/mattboldt/typed.js
 subtitle:
   enable: true # 是否开启动效
-  text: 三月樱，六月雪，也望尘莫及 # 显示的文字
+  text: 那可是我的梦啊 # 显示的文字
   #text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空
   #text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字
   startDelay: 0 # 延迟时间
@@ -194,12 +194,12 @@ friends_link:
 # 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)
 # 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可
 leancloud:
-  enable: false
-  app_id: #
-  app_key: #
+  enable: true
+  app_id: VqvB5y0diPuBd9JFy4kQbHxz-gzGzoHsz
+  app_key: Gmmb4mTXjSDf8ndcJ0ex4Ufi
 # Valine配置
 valine:
-  enable: false # 是否启用
+  enable: true # 是否启用
   avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)
   placeholder: 给我的文章加点评论吧~ # placeholder
 

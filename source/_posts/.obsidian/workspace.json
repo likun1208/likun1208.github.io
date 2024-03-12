@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "6b4755cdaa731810",
+        "id": "582c4ec3e6f2d3fc",
         "type": "tabs",
         "children": [
           {
-            "id": "dd414c04b7010e76",
+            "id": "f68b48a51f442bfa",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,9 +130,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -158,19 +150,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "dd414c04b7010e76",
+  "active": "f68b48a51f442bfa",
   "lastOpenFiles": [
-    "LLM+隐私保护总结.md",
-    "论文记录-LLM+Privacy Survey总结.md",
-    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
-    "读书笔记-中世纪历史与文化.md",
-    "2023年2月1日-6月30日预算.md",
-    "2023年10月1日-12月31日决算及2024上半年预算.md",
-    "论文记录-Best reply structure and equilibrium convergence in generic games.md",
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
+    "hexo-next-github配置blog.md",
     "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+    "2023年10月1日-12月31日决算及2024上半年预算.md",
+    "2023年2月1日-6月30日预算.md",
+    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
+    "论文记录-LLM+Privacy Survey总结.md",
+    "LLM+隐私保护总结.md",
+    "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
+    "读书笔记-中世纪历史与文化.md",
+    "论文记录-Best reply structure and equilibrium convergence in generic games.md",
+    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
     "论文记录-A Survey of Deep Causal Model.md",
     "论文记录-A solution to the single-question crowd wisdom problem.md",
@@ -179,12 +173,10 @@
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
     "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
     "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
     "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
     "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
-    "论文记录-Evolution of cooperation in stochastic games.md",
-    "论文记录-Eliciting Thinking Hierarchy without a Prior.md"
+    "论文记录-Evolution of cooperation in stochastic games.md"
   ]
 }

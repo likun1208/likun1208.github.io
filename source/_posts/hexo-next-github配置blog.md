@@ -887,6 +887,16 @@ albums: [["imgurl", "imgcaption"], ["imgurl", "imgcaption"]]
 3.  然后把要添加的图片放到`photos`文件夹中，并把`index.md`文件夹中的`imgurl`和`imgcaption`修改成图像的路径和标题，路径要注意带上级文件夹，和后缀名，例如我的路径就是`photos/ff14-伊修加德.png`。
 4. 部署后就能看到照片了，之后再加新的照片就也是复制进来，然后打开`index.md`文件，在`albums`的方括号里添加新的链接和标题。
 
+## 评论
+目前是在ayer主题下添加的评论，用了[Valine](https://valine.js.org/)，设置流程如下：
+
+1. 注册[leancloud](https://www.leancloud.cn/)，需要填邮箱、密码等信息，注册完之后回首页，进入控制台，创建应用，选免费的开发版；
+2. 创建好应用后，进入应用—>设置—>应用凭证，可以看到AppID和AppKey；
+3. 打开ayer的主题配置文件，拉到最下面，找到`leancloud`字段，把它下面的`enable`设置为`true`，`app id`和`app key`分别设置成上一步页面中看到的ID和Key；
+4. 在`leancloud`下面有`valine`字段，把`enable`设置为`true`，`avatar`和`placeholder`分别表示评论头像和评论区的提示语，可以根据喜好修改，不改也行；
+5. 保存后重新生成网站就好了。
+
+
 ## 参考链接：
 
 https://segmentfault.com/a/1190000018761324
