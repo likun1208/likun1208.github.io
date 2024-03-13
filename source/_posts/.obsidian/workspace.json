@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "582c4ec3e6f2d3fc",
+        "id": "08d7d9f2d99fa1d0",
         "type": "tabs",
         "children": [
           {
-            "id": "f68b48a51f442bfa",
+            "id": "0eda58e38173dbac",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -34,7 +34,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "byModifiedTime"
               }
             }
           },
@@ -150,15 +150,18 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "f68b48a51f442bfa",
+  "active": "0eda58e38173dbac",
   "lastOpenFiles": [
+    "论文记录-SECURE TRANSFORMER INFERENCE.md",
+    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
+    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+    "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
     "hexo-next-github配置blog.md",
     "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
     "2023年10月1日-12月31日决算及2024上半年预算.md",
     "2023年2月1日-6月30日预算.md",
     "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
-    "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
     "论文记录-LLM+Privacy Survey总结.md",
     "LLM+隐私保护总结.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
@@ -174,9 +177,6 @@
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
     "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
     "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
-    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
-    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
-    "论文记录-Evolution of cooperation in stochastic games.md"
+    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md"
   ]
 }
