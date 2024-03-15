@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "08d7d9f2d99fa1d0",
+        "id": "becc2033ec510fe0",
         "type": "tabs",
         "children": [
           {
-            "id": "0eda58e38173dbac",
+            "id": "3b63a1fdd2e23489",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -150,8 +150,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0eda58e38173dbac",
+  "active": "3b63a1fdd2e23489",
   "lastOpenFiles": [
+    "生活记录-20240315.md",
+    "daily-1 2.jpg",
+    "daily-1 1.jpg",
+    "daily-1.jpg",
+    "2023年2月1日-6月30日预算.md",
+    "读书笔记-中世纪历史与文化.md",
     "论文记录-SECURE TRANSFORMER INFERENCE.md",
     "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
     "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
@@ -160,12 +166,10 @@
     "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
     "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
     "2023年10月1日-12月31日决算及2024上半年预算.md",
-    "2023年2月1日-6月30日预算.md",
     "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-LLM+Privacy Survey总结.md",
     "LLM+隐私保护总结.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
-    "读书笔记-中世纪历史与文化.md",
     "论文记录-Best reply structure and equilibrium convergence in generic games.md",
     "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
     "论文记录-A Bayesian Truth Serum for Subjective Data.md",
@@ -175,8 +179,6 @@
     "论文记录-Theories of Bargaining Delays.md",
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
-    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md"
+    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md"
   ]
 }
