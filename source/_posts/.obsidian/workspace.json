@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "becc2033ec510fe0",
+        "id": "af25fd7fea7dd449",
         "type": "tabs",
         "children": [
           {
-            "id": "3b63a1fdd2e23489",
+            "id": "9f5926f4c51bfe2e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -34,7 +38,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byModifiedTime"
+                "sortOrder": "alphabetical"
               }
             }
           },
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -130,7 +136,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md"
+              }
             }
           }
         ],
@@ -150,35 +158,36 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3b63a1fdd2e23489",
+  "active": "9f5926f4c51bfe2e",
   "lastOpenFiles": [
-    "生活记录-20240315.md",
-    "daily-1 2.jpg",
-    "daily-1 1.jpg",
-    "daily-1.jpg",
-    "2023年2月1日-6月30日预算.md",
-    "读书笔记-中世纪历史与文化.md",
-    "论文记录-SECURE TRANSFORMER INFERENCE.md",
-    "论文记录-CipherGPT Secure Two-Party GPT Inference.md",
-    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
-    "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
-    "hexo-next-github配置blog.md",
-    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
-    "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
-    "2023年10月1日-12月31日决算及2024上半年预算.md",
-    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
-    "论文记录-LLM+Privacy Survey总结.md",
-    "LLM+隐私保护总结.md",
+    "论文记录-Secure Transformer Inference.md",
+    "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
+    "论文记录-Beyond Finite Layer Neural Networks Bridging Deep Architectures And Numerical Differential Equations.md",
+    "论文记录-Arthur Gervais论文略读记录.md",
     "论文记录-Using game theory to thwart multistage privacy intrusions when sharing data.md",
-    "论文记录-Best reply structure and equilibrium convergence in generic games.md",
-    "论文记录-An Efficient Anonymous Authentication and Reputation Management Scheme for Mobile Crowdsensing in Vehicular Networks.md",
-    "论文记录-A Bayesian Truth Serum for Subjective Data.md",
-    "论文记录-A Survey of Deep Causal Model.md",
-    "论文记录-A solution to the single-question crowd wisdom problem.md",
-    "论文记录-A Robust Bayesian Truth Serum for Small Populations.md",
+    "论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations.md",
+    "论文记录-Tiered Mechanisms for Blockchain Transaction Fees.md",
     "论文记录-Theories of Bargaining Delays.md",
+    "论文记录-The universal visitation law of human mobility.md",
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
-    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md"
+    "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
+    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+    "论文记录-PUMA Secure Inference Of LLaMa-7b In Five Minutes.md",
+    "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
+    "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
+    "论文记录-Privacy-Policy-in-Online-Social-Network-with-Targeted-Advertising-Business.md",
+    "论文记录-Peer Prediction-Based Trustworthiness Evaluation and Trustworthy Service Rating in Social Networks.md",
+    "论文记录-Optimal and Quantized Mechanism Design for Fresh Data Acquisition.md",
+    "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
+    "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
+    "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
+    "论文记录-LLM+Privacy Survey总结.md",
+    "论文记录-INFOCOM 2024审稿.md",
+    "论文记录-Fast randomized consensus using shared memory.md",
+    "论文记录-Evolution of cooperation in stochastic games.md",
+    "daily-1 2.jpg",
+    "daily-1 1.jpg",
+    "daily-1.jpg"
   ]
 }

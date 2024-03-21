@@ -1,11 +1,11 @@
 ---
-title: 论文记录-ARTHUR GERVAIS论文略读记录
+title: 论文记录-Arthur Gervais论文略读记录
 date: 2023-09-25 09:14:36
 tags:
   - blockchain
   - defi
 categories: 论文
-description: arthur gervais的论文略读，主要关注defi的内容，挑几个出来详细看看
+description: Arthur Gervais的论文略读，主要关注defi的内容，挑几个出来详细看看
 ---
 # 1. A Study of Inline Assembly in Solidity Smart Contracts
 这篇内容是关于Solidity内联汇编带来的安全性问题，对内联汇编的使用情况做了定量和定性分析。和DeFi没什么关系，先不看了。

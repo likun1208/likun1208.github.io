@@ -8,8 +8,8 @@ category: 论文
 ---
 # FractalNet的ODE建模
 
-论文1：BEYOND FINITE LAYER NEURAL NETWORKS: BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS
+论文1：Beyond Finite Layer Neural Networks: Bridging Deep Architectures And Numerical Differential Equations
 
-论文2：FRACTALNET: ULTRA-DEEP NEURAL NETWORKS WITHOUT RESIDUALS
+论文2：Fractalnet: Ultra-Deep Neural Networks Without Residuals
 
 <!--more-->

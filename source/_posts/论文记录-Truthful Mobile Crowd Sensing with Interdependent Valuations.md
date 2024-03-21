@@ -1,6 +1,6 @@
 ---
 title: 论文记录-Truthful Mobile Crowd Sensing with Interdependent Valuations
-date: 2023-8-31 21:35:43
+date: 2023-08-31 21:35:43
 tags:
   - trustworthiness
   - crowdsourcing

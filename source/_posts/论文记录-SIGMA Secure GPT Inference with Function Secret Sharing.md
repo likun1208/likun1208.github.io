@@ -1,6 +1,6 @@
 ---
 title: "论文记录-SIGMA: Secure GPT Inference with Function Secret Sharing"
-date: 2023-01-08 16:45:50
+date: 2024-03-21 11:58:50
 tags:
   - LLM
   - Privacy

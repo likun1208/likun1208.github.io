@@ -1,6 +1,6 @@
 ---
-title: 论文记录-SECURE TRANSFORMER INFERENCE
-date: 2023-12-08 15:56:00
+title: 论文记录-Secure Transformer Inference
+date: 2024-03-21 11:57:00
 tags:
   - LLM
   - Privacy
@@ -9,7 +9,7 @@ tags:
 categories: 论文
 description: LLM和MPC结合的论文之一
 ---
-# SECURE TRANSFORMER INFERENCE
+# Secure Transformer Inference
 
 ## Abstract
 
