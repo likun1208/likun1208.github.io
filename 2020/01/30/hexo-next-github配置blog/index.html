@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">10.6k</span>
+            <span class="post-count">10.8k</span>
         </span>
     </span>
 
@@ -392,6 +392,14 @@
 <li>然后把要添加的图片放到<code>photos</code>文件夹中，并把<code>index.md</code>文件夹中的<code>imgurl</code>和<code>imgcaption</code>修改成图像的路径和标题，路径要注意带上级文件夹，和后缀名，例如我的路径就是<code>photos/ff14-伊修加德.png</code>。</li>
 <li>部署后就能看到照片了，之后再加新的照片就也是复制进来，然后打开<code>index.md</code>文件，在<code>albums</code>的方括号里添加新的链接和标题。</li>
 </ol>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>目前是在ayer主题下添加的评论，用了<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a>，设置流程如下：</p>
+<ol>
+<li>注册<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud</a>，需要填邮箱、密码等信息，注册完之后回首页，进入控制台，创建应用，选免费的开发版；</li>
+<li>创建好应用后，进入应用—&gt;设置—&gt;应用凭证，可以看到AppID和AppKey；</li>
+<li>打开ayer的主题配置文件，拉到最下面，找到<code>leancloud</code>字段，把它下面的<code>enable</code>设置为<code>true</code>，<code>app id</code>和<code>app key</code>分别设置成上一步页面中看到的ID和Key；</li>
+<li>在<code>leancloud</code>下面有<code>valine</code>字段，把<code>enable</code>设置为<code>true</code>，<code>avatar</code>和<code>placeholder</code>分别表示评论头像和评论区的提示语，可以根据喜好修改，不改也行；</li>
+<li>保存后重新生成网站就好了。</li>
+</ol>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
 <p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
 <p><a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
@@ -483,7 +491,55 @@
     
   </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "VqvB5y0diPuBd9JFy4kQbHxz-gzGzoHsz",
+    app_key: "Gmmb4mTXjSDf8ndcJ0ex4Ufi",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
    
      
 </article>

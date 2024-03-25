@@ -276,6 +276,15 @@
    
   <nav class="article-nav">
     
+      <a href="/2024/03/15/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95-20240315/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            生活记录-20240315
+          
+        </div>
+      </a>
+    
     
       <a href="/2024/01/02/2023%E5%B9%B410%E6%9C%881%E6%97%A5-12%E6%9C%8831%E6%97%A5%E5%86%B3%E7%AE%97%E5%8F%8A2024%E4%B8%8A%E5%8D%8A%E5%B9%B4%E9%A2%84%E7%AE%97/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
@@ -284,7 +293,55 @@
     
   </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "VqvB5y0diPuBd9JFy4kQbHxz-gzGzoHsz",
+    app_key: "Gmmb4mTXjSDf8ndcJ0ex4Ufi",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
    
      
 </article>

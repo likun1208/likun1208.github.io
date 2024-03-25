@@ -1,6 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>论文记录-空间众包任务分配总结</title>
+    <url>/2024/03/25/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-%E7%A9%BA%E9%97%B4%E4%BC%97%E5%8C%85%E4%BB%BB%E5%8A%A1%E5%88%86%E9%85%8D%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="空间众包任务分配总结"><a href="#空间众包任务分配总结" class="headerlink" title="空间众包任务分配总结"></a>空间众包任务分配总结</h1><h2 id="1-A-PLAN-for-Tackling-the-Locust-Crisis-in-East-Africa-Harnessing-Spatiotemporal-Deep-Models-for-Locust-Movement-Forecasting"><a href="#1-A-PLAN-for-Tackling-the-Locust-Crisis-in-East-Africa-Harnessing-Spatiotemporal-Deep-Models-for-Locust-Movement-Forecasting" class="headerlink" title="1 - A PLAN for Tackling the Locust Crisis in East Africa Harnessing Spatiotemporal Deep Models for Locust Movement Forecasting"></a>1 - A PLAN for Tackling the Locust Crisis in East Africa Harnessing Spatiotemporal Deep Models for Locust Movement Forecasting</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>crowdsourcing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-SIGMA: Secure GPT Inference with Function Secret Sharing</title>
+    <url>/2024/03/21/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SIGMA%20Secure%20GPT%20Inference%20with%20Function%20Secret%20Sharing/</url>
+    <content><![CDATA[<h1 id="SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing"><a href="#SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing" class="headerlink" title="SIGMA: Secure GPT Inference with Function Secret Sharing"></a>SIGMA: Secure GPT Inference with Function Secret Sharing</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>安全两方计算</li>
+<li>现有的安全推理解决方案面临着高延迟和通信开销的问题，尤其是transformer</li>
+<li>函数秘密共享（FSS）是一种通过预处理阶段获得高效 2PC 协议的最新范例</li>
+<li>本文：SIGMA——第一个基于 FSS 的安全transformer推理端到端系统<ul>
+<li>通过为复杂的机器学习功能（例如 Softmax 和 GeLU）构建新的基于 FSS 的协议，并加速它们在 GPU 上的计算，SIGMA 将 Transformer 安全推理的延迟比使用现有技术的现有技术提高了 11 − 19 倍预处理和 GPU。</li>
+<li>我们提出了生成式预训练 Transformer (GPT) 模型的第一个安全推理。特别是，SIGMA 在 7.4 秒内执行了 13 亿个参数的 GPT-Neo，在 1.6 秒内执行了 HuggingFace 的 GPT2。<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>对安全推理问题的定义：</li>
+</ul>
+</li>
+<li>模型提供商拥有专有的机器学习 (ML) 模型，将其作为服务提供</li>
+<li>客户希望了解其敏感数据的推理结果</li>
+<li>安全要求是除了推理输出之外，客户端不应了解任何有关模型的信息，并且模型提供者不应了解有关客户端输入的任何信息</li>
+</ul>
+<p>2PC的发展：</p>
+<ol>
+<li>具有数千个参数的模型扩展到[10]、[39]、[48]、[50]–[52]、[55]、[58]、[60] ]、[62]、[72]</li>
+<li>具有数百万个参数的模型 [20]、[32]、[35]、[38]、[42]、[59]、[73]、[76]</li>
+<li>到目前为止具有数亿个参数的 BERT 模型 [7]、[19]、[33]、[41]、[45]</li>
+<li>本文：提供具有数十亿参数的生成预训练 Transformer (GPT) 模型的安全推理</li>
+</ol>
+<p>用于安全机器学习推理的系统必须满足以下要求：</p>
+<ol>
+<li>准确性：即安全推理下的准确性应与明文的准确性相匹配</li>
+<li>安全性：即系统应提供标准的2PC安全性</li>
+<li>效率：即，安全推理的延迟和通信开销应该很低</li>
+<li>可扩展性：即，系统必须扩展到具有数十亿个参数的模型。</li>
+</ol>
+<p>这里列了几个安全transformer推理模型和缺点，survey中可以对比。</p>
+<p>本文贡献：和CipherGPT差不多，也是针对各操作设计了安全计算协议，包括矩阵乘法、激活函数等。</p>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h3><ol>
+<li>$\lambda$：计算安全参数</li>
+<li>$N=2^n,L=2^l$</li>
+<li>$\mathbb{R}$：实数集，$\mathbb{U}_{2^n}$：n位无符号整数集</li>
+<li>用2补数表示$\mathbb{U}_{N}$中的有符号数</li>
+<li>对于$x\in\mathbb{U}_N$，$int_n(x),uint_n(x)$分别表示$\mathbb{Z}$中的有符号整数和无符号整数</li>
+<li>粗体表示数字，普通字体带$[i]$表示第i个元素，如$\mathbf{a}=\lbrace a[0],a[1],a[2]… \rbrace$</li>
+<li>定点数表示法：由位宽n和精度f参数化，将实数$r\in\mathbb{R}$编码为一个n位整数$x\in\mathbb{U}_N$使得$x=\lfloor r\cdot 2f \rfloor/\ mod\ N$。反过来，精度为f的n位定点数x解码为一个实数$\frac{int_n(x)}{2^f}$</li>
+<li>操作符：对于谓词$b$，如果b为真，则$1\lbrace b\rbrace\in\lbrace 0,1\rbrace$返回1，否则返回0。</li>
+<li>对于$n\lt l,x\in\mathbb{U}_N$，$extend_{n,l}(x)$返回x左侧附加$(l-n)$个0。</li>
+<li>对于$x\in\mathbb{U}_N$，$MSB_n(x)\in\lbrace 0,1\rbrace$表示 x 的最高有效位。</li>
+<li>秘密共享：对于$x\in\mathbb{U}_N$，秘密共享是对随机共享$x_0,x_1\in\mathbb{U}_N$的采样，使得$x=x_0+x_1\ mod\ N$成立，并用$share(x)$表示。当$P_0$持有$x_0$且$P_1$持有$x_1$时，我们用$reconstruct(x_b), b\in\lbrace 0,1\rbrace$表示交换共享并将其相加从而重构基础值的过程。</li>
+</ol>
+<h3 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h3><p>这项工作考虑了预处理模型中的标准二方安全计算 [8, 9, 14, 22, 37]，在安全机器学习领域也受到了大量关注 [32, 38, 41, 63, 64, 76]。也就是说，存在两个方$P_0$和$P_1$，其输入为$x_0$和$x_1$，希望计算公共函数$y = f(x_0, x_1)$，而不向对方透露任何超出函数输出y之外的信息。在预处理阶段独立于函数输入$x_0$和$x_1$，相关随机性被生成并提供给$P_0$和$P_1$。这种随机性可以通过多种方式生成 —— 可信第三方 [11, 14, 32, 38, 41, 63, 64, 76]，通用的2PC协议 [28, 78]，或者更高效的专用2PC协议 [24]。在这项工作中，我们考虑第一种方法。我们的所有协议都满足标准的模拟安全性定义 [17, 28, 47]，在半诚实的静态多项式时间(PPT)攻击者模型下提供安全性，该攻击者破坏$P_0$或$P_1$中的一个。</p>
+<h3 id="FSS"><a href="#FSS" class="headerlink" title="FSS"></a>FSS</h3><p>函数秘密共享是一对算法<code>(Gen, Eval)</code>，Gen将函数g拆分为两个函数份额$(g_0,g_1)$，Eval则输入$b\in\lbrace 0,1\rbrace$、函数$g_0$和x，并返回$g_b(x)$。一个FSS方案的正确性要求$g_0(x)+ g_1(x)= g(x)$对于所有的$x$成立。安全性要求则是每个函数份额$g_b$会隐藏底层函数$g$。</p>
+<p>定义1：一个两方FSS方案是一对算法<code>(Gen,Eval)</code>使得：</p>
+<ul>
+<li>$Gen(1^\lambda,\hat{g})$是一个PPT（概率多项式时间）密钥生成算法，它接受安全参数$1^\lambda$和函数g的描述$\hat{g}\in\lbrace 0,1\rbrace^*$，输出一对密钥$(k_0, k_1)$。我们假设$\hat{g}$明确地包含输入和输出群$\mathbb{G}^{in}, \mathbb{G}^{out}$的描述。</li>
+<li>$Eval(b,k_b,x)$是多项式时间评估算法，输入计算方索引$b\in\lbrace 0,1\rbrace$、$g_b:\mathbb{G}^{in}\rightarrow\mathbb{G}^{out}$定义的密钥$k_0$和$g_b$的输入$x\in\mathbb{G}^{in}$，输出$g_b(x)$的值$y_0\in\mathbb{G}^{out}$。</li>
+</ul>
+<p>$(k_0, k_1)$被称为FSS密钥。用于存储一个FSS密钥所需要的比特数称为密钥大小。</p>
+<h3 id="2PC"><a href="#2PC" class="headerlink" title="2PC"></a>2PC</h3><p>考虑具有门$\lbrace g_i\rbrace_i$和线$\lbrace w_i\rbrace_i$的电路的安全计算，我们分两阶段描述使用了[14]中的FSS进行预处理的2PC协议。</p>
+<p>离线阶段。对于每个线$w_i$，从适当的组中采样一个随机掩码$r_i$，然后，对于每个具有输入线$w_i$和输出线$w_j$的门$g$，为其偏移函数$g^{[r_i,r_j]}(x)=g(x-r_i)+r_j$生成一个FSS密钥，并为每一方提供一个密钥。对于属于<code>b</code>方电路的输入和输出线，该方还知道与这些线相关联的掩码。</p>
+<p>在线阶段。对于b方拥有的值为$x_i$的每条输入线$w_i$，b方计算$\hat{x}_i=x_i+r_i$并发送给1-b方。现在，双方按拓扑顺序评估电路门。为了评估有着输入和输出线$w_i$和$w_j$的门，双方评估$\hat{x}_i$上相应的FSS密钥，以获得$\hat{x}_j=g^{[r_i,r_j]}(\hat{x}_i)=g(\hat{x}_i-r_i)+r_j=g(x_i)+r_j$。然后各方重建份额以获得掩码值$\hat{x}_j$。对于输出线，拥有线的一方减去相应的掩码即可得到最终的输出值。</p>
+<p>协议结构和FSS协议的安全性。我们使用$(\hat{\cdot})$表示掩码值。考虑一个函数F和输入x能使得$y=F(x)$。针对F的协议记作$\Pi^F$，有两个阶段$Gen^F$和$Eval^F$。</p>
+<ul>
+<li>前者在预处理阶段对输入和输出掩码$r^{in},r^{out}$执行，以生成可用于$P_0,P_1$的预处理材料或密钥。存储$\Pi^F$的密钥所需的位数称为密钥大小，用$keysize(\Pi^F)$表示。</li>
+<li>后者是$P_0,P_1$于在线阶段在掩码输入$\hat{x}=x+r^{in}$和它们各自密钥上运行的协议。在该阶段结束时，$P_0,P_1$学习掩码输出值$\hat{y}=y+r^{out}$。</li>
+</ul>
+<p>本文提出的所有协议都具有上述结构。</p>
+<p>安全性通过以下两个交互定义：</p>
+<ul>
+<li>真实交互。$Gen^F$在预处理阶段执行（输入和输出掩码为$r^{in},r^{out}$），$P_0,P_1$使用预处理阶段获取的密钥于在现阶段执行$Eval^F$。该交互发生在存在对手A和环节Z的情况下。</li>
+<li>理想交互。$P_0,P_1$发送输入到能诚实计算功能的功能（即，去掩码$\hat{x}$以得到<code>x</code>，计算$y=F(x)$，计算$\hat{y}=y+r^{out}$并提供$\hat{y}$的份额给$P_0,P_1$）。</li>
+</ul>
+<p>如果对于真实交互中的每个对手A，在理想交互中都存在对手S（称为模拟器），使得没有环境Z能区分这两种交互，我们就说协议$\Pi^F$安全地实现了功能F。</p>
+<h3 id="DPF"><a href="#DPF" class="headerlink" title="DPF"></a>DPF</h3><p>点函数$f_{\alpha,\beta}^{\bullet}:\mathbb{U}_N\rightarrow \mathbb{G}^{out}$输入$x\in\mathbb{U}_N$，如果$x=\alpha$则输出$\beta\in\mathbb{G}^{out}$，反之则输出0。点函数对应的FSS方案被称为分布点函数。</p>
+<p>$(k_0^{\bullet},k_1^{\bullet})\leftarrow Gen_n^{\bullet}(1^\lambda,\alpha,\beta,\mathbb{G}^{out})$</p>
+<p>$y_b=Eval_n^{\bullet}(b,k_b^{\bullet},x),x\in\mathbb{U}_N$</p>
+<p>对于所有协议，取$\mathbb{G}^{out}=\lbrace 0,1\rbrace,\beta=1$就够了，这使得我们可以利用带有提前终止优化的分布式点函数构造(这适用于小负载)。</p>
+<p>定理1（DPF的成本）给定PRG $G:\lbrace 0,1\rbrace^\lambda\rightarrow\lbrace0,1\rbrace^{2\lambda+2}$并令$v=\log_2(\lambda+1)$。当$n\gt v$，存在一个$f_{\alpha,1}^{\bullet}$的DPF：$\mathbb{U}_N\rightarrow\lbrace 0,1\rbrace$，其密钥大小是$(n-v)\cdot(\lambda+2)+2\lambda$。在$Gen_n^{\bullet}$中PRG的调用次数是$2(n-v)$，在$Eval_n^{\bullet}$中的用次数是$n-v$。当$n\leq v$时，需要$2^n$的keysize以及$Gen_n^{\bullet},Eval_n^{\bullet}$PRG调用次数为0。</p>
+<p>与其他FSS的工作类似，我们设$\lambda=127$，并在计数器模式下使用两次AES-128调用来实现所需的长度加倍 PRG。正如之前所观察到的，单个 AES 调用足以满足$Eval_n^{\bullet}$，因为仅使用了一半的输出。从现在开始，我们将其称为半 PRG 调用。</p>
+<h3 id="使用DPF密钥比较"><a href="#使用DPF密钥比较" class="headerlink" title="使用DPF密钥比较"></a>使用DPF密钥比较</h3><p>比较函数$f_{\alpha,\beta}^{\lt}:\mathbb{U}_N\rightarrow\mathbb{G}^{out}$输入$x\in\mathbb{U}_N$，如果$x\lt\alpha$则返回$\beta\in\mathbb{G}^{out}$，否则返回0。之前的研究都用一个特殊的名为DCF的FSS方案来实现这个功能。最近一个研究展示了当$\mathbb{G}^{out}=\lbrace 0,1\rbrace,\beta=1$时，FSS方案可以通过DPF来构造。</p>
+<p>定理2：使用DPF的FSS方案。存在一个算法$Eval_n^\lt$使得$\forall x,\alpha\in\mathbb{U}_N$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \left(k_0^{\bullet}, k_1^{\bullet}\right) \leftarrow \operatorname{Gen}_n^{\bullet}\left(1^\lambda, \alpha, 1,\{0,1\}\right) \\
+\Longrightarrow & \operatorname{Eval}_n^{<}\left(0, x, k_0^{\bullet}\right)+\operatorname{Eval}_n^{<}\left(1, x, k_1^{\bullet}\right)=f_{\alpha, 1}^{<}(x)
+\end{aligned}</script><p>且$Eval_n^\lt$调用了DPF half-PRG $\max(n-v,0)$次。因此，$(Gen_n^\bullet,Eval_n^\lt)$是比较函数的FSS方案。</p>
+<p>与[11]中需要长度四倍的 PRG 的 DCF 构造相比，上述构造导致计算成本降低 2 倍以上。</p>
+<h2 id="Transformer概要"><a href="#Transformer概要" class="headerlink" title="Transformer概要"></a>Transformer概要</h2><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-PUMA: Secure Inference Of LLaMa-7b In Five Minutes</title>
+    <url>/2024/03/21/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-PUMA%20SECURE%20INFERENCE%20OF%20LLAMA-7B%20IN%20FIVE%20MINUTES/</url>
+    <content><![CDATA[<h1 id="PUMA-Secure-Inference-Of-LLaMa-7b-In-Five-Minutes"><a href="#PUMA-Secure-Inference-Of-LLaMa-7b-In-Five-Minutes" class="headerlink" title="PUMA: Secure Inference Of LLaMa-7b In Five Minutes"></a>PUMA: Secure Inference Of LLaMa-7b In Five Minutes</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文记录-Secure Transformer Inference</title>
+    <url>/2024/03/21/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SECURE%20TRANSFORMER%20INFERENCE/</url>
+    <content><![CDATA[<h1 id="Secure-Transformer-Inference"><a href="#Secure-Transformer-Inference" class="headerlink" title="Secure Transformer Inference"></a>Secure Transformer Inference</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>Privacy</tag>
+        <tag>Security</tag>
+        <tag>MPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生活记录-20240315</title>
+    <url>/2024/03/15/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95-20240315/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="3886436fc82ea4f2e9838558a9f2929dee7ecbdb6daa8a335efc56375279d61f">37677482e0ad0b0303755495d26d33f4a93b1a1e589fb3af150bbc5463635ce9ef6df5bae457b232868338a82128f0c08bae19896c8202e5eb8bf94db73505b3b52277511f522b5e84d71795a485550515a86374b2d0823794c96c8bbb2c143aaeaef08acce81e1c365d021298c872afd98282b9f55c1e58f58409a946b42ec4ba8663b4b55a3bc269dc2c69ef682d33ffd8babfd5b0d96b378442d0aaf373f4bee2e8c13bc21ddb42e3661f11bb98d154647eaf903dd3cb9af92d5c5614509916e27db3113bcaf5e7fa7869d988fe605cb8c18248af28b455191493d1c16a5b52436d42f21c360e6672637399d061588b4a6a25acc0c6dd353868abd2b61f973fe1773f5f24d7a15b06e9207a3d8a109c515087c0d9e47fe0be50c517da9cbef54cac36d064b24b49a9fb9a0682c8d7e1f31859c261b9ac108d868d35b88a7d1b52246ea267a5e099a59a90c3ae70c4fde792c1c93079902f6da6360b92c587091557be009dcf102d54af7e488ecd1899a0c05873771e238fb32f605e9c55f4d5b506b1ce6603619b288e95177e6c7e3b8282e476d726230a4a1152275ce8046c63789318bd846ea8d954a27bf31350178d350eae0a494ddff6e61b5cc79071265a88ae7a419d0a8366a9576c814611afe2dc3b62b4abbf70495108ee6ee3b47d488d7ab5187b8542c881d6340bb37d659ee2ef0c16966336637eab1bdbca2785c16dfc7028d3762346e25e3cd9fa5682a48066d323403b36631cd7ef1177a4890bcea53c9020410a11a290fa9e03b91efd7d42c9722f77299af5406b84edc2489217704a9407f3dc0857c8572bfd0532c64b851ea6977aab048258e0a45e8e531fa8641229227cdd4766b9b3600ada8da28bcf3ad8e0ce8c4fa1b39f7a2cc0f6d10199dde78bd15901f5d3e56e948ffb34282ff24967155063922f62a757146aa01b6735fce076db80eb9540d41b632d6f194e3a88c560f7c90319621ed8df42b794005920084903ee7842fed7231bf1d8ed149f3268ef88c74c51f9bdda5fb76303b4e3c7fe4cbf6b5eb6500f0d923e6365c1ff2b44cc5b5f2eae2b2c644ecddedba87cf1ddfd682e6a1b66b38d9ee21aa84f81fddc69f41a598427680f0dfa1a7016530049fc03fc4a249956966530d9c4257c396821933ef271c690ff5791372de28482376ba87cd6bf83c20ca39c42063ec5b4d388003cb370d4828f0df5a6f30f18f517ed4c989e1f5c698a1193d399651fbe8b2ca98e698f4639b79f67572b0566a8d629f17526f56e101929c234c989ae248c5da8cbaf23d4ab5d94c054ae3ac01f3f1c519dce057a5da77554fc92036d6af29c9cf0955a934d8b93197f70f1715135928a4b7c83afa1da1b2ac54eb1fc9ae01bf52cdc03eea8e80ffec5f0bc1a2b19bb29216d6dd227734b8998ad8d8b84448872d32cd56498881cfc76909357850add481154eaf071244e5d99a21ccc1f7e1742fdc25d11c58e2840f9b9a47cbaa3b88ab1d1f119c0f85fa3623fc304bfaf0e6a1e35cc245b862a33b13c4367a3c8aae7ec0e298b28c3d005d815fe60604f8b851d7d614baf565f307ed5ece54969919b9add9f569bc01432a8d3c03763f51547d07e3760f5eaca948cb2700eb880d896ae4211717394e93f5282b3be45e15db1fead16dccab8365eddec5ebacdacdf6e1f6cdf5005cd0a6d17cd8b3d4ad946fe64c7323168a54d36526f63d24f7970b739c30ea5cf266144ed67ada2e6af07ceed4fcf8d4bf5de072906c4387ce04e940793bbee4a468276bfffd338c5feb767c1c3b6a5407b50e9d9d093ce53736d3d526f14e1e16e047566fa8d48c4889f2dd76086c02230b942c53b1f9ea7c0abd818a5ccb352ae0de7db8c28c3a534a5410eaff456d8322720f492011a14636e3390b000eaa431b91cf24ae78ee8fe5f9bee83e97f6d9225c5054ae2d868fc3bb57023b8bdaa46f43a1d673b1ecd5d547cc850221fa812e0075ca76cee74b8bd46de7cc80a4bb7c06cff6ff976eaec01760e0741f79c49c50b7b50af12b38fd9f049c4138f69f7f97bc7fd13e2277b2ea8c90daba1bc01f588b6a52f003ff913371aba7cde0d06095a6db2012a5dd37c96892d56d1139f6ae04d67348748b7c5248532d2b88060c14dcc9b48dff31235cabe8cc0c7ea595cc7bb2ab38ad1d70f7fa4c8b67859c2f1de153dc3cb38d845a08439f44b5abd36d758e47c8caa09cf9cb5670831b3d1de6384a2a8f6c3c1beba40c06b1f9cdd82370a21dea7ab2c55404c3a5144258e48eb870cecead06ae74bb5d59694dcaa3d6c8cced0811172782fe2ca74a151ad1846f2abb82eae509f429ed5a7df70d2fbcb93a69ee0f49a0ee0aa0ca02038de0398de3109cf5118391994ce216ad66ec56268c20bffb2fe5dd75cf540da6420e14234529747f9338ee6d4c1b9d29edc8b5767dd2240d855f3fa2e3725cc591ffce866e95c6d9576e9cdaceea345904131d4165f9a65c02e1ab39147824c580103d52fcb6f3b3c7301b87a146bbec4dd96bfd2cbe57f2e230459b48141471c2a609f60c47cdcb1f20d40ac7bba53e5b8c8e291eba5b3e4f61657ace294c75f29e481e5ab10944facf5a74fea039a941f451c16cd03e64ed4ba727a8d142d814282e2e7d2febce4829e040ddd86bb242ab2ef95056aed6504b14abf43c41157ea4cbe852be8f53bfcf7315388efba5b3cf0f9469266e1b479f563c852ead97805dc347c6f67940f03dfc6e560ec03c7067db80d9af4bd0150031f6b8c983f3c0ab6897718865d78017198f14bcd425f1dc7400ed7e39e78d114123c9ba473c0e1c7212108a1ed09675562028e7dc67797eadc0714b7c61a096e30460f2e82073201e7396424d5f380979c21da3ba7c7a7437efb360837de4374962e9eff28d41964deec6c3f24fe782f806b9b276a755fa5034ca842d4b9f901bb94f1f0cf9d0cbed11f53e39441a945aa66743efd9359001a2ecf39885bcdfc8244ea10f2dbffa1b56244844a5d1a60644c8f276aa1b1698f8809a7c8c3589a933642f6869507a862454e61403fe62f5711afffcfb581ecc9355b9a72584ec868b240e0569d0a3ab10c79d719911c41e601f7148a2227875a9e0a625a1cc9a0ff675d805d7e910f619390e398954b033c0f6574c3e3927ddab444d6a409fe4fd51d3bab9e89393825eb9e7606a939cc67f9ddcd4c4000257deb127cba76494e36605d0fc9306a80bf452ce2caab7c03259e41ef62a12892ba4bd4b23eb9d4f964e9b33b7fb4d58de338f78e0726389f1e234e2d21faaf41e51a033c956125b42de74176bf7f32adeb5c939d424c85e5dad736139133da66fb522c1c7e278cd5f1e1ae4c8a2e48bbf911d8be9d62d57d4cfa5c25fc91d9f39d98a4463aa89199c04ab106efbd2114729acaa64bc5b5e28b9e782af560ac251f00fc5f0a5918c5c1a5c73494564c0b2cc19652c67357eeea5c452e9b7c56f141a8263e92c08d509c46138f6c04aca671f898f630abb796a48e645a3b192edb90054668b50566face8357e045a10b2076df6d4522e19eee45c45504c94f6b25f757d9587b7688126b7b26b4580774fbe5d84fb3031ad591b1a4111cce645431f7a941c518cb65f3f164d2682adff16c8ee0d957b4b42acb05aac49cd6a2d3bda86cae18737a062b3ba7cfb119094fc60756651ed6d5724fc257e834e6d926d0510d5d6503f354bdefb26dba2d10195db5ba9c239731cc4338d8390f006f29759ec31c90deb73d7aaa8d8f08350205abeddc7e00f2e1c88dd6bf06a762fa6275492c727f649216dd51360265f678ea651bc0e488244a0d8fc966258c0e7c33e12387bd6d8fb42466be99979bd537d40ea5d9421e4b688220d33392c97d302bb870401d94669df41cd1a3fb4fa979a80ca3ae1f01714a4e87e30e0530f37a62c9c1b63a9d476cd5b681785a1e2701e95d911c7e0ebe99fbc741e750203fcdbc3c0001c0f67b7f6538366dc3bec0699deccc64acebede1f5562851a41a1cd7748de01970b7132c9a08eb9a015c9ffdcebe95b3dc476b27f659ce8b3b46bbc7a75e</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活记录</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading</title>
     <url>/2024/02/15/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-Privacy-Preserved%20Data%20Disturbance%20and%20Truthfulness%20Verification%20for%20Data%20Trading/</url>
     <content><![CDATA[<h1 id="Privacy-Preserved-Data-Disturbance-and-Truthfulness-Verification-for-Data-Trading"><a href="#Privacy-Preserved-Data-Disturbance-and-Truthfulness-Verification-for-Data-Trading" class="headerlink" title="Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading"></a>Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
@@ -129,190 +283,18 @@
   <entry>
     <title>2023年10月1日-12月31日决算及2024上半年预算</title>
     <url>/2024/01/02/2023%E5%B9%B410%E6%9C%881%E6%97%A5-12%E6%9C%8831%E6%97%A5%E5%86%B3%E7%AE%97%E5%8F%8A2024%E4%B8%8A%E5%8D%8A%E5%B9%B4%E9%A2%84%E7%AE%97/</url>
-    <content><![CDATA[<h2 id="2023年10月1日-12月31日决算"><a href="#2023年10月1日-12月31日决算" class="headerlink" title="2023年10月1日-12月31日决算"></a>2023年10月1日-12月31日决算</h2><h3 id="分科目汇总"><a href="#分科目汇总" class="headerlink" title="分科目汇总"></a>分科目汇总</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">科目</th>
-<th style="text-align:center">10月</th>
-<th>11月</th>
-<th>12月</th>
-<th>合计</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">餐饮</td>
-<td style="text-align:center">1075.04</td>
-<td>1005.5</td>
-<td>970.3</td>
-<td>3050.84</td>
-</tr>
-<tr>
-<td style="text-align:center">日用品</td>
-<td style="text-align:center">606.63</td>
-<td>489.43</td>
-<td>102.78</td>
-<td>1198.84</td>
-</tr>
-<tr>
-<td style="text-align:center">娱乐网费</td>
-<td style="text-align:center">323.9</td>
-<td>110</td>
-<td>59.94</td>
-<td>493.84</td>
-</tr>
-<tr>
-<td style="text-align:center">住房</td>
-<td style="text-align:center">1120</td>
-<td>1120</td>
-<td>1120</td>
-<td>3360</td>
-</tr>
-<tr>
-<td style="text-align:center">交通</td>
-<td style="text-align:center">44</td>
-<td>92</td>
-<td>73.36</td>
-<td>209.36</td>
-</tr>
-<tr>
-<td style="text-align:center">医疗</td>
-<td style="text-align:center">33.5</td>
-<td>0</td>
-<td>37.2</td>
-<td>70.7</td>
-</tr>
-<tr>
-<td style="text-align:center">旅行</td>
-<td style="text-align:center">90</td>
-<td>0</td>
-<td>0</td>
-<td>90</td>
-</tr>
-<tr>
-<td style="text-align:center">家具电器</td>
-<td style="text-align:center">7513.75</td>
-<td>298.74</td>
-<td>937.69</td>
-<td>8750.18</td>
-</tr>
-<tr>
-<td style="text-align:center">衣服</td>
-<td style="text-align:center">0</td>
-<td>421.86</td>
-<td>359</td>
-<td>780.86</td>
-</tr>
-<tr>
-<td style="text-align:center">其他</td>
-<td style="text-align:center">110.6</td>
-<td>197.14</td>
-<td>0</td>
-<td>307.74</td>
-</tr>
-<tr>
-<td style="text-align:center">合计</td>
-<td style="text-align:center">10917.42</td>
-<td>3734.67</td>
-<td>3660.27</td>
-<td>18312.36</td>
-</tr>
-</tbody>
-</table>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="2c7846542512aac88e14912684a1c97aca27235a44eaad5a56e9e841ba397dd8">37677482e0ad0b0303755495d26d33f407982f4f557b758dcd94013b69a128a829e6799c6a65f4d2d4a5dac46b2354ce0f1c21f86061cba124aa131e72f4ea66b5ee9506d853c95b57a653e968531e1ba9249e311bfefd60c465213b777417cb7e8f5de080069628266ec575a8f0a7f5cef60ac150f3e98ed8095c8568e103b44cd6fd3f8febb56466a3364cfce3b5b6a203779b9fea8734bc2787a31a9f5d968608f10093f970e18f9269bad06cf195ee495319bee0df51a335f654032627afc57b5251bf1d98d2a7cd8dd1ff5cb28dbdcef675a4388c39fd55af51cd5673b5d5936d6b7e171a57855d82421f392634df86c07ac6b7e1e6bfc267f162808565b13f81028f301e3c479c88768bbc32667f736d2d3511bf59c365d763caf68749b3a47e200de9f2e09a9df9565db65bb8e56868e6eaa2fc308659aa346669d46ac488ed7b59a35ba9aaf5d8a176f671d37d03c51028a2eccccd8a380e9942e8cf24fe84871fb423ca650557f8067ff92dbd40eb971e03429dc6e15a8f2b3fa541a4ea25dba75d48af63a09015f7b4b4ef26ef6b1addf310e864be7a9214c976e7526de2d524723a409b86879147317b1acf42aa57634467ee25986c8a99d552c4ac2c9d9898fefb5d044673886e9f3af89c84f94e797924540d519f1ea1be3034d97c9b880fb189ecbb0e6051046e9a56497f599c85111ea19edd9a432898ddeb7a2194d90b58787d4e9d68ebf4e29508543d03e94ad43d537dffa61f0df7da9a55556e115247b0c1e08c3ca8ed6b698109174615f897ea786fd1480264c1d2ac4486ec3bf85af10e69156190a5295c0e3cd9f6e2433fbceb39fc976a915f5e48e37a3110488116bd73f4631a000493191817b68bb16325e1e00fc4281df97a0351881396446f8fad9226f64f22261f3109709a01158615288e8a3e7627b1c1926959f370c8b544189aaf56407d4962186a76a09b095790844710879da81d6a3aa8df09e837288370809c13b281609eb42c216bed971841639d982df4479c5320802ff185048dcf097f9d51c81f94b864392ceddd11e27d79c40ca8b244b7c8807e19af525ec84712443caf330e4321caae267ceabd445dbcda96521f35a6a02795bfdac654c1b0ca64a76a1a5f99c42a91066c4684ef2d6b6efdec9293db220a32b6b9ae39f01a57854c1ff12ddb375b620ad32927c20b0383dcfd71f7ca38462a4097d4009441e8ee53ea35761a40965ca0f82e5eed872a75ea1155a1ab2c6fbbdb4b0db0b37848246c79a1d9498b097b739550cdaf0a388c60997819db093b55d62d67208b8347c915d4c063e68b21f50d83cc2a45c976f9c2c039f0ded64df98dbfe6680db50e88d7cc25b2dfc2dc4c63b3180d388f10c8e109c36bbcd7809246a3dc9501f4764306935c3703f0291e30fd37aa7fa9150598d92b3ebfa61ba5c8d4813646f73f0b7346c967625ebd497d4e3777b4200c3c3db2bba646fc6203b7dda43d414da51e62ccf65d174928e2fa630047a6c9e99b574f9fb72b33985216ac965aeb1b1767aeb8f2cd3530fa0b62cd97c12048583b8de269f0b9ef0b3d264d290591eee0d081bef2a35a5d6a01a78e988469ae08dd657ab38c4f4a8a5aa9043d95c2141790740384637ebec16ea89ce0e821b94120447fb965e260d27bb5ee2fed06f724771bd76534fbd5255c283ccd742e3699c2e22d9f111d09583e0f53a6e848b8f70bfaffe7349be27be6bdec28b9472079bb9633c0abdf6bd88ca73210c4de2024751b13e8b5a9651ad3b0b5222aacca08a128b6f3067c1c77b70a956cbd081f611f4000112bb4cf20873f2019458ac2385fa99d6441a6d43555b30857bd28d327269fbfac0e7eaed31571849d045ea62d5787ed555ed081895090fc59d6c379b67f786d20ee960c15c32ad2bb1539186fe890bec733aa74ffc4a44a78b7ad9be0e8603de17f19c1b1c46cf586ae6f0ffbc32a5b8b3d2f58570916dc52930c5b8275f3d2ccc82b5f7fb2d248787b71b4a8b62d755cc85d6e8a569a459ce8b2dd188a8906c06a7417629540629462a96cacbc73ae74bc02b07937e1c7fbb5b65ff03d41cff8a0b204b095c7e19e04e82b225c5ddc4a5f718ba255bb71198b806ea62a45d7f2ca82642a6139cb7f4cbc6ce4df35f2a13f2f5dd42fce3b320f4acf4b6327e4192d0fcc6c723325b2a1a535cc3df8455d30caa24218517d88549cc4311b87f02068691e89f73399245ba6037d906bc5617364991862c286f79ebf428edd28a1df92c6337b2ab0d6a796768184aa7de70d6b8399a4c8573299a22bd8a97bfabe0e5b41e4ec4763a068acb3ca71a5c307b12ac9498e54d71a89913fd2c226b5cdfe1e5662a46319a84278cbfdc50bd4135d1b3fb50b017550329616915f39307bc6d558c968d2c62dbae200c6aa70212fc7904ff025055d733af4fa9a04f70fc59dba01444e749c894ed1095cdd19136dc3f6628e291f220a59c68d570ad24e29e892eeb3331fb10d4974586298bd2f2e4ef2f701778bdd5fe942d06fc8daede35b708a3b4aa307ee809fea0a12cc837eddd39d99ea6c64396f00493294a5ee8c5b59153888c273fbc53a6a1992ff299bc985cf264efcac200c18689724a6b6b29ed16d605a83075ba6032c35a028aced2c0e6d5bc6532c36f73a39e2ca5efe0caa5b3785d43ba2faa8bdb58885baec25c12086f49a99700dde335532aa9a40e6c44f9987e83a90db0ae7290bf7137471e13129803ea159bc42aa0edcf20a8638118d2d784056bcca855ce0a109ee71fd43a89ce07f6eb9d8bf7d89489f73e8baf6bc20bdde271d3dadfa03ba5a55742a4c41b39c45891bfb84f522925adcca2e663a9ab304f5540eb60efc99e573c8e8638d20cfe8f42ab14cad5eb3bbc2f05923dde231281783f36738a70043dbb05071a3bd1ebf547fa0124324cdfb24d578d56c11b2baf843e0a63d8ac1eeeb2916caffa0eb6e30a45e1ee4e52c85bcb97a9449ee24aa6d3bde96f83e4c6122ff0d3a8e60d150efade3f494db665b5dcfef744a368db51ea8ac718bfe2573bff76697c3ad53af524dff638577285a55f3103c6d49accee47a45389201b41ce362377c6ef12074842d093a02b24ce9b67aa215f5c9aeced9518d28cf258d0daa388e1b0df1a603178b52d5bf2acf48c998fdaf8ae5672f5ddebaf466dabb04c7f9bd8956f2f50a8bf67b16f1d9d702f8776cb17fc670c2f1e655a775dfe994c72a30f9a7ff5d97bad667a1ebfaae44877eb51466e75b395e1c1048b238c5d73067bce3f09c91d6782d6749e4fe102a087a0ba1302cb14614d0feb839a42971e592fb2a04ab5062f6e53573867add16ff1647c1c8b60b5da2aec62bf364ba6c034eafe680981068c2587d89686b4bcc02b24c7b51b51078cca3e8649f13fbf3bfc468b91084b5de4c3685291feaef55425f572d2789f63c21bead06102268b853040ed0b49b6108997b33d3fac494e816b13e6487f4bac237ecd98756b5858ec742041b18831fc8ef1e2121a154ec829d1207a49a47936aae66b7d794e7012bb704da4fcafb227f816957f7898ff7bb6d3b38829d6c1e3179d5d4a20376bdd8c34c7f97f200e70d22d4bc044a54fac447ab3cc6e49a1257ca6fa0e4cb75c46adb38e000126fbf04edfa607aa72ca302bf803346f8ff2f234205c19821be78cdfe994ca102456c618d75909eb7a179df297575e53a52e2e1e3af9b2efb27d9b2bf4806db33a729d8a6a32b95009f3807b23dc0f0c9d355ed453917dbabefbb29d6a8546b83315f6ecf64409c9ad5a662d7d0d006a6d0d45825ca1ea01eb529c894bc0e4102e0c60490a1cad86feed9b3b5dfbec0a5e06c926f2f56b561c31dfc327441c9432d4afc12ccfe315e481f83ca22754ecaef10af954d34b94cbd53eff07af1d04c71daacc9f80324b0b79acd63bc0a07e902374ee268de246a40dac60a02ce0f921d91cf4ec177d833fcafe8770da05366698cb44cea14dfaf7a2a22e5fcbea5f800e15b3025c35f813b6b5612de3f5320da972049def6d1e6303bf52f8374d100729cd438d41dd4bdf7485395ff74c97a93169249adfc750e5cf7a089e28b14fded2abea88dc02c001619966ce49b06d0ed48c556430934a800663046d516ab7572e32ab8fa4aa0241b5dfc37c3fb4252cf92bd3292393418ac4dacd3f0856dea52be6eff230c440d78245b45c7504ff5b06c6198c8b21a31d5c19b21dad2bebe2df5ca928a2e7a858ca8fa6845354e7816fd1d35045715631074694db33e8d09caa202c7badb5ad3ffb14111581d3d827309c6ac691f1bf0a98225921c589e86d1e85335d6d9b61b44d00eed09fe9d5a21880cc885052884035b1f53414f4c708773735b6d4ce0398d2502f830b38fe2dd2abb94fdc4cbed207b01f8c132c4da8e0c3197017df32cc998ff0d3a2a203a517d523fe57bef21fe73144791600aaa82ea0e1a92cd88d807cf4fc651527f924ae31f43658f333a64874dee1345def2b406111c31d771e1d1fd90ff68df661fb68903d576105da7c257cf3a6c9cddcdbb5dcd5f861b8e25501e62fc544b5d1e118dc3cfb0b2fdc9efb207d15a6b1737cb4da8a653521422222f1f6635a803c48f44ebb4ba25f3c87915f87cf9d96a4fc842d06b5ac69e6476bc9a32fe25b1b23f01cff4e10a0b94b1e89b25d8583d8cdd81a722977c661acc24b58f64117fd69333c48a5c20eb9d62a87491e54337e9b563749d4b5c14c2cc13d801f477b2d0906d4e153b4f3c311cb73a7fb6c5bcdfcf90549b07ebc28c3168309ecc8a226e732f4113dcede84f2fa92c04c66fe726824c57b63ec7b17d7c52fbd096d3eba3faacebf39598157f2e2a86a68275bd35cac4e885c690f81f20e37d55ad1ba20030e9eaffa687242f64adaabbfac0c30571564f10944b8fc51a1f1b06e9a6e09f749848f7067bee823773dc456a8525473a47ec7dad08405d1753cac6d24d097bc3e654fe9c8e67ea4d68f00a7969f78bf638510e95ac2ef33db2d60ffdf1b732a0dd1cef3600400a59f798438b7da6a0530ed6152d7f8f6ec84f915504875777e2490c5542428def4c92c72bbb34e9d72a3e4b89117a52020985900f4eca405d1dbb42af5a9cace0cb68ea1123d40ba4267190b0b908bb12b913172aba6b61b028ffa39a099b4c7fd76f94ef2bda9bf14488f0803f52194c7db2974050e49afc82a5bbf3896db67d35ad1a66afbad6064e84bc06209246a7d82aa68c5f7b0f6711b2aaff4f094f95cec5ba95b10ea8b67b11f76f1a6350e061b156105107525e0798c742e42e3d6d3ade4f8e3d2129662629fd3db15dd9da524386d8f016e01a8f24043b5ace57522edc2df9749c5b805239d9770700b2b41722e4bb0c8a9e50951c01f0d8266677d07d10f87f0016d6c3c88b8b07e0c93d47a398fa236a8125baffd4c16a791f8756c0f48310b686adb7c9d57175aac2bfef9e9ee4eddcbe01234583b93d4b6708ccd48629b6f8ac5414ee4fb5c139599d38b927d1fb9c5adda849daad128c33c379decc9115e4bd163ee12fe387e303051e74388e7a3402b538026b6ede037c963fb4de646502241662aeb22972863118dc9e1f18bea0e75b0dce1b2c692ccfdfc06b71056f10bb22334c0863f29df4685959c5e15e330d67aa9d971eb2d74b68cdd5843e812d0a7574da47b2fd5d9cf984ed539e659aa5050f86800ca39d1c61b35e1e52cefa4dbcae8601c5d3f8403e5b48ef189b9496651f3dec307b5418ec05a2a92ce30d5cbe90a7241f9b62f983d7b7fcb17ec23de3ece90950dadc5e532dc0cef9ce790f221482c5cd06572f66be7892796c2974446c87fff8f55c860f20ae525f202e6082a9ea0215d6a45332f7484aeb3ee0958c9fd31fc5fe8f97774e07d3d35828284605058bb38b0df0d49b8facf766f9d269bcb44997e9836e57bdbb7c1855a2171a8fa8bdd3a49a5662986c73a03c1687d920d33b6029fb80122fc222319061209d2787df20e3352db99e4c918a6522ebc019a4240209639cae789b27682354720af9a436c9e54aba5137170e3125ff733017dddc6687665ed75b16dc56d222a13af0bd839098636658684d57629b01144ae363e27274949d426a6f7ed39c7b035c8ea10749092d5d562a8a711a85d5850f1cba5067204343c73a620a240a5278b305f5338ef319cf0853422981c5b2fd62c378a066c245be46e7f61cf41511a88cb903179f9d8fff0358e200f6c8cb14c8d86c3aed5ee0fbdb1fd7a6ac5abe5e9df905f24d34125d01f8788aa6851dc1ebba02366457648f88bbecca12ab7a07074b892782d487c4cc511077b4205f40932972d51a4770be620cf8f07c23cf89c4ebbe86d7a9f562403c370a1637b62f7b9173174ac7bb89ca98c095406a2726edf013f908f55f8e808abc718316f65ef18e0e7a756c85f2b13afc94c45781bd26593064a121f35d9f6f84d4e23a3639e90f6dec17aed6ec90183fe277aa4eacb06f5c8150657b0f914714f9dc1abbcc9c903cc7099096b9b51dc9ede43798907c7c4384cfc8c9b63891576206f9ed3da04d423f0c27746e84b88212bb40b5051e511ded5591ef621283d70fa7ccaf614feaa38f86cf107a80ccbfb56898c96d1bc64cbeb83a189fd50f32c7d2fd30026da51d1c2f1a91ef804a3e2a9f4dd83f38897101c56580a679cbef4b81b7edaee0e7469231164ba9e42434a444a554afd80776f64cf1ae2a5e35bad8b20b3b1948ae8b19ffceeddf284d3cacabaf7227dde149b859618f4fbaa3a910ad8e53cc82dbdd6258117b978964438ef6e97db1efd880ab8e5550f45b26d453291f932a28782eca49052c2cdb9905af43da00ffa68a119acfeee47e45b1dac367cb39c5b401621b2cd79ec1aec3089b6a34f86187dbd790a527b58ecbe3f30595a3c4f45c02542d975d83532305eca432e46038a7fc50c16a8b968aba59a8987d6c50c8e0345408ad0dff8bc5a4e314640ff18f0b4fb27bf62fa14663821585e9f69d03aa4e15c2bf97d70db66758f0026b9f4d96a490bebd74c2fe91f58c74b4efa3737794e78bc53df442235d99a1e05ab5f651296bdcd48f2e7e0d6b24b4eff779676ae4e9af3febf5c86690da42355d2513f8d88ab1de28dd57b7cccc86fbb963d857b5a8d1c3bd9a72e50ed07db80e1e3b9934eb357083155642569d66901a96a799420b47a0b27f28775b82f7145eea01ea1dd39e2338aa1d63519df23c8697491ad660506d3c39d808b95ad86593078d60099e68d9dbc888ec9eb6897028be1c54def2a4e169778e58e9239bf60dd8e62c498e647ab04161387ca3fbf90be85ee7e890049b9749f37a78e27e3143706989141e4f13e807041b402e3ba60d705f2d6a9fac5aecf5cd3ca8ea2d814dd2900044b55cd0feb66b08b501d4714a7ea1d96d3d077f4081abda8b8ecaf2ec7ba81b507bed7e7ef238063f8428edbbf70a5d94367f294a3e47dca6320020e8c2e887c38c277a7d35beceac2c3b49d3719edf113b09b447396fcbf85cc5880ba73c78f4fe12e29ba559208fef73261c4dc8a6e0b9f4aa68e24065be8c169b526428c5590f7ffa9331b94eea2db895effd110706c8fa492bdc1e94acef3b70b21ff8394fc44031df441f5f5a272745a6f9752d5c9abe6c832877db8cecccf86dbfe88927a5aa2c5ecaa9136998bfa15f40770c8fdd46ba36b4ed5b51d61c179bd0f7ca76da1a89992507cb6397011ea3ebfc15b2bb75dc958162c6ef91db95e0cc0f7ebb1e6446e4386520c7cda991b5385910558bedf9d9917283039b243df22859330a0c556e95612d6b3b0e910bd8f3b996985e7d4c5ab1994baf9b09c3a7b670289d42da3aa33275456b892a01fcd0bf653633ce34f9e354263a1fbed9da02aba7d0ac3c999821586eb0b84cb7df6f3202d9d23cd2dd4e24ee447e1dc70faa0dacc8505ed344c862a03175fd9894d0c5d4025acd2a94916ba147505bea69f206512a57ad0e0e84e326b283c226120234365a6f45e6429655c12ae38ae88313ca5e6970733bebaa7621fff1b829fbe21986d97cbb581d454a1e3bd464585ab2aa0f49acabcda6965f522c94112a1b033431608e1bac5c3d10b4ae3a8c85d6734f79b660780180fb87088013f990ed95f546319c44bb60663451b3b78df708e0fe89d3908a8a6deb5083bc70dc346dea3de5c2709b4d84dd0ec53ca4c009a5edce5d8c5a20</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
 </div>
-<h3 id="简要说明"><a href="#简要说明" class="headerlink" title="简要说明"></a>简要说明</h3><ol>
-<li>餐饮包括校园卡充值、超市购买肉菜零食水果等食物、不定期购买牛奶饮料、不定期聚餐等饮食方面的支出。</li>
-<li>日用品包括卷纸、湿厕纸、酒精湿巾、洗脸巾等各类日用消耗品，同时理发的费用也计入该分类。</li>
-<li>娱乐网费包括游戏月卡、vpn费用和偶尔充值的话费网费。</li>
-<li>住房为房租和物业费，暂未统计水电。</li>
-<li>交通包括公交地铁和偶尔打车，公交部分的支出有一些是支付宝预充值，尚未实际支出，也先计入。</li>
-<li>医疗目前是偶尔买药的花费。</li>
-<li>旅行目前就去了北九水。</li>
-<li>家具电器是买电脑、桌子、电暖器等各类家具的费用，也包括了插座、插线板等，其中10月购买了电脑（7188），12月购买了手环（549），因此支出较多。</li>
-<li>衣服是购买各类服装包括鞋子的支出。</li>
-<li>其他包括了买东西送人、捐款等不好分类的小额支出。</li>
-</ol>
-<h2 id="2024上半年预算"><a href="#2024上半年预算" class="headerlink" title="2024上半年预算"></a>2024上半年预算</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">科目</th>
-<th style="text-align:center">单月平均</th>
-<th>合计</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">餐饮</td>
-<td style="text-align:center">1000</td>
-<td>6000</td>
-</tr>
-<tr>
-<td style="text-align:center">日用品</td>
-<td style="text-align:center">120</td>
-<td>720</td>
-</tr>
-<tr>
-<td style="text-align:center">娱乐网费</td>
-<td style="text-align:center">100</td>
-<td>600</td>
-</tr>
-<tr>
-<td style="text-align:center">住房</td>
-<td style="text-align:center">1120</td>
-<td>6720</td>
-</tr>
-<tr>
-<td style="text-align:center">交通</td>
-<td style="text-align:center">50</td>
-<td>300</td>
-</tr>
-<tr>
-<td style="text-align:center">医疗</td>
-<td style="text-align:center">20</td>
-<td>120</td>
-</tr>
-<tr>
-<td style="text-align:center">旅行</td>
-<td style="text-align:center">50</td>
-<td>300</td>
-</tr>
-<tr>
-<td style="text-align:center">家具电器</td>
-<td style="text-align:center">100</td>
-<td>600</td>
-</tr>
-<tr>
-<td style="text-align:center">衣服</td>
-<td style="text-align:center">100</td>
-<td>600</td>
-</tr>
-<tr>
-<td style="text-align:center">其他</td>
-<td style="text-align:center">100</td>
-<td>600</td>
-</tr>
-<tr>
-<td style="text-align:center">合计</td>
-<td style="text-align:center">2760</td>
-<td>16560</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ol>
-<li>日用品等科目是根据之前预估的，不一定准确，还需要再调整。</li>
-<li>水电燃气暖气费届时应该要再加上，因为不确定花费，所以暂不包含到预算中。</li>
-<li>23年基本买了常用的家具电器，24年应该不会买什么了，考虑到工作稳定后可能会买一些做饭用的东西，暂预留每月100。</li>
-<li>娱乐网费目前是按之前平均算的，因为工作稳定后可能会办新的电话卡或宽带，所以暂按每月100算。</li>
-<li>房租和物业费是固定的。</li>
-<li>每天出门如果坐公交，单次是1.6，回家尽量坐学校的车，按每天上班都坐公交则一个月是32，加上中间可能发生的出差交通费、去市区玩的地铁费等，暂时按每月50算。</li>
-<li>旅行部分等春天气候好了以后可能再去景区逛逛，暂按总计300的预算。</li>
-<li>餐饮、衣服和其他都是按之前平均的，应该差不多。</li>
-<li>希望放假前能有入职的消息吧，到时候再根据工资调整。</li>
-</ol>
-]]></content>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>生活记录</category>
       </categories>
@@ -560,34 +542,6 @@
         <tag>LLM</tag>
         <tag>Privacy</tag>
         <tag>Security</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文记录-SECURE TRANSFORMER INFERENCE</title>
-    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SECURE%20TRANSFORMER%20INFERENCE/</url>
-    <content><![CDATA[<h1 id="SECURE-TRANSFORMER-INFERENCE"><a href="#SECURE-TRANSFORMER-INFERENCE" class="headerlink" title="SECURE TRANSFORMER INFERENCE"></a>SECURE TRANSFORMER INFERENCE</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>LLM</tag>
-        <tag>Privacy</tag>
-        <tag>Security</tag>
-        <tag>MPC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文记录-PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES</title>
-    <url>/2023/12/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-PUMA%20SECURE%20INFERENCE%20OF%20LLAMA-7B%20IN%20FIVE%20MINUTES/</url>
-    <content><![CDATA[<h1 id="PUMA-SECURE-INFERENCE-OF-LLAMA-7B-IN-FIVE-MINUTES"><a href="#PUMA-SECURE-INFERENCE-OF-LLAMA-7B-IN-FIVE-MINUTES" class="headerlink" title="PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES"></a>PUMA: SECURE INFERENCE OF LLAMA-7B IN FIVE MINUTES</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>LLM</tag>
-        <tag>Privacy</tag>
-        <tag>Security</tag>
-        <tag>MPC</tag>
       </tags>
   </entry>
   <entry>
@@ -1814,8 +1768,8 @@ v_{0} \cdot h\left(d_{j}\right)-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+
         <category>论文</category>
       </categories>
       <tags>
-        <tag>审稿意见</tag>
         <tag>game theory</tag>
+        <tag>审稿意见</tag>
         <tag>reinforcement learning</tag>
       </tags>
   </entry>
@@ -2149,7 +2103,7 @@ v_{0} \cdot h\left(d_{j}\right)-p_{j} & <v_{0} \cdot h\left(d_{j+1}\right)-p_{j+
       </tags>
   </entry>
   <entry>
-    <title>论文记录-ARTHUR GERVAIS论文略读记录</title>
+    <title>论文记录-Arthur Gervais论文略读记录</title>
     <url>/2023/09/25/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-ARTHUR%20GERVAIS%E8%AE%BA%E6%96%87%E7%95%A5%E8%AF%BB%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="1-A-Study-of-Inline-Assembly-in-Solidity-Smart-Contracts"><a href="#1-A-Study-of-Inline-Assembly-in-Solidity-Smart-Contracts" class="headerlink" title="1. A Study of Inline Assembly in Solidity Smart Contracts"></a>1. A Study of Inline Assembly in Solidity Smart Contracts</h1><p>这篇内容是关于Solidity内联汇编带来的安全性问题，对内联汇编的使用情况做了定量和定性分析。和DeFi没什么关系，先不看了。</p>
 <h1 id="2-A-2MM-Mitigating-Frontrunning-Transaction-Reordering-and-Consensus-Instability-in-Decentralized-Exchanges"><a href="#2-A-2MM-Mitigating-Frontrunning-Transaction-Reordering-and-Consensus-Instability-in-Decentralized-Exchanges" class="headerlink" title="2. $A^2MM$: Mitigating Frontrunning, Transaction Reordering and Consensus Instability in Decentralized Exchanges"></a>2. $A^2MM$: Mitigating Frontrunning, Transaction Reordering and Consensus Instability in Decentralized Exchanges</h1><p>大致是实现了一个自动套利做市商，能增强共识安全性、降低sandwich攻击，提供经济利益，释放多出来的空间。可以细看一下。</p>
@@ -3497,157 +3451,30 @@ B_{\mathcal{H}, \alpha, \gamma}(\Phi, h)=\frac{1}{n} \sum_{i=1}^n\left|h\left(\P
         <category>论文</category>
       </categories>
       <tags>
-        <tag>因果推断</tag>
         <tag>deep learning</tag>
+        <tag>因果推断</tag>
       </tags>
   </entry>
   <entry>
     <title>2023年2月1日-6月30日预算</title>
     <url>/2023/01/16/2023%E5%B9%B42%E6%9C%881%E6%97%A5-6%E6%9C%8830%E6%97%A5%E9%A2%84%E7%AE%97/</url>
-    <content><![CDATA[<h1 id="2023年2月1日-6月30日预算"><a href="#2023年2月1日-6月30日预算" class="headerlink" title="2023年2月1日-6月30日预算"></a>2023年2月1日-6月30日预算</h1><h2 id="预算表"><a href="#预算表" class="headerlink" title="预算表"></a>预算表</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">科目</th>
-<th style="text-align:center">金额（单位：元）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">餐饮</td>
-<td style="text-align:center">7200</td>
-</tr>
-<tr>
-<td style="text-align:center">会员费</td>
-<td style="text-align:center">115</td>
-</tr>
-<tr>
-<td style="text-align:center">游戏</td>
-<td style="text-align:center">600</td>
-</tr>
-<tr>
-<td style="text-align:center">生活用品</td>
-<td style="text-align:center">300</td>
-</tr>
-<tr>
-<td style="text-align:center">服饰相关</td>
-<td style="text-align:center">500</td>
-</tr>
-<tr>
-<td style="text-align:center">其他支出</td>
-<td style="text-align:center">1285</td>
-</tr>
-</tbody>
-</table>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="28c7856973e37d21e20474c91d9d7bf1f55387e3d5814f7909c866f7573a8987">37677482e0ad0b0303755495d26d33f48e2d9353d6ac72383d428715a3456aeb913959d857e792b1c0d373d3646f0d6e5d82a6a887ba06e9cd4818983ddbf3eb9fcda287086fd29d43ad8fd255cc8e551ce1e62e3c207e56e31898cd72ce544cb72d7a5eea87a13e271a508e631db1025d913243f136b1d27bfe92b9e176f6014930fe7996183b80c4badd196f6aa037c4872e63c9186c8f2d449a7914a04e47e1ffccb82d0df644b30ac9c74a7f4b0a5c6a1280a537fc8f6cb2e39f70ca3fe6b32b586d3b2594862b413b3e58825ed436c6e804eed2f7c6c592d1d62dbbe61c135917940340c5b561b560f280eae3f186e9116bbc30675f9bf18cbd594e1758c32a312e835a814463da04c6e48be36ca944811403378ed258374227cef19bd827d6bebce2f4fdacdf274e7cbff2d6e9f8303710d34db51507bc0305442e8b44871c0954d5acb943de8293b504b27ae5b011ec290ef42ab0f8710e2d5c0ab2dabe8ea7961e23393877f879692a833aa3d84b206bcd9fc64d0895f21e5fd12b5091ec06eb208f09058d53eaea0ff40eea7ab41c49ee7f50072a959bdf4aed874654c7800d2dc34df7565c99ec091af9f3256f41458963de672d3406a7f61c0b6b3e533ae666225186b80f3fdadc7850d519bd14ce569aa28d6291afc7bdeedfb77890cc276151de3afe5a6b82dbdee5c2818ad81331ea6cc754d26e21d88e172ed326972f1551be32780ff97a380fff827b829d2b91e934675692567263d42df31331f092088eff995aacffb8caba8daed31c9cc3b31e48f1a6c16e337051e8edfbc072bd4512cae7cfad995abf80b2987969ee04a726f23a968eeeb84890170ec5ebaddb30f8186a2dd00b31bcf00cd873bd6db090e5f0c06f5bb3ec68d9bb883f38b154a32862db97df411cb9fd7fcfbbea0ff8edfacbcaa7e8a3a3b6e73e283d1842a2579773489ee1c11d2fc1112fedc10cf4c199e6c3f0d70a052717009be68a99e952a4f7d8722fc2507ce998743ee5202b84754d287ba8a8dfffdb24a855e438a35ba46e17bfc6bb1ab65ec60cfe14f7ce3b5131c9b29f31125521cadeb71a3c82cc67d9ef562191775a55a16cb5092d184950eca7704efeeab13585b6a258fc93de80153ff9d6a274d1d608fdd3dbbd816509d52832a8a96352b34ff5feaee6dfec74462f1b08992938efc50f7c605232724ada735b0c901e9c11d05fb4665705ca7cd1d0b274cbf79c74d3178a14ec3131f9464299b2c49fb5663c8a7014fabc83da4c3511751be2f7d56d2f64a148ebcfe8e55666cedc10bc665d7cfb8d1fa7eb7b68bb84915e0c3788bd077a69eabfffb6632bf509689adea8d989cc6fb8f4eba3530cae0050b99cce81cc478eeab38a7d7f137cb577acd564ff753537a47c54239c833067b375e522023d66b5b620e74e4bee1f6ed19c21ad6b0d553af1c59251bc7b91b7db4524e4c0c5e5d136f34cc9688708a5cce7d82cd54a843874ea1cfa196ecfd938daa919e9c023f95d013ce3cf75756cf35a5c58809bad52469f2717b2fb0827b7f2407902511b6e68bbbbb51f73a8573b6f5a834d54b36950d58a21dbcfd3408a82fe7a2c806ee2ee9f0e2af589c87a1ade26769340b1dafd6d53110f548bbc405a37beda573f3dfe94a398efd8868604b232be1304d0954bae4a4dfb671f2f5be1118989c1be403482d9a65cce1fadbfa7a335b442c58177d907a508cd3d94040fe5168539ab96a247b9176d08e2103a96f53a2f4b2541ef737e30977e03259def24a8d555657d38d7e337fd59130c740487a42fa357d4faa8528e92b7b8575ccfa6e2cc9f7cb1d605e6eda50ba0e62c6318cb69d9f30fb2f0a25470a3e1aae77a9b901dc8cf8a8db7e85cbd734711b02170cf2a5ccf121da6251320d57cca4aeabb44fdbcd0b1897c5b474e97bec6ac7b7fba90819f1fc2ccc532ccc876098374faad62b05e57849b4d2db93e23f3a383bca0aed06ce4e994cf9e1dc5cac8c606d2cbb096c9783d8aa9375536288746a025c8d9c54aa269fa343cb8e650fb99fd35430ee86fb5a04def2ae1a83e9a795df8ce99a91d9b6f6465854a433c8d644c26217f8dc141792e07c327212168070e3234e542ebfea6fd5ade28197e79324f554f9d184ba67eada483ff178469b7b88f9865ee7a52504c5bc5b38491a78e1b164c179ab4e0de7fe36869fc62aa5c09b9fae27a1777caec347a784019d0a3c7ab12e4c0652c72aadd2b68209de058e11757f47767d7476e408109a9ef80707eff1b1568cafc95a7d18d3cb51769960fdebb12a85ee6d507a688d1eb2f6443bdd4f5e53cd76a55496a3188b7f0f42f71bf182dbf9476bc3a39d65690bf785d87232f936275ee8da3bc276ed07df173135dde52124d813f5df100c9b2db20c4ca365d12ecb0eed086c9a49658d9e9c0db5b6439619ddc57d1d557daa8e9c1103cd3dc549238ed946b560e01adf0a4c2fd9d4513d911cbffdebe8c672614e12601707591793161011022c03cdf79ed851c06a2799c84952da3e7e7732c3e96496ad810dd3ec9dfd22e43c9ad63db58b059694aeb62c35702848fa57cb0662d14db7f9e8cc08543ea335a427ffbba17feefe00c436f1318a7519f470daae85af4333a62eeddf3322a2b57cf30abe3971024963509d9a78110c10b9b48bd41ddb48d86a4f2b9b540e2c22dc62b9f719ce6605c08f957a71273cd329111b311f9328e7ba80349940cce9d75ab480b6ec77377b5912f870d8a91d65da5fa7278d662ee5b14a05894ea4bca1880f8ed50a9b5f9b9a672f7</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
 </div>
-<h2 id="测算依据"><a href="#测算依据" class="headerlink" title="测算依据"></a>测算依据</h2><p>从2月1日到6月30日共5个月，20周，150天，合计预算10000。</p>
-<ol>
-<li>餐饮：平均一日三餐合计30元，每日牛奶+酸奶合计10元，每周水果10元，每月外出聚餐+零食+饮料等按总共200计算，合计$(30+10)\times150+10\times20+200\times5=7200$。</li>
-<li>各类会员：网易云每月8元，B站每月15元，合计$23\times5=115$。</li>
-<li>游戏：原神每月98，合计490，FF14和其他游戏关联费用暂定110，合计600。</li>
-<li>生活用品：由于2022年双十一买了一批东西，因此上半年应该不用买太多，按每个月50算，再凑个整暂定300。</li>
-<li>服饰相关：应该不会买什么，暂定500。</li>
-<li>其他：考虑到一些临时性的额外支出等，凑个整算1285。</li>
-</ol>
-]]></content>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>生活记录</category>
       </categories>
       <tags>
         <tag>预算决算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文记录-SIGMA: Secure GPT Inference with Function Secret Sharing</title>
-    <url>/2023/01/08/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-SIGMA%20Secure%20GPT%20Inference%20with%20Function%20Secret%20Sharing/</url>
-    <content><![CDATA[<h1 id="SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing"><a href="#SIGMA-Secure-GPT-Inference-with-Function-Secret-Sharing" class="headerlink" title="SIGMA: Secure GPT Inference with Function Secret Sharing"></a>SIGMA: Secure GPT Inference with Function Secret Sharing</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>安全两方计算</li>
-<li>现有的安全推理解决方案面临着高延迟和通信开销的问题，尤其是transformer</li>
-<li>函数秘密共享（FSS）是一种通过预处理阶段获得高效 2PC 协议的最新范例</li>
-<li>本文：SIGMA——第一个基于 FSS 的安全transformer推理端到端系统<ul>
-<li>通过为复杂的机器学习功能（例如 Softmax 和 GeLU）构建新的基于 FSS 的协议，并加速它们在 GPU 上的计算，SIGMA 将 Transformer 安全推理的延迟比使用现有技术的现有技术提高了 11 − 19 倍预处理和 GPU。</li>
-<li>我们提出了生成式预训练 Transformer (GPT) 模型的第一个安全推理。特别是，SIGMA 在 7.4 秒内执行了 13 亿个参数的 GPT-Neo，在 1.6 秒内执行了 HuggingFace 的 GPT2。<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2>对安全推理问题的定义：</li>
-</ul>
-</li>
-<li>模型提供商拥有专有的机器学习 (ML) 模型，将其作为服务提供</li>
-<li>客户希望了解其敏感数据的推理结果</li>
-<li>安全要求是除了推理输出之外，客户端不应了解任何有关模型的信息，并且模型提供者不应了解有关客户端输入的任何信息</li>
-</ul>
-<p>2PC的发展：</p>
-<ol>
-<li>具有数千个参数的模型扩展到[10]、[39]、[48]、[50]–[52]、[55]、[58]、[60] ]、[62]、[72]</li>
-<li>具有数百万个参数的模型 [20]、[32]、[35]、[38]、[42]、[59]、[73]、[76]</li>
-<li>到目前为止具有数亿个参数的 BERT 模型 [7]、[19]、[33]、[41]、[45]</li>
-<li>本文：提供具有数十亿参数的生成预训练 Transformer (GPT) 模型的安全推理</li>
-</ol>
-<p>用于安全机器学习推理的系统必须满足以下要求：</p>
-<ol>
-<li>准确性：即安全推理下的准确性应与明文的准确性相匹配</li>
-<li>安全性：即系统应提供标准的2PC安全性</li>
-<li>效率：即，安全推理的延迟和通信开销应该很低</li>
-<li>可扩展性：即，系统必须扩展到具有数十亿个参数的模型。</li>
-</ol>
-<p>这里列了几个安全transformer推理模型和缺点，survey中可以对比。</p>
-<p>本文贡献：和CipherGPT差不多，也是针对各操作设计了安全计算协议，包括矩阵乘法、激活函数等。</p>
-<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h3><ol>
-<li>$\lambda$：计算安全参数</li>
-<li>$N=2^n,L=2^l$</li>
-<li>$\mathbb{R}$：实数集，$\mathbb{U}_{2^n}$：n位无符号整数集</li>
-<li>用2补数表示$\mathbb{U}_{N}$中的有符号数</li>
-<li>对于$x\in\mathbb{U}_N$，$int_n(x),uint_n(x)$分别表示$\mathbb{Z}$中的有符号整数和无符号整数</li>
-<li>粗体表示数字，普通字体带$[i]$表示第i个元素，如$\mathbf{a}=\lbrace a[0],a[1],a[2]… \rbrace$</li>
-<li>定点数表示法：由位宽n和精度f参数化，将实数$r\in\mathbb{R}$编码为一个n位整数$x\in\mathbb{U}_N$使得$x=\lfloor r\cdot 2f \rfloor/\ mod\ N$。反过来，精度为f的n位定点数x解码为一个实数$\frac{int_n(x)}{2^f}$</li>
-<li>操作符：对于谓词$b$，如果b为真，则$1\lbrace b\rbrace\in\lbrace 0,1\rbrace$返回1，否则返回0。</li>
-<li>对于$n\lt l,x\in\mathbb{U}_N$，$extend_{n,l}(x)$返回x左侧附加$(l-n)$个0。</li>
-<li>对于$x\in\mathbb{U}_N$，$MSB_n(x)\in\lbrace 0,1\rbrace$表示 x 的最高有效位。</li>
-<li>秘密共享：对于$x\in\mathbb{U}_N$，秘密共享是对随机共享$x_0,x_1\in\mathbb{U}_N$的采样，使得$x=x_0+x_1\ mod\ N$成立，并用$share(x)$表示。当$P_0$持有$x_0$且$P_1$持有$x_1$时，我们用$reconstruct(x_b), b\in\lbrace 0,1\rbrace$表示交换共享并将其相加从而重构基础值的过程。</li>
-</ol>
-<h3 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h3><p>这项工作考虑了预处理模型中的标准二方安全计算 [8, 9, 14, 22, 37]，在安全机器学习领域也受到了大量关注 [32, 38, 41, 63, 64, 76]。也就是说，存在两个方$P_0$和$P_1$，其输入为$x_0$和$x_1$，希望计算公共函数$y = f(x_0, x_1)$，而不向对方透露任何超出函数输出y之外的信息。在预处理阶段独立于函数输入$x_0$和$x_1$，相关随机性被生成并提供给$P_0$和$P_1$。这种随机性可以通过多种方式生成 —— 可信第三方 [11, 14, 32, 38, 41, 63, 64, 76]，通用的2PC协议 [28, 78]，或者更高效的专用2PC协议 [24]。在这项工作中，我们考虑第一种方法。我们的所有协议都满足标准的模拟安全性定义 [17, 28, 47]，在半诚实的静态多项式时间(PPT)攻击者模型下提供安全性，该攻击者破坏$P_0$或$P_1$中的一个。</p>
-<h3 id="FSS"><a href="#FSS" class="headerlink" title="FSS"></a>FSS</h3><p>函数秘密共享是一对算法<code>(Gen, Eval)</code>，Gen将函数g拆分为两个函数份额$(g_0,g_1)$，Eval则输入$b\in\lbrace 0,1\rbrace$、函数$g_0$和x，并返回$g_b(x)$。一个FSS方案的正确性要求$g_0(x)+ g_1(x)= g(x)$对于所有的$x$成立。安全性要求则是每个函数份额$g_b$会隐藏底层函数$g$。</p>
-<p>定义1：一个两方FSS方案是一对算法<code>(Gen,Eval)</code>使得：</p>
-<ul>
-<li>$Gen(1^\lambda,\hat{g})$是一个PPT（概率多项式时间）密钥生成算法，它接受安全参数$1^\lambda$和函数g的描述$\hat{g}\in\lbrace 0,1\rbrace^*$，输出一对密钥$(k_0, k_1)$。我们假设$\hat{g}$明确地包含输入和输出群$\mathbb{G}^{in}, \mathbb{G}^{out}$的描述。</li>
-<li>$Eval(b,k_b,x)$是多项式时间评估算法，输入计算方索引$b\in\lbrace 0,1\rbrace$、$g_b:\mathbb{G}^{in}\rightarrow\mathbb{G}^{out}$定义的密钥$k_0$和$g_b$的输入$x\in\mathbb{G}^{in}$，输出$g_b(x)$的值$y_0\in\mathbb{G}^{out}$。</li>
-</ul>
-<p>$(k_0, k_1)$被称为FSS密钥。用于存储一个FSS密钥所需要的比特数称为密钥大小。</p>
-<h3 id="2PC"><a href="#2PC" class="headerlink" title="2PC"></a>2PC</h3><p>考虑具有门$\lbrace g_i\rbrace_i$和线$\lbrace w_i\rbrace_i$的电路的安全计算，我们分两阶段描述使用了[14]中的FSS进行预处理的2PC协议。</p>
-<p>离线阶段。对于每个线$w_i$，从适当的组中采样一个随机掩码$r_i$，然后，对于每个具有输入线$w_i$和输出线$w_j$的门$g$，为其偏移函数$g^{[r_i,r_j]}(x)=g(x-r_i)+r_j$生成一个FSS密钥，并为每一方提供一个密钥。对于属于<code>b</code>方电路的输入和输出线，该方还知道与这些线相关联的掩码。</p>
-<p>在线阶段。对于b方拥有的值为$x_i$的每条输入线$w_i$，b方计算$\hat{x}_i=x_i+r_i$并发送给1-b方。现在，双方按拓扑顺序评估电路门。为了评估有着输入和输出线$w_i$和$w_j$的门，双方评估$\hat{x}_i$上相应的FSS密钥，以获得$\hat{x}_j=g^{[r_i,r_j]}(\hat{x}_i)=g(\hat{x}_i-r_i)+r_j=g(x_i)+r_j$。然后各方重建份额以获得掩码值$\hat{x}_j$。对于输出线，拥有线的一方减去相应的掩码即可得到最终的输出值。</p>
-<p>协议结构和FSS协议的安全性。我们使用$(\hat{\cdot})$表示掩码值。考虑一个函数F和输入x能使得$y=F(x)$。针对F的协议记作$\Pi^F$，有两个阶段$Gen^F$和$Eval^F$。</p>
-<ul>
-<li>前者在预处理阶段对输入和输出掩码$r^{in},r^{out}$执行，以生成可用于$P_0,P_1$的预处理材料或密钥。存储$\Pi^F$的密钥所需的位数称为密钥大小，用$keysize(\Pi^F)$表示。</li>
-<li>后者是$P_0,P_1$于在线阶段在掩码输入$\hat{x}=x+r^{in}$和它们各自密钥上运行的协议。在该阶段结束时，$P_0,P_1$学习掩码输出值$\hat{y}=y+r^{out}$。</li>
-</ul>
-<p>本文提出的所有协议都具有上述结构。</p>
-<p>安全性通过以下两个交互定义：</p>
-<ul>
-<li>真实交互。$Gen^F$在预处理阶段执行（输入和输出掩码为$r^{in},r^{out}$），$P_0,P_1$使用预处理阶段获取的密钥于在现阶段执行$Eval^F$。该交互发生在存在对手A和环节Z的情况下。</li>
-<li>理想交互。$P_0,P_1$发送输入到能诚实计算功能的功能（即，去掩码$\hat{x}$以得到<code>x</code>，计算$y=F(x)$，计算$\hat{y}=y+r^{out}$并提供$\hat{y}$的份额给$P_0,P_1$）。</li>
-</ul>
-<p>如果对于真实交互中的每个对手A，在理想交互中都存在对手S（称为模拟器），使得没有环境Z能区分这两种交互，我们就说协议$\Pi^F$安全地实现了功能F。</p>
-<h3 id="DPF"><a href="#DPF" class="headerlink" title="DPF"></a>DPF</h3><p>点函数$f_{\alpha,\beta}^{\bullet}:\mathbb{U}_N\rightarrow \mathbb{G}^{out}$输入$x\in\mathbb{U}_N$，如果$x=\alpha$则输出$\beta\in\mathbb{G}^{out}$，反之则输出0。点函数对应的FSS方案被称为分布点函数。</p>
-<p>$(k_0^{\bullet},k_1^{\bullet})\leftarrow Gen_n^{\bullet}(1^\lambda,\alpha,\beta,\mathbb{G}^{out})$</p>
-<p>$y_b=Eval_n^{\bullet}(b,k_b^{\bullet},x),x\in\mathbb{U}_N$</p>
-<p>对于所有协议，取$\mathbb{G}^{out}=\lbrace 0,1\rbrace,\beta=1$就够了，这使得我们可以利用带有提前终止优化的分布式点函数构造(这适用于小负载)。</p>
-<p>定理1（DPF的成本）给定PRG $G:\lbrace 0,1\rbrace^\lambda\rightarrow\lbrace0,1\rbrace^{2\lambda+2}$并令$v=\log_2(\lambda+1)$。当$n\gt v$，存在一个$f_{\alpha,1}^{\bullet}$的DPF：$\mathbb{U}_N\rightarrow\lbrace 0,1\rbrace$，其密钥大小是$(n-v)\cdot(\lambda+2)+2\lambda$。在$Gen_n^{\bullet}$中PRG的调用次数是$2(n-v)$，在$Eval_n^{\bullet}$中的用次数是$n-v$。当$n\leq v$时，需要$2^n$的keysize以及$Gen_n^{\bullet},Eval_n^{\bullet}$PRG调用次数为0。</p>
-<p>与其他FSS的工作类似，我们设$\lambda=127$，并在计数器模式下使用两次AES-128调用来实现所需的长度加倍 PRG。正如之前所观察到的，单个 AES 调用足以满足$Eval_n^{\bullet}$，因为仅使用了一半的输出。从现在开始，我们将其称为半 PRG 调用。</p>
-<h3 id="使用DPF密钥比较"><a href="#使用DPF密钥比较" class="headerlink" title="使用DPF密钥比较"></a>使用DPF密钥比较</h3><p>比较函数$f_{\alpha,\beta}^{\lt}:\mathbb{U}_N\rightarrow\mathbb{G}^{out}$输入$x\in\mathbb{U}_N$，如果$x\lt\alpha$则返回$\beta\in\mathbb{G}^{out}$，否则返回0。之前的研究都用一个特殊的名为DCF的FSS方案来实现这个功能。最近一个研究展示了当$\mathbb{G}^{out}=\lbrace 0,1\rbrace,\beta=1$时，FSS方案可以通过DPF来构造。</p>
-<p>定理2：使用DPF的FSS方案。存在一个算法$Eval_n^\lt$使得$\forall x,\alpha\in\mathbb{U}_N$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-& \left(k_0^{\bullet}, k_1^{\bullet}\right) \leftarrow \operatorname{Gen}_n^{\bullet}\left(1^\lambda, \alpha, 1,\{0,1\}\right) \\
-\Longrightarrow & \operatorname{Eval}_n^{<}\left(0, x, k_0^{\bullet}\right)+\operatorname{Eval}_n^{<}\left(1, x, k_1^{\bullet}\right)=f_{\alpha, 1}^{<}(x)
-\end{aligned}</script><p>且$Eval_n^\lt$调用了DPF half-PRG $\max(n-v,0)$次。因此，$(Gen_n^\bullet,Eval_n^\lt)$是比较函数的FSS方案。</p>
-<p>与[11]中需要长度四倍的 PRG 的 DCF 构造相比，上述构造导致计算成本降低 2 倍以上。</p>
-<h2 id="Transformer概要"><a href="#Transformer概要" class="headerlink" title="Transformer概要"></a>Transformer概要</h2><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3>]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>LLM</tag>
-        <tag>Privacy</tag>
-        <tag>Security</tag>
-        <tag>MPC</tag>
       </tags>
   </entry>
   <entry>
@@ -6146,11 +5973,11 @@ Rs_{V_i}^\omega=\frac{F_f\omega_{i-1}+B_\omega s_i}{(F_f\omega_{i-1}+B_\omega s_
 <p>所有数据是直接在<code>web.js</code>中写好的，并不是从其他文件读取，且文件开头的<code>var scatter_origin_data</code>其实可以删了。此外，这份文件中的个人和组织项目散点图我并不需要，因此也直接删了。</p>
 <p>接下来将<code>web.js</code>中的数据修改成前面统计好的数据，打开<code>web.html</code>就可以看到图表了。</p>
 <p>由于hexo博客也可以显示echarts，因此我就把图表放这里了。</p>
-<div id="echarts2998" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts2296" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2998'));
+        var myChart = echarts.init(document.getElementById('echarts2296'));
         // 指定图表的配置项和数据
         var option = {
 title: {
@@ -6206,11 +6033,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts2807" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts443" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2807'));
+        var myChart = echarts.init(document.getElementById('echarts443'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -6260,11 +6087,11 @@ title: {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 </script>
-<div id="echarts9563" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts5486" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9563'));
+        var myChart = echarts.init(document.getElementById('echarts5486'));
         // 指定图表的配置项和数据
         var option = {
         title : {
@@ -11940,11 +11767,11 @@ p_l(\mu_{high}^{post,str}|k_p^{anu}(\epsilon)P_{k^{high}}^{majority}+\mu_{low}^{
 </ol>
 <p>到此为止就可以了，新建一个markdown文件，把下列代码放进去就可以看到本页最下面的echarts示例了。（直接复制粘贴，<strong>不要</strong>放代码块里）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% echarts 400 &#39;85%&#39; %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &quot;某站点用户访问来源&quot;,</span><br><span class="line">        subtext: &quot;ECharts示例&quot;,</span><br><span class="line">        x: &quot;center&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &quot;item&quot;,</span><br><span class="line">        formatter: &quot;&#123;a&#125; &lt;br&#x2F;&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: &quot;vertical&quot;,</span><br><span class="line">        x: &quot;left&quot;,</span><br><span class="line">        data: [&quot;直接访问&quot;, &quot;邮件营销&quot;, &quot;联盟广告&quot;, &quot;视频广告&quot;, &quot;搜索引擎&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show: true,</span><br><span class="line">        feature: &#123;</span><br><span class="line">            mark: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            dataView: &#123;</span><br><span class="line">                show: true,</span><br><span class="line">                readOnly: true</span><br><span class="line">            &#125;,</span><br><span class="line">            restore: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;,</span><br><span class="line">            saveAsImage: &#123;</span><br><span class="line">                show: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    calculable: true,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: &quot;访问来源&quot;,</span><br><span class="line">            type: &quot;pie&quot;,</span><br><span class="line">            radius: &quot;55%&quot;,</span><br><span class="line">            center: [&quot;50%&quot;, &quot;60%&quot;],</span><br><span class="line">            data: [</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 335,</span><br><span class="line">                    name: &quot;直接访问&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 310,</span><br><span class="line">                    name: &quot;邮件营销&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 234,</span><br><span class="line">                    name: &quot;联盟广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 135,</span><br><span class="line">                    name: &quot;视频广告&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    value: 1548,</span><br><span class="line">                    name: &quot;搜索引擎&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endecharts %&#125;</span><br></pre></td></tr></table></figure>
-<div id="echarts1120" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7074" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1120'));
+        var myChart = echarts.init(document.getElementById('echarts7074'));
         // 指定图表的配置项和数据
         var option = {
     title: {
@@ -13520,8 +13347,8 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
   <entry>
     <title>论文记录-FractalNet的ODE建模</title>
     <url>/2020/05/23/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95-BEYOND%20FINITE%20LAYER%20NEURAL%20NETWORKS%20BRIDGING%20DEEP%20ARCHITECTURES%20AND%20NUMERICAL%20DIFFERENTIAL%20EQUATIONS/</url>
-    <content><![CDATA[<h1 id="FractalNet的ODE建模"><a href="#FractalNet的ODE建模" class="headerlink" title="FractalNet的ODE建模"></a>FractalNet的ODE建模</h1><p>论文1：BEYOND FINITE LAYER NEURAL NETWORKS: BRIDGING DEEP ARCHITECTURES AND NUMERICAL DIFFERENTIAL EQUATIONS</p>
-<p>论文2：FRACTALNET: ULTRA-DEEP NEURAL NETWORKS WITHOUT RESIDUALS</p>
+    <content><![CDATA[<h1 id="FractalNet的ODE建模"><a href="#FractalNet的ODE建模" class="headerlink" title="FractalNet的ODE建模"></a>FractalNet的ODE建模</h1><p>论文1：Beyond Finite Layer Neural Networks: Bridging Deep Architectures And Numerical Differential Equations</p>
+<p>论文2：Fractalnet: Ultra-Deep Neural Networks Without Residuals</p>
 <a id="more"></a>
 ]]></content>
       <categories>
@@ -16143,6 +15970,14 @@ W(C)=\varepsilon\sum_{\Pi\in C}R(\Pi)-\eta B</script><p>其中，$\varepsilon$�
 <li>进入<code>photos</code>文件夹，修改其中的<code>index.md</code>如下：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [["imgurl", "imgcaption"], ["imgurl", "imgcaption"]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
 <li>然后把要添加的图片放到<code>photos</code>文件夹中，并把<code>index.md</code>文件夹中的<code>imgurl</code>和<code>imgcaption</code>修改成图像的路径和标题，路径要注意带上级文件夹，和后缀名，例如我的路径就是<code>photos/ff14-伊修加德.png</code>。</li>
 <li>部署后就能看到照片了，之后再加新的照片就也是复制进来，然后打开<code>index.md</code>文件，在<code>albums</code>的方括号里添加新的链接和标题。</li>
+</ol>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>目前是在ayer主题下添加的评论，用了<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a>，设置流程如下：</p>
+<ol>
+<li>注册<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud</a>，需要填邮箱、密码等信息，注册完之后回首页，进入控制台，创建应用，选免费的开发版；</li>
+<li>创建好应用后，进入应用—&gt;设置—&gt;应用凭证，可以看到AppID和AppKey；</li>
+<li>打开ayer的主题配置文件，拉到最下面，找到<code>leancloud</code>字段，把它下面的<code>enable</code>设置为<code>true</code>，<code>app id</code>和<code>app key</code>分别设置成上一步页面中看到的ID和Key；</li>
+<li>在<code>leancloud</code>下面有<code>valine</code>字段，把<code>enable</code>设置为<code>true</code>，<code>avatar</code>和<code>placeholder</code>分别表示评论头像和评论区的提示语，可以根据喜好修改，不改也行；</li>
+<li>保存后重新生成网站就好了。</li>
 </ol>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a href="https://segmentfault.com/a/1190000018761324" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018761324</a></p>
 <p><a href="https://www.jianshu.com/p/3a05351a37dc" target="_blank" rel="noopener">https://www.jianshu.com/p/3a05351a37dc</a></p>
