@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+                "file": "论文记录-空间众包任务分配总结.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+                "file": "论文记录-空间众包任务分配总结.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
+                "file": "论文记录-空间众包任务分配总结.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md"
+                "file": "论文记录-空间众包任务分配总结.md"
               }
             }
           }
@@ -160,6 +160,9 @@
   },
   "active": "9f5926f4c51bfe2e",
   "lastOpenFiles": [
+    "论文记录-LLM+Privacy Survey总结.md",
+    "论文记录-空间众包任务分配总结.md",
+    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
     "论文记录-Secure Transformer Inference.md",
     "论文记录-Secure Balance Planning of Off-blockchain Payment Channel Networks.md",
     "论文记录-Beyond Finite Layer Neural Networks Bridging Deep Architectures And Numerical Differential Equations.md",
@@ -172,7 +175,6 @@
     "论文记录-Strategic Information Revelation in Crowdsourcing Systems Without Verification.md",
     "论文记录-SoK Decentralized Finance (DeFi) Attacks.md",
     "论文记录-Social Decision Making Insights from Game Theory and Neuroscience.md",
-    "论文记录-SIGMA Secure GPT Inference with Function Secret Sharing.md",
     "论文记录-PUMA Secure Inference Of LLaMa-7b In Five Minutes.md",
     "论文记录-Privacy-Preserving Prompt Tuning for Large Language Model Services.md",
     "论文记录-Privacy-Preserved Data Disturbance and Truthfulness Verification for Data Trading.md",
@@ -182,10 +184,8 @@
     "论文记录-Online Organizing Large-scale Heterogeneous Tasks and Multi-skilled Participants in Mobile Crowdsensing.md",
     "论文记录-N-in-One-A-Novel-Location-Based-Service.md",
     "论文记录-Monoxide Scale Out Blockchain with Asynchronous Consensus Zones.md",
-    "论文记录-LLM+Privacy Survey总结.md",
     "论文记录-INFOCOM 2024审稿.md",
     "论文记录-Fast randomized consensus using shared memory.md",
-    "论文记录-Evolution of cooperation in stochastic games.md",
     "daily-1 2.jpg",
     "daily-1 1.jpg",
     "daily-1.jpg"
